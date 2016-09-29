@@ -1,0 +1,26 @@
+{
+  "name": "kaakateeyaangularapplication",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "vinod.a-ext"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "latest",
+    "bootstrap": "~3.0.0",
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.2",
+	"angular-loader":"latest"
+  }
+  
+}
