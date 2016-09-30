@@ -6,8 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-	"express":"latest",
+   "dependencies" :{
+    "angular":"1.5.8",
+    "angular-route" :"latest",
+    "angular-ui-router":"latest",
+    "ng-numbers-only" :"latest",
+    "bootstrap" : "latest",
+    "font-awesome":"latest",
+    "jquery":"latest",
+    "angular-date-time-input":"latest"
+
+    },
+"devDependencies": {
+	  "express":"latest",
     "grunt": "~0.4.4",
     "grunt-contrib-jshint": "latest",
     "jshint-stylish": "latest",
