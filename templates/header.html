@@ -1,41 +1,195 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-            <a class="navbar-brand" href="#/">ACME</a>
+<div class="header_inner" id="divInnerMaster">
+
+    <div class="container_my clearfix">
+
+        <input type="image" id="IbtnLogodisplay" class="logo_inner pull-left" />
+
+        <input type="button" value="Login" id="btnLoginsubmit" class="pull-right button_custom login_show" onclick="return divloginblock();"
+        />
+        <input type="button" value="Logout" id="btnLogOut" class="pull-right button_custom" onclick="return ClearlocalStorage();"
+        />
+
+
+
+        <div class="login_block_header" style="display: none;" id="divLogin">
+
+            <input type="text" id="txtUserName" onchange="return vali();" />
+            <input type="password" id="txtPassword" />
+            <span class="clear">&nbsp;</span>
+            <div class="login_help">
+
+                <a id="lnkForgotPassword" onclick="return ShowForgotPassword();">Forgot Password</a>
+                <a href="CustomerRegistration.aspx">New User Sign Up</a>
+
+            </div>
+            <input type="button" id="btnUserLogin" onclick="btnUserLogin_Click" class="button_custom" value="Login" />
+
+            <span class="clear">&nbsp;</span>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/services">Services</a>
-                </li>
-                <li><a href="#/pricing">Pricing Table</a>
-                </li>
-                <li><a href="#/about">About</a>
-                </li>
-                <li><a href="#/faq">FAQ</a>
-                </li>
-                <li><a href="#/contact">Contact</a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#/blog">List of Posts</a>
-                        </li>
-                        <li><a href="#/blog/post">View One Post</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="header_inner_rt clearfix">
+            <h3>
+
+                <a id="lnkFeedbackMenu" onclick="lnkFeedbackMenu_Click">Feedback</a>
+
+            </h3>
+            <h4>make a missed call<span><em>+91-9390999999</em></span></h4>
+            <h4>Support No<span>+1-734-926-1011</span></h4>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
-</nav>
+    <div class="navbar_inner" id="divMemberName" visible="false">
+
+        <div class="container_my clearfix">
+            <div class="profile_own_name pull-left clearfix">
+                <input type="image" id="IMasterpic" style="height: 31px; width: 31px;" onclick="IMasterpic_Click1" />
+                <h2>
+                    <label id="lblCustFName"></label> &nbsp;&nbsp;
+                    <label id="lblcustLname"></label> (
+                    <label id="lblprofile"></label>)
+                    <br />
+                    <span>Accout type :</span>
+                    <a id="lblpaid" onclick="lblpaid_Click" forecolor="White"></a>
+                </h2>
+            </div>
+            <div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
+
+                    <li>
+                        <a id="lnkMyHome" onclick="lnkMyHome_Click">My Home</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">my account</a>
+
+                        <ul>
+                            <li>
+                                <a id="linkviewmyprofile" onclick="linkfooter_Click">View My Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkeditprofile" onclick="linkfooter_Click">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagephoto" onclick="linkfooter_Click">Manage Photo</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagehoroscope" onclick="linkfooter_Click">Manage Horoscope</a>
+                            </li>
+                            <li>
+                                <a id="linkprofilesettings" onclick="linkfooter_Click">Profile Settings</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a id="lnksearch" onclick="lnkMyHome_Click">Search</a>
+                        <ul>
+                            <li>
+                                <a id="linkgenaralsearch" onclick="linkfooter_Click">General Search</a>
+                            </li>
+                            <li>
+                                <a id="linkAdvancedSearch" onclick="linkfooter_Click">Advanced Search</a>
+                            </li>
+                            <li>
+                                <a id="linkprofileidsearch" onclick="linkfooter_Click">Profileid Search</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)">my package</a>
+                        <ul>
+                            <li>
+                                <a id="linkupgrademembership" onclick="linkfooter_Click">Upgrade Membership</a>
+                            </li>
+                            <li>
+                                <a id="linkmyorders" onclick="linkfooter_Click">My Orders and Statistics</a>
+                            </li>
+                            <li>
+                                <a id="linkmembershipfaqs" onclick="linkfooter_Click">Membership Faqs</a>
+                            </li>
+                            <li>
+                                <a id="linkAddOnPacks" onclick="linkfooter_Click" visible="false">Add On Packs</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">matches</a>
+                        <ul>
+                            <li>
+                                <a id="linkmybookmarks" onclick="linkfooter_Click">My BookMarked Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkwhobookmarkedme" onclick="linkfooter_Click">Who BookMarked Me</a>
+                            </li>
+                            <li>
+                                <a id="linkigonredprofile" onclick="linkfooter_Click">Ignored Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkviewedbutnotexpress" onclick="linkfooter_Click">My profile viewed by others</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">messages</a>
+                        <ul>
+                            <li>
+                                <a id="linkPersonalizedmsg" onclick="linkfooter_Click">Chats</a>
+                            </li>
+                            <li>
+                                <a id="linkrequests" onclick="linkfooter_Click">Requests</a>
+                            </li>
+                            <li>
+                                <a id="linkMyContact" onclick="linkMyContact_Click">Express interest</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Help</a>
+                        <ul>
+                            <li>
+                                <a id="lnkcontactus" onclick="linkfooter_Click">Contact Us</a>
+                            </li>
+                            <li>
+                                <a id="linkmysupportickets" onclick="linkfooter_Click">My Support Tickets</a>
+                            </li>
+                            <li>
+                                <a id="lnkfeedback" onclick="linkfooter_Click">Feed Back</a>
+                            </li>
+                            <li>
+                                <a id="lnktakeatour" onclick="linkfooter_Click">Take A Tour</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar_inner" id="divwithoutlogin">
+        <div class="container_my clearfix">
+
+            <div class="profile_own_menu pull-right">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
+
+                    <li><a href="CustomerRegistration.aspx">Register free</a></li>
+                    <li><a href="KaakateeyaCustomerProfileIDsearchNew.aspx">Search <span></span></a></li>
+                    <li><a onclick="return divloginblock(); return false;" href="javascript:void(0)">Upgrade</a></li>
+                    <li>
+                        <a id="lnkSucessstoreiesFooter" onclick="linkfooter_Click">success stories <span></span></a>
+                    </li>
+                    <li>
+                        <a id="linkfooterhelp" onclick="linkfooter_Click">Help</a>
+                    </li>
+                    <li><a href="KaakateeyaCustomerHomePage.aspx">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
