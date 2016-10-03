@@ -11,52 +11,54 @@
 
     <!-- Meta-Information -->
     <title>ACME Inc.</title>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="ACME Inc.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
+     <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap-theme.min.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="src/css/bootstrap-responsive.min.css" rel="stylesheet"></link>
+    <link href="src/css/stylekaakateeya.css" rel="stylesheet"></link>
+  
+      <link href="src/css/style_responsive.css" rel="stylesheet"></link>
+
+      <link href="src/css/uniform.default.css" rel="stylesheet"></link>
+
+      <link href="src/css/chosen.css" rel="stylesheet"></link>
+     <link href="src/css/jquery-css.css" rel="stylesheet"></link>
+     <link href="src/css/bootstrap-fileupload.css" rel="stylesheet"></link>
+    <link href="src/css/custom_styles.css" rel="stylesheet"></link>
+    <link href="src/css/custom_responsive.css" rel="stylesheet"></link>
+    <link href="src/css/GITheWall.css" rel="stylesheet"></link>
+
+    <link href="src/css/CustomerSearchResult_New.css" rel="stylesheet"></link>
 
     <!-- Our Website CSS Styles -->
     
 
 </head>
 <body ng-app="Kaakateeya">
-<!--<div ng-include='"templates/header.html"'></div>-->
-master page Text
-<div ng-view></div>
-<!--<div ng-include='"templates/footer.html"'></div>-->
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
-<!-- Vendor: Javascripts -->
-<!-- Vendor: Javascripts -->
-
+<!-- Our Website Content Goes Here -->
 <div ng-include="'templates/header.html'"></div>
-
-<div ng-view >
-<div>
-asdasdasdasdasdsad
-asdasaasd
-
-</div>
-
-
-</div>
-
-<div ng-include="'templates/footer.html'" ng-style="max-width:1160px; display:block; margin:20px auto 0 auto; position:relative;"></div>
+<div ng-view></div>
+<div ng-include="'templates/footer.html'"></div>
 
 <!-- Vendor: Javascripts -->
-
 <script src="node_modules\jquery\dist\jquery.min.js"></script>
 <script src="bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
 
 <!-- Vendor: Angular, followed by our custom Javascripts -->
 <script src="bower_components\angular\angular.min.js"></script>
 <script src="node_modules\angular-route\angular-route.min.js"></script>
-
 
 <!-- Our Website Javascripts -->
 <script src="index.js"></script>
@@ -80,16 +82,6 @@ asdasaasd
    <script src="src/js/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
    <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" 
                 type="text/javascript" id="Script1"></script>
- <script src="app/directives/customerGridDisplay.js"></script>         
- <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
-
-<!-- Our Website Javascripts -->
-<script src="app/modules/Dashboard/patientDashboardCtrl.js"></script>
-<script src="app/services/patientDashboardServices.js"></script>
-<script src="app/directives/partnerDirective.js"></script>
-
-<!-- Our Website Javascripts -->
-<script src="index.js"></script>
 
 
 </body>
