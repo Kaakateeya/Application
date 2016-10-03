@@ -14,19 +14,25 @@
     "bootstrap" : "latest",
     "font-awesome":"latest",
     "jquery":"latest",
-    "angular-date-time-input":"latest"
-
+    "angular-date-time-input":"latest",
+     "moment":"latest",
+    "underscore":"latest",
+     "multi-select":"*"
     },
 "devDependencies": {
-	  "express":"latest",
+	 "angular-animate": "^1.5.8",
+    "angular-module-sanitize": "^1.2.19",
+    "angular-touch": "^1.5.8",
+    "angular-ui-bootstrap": "^2.1.4",
+    "express": "latest",
     "grunt": "~0.4.4",
-    "grunt-contrib-jshint": "latest",
-    "jshint-stylish": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-less": "latest",
     "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-watch": "latest"
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "jshint-stylish": "latest"
   },
-  "author": "",
+  "author": "vinu",
   "license": "ISC"
 }
