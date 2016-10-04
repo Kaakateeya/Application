@@ -41,12 +41,29 @@ module.exports = function(grunt) {
           'dist/css/style.min.css': 'src/css/*.css'
         }
       }
+    },
+    dev_prod_switch: {
+        options: {
+            // Can be ran as `grunt --env=dev` or `grunt --env=prod`
+            environment: grunt.option('env') || 'dev',
+                env_char: '#',
+                env_block_dev: 'env:dev',
+                env_block_prod: 'env:prod',
+                env_block_test: 'env:test'
+        },
+        all: {
+            files: {
+                'index.html': 'index.html'
+            }
+        }
     }
 
 	
 	
   });
-
+  grunt.registerTask('default', [
+    'dev_prod_switch'
+  ]);
   // ===========================================================================
   // LOAD GRUNT PLUGINS ========================================================
   // ===========================================================================
@@ -57,5 +74,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-dev-prod-switch');
 
 };
