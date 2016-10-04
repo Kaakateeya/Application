@@ -15,13 +15,11 @@
                     var lhnWindowN = 0;
                     var lhnDepartmentN = 0;
                 </script>
-                <script src="AnimationJsfiles/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
-                <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" type="text/javascript" id="Script1"></script>
+              
             </div>
         </div>
         <script type="text/javascript" defer='defer'>
             function OpenLHNChat() {
-
                 if (typeof CustomOpenLHNChat == 'function') {
                     CustomOpenLHNChat();
                     return false;
@@ -30,14 +28,12 @@
                 var wtop = (screen.height - 420 - 96) / 2;
                 alert(bLHNOnline);
                 var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
-
                 if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
                     lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
                 }
                 else {
                     lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
                 }
-
                 if (typeof Zstepx != 'undefined') {
                     if (Zstepx == 10) {
                         Zslide();

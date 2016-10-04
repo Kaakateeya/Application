@@ -6,22 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-   "dependencies" :{
-    "angular":"1.5.8",
-    "angular-route" :"latest",
-    "angular-ui-router":"latest",
-    "ng-numbers-only" :"latest",
-    "bootstrap" : "latest",
-    "font-awesome":"latest",
-    "jquery":"latest",
-    "angular-date-time-input":"latest",
-     "moment":"latest",
-    "underscore":"latest",
-     "multi-select":"*"
-    },
-"devDependencies": {
-	 "angular-animate": "^1.5.8",
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "latest",
+    "angular-ui-router": "latest",
+    "ng-numbers-only": "latest",
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "jquery": "latest",
+    "angular-date-time-input": "latest",
+    "moment": "latest",
+    "underscore": "latest",
+    "multi-select": "*"
+  },
+  "devDependencies": {
+    "angular-animate": "^1.5.8",
     "angular-module-sanitize": "^1.2.19",
+    "angular-multi-select": "^7.4.6",
     "angular-touch": "^1.5.8",
     "angular-ui-bootstrap": "^2.1.4",
     "express": "latest",
