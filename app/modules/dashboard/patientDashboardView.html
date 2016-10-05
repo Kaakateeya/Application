@@ -1,5 +1,464 @@
-<div ng-controller="patientDashboardCntrl">
-<h1>pateint dahboadrd controller text.</h1>
-{{data}}
-<partner-directive array=data ></partner-directive>
+<div class="landing_page_main" ng-controller="Controllerpartner">
+
+    <div class="landing_page_head clearfix">
+        <div class="landing_page_head_lt clearfix">
+            <div class="landing_page_head_lt_pic">
+                <div id="divMask">
+
+                    <img id="imgprofile" width="116" height="116" class="img-circle" />
+
+                </div>
+            </div>
+
+            <div class="landing_page_head_lt_in">
+                <h5>Welcome <span>
+                        <label id="lblCustName"></label>
+                    </span></h5>
+                <div class="landing_page_head_lt_in_cont">
+                    <div id="notifyDivc"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="landing_page_head_rt">
+            <h6>Your profile</h6>
+            <p class="progress_profile"></p>
+            <p>
+                You have provided
+                <label id="percentagecontrol"></label> of your details
+            </p>
+            <a href="javascript:void(0);" id="lnkpaymentpage" onclick="return servicesRedirectlinks('Editmyprofile');">Please update your profile completely</a>
+        </div>
+    </div>
+    <div class="landing_page_content clearfix">
+
+        <div class="landing_page_sidebar_lt">
+            <div class="landing_page_sidebar_lt_in clearfix">
+                <h4>personalised services</h4>
+                <ul>
+
+                    <li>
+                        <a id="lnkEdit" href="javascript:void(0);" onclick="return servicesRedirectlinks('Editmyprofile');">Edit my profile</a>
+                        <a id="lnkUpgrade" href="javascript:void(0);" onclick="return servicesRedirectlinks('upgrade');">Upgrade your membership</a>
+                        <a id="lnkmanagephoto" href="javascript:void(0);" onclick="return servicesRedirectlinks('managephoto');">manage photo</a>
+                        <a id="lnkMybookmarked" class="bootstro" href="javascript:void(0);" onclick="return PersonalisedClick('MB','Profiles you have bookmarked');">My bookmarked profiles</a>
+                        <a id="lnkMyWhobookmarked" href="javascript:void(0);" onclick="return PersonalisedClick('WB','Profiles Who BookMarked You');">Who bookmarked me</a>
+                        <a id="lnkRecentlyviewed" class="bootstro" href="javascript:void(0);" onclick="return PersonalisedClick('RV','Profiles viewed by me');">Profiles viewed by me</a>
+                        <a id="lnkRecentlywhoviewed" href="javascript:void(0);" onclick="return PersonalisedClick('WV',' Members viewed my profile');">My profile viewed by others</a>
+                        <a id="lnkIgnored" class="bootstro" href="javascript:void(0);" onclick="return PersonalisedClick('I','Profiles ignored by you');">Ignored profiles</a>
+                        <a id="lnkSavedSearch" href="javascript:void(0);" onclick="return servicesRedirectlinks('savedsearch');">Saved search</a>
+                        <a id="lnkProfileSettings" href="javascript:void(0);" onclick="return servicesRedirectlinks('profilesettings');">Profile Settings</a>
+                        <a id="lnkHelp" href="javascript:void(0);" onclick="return servicesRedirectlinks('help');">Help</a>
+
+                    </li>
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div id="accordion">
+                <div class="landing_page_sidebar_rt_in">
+                    <div id="Expressintrst" class="panel panel-default">
+                        <div class="">
+                            <h4 class="panel-title jumbotron">
+                                <span id="lblMainHeader">Express intrest</span>
+                                <img id="Image1" src="../images/interest_icon2.png">
+                            </h4>
+                        </div>
+
+                        <div class="dataContentSection">
+                            <div class="panel-body">
+                                <div class="landing_page_sidebar_rt_list_item_menu">
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <a id="lnkallprofiles" class="clearfix" href="javascript:void(0);" onclick="return Expressintrst(undefined,undefined,undefined,'lnkallprofiles');">
+                                            <small>
+                                                    <img id="imaallprofiles" src="../images/icon_spl_4.png">
+                                                </small>
+                                            <span id="spnallprofiles">All Profiles</span>
+                                        </a>
+                                        <a id="lnknewExp" class="clearfix" href="javascript:void(0);" onclick="return Expressintrst('R',undefined,undefined,'lnknewExp');">
+                                            <small>
+                                                    <img id="plusimageExp" src="../images/icon_spl_4.png">
+                                                </small>
+                                            <span id="lnkNewIDsExp" style="width: 98%; padding-left: 10px; white-space: normal; text-overflow: unset; float: unset;">Interest Expressed By</span>
+                                        </a>
+
+                                        <a id="lnkAcceptExp" class="clearfix" href="javascript:void(0);" onclick="return Expressintrst('S',undefined,undefined,'lnkAcceptExp');">
+                                            <small>
+                                                    <img id="Image2Exp" src="../images/icon_spl_2.png">
+                                                </small>
+                                            <span id="lnkACCEPTEDExp">I sent interest</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Chats" class="panel panel-default">
+                        <div class="">
+                            <h4 class="panel-title jumbotron">
+                                <span id="ctl00_ContentPlaceHolder1_rptRightMenu_ctl01_lblMainHeader">chats</span>
+                                <img id="ctl00_ContentPlaceHolder1_rptRightMenu_ctl01_Image1" src="../images/icon_spl_9_2.png">
+                            </h4>
+                        </div>
+
+                        <div class="dataContentSection">
+                            <div class="panel-body">
+                                <div class="landing_page_sidebar_rt_list_item_menu">
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <h5>
+                                            <span id="lblSubHeaderchats"></span>
+                                        </h5>
+
+                                        <div id="uplnknewchat" class="clearfix">
+
+                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="count = count + 1">
+                                                <p>{{ count }}</p>
+                                                <small>
+                                                        <img id="plusimagechat" src="../images/icon_spl_4.png">
+                                                    </small>
+
+                                                <span id="lnkNewIDmsgs">New</span></a>
+                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" onclick="return Chats('all',this);">
+                                                <small>
+                                                        <img id="Img2" src="../images/icon_spl_2.png">
+                                                    </small>
+                                                <span id="lnkACCEPTEDmsgs">Messages</span></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Request" class="panel panel-default">
+                        <div class="">
+                            <h4 class="panel-title jumbotron">
+                                <span id="lblMainHeaderReq">Requests</span>
+                                <img id="Image1Req" src="../images/icon_spl_9_2.png">
+                            </h4>
+                        </div>
+
+                        <div class="dataContentSection">
+                            <div class="panel-body">
+                                <div class="landing_page_sidebar_rt_list_item_menu">
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <h5>
+                                            <span id="lblSubHeaderReq">Received</span>
+                                        </h5>
+
+                                        <div id="uplnknewReq" class="clearfix">
+
+                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" onclick="return receivesrecphoto('RP','Members are requesting to upload your photo',this);">
+                                                <small>
+                                                        <img id="plusimageReq" src="../images/icon_spl_4.png">
+                                                    </small>
+                                                <span id="lnkNewIDsReceivedReq">RecPhoto</span></a>
+                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" onclick="return receivesrecphoto('RH','Members are requesting to upload your horoscope',this);">
+                                                <small>
+                                                        <img id="Image2Req" src="../images/icon_spl_8.png">
+                                                    </small>
+                                                <span id="lnkRecHoroReq">RecHoro</span></a>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <h5>
+                                            <span id="lblSubHeader1">Sent</span>
+                                        </h5>
+
+                                        <div id="uplnknew1" class="clearfix">
+
+                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" onclick="return receivesrecphoto('SP','Members photo request is sent by you',this);">
+                                                <small>
+                                                        <img id="plusimage1" src="../images/icon_spl_1.png">
+                                                    </small>
+
+                                                <span id="lnkNewIDsSentReq">SentPhoto</span></a>
+                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" onclick="return receivesrecphoto('SH','Members horoscope request is sent by you',this);">
+                                                <small>
+                                                        <img id="Image21" src="../images/icon_spl_2.png">
+                                                    </small>
+                                                <span id="lnkSentHoroReq">SentHoro</span></a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PhotoPassword" class="panel panel-default">
+                        <div class="">
+                            <h4 class="panel-title jumbotron">
+                                <span id="lblMainHeaderpassword">PasswordProtected</span>
+                                <img id="Image1password" src="../images/icon_spl_9_2.png">
+                            </h4>
+                        </div>
+
+                        <div class="dataContentSection">
+                            <div class="panel-body">
+                                <div class="landing_page_sidebar_rt_list_item_menu">
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <h5>
+                                            <span id="lblSubHeaderpassword">Received</span>
+                                        </h5>
+
+                                        <div id="uplnknewpassword" class="clearfix">
+
+                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('RN','Members are awaiting to view your photograph',this);">
+                                                <small>
+                                                        <img id="plusimagepassword" src="../images/icon_spl_1.png">
+                                                    </small>
+
+                                                <span id="lnkNewIDsReceivedProtec">New</span></a>
+                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('RA','Members request has been accepted to view your photograph',this);">
+                                                <small>
+                                                        <img id="Image2password" src="../images/icon_spl_2.png">
+                                                    </small>
+                                                <span id="lnkACCEPTEDReceivedProtec">Accepted</span></a>
+                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('RR','Members requests are rejected',this);">
+                                                <small>
+                                                        <img id="Image3password" src="../images/icon_spl_9.png">
+                                                    </small>
+                                                <span id="lnkREJECTEDReceivedProtec">Rejected</span></a>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="landing_page_sidebar_rt_list_item_in clearfix">
+                                        <h5>
+                                            <span id="lblSubHeadersentpassword">Sent</span>
+                                        </h5>
+
+                                        <div id="uplnknewsendpassword" class="clearfix">
+
+                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('SN','Members are still waiting to accept your request',this);">
+                                                <small>
+                                                        <img id="plusimagesentpassword" src="../images/icon_spl_4.png">
+                                                    </small>
+
+                                                <span id="lnkNewIDsSentProtec">Reply Pending</span></a>
+                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('SA','Members have accepted your request',this);">
+                                                <small>
+                                                        <img id="Image2sendpassword" src="../images/icon_spl_5.png">
+                                                    </small>
+                                                <span id="lnkACCEPTEDSentProtec">Accepted</span></a>
+                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" onclick="return Receivephotopassword('SR','Members have rejected',this);">
+                                                <small>
+                                                        <img id="Image3sendpassword" src="../images/icon_spl_6.png">
+                                                    </small>
+                                                <span id="lnkREJECTEDSentProtec">Rejected</span></a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="landing_page_sidebar_lt_sprt">
+                <h4>Dedicated support<span>Relationship Manager (RM)</span></h4>
+                <p>
+                    Contact : <span>
+                            <label id="lblOwner"></label>
+                        </span><b>
+                            <label id="lblOwnerContact"></label>
+                            <label id="lblOfficialContactNumber"></label>
+                        </b>
+                </p>
+                <label id="lnkEmails" style="color: red;">bhaskar.support@kaakateeya.com</label>
+            </div>
+        </div>
+        <div class="landing_page_middle">
+
+            <div id="Div1" class="landing_page_middle_in">
+                <div class="searched_list clearfix">
+                    <div class="clear"></div>
+                    <div class="clearfix" style="padding: 0 0 0 0;">
+                        <div style="margin: 0;">
+                            <h1 class="span1"><b>
+                                    <label id="lblSearchresultCount" style="color: #d42e02;"></label>
+                                </b></h1>
+                            <label id="lblUHaveviewd" class="control-label span6"></label>
+                        </div>
+                        <div id="View" class="content-View clearfix">
+                            <a id="lnkgrid" class="gridk_view" title="Grid View" onclick="return Changelist();" style="cursor: pointer;background: url('src/images/vinod.png') no-repeat -959px -200px;display: block;width: 34px;height: 34px;"
+                            />
+                            <a id="lnklist" class="normal_view" title="List View" onclick="return Changetogrid();" style="cursor: pointer;background: url('src/images/vinod.png') no-repeat -1191px -207px;/*! margin: 0 0 0 30%; */display: block;width: 34px;height: 34px;margin: -34px 0px 0px -39px;"
+                            />
+                        </div>
+                        <div class="clear"></div>
+                        <div class="row" id="allinterestdivtabs" style="display: none;">
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                <div id="youinterestdiv">
+                                    <h3 style="color: maroon; cursor: pointer; font-size: 18px; background-color: #ccc; padding: 10px 10px 10px 10px; border: 1px #ccc; border-radius: 4px;"><span>I</span><span id="spantoggleyou" class="indicator glyphicon glyphicon-chevron-up"
+                                            style="margin-left: 10px;"></span></h3>
+                                </div>
+                                <div class="row bs-callout bs-callout-info" id="yourinterestbtnsdiv" style="display: none;">
+
+                                    <div class="sugested_block_top_skip">
+                                        <ul>
+                                            <li><a class="active Removecolor" href="javascript:void(0);" id="lnkyourinterest"
+                                                    onclick="return Expressintrst(undefined,'I',undefined,'lnkyourinterest');"
+                                                    style="width: 117px;">Interested</a></li>
+                                            <li><a class="active Removecolor" id="lnkyournotinterest" onclick="return Expressintrst(undefined,'NI',undefined,'lnkyournotinterest');"
+                                                    href="javascript:void(0);" style="width: 117px;">Skipped</a></li>
+                                            <li><a class="active Removecolor" id="lnkyourpending" onclick="return Expressintrst(undefined,'V,NV',undefined,'lnkyourpending');"
+                                                    href="javascript:void(0);" style="width: 117px;">Pending</a></li>
+
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                <div id="partnerinterestdiv">
+                                    <h3 style="color: maroon; cursor: pointer; font-size: 18px; background-color: #ccc; padding: 10px 10px 10px 10px; border: 1px #ccc; border-radius: 4px;"><span id="partnerdivinterest"></span><span id="spantogglebride" class="indicator glyphicon glyphicon-chevron-up"
+                                            style="margin-left: 10px;"></span></h3>
+                                </div>
+                                <div class="row bs-callout bs-callout-info" id="Bridegroominterestbtnsdiv" style="display: none;">
+
+                                    <div class="sugested_block_top_skip">
+                                        <ul>
+                                            <li><a class="active Removecolor" id="lnkbrideinterest" href="javascript:void(0);"
+                                                    onclick="return Expressintrst(undefined,undefined,'I','lnkbrideinterest');"
+                                                    style="width: 117px;">Interested</a></li>
+                                            <li><a class="active Removecolor" id="lnkbridenotinterest" onclick="return Expressintrst(undefined,undefined,'NI','lnkbridenotinterest');"
+                                                    href="javascript:void(0);" style="width: 117px;">Skipped</a></li>
+                                            <li><a class="active Removecolor" id="lnkbridePending" onclick="return Expressintrst(undefined,undefined,'V,NV','lnkbridePending');"
+                                                    href="javascript:void(0);" style="width: 117px;">Pending</a></li>
+
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row bs-callout bs-callout-info" id="ExpSentReceiveBlock" style="display: none;">
+                            <div class="sugested_block_top_skip">
+                                <ul>
+                                    <li><a class="active Removecolors" href="javascript:void(0);" id="lnkIntrst" onclick="return Expressintrst(undefined,'I',undefined,'lnkIntrst');">Interested</a></li>
+                                    <li><a class="active Removecolors" id="lnknotintrst" onclick="return Expressintrst(undefined,'NI',undefined,'lnknotintrst');"
+                                            href="javascript:void(0);">Not Interested</a></li>
+                                    <li><a class="active Removecolors" id="lnkVwd" onclick="return Expressintrst(undefined,'V,NV',undefined,'lnkVwd');"
+                                            href="javascript:void(0);">Not Interested</a></li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                  
+
+                    <div class="search_results_main clearfix" style="display: none;">
+                        <div class="search_result_items_main clearfix">
+                        </div>
+                    </div>
+
+
+                    <partner-data ng-hide=vall></partner-data>
+                    
+                    <!-- <div id="PartnerProfilles">
+                        </div>-->
+                </div>
+            </div>
+            <div id="uctrldiv">
+               <div id="MessagesDiv">
+                        <div class="messages_list_item clearfix" ng-repeat="ch in chats">
+                            <div class="messages_list_item_lt"> <span class="">                            <img id="Iimagesdisplay" src="{{ch.Photo}}" style="height:120px;width:120px;"></span>                                </div>
+                            <div class="messages_list_item_rt">
+                                <p> Member Id : <span id="lblMseeageProfileID">{{ch.ProfileID}}</span></p>
+                                <p><span id="lblName">{{ch.NAME}}</span></p>
+                                <p class="Messages_profile_view clearfix"> <span id="lblAge">{{ch.Age}}</span><span id="lblCastIDs">{{ch.Caste}}</span><span id="lblheight">{{ch.HeightInCentimeters}}</span>                                    <span id="lblEducation">Masters in Engineering</span> <span id="lblProfessionID">{{ch.Profession}}</span></p>
+                                <div class="messages_list_item_ui clearfix">
+                                    <div id="updateContentKK">
+                                        <ul>
+                                            <li class="clearfix" style="width: 100%;"> <a onclick="return ShowFullProfile(310910220,91022,0,&quot;&quot;,&quot;Unpaid&quot;);"
+                                                    id="lnkViewCompleteProfile_Message" class="pull-left" href="javascript:void(0);">View Complete Profile</a>
+                                                <a id="lnkCommunicationHistory_Message" class="pull-right" href="javascript:void(0);" onclick="return ComunicationHistory(17527,1);">Communication History(<b style="color:Maroon">1</b>)</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"> </div>
+                                </div>
+                                <div class="messages_list_item_rt_rcdate">
+                                    <p> Message Received Date : <span id="lblRequestDatemsg">{{ch.RequestDate}}</span></p>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div id="JJHDDDDD">
+                                <div class="messages_list_item_form clearfix">
+                                    <div class="messages_list_item_form_cont">
+                                        <h6>Message Status</h6>
+                                        <p> <span id="lblMessages">          Reply pending from your side since {{ch.RequestDate}}          </span>                                            &nbsp;&nbsp;&nbsp;&nbsp; </p>
+                                    </div>
+                                </div>
+                                <div> </div>
+                            </div><label id="lblCustIDs1" style="display:none;">{{ch.CustID}}</label><label id="lblReviewID1" style="display:none;">{{ch.IsReviewd}}</label>
+                            <label id="lblMessageHistoryID1" style="display:none;">{{ch.Cust_MessageHistory_Id}}</label><label id="lblMessageLinkID1"
+                                style="display:none;">{{ch.Cust_MessageLink_Id}}</label>
+                            <label id="lblMseeageProfileID1" style="display:none;">{{ch.ProfileID}}</label>
+                            <label id="lblRowCount1" style="display:none;">1</label>
+                        </div>
+                    </div>
+                <div id="ExpressInterestDivuuuu" class="Exp" style="display: none;">
+                    <div class="search_result_items_main clearfix">
+                        <!-- Suggested Matches Block  /-->
+                        <div class="search_result_item sugested_match clearfix">
+
+                            <br />
+                            <div class="sugested_block_main tab-content">
+                                <div class="tab-pane fade in active" id="match1">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <!-- Suggested Matches Block  /-->
+                    </div>
+                </div>
+                <div id="uctrlRequests"></div>
+                <div id="uctrlPhotoPassword"></div>
+
+            </div>
+            <div class="col-lg-offset-5" style="display: none;" id="divloadmore">
+
+                <a href="javascript:void(0);" onclick="return paging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+            </div>
+            <div class="text-center" style="display: none;" id="Norows">
+                <h3 style="color: maroon;">End</h3>
+            </div>
+        </div>
+    </div>
 </div>
+  <!--<div ng-controller="SubjectDropDownController">
+
+    <div class="dropdown">
+
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+            Subject
+
+            <span class="caret"></span>
+
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+            <li ng-repeat="a in subjects"><a href="#">{{a}}</a></li>
+
+        </ul>
+
+    </div>
+
+</div>-->

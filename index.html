@@ -17,36 +17,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
+     <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap-theme.min.css">
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="src/css/bootstrap-responsive.min.css" rel="stylesheet"></link>
+    <link href="src/css/stylekaakateeya.css" rel="stylesheet"></link>
+  
+      <link href="src/css/style_responsive.css" rel="stylesheet"></link>
 
-    <!-- Our Website CSS Styles -->
-    
+      <link href="src/css/uniform.default.css" rel="stylesheet"></link>
 
+      <link href="src/css/chosen.css" rel="stylesheet"></link>
+     <link href="src/css/jquery-css.css" rel="stylesheet"></link>
+     <link href="src/css/bootstrap-fileupload.css" rel="stylesheet"></link>
+    <link href="src/css/custom_styles.css" rel="stylesheet"></link>
+    <link href="src/css/custom_responsive.css" rel="stylesheet"></link>
+    <link href="src/css/GITheWall.css" rel="stylesheet"></link>
+
+    <link href="src/css/CustomerSearchResult_New.css" rel="stylesheet"></link>
+
+    <style>
+       .logo_inner_new 
+       {background: url('src/images/vinod.png') no-repeat -448px -180px;
+width: 162px;
+height: 75px;
+}
+.live_chat_footer_new{
+ margin: 0 0 0 30%;
+background: url('src/images/vinod.png') no-repeat -318px -183px;
+display: block;
+width: 90px;
+height: 90px;
+}
+.mobileicon{
+    background: url('src/images/vinod.png') no-repeat -620px -291px !important;
+display: block !important;
+width: 34px !important;
+height: 34px !important;
+}
+        </style>
 </head>
-<body ng-app="mg">
-<!--<div ng-include='"templates/header.html"'></div>-->
-master page Text
-<div ng-view></div>
-<!--<div ng-include='"templates/footer.html"'></div>-->
-
-<!-- Vendor: Javascripts -->
-<!-- Vendor: Javascripts -->
+<body ng-app="Kaakateeya">
 
 <div ng-include="'templates/header.html'"></div>
+<div ng-view></div>
+<div ng-include="'templates/footer.html'"></div>
 
-<div ng-view >
-<div>
-asdasdasdasdasdsad
-asdasaasd
-
-</div>
-
-
-</div>
-
-<div ng-include="'templates/footer.html'" ng-style="max-width:1160px; display:block; margin:20px auto 0 auto; position:relative;"></div>
 
 <!-- Vendor: Javascripts -->
 
@@ -54,14 +70,63 @@ asdasaasd
 <!-- env:dev -->
 <!-- SCRIPTS DATA --><script src="app/Filters/dateFilter.js"></script><script src="app/constants/config.js"></script><script src="app/directives/partnerDirective.js"></script><script src="app/modules/dashboard/controllers/dashboardController.js"></script><script src="app/modules/dashboard/patientDashboardCtrl.js"></script><script src="app/modules/search/advanceSearchCtrl.js"></script><script src="app/modules/static/feedbackCtrl.js"></script><script src="app/services/patientDashboardServices.js"></script><!--SCRIPTS END-->
 <!-- env:dev:end -->
-
-
-
 <!-- env:prod --#>
 <h1>For everyone</h1>
 <p>This will be visable in 'prod' environment</p>
 <!-- env:prod:end -->
+<script src="node_modules\jquery\dist\jquery.min.js"></script>
+<script src="bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
+
+<script src="bower_components\angular\angular.min.js"></script>
+<script src="node_modules\angular-route\angular-route.min.js"></script>
+<script src="index.js"></script>
+
+<script src="src/js/bootstrap.min.js"></script>
+
+<script src="src/js/jquery.blockui.js"></script>
 
 
+
+<script src="src/js/chosen.jquery.min.js"></script>
+
+<script src="src/js/bootstrap-multiselect.js"></script>
+<script src="src/js/scriptsKaakateeya.js"></script>
+<script src="src/js/jquery.alert.js"></script>
+<script src="src/js/GI.TheWall.min.js"></script>
+<script src="src/js/KaakateeyaHelper.js"></script>
+<script src="src/js/CustomerCache_prod.js"></script>
+ <script src="src/js/scrollgress.js"></script>
+ <script src="src/js/jquery-ui.js"></script>
+   <script src="src/js/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
+   <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" 
+                type="text/javascript" id="Script1"></script>
+ <script src="app/directives/customerGridDisplay.js"></script>         
+ <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
+<script src="app/modules/Dashboard/patientDashboardCtrl.js"></script>
+<script src="app/services/patientDashboardServices.js"></script>
+<script src="app/directives/partnerDirective.js"></script>
+
+<script>
+function multidropdown() {
+            $('.multiple').multiselect({
+                includeSelectAllOption: true,
+                disableIfEmpty: true,
+                nonSelectedText: 'Any',
+                allSelectedText: 'All Selected',
+                selectAllText: 'Check all!',
+                // enableFiltering: true,
+                // enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Type To Search',
+                enableClickableOptGroups: true
+
+            });
+
+
+        }
+
+        jQuery(function ($) {
+            multidropdown();
+                   });
+        </script>
 </body>
 </html>
