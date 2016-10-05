@@ -6,7 +6,7 @@
 /**
  * Main App Creation
  */
-var app = angular.module('Kaakateeya', ['ngRoute']);
+var app = angular.module('Kaakateeya', ['ngRoute','ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 /**
  * Configure the Routes

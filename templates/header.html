@@ -1,12 +1,11 @@
-<div class="header_inner" id="divInnerMaster">
+<div class="header_inner" id="divInnerMaster" ng-controller='headctrl'>
 
     <div class="container_my clearfix">
 
         <a  id="IbtnLogodisplay" class="logo_inner_new pull-left" />
-
-        <input type="button" value="Login" id="btnLoginsubmit" class="pull-right button_custom login_show" onclick="return divloginblock();"
+        <input type="button" value="Login" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();"
         />
-        <input type="button" value="Logout" id="btnLogOut" class="pull-right button_custom" onclick="return ClearlocalStorage();"
+        <input type="button" value="Logout" id="btnLogOut" ng-hide="true" class="pull-right button_custom" onclick="return ClearlocalStorage();"
         />
 
 
@@ -37,7 +36,7 @@
             <h4>Support No<span>+1-734-926-1011</span></h4>
         </div>
     </div>
-    <div class="navbar_inner" id="divMemberName" visible="false">
+    <div class="navbar_inner" id="divMemberName" ng-hide="true">
 
         <div class="container_my clearfix">
             <div class="profile_own_name pull-left clearfix">
@@ -56,42 +55,42 @@
                 <ul class="pull-right">
 
                     <li>
-                        <a id="lnkMyHome" onclick="lnkMyHome_Click">My Home</a>
+                        <a id="lnkMyHome" href="#/Home">My Home</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)">my account</a>
 
                         <ul>
                             <li>
-                                <a id="linkviewmyprofile" onclick="linkfooter_Click">View My Profile</a>
+                                <a id="linkviewmyprofile" href="#/ViewMyProfile">View My Profile</a>
                             </li>
                             <li>
-                                <a id="linkeditprofile" onclick="linkfooter_Click">Edit Profile</a>
+                                <a id="linkeditprofile" href="#/EditProfile">Edit Profile</a>
                             </li>
                             <li>
-                                <a id="linkmanagephoto" onclick="linkfooter_Click">Manage Photo</a>
+                                <a id="linkmanagephoto" href="#/ManagePhoto">Manage Photo</a>
                             </li>
                             <li>
-                                <a id="linkmanagehoroscope" onclick="linkfooter_Click">Manage Horoscope</a>
+                                <a id="linkmanagehoroscope" href="#/ManageHoroscope">Manage Horoscope</a>
                             </li>
                             <li>
-                                <a id="linkprofilesettings" onclick="linkfooter_Click">Profile Settings</a>
+                                <a id="linkprofilesettings" href="#/ProfileSettings">Profile Settings</a>
                             </li>
 
                         </ul>
 
                     </li>
                     <li>
-                        <a id="lnksearch" onclick="lnkMyHome_Click">Search</a>
+                        <a id="lnksearch" href="#/Home">Search</a>
                         <ul>
                             <li>
-                                <a id="linkgenaralsearch" onclick="linkfooter_Click">General Search</a>
+                                <a id="linkgenaralsearch" href="#/GeneralSearch">General Search</a>
                             </li>
                             <li>
-                                <a id="linkAdvancedSearch" onclick="linkfooter_Click">Advanced Search</a>
+                                <a id="linkAdvancedSearch" href="#/AdvancedSearch">Advanced Search</a>
                             </li>
                             <li>
-                                <a id="linkprofileidsearch" onclick="linkfooter_Click">Profileid Search</a>
+                                <a id="linkprofileidsearch" href="#/ProfileidSearch">Profileid Search</a>
                             </li>
 
                         </ul>
@@ -101,16 +100,16 @@
                         <a href="javascript:void(0)">my package</a>
                         <ul>
                             <li>
-                                <a id="linkupgrademembership" onclick="linkfooter_Click">Upgrade Membership</a>
+                                <a id="linkupgrademembership" href="#/UpgradeMembership">Upgrade Membership</a>
                             </li>
                             <li>
-                                <a id="linkmyorders" onclick="linkfooter_Click">My Orders and Statistics</a>
+                                <a id="linkmyorders" href="#/MyOrdersAndStatistics">My Orders and Statistics</a>
                             </li>
                             <li>
-                                <a id="linkmembershipfaqs" onclick="linkfooter_Click">Membership Faqs</a>
+                                <a id="linkmembershipfaqs" href="#/MembershipFaqsHome">Membership Faqs</a>
                             </li>
                             <li>
-                                <a id="linkAddOnPacks" onclick="linkfooter_Click" visible="false">Add On Packs</a>
+                                <a id="linkAddOnPacks" href="#/AddOnPacks" visible="false">Add On Packs</a>
                             </li>
 
                         </ul>
@@ -119,16 +118,16 @@
                         <a href="javascript:void(0)">matches</a>
                         <ul>
                             <li>
-                                <a id="linkmybookmarks" onclick="linkfooter_Click">My BookMarked Profiles</a>
+                                <a id="linkmybookmarks" href="#/MyBookMarked">My BookMarked Profiles</a>
                             </li>
                             <li>
-                                <a id="linkwhobookmarkedme" onclick="linkfooter_Click">Who BookMarked Me</a>
+                                <a id="linkwhobookmarkedme" href="#/WhoBookMarked">Who BookMarked Me</a>
                             </li>
                             <li>
-                                <a id="linkigonredprofile" onclick="linkfooter_Click">Ignored Profiles</a>
+                                <a id="linkigonredprofile" href="#/Ignored">Ignored Profiles</a>
                             </li>
                             <li>
-                                <a id="linkviewedbutnotexpress" onclick="linkfooter_Click">My profile viewed by others</a>
+                                <a id="linkviewedbutnotexpress" href="#/viewed">My profile viewed by others</a>
                             </li>
 
                         </ul>
@@ -137,13 +136,13 @@
                         <a href="javascript:void(0)">messages</a>
                         <ul>
                             <li>
-                                <a id="linkPersonalizedmsg" onclick="linkfooter_Click">Chats</a>
+                                <a id="linkPersonalizedmsg" href="#/Chats">Chats</a>
                             </li>
                             <li>
-                                <a id="linkrequests" onclick="linkfooter_Click">Requests</a>
+                                <a id="linkrequests" href="#/Requests">Requests</a>
                             </li>
                             <li>
-                                <a id="linkMyContact" onclick="linkMyContact_Click">Express interest</a>
+                                <a id="linkMyContact" href="#/Expressinterest">Express interest</a>
                             </li>
 
                         </ul>
@@ -152,16 +151,16 @@
                         <a href="javascript:void(0)">Help</a>
                         <ul>
                             <li>
-                                <a id="lnkcontactus" onclick="linkfooter_Click">Contact Us</a>
+                                <a id="lnkcontactus" href="#/ContactUs">Contact Us</a>
                             </li>
                             <li>
-                                <a id="linkmysupportickets" onclick="linkfooter_Click">My Support Tickets</a>
+                                <a id="linkmysupportickets" href="#/MySupportTickets">My Support Tickets</a>
                             </li>
                             <li>
-                                <a id="lnkfeedback" onclick="linkfooter_Click">Feed Back</a>
+                                <a id="lnkfeedback" href="#/FeedBack">Feed Back</a>
                             </li>
                             <li>
-                                <a id="lnktakeatour" onclick="linkfooter_Click">Take A Tour</a>
+                                <a id="lnktakeatour" href="#/TakeATour">Take A Tour</a>
                             </li>
                         </ul>
                     </li>
@@ -181,10 +180,10 @@
                     <li><a href="KaakateeyaCustomerProfileIDsearchNew.aspx">Search <span></span></a></li>
                     <li><a onclick="return divloginblock(); return false;" href="javascript:void(0)">Upgrade</a></li>
                     <li>
-                        <a id="lnkSucessstoreiesFooter" onclick="linkfooter_Click">success stories <span></span></a>
+                        <a id="lnkSucessstoreiesFooter" href="#/Home">success stories <span></span></a>
                     </li>
                     <li>
-                        <a id="linkfooterhelp" onclick="linkfooter_Click">Help</a>
+                        <a id="linkfooterhelp" href="#/Help">Help</a>
                     </li>
                     <li><a href="KaakateeyaCustomerHomePage.aspx">Home</a></li>
 

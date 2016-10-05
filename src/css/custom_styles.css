@@ -96,7 +96,7 @@ a.logo										{ display:block; background:url(../images/logo.png) no-repeat ce
 .chzn-container .chzn-results li            { color:#000 !important; float:none !important; display:block !important; }
 
 .main_block1								{ max-width:1160px; margin:0 auto; position:relative; float:none !important; display:block; padding:60px 0; }
-.color_strip								{ display:block; width:368px; background:url(../images/strip-color.jpg) no-repeat left top; height:12px; position:absolute; top:0; left:0; }
+.color_strip								{ display:block; width:368px; background:url('') no-repeat left top; height:12px; position:absolute; top:0; left:0; }
 .main_block1 h4								{ text-transform:uppercase; font-weight:300; color:#d42e02; line-height:28px; font-size:20px; padding:0 0 20px 0; }
 .main_block1 h4 b							{ display:block; }
 .main_block1 p								{ font-size:14px; line-height:20px; color:#6c6b6b; }
@@ -140,7 +140,7 @@ a.more:before								{ content:""; position:absolute; left:0; top:10px; width:10
 /*-----*/
 footer	                                     { border-top:solid 1px #ccc; clear:both; }
 .footer_in									{ max-width:1160px; display:block; margin:20px auto 0 auto; position:relative; }
-footer a.logo								{ background-image:url(../images/logo2.png); width:138px; height:80px; margin:10px 40px 0 0; }
+footer a.logo								{ background-image:url(''); width:138px; height:80px; margin:10px 40px 0 0; }
 .footer_block_1								{ padding:0; margin:0; }
 footer h6									{ font-family: 'Oswald', sans-serif; text-transform:uppercase; font-size:16px; color:#010000; line-height:20px; padding:0 0 12px 0; font-weight:400; }
 footer p									{ font-weight:400; color:#6c6b6b; font-size:14px; line-height:20px; }
@@ -151,9 +151,9 @@ footer h3 span								{ color:#d42e02; }
 .social										{ display:block; padding:14px 0 0 0; }
 .social ul 									{ display:block; }
 .social ul li 								{ float:left; margin:0 0 0 8px; }
-.social ul li a								{ width:40px; height:40px; display:block; background:url(../images/icon_fb.png) no-repeat center center; background-color:#7B7878; }
-.social ul li+li a							{ background-image:url(../images/icon_linkedin.png); }
-.social ul li+li+li a						{ background-image:url(../images/icon_twitter.png); }
+.social ul li a								{ width:40px; height:40px; display:block; background:url('') no-repeat center center; background-color:#7B7878; }
+.social ul li+li a							{ background-image:url(''); }
+.social ul li+li+li a						{ background-image:url(''); }
 .social ul li a:hover						{ background-color:#000; }
 
 .copy_rights								{ text-transform:capitalize; padding:42px 0 40px 0; }
@@ -165,7 +165,7 @@ footer h3 span								{ color:#d42e02; }
 /*-----*/
 .header_inner								{ width:100%; padding:20px 0 0 0; background:#fedc01 !important; border-radius:0 !important; border:0 none !important; }
 .container_my								{ width:100%; max-width:1160px; display:block; margin:0 auto; }
-.logo_inner									{ text-indent:-280%; overflow:hidden; display:block; background:url(../images/logo3.png) no-repeat center center; width:160px !important; height:75px; }
+.logo_inner									{ text-indent:-280%; overflow:hidden; display:block; background:url('') no-repeat center center; width:160px !important; height:75px; }
 
 .header_inner h3							{ float:right; color:#a00201; text-transform:uppercase; font-weight:700; line-height:24px; font-size:24px; margin:25px 30px 0 4%; }
 .header_inner h3 small						{ color:#000; font-weight:400; }
@@ -1222,7 +1222,7 @@ span.duration_of_pack:after                    { content:" months"; text-transfo
 
 /* 08-09-2015 */
 
-.live_chat_footer                           { margin:0 0 0 30%; background:url(../images/icon_chat_footer.png) no-repeat center center; display:block; width:90px; height:90px; }
+.live_chat_footer                           { margin:0 0 0 30%; background:url('') no-repeat center center; display:block; width:90px; height:90px; }
 
 .myorders_list_main                         {}
 .myorders_list_main_item                    { border:solid 1px #ccc; border-radius:6px; margin:0 0 14px 0; }

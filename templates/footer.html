@@ -20,7 +20,6 @@
         </div>
         <script type="text/javascript" defer='defer'>
             function OpenLHNChat() {
-
                 if (typeof CustomOpenLHNChat == 'function') {
                     CustomOpenLHNChat();
                     return false;
@@ -29,14 +28,12 @@
                 var wtop = (screen.height - 420 - 96) / 2;
                 alert(bLHNOnline);
                 var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
-
                 if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
                     lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
                 }
                 else {
                     lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
                 }
-
                 if (typeof Zstepx != 'undefined') {
                     if (Zstepx == 10) {
                         Zslide();

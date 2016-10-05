@@ -22,8 +22,10 @@
   "devDependencies": {
     "angular-animate": "^1.5.8",
     "angular-module-sanitize": "^1.2.19",
+    "angular-multi-select": "^7.4.6",
     "angular-touch": "^1.5.8",
     "angular-ui-bootstrap": "^2.1.4",
+    "bootstrap-multiselect": "^0.9.13-1",
     "express": "latest",
     "grunt": "~0.4.4",
     "grunt-contrib-cssmin": "latest",
