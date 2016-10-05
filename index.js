@@ -6,24 +6,14 @@
 /**
  * Main App Creation
  */
-var app = angular.module('Kaakateeya', ['ngRoute']);
+var app = angular.module('Kaakateeya', ['ngRoute','ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 /**
  * Configure the Routes
  */
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
-    // Home
-    .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
-    // Pages
-    .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
-    .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
-    .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
-    .when("/services", {templateUrl: "partials/services.html", controller: "PageCtrl"})
-    .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
-    // Blog
-    .when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"})
-    .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
-    // else 404
+  .when("/", {templateUrl: "app/modules/dashboard/patientDashboardView.html",controller:"Controllerpartner"})
     .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
 }]);
+
