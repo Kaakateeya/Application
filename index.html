@@ -310,7 +310,16 @@ height: 34px !important;
 <div ng-include="'templates/footer.html'"></div>
 
 
+<!-- Vendor: Javascripts -->
+
+
 <!-- env:dev -->
+<!-- SCRIPTS DATA --><script src="app/Filters/dateFilter.js"></script><script src="app/constants/config.js"></script><script src="app/directives/partnerDirective.js"></script><script src="app/modules/dashboard/controllers/dashboardController.js"></script><script src="app/modules/dashboard/patientDashboardCtrl.js"></script><script src="app/modules/search/advanceSearchCtrl.js"></script><script src="app/modules/static/feedbackCtrl.js"></script><script src="app/services/patientDashboardServices.js"></script><!--SCRIPTS END-->
+<!-- env:dev:end -->
+<!-- env:prod --#>
+<h1>For everyone</h1>
+<p>This will be visable in 'prod' environment</p>
+<!-- env:prod:end -->
 <script src="node_modules\jquery\dist\jquery.min.js"></script>
 <script src="bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
 
@@ -340,12 +349,7 @@ height: 34px !important;
 <script src="app/modules/Dashboard/patientDashboardCtrl.js"></script>
 <script src="app/services/patientDashboardServices.js"></script>
 <script src="app/directives/partnerDirective.js"></script>
-<!-- env:dev:end -->
 
-<!-- env:prod --#>
-<h1>For everyone</h1>
-<p>This will be visable in 'prod' environment</p>
-<!-- env:prod:end -->
 <script>
 function multidropdown() {
             $('.multiple').multiselect({
