@@ -39,14 +39,11 @@
     <link href="src/css/CustomerSearchResult_New.css" rel="stylesheet"></link>
     <!-- Our Website CSS Styles -->
     <!--testing-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.css" rel="stylesheet" />
+   
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
 
 </head>
 
@@ -67,9 +64,11 @@
 
     <!-- Vendor: Javascripts -->
     <script src="node_modules\jquery\dist\jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
+    
 
     <!-- Vendor: Angular, followed by our custom Javascripts -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
     <script src="bower_components\angular\angular.min.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
 
@@ -78,21 +77,19 @@
     <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="node_modules/angular-module-sanitize/angular-sanitize.js"></script>
     <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-
+    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
 
 
 
     <!-- Our Website Javascripts -->
     <script src="index.js"></script>
 
-    <script src="src/js/bootstrap.min.js"></script>
-
     <script src="src/js/jquery.blockui.js"></script>
 
 
 
 
-    <script src="src/js/chosen.jquery.min.js"></script>
+    
 
 
     <script src="src/js/scriptsKaakateeya.js"></script>
@@ -104,32 +101,11 @@
     <script src="src/js/jquery-ui.js"></script>
     <script src="src/js/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
     <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" type="text/javascript" id="Script1"></script>
-    <script src="src/js/bootstrap-multiselect.js"></script>
     <script src="app/modules/static/dataGetin.js"></script>
 
     <script>
-            (function(){
-                multidropdown();
-            })();
-
-        function multidropdown() {
-            $('.multiple').multiselect({
-                includeSelectAllOption: true,
-                disableIfEmpty: true,
-                nonSelectedText: 'Any',
-                allSelectedText: 'All Selected',
-                selectAllText: 'Check all!',
-                // enableFiltering: true,
-                // enableCaseInsensitiveFiltering: true,
-                filterPlaceholder: 'Type To Search'
-            });
-
-        }
-
-        
-        
-
-                    </script>
+            
+    </script>
 
 </body>
 

@@ -1,15 +1,5 @@
-<!doctype html>
-<html>
-
-<head>
-
-
-</head>
-
-<body>
-
-    <div ng-controller="ModalDemoCtrl as $ctrl">
-        <script type="text/ng-template" id="myModalContent.html">
+<div ng-controller="ModalDemoCtrl as $ctrl">
+    <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
         </div>
@@ -153,13 +143,45 @@
         </div>
     </script>
 
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
-        <select id="sssss" class="selectpicker">
-     <option>--select--</option>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+    <select id="example-multiple-selected" class="multiple" multiple="multiple" ng-change="multidropdown();">
+    <option value="1">Option 1</option>
+    <option value="2" selected="selected">Option 2</option>
+    <!-- Option 3 will be selected in advance ... -->
+    <option value="3" selected="selected">Option 3</option>
+    <option value="4">Option 4</option>
+    <option value="5">Option 5</option>
+    <option value="6">Option 6</option>
 </select>
-    </div>
-</body>
+</div>
 
-</html>
+
+
+
+<link href="node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+
+<script type="text/javascript">
+            (function(){
+                multidropdown();
+                
+            })();
+
+        function multidropdown() {
+            $('.multiple').multiselect({
+                includeSelectAllOption: true,
+                disableIfEmpty: true,
+                nonSelectedText: 'Any',
+                allSelectedText: 'All Selected',
+                selectAllText: 'Check all!',
+                // enableFiltering: true,
+                // enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Type To Search'
+            });
+
+ 
+
+        }
+</script>
