@@ -1,12 +1,11 @@
 <div ng-controller="ModalDemoCtrl as $ctrl">
+    <div>{{itemsd}}</div>
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
         </div>
         <div class="modal-body" id="modal-body">
-<select id="sssss" class="selectpicker">
-    <option>--select--</option>
-</select>
+
 
             <ul id="uleducation">
         <li class="clearfix">
@@ -26,9 +25,11 @@
             <label for="lbleducationGroup" class="pop_label_left">Education category<span style="color: red; margin-left: 3px;">*</span></label>
 
             <div class="pop_controls_right select-box-my">
-                <select id="lstGEducatgory" ng-class="chosen">
+                <!--<select id="lstGEducatgory" ng-class="chosen">
                      <option>--select--</option>
-                </select>
+                </select>-->
+                
+               <multi-select-directive ng-model="lstGEducatgory" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
             </div>
         </li>
         <li class="clearfix">
@@ -37,9 +38,11 @@
 
             <div class="pop_controls_right select-box-my">
                 <div class="select-box-my">
-                    <select id="lstGEdugroup" class="chosen">
+                    <!--<select id="lstGEdugroup" class="chosen">
                          <option>--select--</option>
-                    </select>
+                    </select>-->
+                <multi-select-directive ng-model="lstGEdugroup" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
+                    
                 </div>
             </div>
         </li>
@@ -50,9 +53,10 @@
 
                 <div class="select-box-my">
 
-                    <select id="ddlEduspecialization" class="chosen">
+                    <!--<select id="ddlEduspecialization" class="chosen">
                          <option>--select--</option>
-                    </select>
+                    </select>-->
+                <multi-select-directive ng-model="ddlEduspecialization" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
 
                 </div>
             </div>
@@ -134,54 +138,20 @@
                     onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
             </div>
         </li>
-
     </ul>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
-    </script>
-
+    </script> {{ddlvals}} <br> {{ddltest}}
     <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
     <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
     <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
-    <select id="example-multiple-selected" class="multiple" multiple="multiple" ng-change="multidropdown();">
-    <option value="1">Option 1</option>
-    <option value="2" selected="selected">Option 2</option>
-    <!-- Option 3 will be selected in advance ... -->
-    <option value="3" selected="selected">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-    <option value="6">Option 6</option>
-</select>
+
+    <!--<multi-select-directive directive-id="ggg" ng-model="ddlvals" obj="obj2" selectedvals="[1,4]"></multi-select-directive>
+    <multi-select-directive  directive-id="ddltest" obj="obj1" selectedvals="[1,4]"></multi-select-directive>
+-->
+
+
 </div>
-
-
-
-
-<link href="node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
-    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-
-<script type="text/javascript">
-            (function(){
-                multidropdown();
-                
-            })();
-
-        function multidropdown() {
-            $('.multiple').multiselect({
-                includeSelectAllOption: true,
-                disableIfEmpty: true,
-                nonSelectedText: 'Any',
-                allSelectedText: 'All Selected',
-                selectAllText: 'Check all!',
-                // enableFiltering: true,
-                // enableCaseInsensitiveFiltering: true,
-                filterPlaceholder: 'Type To Search'
-            });
-
- 
-
-        }
-</script>

@@ -13,16 +13,15 @@
 
         <div class="login_block_header" style="display: none;" id="divLogin">
 
-            <input type="text" id="txtUserName" onchange="return vali();" />
-            <input type="password" id="txtPassword" />
+            <input type="text" ng-model="log.txtUserName" ng-blur="vali(log);" />
+            <input type="password" ng-model="log.txtPassword" />
             <span class="clear">&nbsp;</span>
             <div class="login_help">
-
                 <a id="lnkForgotPassword" onclick="return ShowForgotPassword();">Forgot Password</a>
                 <a href="CustomerRegistration.aspx">New User Sign Up</a>
 
             </div>
-            <input type="button" id="btnUserLogin" onclick="btnUserLogin_Click" class="button_custom" value="Login" />
+            <input type="button" id="btnUserLogin" ng-click="login(log);" class="button_custom" value="Login" />
 
             <span class="clear">&nbsp;</span>
         </div>
@@ -169,7 +168,7 @@
             </div>
         </div>
     </div>
-
+{{data}}
     <div class="navbar_inner" id="divwithoutlogin">
         <div class="container_my clearfix">
 
@@ -186,7 +185,7 @@
                     <li>
                         <a id="linkfooterhelp" href="#/Help">Help</a>
                     </li>
-                    <li><a href="KaakateeyaCustomerHomePage.aspx">Home</a></li>
+                    <li><a href="#/mobileVerification">Home</a></li>
 
                 </ul>
             </div>

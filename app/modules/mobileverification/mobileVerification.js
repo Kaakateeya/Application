@@ -1,4 +1,4 @@
-app.controller('mobileverifyController',function(){
+app.controller('mobileverifyController  ',function(){
 
 
 });
