@@ -10,3 +10,10 @@ return {
     }
 }
 });
+app.directive("partnerData",function () {
+    return{
+    restrict:"E",
+    templateUrl:"templates/Commonpartnerprofiles.html",
+    }
+});
+

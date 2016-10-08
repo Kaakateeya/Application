@@ -40,6 +40,11 @@ app.controller('ModalDemoCtrl', function ($uibModal, $log, $scope) {
     });
 
   };
+
+
+  // $scope.DropDownChnaged = function () {
+  //   $scope.DropDownStatus = $scope.dropValue;
+  // };
 });
 
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
@@ -73,13 +78,3 @@ app.controller('ModalInstanceCtrl', function ($uibModalInstance, items, $scope) 
     $uibModalInstance.dismiss('cancel');
   };
 });
-
-
-function getvalues(test) {
-  debugger;
-  var countries = [];
-  $.each($("#" + test + " option:selected"), function () {
-    countries.push($(this).val());
-  });
-  alert(JSON.stringify(countries));
-}

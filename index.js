@@ -6,6 +6,7 @@
 /**
  * Main App Creation
  */
+
 var app = angular.module('Kaakateeya', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 /**
@@ -26,7 +27,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/blog/post", { templateUrl: "partials/blog_item.html", controller: "BlogCtrl" })
     // else 404
     .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
+
 }]);
+
 
 app.controller('headctrl', ['$scope', function (scope) {
   scope.divloginblock = function () {
@@ -91,6 +94,4 @@ scope.data=[];
 
 
 }]);
-
-
 

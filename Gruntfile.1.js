@@ -47,44 +47,16 @@ module.exports = function(grunt) {
             // Can be ran as `grunt --env=dev` or `grunt --env=prod`
             environment: grunt.option('env') || 'dev',
                 env_char: '#',
-                //env_block_dev: 'env:dev',
-                env_block_dev: 'SCRIPTS DATA',
+                env_block_dev: 'env:dev',
                 env_block_prod: 'env:prod',
                 env_block_test: 'env:test'
         },
         all: {
             files: {
-                'index.html': 'index.html',
-                'index.js' :'index.js'
+                'index.html': 'index.html'
             }
         }
-    },
-    scriptlinker: {
-    dev: {
-      options: {
-        startTag: '<!-- SCRIPTS DATA -->',
-        endTag: '<!--SCRIPTS END-->',
-        fileTmpl: '<script src="%s"></script>',
-        appRoot: ''
-      },
-      files: {
-        // Target-specific file lists and/or options go here. 
-        'index.html': ['app/**/*.js']
-      },
-    },
-    prod: {
-      options: {
-        startTag: '<!-- SCRIPTS DATA -->',
-        endTag: '<!--SCRIPTS END-->',
-        fileTmpl: '<script src="%s"></script>',
-        appRoot: ''
-      },
-      files: {
-        // Target-specific file lists and/or options go here. 
-        'index.html': ['app/modules/**/*.js']
-      },
-    },
-  }
+    }
 
 	
 	
@@ -103,6 +75,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-dev-prod-switch');
-  grunt.loadNpmTasks('grunt-scriptlinker');
 
 };

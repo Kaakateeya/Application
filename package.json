@@ -33,6 +33,8 @@
     "grunt-contrib-less": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
+    "grunt-dev-prod-switch": "^0.1.8",
+    "grunt-scriptlinker": "^0.1.1",
     "jshint-stylish": "latest"
   },
   "author": "vinu",

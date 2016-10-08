@@ -2,8 +2,7 @@
 
     <div class="container_my clearfix">
 
-        <input type="image" id="IbtnLogodisplay" class="logo_inner pull-left"  alt="kaakateeyalogo"/>
-
+        <a id="IbtnLogodisplay" class="logo_inner_new pull-left" />
         <input type="button" value="Login" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();"
         />
         <input type="button" value="Logout" id="btnLogOut" ng-hide="true" class="pull-right button_custom" onclick="return ClearlocalStorage();"
@@ -29,14 +28,14 @@
         <div class="header_inner_rt clearfix">
             <h3>
 
-                <a id="lnkFeedbackMenu" onclick="lnkFeedbackMenu_Click">Feedback</a>
+                <a id="lnkFeedbackMenu" href="#/feedback">Feedback</a>
 
             </h3>
             <h4>make a missed call<span><em>+91-9390999999</em></span></h4>
             <h4>Support No<span>+1-734-926-1011</span></h4>
         </div>
     </div>
-    <div class="navbar_inner" id="divMemberName" ng-hide="true">
+    <div class="navbar_inner" id="divMemberName">
 
         <div class="container_my clearfix">
             <div class="profile_own_name pull-left clearfix">
@@ -55,7 +54,7 @@
                 <ul class="pull-right">
 
                     <li>
-                        <a id="lnkMyHome" href="#/Home">My Home</a>
+                        <a id="lnkMyHome" href="#/home">My Home</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)">my account</a>
@@ -74,7 +73,7 @@
                                 <a id="linkmanagehoroscope" href="#/ManageHoroscope">Manage Horoscope</a>
                             </li>
                             <li>
-                                <a id="linkprofilesettings" href="#/ProfileSettings">Profile Settings</a>
+                                <a id="linkprofilesettings" href="#/profilesettings">Profile Settings</a>
                             </li>
 
                         </ul>
@@ -118,16 +117,16 @@
                         <a href="javascript:void(0)">matches</a>
                         <ul>
                             <li>
-                                <a id="linkmybookmarks" href="#/MyBookMarked">My BookMarked Profiles</a>
+                                <a id="linkmybookmarks" href="#/home">My BookMarked Profiles</a>
                             </li>
                             <li>
-                                <a id="linkwhobookmarkedme" href="#/WhoBookMarked">Who BookMarked Me</a>
+                                <a id="linkwhobookmarkedme" href="#/home">Who BookMarked Me</a>
                             </li>
                             <li>
-                                <a id="linkigonredprofile" href="#/Ignored">Ignored Profiles</a>
+                                <a id="linkigonredprofile" href="#/home">Ignored Profiles</a>
                             </li>
                             <li>
-                                <a id="linkviewedbutnotexpress" href="#/viewed">My profile viewed by others</a>
+                                <a id="linkviewedbutnotexpress" href="#/<home></home>">My profile viewed by others</a>
                             </li>
 
                         </ul>
@@ -136,31 +135,31 @@
                         <a href="javascript:void(0)">messages</a>
                         <ul>
                             <li>
-                                <a id="linkPersonalizedmsg" href="#/Chats">Chats</a>
+                                <a id="linkPersonalizedmsg" href="#/home">Chats</a>
                             </li>
                             <li>
-                                <a id="linkrequests" href="#/Requests">Requests</a>
+                                <a id="linkrequests" href="#/home">Requests</a>
                             </li>
                             <li>
-                                <a id="linkMyContact" href="#/Expressinterest">Express interest</a>
+                                <a id="linkMyContact" href="#/home">Express interest</a>
                             </li>
 
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">Help</a>
+                        <a href="#/help">Help</a>
                         <ul>
                             <li>
-                                <a id="lnkcontactus" href="#/ContactUs">Contact Us</a>
+                                <a id="lnkcontactus" href="#/help">Contact Us</a>
                             </li>
                             <li>
                                 <a id="linkmysupportickets" href="#/MySupportTickets">My Support Tickets</a>
                             </li>
                             <li>
-                                <a id="lnkfeedback" href="#/FeedBack">Feed Back</a>
+                                <a id="lnkfeedback" href="#/feedback">Feed Back</a>
                             </li>
                             <li>
-                                <a id="lnktakeatour" href="#/TakeATour">Take A Tour</a>
+                                <a id="lnktakeatour" href="#/takeatour">Take A Tour</a>
                             </li>
                         </ul>
                     </li>
@@ -168,8 +167,9 @@
             </div>
         </div>
     </div>
-{{data}}
-    <div class="navbar_inner" id="divwithoutlogin">
+
+
+    <div class="navbar_inner" id="divwithoutlogin" ng-hide="true">
         <div class="container_my clearfix">
 
             <div class="profile_own_menu pull-right">
@@ -183,7 +183,7 @@
                         <a id="lnkSucessstoreiesFooter" href="#/Home">success stories <span></span></a>
                     </li>
                     <li>
-                        <a id="linkfooterhelp" href="#/Help">Help</a>
+                        <a id="linkfooterhelp" href="#/help">Help</a>
                     </li>
                     <li><a href="#/mobileVerification">Home</a></li>
 
