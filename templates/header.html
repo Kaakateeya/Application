@@ -18,7 +18,7 @@
             <div class="login_help">
 
                 <a id="lnkForgotPassword" onclick="return ShowForgotPassword();">Forgot Password</a>
-                <a href="CustomerRegistration.aspx">New User Sign Up</a>
+                <a href="#/Registration">New User Sign Up</a>
 
             </div>
             <input type="button" id="btnUserLogin" onclick="btnUserLogin_Click" class="button_custom" value="Login" />
@@ -62,7 +62,7 @@
 
                         <ul>
                             <li>
-                                <a id="linkviewmyprofile" href="#/ViewMyProfile">View My Profile</a>
+                                <a id="linkviewmyprofile" href="#/viewmyprofile">View My Profile</a>
                             </li>
                             <li>
                                 <a id="linkeditprofile" href="#/EditProfile">Edit Profile</a>
@@ -81,16 +81,16 @@
 
                     </li>
                     <li>
-                        <a id="lnksearch" href="#/Home">Search</a>
+                        <a id="lnksearch" href="#/profilidsrch">Search</a>
                         <ul>
                             <li>
-                                <a id="linkgenaralsearch" href="#/GeneralSearch">General Search</a>
+                                <a id="linkgenaralsearch" href="#/General">General Search</a>
                             </li>
                             <li>
-                                <a id="linkAdvancedSearch" href="#/AdvancedSearch">Advanced Search</a>
+                                <a id="linkAdvancedSearch" href="#/Advanced">Advanced Search</a>
                             </li>
                             <li>
-                                <a id="linkprofileidsearch" href="#/ProfileidSearch">Profileid Search</a>
+                                <a id="linkprofileidsearch" href="#/profilidsrch">Profileid Search</a>
                             </li>
 
                         </ul>
@@ -103,13 +103,13 @@
                                 <a id="linkupgrademembership" href="#/UpgradeMembership">Upgrade Membership</a>
                             </li>
                             <li>
-                                <a id="linkmyorders" href="#/MyOrdersAndStatistics">My Orders and Statistics</a>
+                                <a id="linkmyorders" href="#/myorders">My Orders and Statistics</a>
                             </li>
                             <li>
-                                <a id="linkmembershipfaqs" href="#/MembershipFaqsHome">Membership Faqs</a>
+                                <a id="linkmembershipfaqs" href="#/faqs">Membership Faqs</a>
                             </li>
                             <li>
-                                <a id="linkAddOnPacks" href="#/AddOnPacks" visible="false">Add On Packs</a>
+                                <a id="linkAddOnPacks" href="#/AddOnPacks" ng-hide="true">Add On Packs</a>
                             </li>
 
                         </ul>
@@ -127,7 +127,7 @@
                                 <a id="linkigonredprofile" href="#/home">Ignored Profiles</a>
                             </li>
                             <li>
-                                <a id="linkviewedbutnotexpress" href="#/<home></home>">My profile viewed by others</a>
+                                <a id="linkviewedbutnotexpress" href="#/home">My profile viewed by others</a>
                             </li>
 
                         </ul>
@@ -169,23 +169,23 @@
         </div>
     </div>
 
-    <div class="navbar_inner" id="divwithoutlogin" ng-hide="true">
+    <div class="navbar_inner" id="divwithoutlogin">
         <div class="container_my clearfix">
 
             <div class="profile_own_menu pull-right">
                 <a class="menu_toggle pull-right">Menu</a>
                 <ul class="pull-right">
 
-                    <li><a href="CustomerRegistration.aspx">Register free</a></li>
-                    <li><a href="KaakateeyaCustomerProfileIDsearchNew.aspx">Search <span></span></a></li>
-                    <li><a onclick="return divloginblock(); return false;" href="javascript:void(0)">Upgrade</a></li>
+                    <li><a href="#/Registration">Register free</a></li>
+                    <li><a href="#/profilidsrch">Search <span></span></a></li>
+                    <li><a href="#/profilidsrch">Upgrade</a></li>
                     <li>
-                        <a id="lnkSucessstoreiesFooter" href="#/Home">success stories <span></span></a>
+                        <a id="lnkSucessstoreiesFooter" href="#/successstories">success stories <span></span></a>
                     </li>
                     <li>
                         <a id="linkfooterhelp" href="#/help">Help</a>
                     </li>
-                    <li><a href="KaakateeyaCustomerHomePage.aspx">Home</a></li>
+                    <li><a href="#/homepage">Home</a></li>
 
                 </ul>
             </div>

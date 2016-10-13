@@ -7,26 +7,28 @@
             a happy and success married life.</small>
     </p>
     <div class="success_stories_new_list GITheWall">
-       
+
         <ul class="clearfix" id="ulsuccess">
-            <li class="inline-test" data-contenttype="inline" data-href="#210319750" id="hhhh" style="margin-bottom: 0px;">
+            <li class="inline-test" data-contenttype="inline" id="hhhh" style="margin-bottom: 0px;" ng-repeat="s in success">
                 <span class="image">
                     <input name="imgpath" id="imgpath" class="image" src="http://www.kaakateeya.com/access/Images/SuccessStoryImages/19985_31975_SuccessImage/19985_31975_SuccessImage.jpg" type="image"></span>
-                <p class="clearfix">
-                    <span class="groomname">
-                        <span id="lblGroom">NAGARJUNA THOTTEMPUDI</span>
-                    </span>&amp; <span class="bridename">
-                        <span id="lblBride">SINDHURA NADELLA</span>
-                    </span>
-                </p>
-                <h6 class="clearfix">
-                    <span class="groomid">
-                        <span id="lblGroomId">210319750</span>
-                    </span><span class="brideid">
-                        <span id="lblBrideId">110199854</span></span>
-                    <span class="weddingdate">
-                        <span id="lblWeddingDate">27/06/2016</span></span>
-                </h6>
+                <div style="height: 85px;">
+                    <p class="clearfix">
+                        <span class="groomname">
+                        <span id="lblGroom">{{s.GroomNAME}}</span>
+                        </span>&amp; <span class="bridename">
+                        <span id="lblBride">{{s.BrideName}}</span>
+                        </span>
+                    </p>
+                    <h6 class="clearfix">
+                        <span class="groomid">
+                        <span id="lblGroomId">{{s.GroomProfileID}}</span>
+                        </span><span class="brideid">
+                        <span id="lblBrideId">{{s.BrideProfileID}}</span></span>
+                        <span class="weddingdate">
+                        <span id="lblWeddingDate">{{s.Marrigedate}}</span></span>
+                    </h6>
+                </div>
             </li>
         </ul>
         <span class="clear">&nbsp;</span>

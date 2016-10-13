@@ -10,23 +10,19 @@
 <!--<![endif]-->
 
 <head>
-
     <!-- Meta-Information -->
     <title>Kaakateeya Marriages</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="ACME Inc.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
     <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap-theme.min.css">
     <link href="src/css/bootstrap-responsive.min.css" rel="stylesheet"></link>
     <link href="src/css/stylekaakateeya.css" rel="stylesheet"></link>
-
     <link href="src/css/style_responsive.css" rel="stylesheet"></link>
-
     <link href="src/css/uniform.default.css" rel="stylesheet"></link>
     <link href="src/css/chosen.css" rel="stylesheet"></link>
     <link href="src/css/jquery-css.css" rel="stylesheet"></link>
@@ -34,21 +30,18 @@
     <link href="src/css/custom_styles.css" rel="stylesheet"></link>
     <link href="src/css/custom_responsive.css" rel="stylesheet"></link>
     <link href="src/css/GITheWall.css" rel="stylesheet"></link>
-
     <link href="src/css/CustomerSearchResult_New.css" rel="stylesheet"></link>
     <link href="src/css/dashBoard.css" rel="stylesheet"></link>
+    <!--<style type="tetxt/css">
+        div[ng-view].ng-enter { -webkit-animation: fadeInRight 0.5s; animation: fadeInRight 0.5s; }
+    </style>-->
 </head>
 
 <body ng-app="Kaakateeya">
-
     <div ng-include="'templates/header.html'"></div>
     <div ng-view></div>
     <div ng-include="'templates/footer.html'"></div>
-
-
     <!-- Vendor: Javascripts -->
-
-
     <!-- env:dev -->
     <!-- SCRIPTS DATA -->
     <!-- <script src="app/Filters/dateFilter.js"></script>
@@ -70,12 +63,8 @@
 
     <script src="bower_components\angular\angular.min.js"></script>
     <script src="node_modules\angular-route\angular-route.min.js"></script>
-
     <!-- Our Website Javascripts -->
-
     <script src="src/js/jquery.blockui.js"></script>
-
-
     <script src="src/js/bootstrap-multiselect.js"></script>
     <script src="src/js/scriptsKaakateeya.js"></script>
     <script src="src/js/jquery.alert.js"></script>
@@ -87,37 +76,34 @@
     <script src="src/js/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
     <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" type="text/javascript" id="Script1"></script>
     <script src="index.js"></script>
-
     <script src="app/directives/customerGridDisplay.js"></script>
     <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
     <script src="app/modules/Dashboard/patientDashboardCtrl.js"></script>
-    <script src="app/services/patientDashboardServices.js"></script>
+    <script src="app/services/customerDashboardServices.js"></script>
     <script src="app/directives/partnerDirective.js"></script>
-
     <link href="node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
     <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-    <script>
-function multidropdown() {
-            $('.multiple').multiselect({
-                includeSelectAllOption: true,
-                disableIfEmpty: true,
-                nonSelectedText: 'Any',
-                allSelectedText: 'All Selected',
-                selectAllText: 'Check all!',
-                // enableFiltering: true,
-                // enableCaseInsensitiveFiltering: true,
-                filterPlaceholder: 'Type To Search',
-                enableClickableOptGroups: true
-
-            });
-
-
-        }
-
-        jQuery(function ($) {
-            multidropdown();
-                   });
-        </script>
+    <script src="app/modules/static/successStories.js"></script>
+    <script src="app/modules/homePage/homePage.js"></script>
+    <script src="app/modules/mobileverification/mobileVerification.js"></script>
+    <script src="app\modules\payments\controllers\paymentCtrl.js"></script>
+    <script src="app\modules\search\advanceSearchCtrl.js"></script>
+    <script src="app\modules\search\generalSearchView.js"></script>
+    <script src="app\modules\search\profileidSearch.js"></script>
+    <script src="app\modules\search\savedSearchView.js"></script>
+    <script src="app\modules\static\dataGetin.js"></script>
+    <script src="app\modules\static\faqs.js"></script>
+    <script src="app\modules\static\feedbackCtrl.js"></script>
+    <script src="app\modules\static\helpPage.js"></script>
+    <script src="app\modules\static\loginBlocker.js"></script>
+    <script src="app\modules\static\myOrdersAndStatistics.js"></script>
+    <script src="app\modules\static\profileSettings.js"></script>
+    <script src="app\modules\static\successStories.js"></script>
+    <script src="app\modules\static\supportTickets.js"></script>
+    <script src="app\modules\static\viewMyProfile.js"></script>
+    <script src="app\modules\viewFullProfile\viewFullProfileCustomer.js"></script>
+    <script src="app/modules/registration/controllers/registrationCntrl.js"></script>
+    <script src="app/modules/registration/controllers/registrationRegProfiles.js"></script>
 </body>
 
 </html>
