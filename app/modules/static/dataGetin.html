@@ -1,158 +1,932 @@
-<div ng-controller="ModalDemoCtrl as $ctrl">
-    <div>{{itemsd}}</div>
+<div ng-controller="ModalDemoCtrl">
     <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-
-
+    
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div id="divEducation">
             <ul id="uleducation">
-        <li class="clearfix">
-            <label for="lblIsHighestDegree" class="pop_label_left">Is Highest Degree<span style="color: red; margin-left: 3px;">*</span></label>
+                <li class="clearfix">
+                    <label for="lblIsHighestDegree" class="pop_label_left">Is Highest Degree<span style="color: red; margin-left: 3px;">*</span></label>
 
-            <div class="pop_controls_right pop_radios_list">
+                    <div class="pop_controls_right pop_radios_list">
 
-                <label>
+                        <label>
                     <input name="EmpType" value="1" type="radio"><span>&nbsp;Yes</span>
                 </label>
-                <label class="">
+                        <label class="">
                     <input name="EmpType" value="0" type="radio"><span>&nbsp;No</span>
                 </label>
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="lbleducationGroup" class="pop_label_left">Education category<span style="color: red; margin-left: 3px;">*</span></label>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lbleducationGroup" class="pop_label_left">Education category<span style="color: red; margin-left: 3px;">*</span></label>
 
-            <div class="pop_controls_right select-box-my">
-                <!--<select id="lstGEducatgory" ng-class="chosen">
+                    <div class="pop_controls_right select-box-my">
+                        <select id="lstGEducatgory" ng-class="chosen">
                      <option>--select--</option>
-                </select>-->
-                
-               <multi-select-directive ng-model="lstGEducatgory" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="lbleducationGroup" class="pop_label_left">Education group<span style="color: red; margin-left: 3px;">*</span></label>
+                </select>
 
 
-            <div class="pop_controls_right select-box-my">
-                <div class="select-box-my">
-                    <!--<select id="lstGEdugroup" class="chosen">
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lbleducationGroup" class="pop_label_left">Education group<span style="color: red; margin-left: 3px;">*</span></label>
+
+
+                    <div class="pop_controls_right select-box-my">
+                        <div class="select-box-my">
+                            <select id="lstGEdugroup" class="chosen">
                          <option>--select--</option>
-                    </select>-->
-                <multi-select-directive ng-model="lstGEdugroup" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
-                    
-                </div>
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="lbleducationGroup" class="pop_label_left">Edu specialization<span style="color: red; margin-left: 3px;">*</span></label>
+                    </select>
 
-            <div class="pop_controls_right select-box-my">
 
-                <div class="select-box-my">
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lbleducationGroup" class="pop_label_left">Edu specialization<span style="color: red; margin-left: 3px;">*</span></label>
 
-                    <!--<select id="ddlEduspecialization" class="chosen">
+                    <div class="pop_controls_right select-box-my">
+
+                        <div class="select-box-my">
+
+                            <select id="ddlEduspecialization" class="chosen">
                          <option>--select--</option>
-                    </select>-->
-                <multi-select-directive ng-model="ddlEduspecialization" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
+                    </select>
 
-                </div>
-            </div>
-        </li>
-        <li class="clearfix" id="divuniversity">
-            <label for="lbluniversity" class="pop_label_left">University</label>
 
-            <div class="pop_controls_right">
-                <input type="text" id="txtuniversity" maxlength="100" class="form-control" />
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="lblcollege" class="pop_label_left">College</label>
-            <div class="pop_controls_right">
-                <input type="text" id="txtcollege" maxlength="150" class="form-control" />
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="lblPassOfYear" class="pop_label_left">Pass of year</label>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix" id="divuniversity">
+                    <label for="lbluniversity" class="pop_label_left">University</label>
 
-            <div class="pop_controls_right select-box-my">
-                <select id="ddlpassofyear" class="chosen" style="width: 100%; height: 31px;">
+                    <div class="pop_controls_right">
+                        <input type="text" id="txtuniversity" maxlength="100" class="form-control" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblcollege" class="pop_label_left">College</label>
+                    <div class="pop_controls_right">
+                        <input type="text" id="txtcollege" maxlength="150" class="form-control" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblPassOfYear" class="pop_label_left">Pass of year</label>
+
+                    <div class="pop_controls_right select-box-my">
+                        <select id="ddlpassofyear" class="chosen" style="width: 100%; height: 31px;">
                      <option>--select--</option>
                 </select>
-            </div>
-        </li>
+                    </div>
+                </li>
 
 
-        <li class="clearfix">
-            <label for="lblCountry" class="pop_label_left">Country</label>
+                <li class="clearfix">
+                    <label for="lblCountry" class="pop_label_left">Country</label>
 
-            <div class="pop_controls_right select-box-my">
-                <select id="ddlCountry" class="chosen" style="width: 100%; height: 31px;">
+                    <div class="pop_controls_right select-box-my">
+                        <select id="ddlCountry" class="chosen" style="width: 100%; height: 31px;">
                      <option>--select--</option>
                 </select>
-            </div>
-        </li>
-        <li class="clearfix">
-            <label for="State" class="pop_label_left">State</label>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="State" class="pop_label_left">State</label>
 
-            <div class="pop_controls_right select-box-my">
-                <select id="ddlState" class="chosen" style="width: 100%; height: 31px;">
+                    <div class="pop_controls_right select-box-my">
+                        <select id="ddlState" class="chosen" style="width: 100%; height: 31px;">
                      <option>--select--</option>
                 </select>
 
-            </div>
-        </li>
-        <li class="clearfix">
+                    </div>
+                </li>
+                <li class="clearfix">
 
-            <div id="divEduDistric">
-                <label for="lblDistrict" class="pop_label_left">District</label>
-                <div class="pop_controls_right select-box-my">
-                    <select id="ddlDistrict" class="chosen" style="width: 100%; height: 31px;">
+                    <div id="divEduDistric">
+                        <label for="lblDistrict" class="pop_label_left">District</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select id="ddlDistrict" class="chosen" style="width: 100%; height: 31px;">
                          <option>--select--</option>
                         </select>
+                        </div>
+                    </div>
+
+                </li>
+                <li class="clearfix">
+                    <label for="lblCityworking" class="pop_label_left">City Studying in</label>
+
+                    <div class="pop_controls_right select-box-my">
+
+                        <select id="ddlcityworking" class="chosen" tabindex="11">
+                     <option>--select--</option>
+                </select>
+                        <input id="txtcity" style="display: none; width: 100%;" maxlength="100" />
+
+                        <a id="lnkCity">Not in List</a>
+
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
+                    <div class="">
+
+                        <textarea id="txtEdumerits" maxlength="500" rows="4" tabindex="12" onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div id="divProfession">
+            <ul>
+                    <li class="clearfix">
+
+                        <label for="lblempin" class="pop_label_left">Employed In<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my">
+                            <select id="ddlempin" class="chosen" tabindex="1">
+                                <option value="0">--select--</option>
+                            </select>
+                            <div>
+                            </div>
+                            <label id="lblprofGridIDV" visible="false"></label>
+                            <label id="lblProfessionIDV" visible="false"></label>
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblprofessiongroup" class="pop_label_left">Professional group<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my">
+                            <select id="ddlprofgroup" class="chosen" tabindex="2">
+                                <option value="0">--select--</option>
+                            </select>
+                        </div>
+                    </li>
+
+                    <li class="clearfix">
+                        <label for="lblprofession" class="pop_label_left">Profession<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my">
+                            <select id="ddlprofession" class="chosen" tabindex="3">
+                                <option value="0">--select--</option>
+                            </select>
+                        </div>
+                    </li>
+
+                    <li class="clearfix">
+                        <label for="lblcmpyname" class="pop_label_left">Company name</label>
+                        <div class="pop_controls_right select-box-my">
+                            <input id="txtcmpyname" class="form-control" tabindex="4" maxlength="100" />
+
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblsal" class="pop_label_left">Monthly salary</label>
+                        <div class="pop_controls_right select-box-my select-box-my-double">
+
+
+
+                            <select id="ddlcurreny" tabindex="5" class="chosen">
+                                <option>--select--</option>
+                            </select>
+
+
+
+
+
+                            <input id="txtsalary" class="form-control" onchange="currency();" maxlength="7" tabindex="6" />
+                            <asp:filteredtextboxextender validchars="1234567890" id="fteLand"
+                                targetcontrolid="txtsalary" filtertype="Custom" filtermode="ValidChars">
+                                            </asp:filteredtextboxextender>
+
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblCountryProf" class="pop_label_left">Country</label>
+
+                        <div class="pop_controls_right select-box-my">
+
+
+                            <select id="ddlCountryProf" width="100%" height="31" class="chosen" tabindex="7">
+                                <option value="0">---Select--</option>
+                            </select>
+
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="StateProf" class="pop_label_left">State</label>
+
+                        <div class="pop_controls_right select-box-my">
+
+
+                            <select id="ddlStateProf" width="100%" height="31" class="chosen" tabindex="8">
+                                <option value="0">---Select--</option>
+                            </select>
+
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+
+
+                        <div id="divDistricProf">
+                            <label for="lblDistrictProf" class="pop_label_left">District</label>
+
+                            <div class="pop_controls_right select-box-my">
+
+
+                                <select id="ddlDistrictProf" width="100%" height="31" class="chosen" tabindex="9">
+                                    <option value="0">---Select--</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblCityworking" class="pop_label_left">City working in</label>
+                        <div class="pop_controls_right select-box-my">
+
+
+
+                            <select id="ddlcityworkingprofession" class="chosen" tabindex="10">
+                                <option>--select--</option>
+                            </select>
+
+                            <input id="txtcityprofession" style="display: none;" maxlength="100" />
+                            <asp:filteredtextboxextender id="filcity" targetcontrolid="txtcityprofession"
+                                filtertype="Custom" validchars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ">
+                                            </asp:filteredtextboxextender>
+                            <asp:autocompleteextender
+                                id="AutoCompleteExtender2"
+                                targetcontrolid="txtcityprofession"
+                                servicemethod="GetAutoCompleteData" usecontextkey="True">
+                                            </asp:autocompleteextender>
+                            <asp:linkbutton id="lnkCityprofession" text="Not in List" onclientclick="return city();"></asp:linkbutton>
+
+
+                        </div>
+                    </li>
+
+
+                    <li class="clearfix">
+                        <label for="lblworkingfrome" class="pop_label_left">Working from date</label>
+                        <div class="pop_controls_right select-box-my">
+
+
+                            <input id="txtworkingfrom" class="datepicker2 form-control" tabindex="11" />
+
+
+                        </div>
+                    </li>
+
+
+                    <div id="divfalseVisa" style="display: none;">
+                        <li class="clearfix">
+                            <label for="lblvisastatus" class="pop_label_left">visa status</label>
+                            <div class="pop_controls_right select-box-my">
+
+
+                                <div class="select-box-my">
+                                    <select id="ddlvisastatus" class="chosen" tabindex="12">
+                                        <option>--select--</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                        </li>
+                        <li class="clearfix">
+
+                            <label class="pop_label_left" for="lblsincedate">Since date</label>
+                            <div class="pop_controls_right select-box-my">
+
+
+                                <input id="txtssincedate" class="datepicker2 form-control" tabindex="13" />
+
+
+                            </div>
+                        </li>
+                        <li class="clearfix">
+
+                            <label for="lblarrivaldate" class="pop_label_left">Arrival Date</label>
+                            <div class="pop_controls_right select-box-my">
+
+
+                                <input id="txtarrivaldate" class=" datepicker2 form-control" tabindex="14" />
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="clearfix">
+                            <label for="lbldeaparturedate" class="pop_label_left">Departure Date</label>
+                            <div class="pop_controls_right select-box-my">
+
+
+                                <input id="txtdeparture" class="datepicker2 form-control" tabindex="15" />
+
+
+                            </div>
+                        </li>
+                    </div>
+                    <li class="clearfix">
+                        <label for="lbloccupation" class="pop_label_left">Occupation Details</label>
+                        <div class="">
+                            <textarea id="txtoccupation" rows="4" tabindex="16" maxlength="500"
+                                onkeydown="return CharacterCount()" onkeyup="return CharacterCount()"></textarea>
+                            <label id="lbloccupationcount" style="color: #1e1c1c; font-size: 13px;"></label>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+        <div id="divParentsDetails">
+
+            <ul id="parentDivClear">
+    <li>
+        <h6>Father Details</h6>
+    </li>
+    <li class="clearfix">
+        <label for="lbleducationGroup" class="pop_label_left" style="color: red;">Father Name<span style="color: red; margin-left: 3px;">*</span></label>
+
+        <div class="pop_controls_right">
+            <input id="txtFathername" class="form-control" maxlength="100" tabindex="1"></input>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="lblFEducation" class="pop_label_left">Education</label>
+        <div class="pop_controls_right">
+            <input id="txtFEducation" class="form-control" maxlength="150" tabindex="2"></input>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="lblFProfession" class="pop_label_left">Profession</label>
+        <div class="pop_controls_right">
+            <input id="txtFProfession" class="form-control" maxlength="200" tabindex="3"></input>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="lblCompanyName" class="pop_label_left">Company Name </label>
+        <div class="pop_controls_right">
+            <input id="txtCompany" class="form-control" maxlength="100" tabindex="4"></input>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="lblJobLocation" class="pop_label_left">Job Location</label>
+        <div class="pop_controls_right">
+            <input id="txtJobLocation" class="form-control" maxlength="100" tabindex="5"></input>
+        </div>
+    </li>
+
+
+    <div id="ownerdiv4">
+        <li id="divfathernumbersowner" class="clearfix">
+            <label for="lblContactNumbersfather" class="pop_label_left">Contact Numbers</label>
+            <div class="pop_controls_right">
+                <a id="lnlmobilee" onclick="showhidetextboxsalerts('txtMobile', 'txtfathermobile2', 'txtLandNumber', 'mobile','divfathermobile2','divfatherlandnumber','txtAreCode','ddlLandLineCountry','divfathermobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');return false;" data-toggle="tooltip" data-original-title="Add Mobile Number" tabindex="6">
+                    <span class="glyphicon glyphicon-phone"></span>
+                </a>
+
+                <a id="lnklandline" onclick="showhidetextboxsalerts('txtMobile', 'txtfathermobile2', 'txtLandNumber', 'landnumber', 'divfathermobile2', 'divfatherlandnumber', 'txtAreCode', 'ddlfathermobile2','divfathermobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');return false;" data-toggle="tooltip" data-original-title="Add  Land Number" tabindex="7">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </a>
+
+                <a id="lnkFatherEmail" onclick="showhideonlyonediv('fatheradeemail','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');return false;" data-toggle="tooltip" data-original-title="Add  Email ID" tabindex="8">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </a>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div id="divfathermobile">
+                <label for="lblMobile" class="pop_label_left">Mobile #  </label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlMobile" class="chosen" tabindex="9"
+                        onchange="return validatemobilecode('ddlMobile',
+                                                    'txtMobile','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMobile" maxlength="10" tabindex="10"
+                        onkeydown="return validatemobilecode('ddlMobile',
+                                                    'txtMobile','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+                </div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div id="divfathermobile2">
+                <label for="lblMobilefather" class="pop_label_left">Altenate Number</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlfathermobile2" tabindex="11" class="chosen"
+                        onchange="return validatemobilecode('ddlfathermobile2',
+                                                    'txtfathermobile2','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtfathermobile2" maxlength="10" tabindex="12"
+                        onkeydown="return validatemobilecode('ddlfathermobile2',
+                                                    'txtfathermobile2','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+                </div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <div id="divfatherlandnumber">
+                <label for="lblLandLine" class="pop_label_left">Land line #  </label>
+                <div class="pop_controls_right select-box-my select-box-my-trible">
+
+                    <select id="ddlLandLineCountry" tabindex="13" class="chosen"
+                        onchange="return validatemobilecode('ddlLandLineCountry',
+                                                    'txtLandNumber','txtAreCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtAreCode" maxlength="4" tabindex="14"
+                        onkeydown="return validatemobilecode('ddlLandLineCountry',
+                                                    'txtLandNumber','txtAreCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                    <input id="txtLandNumber" maxlength="8" tabindex="15"
+                        onkeydown="return validatemobilecode('ddlLandLineCountry',
+                                                    'txtLandNumber','txtAreCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                </div>
+            </div>
+        </li>
+
+        <li id="fatheradeemail" style="display: none;" class="clearfix">
+            <label for="lblEmail" class="pop_label_left">Email  </label>
+            <div class="pop_controls_right">
+                <input id="txtEmail" class="form-control" placeholder="Enter Email" text=" " tabindex="16"></input>
+
+            </div>
+        </li>
+    </div>
+    <li class="clearfix">
+        <label for="lblFatherFname" class="pop_label_left">Father's father name </label>
+        <div class="pop_controls_right">
+            <input id="txtFatherFname" class="form-control" placeholder="Enter Father's father name" maxlength="100" tabindex="17"></input>
+        </div>
+    </li>
+    <div id="ownerdiv5">
+        <li id="fathersfatehrnumbers" class="clearfix">
+            <label for="lblContactNumbersfatherFather" class="pop_label_left">Contact Numbers</label>
+            <div class="pop_controls_right">
+
+                <a id="lnkFFmobile" onclick="return  showhidetextboxsalerts('txtMobileFatherfather', 'txtfatherfatherAlternative', 'txtGrandFatherLandLinenum', 'mobile','divfatherfatherAlternative','divFFland','txtGrandFatherArea',
+                                            'ddlFatherFatherLandLineCode','divffMobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"
+                    data-toggle="tooltip" data-original-title="Add Mobile Number" tabindex="18">
+                    <span class="glyphicon glyphicon-phone"></span>
+                </a>
+
+
+                <a id="lnlFFLand" onclick="return showhidetextboxsalerts('txtMobileFatherfather', 'txtfatherfatherAlternative', 'txtGrandFatherLandLinenum', 'landnumber', 
+                                            'divfatherfatherAlternative', 'divFFland', 'txtGrandFatherArea', 'ddlfatherfatherAlternative','divffMobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"
+                    data-toggle="tooltip" data-original-title="Add  Land Number" tabindex="19">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </a>
+            </div>
+
+        </li>
+
+        <li class="clearfix">
+
+
+            <div id="divffMobile">
+                <label for="lblMobileGrandfather" class="pop_label_left">Mobile Number</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlFatherfatherMobileCountryCode" tabindex="20" class="chosen"
+                        onchange="return validatemobilecode('ddlFatherfatherMobileCountryCode',
+                                                    'txtMobileFatherfather','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMobileFatherfather" maxlength="10" tabindex="21"
+                        onkeydown="return validatemobilecode('ddlFatherfatherMobileCountryCode',
+                                                    'txtMobileFatherfather','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
                 </div>
             </div>
 
+
         </li>
         <li class="clearfix">
-            <label for="lblCityworking" class="pop_label_left">City Studying in</label>
 
+
+            <div id="divfatherfatherAlternative">
+                <label for="fatherfatherAlternative" class="pop_label_left">Altenate Number</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlfatherfatherAlternative" tabindex="22" class="chosen"
+                        onchange="return validatemobilecode('ddlfatherfatherAlternative',
+                                                    'txtfatherfatherAlternative','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtfatherfatherAlternative" maxlength="10" tabindex="23"
+                        onkeydown="return validatemobilecode('ddlfatherfatherAlternative',
+                                                    'txtfatherfatherAlternative','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                </div>
+            </div>
+
+
+        </li>
+
+        <li class="clearfix">
+
+
+            <div id="divFFland">
+                <label for="lblGrandFatherLandLine" class="pop_label_left">Land line #  </label>
+
+
+                <div class="pop_controls_right select-box-my select-box-my-trible">
+
+                    <select id="ddlFatherFatherLandLineCode" class="chosen" tabindex="24"
+                        onchange="return validatemobilecode('ddlFatherFatherLandLineCode',
+                                                    'txtGrandFatherLandLinenum','txtGrandFatherArea','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtGrandFatherArea" maxlength="4" tabindex="25"
+                        onkeydown="return validatemobilecode('ddlFatherFatherLandLineCode',
+                                                    'txtGrandFatherLandLinenum','txtGrandFatherArea','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                    <input id="txtGrandFatherLandLinenum" width="30%"
+                        class="col-lg-2 form-control" maxlength="8" tabindex="26"
+                        onkeydown="return validatemobilecode('ddlFatherFatherLandLineCode',
+                                                    'txtGrandFatherLandLinenum','txtGrandFatherArea','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                </div>
+            </div>
+        </li>
+    </div>
+
+
+
+    <li class="clearfix">
+        <label for="FState" class="pop_label_left">State</label>
+        <div class="pop_controls_right select-box-my">
+
+
+            <select id="ddlFState" class="chosen" enableviewstate="true" onselectedindexchanged="ddlCountry_SelectedIndexChanged" tabindex="27"></select>
+
+
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="FDistrict" class="pop_label_left">District</label>
+        <div class="pop_controls_right select-box-my">
+
+
+
+            <select id="ddlFDistric" class="chosen" tabindex="28"></select>
+
+
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="FNativePlace" class="pop_label_left">Native Place</label>
+        <div class="pop_controls_right">
+
+
+            <input id="txtFNativePlace" class="form-control" maxlength="100" tabindex="29"></input>
+
+
+        </div>
+    </li>
+    <li>
+        <h6>Mother Details</h6>
+    </li>
+    <li class="clearfix">
+        <label for="lblMotherName" class="pop_label_left" style="color: red;">Mother Name<span style="color: red; margin-left: 3px;">*</span></label>
+
+        <div class="pop_controls_right">
+
+
+            <input id="txtMName" class="form-control" maxlength="100" tabindex="30"></input>
+
+        </div>
+
+    </li>
+
+    <li class="clearfix">
+        <label for="lblMEducation" class="pop_label_left">Education</label>
+        <div class="pop_controls_right">
+            <input id="txtMEducation" class="form-control" maxlength="150" tabindex="31"></input>
+        </div>
+    </li>
+
+    <li class="clearfix">
+        <label for="lblMProfession" class="pop_label_left">Profession</label>
+        <div class="pop_controls_right">
+
+
+            <input id="txtMProfession" class="form-control" maxlength="200" tabindex="32"></input>
+
+            <label class="checkbox-inline checkbox_my" style="padding: 5px 0 0 0;">
+                <label class="">
+                    <input id="chkbox" type="checkbox"><span>&nbsp;HouseWife</span>
+                </label>
+            </label>
+
+
+        </div>
+
+    </li>
+
+
+
+    <div id="divmotherprofesseion">
+        <li id="divComLocation" class="clearfix">
+
+            <label for="lblMCompanyName" class="pop_label_left">Company Name </label>
+            <div class="pop_controls_right">
+
+
+                <input id="txtMCompanyName" class="form-control" maxlength="100" tabindex="34"></input>
+
+
+            </div>
+        </li>
+
+        <li class="clearfix">
+            <label for="lblMJobLocation" class="pop_label_left">Job Location</label>
+            <div class="pop_controls_right">
+
+
+                <input id="txtMJobLocation" class="form-control" maxlength="100" tabindex="35"></input>
+
+            </div>
+        </li>
+    </div>
+
+
+    <div style="height: 15px;"></div>
+
+
+    <div id="ownerdiv6">
+        <li id="divmothernumberowner" class="clearfix">
+            <label for="lblContactNumbersMother" class="pop_label_left">Contact Numbers</label>
+            <div class="pop_controls_right">
+                <a id="LnkMotherMobile" onclick="return showhidetextboxsalerts('txtMMobileNum', 'txtMMobileNum2', 'txtMLandLineNum', 'mobile', 'divMotherMobile2', 'motherlandnumber','txtmAreaCode','ddlMLandLineCounCode','mothermobilediv','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_')" data-toggle="tooltip"
+                    data-original-title="Add Mobile Number" tabindex="36">
+                    <span class="glyphicon glyphicon-phone"></span>
+
+                </a>
+
+                <a id="lnkMotherLandNum" onclick="return showhidetextboxsalerts('txtMMobileNum', 'txtMMobileNum2', 'txtMLandLineNum', 'landnumber', 'divMotherMobile2', 'motherlandnumber', 'txtmAreaCode', 'ddlMMobileCounCodeID2','mothermobilediv','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');" data-toggle="tooltip"
+                    data-original-title="Add  Land Number" tabindex="37">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </a>
+
+                <a id="lnkMotherEmail" onclick="return showhideonlyonediv('divmothermails','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');" data-toggle="tooltip"
+                    data-original-title="Add  Email ID" tabindex="38">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </a>
+            </div>
+        </li>
+        <li class="clearfix">
+
+
+            <div id="mothermobilediv">
+                <label for="lblMMobile" class="pop_label_left">Mobile # </label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlMMobileCounCodeID" class="chosen" tabindex="39"
+                        onchange="return validatemobilecode('ddlMMobileCounCodeID',
+                                                    'txtMMobileNum','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMMobileNum" maxlength="10" tabindex="40"
+                        onkeydown="return validatemobilecode('ddlMMobileCounCodeID',
+                                                    'txtMMobileNum','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+
+                </div>
+            </div>
+
+
+        </li>
+
+        <li class="clearfix">
+
+
+            <div id="divMotherMobile2">
+                <label for="lblMMobile2" class="pop_label_left">Altenate NUmber</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlMMobileCounCodeID2" class="chosen" tabindex="41"
+                        onchange="return validatemobilecode('ddlMMobileCounCodeID2',
+                                                    'txtMMobileNum2','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMMobileNum2" maxlength="10" tabindex="42" onkeydown="return validatemobilecode('ddlMMobileCounCodeID2',
+                                                    'txtMMobileNum2','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+
+                </div>
+            </div>
+
+
+        </li>
+        <li class="clearfix">
+
+
+            <div id="motherlandnumber" style="display: none;">
+                <label for="lblMLandLine" class="pop_label_left">Land line #  </label>
+                <div class="pop_controls_right select-box-my select-box-my-trible">
+
+                    <select id="ddlMLandLineCounCode" class="chosen" tabindex="43"
+                        onchange="return validatemobilecode('ddlMLandLineCounCode',
+                                                    'txtMLandLineNum','txtmAreaCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtmAreaCode" maxlength="4" tabindex="44"
+                        onkeydown="return validatemobilecode('ddlMLandLineCounCode',
+                                                    'txtMLandLineNum','txtmAreaCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                    <input id="txtMLandLineNum" maxlength="8" tabindex="45"
+                        onkeydown="return validatemobilecode('ddlMLandLineCounCode',
+                                                    'txtMLandLineNum','txtmAreaCode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                </div>
+            </div>
+
+
+        </li>
+        <li id="divmothermails" style="display: none;" class="clearfix">
+            <label for="lblMEmail" class="pop_label_left">Email  </label>
+            <div class="pop_controls_right">
+
+                <input id="txtMEmail" class="form-control" placeholder="Enter Email" tabindex="46"></input>
+
+            </div>
+        </li>
+    </div>
+
+
+    <li class="clearfix">
+        <label for="lblMotherFname" class="pop_label_left">Mother's Father Name </label>
+        <div class="pop_controls_right select-box-my">
+
+
+            <input id="txtMFatherFname" class="form-control" placeholder="FIRST NAME" tabindex="47"
+                maxlength="100" />
+    </li>
+    <li class="clearfix">
+        <label for="lblMotherFname" class="pop_label_left">Mother's Last Name </label>
+        <div class="pop_controls_right select-box-my">
+
+
+            <input id="txtMFatherLname" class="form-control" placeholder="LAST NAME" tabindex="48"
+                maxlength="50" />
+
+
+        </div>
+    </li>
+
+
+    <div id="ownerdiv7">
+        <li id="motherfathercontactDiv" class="clearfix">
+            <label for="lblContactNumbersMotherFather" class="pop_label_left">Contact Numbers</label>
+            <div class="pop_controls_right">
+
+                <a id="lnkMfMpobile" onclick="return showhidetextboxsalerts('txtMotherfatheMobilenumber', 'txtmotherfatheralternative', 'txtMotherFatherLandLinenum', 'mobile', 'dlvmotherfatheralternative', 
+                                            'divmfLand','txtMotherFatherLandLineareacode','ddlMotherFatherLandLineCode','divmfMobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_')"
+                    data-toggle="tooltip" data-original-title="Add Mobile Number" tabindex="49">
+                    <span class="glyphicon glyphicon-phone"></span>
+                </a>
+
+                <a id="lnkMFLand" onclick="return showhidetextboxsalerts('txtMotherfatheMobilenumber', 'txtmotherfatheralternative',
+                                             'txtMotherFatherLandLinenum', 'landnumber', 'dlvmotherfatheralternative', 'divmfLand', 'txtMotherFatherLandLineareacode', 'ddlmotherfatheralternative','divmfMobile','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"
+                    data-toggle="tooltip" data-original-title="Add  Land Number" tabindex="50">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </a>
+            </div>
+
+        </li>
+        <li class="clearfix">
+
+
+            <div id="divmfMobile">
+                <label for="lblMobileMGrandfather" class="pop_label_left">Mobile Number</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlMotherfatheMobileCountryCode" class="chosen" tabindex="51"
+                        onchange="return validatemobilecode('ddlMotherfatheMobileCountryCode',
+                                                    'txtMotherfatheMobilenumber','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMotherfatheMobilenumber" onkeydown="return validatemobilecode('ddlMotherfatheMobileCountryCode',
+                                                    'txtMotherfatheMobilenumber','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"
+                        maxlength="10" tabindex="52" />
+
+                </div>
+            </div>
+
+
+        </li>
+        <li class="clearfix">
+
+
+            <div id="dlvmotherfatheralternative">
+                <label for="lblMMobile2" class="pop_label_left">Altenate NUmber</label>
+                <div class="pop_controls_right select-box-my select-box-my-double">
+
+                    <select id="ddlmotherfatheralternative" class="chosen" tabindex="53"
+                        onchange="return validatemobilecode('ddlmotherfatheralternative',
+                                                    'txtmotherfatheralternative','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtmotherfatheralternative" maxlength="10" tabindex="54"
+                        onkeydown="return validatemobilecode('ddlmotherfatheralternative',
+                                                    'txtmotherfatheralternative','','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+
+                </div>
+            </div>
+
+
+        </li>
+        <li class="clearfix">
+
+
+            <div id="divmfLand">
+                <label for="lblMotherFatherLandLine" class="pop_label_left">Land line #  </label>
+                <div class="pop_controls_right select-box-my select-box-my-trible">
+
+                    <select id="ddlMotherFatherLandLineCode" tabindex="55" class="chosen"
+                        onchange="return validatemobilecode('ddlMotherFatherLandLineCode',
+                                                    'txtMotherFatherLandLinenum','txtMotherFatherLandLineareacode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');">
+                    </select>
+                    <input id="txtMotherFatherLandLineareacode" maxlength="4" tabindex="56"
+                        onkeydown="return validatemobilecode('ddlMotherFatherLandLineCode',
+                                                    'txtMotherFatherLandLinenum','txtMotherFatherLandLineareacode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                    <input id="txtMotherFatherLandLinenum" class="col-lg-2 form-control" maxlength="8" tabindex="57"
+                        onkeydown="return validatemobilecode('ddlMotherFatherLandLineCode',
+                                                    'txtMotherFatherLandLinenum','txtMotherFatherLandLineareacode','#ctl00_ContentPlaceHolder1_EditCustomerParentsDetails_');"></input>
+
+                </div>
+            </div>
+
+
+        </li>
+    </div>
+
+
+    <li class="clearfix">
+        <label for="MState" class="pop_label_left">State</label>
+        <div class="pop_controls_right select-box-my">
+            <select id="ddlMState" class="chosen"
+                tabindex="58">
+            </select>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="MDistrict" class="pop_label_left">District</label>
+        <div class="pop_controls_right select-box-my">
+            <select id="ddlMDistrict" class="chosen" tabindex="59"></select>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="MNativePlace" class="pop_label_left">Native Place</label>
+        <div class="pop_controls_right">
+            <input id="txtMNativePlace" class="form-control" maxlength="150" tabindex="60"></input>
+        </div>
+    </li>
+    <li class="clearfix">
+        <label for="ParentIntercaste" class="pop_label_left">Are parents interCaste ? </label>
+        <div class="pop_controls_right pop_radios_list">
+            <label>
+                <input name="rbtlParentIntercaste" value="1" type="radio"><span>&nbsp;Yes</span>
+            </label>
+            <label class="">
+                <input name="rbtlParentIntercaste" value="0" type="radio"><span>&nbsp;No</span>
+            </label>
+        </div>
+    </li>
+    <div id="ParentCasteDiv">
+
+        <li id="divddlFatherCaste" class="clearfix">
+
+            <label for="lblFCaste" class="pop_label_left">Father Caste</label>
             <div class="pop_controls_right select-box-my">
-
-                <select id="ddlcityworking" class="chosen" tabindex="11">
-                     <option>--select--</option>
-                </select>
-                <input id="txtcity" style="display: none; width: 100%;" maxlength="100" />
-
-                <a id="lnkCity">Not in List</a>
-
+                <select id="ddlFatherCaste" onchange="return parentCasteSame();" class="chosen" tabindex="62"></select>
             </div>
         </li>
-        <li class="clearfix">
-            <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
-            <div class="">
-
-                <textarea id="txtEdumerits" maxlength="500" rows="4" tabindex="12"
-                    onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
+        <li id="divddlMotherCaste" class="clearfix">
+            <label for="lblMCaste" class="pop_label_left">Mother Caste</label>
+            <div class="pop_controls_right select-box-my">
+                <select id="ddlMotherCaste" onchange="return parentCasteSame();" class="chosen" tabindex="63"></select>
             </div>
         </li>
-    </ul>
+    </div>
+
+
+
+</ul>
+
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-        </div>
-    </script> {{ddlvals}} <br> {{ddltest}}
-    <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
-    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
-    <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+        <div id="divEditAstro"></div>
+        <div id="divMissfields"></div>
+    </div>
 
-    <!--<multi-select-directive directive-id="ggg" ng-model="ddlvals" obj="obj2" selectedvals="[1,4]"></multi-select-directive>
-    <multi-select-directive  directive-id="ddltest" obj="obj1" selectedvals="[1,4]"></multi-select-directive>
--->
-
-
-
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+    </script>
+    <button type="button" class="btn btn-default" ng-click="open(undefined,'uleducation')">Open me!</button>
+    <button type="button" class="btn btn-default" ng-click="open('ulprofession')">Large modal</button>
 </div>

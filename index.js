@@ -15,18 +15,31 @@ var app = angular.module('Kaakateeya', ['ngRoute', 'ngAnimate', 'ngSanitize', 'u
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     // Home
+//.when("/", { templateUrl: "app/modules/editPages/editSideMenu.html", controller: "editSideMenuCtrl" })
+
     .when("/", { templateUrl: "app/modules/static/dataGetin.html", controller: "ModalDemoCtrl" })
     // Pages
-    .when("/mobileVerification", { templateUrl: "app/modules/mobileverification/mobileVerification.html", controller: "PageCtrl" })
-    .when("/faq", { templateUrl: "partials/faq.html", controller: "PageCtrl" })
-    .when("/pricing", { templateUrl: "partials/pricing.html", controller: "PageCtrl" })
-    .when("/services", { templateUrl: "partials/services.html", controller: "PageCtrl" })
-    .when("/contact", { templateUrl: "partials/contact.html", controller: "PageCtrl" })
+    .when("/mobileVerification", { templateUrl: "app/modules/mobileverification/mobileVerification.html", controller: "mobileverifyController" })
+    // .when("/faq", { templateUrl: "partials/faq.html", controller: "PageCtrl" })
+    // .when("/pricing", { templateUrl: "partials/pricing.html", controller: "PageCtrl" })
+    // .when("/services", { templateUrl: "partials/services.html", controller: "PageCtrl" })
+    // .when("/contact", { templateUrl: "partials/contact.html", controller: "PageCtrl" })
+    //edit Pages
+    .when("/editEducationAndProfession", { templateUrl: "app/modules/editPages/educationAndProfession.html", controller: "eduAndProfCtrl" })
+    .when("/editManagePhoto", { templateUrl: "app/modules/editPages/editManagePhoto.html", controller: "managePhotoCtrl" })
+    .when("/editparent", { templateUrl: "app/modules/editPages/editParentDetails.html", controller: "parentCtrl" })
+    .when("/editPartnerPreferences", { templateUrl: "app/modules/editPages/editPartnerPreferences.html", controller: "partnerPreferenceCtrl" })
+    .when("/editSiblingDetails", { templateUrl: "app/modules/editPages/editSibblingDetails.html", controller: "sibblingCtrl" })
+    .when("/editAstro", { templateUrl: "app/modules/editPages/editAstroDetails.html", controller: "astroCtrl" })
+    .when("/editProperty", { templateUrl: "app/modules/editPages/editPropertyDetails.html", controller: "propertyCtrl" })
+    .when("/editRelative", { templateUrl: "app/modules/editPages/editRelativeDetails.html", controller: "relativeCtrl" })
+    .when("/editReferences", { templateUrl: "app/modules/editPages/editReferenceDetails.html", controller: "referenceCtrl" })
+
     // Blog
     .when("/blog", { templateUrl: "partials/blog.html", controller: "BlogCtrl" })
     .when("/blog/post", { templateUrl: "partials/blog_item.html", controller: "BlogCtrl" })
     // else 404
-    .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
+    //.otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
 
 }]);
 
