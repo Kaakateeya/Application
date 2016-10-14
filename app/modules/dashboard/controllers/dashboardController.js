@@ -1,6 +1,10 @@
 app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', function (scope, customerDashboardServices) {
 
     scope.typeodbind = 'C';
+    scope.selectedvalues=["1","2"];
+    scope.names = ["Emil", "Tobias", "Linus"];
+    scope.caste="caste";
+    scope.mg="mg";
     scope.PartnerProfilesnew = [];
     scope.counts = 1;
     scope.bindallcounts = {};
