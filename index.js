@@ -17,6 +17,7 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when("/home", { templateUrl: "app/modules/dashboard/customerDashboardView.html", controller: "Controllerpartner" })
+    .when("/multiseelct", { templateUrl: "app/modules/static/multiselectexample.html", controller: "Controllerpartner" })
     .when("/homepage", { templateUrl: "app/modules/homePage/homePage.html", controller: "home" })
     .when("/mobileverf", { templateUrl: "app/modules/mobileverification/mobileverification.html", controller: "mobileverifyController" })
     .when("/Advanced", { templateUrl: "app/modules/search/advancesearchView.html", controller: "advancesearchCtrl" })
