@@ -34,17 +34,9 @@
                 <h4>personalised services</h4>
                 <ul>
                     <li>
-                        <a id="lnkEdit" href="javascript:void(0);" onclick="return servicesRedirectlinks('Editmyprofile');">Edit my profile</a>
-                        <a id="lnkUpgrade" href="javascript:void(0);" onclick="return servicesRedirectlinks('upgrade');">Upgrade your membership</a>
-                        <a id="lnkmanagephoto" href="javascript:void(0);" onclick="return servicesRedirectlinks('managephoto');">manage photo</a>
-                        <a id="lnkMybookmarked" class="bootstro" href="javascript:void(0);" ng-click="profilesviwed('MB', 'Profiles you have bookmarked')">My bookmarked profiles</a>
-                        <a id="lnkMyWhobookmarked" href="javascript:void(0);" ng-click="profilesviwed('WB', 'Profiles Who BookMarked You')">Who bookmarked me</a>
-                        <a id="lnkRecentlyviewed" class="bootstro" href="javascript:void(0);" ng-click="profilesviwed('RV','Profiles viewed by me')">Profiles viewed by me</a>
-                        <a id="lnkRecentlywhoviewed" href="javascript:void(0);" ng-click="profilesviwed('WV',' Members viewed my profile')">My profile viewed by others</a>
-                        <a id="lnkIgnored" class="bootstro" href="javascript:void(0);" ng-click="profilesviwed('I', 'Profiles ignored by you')">Ignored profiles</a>
-                        <a id="lnkSavedSearch" href="javascript:void(0);" onclick="return servicesRedirectlinks('savedsearch');">Saved search</a>
-                        <a id="lnkProfileSettings" href="javascript:void(0);" onclick="return servicesRedirectlinks('profilesettings');">Profile Settings</a>
-                        <a id="lnkHelp" href="#/help">Help</a>
+                        <a ng-repeat="item in leftMenuArr" ng-click="item.bindvalue===null?'':gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind)"
+                            href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null"
+                        > ({{item.bindvalue}})</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -241,12 +233,12 @@
             <div id="Div1" class="landing_page_middle_in">
                 <div class="searched_list clearfix">
                     <div class="clear"></div>
-                    <div class="clearfix" style="padding: 0 0 0 0;">
+                    <div class="clearfix col-lg-9" style="padding: 0 0 0 0;">
                         <div style="margin: 0;">
                             <h1 class="span1"><b>
                                     <label id="lblSearchresultCount" style="color: #d42e02;">{{PartnerProfilesnewTotalrows}}</label>
                                 </b></h1>
-                            <label id="lblUHaveviewd" class="control-label span6">{{lblUHaveviewd}}</label>
+                            <label id="lblUHaveviewd" class="control-label span5">{{lblUHaveviewd}}</label>
                         </div>
                         <div class="clear"></div>
                         <!--all tabs-->

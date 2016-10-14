@@ -16,7 +16,8 @@
         <div class="search_result_item_in clearfix">
             <div class="search_result_item_pic pull-left">
                 <span class="">
-                    <input name="imgProfilefullpic" src="http://kaakateeya.com/access/Images/ProfilePics/KMPL_71648_Images/img1_Images/110716489_ApplicationPhoto.jpg" style="height: 250px; width: 250px;" type="image"></span>
+                   
+                    <img name="imgProfilefullpic" ng-src="{{data.Photo}}" style="height: 250px; width: 250px;"></span>
                 <p style="align-items: center; text-align: center;"></p>
                 <div>
                     <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid'?{'display':' none'}:{'display':'block'}"></a>
@@ -108,13 +109,16 @@ height: 34px !important;"></a>
         </div>
     </div>
 </div>
-<div class="col-lg-offset-5" ng-show=loadmore>
+<div class='row col-lg-10'>
+    <div class="col-lg-offset-5" ng-show=loadmore>
 
-    <a href="javascript:void(0);" ng-click="paging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
-</div>
-<div class="col-lg-offset-5" ng-show=loaderspin>
-    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-</div>
-<div class="text-center" ng-show=Norowsend>
-    <h3 style="color: maroon;">End</h3>
+        <a href="javascript:void(0);" ng-click="paging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+    </div>
+    <div class="col-lg-offset-5 row" ng-show=loaderspin>
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+
+    </div>
+    <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
+        <h3 style="color: maroon;">End</h3>
+    </div>
 </div>

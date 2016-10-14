@@ -1,4 +1,4 @@
-app.controller('suceesstories', ['$scope', function (scope) {
+app.controller('suceesstories', ['$scope', 'successstoriesdata', function (scope, suceessdata) {
     scope.success = [];
     scope.successes = [];
     scope.success = [{
@@ -65,7 +65,9 @@ app.controller('suceesstories', ['$scope', function (scope) {
             "GroomNAME": "ANUHYA THALLAPA", "BrideName": "THALLAPA REDDY", "Marrigedate": "27/06/2016"
         }
     ];
-
+    scope.init = function () {
+        suceessdata.suceessdataget('91022', 'P', 1, 9);
+    };
     $(window).scroll(function () {
         debugger;
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
