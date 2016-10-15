@@ -14,11 +14,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
         scope.gettingpartnerdata('C', undefined, undefined, 'Suitable Profiles that match you');
     };
     scope.gettingpartnerdata = function (type, frompage, topage, headertext) {
-        scope.typeodbind = type;
-        if (parseInt(topage === undefined ? 1 : topage) < parseInt(scope.PartnerProfilesnewTotalrows === undefined ? 2 : scope.PartnerProfilesnewTotalrows)) {
-            console.log(parseInt(topage === undefined ? 1 : topage));
-            console.log(parseInt(scope.PartnerProfilesnewTotalrows === undefined ? 2 : scope.PartnerProfilesnewTotalrows));
-
+        scope.typeodbind = type;           
             if (type == 'C') {
                 customerDashboardServices.getCustomercounts(91022, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
 
@@ -27,12 +23,18 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
                         scope.PersonalInfo = (response.data.PersonalInfo)
                     }
                     if (parseInt(frompage) === 1) {
-                        scope.PartnerProfilesnew = response.data.PartnerProfilesnew;
+                            scope.PartnerProfilesnew=[];
+                         _.each(response.data.PartnerProfilesnew,function(item){
+                            scope.PartnerProfilesnew.push(item);
+                        });
                     }
                     else {
-                        scope.PartnerProfilesnew = $.merge(scope.PartnerProfilesnew, response.data.PartnerProfilesnew);
+                        _.each(response.data.PartnerProfilesnew,function(item){
+                            scope.PartnerProfilesnew.push(item);
+                        });
+                        
                     }
-                    scope.$broadcast('loadmore', false);
+                    scope.$broadcast('loadmore');
                     scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew[0].TotalRows;
                     scope.lblUHaveviewd = headertext;
 
@@ -41,22 +43,23 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
             else {
 
                 customerDashboardServices.getcustomerpartnerdata(91022, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
-                    alert(frompage);
                     if (parseInt(frompage) === 1) {
+                          scope.PartnerProfilesnew=[];
+                         _.each(response.data.PartnerProfilesnew,function(item){
+                            scope.PartnerProfilesnew.push(item);
+                        });
                         scope.PartnerProfilesnew = response.data.PartnerProfilesnew;
                     }
                     else {
-                        scope.PartnerProfilesnew = $.merge(scope.PartnerProfilesnew, response.data.PartnerProfilesnew);
+                        _.each(response.data.PartnerProfilesnew,function(item){
+                            scope.PartnerProfilesnew.push(item);
+                        });
                     }
                     scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew[0].TotalRows;
                     scope.lblUHaveviewd = headertext;
-                    scope.$broadcast('loadmore', false);
+                    scope.$broadcast('loadmore');
                 });
             }
-        }
-        else {
-            scope.$broadcast('loadmore', true);
-        }
     }
     scope.paging = function (frompage, topage, typeodbind) {
         debugger;
