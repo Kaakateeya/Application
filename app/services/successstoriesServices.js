@@ -1,8 +1,16 @@
 app.factory('successstoriesdata', ['$http', function (http) {
     return {
-        suceessdataget: function (custid, typeofaction, frompage, topage) {
+        suceessdataget: function (frompage, topage) {
+            var person = {};
+            person.successid = null
+            person.vc_ProfileID = null;
+            person.i_RegionID = null;
+            person.casteiid = null;
+            person.branchrom = null;
+            person.pagefrom = frompage;
+            person.pageto = topage;
             debugger;
-            return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
+            return http.post(app.apiroot + 'StaticPages/GetSuccessStoriesdetails', person);
         }
     }
 }]);
