@@ -1,4 +1,4 @@
-<div class="register_page_main">
+<div class="register_page_main" ng-controller="privacypolicy as policy" ng-init="initprivacy()">
     <h4>Privacy Policy</h4>
     <div class="faq_main">
 
@@ -260,4 +260,32 @@
         </div>
     </div>
 </div>
-<a class="back-to-top cd-top">&nbsp;</a>
+<a class="back-to-top">&nbsp;</a>
+
+<script>
+  //  $(document).ready(function(){
+
+	// hide #back-top first
+	//$(".back-to-top").hide();
+	
+	// fade in #back-top
+	//$(function () {
+	//	$(window).scroll(function () {
+		//	if ($(this).scrollTop() > 100) {
+		///		$('.back-to-top').fadeIn();
+		//	} else {
+		//		$('.back-to-top').fadeOut();
+		//	}
+		//});
+
+		// scroll body to 0px on click
+	//	$('.back-to-top').click(function () {
+		//	$('body,html').animate({
+		//		scrollTop: 0
+		//	}, 800);
+		//	return false;
+	//	});
+	//});
+
+//});
+    </script>

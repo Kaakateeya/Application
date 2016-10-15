@@ -5,25 +5,28 @@ app.directive('multiselectdropdown', function () {
         require: 'ng-model',
         scope: {
             ngModel: '=',
-            typeofdata:"="
+            typeofdata: "="
 
         },
         link: function (scope, element, attrs) {
-            if(scope.typeofdata ==="caste"){
-            scope.options = [
-                { label: 'Option 1', title: 'Option 1', value: '1' },
-                { label: 'Option 2', title: 'Option 2', value: '2' },
-                { label: 'Option 3', title: 'Option 3', value: '3' },
-                { label: 'Option 4', title: 'Option 4', value: '4' },
-                { label: 'Option 5', title: 'Option 5', value: '5' },
-                { label: 'Option 6', title: 'Option 6', value: '6', disabled: true }
-            ];
-            }
-            else{
-                 scope.options = [
-                { label: 'Option 1', title: 'Option 1', value: '1' },
-                { label: 'Option 2', title: 'Option 2', value: '2' },
-            ];
+            if (scope.typeofdata != null && scope.typeofdata != undefined) {
+                if (scope.typeofdata === "caste") {
+                    scope.options = [
+                        { label: 'Option 1', title: 'Option 1', value: '1' },
+                        { label: 'Option 2', title: 'Option 2', value: '2' },
+                        { label: 'Option 3', title: 'Option 3', value: '3' },
+                        { label: 'Option 4', title: 'Option 4', value: '4' },
+                        { label: 'Option 5', title: 'Option 5', value: '5' },
+                        { label: 'Option 6', title: 'Option 6', value: '6', disabled: true }
+                    ];
+                }
+
+                else {
+                    scope.options = [
+                        { label: 'Option 1', title: 'Option 1', value: '1' },
+                        { label: 'Option 2', title: 'Option 2', value: '2' },
+                    ];
+                }
             }
             element.multiselect({
                 buttonClass: 'btn',
@@ -42,7 +45,7 @@ app.directive('multiselectdropdown', function () {
                 select: ['1', '2'],
                 // Replicate the native functionality on the elements so
                 // that angular can handle the changes for us.
-                onChange: function (optionElement, checked, select) {
+                onChange: function (optionElement, checked) {
                     if (optionElement != null) {
                         optionElement.removeAttr('selected');
                     }
@@ -81,20 +84,22 @@ app.directive('multiselectdropdown', function () {
                 enableClickableOptGroups: true,
                 inheritClass: true
             };
-            element.multiselect('dataprovider', scope.options);
-            //element.multiselect('setOptions', secondConfigurationSet);
-            //element.multiselect('rebuild');
+            if (scope.options.length > 1) {
+                element.multiselect('dataprovider', scope.options);
+            }
+            // element.multiselect('setOptions', secondConfigurationSet);
+            // element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
-            scope.$watch(function () {
-                return element[0].length;
-            }, function () {
-                scope.$applyAsync(element.multiselect('rebuild'));
-            });
+            // scope.$watch(function () {
+            //     return element[0].length;
+            // }, function () {
+            //     scope.$applyAsync(element.multiselect('rebuild'));
+            // });
 
-            // Watch for any changes from outside the directive and refresh
-            scope.$watch(attrs.ngModel, function () {
-                element.multiselect('refresh');
-            });
+            // // Watch for any changes from outside the directive and refresh
+            // scope.$watch(attrs.ngModel, function () {
+            //     element.multiselect('refresh');
+            // });
 
         }
 

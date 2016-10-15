@@ -1,5 +1,4 @@
 
-app.controller("help",function()
-{
+app.controller("help", ["$scope", function (scope) {
 
-});
+}]);

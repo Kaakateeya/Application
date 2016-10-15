@@ -662,7 +662,7 @@ div.radio span.checked						{ background-image:url(../images/radio_activenew.png
 .faqs_list_main_item						{ padding:0 20px; border-bottom:solid 1px #ccc; }
 .faqs_list_main	h5							{ line-height:18px; font-size:14px; color:#4f4f4f; font-weight:600; padding:14px 0; background:url(../images/icon_plus.png) no-repeat center right; cursor:pointer; }
 .faqs_list_main	h5 span						{ color:#000; }
-.faq_ans_block								{ padding:14px 0; border-top:solid 1px #ccc; display:none; }
+.faq_ans_block								{ padding:14px 0; border-top:solid 1px #ccc; }
 .faq_ans_block p							{ font-size:14px; line-height:20px; color:#717171; }
 
 .faqs_list_main_item.active h5				{ background-image:url(../images/icon_minus.png); color:#d42e02; }
