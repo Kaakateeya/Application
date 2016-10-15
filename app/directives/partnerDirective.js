@@ -13,6 +13,11 @@ app.directive("partnerData", function () {
             scope.loaderspin = false;
             scope.PartnerProfilesnew = scope.array;
             scope.typeofdiv = "Grid";
+            if(scope.array.length>0){
+                scope.loadmore=scope.array[0].TotalRows>9?true:false;
+                alert(scope.loadmore);
+
+            }
             scope.paging = function () {
                 scope.loaderspin = true;
                 scope.loadmore = false;
@@ -22,16 +27,20 @@ app.directive("partnerData", function () {
                 scope.$emit('paging', scope.startindex, scope.endindex);
             };
             scope.$on('loadmore', function (event, endflag) {
-                if (endflag) {
-                    scope.loaderspin = false;
-                    scope.loadmore = false;
-                    scope.Norowsend = true;
-                }
-                else {
+               
                     scope.loaderspin = false;
                     scope.loadmore = true;
                     scope.Norowsend = false;
-                }
+                
+            });
+            scope.$watch('array', function(value) {
+            scope.PartnerProfilesnew = scope.array;
+             if(scope.array.length>0){
+                scope.loadmore=scope.array[0].TotalRows>9?true:false;
+                scope.Norowsend=scope.array[0].TotalRows<9?true:false;
+
+            }
+              
             });
         }
     }
