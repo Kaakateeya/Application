@@ -38,6 +38,13 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', functio
 
     scope.yourratethesearch = [
         { label: '--select--', title: '--select--', value: '0' },
+        { label: 'Valuable', title: 'Valuable', value: '507' },
+        { label: 'Average', title: 'Average', value: '508' },
+        { label: 'Bad', title: 'Bad', value: '509' },
+        { label: 'No Answer', title: 'No Answer', value: '510' },
+    ];
+    scope.comparesites = [
+        { label: '--select--', title: '--select--', value: '0' },
         { label: 'Better', title: 'Better', value: '502' },
         { label: 'Same', title: 'Same', value: '503' },
         { label: 'Bad', title: 'Bad', value: '504' },
@@ -50,9 +57,9 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', functio
         { label: 'No Answer', title: 'No Answer', value: '513' },
     ];
 
-
+    scope.HearAbout = ["1"];
     scope.submit = function () {
-        
+        debugger;
         var objectfeedback = {};
         objectfeedback.Cust_ID = 91035;
         objectfeedback.HearAbout = scope.HearAbout;

@@ -22,12 +22,13 @@
                 Customer feedback plays a significant role in improving our quality of service. Kindly allot a few seconds to fill the form
                 below.
             </p>
+            {{HearAbout}}
             <form name="feedbackform" role="form" novalidate>
                 <div class="rating_main_in clearfix">
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">How did you here about us?</label>
                         <div class="controls clearfix">
-                            <select id="ddlabout" multiselectdropdown ng-model="HearAbout" ng-options="item.label for item in optionhereabout track by item.value">  
+                            <select id="ddlabout" multiselectdropdown ng-model="HearAbout" ng-options="item.value as item.label for item in optionhereabout">  
                         </select>
 
                         </div>
@@ -35,26 +36,26 @@
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">if you could improve our website, which section would that be?</label>
                         <div class="controls clearfix">
-                            <select id="ddlimprove" multiselectdropdown ng-model="ImproveWebsite" ng-options="item.title for item in improveourwebsite track by item.value">  </select>
+                            <select id="ddlimprove" multiselectdropdown ng-model="ImproveWebsite" ng-options="item.value as item.label for item in improveourwebsite">  </select>
                         </div>
                     </div>
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">Kaakateeya.com prices are</label>
                         <div class="controls clearfix">
-                            <select multiselectdropdown ng-model="kaaPrices" ng-options="item.title for item in prices track by item.value">  </select>
+                            <select multiselectdropdown ng-model="kaaPrices" ng-options="item.value as item.label for item in prices">  </select>
                         </div>
                     </div>
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">Download time of our website</label>
                         <div class="controls clearfix">
-                            <select  multiselectdropdown ng-model="DownLoadTime" ng-options="item.title for item in downloadtime track by item.value">  </select>
+                            <select  multiselectdropdown ng-model="DownLoadTime" ng-options="item.value as item.label for item in downloadtime">  </select>
                         </div>
                     </div>
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">Compare to other Indian Matrimonial websites, Our services are</label>
                         <div class="controls clearfix">
 
-                            <select  multiselectdropdown ng-model="CompareSite" ng-options="item.title for item in yourratethesearch track by item.value">  </select>
+                            <select  multiselectdropdown ng-model="CompareSite" ng-options="item.value as item.label for item in comparesites">  </select>
                         </div>
                     </div>
                     <div class="control-group span6 select-box-my">
@@ -66,14 +67,14 @@
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">How do your rate the search results for your partner?</label>
                         <div class="controls clearfix">
-                            <select  multiselectdropdown ng-model="SearchRate" ng-options="item.title for item in recomendedtofriends track by item.value"
+                            <select  multiselectdropdown ng-model="SearchRate" ng-options="item.value as item.label for item in yourratethesearch"
                                 typeofdata="caste">  </select>
                         </div>
                     </div>
                     <div class="control-group span6 select-box-my">
                         <label class="control-label">Would recomended  us to  your friends and family members</label>
                         <div class="controls clearfix">
-                            <select multiselectdropdown ng-model="Recommend" ng-options="item.title for item in optionsxcvn track by item.value"
+                            <select multiselectdropdown ng-model="Recommend" ng-options="item.value as item.label for item in recomendedtofriends"
                                 typeofdata="caste">  </select>
                         </div>
                     </div>

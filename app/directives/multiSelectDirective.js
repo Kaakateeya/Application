@@ -1,33 +1,69 @@
+
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
-app.directive('multiselectdropdown', function () {
+//var statticdata=require('./staticArrayBindings.json');
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function (cons, service) {
     return {
         require: 'ng-model',
         scope: {
             ngModel: '=',
-            typeofdata: "="
-
+            typeofdata: "=",
+            parentVal: "="
         },
         link: function (scope, element, attrs) {
-            if (scope.typeofdata != null && scope.typeofdata != undefined) {
-                if (scope.typeofdata === "caste") {
-                    scope.options = [
-                        { label: 'Option 1', title: 'Option 1', value: '1' },
-                        { label: 'Option 2', title: 'Option 2', value: '2' },
-                        { label: 'Option 3', title: 'Option 3', value: '3' },
-                        { label: 'Option 4', title: 'Option 4', value: '4' },
-                        { label: 'Option 5', title: 'Option 5', value: '5' },
-                        { label: 'Option 6', title: 'Option 6', value: '6', disabled: true }
-                    ];
-                }
+            scope.options = [];
 
-                else {
-                    scope.options = [
-                        { label: 'Option 1', title: 'Option 1', value: '1' },
-                        { label: 'Option 2', title: 'Option 2', value: '2' },
-                    ];
-                }
+            scope.databind = function (data) {
+                element.multiselect('dataprovider', data);
             }
+
+
+            switch (scope.typeofdata) {
+                case 'MaritalStatus':
+                    scope.databind(cons.MaritalStatus);
+                    break;
+
+                case 'height':
+                    scope.databind(cons.height);
+                    break;
+
+                case 'Religion':
+                    scope.databind(cons.Religion);
+                    break;
+
+                case 'Mothertongue':
+                    scope.databind(cons.Mothertongue);
+                    break;
+
+                case 'educationcategory':
+                    scope.databind(cons.educationcategory);
+                    break;
+
+                case 'visastatus':
+                    scope.databind(cons.visastatus);
+                    break;
+
+                case 'stars':
+                    scope.databind(cons.stars);
+                    break;
+
+                case 'stars':
+                    scope.databind(cons.stars);
+                    break;
+
+                case 'Country':
+                    service.countrySelect().then(function (response) {
+                        var option = [];
+                        _.each(response.data, function (item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+
+            }
+
+
             element.multiselect({
                 buttonClass: 'btn',
                 buttonWidth: 'auto',
@@ -42,66 +78,24 @@ app.directive('multiselectdropdown', function () {
                 filterPlaceholder: 'Type To Search',
                 buttonContainer: '<div class="btn-group" />',
                 maxHeight: false,
-                select: ['1', '2'],
-                // Replicate the native functionality on the elements so
-                // that angular can handle the changes for us.
-                onChange: function (optionElement, checked) {
-                    if (optionElement != null) {
-                        optionElement.removeAttr('selected');
-                    }
-                    if (checked) {
-                        optionElement.prop('selected', 'selected');
-                    }
-                    element.change();
-                }
-                ,
-                onSelectAll: function (element) {
-                },
-                onDeselectAll: function () {
-                },
-                buttonText: function (options, select) {
-                    if (options.length === 0) {
-                        return 'ANY';
-                    }
-                    var labels = [];
-                    scope.ngModel = [];
-                    options.each(function () {
-                        scope.ngModel.push($(this)[0].value);
-                        if ($(this).attr('label') !== undefined) {
-                            labels.push($(this).attr('label'));
-                        }
-                        else {
-                            labels.push($(this).html());
-                        }
-                    });
-                    return labels.join(', ') + '';
-                }
+                select: ['1', '2']
             });
-            var secondConfigurationSet = {
-                includeSelectAllOption: true,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                enableClickableOptGroups: true,
-                inheritClass: true
-            };
-            if (scope.options != undefined && scope.options.length > 1) {
-                element.multiselect('dataprovider', scope.options);
-            }
-            // element.multiselect('setOptions', secondConfigurationSet);
-            // element.multiselect('rebuild');
+            //element.multiselect('setOptions', secondConfigurationSet);
+            //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
-            // scope.$watch(function () {
-            //     return element[0].length;
-            // }, function () {
-            //     scope.$applyAsync(element.multiselect('rebuild'));
-            // });
+            scope.$watch(function () {
+                return element[0].length;
+            }, function () {
+                scope.$applyAsync(element.multiselect('rebuild'));
+            });
 
-            // // Watch for any changes from outside the directive and refresh
-            // scope.$watch(attrs.ngModel, function () {
-            //     element.multiselect('refresh');
-            // });
+            // Watch for any changes from outside the directive and refresh
+            scope.$watch(attrs.ngModel, function () {
+                element.multiselect('refresh');
+            });
+
 
         }
 
     };
-});
+}]);
