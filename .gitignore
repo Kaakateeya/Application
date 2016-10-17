@@ -38,5 +38,7 @@ Thumbs.db
 
 # project files #
 #####################
-node_modules/
+node_modules
+bower_components
 app.js
+Web.config
