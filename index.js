@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['ngRoute']);
+var app = angular.module('Kaakateeya', ['ngRoute','reCAPTCHA']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 /**
@@ -43,9 +43,18 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/privacyPolicy", { templateUrl: "app/modules/static/privacyPolicy.html" })
     .when("/", { templateUrl: "app/modules/homePage/homePage.html", controller: "home" })
     .when("/UpgradeMembership", { templateUrl: "app/modules/static/upgradeMembership.html", controller: "upgrademembership" })
+    .when("/acco", { templateUrl: "app/modules/static/accordian.html" })
     .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
 
 }]);
+app.config(function (reCAPTCHAProvider) {
+   reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
+                       // optional
+                       reCAPTCHAProvider.setOptions({
+                           theme: 'clean'
+                       });
+                   })
+
 app.controller('headctrl', ['$scope', function (scope) {
   scope.divloginblock = function () {
     $('.login_block_header').toggle();

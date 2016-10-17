@@ -23,11 +23,10 @@
         <div class="faqs_list_main">
 
             <div class="">
-
-                <div ng-class="activeClass" ng-repeat="faqs in arrayfaqs | filter:filters.search">
-                    <h5 faqdirective class="faq_toggle_heading" ng-click="toggleans()" >
+                <div class="faqs_list_main_item" ng-class="faqs.activeClass" ng-repeat="faqs in arrayfaqs | filter:filters.search">
+                    <h5 faqdirective class="faq_toggle_heading" ng-click="toggleans(faqs)">
                         <span class="HeaderCSS">{{faqs.questons}}</span></h5>
-                    <div class="faq_ans_block" ng-show="styleanswer">
+                    <div class="faq_ans_block" ng-show="faqs.styleanswer">
                         <p>
                             <span>{{faqs.answers}}</span>
                         </p>
@@ -41,17 +40,4 @@
 <div id="ctl00_modalPopup_backgroundElement" style="display:none; position: fixed; left: 0px; top: 0px; z-index: 10000;"
     class="modalBackground"></div>
 
-
-
-
-
-
-<!--<div ng-app="app" ng-controller="mainCtrl">
-    <div>Search by Name: <input type="text" ng-model="filters.search"></div>
-    <div>Show only Company X: <input type="checkbox" ng-model="filters.x" ng-change="actions.updateCompany()" />
-    </div>
-    <div ng-repeat="arr in array | filter:filters.search | filter:{company: filters.company}">
-        <span ng-bind="arr.name"></span>
-    </div>
-</div>-->
 

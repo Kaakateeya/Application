@@ -84,7 +84,7 @@ app.directive('multiselectdropdown', function () {
                 enableClickableOptGroups: true,
                 inheritClass: true
             };
-            if (scope.options.length > 1) {
+            if (scope.options != undefined && scope.options.length > 1) {
                 element.multiselect('dataprovider', scope.options);
             }
             // element.multiselect('setOptions', secondConfigurationSet);

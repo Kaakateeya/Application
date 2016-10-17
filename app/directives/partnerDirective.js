@@ -11,36 +11,49 @@ app.directive("partnerData", function () {
             scope.endindex = 9;
             scope.flag = 9;
             scope.loaderspin = false;
+            scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
             scope.typeofdiv = "Grid";
-            if(scope.array.length>0){
-                scope.loadmore=scope.array[0].TotalRows>9?true:false;
-                alert(scope.loadmore);
+            var i = 0;
+            // if (scope.array.length > 0) {
+            // scope.loadmore = scope.array[0].TotalRows > 9 || scope.array[0].TotalRows > scope.endindex ? true : false;
+            // scope.endindex = scope.array[0].TotalRows > scope.endindex ? scope.array[0].TotalRows : scope.endindex;
+            // scope.Norowsend = scope.array[0].TotalRows < 9 || scope.array[0].TotalRows < scope.endindex ? true : false;
+            // alert(scope.loadmore);
 
-            }
-            scope.paging = function () {
+            // }
+            scope.directivepaging = function () {
                 scope.loaderspin = true;
                 scope.loadmore = false;
                 scope.flag += 9;
                 scope.startindex = scope.flag - 8;
                 scope.endindex = scope.flag;
-                scope.$emit('paging', scope.startindex, scope.endindex);
+                scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
             };
             scope.$on('loadmore', function (event, endflag) {
-               
-                    scope.loaderspin = false;
-                    scope.loadmore = true;
-                    scope.Norowsend = false;
-                
-            });
-            scope.$watch('array', function(value) {
-            scope.PartnerProfilesnew = scope.array;
-             if(scope.array.length>0){
-                scope.loadmore=scope.array[0].TotalRows>9?true:false;
-                scope.Norowsend=scope.array[0].TotalRows<9?true:false;
 
-            }
-              
+                scope.loaderspin = false;
+                // scope.loadmore = true;
+                // scope.Norowsend = false;
+                if (scope.array.length > 0) {
+                    debugger;
+                    scope.endindex = (scope.array[0].TotalRows > scope.endindex == true) ? scope.endindex : scope.array[0].TotalRows;
+                    scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
+                    scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
+                }
+
+            });
+            scope.$watch('array', function (value) {
+                debugger;
+                scope.PartnerProfilesnew = scope.array;
+                if (scope.array.length > 0) {
+                    scope.loadmore = scope.array[0].TotalRows > 9 || scope.array[0].TotalRows > scope.endindex ? true : false;
+                    scope.Norowsend = scope.array[0].TotalRows < 9 || scope.array[0].TotalRows < scope.endindex ? true : false;
+                    scope.startindex = 1;
+                    scope.endindex = 9;
+                    scope.flag = 9;
+                }
+
             });
         }
     }

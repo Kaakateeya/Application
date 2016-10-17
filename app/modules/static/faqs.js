@@ -34,26 +34,22 @@ app.directive('faqdirective', function () {
         link: function (scope, element, attrs) {
 
             scope.expanall = function () {
-                scope.styleanswer = true;
-                scope.activeClass = 'faqs_list_main_item active';
-            };
+                _.each(scope.arrayfaqs,function(item){
+                    item.styleanswer = true;
+                    item.activeClass = 'faqs_list_main_item active';
+                })
+            }
             scope.collapseall = function () {
-                debugger;
-                scope.activeClass = 'faqs_list_main_item active'
-                if (scope.activeClass === 'faqs_list_main_item active') {
-                    // scope.removeClass('faqs_list_main_item active');
-                    //scope.addClass('faqs_list_main_item');
-                    scope.styleanswer = false;
-                    scope.activeClass = 'faqs_list_main_item';
-                }
-                else {
-                    scope.styleanswer = false;
-                    scope.activeClass = 'faqs_list_main_item';
-                }
+                _.each(scope.arrayfaqs,function(item){
+                   item.styleanswer = false;
+                    item.activeClass = 'faqs_list_main_item';
+                });
+                
+
             };
-            scope.toggleans = function () {
-                scope.styleanswer = !scope.styleanswer;
-                scope.activeClass = scope.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item';
+            scope.toggleans = function (faqs) {
+                faqs.styleanswer = !faqs.styleanswer;
+                faqs.activeClass = (faqs.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item');
 
             };
         }
