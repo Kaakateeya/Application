@@ -61,6 +61,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                    templateUrl: 'app/modules/homePage/homePage.html',
                    controller:'home'
               }
+              ,
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
+                }
           }
         })            
         .state('dashboard', {
@@ -72,6 +76,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 "content@": {
                      templateUrl: 'app/modules/dashboard/customerDashboardView.html',
                      controller:'Controllerpartner'
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
+                }
+              }
+        })
+        .state('searches', {
+            url: '/Advanced',
+              views: {
+                "topbar@": {
+                    templateUrl: "templates/header.html"
+                },
+                "content@": {
+                     templateUrl: 'app/modules/search/advancesearchView.html',
+                     controller:'advancesearchCtrl'
                 },
                 "bottompanel@": {
                     templateUrl: "templates/footer.html"
