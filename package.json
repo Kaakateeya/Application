@@ -8,16 +8,16 @@
   },
   "dependencies": {
     "angular": "1.5.8",
+    "angular-date-time-input": "latest",
     "angular-route": "latest",
-    "angular-ui-router": "latest",
-    "ng-numbers-only": "latest",
+    "angular-ui-router": "^0.3.1",
     "bootstrap": "latest",
     "font-awesome": "latest",
     "jquery": "latest",
-    "angular-date-time-input": "latest",
     "moment": "latest",
-    "underscore": "latest",
-    "multi-select": "*"
+    "multi-select": "*",
+    "ng-numbers-only": "latest",
+    "underscore": "latest"
   },
   "devDependencies": {
     "angular-animate": "^1.5.8",
