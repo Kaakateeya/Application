@@ -1,1 +1,106 @@
-<h1>Hi....</h1>
+<style>
+.multiselect {
+        margin: 4px 0 0 0;
+        border-radius: 3px !important;
+        height: 34px;
+        background: none !important;
+        text-align: left;
+        box-shadow: none !important;
+        display: block;
+        width: 96% !important;
+        border: solid 1px #ccc !important;
+        color: #000 !important;
+    }
+}
+</style>
+<div id="upfeedback" ng-controller="feedbackCtrl">
+
+    <div class="register_page_main">
+        <h4>FEEDBACK</h4>
+        <div class="rating_main">
+            <p>
+                Customer feedback plays a significant role in improving our quality of service. Kindly allot a few seconds to fill the form
+                below.
+            </p>
+            {{HearAbout}}
+            <form name="feedbackform" role="form" novalidate>
+                <div class="rating_main_in clearfix">
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">How did you here about us?</label>
+                        <div class="controls clearfix">
+                            <select id="ddlabout" multiselectdropdown ng-model="HearAbout" ng-options="item.value as item.label for item in optionhereabout">  
+                        </select>
+
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">if you could improve our website, which section would that be?</label>
+                        <div class="controls clearfix">
+                            <select id="ddlimprove" multiselectdropdown ng-model="ImproveWebsite" ng-options="item.value as item.label for item in improveourwebsite">  </select>
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">Kaakateeya.com prices are</label>
+                        <div class="controls clearfix">
+                            <select multiselectdropdown ng-model="kaaPrices" ng-options="item.value as item.label for item in prices">  </select>
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">Download time of our website</label>
+                        <div class="controls clearfix">
+                            <select  multiselectdropdown ng-model="DownLoadTime" ng-options="item.value as item.label for item in downloadtime">  </select>
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">Compare to other Indian Matrimonial websites, Our services are</label>
+                        <div class="controls clearfix">
+
+                            <select  multiselectdropdown ng-model="CompareSite" ng-options="item.value as item.label for item in comparesites">  </select>
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">Your favorite indian Matrimonial websites</label>
+                        <div class="controls clearfix">
+                            <input name="txtfavoritesite" ng-model="FavSite" id="txtfavoritesite" class="input-box" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">How do your rate the search results for your partner?</label>
+                        <div class="controls clearfix">
+                            <select  multiselectdropdown ng-model="SearchRate" ng-options="item.value as item.label for item in yourratethesearch"
+                                typeofdata="caste">  </select>
+                        </div>
+                    </div>
+                    <div class="control-group span6 select-box-my">
+                        <label class="control-label">Would recomended  us to  your friends and family members</label>
+                        <div class="controls clearfix">
+                            <select multiselectdropdown ng-model="Recommend" ng-options="item.value as item.label for item in recomendedtofriends"
+                                typeofdata="caste">  </select>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="control-group">
+                        <label class="control-label">Comments and Suggestions<span style="color: red;">*</span></label>
+                        <div class="controls clearfix">
+
+                            <textarea name="txtcomments" minlength="10" ng-model="Comments" rows="2" cols="20" id="txtcomments" required="required" class="textarea"></textarea>
+                            <span id="lblcommentcount" class="col-lg-offset-5" style="color: black; font-size: 13px;"></span>
+
+                            <br>
+                            <span id="RegularExpressionValidator3" class="comments" style="color:Red;display:none;">Minimum 10 characters required.</span>
+                            <span id="RequiredFieldValidatotxtcomments" style="color:Red;font-size:12px;display:none;">*Please enter comments/Suggestions</span>
+                        </div>
+                    </div>
+                    <div class="rating_submit_main clearfix" id="divcaptcha">
+                        <div class="rating_captcha">
+                            <label class="control-label">Please enter the security code</label>
+                                                        <div re-captcha ng-model="user.captcha"></div>
+                        </div>
+                        <button ng-disabled="feedbackform.$invalid" id="btnsubmit" class="btn btn-primary pull-right" ng-click="submit()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

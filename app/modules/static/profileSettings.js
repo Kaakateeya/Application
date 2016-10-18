@@ -1,4 +1,3 @@
-app.controller("profilesettings",function()
-{
+app.controller("profilesettings", function () {
 
 });

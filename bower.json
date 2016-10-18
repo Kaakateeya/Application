@@ -20,7 +20,7 @@
     "bootstrap": "~3.0.0",
     "jquery": "~2.0.3",
     "underscore": "~1.5.2",
-	"angular-loader":"latest"
+    "angular-loader": "latest",
+    "angular-re-captcha": "^0.2.0"
   }
-  
 }

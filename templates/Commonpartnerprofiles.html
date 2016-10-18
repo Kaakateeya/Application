@@ -1,6 +1,14 @@
-
-   
-<div id="partnerDiv1" class="list searched_list_item2" style="width: 22%; margin-right: 2.4%; min-width: 250px;" ng-repeat="data in sssarr">
+<div class="clearfix" style="padding: 0 0 0 0;">
+    <div id="View" class="content-View clearfix pull-right" ng-show="true">
+        <a id="lnkgrid" class="gridk_view" title="Grid View" ng-click="typeofdiv='List'" style="cursor: pointer;background: url('src/images/vinod.png') no-repeat -959px -199px;display: block;width: 34px;height: 34px;"
+        />
+        <a id="lnklist" class="normal_view" title="List View" ng-click="typeofdiv='Grid'" style="cursor: pointer;background: url('src/images/vinod.png') no-repeat -1191px -207px;/*! margin: 0 0 0 30%; */display: block;width: 34px;height: 34px;margin: -34px 0px 0px -39px;"
+        />
+    </div>
+</div>
+<div id="PartnerProfilles">
+    <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''"
+        ng-repeat="data in PartnerProfilesnew">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix"><span> {{data.ProfileID}}</span></p>
         <p></p>
@@ -8,19 +16,25 @@
         <div class="search_result_item_in clearfix">
             <div class="search_result_item_pic pull-left">
                 <span class="">
-                    <input name="imgProfilefullpic" src="http://kaakateeya.com/access/Images/ProfilePics/KMPL_71648_Images/img1_Images/110716489_ApplicationPhoto.jpg" style="height: 250px; width: 250px;" type="image"></span><p style="align-items: center; text-align: center;"></p>
-                <div><a class="lnkPhotoRequest" href="javascript:void(0)" style="display: none;"></a></div>
+                   
+                    <img name="imgProfilefullpic" ng-src="{{data.Photo}}" style="height: 250px; width: 250px;"></span>
+                <p style="align-items: center; text-align: center;"></p>
+                <div>
+                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid'?{'display':' none'}:{'display':'block'}"></a>
+                </div>
             </div>
             <div class="search_result_item_descr pull-left">
                 <p>
                     <span>He</span> was born and raised in
                     <label class="label_check"><span>{{data.placeofbirth}}</span></label>
                 </p>
+
                 <div class="search_result_item_descr_list clearfix">
-                    <p class="clearfix ipName" style="display: none;">
+                    <p class="clearfix ipName" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
                         <label>Name</label>
                         <span>{{data.NAME}}</span>
                     </p>
+
                     <p class="clearfix">
                         <label>Age / Height</label>
                         <span>{{data.Age}}</span><span>-</span><span>{{data.Height}}</span>
@@ -28,14 +42,14 @@
                     <p class="clearfix">
                         <label>Caste</label><span>{{data.ReligionName}}</span><span>-</span><span>{{data.Caste}}</span>
                     </p>
-                    <p class="clearfix ipMaritalstatus" style="display: none;">
+                    <p class="clearfix ipMaritalstatus" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
                         <label>Marital status</label><span>{{data.MaritualStatus}}</span>
                     </p>
-                    <p class="clearfix ipStar" style="display: none;">
+                    <p class="clearfix ipStar" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
                         <label>Star</label>
                         <span>{{data.Star}}</span>
                     </p>
-                    <p class="clearfix ipLocation" style="display: none;">
+                    <p class="clearfix ipLocation" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
                         <label>Location</label>
                         <span>{{ data.Location }}</span>
                     </p>
@@ -54,36 +68,57 @@
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
-                        <a title="Mobile" class="mobileicon" ></a></li>
+                        <a title="Mobile" class="mobileicon"></a>
+                    </li>
                     <li>
                         <a title="Emails" class="" style="background: url('src/images/vinod.png') no-repeat -1075px -204px !important;
     display: block !important;
     width: 34px !important;
-    height: 34px !important;"></a></li>
+    height: 34px !important;"></a>
+                    </li>
                     <li>
                         <a title="horo" class="" style="background: url('src/images/vinod.png') no-repeat -1255px -204px !important;
 display: block !important;
 width: 34px !important;
-height: 34px !important;"></a></li>
+height: 34px !important;"></a>
+                    </li>
                 </ul>
                 <div class="clear"></div>
             </div>
-            <div class="listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid">
+            <div ng-class="typeofdiv==='Grid'?'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid':'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
                 <ul>
                     <li>
-                        <img src="../images/bookmark_icon.png" alt="Bookmark" title="BookMark"><div><a title="BookMark" href="javascript:void(0)" style="color: Black;">BookMark</a></div>
+                        <img src="../images/bookmark_icon.png" alt="Bookmark" title="BookMark">
+                        <div><a title="BookMark" href="javascript:void(0)" style="color: Black;">BookMark</a></div>
                     </li>
                     <li>
-                        <img src="../images/interest_icon.png" alt="Express interest" title="Express"><div><a title="Expressinterest" href=" javascript:void(0)" style="color: Black;">Express Interest</a></div>
+                        <img src="../images/interest_icon.png" alt="Express interest" title="Express">
+                        <div><a title="Expressinterest" href=" javascript:void(0)" style="color: Black;">Express Interest</a></div>
                     </li>
                     <li>
-                        <img src="../images/message_icon2.png" alt="Message" title="Message"><div><a title="Message" href="javascript:void(0)" style="color: Black;">Message</a></div>
+                        <img src="../images/message_icon2.png" alt="Message" title="Message">
+                        <div><a title="Message" href="javascript:void(0)" style="color: Black;">Message</a></div>
                     </li>
                     <li>
-                        <img src="../images/close_icon.png" alt="Notinterest" title="Ignore"><div><a title="Ignore" href=" javascript:void(0)" style="color: Black;">Ignore</a></div>
+                        <img src="../images/close_icon.png" alt="Notinterest" title="Ignore">
+                        <div><a title="Ignore" href=" javascript:void(0)" style="color: Black;">Ignore</a></div>
                     </li>
                 </ul>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
+</div>
+<div class='row col-lg-10'>
+    <div class="col-lg-offset-5" ng-show=loadmore>
+
+        <a href="javascript:void(0);" ng-click="directivepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+    </div>
+    <div class="col-lg-offset-5" ng-show=loaderspin>
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+
+    </div>
+    <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
+        <h3 style="color: maroon;">End</h3>
+    </div>
+</div>

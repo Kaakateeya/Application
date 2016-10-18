@@ -1,3 +1,3 @@
-app.controller('advancesearchCtrl',['$scope',function(scope){
+app.controller('profileidsrch',['$scope',function(scope){
     scope.data=[];
 }]);

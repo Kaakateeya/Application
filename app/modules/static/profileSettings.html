@@ -1,1 +1,583 @@
-<div ng-controller="profilesettings">dddddddddddaddd</div>
+<div class="search_page_main" ng-controller="profilesettings">
+    <div class="search_page_tabs profile_settings_tabs">
+        <ul>
+            <li>
+                <a class="tab_mail_but active">Edit Email</a>
+
+            </li>
+            <li>
+                <a class="tab_pswd_but">Edit Password</a>
+
+            </li>
+            <li>
+                <a class="tab_alerts_but">Manage Alerts</a>
+
+            </li>
+            <li>
+                <a class="tab_profile_hide_but">Hide Profile</a>
+
+            </li>
+            <li>
+                <a class="tab_del_profile_but">Delete Profile</a>
+
+            </li>
+        </ul>
+        <div class="clear"></div>
+
+
+
+
+        <div id="ctl00_ContentPlaceHolder1_UpdatePanel1" class="tab_mail" style="display: block;">
+
+            <div class="profile_search_main profile_settings_main clearfix" id="tab_mail">
+
+                <p>
+                    You can change your primary email id
+                    <a id="ctl00_ContentPlaceHolder1_lnkEditEmailIDs" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkEditEmailIDs','')"
+                        style="font-weight:bold;text-decoration:underline;">Edit</a>.
+                </p>
+                <div id="ctl00_ContentPlaceHolder1_ffff">
+
+                    <div class="span4">
+                        <label class="control-label">Current Email ID</label>
+                        <input name="ctl00$ContentPlaceHolder1$txtemail" value="anil.singareddy@gmail.com" id="ctl00_ContentPlaceHolder1_txtemail"
+                            disabled="disabled" class="aspNetDisabled" type="text">
+
+                    </div>
+                    <div class="span4">
+                        <label class="control-label">New Email ID</label>
+                        <div id="ctl00_ContentPlaceHolder1_upemail">
+
+                            <input name="ctl00$ContentPlaceHolder1$txtNewMail" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$txtNewMail\',\'\')', 0)"
+                                onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="ctl00_ContentPlaceHolder1_txtNewMail"
+                                disabled="disabled" class="aspNetDisabled" type="text">
+                            <span id="ctl00_ContentPlaceHolder1_reqnewemail" style="color:Red;visibility:hidden;">*Please enter Email</span>
+                            <span id="ctl00_ContentPlaceHolder1_RegularExpressionValidator4" style="color:Red;font-size:11px;display:none;">*Please enter valid email</span>
+
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <label class="control-label">Confirm New Email ID</label>
+                        <input name="ctl00$ContentPlaceHolder1$txtConfirmEmail" id="ctl00_ContentPlaceHolder1_txtConfirmEmail" disabled="disabled"
+                            class="aspNetDisabled" type="text">
+                        <span id="ctl00_ContentPlaceHolder1_reqtxtConfirmEmail" style="color:Red;visibility:hidden;">*Please enter confirm Email</span>
+                        <span id="ctl00_ContentPlaceHolder1_comparePasswords" style="color:Red;display:none;">Your Email do not match above email!</span>
+                    </div>
+
+                    <div class="clear"></div>
+                    <br>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="ctl00_ContentPlaceHolder1_UpdatePanel3" class="tab_mail" style="display: block;">
+
+            <div class="profile_search_main profile_settings_main" id="Div1">
+                <p>
+                    You can change your primary Mobile Number
+                    <a id="ctl00_ContentPlaceHolder1_lnkMobile" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkMobile','')" style="font-weight:bold;text-decoration:underline;">Edit</a>.
+                </p>
+                <div id="ctl00_ContentPlaceHolder1_UpdatePanel4">
+
+                    <div class="span4">
+                        <label class="control-label">Current Mobile Number</label>
+                        <input name="ctl00$ContentPlaceHolder1$txtCurrentMobile" value="9581812151" id="ctl00_ContentPlaceHolder1_txtCurrentMobile"
+                            disabled="disabled" class="aspNetDisabled" type="text">
+
+                    </div>
+                    <div class="span4">
+                        <label class="control-label">Country Code</label>
+                        <select name="ctl00$ContentPlaceHolder1$ddlCountryCode" id="ctl00_ContentPlaceHolder1_ddlCountryCode" disabled="disabled"
+                            class="aspNetDisabled" style="height:35px;width:330px;">
+			<option selected="selected" value="0">--Select--</option>
+			<option value="1">India(91)</option>
+			<option value="2">USA(001)</option>
+			<option value="3">UK(0044)</option>
+			<option value="4">Canada(001)</option>
+			<option value="5">Australia(0061)</option>
+			<option value="6">Singapore(0065)</option>
+			<option value="7">Saudi Arabia(0966)</option>
+			<option value="8">South Africa(0027)</option>
+			<option value="9">Kuwait(965)</option>
+			<option value="10">Pakistan(92)</option>
+			<option value="11">Afghanistan(93)</option>
+			<option value="12">Albania(355)</option>
+			<option value="13">Algeria(213)</option>
+			<option value="14">American Samoa(168)</option>
+			<option value="15">Andorra(376)</option>
+			<option value="16">Angola(244)</option>
+			<option value="17">Anguiila(126)</option>
+			<option value="18">Antarctica(672)</option>
+			<option value="19">Antigua  Barbuda(126)</option>
+			<option value="20">Argentina(54)</option>
+			<option value="21">Armenia(374)</option>
+			<option value="22">Aruba(297)</option>
+			<option value="23">Austria(43)</option>
+			<option value="24">Azerbaijan(994)</option>
+			<option value="25">Bahamas(124)</option>
+			<option value="26">Bahrain(973)</option>
+			<option value="27">Bangladesh(880)</option>
+			<option value="28">Barbados(124)</option>
+			<option value="29">Belarus(375)</option>
+			<option value="30">Belgium(32)</option>
+			<option value="31">Belize(501)</option>
+			<option value="32">Benin(229)</option>
+			<option value="33">Bermuda(144)</option>
+			<option value="34">Bhutan(975)</option>
+			<option value="35">Bolivia(591)</option>
+			<option value="36">Bosina  Herzegovina(387)</option>
+			<option value="37">Botswana(267)</option>
+			<option value="38">Bouvet Island(0)</option>
+			<option value="39">Brazil(55)</option>
+			<option value="40">British Indian Ocean Territory(0)</option>
+			<option value="41">British Virgin Islands(128)</option>
+			<option value="42">Brunei(673)</option>
+			<option value="43">Bulgaria(359)</option>
+			<option value="44">Burkina Faso(226)</option>
+			<option value="45">Burundi(257)</option>
+			<option value="46">Cambodia(855)</option>
+			<option value="47">Cameron(237)</option>
+			<option value="48">Cape Verde(238)</option>
+			<option value="49">Cayman Islands(134)</option>
+			<option value="50">Central African Republic(236)</option>
+			<option value="51">Chad(235)</option>
+			<option value="52">Chile(56)</option>
+			<option value="53">China(86)</option>
+			<option value="54">Chirstmas Island(61)</option>
+			<option value="55">Cocos Islands(61)</option>
+			<option value="56">Colombia(57)</option>
+			<option value="57">Cmoros(269)</option>
+			<option value="58">Congo(0)</option>
+			<option value="59">Cook Islands(682)</option>
+			<option value="60">Costa Rica(506)</option>
+			<option value="61">Croatia(385)</option>
+			<option value="62">Cuba(53)</option>
+			<option value="63">Cyprus(357)</option>
+			<option value="64">Czech Republic(420)</option>
+			<option value="65">Denmark(45)</option>
+			<option value="66">Djibouti(253)</option>
+			<option value="67">Dominica(176)</option>
+			<option value="68">Dominican Republic(180)</option>
+			<option value="69">East Timor(0)</option>
+			<option value="70">Ecuador(593)</option>
+			<option value="71">Egypt(20)</option>
+			<option value="72">Ei Salvador(503)</option>
+			<option value="73">Equatorial Guinea(240)</option>
+			<option value="74">Eritrea(291)</option>
+			<option value="75">Estonia(372)</option>
+			<option value="76">Ethiopia(251)</option>
+			<option value="77">Falkland Islands(500)</option>
+			<option value="78">Faroe Islands(298)</option>
+			<option value="79">Fiji(679)</option>
+			<option value="80">Finland(358)</option>
+			<option value="81">France(33)</option>
+			<option value="82">French Guiana(0)</option>
+			<option value="83">French Polynesia(689)</option>
+			<option value="84">French Southern Territories(0)</option>
+			<option value="85">Gabon(241)</option>
+			<option value="86">Gambia(220)</option>
+			<option value="87">Georgia(995)</option>
+			<option value="88">Germany(0049)</option>
+			<option value="89">Ghana(233)</option>
+			<option value="90">Gibraltar(350)</option>
+			<option value="91">Greece(30)</option>
+			<option value="92">Greenland(299)</option>
+			<option value="93">Grenada(147)</option>
+			<option value="94">Guadeloupe(0)</option>
+			<option value="95">Guam(167)</option>
+			<option value="96">Guatemala(502)</option>
+			<option value="97">Guinea(224)</option>
+			<option value="98">GuineaBissau(245)</option>
+			<option value="99">Guyana(592)</option>
+			<option value="100">Haiti(509)</option>
+			<option value="101">Heard  Mcdonald Islands(0)</option>
+			<option value="102">Honduras(504)</option>
+			<option value="103">Hong Kong(852)</option>
+			<option value="104">Hungary(36)</option>
+			<option value="105">Iceland(354)</option>
+			<option value="106">Indonesia(62)</option>
+			<option value="107">Iran(98)</option>
+			<option value="108">Iraq(964)</option>
+			<option value="109">Ireland(353)</option>
+			<option value="110">Israel(972)</option>
+			<option value="111">Italy(39)</option>
+			<option value="112">Ivory Coast(225)</option>
+			<option value="113">Jamaica(187)</option>
+			<option value="114">Japan(81)</option>
+			<option value="115">Jordan(962)</option>
+			<option value="116">Kazakstan(7)</option>
+			<option value="117">Kenya(254)</option>
+			<option value="118">Kiribati(686)</option>
+			<option value="119">South Korea(82)</option>
+			<option value="120">North Korea(0)</option>
+			<option value="121">Kyrgyzstan(996)</option>
+			<option value="122">Laos(856)</option>
+			<option value="123">Latvia(371)</option>
+			<option value="124">Lebanon(961)</option>
+			<option value="125">Lesotho(266)</option>
+			<option value="126">Liberia(231)</option>
+			<option value="127">Libya(218)</option>
+			<option value="128">Liechtenstein(423)</option>
+			<option value="129">Lithuania(370)</option>
+			<option value="130">Luxembourg(352)</option>
+			<option value="131">Macau(853)</option>
+			<option value="132">Macedonia(389)</option>
+			<option value="133">Madagascar(261)</option>
+			<option value="134">Malawi(265)</option>
+			<option value="135">Malaysia(60)</option>
+			<option value="136">Maldives(960)</option>
+			<option value="137">Mali(223)</option>
+			<option value="138">Malta(356)</option>
+			<option value="139">Marshall Islads(692)</option>
+			<option value="140">Martinique(0)</option>
+			<option value="141">Mauritania(222)</option>
+			<option value="142">Mauritius(230)</option>
+			<option value="143">Mayotte(0)</option>
+			<option value="144">Mexico(52)</option>
+			<option value="145">Micronesia(691)</option>
+			<option value="146">Moldova(373)</option>
+			<option value="147">Monaco(377)</option>
+			<option value="148">Mongolia(976)</option>
+			<option value="149">Montserrat(166)</option>
+			<option value="150">Morocco(212)</option>
+			<option value="151">Mozambique(258)</option>
+			<option value="152">Myanmar(0)</option>
+			<option value="153">Namibia(264)</option>
+			<option value="154">Nauru(674)</option>
+			<option value="155">Nepal(977)</option>
+			<option value="156">Netherlands(31)</option>
+			<option value="157">Netherlands Antilles(599)</option>
+			<option value="158">New Caledonia(687)</option>
+			<option value="159">New Zealand(64)</option>
+			<option value="160">Nicaragua(505)</option>
+			<option value="161">Niger(0)</option>
+			<option value="162">Nigeria(234)</option>
+			<option value="163">Niue(683)</option>
+			<option value="164">Norfolk Island(672)</option>
+			<option value="165">Northern Mariana(167)</option>
+			<option value="166">Norway(47)</option>
+			<option value="167">Oman(968)</option>
+			<option value="168">Palau(680)</option>
+			<option value="169">Panama(0)</option>
+			<option value="170">Papua New Guinea(675)</option>
+			<option value="171">Paraguay(595)</option>
+			<option value="172">Peru(51)</option>
+			<option value="173">Philippines(63)</option>
+			<option value="174">Poland(48)</option>
+			<option value="175">Portugal(351)</option>
+			<option value="176">Puerto Rico(1)</option>
+			<option value="177">Qatar(974)</option>
+			<option value="178">Reunion(0)</option>
+			<option value="179">Romania(40)</option>
+			<option value="180">Russia(7)</option>
+			<option value="181">Rwanda(250)</option>
+			<option value="182">Sgeorgia  Ssandwich isls(0)</option>
+			<option value="183">Saint Kitts  Nevis(186)</option>
+			<option value="184">Saint Lucia(175)</option>
+			<option value="185">Saint Vincent  The Grenadines(178)</option>
+			<option value="186">Samoa(685)</option>
+			<option value="187">San Marino(378)</option>
+			<option value="188">Sao Tome  Principe(239)</option>
+			<option value="189">Senegal(221)</option>
+			<option value="190">Seychelles(248)</option>
+			<option value="191">Sierra Leone(232)</option>
+			<option value="192">Slovakia(421)</option>
+			<option value="193">Solvenia(386)</option>
+			<option value="194">Somalia(252)</option>
+			<option value="195">Spain(34)</option>
+			<option value="197">Sthelena(0)</option>
+			<option value="198">Stpierre  miquelon(0)</option>
+			<option value="199">Sudan(249)</option>
+			<option value="200">Suriname(597)</option>
+			<option value="201">Svalbard  Jan Mayen Islands(0)</option>
+			<option value="202">Swaziland(268)</option>
+			<option value="203">Sweden(46)</option>
+			<option value="204">Switzerland (0041)</option>
+			<option value="205">Syria(963)</option>
+			<option value="206">Taiwan(886)</option>
+			<option value="207">Tajikistan(992)</option>
+			<option value="208">Tanzania(255)</option>
+			<option value="209">Thailand(66)</option>
+			<option value="210">Togo(228)</option>
+			<option value="211">Tokelau(690)</option>
+			<option value="212">Tonga(676)</option>
+			<option value="213">Trinidad  Tobago(186)</option>
+			<option value="214">Tunisia(216)</option>
+			<option value="215">Turkey(90)</option>
+			<option value="216">Turkmenistan(993)</option>
+			<option value="217">Turks  Caicos Islands(164)</option>
+			<option value="218">Tuvalu(688)</option>
+			<option value="219">Uganda(256)</option>
+			<option value="220">Ukraine(0)</option>
+			<option value="221">United Arab Emirates(971)</option>
+			<option value="222">Uruguay(598)</option>
+			<option value="223">Uzbekistan(998)</option>
+			<option value="224">Vanuatu(678)</option>
+			<option value="225">Vatican City(0)</option>
+			<option value="226">Venezuela(58)</option>
+			<option value="227">Vietnam(84)</option>
+			<option value="228">Virgin Islands(0)</option>
+			<option value="229">Wallis  Futuna Islands(681)</option>
+			<option value="230">Western Sahara(0)</option>
+			<option value="231">Yemen(967)</option>
+			<option value="232">Yugoslavia(0)</option>
+			<option value="233">Zaire(0)</option>
+			<option value="234">Zambia(260)</option>
+			<option value="235">Zimbabwe(263)</option>
+			<option value="237">Not Given(00)</option>
+			<option value="238">Other(00)</option>
+			<option value="239">Srilanka(94)</option>
+			<option value="240">West Indies(264)</option>
+			<option value="241">Europe(0028)</option>
+			<option value="242">XCountry(000)</option>
+			<option value="243">WEST AFRICA(221)</option>
+			<option value="244">Tanzania(0255)</option>
+			<option value="245">Nigeria(234)</option>
+
+		</select>
+                        <span id="ctl00_ContentPlaceHolder1_reqddlCountryCode" style="color:Red;visibility:hidden;">*Please select CountryCode</span>
+                    </div>
+                    <div class="span4">
+                        <label class="control-label">New Mobile Number</label>
+                        <div id="ctl00_ContentPlaceHolder1_UpdatePanel2">
+
+                            <input name="ctl00$ContentPlaceHolder1$txtNewMobile" maxlength="10" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$txtNewMobile\',\'\')', 0)"
+                                onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="ctl00_ContentPlaceHolder1_txtNewMobile"
+                                disabled="disabled" class="aspNetDisabled" type="text">
+
+                            <span id="ctl00_ContentPlaceHolder1_RequiredFieldValidator2" style="color:Red;visibility:hidden;">*Please enter New Mobile Number</span>
+                            <span id="ctl00_ContentPlaceHolder1_RegularExpressionValidator6" style="color:Red;display:none;">*Please enter valid Mobile No</span>
+
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <br>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div id="ctl00_ContentPlaceHolder1_iiiiii" class="tab_pswd">
+
+            <div class="profile_search_main profile_settings_main clearfix" id="tab_pswd">
+                <p>
+                    You can change your password
+                    <a id="ctl00_ContentPlaceHolder1_lnkPasswordIDs" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkPasswordIDs','')"
+                        style="font-weight:bold;text-decoration:underline;">Edit</a>.
+                </p>
+                <div class="span4">
+                    <label class="control-label">Current Password</label>
+                    <input name="ctl00$ContentPlaceHolder1$txtCurPwd" id="ctl00_ContentPlaceHolder1_txtCurPwd" disabled="disabled" class="aspNetDisabled"
+                        type="password">
+                    <span id="ctl00_ContentPlaceHolder1_RequiredFieldValidator1" style="color:Red;visibility:hidden;">* Please enter current password</span>
+                    <span id="ctl00_ContentPlaceHolder1_lblPassword" style="display: none;">Anilshruthi@3</span>
+                </div>
+                <div class="span4">
+                    <label class="control-label">New Password</label>
+                    <input name="ctl00$ContentPlaceHolder1$txtNewPwd" id="ctl00_ContentPlaceHolder1_txtNewPwd" disabled="disabled" class="aspNetDisabled"
+                        onfocus="myFunction()" type="password">
+                    <span id="ctl00_ContentPlaceHolder1_reqtxtNewPwd" style="color:Red;visibility:hidden;">* Please enter new password</span>
+                    <span id="ctl00_ContentPlaceHolder1_RegularExpressionValidator5" style="color:Red;font-size:11px;display:none;">Minimum 6 and Maximum 15 characters required.</span>
+                </div>
+                <div class="span4">
+                    <label class="control-label">Confirm New Password</label>
+                    <input name="ctl00$ContentPlaceHolder1$txtnewConfirmPwd" id="ctl00_ContentPlaceHolder1_txtnewConfirmPwd" disabled="disabled"
+                        class="aspNetDisabled" type="password">
+                    <span id="ctl00_ContentPlaceHolder1_reqtxtnewConfirmPwd" style="color:Red;visibility:hidden;">* Please enter Confirm password</span>
+                    <span id="ctl00_ContentPlaceHolder1_CompareValidator1" style="color:Red;display:none;">Your passowrd do not match above Password!</span>
+                </div>
+
+                <div class="clear"></div>
+                <br>
+
+            </div>
+
+
+        </div>
+
+        <div id="ctl00_ContentPlaceHolder1_KKKK" class="tab_alerts">
+
+            <div class="profile_search_main profile_settings_main clearfix" id="tab_alerts">
+                <p><span style="color: #D42E02; font-size: 14px;">You can change the Email/SMS alerts settings.<a id="ctl00_ContentPlaceHolder1_lnkSmsAlerts" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkSmsAlerts','')" style="font-weight:bold;text-decoration:underline;">Edit</a></span></p>
+
+                <div class="mail_alerts_item span4 clearfix">
+                    <p>Receive alerts by SMS</p>
+
+                    <div class="radio_alert">
+                        <label>
+                                    <table id="ctl00_ContentPlaceHolder1_rdlSmsAlerts" class="aspNetDisabled">
+		<tbody><tr>
+			<td><span class="aspNetDisabled"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_0"><span class="checked"><input id="ctl00_ContentPlaceHolder1_rdlSmsAlerts_0" name="ctl00$ContentPlaceHolder1$rdlSmsAlerts" value="1" checked="checked" disabled="disabled" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div><label for="ctl00_ContentPlaceHolder1_rdlSmsAlerts_0"><span class="alert_lable">Yes</span></label></span>
+                        </td>
+                        <td><span class="aspNetDisabled"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlSmsAlerts_1"><span><input id="ctl00_ContentPlaceHolder1_rdlSmsAlerts_1" name="ctl00$ContentPlaceHolder1$rdlSmsAlerts" value="0" disabled="disabled" style="opacity: 0;" type="radio"></span></div>
+                    </span>
+                </div>
+                </span>
+            </div>
+            </span>
+        </div><label for="ctl00_ContentPlaceHolder1_rdlSmsAlerts_1"><span class="alert_lable">No</span></label></span>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+
+        </label>
+    </div>
+</div>
+<div class="mail_alerts_item span4 clearfix">
+    <p>Receive alerts by Email</p>
+
+    <div class="radio_alert">
+
+        <label>
+                                    <table id="ctl00_ContentPlaceHolder1_rdlEmailAlerts" class="aspNetDisabled">
+		<tbody><tr>
+			<td><span class="aspNetDisabled"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_0"><span class="checked"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_0"><span class="checked"><input id="ctl00_ContentPlaceHolder1_rdlEmailAlerts_0" name="ctl00$ContentPlaceHolder1$rdlEmailAlerts" value="1" checked="checked" disabled="disabled" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div><label for="ctl00_ContentPlaceHolder1_rdlEmailAlerts_0"><span class="alert_lable">Yes</span></label></span>
+        </td>
+        <td><span class="aspNetDisabled"><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_1"><span><div class="radio disabled" id="uniform-ctl00_ContentPlaceHolder1_rdlEmailAlerts_1"><span><input id="ctl00_ContentPlaceHolder1_rdlEmailAlerts_1" name="ctl00$ContentPlaceHolder1$rdlEmailAlerts" value="0" disabled="disabled" style="opacity: 0;" type="radio"></span></div>
+    </span>
+</div>
+</span>
+</div>
+</span>
+</div><label for="ctl00_ContentPlaceHolder1_rdlEmailAlerts_1"><span class="alert_lable">No</span></label></span>
+</td>
+</tr>
+</tbody>
+</table>
+
+</label>
+</div>
+
+</div>
+
+<div class="clear"></div>
+<br>
+
+</div>
+
+</div>
+
+
+
+
+<div class="tab_profile_hide">
+    <div id="ctl00_ContentPlaceHolder1_opopopo">
+
+        <div class="profile_search_main profile_settings_main clearfix">
+            <div id="ctl00_ContentPlaceHolder1_DDSS">
+
+                <p>In order to hide profile for certain time period please select the option below and mention the reason for
+                    hiding the profile.<a id="ctl00_ContentPlaceHolder1_lnkHideMyProfile" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkHideMyProfile','')"
+                        style="font-weight:bold;text-decoration:underline;">Edit</a></p>
+
+            </div>
+            <div id="ctl00_ContentPlaceHolder1_divDll" class="span4  select-box-my">
+                <label class="control-label">Hide my profile</label>
+                <div class="controls clearfix">
+                    <select name="ctl00$ContentPlaceHolder1$ddlHideMyProfile" id="ctl00_ContentPlaceHolder1_ddlHideMyProfile" disabled="disabled"
+                        class="aspNetDisabled" style="height:35px;width:300px;">
+		<option selected="selected" value="0">--Select--</option>
+		<option value="1">1Days</option>
+		<option value="2">2Days</option>
+		<option value="3">3Days</option>
+		<option value="4">4Days</option>
+		<option value="5">5Days</option>
+		<option value="6">6Days</option>
+		<option value="7">7Days</option>
+		<option value="8">8Days</option>
+		<option value="9">9Days</option>
+		<option value="10">10Days</option>
+		<option value="11">11Days</option>
+		<option value="12">12Days</option>
+		<option value="13">13Days</option>
+		<option value="14">14Days</option>
+		<option value="15">15Days</option>
+		<option value="16">16Days</option>
+		<option value="17">17Days</option>
+		<option value="18">18Days</option>
+		<option value="19">19Days</option>
+		<option value="20">20Days</option>
+		<option value="21">21Days</option>
+		<option value="22">22Days</option>
+		<option value="23">23Days</option>
+		<option value="24">24Days</option>
+		<option value="25">25Days</option>
+		<option value="26">26Days</option>
+		<option value="27">27Days</option>
+		<option value="28">28Days</option>
+		<option value="29">29Days</option>
+		<option value="30">30Days</option>
+
+	</select>
+                </div>
+                <br>
+                <div>
+                    <label class="control-label">Provide narration for hidden</label>
+                    <div class="controls clearfix">
+                        <textarea name="ctl00$ContentPlaceHolder1$txtHideNarration" rows="2" cols="20" id="ctl00_ContentPlaceHolder1_txtHideNarration"
+                            disabled="disabled" class="aspNetDisabled" style="width:301px;"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="ctl00_ContentPlaceHolder1_DFDFFFF">
+
+
+
+            </div>
+            <div class="clear"></div>
+            <br>
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="ctl00_ContentPlaceHolder1_LOLOLO" class="tab_del_profile">
+
+    <div class="profile_search_main profile_settings_main clearfix" id="tab_del_profile">
+        <p>To delete your kaakateeya profile permanently.<a id="ctl00_ContentPlaceHolder1_lnkdeleteProfile" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$lnkdeleteProfile','')"
+                style="font-weight:bold;text-decoration:underline;">Edit</a></p>
+        <textarea name="ctl00$ContentPlaceHolder1$txtdeleteProfile" rows="2" cols="20" id="ctl00_ContentPlaceHolder1_txtdeleteProfile"
+            disabled="disabled" class="aspNetDisabled"></textarea>
+
+        <p class="accept_terms clearfix">
+            <span class="checkbox_my checkbox">
+                                <span class="aspNetDisabled"><div class="checker disabled" id="uniform-ctl00_ContentPlaceHolder1_chkdelete"><span><div class="checker disabled" id="uniform-ctl00_ContentPlaceHolder1_chkdelete"><span><div class="checker disabled" id="uniform-ctl00_ContentPlaceHolder1_chkdelete"><span><div class="checker disabled" id="uniform-ctl00_ContentPlaceHolder1_chkdelete"><span><input id="ctl00_ContentPlaceHolder1_chkdelete" name="ctl00$ContentPlaceHolder1$chkdelete" disabled="disabled" style="opacity: 0;" type="checkbox"></span></div>
+    </span>
+</div>
+</span>
+</div>
+</span>
+</div>
+</span>
+</span>
+<label for="checkbox" style="font-weight: 400;">
+                                Delete my profile permanently
+                            </label>
+</p>
+<div class="clear"></div>
+<br>
+
+</div>
+
+</div>
+</div>
+</div>

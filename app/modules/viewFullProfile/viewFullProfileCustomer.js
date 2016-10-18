@@ -1,4 +1,4 @@
-app.controller("viewfull",function()
+app.controller("viewFullProfileCustomer",function()
 {
 
 });

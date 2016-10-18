@@ -1,1 +1,260 @@
-<h1>Hi....</h1>
+<style type="text/css">
+    .ValueContains {
+        margin: 0 !important;
+        background-color: #f0f0cc !important;
+        /*border-color:green !important;*/
+    }
+    
+    .has-error .control-label {
+        color: #a94442 !important;
+    }
+    
+    .has-error .form-control {
+        color: #a94442 !important;
+        border-color: #a94442 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    }
+    
+    .has-success .control-label {
+        color: green !important;
+    }
+    
+    .has-success .form-control {
+        color: green !important;
+        border-color: green !important;
+        box-shadow: inset 0 1px 1px green;
+    }
+    
+    select {
+        width: 100px;
+        height: 34px;
+        margin-bottom: 10px;
+    }
+    
+    .Linkdisabledfalse {
+        /*pointer-events: none;
+        cursor: default;*/
+    }
+    
+    .colorloading {
+        color: black;
+        margin-top: 10px;
+    }
+</style>
+<div class="wrapper" id="divcontrols" style="display: block;" ng-controller="profileidsrch">
+
+    <!--/ Main Block 1 -->
+    <div class="search_page_main">
+        <div class="search_page_tabs">
+            <ul>
+                <li>
+                    <a id="lnkGeneralSearch" href="#/General">General Search</a>
+
+                </li>
+                <li>
+                    <a id="lnkAdvancedSearch" href="#/Advanced">Advanced Search</a>
+
+                </li>
+                <li>
+                    <a id="lnkProfileidSearch" class="active" href="#/profilidsrch">Profile id Search</a>
+
+                </li>
+
+                <li>
+                    <a id="lnkSaveandSearch" href="#/General" style="display: none;">Save&amp;Search</a>
+
+                </li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </div>
+
+        <div class="search_fields general_fields clearfix">
+            <div class="control-group radio-group-my" id="divGender" style="display: none;">
+                <div class="" id="gender" style="color: rgb(50, 40, 40);">
+                    <label class="">
+                            <div class="radio" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><input name="gender" value="2" autocomplete="off" style="opacity: 0;" checked="checked" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Bride</span>
+                        </label> &nbsp;
+                    <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><input name="gender" value="1" style="opacity: 0;" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Groom</span>
+                        </label> &nbsp;
+                </div>
+            </div>
+            <br>
+            <div class="profile_search_main clearfix">
+                <div class="span4">
+                    <label class="control-label">Profile id</label>
+
+                    <input id="txtProfileid" aria-describedby="basic-addon1" maxlength="15" class="Number" type="text">
+                </div>
+                <div class="span4">
+                    <label class="control-label">First name</label>
+                    <input id="txtFirstNameProfileid" aria-describedby="basic-addon1" maxlength="50" type="text">
+                </div>
+                <div class="span4">
+                    <label class="control-label">Last name</label>
+                    <input id="txtLastNameProfileid" aria-describedby="basic-addon1" maxlength="50" type="text">
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <button id="btnSaveAdvancesearch" class="button_custom" onclick="return SubmitAdvance();">Search</button>
+                <button id="btnReset" class="button_custom button_custom_reset" style="display: none;">Reset</button>
+                <div id="Div1" style="display: none;">
+                    <button id="btnSavesearch" class="button_custom" style="display: none;">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Block 1 /-->
+</div>
+<div class="col-lg-offset-5" id="divsubmitloader" style="display: none;">
+    <i class="fa fa-spinner fa-pulse fa-4x fa-fw margin-bottom colorloading"></i>
+</div>
+<div class="wrapper register_page_main clearfix" id="divsearchresult" style="display: none;">
+    <div class="clearfix">
+
+        <div class="refine_search_new clearfix" id="newsearchresultdiv" style="display: block;">
+
+            <div class="refine_search_new_sub clearfix">
+                <div class="refine_search_new_sub1 clearfix">
+                    <h4>Refine <span id="refinegender"></span></h4>
+                    <div class="clear">&nbsp;</div>
+                    <h6><span>Age:</span> <span id="refineAge">24 years - 28 years</span></h6>
+                    <h6><span>caste:</span><span id="refinecaste"> kamma</span></h6>
+                    <h6><span>education:</span> <span id="refineeducation">pg, btech, mtech</span></h6>
+                    <h6><span>height:</span><span id="spanrefineheight"> 5’.4”-167 cms</span></h6>
+                </div>
+                <div class="refine_search_new_sub2 clearfix">
+                    <div class="span3">
+                        <h6><span>Age</span></h6>
+                        <div class="clear">&nbsp;</div>
+                        <input id="amount" readonly="">
+
+                        <div id="slider_range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 5.26316%; width: 5.26316%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 5.26316%;"></span>
+                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10.5263%;"></span>
+                        </div>
+
+                        <input id="amountto" readonly="">
+                    </div>
+                    <div class="span3">
+                        <h6><span>Height</span></h6>
+                        <div class="clear">&nbsp;</div>
+                        <p id="amount2" style="display: none;">1</p>
+                        <input id="heightfrom" readonly="">
+                        <div id="slider_range2" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 2.5%; width: 97.5%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 2.5%;"></span>
+                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                        </div>
+                        <p id="amount2to" style="display: none;">40</p>
+                        <input id="heightto" readonly="">
+                    </div>
+                    <div class="span3 clearfix">
+                        <span class="checkbox_my checkbox">
+                            <label>
+                                <div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><input id="checkwithphoto" style="opacity: 0;" type="checkbox"></span></div>
+                    </span>
+                </div>
+                </span>
+            </div>
+            </span>
+        </div>
+        </span>
+    </div>With photo
+
+    </label>
+    </span>
+</div>
+<a href="javascript:void(0);" onclick="return refinesubmit();">Search more</a>
+</div>
+</div>
+</div>
+
+
+<!--/ Modal Gallery -->
+
+
+<div id="UpdateViewimage" class="UpdateViewimage clearfix">
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="searchresultprofilesdiv" style="display: block;">
+                <h4>search results - <span>
+                            <label id="refinetotalrecords">0</label>
+                            <small>Profiles found</small></span></h4>
+            </div>
+        </div>
+
+        <div class="col-lg-6 clearfix">
+
+            <input id="imageslideshow" src="../images/slider.png" class="pull-right" title="SlideShow" data-toggle="modal" onclick="return Slideshowpage();"
+                style="height: 32px; width: 32px;" type="image">
+
+            <input id="playButton" class="btn btn-default btn-xs pull-right" title="Play" src="../images/play-button.png" style="height: 33px; width: 40px;"
+                type="image">
+            <input id="pauseButton" class="btn btn-default btn-xs pull-right" title="Pause" src="../images/pause-button.png" style="display: none; height: 33px; width: 40px;"
+                type="image">
+
+            <input name="lnkViewImages" id="lnkViewImages" title="Grid View" class="grid_view pull-right" src="../CutomerImages/List%20page/icon_grid.png"
+                style="font-weight: bold;" onclick="return Changelist();" type="image">
+            <input name="lnkNormal" id="lnkNormal" title="List View" class="normal_view pull-right" src="../CutomerImages/List%20page/icon_list.png"
+                style="font-weight: bold;" onclick="return Changetogrid();" type="image">
+            <a id="lnkModifsearch" class="view_similar pull-right" href="javascript:void(0);" onclick="return Modifursearch();">Modify Your Search</a>
+        </div>
+        <div class="clear"></div>
+        <div id="divviewdprofiles" class="col-lg-12" style="display: none;">
+            <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;">1</label>&nbsp;
+            <label style="color: #000;">Profiles</label>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <br>
+</div>
+<!-- Carousel Start-->
+
+<div id="slideShowCarousel" class="carousel slide slideShowCarousel">
+    <!-- Carousel items -->
+    <div class="carousel-inner" id="maincarousal">
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#slideShowCarousel" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="#slideShowCarousel" data-slide="next">›</a>
+    <label style="display: none;" id="lblcurrentprofile"></label>
+    <label style="display: none;" id="lblcurSlide"></label>
+    <label style="display: none;" id="lnkLastSlide1"></label>
+
+
+</div>
+<!-- Carousel End -->
+</div>
+<div class="search_results_main clearfix">
+    <div class="search_result_items_main clearfix">
+        <div id="Refsearchllll">
+            <div id="divListV" class="message-row4">
+                <div id="updateList">
+                    <div class="Maindiv message-row4  wrapper--overflow">
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="col-lg-offset-5" style="display: none;" id="divloadmore">
+
+                        <a href="javascript:void(0);" onclick="return Ladmore();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+                    </div>
+                    <div class="col-lg-offset-5" id="divloader" style="display: none;">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="text-center" style="display: none;" id="Norows">
+                <h3 style="color: maroon;">End</h3>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>

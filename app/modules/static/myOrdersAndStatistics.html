@@ -1,1 +1,90 @@
-<div>ggggggggggg</div>
+<div class="register_page_main" ng-controller="myorders">
+    <h4>My Orders and statistics</h4>
+    <div class="myorders_list_main">
+        <div class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading">Profile Statistics</h5>
+            <div class="myorders_list_main_item_desc" style="display: none;">
+                <p class="clearfix">
+                    <small>Profile registration date</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblprofiledate">08-Oct-2015</span></span>
+                </p>
+                <p class="clearfix"><small>Profile last updated</small><span><span id="ctl00_ContentPlaceHolder1_lblprofilelastDate">10-Oct-2016</span></span>
+                </p>
+                <p class="clearfix"><small>Login count</small><span><span id="ctl00_ContentPlaceHolder1_lblNoOfLogins">186</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Recent login date</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblLastLogin">12-Oct-2016</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Number of Times your Profile was viewed</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblProfileviewed">0</span></span>
+                </p>
+            </div>
+        </div>
+
+        <div class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading">Online Membership Details</h5>
+            <div class="myorders_list_main_item_desc" style="display: none;">
+                <p class="clearfix"><small>Internet Membership Type</small><span><span id="ctl00_ContentPlaceHolder1_lblpaid">UNPAID</span></span>
+                </p>
+                <p class="clearfix"><small>Payment Date</small><span><span id="ctl00_ContentPlaceHolder1_lblpaidondate"></span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Membership Expiry date</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblexpiry">10-Nov-2016</span></span>
+                </p>
+                <p class="clearfix"><small>Package Name</small><span><span id="ctl00_ContentPlaceHolder1_lblMemName"></span></span>
+                </p>
+
+                <p class="clearfix"><small>Maximum Profile count</small><span><span id="ctl00_ContentPlaceHolder1_lblTolPoints">100</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Remaining profile count</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblBalance">72</span></span>
+                </p>
+
+            </div>
+        </div>
+
+        <div id="ctl00_ContentPlaceHolder1_panalofferMembership" class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading">Offline Membership Details <span>(Office Service)</span></h5>
+            <div class="myorders_list_main_item_desc" style="display: none;">
+                <p class="clearfix">
+                    <small>Offline Membership Type</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lbloffpaid">PAID</span></span>
+                </p>
+                <p class="clearfix"><small>Payment Date</small><span><span id="ctl00_ContentPlaceHolder1_lblpaidoffdate">16-Sep-2016</span></span>
+                </p>
+                <p class="clearfix"><small>Membership Expiry date</small><span><span id="ctl00_ContentPlaceHolder1_lbloffExpiry">06-Dec-2016</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Package Name</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lbloffmemName">b2_Ry_1000</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Maximum Profile count</small><span>
+                            <span id="ctl00_ContentPlaceHolder1_lblofftotpoints">200</span></span>
+                </p>
+                <p class="clearfix"><small>Remaining profile count</small><span><span id="ctl00_ContentPlaceHolder1_lbloffBalpoints">149</span></span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+            jQuery('.myorders_list_main_item:first-child .myorders_list_main_item_desc').show();
+            jQuery('.myorders_list_main_item:first-child').addClass('active');
+            jQuery('.myorders_list_main_item_heading').click(function () {
+                jQuery(this).parent().find('.myorders_list_main_item_desc').slideToggle(function () {
+                    if (jQuery(this).parent().find('.myorders_list_main_item_desc').is(':visible')) {
+                        jQuery(this).parent().addClass('active');
+                        jQuery(this).parent().siblings().find('.myorders_list_main_item_desc').slideUp();
+                        jQuery(this).parent().siblings().removeClass('active');
+                    } else {
+                        jQuery(this).parent().removeClass('active');
+                    }
+                });
+            });
+            </script>
