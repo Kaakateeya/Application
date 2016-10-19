@@ -21,6 +21,7 @@
     "jquery": "~2.0.3",
     "underscore": "~1.5.2",
     "angular-loader": "latest",
-    "angular-re-captcha": "^0.2.0"
+    "angular-re-captcha": "^0.2.0",
+    "angular-ui-router-styles": "^1.1.0"
   }
 }

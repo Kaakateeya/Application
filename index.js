@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA','ui.router']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 /**
@@ -47,69 +47,103 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 //     .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
 
 // }]);
-app.config(function($stateProvider, $urlRouterProvider) {
-    
+app.config(function ($stateProvider, $urlRouterProvider) {
+
     $urlRouterProvider.otherwise('/');
-    
+
     $stateProvider
-        
+
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
-            url: '/',
-             views: {
-              "content@": {
-                   templateUrl: 'app/modules/homePage/homePage.html',
-                   controller:'home'
-              }
-              ,
+            url: '/homepage',
+            views: {
+                "content@": {
+                    templateUrl: 'app/modules/homePage/homePage.html',
+                    controller: 'home',
+                    data: {
+                        css: 'src\css\bootstrap.min.css'
+                    }
+                }
+                ,
                 "bottompanel@": {
                     templateUrl: "templates/footer.html"
+
                 }
-          }
-        })            
+            }
+        })
         .state('dashboard', {
             url: '/home',
-              views: {
+            views: {
                 "topbar@": {
                     templateUrl: "templates/header.html"
                 },
                 "content@": {
-                     templateUrl: 'app/modules/dashboard/customerDashboardView.html',
-                     controller:'Controllerpartner'
+                    templateUrl: 'app/modules/dashboard/customerDashboardView.html',
+                    controller: 'Controllerpartner'
+
                 },
                 "bottompanel@": {
                     templateUrl: "templates/footer.html"
                 }
-              }
+            }
         })
         .state('searches', {
-            url: '/Advanced',
-              views: {
+            url: '/feedback',
+            views: {
                 "topbar@": {
                     templateUrl: "templates/header.html"
                 },
                 "content@": {
-                     templateUrl: 'app/modules/search/advancesearchView.html',
-                     controller:'advancesearchCtrl'
+                    templateUrl: 'app/modules/static/feedbackView.html',
+                    controller: 'feedbackCtrl'
                 },
                 "bottompanel@": {
                     templateUrl: "templates/footer.html"
                 }
-              }
+            }
+        })
+        .state('helppage', {
+            url: '/helppage',
+            views: {
+                "topbar@": {
+                    templateUrl: "templates/header.html"
+                },
+                "content@": {
+                    templateUrl: 'app/modules/static/helpPage.html',
+                    controller: 'help'
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
+                }
+            }
+        })
+        .state('taketour', {
+            url: '/tour',
+            views: {
+                "topbar@": {
+                    templateUrl: "templates/header.html"
+                },
+                "content@": {
+                    templateUrl: 'app/modules/static/takeTour.html'
+                    
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
+                }
+            }
         });
-        
 });
 app.config(function (reCAPTCHAProvider) {
-   reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
-                       // optional
-                       reCAPTCHAProvider.setOptions({
-                           theme: 'clean'
-                       });
-                   })
+    reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
+    // optional
+    reCAPTCHAProvider.setOptions({
+        theme: 'clean'
+    });
+})
 
 app.controller('headctrl', ['$scope', function (scope) {
-  scope.divloginblock = function () {
-    $('.login_block_header').toggle();
-  }
+    scope.divloginblock = function () {
+        $('.login_block_header').toggle();
+    }
 }]);
 

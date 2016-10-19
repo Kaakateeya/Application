@@ -1,7 +1,14 @@
+/*
+Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
+Template Version: 1.2
+Author: Mosaddek Hossain
+Website: http://thevectorlab.net/
+*/
 
 /* body styles */
 body {
     color: #000;
+    font-family: 'Arial';
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;

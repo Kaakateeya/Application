@@ -20,7 +20,7 @@
 .icon-spl-4, .icon-spl-8
 { display: inline-block; background: url('../images/download3.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 
-.banner-1 { background-position: -4px -0px; width: 1600px !important; height: 792px !important; }
+.banner-1 { background-position: -4px -0px; width: 1600px; height: 792px; }
 .banner-2 { background-position: -4px -796px; width: 1600px; height: 792px; }
 .banner-3 { background-position: -4px -1592px; width: 1600px; height: 792px; }
 .take-tour { background-position: -4px -2388px; width: 1044px; height: 583px; }

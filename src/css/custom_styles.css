@@ -50,7 +50,7 @@ body										{ min-width:300px; color:#b1b1b1; font-family: 'Open Sans', sans-s
 .wrapper									{ margin:0 auto; width:100%; }
 .container									{ margin:0 auto; max-width:1024px; }
 
-a.logo										{ display:block; background:url(../images/logo.png) no-repeat center center; width:202px; height:120px; }
+/*a.logo										{ display:block; background:url(../images/logo.png) no-repeat center center; width:202px; height:120px; }*/
 #header										{ margin:0; padding:14px 0 !important; position:absolute; top:0; left:0; width:100%; z-index:9999999999; }
 .navbar-default								{ background:none !important; border:0 none; }
 .navbar-nav									{ float:right; margin:80px 0 0 0; }
@@ -499,7 +499,7 @@ div.radio span.checked						{ background-image:url(../images/radio_activenew.png
 /* ----- 03-08-2015 ----- */
 .pics_upload								{ display:block; }
 .pics_upload .input-append, .pics_upload .input-prepend{ width:50%; display:block; border:solid 1px #ccc; padding:10px 6px; }
-.pics_upload .btn-file						{ background:url(../images/drag_icon.png) no-repeat center center; width:42px; height:42px; display:inline-block; border:0 none !important; box-shadow:none !important; padding:0 !important; margin:0 0 0 -46px; }
+/*.pics_upload .btn-file						{ background:url(../images/drag_icon.png) no-repeat center center; width:42px; height:42px; display:inline-block; border:0 none !important; box-shadow:none !important; padding:0 !important; margin:0 0 0 -46px; }*/
 .pics_upload .fileupload .uneditable-input	{ padding:0 !important; width:100%; box-shadow:none; height:32px; border:0 none; }
 .pics_upload .fileupload .uneditable-input + span{ position:absolute; right:8px; top:1px; }
 

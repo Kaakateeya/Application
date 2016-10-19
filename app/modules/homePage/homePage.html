@@ -1,205 +1,272 @@
+<style type="text/css">
+	.dropdown-toggle {
+		background-color: white !important;
+	}
+</style>
 <div class="wrapper">
-    <!--/ Header -->
+	<!--/ Header -->
 
-    <div id="header" class="navbar navbar-inverse">
+	<div id="header" class="navbar navbar-inverse">
 
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="javascript:void(0)" class="logo pull-left"></a>
-                <a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="arrow"></span>
-                </a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="javascript:void(0)" class="logo pull-left"></a>
+				<a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="arrow"></span>
+				</a>
 
-            
-                <div id="navbar" class="nav-collapse collapse pull-left">
-                    <ul class="nav">
-                        <li><a href="CustomerRegistration.aspx">Register Free</a></li>
-                        <li><a href="KaakateeyaCustomerProfileidsearchNew.aspx">Search</a></li>
-                        <li><a onclick="return divloginblock(); return false;" href="javascript:void(0)">Upgrade</a></li>
-                        <li><a href="KaakateeyaNewSuccessStories.aspx">success stories</a></li>
-                        <li><a href="CustomerNewHelp.aspx">Help</a></li>
+				<div id="navbar" class="nav-collapse collapse pull-left">
+					<ul class="nav">
+						<li><a href="#/Registration">Register Free</a></li>
+						<li><a href="#/profilidsrch">Search</a></li>
+						<li><a ng-click="divloginblock()" href="javascript:void(0)">Upgrade</a></li>
+						<li><a href="#/successstories">success stories</a></li>
+						<li><a href="#/help">Help</a></li>
 
-                        <li><a href="KaakateeyaAboutUs.aspx">About us</a></li>
-                        <li><a onclick="return divloginblock(); return false;" href="javascript:void(0)">Member Login</a></li>
-                    </ul>
-                </div>
-            </div>
+						<li><a href="#/aboutUs">About us</a></li>
+						<li><a ng-click="divloginblock()" href="javascript:void(0)">Member Login</a></li>
+					</ul>
+				</div>
+			</div>
 
-        </div>
-    </div>
-    <div class="login_block_header" style="display: none;" id="divLogin">
-        <input type="text" id="txtUserName"></input>
+		</div>
+	</div>
+	<div class="login_block_header" style="display: none;" id="divLogin">
 
-        <span class="clear">&nbsp;</span>
-        <div class="login_help">
+		<input type="text" id="txtUserName" onchange="return vali();" />
+		<input type="password" id="txtPassword" />
+		<span class="clear">&nbsp;</span>
+		<div class="login_help">
 
-            <a id="lnkForgotPassword" text="Forgot Password"></a>
-            <a href="CustomerRegistration.aspx">New User Sign Up</a>
+			<a id="lnkForgotPassword" onclick="return ShowForgotPassword();">Forgot Password</a>
+			<a href="#/Registration">New User Sign Up</a>
 
-        </div>
-        <button id="btnUserLogin" class="button_custom">Login</button>
-        <span class="clear">&nbsp;</span>
-    </div>
+		</div>
+		<input type="button" id="btnUserLogin" ng-click="loginsubmit()" class="button_custom" value="Login" />
 
+		<span class="clear">&nbsp;</span>
+	</div>
+	<!-- Header /-->
+	<!--/ Banner -->
+	<div class="banner-main">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img class="first-slide" src="src/images/banner-1.jpg" alt="Kakateeya Matrimony">
+				</div>
+				<div class="item">
+					<img class="second-slide" src="src/images/banner-1.jpg" alt="Kakateeya Matrimony">
+				</div>
+				<div class="item">
+					<img class="third-slide" src="src/images/banner-1.jpg" alt="Kakateeya Matrimony">
+				</div>
+			</div>
+		</div>
 
-    <!-- Header /-->
-
-
-
-
-    <!--/ Banner -->
-    <div class="banner-main">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img class="first-slide banner-1" src="" alt="Kakateeya Matrimony">
-                </div>
-                <div class="item">
-                    <img class="second-slide banner-1" src="" alt="Kakateeya Matrimony">
-                </div>
-                <div class="item">
-                    <img class="third-slide banner-1" src="" alt="Kakateeya Matrimony">
-                </div>
-            </div>
-        </div>
-
-        <span class="clear">&nbsp;</span>
-        <div class="span9 search-area-index">
-            <h3 class="pull-left">Just a click to find your <b>Soulmate</b></h3>
-            <div class="control-group pull-right radio-group-index">
-                <div class="controls">
+		<span class="clear">&nbsp;</span>
+		<div class="span9 search-area-index">
+			<h3 class="pull-left">Just a click to find your <b>Soulmate</b></h3>
+			<div class="control-group pull-right radio-group-index">
+				<div class="controls">
 
 
-                    <input type="radio" class="radio" id="ddlLookingFor">
-                        <option value="2" selected="selected">Bride</option>
-                        <option value="1">Groom</option>
-                    </input>
+					<table id="ddlLookingFor" class="radio">
+						<tbody>
+							<tr>
+								<td>
+									<div class="radio-inactivenew">
+										<input name="ddlLookingFor" value="2" style="opacity: 0;" type="radio">
+									</div><label>Bride</label></td>
+								<td>
+									<div class="radio-inactivenew">
+										<input name="ddlLookingFor" value="1" style="opacity: 0;" type="radio"></div>
+									<label>Groom</label></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="control-group selectbox-index selectbox-index2 span2">
+				<label class="control-label">Age</label>
+				<div class="controls">
+					<div id="updateContentdd">
+						<div class="col-lg-6" style="width: 81px;float: left;">
+							<select name="ddlAgrFrom" ng-model="Agefrom" id="ddlAgrFrom" multiselectdropdown ng-options="item.value as item.label for item in arrayAge"
+								style="left: -9000px;width:80px;top: 36px;">
+                          
+                            	</select>
+						</div>
+						<div class="col-lg-6" style="width: 81px;float: left;">
+							<select name="ddlAgeTo" ng-model="Ageto" id="ddlAgeTo" multiselectdropdown ng-options="item.value as item.label for item in arrayAge"
+								style="left: -9000px;width:80px;top: 36px;">
+		                 	</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="control-group selectbox-index span2">
+				<label class="control-label">Religion</label>
+				<div class="controls">
+					<div id="IIII">
+
+						<select name="ddlQuickReligion" multiselectdropdown ng-model="religion" typeofdata="Religion" style="width: 170px;">
+			</select>
 
 
+					</div>
+				</div>
+			</div>
+			<div class="control-group selectbox-index span2">
+				<label class="control-label">Caste</label>
+				<div class="controls">
+					<div id="VVVV">
+						<select name="ddlQuickCaste" id="ddlQuickCaste" multiselectdropdown ng-model="caste" style="width: 170px;" typeofdata="Caste">
+		</select>
+					</div>
+				</div>
+			</div>
+			<div class="control-group selectbox-index span2">
+				<label class="control-label">Current location</label>
+				<div class="controls">
 
-                </div>
-            </div>
-            <div class="clear">&nbsp;</div>
-            <div class="control-group selectbox-index selectbox-index2 span2">
-                <label class="control-label">Age</label>
-                <div class="controls">
+					<select name="ddlQuickCountry" id="ddlQuickCountry" multiselectdropdown ng-model="country" typeofdata="Country" style="width: 170px;">
+	
 
-                    <select id="ddlAgrFrom" class="chosen-with-diselect span2">
-                    </select>
-                    <select id="ddlAgeTo" class="chosen-with-diselect span2">
-                    </select>
+</select>
 
-                </div>
-            </div>
-            <div class="control-group selectbox-index span2">
-                <label class="control-label">Religion</label>
-                <div class="controls">
+				</div>
+			</div>
+			<div class="clear"></div>
+			<br>
 
-                    <select id="ddlQuickReligion" class="chosen-with-diselect span2" tabindex="-1" >
-                    </select>
+			<h4 class="pull-left"><small>Contact</small>+91-9390999999</h4>
 
-                </div>
-            </div>
-            <div class="control-group selectbox-index span2">
-                <label class="control-label">Caste</label>
-                <div class="controls">
+			<input name="btnSearch" value="find your partner now !" ng-click="ValidatequickRegister();" id="btnSearch" class="pull-right button_custom"
+				type="submit">
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- Banner /-->
+
+	<!--/ Main Block 1 -->
+	<div class="row-fluid main_block1">
+		<div class="span12">
+			<div class="span6 main_block1_lt">
+				<h4>South India's most reputated and trusted <b>matrimonial portal</b></h4>
 
 
-                    <select id="ddlQuickCaste" class="chosen-with-diselect span2" tabindex="-1">
-                    </select>
+				<p>
+					<span>Kaakateeya Marriages </span>is the solution for delivering reliable and quality match making services to all the
+					brides and grooms seeking to enter into marital bliss.We arrange alliances through our extensive database to match your
+					needs and tastes. Since 1982,we have been very successful in providing alliances and settling marriages to thousands
+					of our valued customers and committed to discover you better half !
+				</p>
 
+			</div>
+			<div class="span6">
+				<h4>Join us to start your journey <b>Choose your life partner from our vast collection</b></h4>
+				<p><span><b>Register for FREE</b></span> and take the first step towards marriage </p>
+				<br />
 
-                </div>
-            </div>
-            <div class="control-group selectbox-index span2">
-                <label class="control-label">Current location</label>
-                <div class="controls">
+				<a href="#/Registration" class="button_custom pull-left">register now</a>
+				<h5 class="pull-left">get regular alerts and notifications</h5>
+			</div>
+			<div class="color_strip">&nbsp;</div>
+		</div>
+	</div>
+	<!-- Main Block 1 /-->
 
-                    <select id="ddlQuickCountry" class="chosen-with-diselect span2" tabindex="-1">
-                    </select>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <br />
+	<!--/ Main Block 2 -->
+	<div class="row-fluid main_block2">
+		<div class="main_block2_in clearfix">
+			<div class="span12">
+				<h5 class="pull-left">our <b>success stories</b></h5>
+				<a class="more pull-right" href="#/successstories">view more success stories</a>
 
-            <h4 class="pull-left"><small>Contact</small>+91-9390999999</h4>
+				<div class="clear"></div>
 
-            <button id="btnSearch" text="find your partner now !" class="pull-right button_custom" onclick="btnSearch_Click" onclientclick="return ValidatequickRegister();" />
-            <div class="clear"></div>
-        </div>
-    </div>
-    <!-- Banner /-->
+				<table id="dtListsuccess" style="border-collapse:collapse;" cellspacing="0">
+					<tbody>
+						<tr>
+							<td>
+								<div class="success_item_index">
+									<img id="dtListsuccess_ctl00_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/19985_31975_SuccessImage/19985_31975_SuccessImage.jpg">
+									<a href="javascript:void(0)" class="overlay">
+										<small>&nbsp;</small>
+										<span>RANJANA G<br>
+                                        weds<br>
+                                        SAI SUBASH C</span></a>
+								</div>
+							</td>
+							<td>
+								<div class="success_item_index">
+									<img id="dtListsuccess_ctl01_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/85492_87427_SuccessImage/85492_87427_SuccessImage.jpg">
+									<a href="javascript:void(0)" class="overlay">
+										<small>&nbsp;</small>
+										<span>SINDHURA NADELLA<br>
+                                        weds<br>
+                                        NAGARJUNA THOTTEMPUDI</span></a>
+								</div>
+							</td>
+							<td>
+								<div class="success_item_index">
+									<img id="dtListsuccess_ctl02_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/88729_96224_SuccessImage/88729_96224_SuccessImage.jpg">
+									<a href="javascript:void(0)" class="overlay">
+										<small>&nbsp;</small>
+										<span>YOGITHA POTHUGUNTA<br>
+                                        weds<br>
+                                        vamsi karthik kommineni</span></a>
+								</div>
+							</td>
+							<td>
+								<div class="success_item_index">
+									<img id="dtListsuccess_ctl03_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/__SuccessImage/__SuccessImage.jpg">
+									<a href="javascript:void(0)" class="overlay">
+										<small>&nbsp;</small>
+										<span>RENUKA KOLLURU<br>
+                                        weds<br>
+                                        </span></a>
+								</div>
+							</td>
+							<td>
+								<div class="success_item_index">
+									<img id="dtListsuccess_ctl04_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/74606_88924_SuccessImage/74606_88924_SuccessImage.jpg">
+									<a href="javascript:void(0)" class="overlay">
+										<small>&nbsp;</small>
+										<span>SINDHU RAYAPATI<br>
+                                        weds<br>
+                                        VARUN VATTIKONDA</span></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
-    <!--/ Main Block 1 -->
-    <div class="row-fluid main_block1">
-        <div class="span12">
-            <div class="span6 main_block1_lt">
-                <h4>South India's most reputated and trusted <b>matrimonial portal</b></h4>
-               
+				<div class="color_strip">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<!-- Main Block 2 /-->
 
-                <p>
-                    <span>Kaakateeya Marriages </span>is the solution for delivering reliable and quality match making 
-                         services to all the brides and grooms seeking to enter into marital bliss.We arrange alliances through our extensive database to match your needs and tastes. 
-                        Since 1982,we have been very 
-                        successful in providing alliances and settling marriages to thousands of our valued customers and committed to discover you better half !
-                </p>
-              
-            </div>
-            <div class="span6">
-                <h4>Join us to start your journey <b>Choose your life partner from our vast collection</b></h4>
-                <p><span><b>Register for FREE</b></span> and take the first step towards marriage </p>
-                <br />
-
-                <a href="CustomerRegistration.aspx" class="button_custom pull-left">register now</a>
-                <h5 class="pull-left">get regular alerts and notifications</h5>
-            </div>
-            <div class="color_strip">&nbsp;</div>
-        </div>
-    </div>
-    <!-- Main Block 1 /-->
-
-    <!--/ Main Block 2 -->
-    <div class="row-fluid main_block2">
-        <div class="main_block2_in clearfix">
-            <div class="span12">
-                <h5 class="pull-left">our <b>success stories</b></h5>
-                <a class="more pull-right" href="KaakateeyaNewSuccessStories.aspx">view more success stories</a>
-
-                <div class="clear"></div>
-
-                <li id="dtListsuccess">
-                   
-                        <div class="success_item_index">
-                            
-                        </div>
-                  
-                </li>
-
-                <div class="color_strip">&nbsp;</div>
-            </div>
-        </div>
-    </div>
-    <!-- Main Block 2 /-->
-
-    <!--/ Main Block 3 -->
-    <div class="container-fluid main_block3" style="display: none;">
-        <div class="main_block3_in">
-            <h5>marriage is a <b>happy &amp; colorful celebration of life</b></h5>
-            <h6>let’s celebrate of your’s</h6>
-            <a href="javascript:void(0)" class="more">&nbsp;</a>
-            <div class="color_strip">&nbsp;</div>
-        </div>
-    </div>
-    <!-- Main Block 3 /-->
-
+	<!--/ Main Block 3 -->
+	<div class="container-fluid main_block3" style="display: none;">
+		<div class="main_block3_in">
+			<h5>marriage is a <b>happy &amp; colorful celebration of life</b></h5>
+			<h6>let’s celebrate of your’s</h6>
+			<a href="javascript:void(0)" class="more">&nbsp;</a>
+			<div class="color_strip">&nbsp;</div>
+		</div>
+	</div>
+	<!-- Main Block 3 /-->
 
 
 </div>

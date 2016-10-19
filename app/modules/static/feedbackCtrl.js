@@ -57,22 +57,25 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', functio
         { label: 'No Answer', title: 'No Answer', value: '513' },
     ];
 
-    scope.HearAbout = ["1"];
+
     scope.submit = function () {
         debugger;
         var objectfeedback = {};
-        objectfeedback.Cust_ID = 91035;
-        objectfeedback.HearAbout = scope.HearAbout;
-        objectfeedback.ImproveWebsite = scope.ImproveWebsite;
-        objectfeedback.kaaPrices = scope.kaaPrices;
-        objectfeedback.DownLoadTime = scope.DownLoadTime;
-        objectfeedback.CompareSite = scope.CompareSite;
-        objectfeedback.FavSite = scope.FavSite;
-        objectfeedback.SearchRate = scope.SearchRate;
-        objectfeedback.Recommend = scope.Recommend;
-        objectfeedback.Comments = scope.Comments;
+        objectfeedback.Cust_ID = null;
+        objectfeedback.HearAbout = scope.HearAbout != undefined && scope.HearAbout != "" ? scope.HearAbout : null;
+        objectfeedback.ImproveWebsite = scope.ImproveWebsite != undefined && scope.ImproveWebsite != "" ? scope.ImproveWebsite : null;
+        objectfeedback.kaaPrices = scope.kaaPrices != undefined && scope.kaaPrices != "" ? scope.kaaPrices : null;
+        objectfeedback.DownLoadTime = scope.DownLoadTime != undefined && scope.DownLoadTime != "" ? scope.DownLoadTime : null;
+        objectfeedback.CompareSite = scope.CompareSite != undefined && scope.CompareSite != "" ? scope.CompareSite : null;
+        objectfeedback.FavSite = scope.FavSite != undefined && scope.FavSite != "" ? scope.FavSite : null;
+        objectfeedback.SearchRate = scope.SearchRate != undefined && scope.SearchRate != "" ? scope.SearchRate : null;
+        objectfeedback.Recommend = scope.Recommend != undefined && scope.Recommend != "" ? scope.Recommend : null;
+        objectfeedback.Comments = scope.Comments != undefined && scope.Comments != "" ? scope.Comments : null;
         feedbacksubmit.feedbacksubmitinsert(objectfeedback).then(function (response) {
-
+            if (response.data == 1) {
+                alert("Thank u for your valuable feedback");
+                
+            }
         });
     }
 
