@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 /**
@@ -47,103 +47,67 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 //     .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
 
 // }]);
-app.config(function ($stateProvider, $urlRouterProvider) {
+
+app.config(function($stateProvider, $urlRouterProvider) {
+
+    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false }, 
+                  { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' }
+
+    ];
+
 
     $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-
-        // HOME STATES AND NESTED VIEWS ========================================
-        .state('home', {
-            url: '/homepage',
-            views: {
-                "content@": {
-                    templateUrl: 'app/modules/homePage/homePage.html',
-                    controller: 'home',
-                    data: {
-                        css: 'src\css\bootstrap.min.css'
-                    }
-                }
-                ,
-                "bottompanel@": {
-                    templateUrl: "templates/footer.html"
-
-                }
+    var outerView = {
+        "content@": {
+            templateUrl: 'app/modules/homePage/homePage.html',
+            controller: 'home'
+        }
+    };
+    _.each(states, function(item) {
+        var innerView = {
+            "topbar@": {
+                templateUrl: "templates/header.html"
+            },
+            "content@": {
+                templateUrl: item.templateUrl,
+                controller: item.controller
+            },
+            "bottompanel@": {
+                templateUrl: "templates/footer.html"
+            }
+        };
+        $stateProvider.state(item.name, {
+            url: item.url,
+            views: (item.ishomepage ? outerView : innerView),
+            data: {
+                requiresLogin: item.isloginrequired || true
             }
         })
-        .state('dashboard', {
-            url: '/home',
-            views: {
-                "topbar@": {
-                    templateUrl: "templates/header.html"
-                },
-                "content@": {
-                    templateUrl: 'app/modules/dashboard/customerDashboardView.html',
-                    controller: 'Controllerpartner'
-
-                },
-                "bottompanel@": {
-                    templateUrl: "templates/footer.html"
-                }
-            }
-        })
-        .state('searches', {
-            url: '/feedback',
-            views: {
-                "topbar@": {
-                    templateUrl: "templates/header.html"
-                },
-                "content@": {
-                    templateUrl: 'app/modules/static/feedbackView.html',
-                    controller: 'feedbackCtrl'
-                },
-                "bottompanel@": {
-                    templateUrl: "templates/footer.html"
-                }
-            }
-        })
-        .state('helppage', {
-            url: '/helppage',
-            views: {
-                "topbar@": {
-                    templateUrl: "templates/header.html"
-                },
-                "content@": {
-                    templateUrl: 'app/modules/static/helpPage.html',
-                    controller: 'help'
-                },
-                "bottompanel@": {
-                    templateUrl: "templates/footer.html"
-                }
-            }
-        })
-        .state('taketour', {
-            url: '/tour',
-            views: {
-                "topbar@": {
-                    templateUrl: "templates/header.html"
-                },
-                "content@": {
-                    templateUrl: 'app/modules/static/takeTour.html'
-                    
-                },
-                "bottompanel@": {
-                    templateUrl: "templates/footer.html"
-                }
-            }
-        });
+    });
 });
-app.config(function (reCAPTCHAProvider) {
+app.config(function(reCAPTCHAProvider) {
     reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
     // optional
     reCAPTCHAProvider.setOptions({
         theme: 'clean'
     });
 })
+app.run(function($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart', function(e, to) {
+        if (to.data && to.data.requiresLogin) {
+            if (localStorage.getItem('cust_id') === undefined) {
+                e.preventDefault();
+                console.log('success');
+                $state.go('home');
+            } else {
+                console.log('double success');
+            }
+        }
+    });
+})
 
-app.controller('headctrl', ['$scope', function (scope) {
-    scope.divloginblock = function () {
+app.controller('headctrl', ['$scope', function(scope) {
+    scope.divloginblock = function() {
         $('.login_block_header').toggle();
     }
 }]);
-
