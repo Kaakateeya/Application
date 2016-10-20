@@ -51,7 +51,8 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false },
-    { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' }
+    { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' },
+    {name: 'help', url: '/help', templateUrl: 'app/modules/static/helpPage.html', controller: 'help' }
 
     ];
 

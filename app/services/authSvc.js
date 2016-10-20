@@ -17,12 +17,11 @@
 //     };
 //   }]);
 
-  app.factory('authSvc', ['$injector','navCacheSvc', function($injector,navCacheSvc) {
+  app.factory('authSvc', ['$injector', function($injector) {
   
     function setUser(value) {
-
-      setSession('cust.id', value.custID);
-      setSession('cust.username', value.username);
+      setSession('cust.id', value.CustID);
+      setSession('cust.username', (value.FirstName+' '+value.LastName));
 	}
 
     function getSession(key) {
@@ -75,13 +74,13 @@
       },
       login: function(username, password) {
         var body = {
-          username: username,
-          password: password
+          Username: username,
+          Password: password
         };
         return $injector.invoke(function($http) {
-          return $http.post(app.api.root + 'userlogin', body)
+          return $http.post(app.apiroot + 'DB/userLogin/person', body)
           .then(function(response) {
-            if(response.status === 201) {
+            if(response.status === 200) {
               return { success: true, response: response.data };
             }
             return { success: false, response: response.data };

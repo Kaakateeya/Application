@@ -1,6 +1,6 @@
 
 
-app.controller('home', ['$scope', 'homepageservices', function (scope, homepageservices) {
+app.controller('home', ['$scope', 'homepageservices','authSvc', function (scope, homepageservices,authSvc) {
 
 
 
@@ -21,8 +21,9 @@ app.controller('home', ['$scope', 'homepageservices', function (scope, homepages
         $('.login_block_header').toggle();
     }
     scope.loginsubmit = function () {
-        homepageservices.logininfo().then(function (response) {
-            console.log(response);
+       authSvc.login('310910220','XowIvsTkzINyyKyJrPlmgg==').then(function (response) {
+            authSvc.user(response.response[0]);
+            var d=authSvc.getCustId();
         });
     }
     scope.ValidatequickRegister = function () {

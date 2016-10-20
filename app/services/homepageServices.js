@@ -1,4 +1,4 @@
-app.factory('homepageservices', ['$http', function (http) {
+app.factory('homepageservices', ['authSvc', function (http) {
     return {
         logininfo: function () {
             var person = new Object();
