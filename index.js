@@ -48,10 +48,10 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 // }]);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
 
-    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false }, 
-                  { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' }
+    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false },
+    { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' }
 
     ];
 
@@ -63,7 +63,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'home'
         }
     };
-    _.each(states, function(item) {
+    _.each(states, function (item) {
         var innerView = {
             "topbar@": {
                 templateUrl: "templates/header.html"
@@ -85,15 +85,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
     });
 });
-app.config(function(reCAPTCHAProvider) {
+app.config(function (reCAPTCHAProvider) {
     reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
     // optional
     reCAPTCHAProvider.setOptions({
         theme: 'clean'
     });
 })
-app.run(function($rootScope, $state) {
-    $rootScope.$on('$stateChangeStart', function(e, to) {
+app.run(function ($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart', function (e, to) {
         if (to.data && to.data.requiresLogin) {
             if (localStorage.getItem('cust_id') === undefined) {
                 e.preventDefault();
@@ -106,8 +106,8 @@ app.run(function($rootScope, $state) {
     });
 })
 
-app.controller('headctrl', ['$scope', function(scope) {
-    scope.divloginblock = function() {
+app.controller('headctrl', ['$scope', function (scope) {
+    scope.divloginblock = function () {
         $('.login_block_header').toggle();
     }
 }]);

@@ -3,11 +3,12 @@ app.factory('authSvc', ['$scope', function(){
 		getLoginCustid:function(){
 			return  getLogindata();
 		}
-		function getLogindata(){
-			return var returnobject ={
+		var getLogindata=function(){
+			return  returnobject ={
 				loginCustId:localStorage.getItem('cust_id'),
 				loginName:localStorage.getItem('cust_name')
-			}
-		}
-	}
-}])
+			};
+		};
+	};
+	
+}]);
