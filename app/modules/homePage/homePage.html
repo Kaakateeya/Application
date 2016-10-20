@@ -36,18 +36,19 @@
 			</div>
 		</div>
 		<div class="login_block_header" style="display: none;" id="divLogin">
+			<form name="myFormss">
+				<input type="text" id="txtUserName" ng-model="username"  required/>
+				<input type="password" id="txtPassword" ng-model="password" required/>
+				<span class="clear">&nbsp;</span>
+				<div class="login_help">
 
-			<input type="text" id="txtUserName" onchange="return vali();" />
-			<input type="password" id="txtPassword" />
-			<span class="clear">&nbsp;</span>
-			<div class="login_help">
+					<a id="lnkForgotPassword">Forgot Password</a>
+					<a href="#/Registration">New User Sign Up</a>
 
-				<a id="lnkForgotPassword" onclick="return ShowForgotPassword();">Forgot Password</a>
-				<a href="#/Registration">New User Sign Up</a>
-
-			</div>
-			<input type="button" id="btnUserLogin" ng-click="loginsubmit()" class="button_custom" value="Login" />
-
+				</div>
+				<input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myFormss.$invalid" class="button_custom" value="Login"
+				/>
+			</form>
 			<span class="clear">&nbsp;</span>
 		</div>
 		<!-- Header /-->

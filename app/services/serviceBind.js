@@ -8,8 +8,8 @@ app.factory('SelectBindService', ["$http", function (http) {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal.join(',') } });
         },
         casteselect: function () {
-           
-            return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "caste" } });
+
+            return http.get(app.apiroot + 'Dependency/getDropdown_filling_values', { params: { strDropdownname: "CasteName" } });
         }
     }
 }]);

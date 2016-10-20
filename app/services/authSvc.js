@@ -17,78 +17,88 @@
 //     };
 //   }]);
 
-  app.factory('authSvc', ['$injector', function($injector) {
-  
-    function setUser(value) {
-      setSession('cust.id', value.CustID);
-      setSession('cust.username', (value.FirstName+' '+value.LastName));
-	}
+app.factory('authSvc', ['$injector', function ($injector) {
 
-    function getSession(key) {
-      return sessionStorage.getItem(key);
-    }
-    
-    function setSession(key, value) {
-      if (value === undefined || value === null) {
-        clearSession(key);
-      }
-      else {
-        sessionStorage.setItem( key, value);
-      }
-    }
+  function setUser(value) {
+    console.log(value);
+    setSession('cust.id', value.CustID);
+    setSession('cust.username', (value.FirstName + ' ' + value.LastName));
+    setSession('cust.profileid', (value.ProfileID));
+    setSession('cust.paidstatus', (value.PaidStatus));
+  }
 
-    function clearSession(key) {
-      sessionStorage.removeItem(key);
-    }
+  function getSession(key) {
+    return sessionStorage.getItem(key);
+  }
 
-    function clearUserSession() {
-      clearSession('cust.id');
-      clearSession('cust.username');
+  function setSession(key, value) {
+    if (value === undefined || value === null) {
+      clearSession(key);
     }
-
-    function getUser() {
-      return {
-        custid: getSession('cust.id'),
-        username: getSession('cust.username')
-      };
+    else {
+      sessionStorage.setItem(key, value);
     }
+  }
 
+  function clearSession(key) {
+    sessionStorage.removeItem(key);
+  }
+
+  function clearUserSession() {
+
+    clearSession('cust.id');
+    clearSession('cust.username');
+    clearSession('cust.profileid');
+    clearSession('cust.paidstatus');
+
+  }
+
+  function getUser() {
     return {
-      user: function(value) {
-        if (value) {
-          setUser(value);
-        }
-        return getUser();
-      },
-      isAuthenticated: function() {
-        return !!getSession('cust.id');
-      },
-      getCustId: function () {
-        return getSession('cust.id');
-      },
-      clearUserSessionDetails: function () {
-        return clearUserSession();
-      },
-      logout: function () {
-        clearUserSession();
-      },
-      login: function(username, password) {
-        var body = {
-          Username: username,
-          Password: password
-        };
-        return $injector.invoke(function($http) {
-          return $http.post(app.apiroot + 'DB/userLogin/person', body)
-          .then(function(response) {
-            if(response.status === 200) {
+      custid: getSession('cust.id'),
+      username: getSession('cust.username'),
+      profileid: getSession('cust.profileid'),
+      paidstatus: getSession('cust.paidstatus')
+    };
+  }
+
+  return {
+    user: function (value) {
+      if (value) {
+        setUser(value);
+      }
+      return getUser();
+    },
+    isAuthenticated: function () {
+      return !!getSession('cust.id');
+    },
+    getCustId: function () {
+      return getSession('cust.id');
+    },
+    clearUserSessionDetails: function () {
+      return clearUserSession();
+    },
+    logout: function () {
+      debugger;
+      clearUserSession();
+    },
+    login: function (username, password) {
+      var body = {
+        Username: username,
+        Password: password
+      };
+      return $injector.invoke(function ($http) {
+        return $http.post(app.apiroot + 'DB/userLogin/person', body)
+          .then(function (response) {
+            if (response.status === 200) {
               return { success: true, response: response.data };
             }
             return { success: false, response: response.data };
           });
-        });
-      }
-    };
-  }]);
+      });
+    }
+  };
+}]);
 
 //   app.ng.config(['$httpProvider', function ($httpProvider) {
 //     $httpProvider.interceptors.push('authInterceptor');

@@ -60,7 +60,15 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                         scope.databind(option);
                     });
                     break;
-
+                case 'Caste':
+                    service.casteselect().then(function (response) {
+                        var option = [];
+                        _.each(response.data, function (item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
             }
 
 

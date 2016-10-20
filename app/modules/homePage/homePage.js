@@ -1,9 +1,6 @@
 
 
-app.controller('home', ['$scope', 'homepageservices','authSvc', function (scope, homepageservices,authSvc) {
-
-
-
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope, homepageservices, authSvc) {
     scope.Age = function () {
         scope.test = [];
         scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
@@ -20,12 +17,67 @@ app.controller('home', ['$scope', 'homepageservices','authSvc', function (scope,
     scope.divloginblock = function () {
         $('.login_block_header').toggle();
     }
-    scope.loginsubmit = function () {
-       authSvc.login('310910220','XowIvsTkzINyyKyJrPlmgg==').then(function (response) {
-            authSvc.user(response.response[0]);
-            var d=authSvc.getCustId();
-        });
+    scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+    scope.validate = function () {
+
+        if ((scope.username).indexOf("@") != -1) {
+
+            if (!scope.ValidateEmail(scope.username)) {
+                scope.username = '';
+                alert(" Please enter valid ProfileID/Email");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            if (!scope.Validatnumber(scope.username) || (scope.username).length != 9) {
+                alert("Please enter valid ProfileID/Email");
+                scope.username = '';
+                return false;
+
+            }
+            else {
+                return true;
+            }
+
+        }
     }
+    scope.loginsubmit = function () {
+
+        if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
+            alert("Please enter user name");
+            return false;
+        }
+        else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+
+            alert("Please enter password");
+            return false;
+        }
+        else {
+            if (scope.validate()) {
+                authSvc.login('011046091', 'XowIvsTkzINyyKyJrPlmgg==').then(function (response) {
+                    debugger;
+                    authSvc.user(response.response[0]);
+                    var d = authSvc.getCustId();
+                    var dd = authSvc.user();
+                    window.location = "#/home";
+
+                });
+            }
+        }
+    }
+    scope.ValidateEmail = function (email) {
+        var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        return expr.test(email);
+    };
+    scope.Validatnumber = function (num) {
+        var expr1 = /[0-9 -()+]+$/;
+        return expr1.test(num);
+    };
+
+
     scope.ValidatequickRegister = function () {
         var srchobject = {};
         srchobject.intCusID = null
