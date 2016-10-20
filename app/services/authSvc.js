@@ -1,14 +1,97 @@
-app.factory('authSvc', ['$scope', function(){
-	return {
-		getLoginCustid:function(){
-			return  getLogindata();
-		}
-		var getLogindata=function(){
-			return  returnobject ={
-				loginCustId:localStorage.getItem('cust_id'),
-				loginName:localStorage.getItem('cust_name')
-			};
-		};
-	};
-	
-}]);
+//  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {
+//     return {
+//       request: function (config) {
+//         config.headers = config.headers || {};
+//         var user = authSvc.user();
+//         if (user.token) {
+//           config.headers.Authorization = 'Bearer ' + user.token;
+//         }
+//         return config;
+//       },
+//       responseError: function (rejection) {
+//         if (rejection.status === 401) {
+//           // handle the case where the user is not authenticated
+//         }
+//         return $q.reject(rejection);
+//       }
+//     };
+//   }]);
+
+  app.factory('authSvc', ['$injector','navCacheSvc', function($injector,navCacheSvc) {
+  
+    function setUser(value) {
+
+      setSession('cust.id', value.custID);
+      setSession('cust.username', value.username);
+	}
+
+    function getSession(key) {
+      return sessionStorage.getItem(key);
+    }
+    
+    function setSession(key, value) {
+      if (value === undefined || value === null) {
+        clearSession(key);
+      }
+      else {
+        sessionStorage.setItem( key, value);
+      }
+    }
+
+    function clearSession(key) {
+      sessionStorage.removeItem(key);
+    }
+
+    function clearUserSession() {
+      clearSession('cust.id');
+      clearSession('cust.username');
+    }
+
+    function getUser() {
+      return {
+        custid: getSession('cust.id'),
+        username: getSession('cust.username')
+      };
+    }
+
+    return {
+      user: function(value) {
+        if (value) {
+          setUser(value);
+        }
+        return getUser();
+      },
+      isAuthenticated: function() {
+        return !!getSession('cust.id');
+      },
+      getCustId: function () {
+        return getSession('cust.id');
+      },
+      clearUserSessionDetails: function () {
+        return clearUserSession();
+      },
+      logout: function () {
+        clearUserSession();
+      },
+      login: function(username, password) {
+        var body = {
+          username: username,
+          password: password
+        };
+        return $injector.invoke(function($http) {
+          return $http.post(app.api.root + 'userlogin', body)
+          .then(function(response) {
+            if(response.status === 201) {
+              return { success: true, response: response.data };
+            }
+            return { success: false, response: response.data };
+          });
+        });
+      }
+    };
+  }]);
+
+//   app.ng.config(['$httpProvider', function ($httpProvider) {
+//     $httpProvider.interceptors.push('authInterceptor');
+//   }]);
+

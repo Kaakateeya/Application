@@ -95,7 +95,7 @@ app.config(function (reCAPTCHAProvider) {
 app.run(function ($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function (e, to) {
         if (to.data && to.data.requiresLogin) {
-            if (localStorage.getItem('cust_id') === undefined) {
+            if (sessionStorage.getItem('cust_id') === undefined) {
                 e.preventDefault();
                 console.log('success');
                 $state.go('home');
