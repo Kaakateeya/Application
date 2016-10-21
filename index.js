@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router','uiRouterStyles']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 /**
@@ -51,7 +51,7 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false },
-    { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner' },
+    { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner',isloginrequired: false },
     { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
     { name: 'Advanced', url: '/Advanced', templateUrl: 'app/modules/search/advancesearchView.html', controller: 'advancesearchCtrl', isloginrequired: false },
     { name: 'General', url: '/General', templateUrl: 'app/modules/search/generalSearchView.html', controller: 'Generalsearch', isloginrequired: false },
@@ -79,7 +79,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     ];
 
-
+    var homepagecss=['src/css/bootstrap.min.css', 'src/css/styleshome.css','src/css/styleshomerespinsive.css'];
+    var innsercss=['src/css/bootsrsapinner.min.css'];
     $urlRouterProvider.otherwise('/');
     var outerView = {
         "content@": {
@@ -107,7 +108,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: item.url,
             views: (item.ishomepage ? outerView : innerView),
             data: {
-                requiresLogin: item.isloginrequired==null? true:item.isloginrequired
+                requiresLogin: item.isloginrequired==null? true:item.isloginrequired,
+                 css: item.ishomepage==null? innsercss:homepagecss,
             }
         })
     });
