@@ -54,6 +54,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                 case 'Country':
                     service.countrySelect().then(function (response) {
                         var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": 0 })
                         _.each(response.data, function (item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
@@ -63,6 +64,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                 case 'Caste':
                     service.casteselect().then(function (response) {
                         var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": 0 });
                         _.each(response.data, function (item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });

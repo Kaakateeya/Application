@@ -10,6 +10,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope
         return scope.test;
 
     }
+    scope.gender="2";
     scope.arrayAge = scope.Age();
     scope.Religion = "Religion";
     scope.Country = "Country";
@@ -79,10 +80,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope
 
 
     scope.ValidatequickRegister = function () {
+        debugger;
         var srchobject = {};
         srchobject.intCusID = null
         srchobject.strCust_id = null
-        srchobject.intGender = null
+        srchobject.intGender = scope.gender;
         srchobject.FromAge = null
         srchobject.ToAge = null
         srchobject.iFromHeight = null

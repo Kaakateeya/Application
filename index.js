@@ -85,6 +85,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         "content@": {
             templateUrl: 'app/modules/homePage/homePage.html',
             controller: 'home'
+        },
+        "bottompanel@": {
+            templateUrl: "templates/footer.html"
         }
     };
     _.each(states, function (item) {
@@ -104,7 +107,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: item.url,
             views: (item.ishomepage ? outerView : innerView),
             data: {
-                requiresLogin: item.isloginrequired || true
+                requiresLogin: item.isloginrequired==null? true:item.isloginrequired
             }
         })
     });
@@ -118,8 +121,9 @@ app.config(function (reCAPTCHAProvider) {
 })
 app.run(function ($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function (e, to) {
-        if (to.data && to.data.requiresLogin) {
-            if (sessionStorage.getItem('cust_id') === undefined) {
+        console.log(to);
+        if (to.data && to.data.requiresLogin) {           
+            if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();
                 console.log('success');
                 $state.go('home');

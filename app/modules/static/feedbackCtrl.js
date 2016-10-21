@@ -74,9 +74,12 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', functio
         feedbacksubmit.feedbacksubmitinsert(objectfeedback).then(function (response) {
             if (response.data == 1) {
                 alert("Thank u for your valuable feedback");
-                
+
             }
         });
+    };
+    scope.clearallfields = function () {
+
     }
 
 }]);

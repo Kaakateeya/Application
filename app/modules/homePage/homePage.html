@@ -37,7 +37,7 @@
 		</div>
 		<div class="login_block_header" style="display: none;" id="divLogin">
 			<form name="myFormss">
-				<input type="text" id="txtUserName" ng-model="username"  required/>
+				<input type="text" id="txtUserName" ng-model="username" required/>
 				<input type="password" id="txtPassword" ng-model="password" required/>
 				<span class="clear">&nbsp;</span>
 				<div class="login_help">
@@ -84,12 +84,13 @@
 							<tbody>
 								<tr>
 									<td>
-										<div class="radio-inactivenew">
-											<input name="ddlLookingFor" value="2" style="opacity: 0;" type="radio">
+										<div ng-class="gender==='2'?'radio-activenew':'radio-inactivenew'">
+											{{gender}}
+											<input name="ddlLookingFor" ng-model="gender" value="2" style="opacity: 0;" type="radio">
 										</div><label>Bride</label></td>
 									<td>
-										<div class="radio-inactivenew">
-											<input name="ddlLookingFor" value="1" style="opacity: 0;" type="radio"></div>
+										<div ng-class="gender==='1'?'radio-activenew':'radio-inactivenew'">
+											<input name="ddlLookingFor" ng-model="gender" value="1" style="opacity: 0;" type="radio"></div>
 										<label>Groom</label></td>
 								</tr>
 							</tbody>
