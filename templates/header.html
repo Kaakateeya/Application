@@ -2,7 +2,7 @@
 
 	<div class="container_my clearfix">
 
-		<a id="IbtnLogodisplay" class="logo_inner_new pull-left" />
+		<a id="IbtnLogodisplay" class="logo3 pull-left" />
 		<input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show"
 			ng-click="divloginblock();" />
 		<input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();"
@@ -40,11 +40,11 @@
 				<h2>
 
 					<label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
-				
+
 					<label id="lblprofile">{{profileid}}</label>)
 					<br />
 					<span>Accout type :</span>
-					<a id="lblpaid" onclick="lblpaid_Click" forecolor="White">{{paidstatus}}</a>
+					<a id="lblpaid" href="#" style="color:White;">{{paidstatus}}</a>
 				</h2>
 			</div>
 			<div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">

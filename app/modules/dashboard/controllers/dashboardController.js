@@ -17,11 +17,12 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
         scope.flag = frompage === 1 ? 9 : scope.flag;
         scope.typeodbind = type;
         if (type == 'C') {
-            customerDashboardServices.getCustomercounts(91022, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
+            customerDashboardServices.getCustomercounts(91035, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
 
                 if (scope.counts == 1) {
                     scope.bindcounts(response.data.DashBoardCounts);
-                    scope.PersonalInfo = (response.data.PersonalInfo)
+                    scope.PersonalInfo = (response.data.PersonalInfo);
+                    console.log(response);
                 }
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
