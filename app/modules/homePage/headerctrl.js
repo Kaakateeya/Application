@@ -7,6 +7,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
             scope.usernamepersonal = datatinfo.username;
             scope.profileid = datatinfo.profileid;
             scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
+            scope.profilepic = datatinfo.profilepic;
             scope.withlogin = true;
             scope.withoutlogin = false;
         }
@@ -16,6 +17,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
             scope.usernamepersonal = "";
             scope.profileid = "";
             scope.paidstatus = "";
+            scope.profilepic = "";
             scope.withlogin = false;
             scope.withoutlogin = true;
         }
@@ -75,11 +77,6 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
                     window.location = "#/home";
                     scope.loginpopup = false;
                     scope.showhidetestbuttons();
-                    scope.custid = custidlogin;
-                    // scope.$emit('dashBoardLogin', 'C', 1, 9, 'Suitable Profiles that match you');
-                    // scope.$watch(function () {
-                    //     scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
-                    // });
                 });
             }
         }

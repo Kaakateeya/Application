@@ -2,10 +2,6 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
     var logincustid = authSvc.getCustId();
     scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     scope.typeodbind = 'C';
-    scope.selectedvalues = ["1", "2"];
-    scope.names = ["Emil", "Tobias", "Linus"];
-    scope.caste = "caste";
-    scope.mg = "mg";
     scope.PartnerProfilesnew = [];
     scope.counts = 1;
     scope.bindallcounts = {};
@@ -16,11 +12,12 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
         scope.typeodbind = type;
         if (type == 'C') {
             customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function (response) {
-
+                debugger;
                 if (scope.counts == 1) {
                     scope.bindcounts(response.data.DashBoardCounts);
                     scope.PersonalInfo = (response.data.PersonalInfo);
-                    // console.log(response);
+                    scope.photopersonal = scope.PersonalInfo.Photo;
+
                 }
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
@@ -41,8 +38,8 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             });
         }
         else {
-
-            customerDashboardServices.getcustomerpartnerdata(91022, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
+            customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage).then(function (response) {
+                debugger;
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
                     _.each(response.data.PartnerProfilesnew, function (item) {
@@ -55,16 +52,13 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
                         scope.PartnerProfilesnew.push(item);
                     });
                 }
+                scope.$broadcast('loadmore');
                 scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew[0].TotalRows;
                 scope.lblUHaveviewd = headertext;
-                scope.$broadcast('loadmore');
+
             });
         }
     }
-    // scope.$on('dashBoardLogin', function (event, type, frompage, topage, headertext) {
-    //     debugger;
-    //     scope.gettingpartnerdata(type, frompage, topage, headertext);
-    // });
 
     scope.init = function () {
         scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
@@ -89,7 +83,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
             { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
             { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
-            { value: 'Saved search', bindvalue: array.IgnoreProfileCount, hrefs: '/#home' },
+            { value: 'Saved search', bindvalue: array.SaveSearchCount, hrefs: '/#home' },
             { value: 'Profile Settings', bindvalue: null, hrefs: '/#profilesettings' },
             { value: 'help', bindvalue: null, hrefs: '/#help' },
         ];

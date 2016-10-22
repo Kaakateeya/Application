@@ -1,191 +1,187 @@
 <div class="header_inner" id="divInnerMaster" ng-controller='headctrl'>
 
-	<div class="container_my clearfix">
+    <div class="container_my clearfix">
 
-		<a id="IbtnLogodisplay" class="logo3 pull-left" />
-		<input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show"
-			ng-click="divloginblock();" />
-		<input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();"
-		/>
-		<div class="login_block_header" ng-show="loginpopup" id="divLogin">
-			<form name="myForm">
-				<input type="text" id="txtUserName" ng-model="username" required/>
-				<input type="password" id="txtPassword" ng-model="password" required/>
-				<span class="clear">&nbsp;</span>
-				<div class="login_help">
-					<a id="lnkForgotPassword">Forgot Password</a>
-					<a href="#/Registration">New User Sign Up</a>
-				</div>
-				<input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForm.$invalid" class="button_custom" value="Login"
-				/>
-			</form>
-			<span class="clear">&nbsp;</span>
-		</div>
+        <a id="IbtnLogodisplay" class="logo3 pull-left" />
+        <input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();" />
+        <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
+        <div class="login_block_header" ng-show="loginpopup" id="divLogin">
+            <form name="myForm">
+                <input type="text" id="txtUserName" ng-model="username" required/>
+                <input type="password" id="txtPassword" ng-model="password" required/>
+                <span class="clear">&nbsp;</span>
+                <div class="login_help">
+                    <a id="lnkForgotPassword">Forgot Password</a>
+                    <a href="#/Registration">New User Sign Up</a>
+                </div>
+                <input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForm.$invalid" class="button_custom" value="Login" />
+            </form>
+            <span class="clear">&nbsp;</span>
+        </div>
 
-		<div class="header_inner_rt clearfix">
-			<h3>
+        <div class="header_inner_rt clearfix">
+            <h3>
 
-				<a id="lnkFeedbackMenu" href="#/feedback">Feedback</a>
+                <a id="lnkFeedbackMenu" href="#/feedback">Feedback</a>
 
-			</h3>
-			<h4>make a missed call<span><em>+91-9390999999</em></span></h4>
-			<h4>Support No<span>+1-734-926-1011</span></h4>
-		</div>
-	</div>
-	<div class="navbar_inner" id="divMemberName" ng-show="withlogin">
+            </h3>
+            <h4>make a missed call<span><em>+91-9390999999</em></span></h4>
+            <h4>Support No<span>+1-734-926-1011</span></h4>
+        </div>
+    </div>
+    <div class="navbar_inner" id="divMemberName" ng-show="withlogin">
 
-		<div class="container_my clearfix">
-			<div class="profile_own_name pull-left clearfix">
-				<input type="image" id="IMasterpic" style="height: 31px; width: 31px;" onclick="IMasterpic_Click1" />
-				<h2>
+        <div class="container_my clearfix">
+            <div class="profile_own_name pull-left clearfix">
+                <img id="IMasterpic" src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
+                <h2>
+                    <label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
 
-					<label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
+                    <label id="lblprofile">{{profileid}}</label>)
+                    <br />
+                    <span>Accout type :</span>
+                    <a id="lblpaid" href="#" style="color:White;">{{paidstatus}}</a>
+                </h2>
+            </div>
+            <div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
 
-					<label id="lblprofile">{{profileid}}</label>)
-					<br />
-					<span>Accout type :</span>
-					<a id="lblpaid" href="#" style="color:White;">{{paidstatus}}</a>
-				</h2>
-			</div>
-			<div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
-				<a class="menu_toggle pull-right">Menu</a>
-				<ul class="pull-right">
+                    <li>
+                        <a id="lnkMyHome" href="#/home">My Home</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">my account</a>
 
-					<li>
-						<a id="lnkMyHome" href="#/home">My Home</a>
-					</li>
-					<li>
-						<a href="javascript:void(0)">my account</a>
+                        <ul>
+                            <li>
+                                <a id="linkviewmyprofile" href="#/viewmyprofile">View My Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkeditprofile" href="#/EditProfile">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagephoto" href="#/ManagePhoto">Manage Photo</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagehoroscope" href="#/ManageHoroscope">Manage Horoscope</a>
+                            </li>
+                            <li>
+                                <a id="linkprofilesettings" href="#/profilesettings">Profile Settings</a>
+                            </li>
 
-						<ul>
-							<li>
-								<a id="linkviewmyprofile" href="#/viewmyprofile">View My Profile</a>
-							</li>
-							<li>
-								<a id="linkeditprofile" href="#/EditProfile">Edit Profile</a>
-							</li>
-							<li>
-								<a id="linkmanagephoto" href="#/ManagePhoto">Manage Photo</a>
-							</li>
-							<li>
-								<a id="linkmanagehoroscope" href="#/ManageHoroscope">Manage Horoscope</a>
-							</li>
-							<li>
-								<a id="linkprofilesettings" href="#/profilesettings">Profile Settings</a>
-							</li>
+                        </ul>
 
-						</ul>
+                    </li>
+                    <li>
+                        <a id="lnksearch" href="#/profilidsrch">Search</a>
+                        <ul>
+                            <li>
+                                <a id="linkgenaralsearch" href="#/General">General Search</a>
+                            </li>
+                            <li>
+                                <a id="linkAdvancedSearch" href="#/Advanced">Advanced Search</a>
+                            </li>
+                            <li>
+                                <a id="linkprofileidsearch" href="#/profilidsrch">Profileid Search</a>
+                            </li>
 
-					</li>
-					<li>
-						<a id="lnksearch" href="#/profilidsrch">Search</a>
-						<ul>
-							<li>
-								<a id="linkgenaralsearch" href="#/General">General Search</a>
-							</li>
-							<li>
-								<a id="linkAdvancedSearch" href="#/Advanced">Advanced Search</a>
-							</li>
-							<li>
-								<a id="linkprofileidsearch" href="#/profilidsrch">Profileid Search</a>
-							</li>
+                        </ul>
+                    </li>
 
-						</ul>
-					</li>
+                    <li>
+                        <a href="javascript:void(0)">my package</a>
+                        <ul>
+                            <li>
+                                <a id="linkupgrademembership" href="#/UpgradeMembership">Upgrade Membership</a>
+                            </li>
+                            <li>
+                                <a id="linkmyorders" href="#/myorders">My Orders and Statistics</a>
+                            </li>
+                            <li>
+                                <a id="linkmembershipfaqs" href="#/faqs">Membership Faqs</a>
+                            </li>
+                            <li>
+                                <a id="linkAddOnPacks" href="#/AddOnPacks" ng-hide="true">Add On Packs</a>
+                            </li>
 
-					<li>
-						<a href="javascript:void(0)">my package</a>
-						<ul>
-							<li>
-								<a id="linkupgrademembership" href="#/UpgradeMembership">Upgrade Membership</a>
-							</li>
-							<li>
-								<a id="linkmyorders" href="#/myorders">My Orders and Statistics</a>
-							</li>
-							<li>
-								<a id="linkmembershipfaqs" href="#/faqs">Membership Faqs</a>
-							</li>
-							<li>
-								<a id="linkAddOnPacks" href="#/AddOnPacks" ng-hide="true">Add On Packs</a>
-							</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">matches</a>
+                        <ul>
+                            <li>
+                                <a id="linkmybookmarks" href="#/home">My BookMarked Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkwhobookmarkedme" href="#/home">Who BookMarked Me</a>
+                            </li>
+                            <li>
+                                <a id="linkigonredprofile" href="#/home">Ignored Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkviewedbutnotexpress" href="#/home">My profile viewed by others</a>
+                            </li>
 
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:void(0)">matches</a>
-						<ul>
-							<li>
-								<a id="linkmybookmarks" href="#/home">My BookMarked Profiles</a>
-							</li>
-							<li>
-								<a id="linkwhobookmarkedme" href="#/home">Who BookMarked Me</a>
-							</li>
-							<li>
-								<a id="linkigonredprofile" href="#/home">Ignored Profiles</a>
-							</li>
-							<li>
-								<a id="linkviewedbutnotexpress" href="#/home">My profile viewed by others</a>
-							</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">messages</a>
+                        <ul>
+                            <li>
+                                <a id="linkPersonalizedmsg" href="#/home">Chats</a>
+                            </li>
+                            <li>
+                                <a id="linkrequests" href="#/home">Requests</a>
+                            </li>
+                            <li>
+                                <a id="linkMyContact" href="#/home">Express interest</a>
+                            </li>
 
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:void(0)">messages</a>
-						<ul>
-							<li>
-								<a id="linkPersonalizedmsg" href="#/home">Chats</a>
-							</li>
-							<li>
-								<a id="linkrequests" href="#/home">Requests</a>
-							</li>
-							<li>
-								<a id="linkMyContact" href="#/home">Express interest</a>
-							</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#/help">Help</a>
+                        <ul>
+                            <li>
+                                <a id="lnkcontactus" href="#/help">Contact Us</a>
+                            </li>
+                            <li>
+                                <a id="linkmysupportickets" href="#/MySupportTickets">My Support Tickets</a>
+                            </li>
+                            <li>
+                                <a id="lnkfeedback" href="#/feedback">Feed Back</a>
+                            </li>
+                            <li>
+                                <a id="lnktakeatour" href="#/takeatour">Take A Tour</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-						</ul>
-					</li>
-					<li>
-						<a href="#/help">Help</a>
-						<ul>
-							<li>
-								<a id="lnkcontactus" href="#/help">Contact Us</a>
-							</li>
-							<li>
-								<a id="linkmysupportickets" href="#/MySupportTickets">My Support Tickets</a>
-							</li>
-							<li>
-								<a id="lnkfeedback" href="#/feedback">Feed Back</a>
-							</li>
-							<li>
-								<a id="lnktakeatour" href="#/takeatour">Take A Tour</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <div class="navbar_inner" id="divwithoutlogin" ng-show="withoutlogin">
+        <div class="container_my clearfix">
 
-	<div class="navbar_inner" id="divwithoutlogin" ng-show="withoutlogin">
-		<div class="container_my clearfix">
+            <div class="profile_own_menu pull-right">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
 
-			<div class="profile_own_menu pull-right">
-				<a class="menu_toggle pull-right">Menu</a>
-				<ul class="pull-right">
+                    <li><a href="#/Registration">Register free</a></li>
+                    <li><a href="#/profilidsrch">Search <span></span></a></li>
+                    <li><a href="#/profilidsrch">Upgrade</a></li>
+                    <li>
+                        <a id="lnkSucessstoreiesFooter" href="#/successstories">success stories <span></span></a>
+                    </li>
+                    <li>
+                        <a id="linkfooterhelp" href="#/help">Help</a>
+                    </li>
+                    <li><a href="#/">Home</a></li>
 
-					<li><a href="#/Registration">Register free</a></li>
-					<li><a href="#/profilidsrch">Search <span></span></a></li>
-					<li><a href="#/profilidsrch">Upgrade</a></li>
-					<li>
-						<a id="lnkSucessstoreiesFooter" href="#/successstories">success stories <span></span></a>
-					</li>
-					<li>
-						<a id="linkfooterhelp" href="#/help">Help</a>
-					</li>
-					<li><a href="#/">Home</a></li>
-
-				</ul>
-			</div>
-		</div>
-	</div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

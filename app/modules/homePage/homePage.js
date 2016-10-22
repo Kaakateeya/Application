@@ -1,13 +1,8 @@
-
-
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function (scope, homepageservices, authSvc, successstoriesdata) {
-
-
     scope.fromge = 1;
     scope.topage = 5;
     scope.homeinit = function () {
         successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
-            //console.log(response.data);
             scope.successstoriesarray = response.data;
         });
     };
@@ -69,15 +64,12 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         }
         else {
             if (scope.validate()) {
-                //'011046091', 'XowIvsTkzINyyKyJrPlmgg=='
                 authSvc.login(scope.username, scope.password).then(function (response) {
                     debugger;
                     authSvc.user(response.response != null ? response.response[0] : null);
-                    var d = authSvc.getCustId();
-                    var dd = authSvc.user();
+                    // var d = authSvc.getCustId();
+                    // var dd = authSvc.user();
                     window.location = "#/home";
-                    //$state.go('home');
-
                 });
             }
         }

@@ -25,6 +25,7 @@ app.factory('authSvc', ['$injector', function ($injector) {
     setSession('cust.username', (value.FirstName + ' ' + value.LastName));
     setSession('cust.profileid', (value.ProfileID));
     setSession('cust.paidstatus', (value.PaidStatus));
+    setSession('cust.profilepic', (value.ProfilePic));
   }
 
   function getSession(key) {
@@ -50,7 +51,7 @@ app.factory('authSvc', ['$injector', function ($injector) {
     clearSession('cust.username');
     clearSession('cust.profileid');
     clearSession('cust.paidstatus');
-
+    clearSession('cust.profilepic');
   }
 
   function getUser() {
@@ -58,7 +59,9 @@ app.factory('authSvc', ['$injector', function ($injector) {
       custid: getSession('cust.id'),
       username: getSession('cust.username'),
       profileid: getSession('cust.profileid'),
-      paidstatus: getSession('cust.paidstatus')
+      paidstatus: getSession('cust.paidstatus'),
+      profilepic: getSession('cust.profilepic')
+
     };
   }
 

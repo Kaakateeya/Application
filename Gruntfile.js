@@ -27,21 +27,9 @@ module.exports = function(grunt) {
                 banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
             },
             build: {
-                files: [{
-                        'dist/js/lib.min.js': ['src/js/jquery-1.8.3.min.js', 'src/js/jquery.alert.js', 'src/js/scriptsKaakateeya.js', 'src/js/GI.TheWall.min.js', 'src/js/bootstrap-multiselect.js',
-                            'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache', 'src/js/scrollgress.js', 'src/js/jquery.blockui.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
-                            'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
-                            'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
-                            'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
-                            'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
-                            'bower_components/angular-ui-router-styles/ui-router-styles.js'
-                        ]
-                    },
-                    {
-                        'dist/js/main.min.js': 'app/**/*.js'
-                    }
-                ]
-
+                files: {
+                    'dist/js/main.min.js': ['index.js', 'app/**/*.js']
+                }
             }
         },
         cssmin: {
@@ -102,7 +90,7 @@ module.exports = function(grunt) {
                             'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
                             'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
                             'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
-                            'bower_components/angular-ui-router-styles/ui-router-styles.js'
+                            'bower_components/angular-ui-router-styles/ui-router-styles.js', 'index.js'
                         ], 'app/**/*.js',
                     ]
                 }],
