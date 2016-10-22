@@ -28,7 +28,7 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    'dist/js/main.min.js': ['index.js', 'app/**/*.js']
+                    'dist/js/main.min.js': ['app/**/*.js']
                 }
             }
         },

@@ -29,11 +29,11 @@
             <h4>Support No<span>+1-734-926-1011</span></h4>
         </div>
     </div>
-    <div class="navbar_inner" id="divMemberName" ng-show="withlogin">
+    <div class="navbar_inner" id="divMemberName" ng-show="withlogin" set-class-when-at-top="fix-to-top">
 
         <div class="container_my clearfix">
             <div class="profile_own_name pull-left clearfix">
-                <img id="IMasterpic" src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
+                <img id="IMasterpic" ng-src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
                 <h2>
                     <label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
 
@@ -185,3 +185,13 @@
         </div>
     </div>
 </div>
+<style type="text/css">
+        .fix-to-top {
+        position: fixed;
+        margin: 0 auto;
+        z-index: 999999999;
+        top: 0;
+        left: 0%;
+        width: 100%;
+        padding: 20px 1%;
+</style>

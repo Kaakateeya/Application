@@ -15,7 +15,7 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false },
+    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
         { name: 'Advanced', url: '/Advanced', templateUrl: 'app/modules/search/advancesearchView.html', controller: 'advancesearchCtrl', isloginrequired: false },

@@ -64,7 +64,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
     scope.paging = function(frompage, topage, typeodbind) {
         scope.counts = 0;
         typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
-        scope.gettingpartnerdata(typeodbind, frompage, topage);
+        scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd);
     };
     scope.$on('directivecallingpaging', function(event, frompage, topage) {
         scope.paging(frompage, topage, scope.typeodbind);

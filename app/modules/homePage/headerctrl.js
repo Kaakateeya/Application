@@ -1,5 +1,5 @@
-app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
-    scope.showhidetestbuttons = function () {
+app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
+    scope.showhidetestbuttons = function() {
         var datatinfo = authSvc.user();
         if (datatinfo.custid != "" && datatinfo.custid != undefined && datatinfo.custid != null) {
             scope.loginstatus = false;
@@ -10,8 +10,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
             scope.profilepic = datatinfo.profilepic;
             scope.withlogin = true;
             scope.withoutlogin = false;
-        }
-        else {
+        } else {
             scope.loginstatus = true;
             scope.loginoutstatus = false;
             scope.usernamepersonal = "";
@@ -28,11 +27,11 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
     scope.withlogin = false;
     scope.withoutlogin = true;
     scope.showhidetestbuttons();
-    scope.divloginblock = function () {
+    scope.divloginblock = function() {
         scope.loginpopup = true;
         $('.login_block_header').toggle();
     }
-    scope.validate = function () {
+    scope.validate = function() {
 
         if ((scope.username).indexOf("@") != -1) {
 
@@ -40,38 +39,33 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
                 scope.username = '';
                 alert(" Please enter valid ProfileID/Email");
                 return false;
-            }
-            else {
+            } else {
                 return true;
             }
-        }
-        else {
+        } else {
             if (!scope.Validatnumber(scope.username) || (scope.username).length != 9) {
                 alert("Please enter valid ProfileID/Email");
                 scope.username = '';
                 return false;
 
-            }
-            else {
+            } else {
                 return true;
             }
 
         }
     }
-    scope.loginsubmit = function () {
+    scope.loginsubmit = function() {
 
         if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        }
-        else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
 
             alert("Please enter password");
             return false;
-        }
-        else {
+        } else {
             if (scope.validate()) {
-                authSvc.login(scope.username, scope.password).then(function (response) {
+                authSvc.login(scope.username, scope.password).then(function(response) {
                     authSvc.user(response.response != null ? response.response[0] : null);
                     var custidlogin = authSvc.getCustId();
                     window.location = "#/home";
@@ -82,15 +76,15 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
         }
     }
 
-    scope.ValidateEmail = function (email) {
+    scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return expr.test(email);
     };
-    scope.Validatnumber = function (num) {
+    scope.Validatnumber = function(num) {
         var expr1 = /[0-9 -()+]+$/;
         return expr1.test(num);
     };
-    scope.ClearlocalStorage = function () {
+    scope.ClearlocalStorage = function() {
         authSvc.logout();
         window.location = "#/";
 
