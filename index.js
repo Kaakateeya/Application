@@ -55,9 +55,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
         'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'];
 
-    var sitescripts = ['src/js/jquery-1.8.3.min.js',
-        'src/js/jquery.blockui.js', 'src/js/bootstrap-multiselect.js', 'src/js/jquery.alert.js', 'src/js/GI.TheWall.min.js', 'src/js/KaakateeyaHelper.js',
-        'src/js/CustomerCache_prod.js', 'src/js/scrollgress.js', 'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache',
+    var sitescripts = [
+        'src/js/KaakateeyaHelper.js',
+        'src/js/CustomerCache_prod.js',
         'src/js/scriptsKaakateeya.js',
         'index.js', 'app/modules/dashboard/controllers/dashboardController.js', 'app/services/customerDashboardServices.js',
         'app/directives/partnerDirective.js', 'app/directives/multiSelectDirective.js',
@@ -74,7 +74,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         'app\services\helpService.js', 'app\services\ourbranchService.js'
     ]
 
-    var jsscripts = ['bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
+    var jsscripts = ['src/js/jquery-1.8.3.min.js', 'src/js/jquery.alert.js', 'src/js/GI.TheWall.min.js', 'src/js/bootstrap-multiselect.js',
+        'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache', 'src/js/scrollgress.js', 'src/js/jquery.blockui.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
         'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
         'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
         'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
