@@ -1,12 +1,11 @@
-
-app.directive("partnerData", function () {
+app.directive("partnerData", function() {
     return {
         restrict: "E",
         scope: {
             array: '='
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
             scope.startindex = 1;
             scope.endindex = 9;
             scope.flag = 9;
@@ -15,7 +14,7 @@ app.directive("partnerData", function () {
             scope.PartnerProfilesnew = scope.array;
             scope.typeofdiv = "Grid";
             var i = 0;
-            scope.directivepaging = function () {
+            scope.directivepaging = function() {
                 scope.loaderspin = true;
                 scope.loadmore = false;
                 scope.flag += 9;
@@ -23,9 +22,9 @@ app.directive("partnerData", function () {
                 scope.endindex = scope.flag;
                 scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
             };
-            scope.$on('loadmore', function (event, endflag) {
+            scope.$on('loadmore', function(event, endflag) {
                 scope.loaderspin = false;
-                debugger;
+
                 if (scope.array.length > 0) {
                     scope.endindex = (scope.array[0].TotalRows > scope.endindex == true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
@@ -33,8 +32,8 @@ app.directive("partnerData", function () {
                 }
 
             });
-            scope.$watch('array', function (value) {
-                debugger;
+            scope.$watch('array', function(value) {
+
                 scope.PartnerProfilesnew = scope.array;
                 if (scope.array.length > 0) {
                     scope.loadmore = scope.array[0].TotalRows > 9 || scope.array[0].TotalRows > scope.endindex ? true : false;
@@ -48,4 +47,3 @@ app.directive("partnerData", function () {
         }
     }
 });
-

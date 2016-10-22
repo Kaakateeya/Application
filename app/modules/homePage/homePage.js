@@ -1,13 +1,13 @@
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function (scope, homepageservices, authSvc, successstoriesdata) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function(scope, homepageservices, authSvc, successstoriesdata) {
     scope.fromge = 1;
     scope.topage = 5;
-    scope.homeinit = function () {
-        successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
+    scope.homeinit = function() {
+        successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
             scope.successstoriesarray = response.data;
         });
     };
 
-    scope.Age = function () {
+    scope.Age = function() {
         scope.test = [];
         scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
         for (var i = 18; i < 78; i++) {
@@ -21,11 +21,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     scope.Religion = "Religion";
     scope.Country = "Country";
     scope.Caste = "Caste";
-    scope.divloginblock = function () {
+    scope.divloginblock = function() {
         $('.login_block_header').toggle();
     }
     scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
-    scope.validate = function () {
+    scope.validate = function() {
 
         if ((scope.username).indexOf("@") != -1) {
 
@@ -33,39 +33,34 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.username = '';
                 alert(" Please enter valid ProfileID/Email");
                 return false;
-            }
-            else {
+            } else {
                 return true;
             }
-        }
-        else {
+        } else {
             if (!scope.Validatnumber(scope.username) || (scope.username).length != 9) {
                 alert("Please enter valid ProfileID/Email");
                 scope.username = '';
                 return false;
 
-            }
-            else {
+            } else {
                 return true;
             }
 
         }
     }
-    scope.loginsubmit = function () {
+    scope.loginsubmit = function() {
 
         if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        }
-        else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
 
             alert("Please enter password");
             return false;
-        }
-        else {
+        } else {
             if (scope.validate()) {
-                authSvc.login(scope.username, scope.password).then(function (response) {
-                    debugger;
+                authSvc.login(scope.username, scope.password).then(function(response) {
+
                     authSvc.user(response.response != null ? response.response[0] : null);
                     // var d = authSvc.getCustId();
                     // var dd = authSvc.user();
@@ -74,18 +69,18 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }
         }
     }
-    scope.ValidateEmail = function (email) {
+    scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return expr.test(email);
     };
-    scope.Validatnumber = function (num) {
+    scope.Validatnumber = function(num) {
         var expr1 = /[0-9 -()+]+$/;
         return expr1.test(num);
     };
 
 
-    scope.ValidatequickRegister = function () {
-        debugger;
+    scope.ValidatequickRegister = function() {
+
         var srchobject = {};
         srchobject.intCusID = null
         srchobject.strCust_id = null

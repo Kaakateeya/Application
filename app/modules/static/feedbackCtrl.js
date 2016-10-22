@@ -1,4 +1,4 @@
-app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSvc', function (scope, reCAPTCHA, feedbacksubmit, authSvc) {
+app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSvc', function(scope, reCAPTCHA, feedbacksubmit, authSvc) {
     reCAPTCHA.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
     scope.optionhereabout = [
         { label: '--select--', title: '--select--', value: 0 },
@@ -58,8 +58,8 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
     ];
 
     //scope.HearAbout = "481";
-    scope.submit = function () {
-        debugger;
+    scope.submit = function() {
+
         var custid = authSvc.getCustId();
         scope.Cust_ID = custid != undefined && custid != null && custid != "" ? custid : null;
         var objectfeedback = {};
@@ -73,7 +73,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
         objectfeedback.SearchRate = scope.SearchRate != undefined && scope.SearchRate != "" ? scope.SearchRate : null;
         objectfeedback.Recommend = scope.Recommend != undefined && scope.Recommend != "" ? scope.Recommend : null;
         objectfeedback.Comments = scope.Comments != undefined && scope.Comments != "" ? scope.Comments : null;
-        feedbacksubmit.feedbacksubmitinsert(objectfeedback).then(function (response) {
+        feedbacksubmit.feedbacksubmitinsert(objectfeedback).then(function(response) {
             if (response.data == 1) {
                 alert("Thank u for your valuable feedback");
                 scope.clearallfields();
@@ -81,7 +81,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
             }
         });
     };
-    scope.clearallfields = function () {
+    scope.clearallfields = function() {
         scope.Cust_ID = "";
         scope.HearAbout = 0;
         scope.ImproveWebsite = 0;
