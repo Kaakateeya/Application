@@ -20,7 +20,7 @@
 app.factory('authSvc', ['$injector', function ($injector) {
 
   function setUser(value) {
-    console.log(value);
+    //console.log(value);
     setSession('cust.id', value.CustID);
     setSession('cust.username', (value.FirstName + ' ' + value.LastName));
     setSession('cust.profileid', (value.ProfileID));

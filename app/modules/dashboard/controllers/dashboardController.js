@@ -1,5 +1,6 @@
-app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', function (scope, customerDashboardServices) {
-
+app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'authSvc', function (scope, customerDashboardServices, authSvc) {
+    var logincustid = authSvc.getCustId();
+    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     scope.typeodbind = 'C';
     scope.selectedvalues = ["1", "2"];
     scope.names = ["Emil", "Tobias", "Linus"];
@@ -10,19 +11,16 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
     scope.bindallcounts = {};
     scope.lblUHaveviewd = 'Suitable Profiles that match you';
     scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
-    scope.init = function () {
-        scope.gettingpartnerdata('C', undefined, undefined, 'Suitable Profiles that match you');
-    };
     scope.gettingpartnerdata = function (type, frompage, topage, headertext) {
         scope.flag = frompage === 1 ? 9 : scope.flag;
         scope.typeodbind = type;
         if (type == 'C') {
-            customerDashboardServices.getCustomercounts(91035, type, frompage === undefined ? 1 : frompage, topage === undefined ? 9 : topage).then(function (response) {
+            customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function (response) {
 
                 if (scope.counts == 1) {
                     scope.bindcounts(response.data.DashBoardCounts);
                     scope.PersonalInfo = (response.data.PersonalInfo);
-                    console.log(response);
+                    // console.log(response);
                 }
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
@@ -63,15 +61,21 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', func
             });
         }
     }
+    // scope.$on('dashBoardLogin', function (event, type, frompage, topage, headertext) {
+    //     debugger;
+    //     scope.gettingpartnerdata(type, frompage, topage, headertext);
+    // });
+
+    scope.init = function () {
+        scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
+    };
+
     scope.paging = function (frompage, topage, typeodbind) {
-        debugger;
         scope.counts = 0;
         typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
         scope.gettingpartnerdata(typeodbind, frompage, topage);
     };
     scope.$on('directivecallingpaging', function (event, frompage, topage) {
-        //scope.flag = frompage === 10 ? 18 : scope.flag;
-        debugger;
         scope.paging(frompage, topage, scope.typeodbind);
     });
     scope.bindcounts = function (array) {

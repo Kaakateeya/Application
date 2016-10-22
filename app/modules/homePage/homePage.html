@@ -3,7 +3,7 @@
 		background-color: white !important;
 	}
 </style>
-<div id="homepageid">
+<div id="homepageid" ng-init="homeinit()">
 	<div class="wrapper">
 		<!--/ Header -->
 
@@ -200,56 +200,19 @@
 					<table id="dtListsuccess" style="border-collapse:collapse;" cellspacing="0">
 						<tbody>
 							<tr>
-								<td>
+								<td ng-repeat="s in successstoriesarray">
 									<div class="success_item_index">
-										<img id="dtListsuccess_ctl00_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/19985_31975_SuccessImage/19985_31975_SuccessImage.jpg">
+										<!--<img id="dtListsuccess_ctl00_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/19985_31975_SuccessImage/19985_31975_SuccessImage.jpg">-->
+
+										<img alt="Kakateeya Matrimony" src="{{s.PhotoPath}}">
 										<a href="javascript:void(0)" class="overlay">
 											<small>&nbsp;</small>
-											<span>RANJANA G<br>
+											<span> {{s.BrideName}}<br>
                                         weds<br>
-                                        SAI SUBASH C</span></a>
+                                        {{s.GroomName}}</span></a>
 									</div>
 								</td>
-								<td>
-									<div class="success_item_index">
-										<img id="dtListsuccess_ctl01_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/85492_87427_SuccessImage/85492_87427_SuccessImage.jpg">
-										<a href="javascript:void(0)" class="overlay">
-											<small>&nbsp;</small>
-											<span>SINDHURA NADELLA<br>
-                                        weds<br>
-                                        NAGARJUNA THOTTEMPUDI</span></a>
-									</div>
-								</td>
-								<td>
-									<div class="success_item_index">
-										<img id="dtListsuccess_ctl02_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/88729_96224_SuccessImage/88729_96224_SuccessImage.jpg">
-										<a href="javascript:void(0)" class="overlay">
-											<small>&nbsp;</small>
-											<span>YOGITHA POTHUGUNTA<br>
-                                        weds<br>
-                                        vamsi karthik kommineni</span></a>
-									</div>
-								</td>
-								<td>
-									<div class="success_item_index">
-										<img id="dtListsuccess_ctl03_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/__SuccessImage/__SuccessImage.jpg">
-										<a href="javascript:void(0)" class="overlay">
-											<small>&nbsp;</small>
-											<span>RENUKA KOLLURU<br>
-                                        weds<br>
-                                        </span></a>
-									</div>
-								</td>
-								<td>
-									<div class="success_item_index">
-										<img id="dtListsuccess_ctl04_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/74606_88924_SuccessImage/74606_88924_SuccessImage.jpg">
-										<a href="javascript:void(0)" class="overlay">
-											<small>&nbsp;</small>
-											<span>SINDHU RAYAPATI<br>
-                                        weds<br>
-                                        VARUN VATTIKONDA</span></a>
-									</div>
-								</td>
+
 							</tr>
 						</tbody>
 					</table>

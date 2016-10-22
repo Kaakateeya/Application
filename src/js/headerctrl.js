@@ -4,7 +4,6 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
         if (datatinfo.custid != "" && datatinfo.custid != undefined && datatinfo.custid != null) {
             scope.loginstatus = false;
             scope.loginoutstatus = true;
-            debugger;
             scope.usernamepersonal = datatinfo.username;
             scope.profileid = datatinfo.profileid;
             scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
@@ -70,14 +69,17 @@ app.controller('headctrl', ['$scope', 'authSvc', function (scope, authSvc) {
         }
         else {
             if (scope.validate()) {
-                authSvc.login('011046091', 'XowIvsTkzINyyKyJrPlmgg==').then(function (response) {
-
-                    authSvc.user(response.response[0]);
-                    var d = authSvc.getCustId();
+                authSvc.login(scope.username, scope.password).then(function (response) {
+                    authSvc.user(response.response != null ? response.response[0] : null);
+                    var custidlogin = authSvc.getCustId();
                     window.location = "#/home";
                     scope.loginpopup = false;
                     scope.showhidetestbuttons();
-
+                    scope.custid = custidlogin;
+                    // scope.$emit('dashBoardLogin', 'C', 1, 9, 'Suitable Profiles that match you');
+                    // scope.$watch(function () {
+                    //     scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
+                    // });
                 });
             }
         }

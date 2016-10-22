@@ -1,6 +1,17 @@
 
 
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope, homepageservices, authSvc) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function (scope, homepageservices, authSvc, successstoriesdata) {
+
+
+    scope.fromge = 1;
+    scope.topage = 5;
+    scope.homeinit = function () {
+        successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
+            //console.log(response.data);
+            scope.successstoriesarray = response.data;
+        });
+    };
+
     scope.Age = function () {
         scope.test = [];
         scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
@@ -10,7 +21,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope
         return scope.test;
 
     }
-    scope.gender="2";
+    scope.gender = "2";
     scope.arrayAge = scope.Age();
     scope.Religion = "Religion";
     scope.Country = "Country";
@@ -58,12 +69,14 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', function (scope
         }
         else {
             if (scope.validate()) {
-                authSvc.login('011046091', 'XowIvsTkzINyyKyJrPlmgg==').then(function (response) {
+                //'011046091', 'XowIvsTkzINyyKyJrPlmgg=='
+                authSvc.login(scope.username, scope.password).then(function (response) {
                     debugger;
-                    authSvc.user(response.response[0]);
+                    authSvc.user(response.response != null ? response.response[0] : null);
                     var d = authSvc.getCustId();
                     var dd = authSvc.user();
                     window.location = "#/home";
+                    //$state.go('home');
 
                 });
             }

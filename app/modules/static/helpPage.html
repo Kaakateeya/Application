@@ -33,89 +33,49 @@
 			<p>Please fill the form below to get immediate help</p>
 			<div class="control-group span6">
 				<label class="control-label">Your Name<span style="color: red;">*</span></label>
-
-				<div id="UpdatePanel1">
-
-					<div class="controls clearfix">
-						<input name="txtname" id="txtname" class="input-box" type="text">
-
-						<span id="RequiredFieldValidator1" class="leftalign" style="color:Red;font-size:11px;display:none;">*Please enter Name</span>
-					</div>
-
+				<div class="controls clearfix">
+					<input ng-model="txtname" class="input-box" type="text">
 				</div>
 			</div>
 
-
 			<div class="control-group span6">
 				<label class="control-label">Your email id<span style="color: red;">*</span></label>
-				<div id="UpdatePanel2">
-
-					<div class="controls clearfix">
-						<input name="txtemail" id="txtemail" class="input-box" type="text">
-						<span id="RequiredFieldValidator2" class="leftalign" style="color:Red;font-size:11px;display:none;">*Please enter email</span>
-						<span id="RegularExpressionValidator1" class="leftalign" style="color:Red;font-size:11px;display:none;">*Please enter valid email</span>
-					</div>
-
+				<div class="controls clearfix">
+					<input ng-model="txtemail" class="input-box" type="text">
 				</div>
 			</div>
 
 			<div class="control-group span6">
 				<label class="control-label">Subject<span style="color: red;">*</span></label>
-				<div id="UpdatePanel3">
-
-					<div class="controls clearfix">
-						<input name="txtsubject" id="txtsubject" class="input-box" type="text">
-
-						<span id="RequiredFieldValidator3" class="leftalign" style="color:Red;font-size:11px;display:none;">*Please enter Subject</span>
-					</div>
-
+				<div class="controls clearfix">
+					<input ng-model="txtsubject" class="input-box" type="text">
 				</div>
 			</div>
 
 			<div class="control-group span6 select-box-my">
 				<label class="control-label">Category<span style="color: red;">*</span></label>
-				<div id="UpdatePanel4">
-
-					<div class="controls clearfix">
-						<select name="ddlcategory" id="ddlcategory">
-			</select>
-						<span id="cvcategory" class="leftaligndrop" style="color:Red;font-size:11px;display:none;">*Please Select Category</span>
-					</div>
-
+				<div class="controls clearfix">
+					<select multiselectdropdown ng-model="ddlcategory" typeofdata="catgory">  </select>
 				</div>
 			</div>
 
 			<div class="clear"></div>
-
 			<div class="control-group">
 				<label class="control-label">Message<span style="color: red;">*</span></label>
-				<div id="UpdatePanel5">
-
-					<div class="controls clearfix">
-						<textarea name="txtmsg" rows="2" cols="20" id="txtmsg" class="marital textarea" ></textarea>
-
-						<span id="RequiredFieldValidator4" class="leftalign" style="color:Red;font-size:11px;display:none;">*Please enter Message</span>
-						<span id="lblmessage" style="color: black; font-size: 13px;"></span>
-					</div>
-
+				<div class="controls clearfix">
+					<textarea rows="2" cols="20" ng-model="txtmsg" class="marital textarea"></textarea>
 				</div>
+
+
 				<br>
 			</div>
 
 			<div class="control-group span6 select-box-my">
 				<label class="control-label">Priority<span style="color: red;">*</span></label>
-				<div id="UpdatePanel6">
-
-					<div class="controls clearfix">
-						<select name="ddlpriority" id="ddlpriority" class="chosen">
-		
-
-	</select>
-
-						<span id="CompareValidator1" class="leftaligndrop" style="color:Red;font-size:11px;display:none;">*Please Select Priority</span>
-					</div>
-
+				<div class="controls clearfix">
+					<select multiselectdropdown ng-model="ddlpriority" typeofdata="Priority">  </select>
 				</div>
+
 			</div>
 
 			<div class="control-group pics_upload span6 file_upload_help">
@@ -128,8 +88,7 @@
 								<span class="fileupload-preview"></span>
 							</div>
 							<span class="btn btn-file drag-icon">
-                                    
-                                    <input name="fileupload1" id="fileupload1" class="default" type="file"></span>
+                                    <input name="fileupload1" ng-model="fileupload1" class="default" type="file"></span>
 						</div>
 					</div>
 
@@ -139,29 +98,20 @@
 
 			<div class="control-group span6 select-box-my select-box-my-trible clearfix">
 				<label class="control-label">Contact phone</label>
-				<div id="UpdatePanel7">
 
-					<div class="controls clearfix">
-						<select name="ddlcountrycode" id="ddlcountrycode" class="chosen chzn-done" style="display: none;">
-		
+				<div class="controls clearfix">
 
-	</select>
-						<div id="ddlcountrycode_chzn" class="chzn-container chzn-container-single" style="width: 235px;"><a href="javascript:void(0)" class="chzn-single" tabindex="-1"><span>--Select--</span><div><b></b></div></a>
-							<div class="chzn-drop" style="left: -9000px; width: 233px; top: 34px;">
-								<div class="chzn-search"><input autocomplete="off" style="width: 215.8px;" type="text"></div>
+					<select multiselectdropdown ng-model="ddlcountrycode" typeofdata="countryCode" style="width: 239px;">  </select>
+					<input name="txtphonecode" maxlength="4" ng-model="txtphonecode" class="form-Control" placeholder="area code" onkeydown="return validatemobilecode('ddlcountrycode','txtphnum','txtphonecode','#');"
+						type="text">
 
-							</div>
-						</div>
-						<input name="txtphonecode" maxlength="4" id="txtphonecode" class="input-box1" placeholder="area code" onkeydown="return validatemobilecode('ddlcountrycode','txtphnum','txtphonecode','#');"
-							type="text">
+					<input name="txtphnum" maxlength="8" ng-model="txtphnum" class="form-Control" onkeydown="return validatemobilecode('ddlcountrycode','txtphnum','txtphonecode','#');"
+						type="text">
 
-						<input name="txtphnum" maxlength="8" id="txtphnum" class="input-box2" onkeydown="return validatemobilecode('ddlcountrycode','txtphnum','txtphonecode','#');"
-							type="text">
-
-
-					</div>
 
 				</div>
+
+
 			</div>
 			<div class="clear clear_my"></div>
 			<div class="rating_submit_main clearfix">
@@ -169,10 +119,7 @@
 
 					<label class="control-label">Please enter the security code here</label>
 					<div class="rating_captcha_in clearfix">
-
-
-
-						<input name="CaptchaInputField" id="CaptchaInputField" class="verify" type="text">
+						<input name="CaptchaInputField" ng-model="CaptchaInputField" class="verify" type="text">
 						<img id="Captcha1" captchalength="5" noisecolor="#B1B1B1" alt="" captchaheight="60" captchabackgroundnoise="Low" captchamaxtimeout="240"
 							fontcolor="#D20B0C" captchamintimeout="5" src="/Customer_new/Customerdesignedpages/CustomerNewHelp.aspx?oboutcaptchaguid=411542236&amp;width=200&amp;height=40"
 							captchawidth="200" style="height:40px;width:200px;">
@@ -185,16 +132,10 @@
 					<img id="GenerateNew" alt="" title="Generate a new image" onclick="$find('Captcha1').getNewImage();" src="../images/icon_refresh.png"
 						style="cursor: pointer">
 
-
-
-					<span id="RequiredFieldValidator5" style="color:Red;font-size:11px;display:none;">*Please enter Captcha</span>
-
-
-
 				</div>
 
 
-				<input name="btnSub" value="submit" id="btnSub" class="button_custom pull-right" type="submit">
+				<input name="btnSub" value="submit" class="button_custom pull-right" type="submit" ng-click="submit();">
 
 			</div>
 
@@ -206,5 +147,75 @@
 		<a href="#" class="help_icons_pos help_icons_pos2">&nbsp;</a>
 		<a href="#" class="help_icons_pos help_icons_pos3">&nbsp;</a>
 	</div>
+<!--
+	<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+	<h3 class="modal-title text-center" id="modal-title">Mail Preview </h3>
+</div>	
+<div class="modal-body" id="modal-body">
+	<div class="control-label">
+		
+		<div><label ng-model="CustName">{{CustName}}</label></div>
+		<br/>
+		<div> Thank you for contacting Kaakateeya.com. Your enquiry is currently being processed and it can be tracked through reference
+			<span ng-model="lblTicketID">{{lblTicketID}}</span></div>
+					<br/>
+		<div>Category:<label ng-model="lblpopupCategory"></label></div>
+				<br/>
+		<div> A response will be sent to you shortly.</div>
+		<div> For immediate assistance, please call 91-9848344977 (9 AM to 7 PM IST)</div>
+
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">Send Mail</button>
+
+</div>
+    </script>-->
+
+
+
+	<script type="text/ng-template" id="myModalContent.html">
+	
+        <!--<div class="modal-header">
+	<h3 class="modal-title text-center" id="modal-title">Forgot Password </h3>
+</div>	
+<div class="modal-body" id="modal-body">
+	<div class="control-label">
+		<div>Don't worry! just fill in your email and we'll help you reset your password. </div>
+		<div>Matrimony ID / Email-ID:</div>	
+		<input type="text" ng-model="txtMatrimonyIDEmailID" class="form-control">
+	</div>
+</div>
+<div class="modal-footer">
+	
+	<input value="Cancel" ng-model="btnCancel" class="button_custom button_custom_reset"  type="submit">
+	<input value="Send Email" ng-model="btnSendEmail" class="button_custom" type="submit">
+
+
+</div>-->
+	
+
+<div class="modal-header">
+            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+
+	
+    </script>
+	<!--<button type="button" class="btn btn-default" ng-click="open('sm')">test button</button>-->
+<button type="button" class="btn btn-default" ng-click="open('lg')">Small modal</button>
 
 </div>
