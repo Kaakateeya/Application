@@ -34,9 +34,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     { name: 'takeatour', url: '/takeatour', templateUrl: 'app/modules/static/takeTour.html', isloginrequired: false },
     { name: 'viewmyprofile', url: '/viewmyprofile', templateUrl: 'app/modules/static/viewMyProfile.html', controller: 'viewmyprofile', isloginrequired: true },
     { name: 'viewFullProfileCustomer', url: '/viewFullProfileCustomer', templateUrl: 'app/modules/viewFullProfile/viewFullProfileCustomer.html', controller: 'viewFullProfileCustomer', isloginrequired: true },
-    { name: 'termsAndConditions', url: '/termsAndConditions', templateUrl: 'app/modules/static/termsAndConditions.html',isloginrequired: false  },
-    { name: 'Registration', url: '/Registration', templateUrl: 'app/modules/registration/views/registrationView.html', controller: "registration",isloginrequired: false  },
-    { name: 'regprofiles', url: '/regprofiles', templateUrl: 'app/modules/registration/views/registrationRegProfiles.html', controller: "registrationReg",isloginrequired: false  },
+    { name: 'termsAndConditions', url: '/termsAndConditions', templateUrl: 'app/modules/static/termsAndConditions.html', isloginrequired: false },
+    { name: 'Registration', url: '/Registration', templateUrl: 'app/modules/registration/views/registrationView.html', controller: "registration", isloginrequired: false },
+    { name: 'regprofiles', url: '/regprofiles', templateUrl: 'app/modules/registration/views/registrationRegProfiles.html', controller: "registrationReg", isloginrequired: false },
     { name: 'ourbranches', url: '/ourbranches', templateUrl: 'app/modules/static/ourBranches.html', controller: 'ourbranches', isloginrequired: false },
     { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
     { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: false },
@@ -56,13 +56,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'];
 
     var sitescripts = ['src/js/jquery-1.8.3.min.js',
-       
-        
         'src/js/jquery.blockui.js', 'src/js/bootstrap-multiselect.js', 'src/js/jquery.alert.js', 'src/js/GI.TheWall.min.js', 'src/js/KaakateeyaHelper.js',
         'src/js/CustomerCache_prod.js', 'src/js/scrollgress.js', 'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache',
         'src/js/scriptsKaakateeya.js',
         'index.js', 'app/modules/dashboard/controllers/dashboardController.js', 'app/services/customerDashboardServices.js',
-        'app/directives/partnerDirective.js', 'app/directives/multiSelectDirective.js', 'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
+        'app/directives/partnerDirective.js', 'app/directives/multiSelectDirective.js',
         'app/modules/static/successStories.js', 'app/modules/homePage/homePage.js', 'app/modules/mobileverification/mobileVerification.js',
         'app/modules/payments/controllers/paymentCtrl.js', 'app/modules/search/advanceSearchCtrl.js', 'app/modules/search/generalSearchView.js',
         'app/modules/search/profileidSearch.js', 'app/modules/search/savedSearchView.js', 'app/modules/static/dataGetin.js',
@@ -72,28 +70,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         'app/modules/registration/controllers/registrationRegProfiles.js', 'app/services/successstoriesServices.js', 'app/modules/static/privacyPolicyCtrl.js',
         'app/modules/static/accodian.js',
         'app/modules/static/termsAndConditions.js', 'app/services/feedbackServices.js', 'app/services/serviceBind.js', 'app/constants/arrayConstants.js',
-        'app/services/homepageServices.js', 'app/services/authSvc.js', 'src/js/headerctrl.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
-        'app\services\helpService.js','app\services\ourbranchService.js'
+        'app/services/homepageServices.js', 'app/services/authSvc.js', 'src/js/headerctrl.js',
+        'app\services\helpService.js', 'app\services\ourbranchService.js'
     ]
 
-      var jsscripts = ['src/js/jquery-1.8.3.min.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
+    var jsscripts = ['bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
         'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
         'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
-        'src/js/jquery.blockui.js', 'src/js/bootstrap-multiselect.js', 'src/js/jquery.alert.js', 'src/js/GI.TheWall.min.js', 'src/js/KaakateeyaHelper.js',
-        'src/js/CustomerCache_prod.js', 'src/js/scrollgress.js', 'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache',
-        'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js', 'src/js/scriptsKaakateeya.js',
-        'index.js', 'app/modules/dashboard/controllers/dashboardController.js', 'app/services/customerDashboardServices.js',
-        'app/directives/partnerDirective.js', 'app/directives/multiSelectDirective.js', 'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
-        'app/modules/static/successStories.js', 'app/modules/homePage/homePage.js', 'app/modules/mobileverification/mobileVerification.js',
-        'app/modules/payments/controllers/paymentCtrl.js', 'app/modules/search/advanceSearchCtrl.js', 'app/modules/search/generalSearchView.js',
-        'app/modules/search/profileidSearch.js', 'app/modules/search/savedSearchView.js', 'app/modules/static/dataGetin.js',
-        'app/modules/static/faqs.js', 'app/modules/static/feedbackCtrl.js', 'app/modules/static/helpPage.js', 'app/modules/static/loginBlocker.js',
-        'app/modules/static/myOrdersAndStatistics.js', 'app/modules/static/profileSettings.js', 'app/modules/static/supportTickets.js',
-        'app/modules/static/viewMyProfile.js', 'app/modules/viewFullProfile/viewFullProfileCustomer.js', 'app/modules/registration/controllers/registrationCntrl.js',
-        'app/modules/registration/controllers/registrationRegProfiles.js', 'app/services/successstoriesServices.js', 'app/modules/static/privacyPolicyCtrl.js',
-        'app/modules/static/accodian.js',
-        'app/modules/static/termsAndConditions.js', 'app/services/feedbackServices.js', 'app/services/serviceBind.js', 'app/constants/arrayConstants.js',
-        'app/services/homepageServices.js', 'app/services/authSvc.js', 'src/js/headerctrl.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
+        'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
+        'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
+        'bower_components/angular-ui-router-styles/ui-router-styles.js'
     ]
     $urlRouterProvider.otherwise('/');
     var outerView = {
