@@ -24,11 +24,14 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+                banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n',
+                report: 'min',
+                mangle: false
             },
             build: {
                 files: {
-                    'dist/js/main.min.js': ['app/**/*.js']
+
+                    'dist/js/main.min.js': ['dist/src/mainnew.js']
                 }
             }
         },
@@ -61,7 +64,7 @@ module.exports = function(grunt) {
                 // Can be ran as `grunt --env=dev` or `grunt --env=prod`
                 environment: grunt.option('env') || 'dev',
                 env_char: '#',
-                //env_block_dev: 'env:dev',
+                env_block_dev: 'env:dev',
                 env_block_dev: 'SCRIPTS DATA',
                 env_block_prod: 'SCRIPTSP DATA',
                 env_block_test: 'env:test'
@@ -104,9 +107,24 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // Target-specific file lists and/or options go here. 
-                    'index.html': ['dist/js/*.js']
+                    'index.html': [
+                        ['src/js/jquery-1.8.3.min.js', 'src/js/jquery.alert.js', 'src/js/scriptsKaakateeya.js', 'src/js/GI.TheWall.min.js', 'src/js/bootstrap-multiselect.js',
+                            'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache', 'src/js/scrollgress.js', 'src/js/jquery.blockui.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
+                            'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
+                            'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
+                            'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
+                            'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
+                            'bower_components/angular-ui-router-styles/ui-router-styles.js', 'index.js'
+                        ], 'dist/js/*.js'
+                    ]
                 },
             },
+        },
+        concat: {
+            js: { //target
+                src: ['app/**/*.js'],
+                dest: 'dist/src/mainnew.js'
+            }
         }
 
 
@@ -115,10 +133,10 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint', 'cssmin', 'scriptlinker:dev']);
 
     // this task will only run the dev configuration 
-    grunt.registerTask('dev', ['jshint', 'cssmin', 'scriptlinker:dev']);
+    grunt.registerTask('dev', ['cssmin', 'scriptlinker:dev']);
 
     // only run production configuration 
-    grunt.registerTask('production', ['jshint', 'uglify', 'cssmin', 'scriptlinker:prod']);
+    grunt.registerTask('prod', ['concat', 'uglify', 'cssmin', 'scriptlinker:prod']);
 
     // ===========================================================================
     // LOAD GRUNT PLUGINS ========================================================
@@ -132,5 +150,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-dev-prod-switch');
     grunt.loadNpmTasks('grunt-scriptlinker');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
 };
