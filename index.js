@@ -16,7 +16,7 @@ app.apiroot = 'http://183.82.0.58:8010/Api/'
 app.config(function($stateProvider, $urlRouterProvider) {
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
-        { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
+        { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: false },
         { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
         { name: 'Advanced', url: '/Advanced', templateUrl: 'app/modules/search/advancesearchView.html', controller: 'advancesearchCtrl', isloginrequired: false },
         { name: 'General', url: '/General', templateUrl: 'app/modules/search/generalSearchView.html', controller: 'Generalsearch', isloginrequired: false },
@@ -40,8 +40,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         { name: 'ourbranches', url: '/ourbranches', templateUrl: 'app/modules/static/ourBranches.html', controller: 'ourbranches', isloginrequired: false },
         { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: false },
-        { name: 'aboutUs', url: '/aboutUs', templateUrl: 'app/modules/static/aboutUs.html', isloginrequired: false }
-
+        { name: 'aboutUs', url: '/aboutUs', templateUrl: 'app/modules/static/aboutUs.html', isloginrequired: false },
+        { name: 'homedummy', url: '/homedummy', templateUrl: 'app/modules/homePage/homepagedummy.html', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -72,7 +72,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             views: (item.ishomepage ? outerView : innerView),
             data: {
                 requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
-                css: item.ishomepage == true ? 'dist/css/homepage.min.css' : 'dist/css/inner.min.css'
+                //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
             }
         })
     });

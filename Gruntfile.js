@@ -133,10 +133,10 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint', 'cssmin', 'scriptlinker:dev']);
 
     // this task will only run the dev configuration 
-    grunt.registerTask('dev', ['cssmin', 'scriptlinker:dev']);
+    grunt.registerTask('dev', ['jshint', 'cssmin', 'scriptlinker:dev']);
 
     // only run production configuration 
-    grunt.registerTask('prod', ['concat', 'uglify', 'cssmin', 'scriptlinker:prod']);
+    grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod']);
 
     // ===========================================================================
     // LOAD GRUNT PLUGINS ========================================================

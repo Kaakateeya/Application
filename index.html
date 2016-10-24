@@ -10,13 +10,13 @@
 <!--<![endif]-->
 
 <head>
-    <!-- Meta-Information -->
-    <title>Kaakateeya Marriages</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="ACME Inc.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com 
+	<!-- Meta-Information -->
+	<title>Kaakateeya Marriages</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="ACME Inc.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com 
     <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
     <link rel="stylesheet" href="src\css\bootstrap.min.css">
 	<link rel="stylesheet" href="src\css\styleshome.css">
@@ -36,82 +36,83 @@
     <link href="src/css/dashBoard.css" rel="stylesheet"></link>
     <link href="src\css\allimagesClasses.css" rel="stylesheet"></link>-->
 
-    <!--<link href="dist\css\inner.min.css" rel="stylesheet"></link>-->
-    <!--<link href="dist\css\homepage.min.css" rel="stylesheet"></link>-->
-    <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
+	<!--<link href="dist\css\inner.min.css" rel="stylesheet"></link>-->
+	<!--<link href="dist\css\homepage.min.css" rel="stylesheet"></link>-->
+	<link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css"></link>
+	<link href="dist\css\homepage.min.css" rel="stylesheet"></link>
 
 
 </head>
 
 <body ng-app="Kaakateeya" ui-router-styles>
-    <div ui-view="topbar"></div>
-    <div ui-view="content"></div>
-    <div ui-view="bottompanel"></div>
-    <!-- SCRIPTS DATA -->
-    <script src="src/js/jquery-1.8.3.min.js"></script>
-    <script src="src/js/jquery.alert.js"></script>
-    <script src="src/js/scriptsKaakateeya.js"></script>
-    <script src="src/js/GI.TheWall.min.js"></script>
-    <script src="src/js/bootstrap-multiselect.js"></script>
-    <script src="src/js/jquery-ui.js"></script>
-    <script src="src/js/lhnchatbutton-current.min.cache"></script>
-    <script src="src/js/scrollgress.js"></script>
-    <script src="src/js/jquery.blockui.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="node_modules/underscore/underscore-min.js"></script>
-    <script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
-    <script src="bower_components/angular-ui-router-styles/ui-router-styles.js"></script>
-    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-    <script src="index.js"></script>
-    <!--<script src="dist\js\main.min.js"></script>-->
+	<div ui-view="topbar"></div>
+	<div ui-view="content"></div>
+	<div ui-view="bottompanel"></div>
+	<!-- SCRIPTS DATA -->
+	<script src="src/js/jquery-1.8.3.min.js"></script>
+	<script src="src/js/jquery.alert.js"></script>
+	<script src="src/js/scriptsKaakateeya.js"></script>
+	<script src="src/js/GI.TheWall.min.js"></script>
+	<script src="src/js/bootstrap-multiselect.js"></script>
+	<script src="src/js/jquery-ui.js"></script>
+	<script src="src/js/lhnchatbutton-current.min.cache"></script>
+	<script src="src/js/scrollgress.js"></script>
+	<script src="src/js/jquery.blockui.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="node_modules/underscore/underscore-min.js"></script>
+	<script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
+	<script src="bower_components/angular-ui-router-styles/ui-router-styles.js"></script>
+	<script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+	<script src="index.js"></script>
+	<!--<script src="dist\js\main.min.js"></script>-->
 
-    <script src="app/Filters/dateFilter.js"></script>
-    <script src="app/constants/arrayConstants.js"></script>
-    <script src="app/constants/config.js"></script>
-    <script src="app/directives/multiSelectDirective.js"></script>
-    <script src="app/directives/partnerDirective.js"></script>
-    <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
-    <script src="app/modules/homePage/headerctrl.js"></script>
-    <script src="app/modules/homePage/homePage.js"></script>
-    <script src="app/modules/mobileverification/mobileVerification.js"></script>
-    <script src="app/modules/payments/controllers/paymentCtrl.js"></script>
-    <script src="app/modules/registration/controllers/registrationCntrl.js"></script>
-    <script src="app/modules/registration/controllers/registrationRegProfiles.js"></script>
-    <script src="app/modules/search/advanceSearchCtrl.js"></script>
-    <script src="app/modules/search/generalSearchView.js"></script>
-    <script src="app/modules/search/profileidSearch.js"></script>
-    <script src="app/modules/search/savedSearchView.js"></script>
-    <script src="app/modules/static/aboutUsctrl.js"></script>
-    <script src="app/modules/static/accodian.js"></script>
-    <script src="app/modules/static/dataGetin.js"></script>
-    <script src="app/modules/static/faqs.js"></script>
-    <script src="app/modules/static/feedbackCtrl.js"></script>
-    <script src="app/modules/static/helpPage.js"></script>
-    <script src="app/modules/static/loginBlocker.js"></script>
-    <script src="app/modules/static/myOrdersAndStatistics.js"></script>
-    <script src="app/modules/static/ourBranches.js"></script>
-    <script src="app/modules/static/privacyPolicyCtrl.js"></script>
-    <script src="app/modules/static/profileSettings.js"></script>
-    <script src="app/modules/static/successStories.js"></script>
-    <script src="app/modules/static/supportTickets.js"></script>
-    <script src="app/modules/static/termsAndConditions.js"></script>
-    <script src="app/modules/static/upgradeMemberdhip.js"></script>
-    <script src="app/modules/static/viewMyProfile.js"></script>
-    <script src="app/modules/viewFullProfile/viewFullProfileCustomer.js"></script>
-    <script src="app/services/authSvc.js"></script>
-    <script src="app/services/customerDashboardServices.js"></script>
-    <script src="app/services/feedbackServices.js"></script>
-    <script src="app/services/helpService.js"></script>
-    <script src="app/services/homepageServices.js"></script>
-    <script src="app/services/ourbranchService.js"></script>
-    <script src="app/services/serviceBind.js"></script>
-    <script src="app/services/successstoriesServices.js"></script>
-    <script src="app\directives\stickyHeaderDirective.js"></script>
-    <!--SCRIPTS END-->
+	<script src="app/Filters/dateFilter.js"></script>
+	<script src="app/constants/arrayConstants.js"></script>
+	<script src="app/constants/config.js"></script>
+	<script src="app/directives/multiSelectDirective.js"></script>
+	<script src="app/directives/partnerDirective.js"></script>
+	<script src="app/modules/dashboard/controllers/dashboardController.js"></script>
+	<script src="app/modules/homePage/headerctrl.js"></script>
+	<script src="app/modules/homePage/homePage.js"></script>
+	<script src="app/modules/mobileverification/mobileVerification.js"></script>
+	<script src="app/modules/payments/controllers/paymentCtrl.js"></script>
+	<script src="app/modules/registration/controllers/registrationCntrl.js"></script>
+	<script src="app/modules/registration/controllers/registrationRegProfiles.js"></script>
+	<script src="app/modules/search/advanceSearchCtrl.js"></script>
+	<script src="app/modules/search/generalSearchView.js"></script>
+	<script src="app/modules/search/profileidSearch.js"></script>
+	<script src="app/modules/search/savedSearchView.js"></script>
+	<script src="app/modules/static/aboutUsctrl.js"></script>
+	<script src="app/modules/static/accodian.js"></script>
+	<script src="app/modules/static/dataGetin.js"></script>
+	<script src="app/modules/static/faqs.js"></script>
+	<script src="app/modules/static/feedbackCtrl.js"></script>
+	<script src="app/modules/static/helpPage.js"></script>
+	<script src="app/modules/static/loginBlocker.js"></script>
+	<script src="app/modules/static/myOrdersAndStatistics.js"></script>
+	<script src="app/modules/static/ourBranches.js"></script>
+	<script src="app/modules/static/privacyPolicyCtrl.js"></script>
+	<script src="app/modules/static/profileSettings.js"></script>
+	<script src="app/modules/static/successStories.js"></script>
+	<script src="app/modules/static/supportTickets.js"></script>
+	<script src="app/modules/static/termsAndConditions.js"></script>
+	<script src="app/modules/static/upgradeMemberdhip.js"></script>
+	<script src="app/modules/static/viewMyProfile.js"></script>
+	<script src="app/modules/viewFullProfile/viewFullProfileCustomer.js"></script>
+	<script src="app/services/authSvc.js"></script>
+	<script src="app/services/customerDashboardServices.js"></script>
+	<script src="app/services/feedbackServices.js"></script>
+	<script src="app/services/helpService.js"></script>
+	<script src="app/services/homepageServices.js"></script>
+	<script src="app/services/ourbranchService.js"></script>
+	<script src="app/services/serviceBind.js"></script>
+	<script src="app/services/successstoriesServices.js"></script>
+	<script src="app\directives\stickyHeaderDirective.js"></script>
+	<!--SCRIPTS END-->
 
-    <!-- SCRIPTSP DATA --#>
+	<!-- SCRIPTSP DATA --#>
     <script src="src/js/jquery-1.8.3.min.js"></script>
     <script src="src/js/jquery.alert.js"></script>
     <script src="src/js/scriptsKaakateeya.js"></script>

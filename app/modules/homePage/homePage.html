@@ -1,6 +1,19 @@
 <style type="text/css">
-    .dropdown-toggle {
+    #homepageid .dropdown-toggle {
         background-color: white !important;
+        width: 70px !important;
+    }
+    
+    #IIII .dropdown-toggle {
+        width: 140px !important;
+    }
+    
+    #VVVV .dropdown-toggle {
+        width: 140px !important;
+    }
+    
+    #countrycoquick .dropdown-toggle {
+        width: 140px !important;
     }
 </style>
 <div id="homepageid" ng-init="homeinit()">
@@ -37,8 +50,8 @@
         </div>
         <div class="login_block_header" style="display: none;" id="divLogin">
             <form name="myFormss">
-                <input type="text" id="txtUserName" ng-model="username" required/>
-                <input type="password" id="txtPassword" ng-model="password" required/>
+                <input type="text" id="txtUserName" style="height: 38px;" ng-model="username" required/>
+                <input type="password" id="txtPassword" style="height: 38px;" ng-model="password" required/>
                 <span class="clear">&nbsp;</span>
                 <div class="login_help">
 
@@ -101,12 +114,12 @@
                     <label class="control-label">Age</label>
                     <div class="controls">
                         <div id="updateContentdd">
-                            <div class="col-lg-6" style="width: 81px;float: left;">
+                            <div class="" style="width: 61px;float: left;">
                                 <select name="ddlAgrFrom" ng-model="Agefrom" id="ddlAgrFrom" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
                           
                             	</select>
                             </div>
-                            <div class="col-lg-6" style="width: 81px;float: left;">
+                            <div class="col-lg-6" style="width: 61px;float: left;">
                                 <select name="ddlAgeTo" ng-model="Ageto" id="ddlAgeTo" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
 		                 	</select>
                             </div>
@@ -136,12 +149,9 @@
                 </div>
                 <div class="control-group selectbox-index span2">
                     <label class="control-label">Current location</label>
-                    <div class="controls">
-
+                    <div class="controls" id="countrycoquick">
                         <select name="ddlQuickCountry" id="ddlQuickCountry" multiselectdropdown ng-model="country" typeofdata="Country" style="width: 170px;">
-	
-
-        </select>
+	        </select>
 
                     </div>
                 </div>
