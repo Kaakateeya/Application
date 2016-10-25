@@ -26,7 +26,7 @@ app.directive("partnerData", function() {
                 scope.loaderspin = false;
 
                 if (scope.array.length > 0) {
-                    scope.endindex = (scope.array[0].TotalRows > scope.endindex == true) ? scope.endindex : scope.array[0].TotalRows;
+                    scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                     scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
                 }
@@ -45,5 +45,5 @@ app.directive("partnerData", function() {
 
             });
         }
-    }
+    };
 });

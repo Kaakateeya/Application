@@ -55,7 +55,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
 
             });
         }
-    }
+    };
 
     scope.init = function() {
         scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
@@ -84,6 +84,6 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             { value: 'Profile Settings', bindvalue: null, hrefs: '/#profilesettings' },
             { value: 'help', bindvalue: null, hrefs: '/#help' },
         ];
-    }
+    };
 
 }]);

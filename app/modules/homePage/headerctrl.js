@@ -1,7 +1,7 @@
 app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     scope.showhidetestbuttons = function() {
         var datatinfo = authSvc.user();
-        if (datatinfo.custid != "" && datatinfo.custid != undefined && datatinfo.custid != null) {
+        if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
             scope.loginstatus = false;
             scope.loginoutstatus = true;
             scope.usernamepersonal = datatinfo.username;
@@ -20,7 +20,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
             scope.withlogin = false;
             scope.withoutlogin = true;
         }
-    }
+    };
     scope.loginstatus = true;
     scope.loginoutstatus = false;
     scope.loginpopup = false;
@@ -30,7 +30,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     scope.divloginblock = function() {
         scope.loginpopup = true;
         $('.login_block_header').toggle();
-    }
+    };
     scope.validate = function() {
 
         if ((scope.username).indexOf("@") != -1) {
@@ -53,20 +53,20 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
             }
 
         }
-    }
+    };
     scope.loginsubmit = function() {
 
-        if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
+        if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
 
             alert("Please enter password");
             return false;
         } else {
             if (scope.validate()) {
                 authSvc.login(scope.username, scope.password).then(function(response) {
-                    authSvc.user(response.response != null ? response.response[0] : null);
+                    authSvc.user(response.response !== null ? response.response[0] : null);
                     var custidlogin = authSvc.getCustId();
                     window.location = "#/home";
                     scope.loginpopup = false;
@@ -74,7 +74,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
                 });
             }
         }
-    }
+    };
 
     scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -88,5 +88,5 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
         authSvc.logout();
         window.location = "#/";
 
-    }
+    };
 }]);

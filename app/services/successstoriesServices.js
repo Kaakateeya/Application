@@ -1,8 +1,8 @@
-app.factory('successstoriesdata', ['$http', function (http) {
+app.factory('successstoriesdata', ['$http', function(http) {
     return {
-        suceessdataget: function (frompage, topage) {
+        suceessdataget: function(frompage, topage) {
             var person = {};
-            person.successid = null
+            person.successid = null;
             person.vc_ProfileID = null;
             person.i_RegionID = null;
             person.casteiid = null;
@@ -11,5 +11,5 @@ app.factory('successstoriesdata', ['$http', function (http) {
             person.pageto = topage;
             return http.post(app.apiroot + 'StaticPages/GetSuccessStoriesdetails', person);
         }
-    }
+    };
 }]);

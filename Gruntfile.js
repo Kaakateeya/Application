@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                             'node_modules/font-awesome/css/font-awesome.min.css', 'src/css/bootstrap-responsive.min.css', 'src/css/stylekaakateeya.css',
                             'style_responsive.css', 'src/css/uniform.default.css', 'src/css/chosen.css', 'src/css/jquery-css.css', 'src/css/bootstrap-fileupload.css',
                             'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
-                            'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'
+                            'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css', 'src/css/bootsrsapinner.min.css'
                         ]
                     },
                     {

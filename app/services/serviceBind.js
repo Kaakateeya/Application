@@ -1,15 +1,15 @@
-app.factory('SelectBindService', ["$http", function (http) {
+app.factory('SelectBindService', ["$http", function(http) {
     return {
-        countrySelect: function () {
+        countrySelect: function() {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "", dependencyValue: "" } });
         },
-        stateSelect: function (dependencyVal) {
+        stateSelect: function(dependencyVal) {
             alert(dependencyVal);
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal.join(',') } });
         },
-        casteselect: function () {
+        casteselect: function() {
 
             return http.get(app.apiroot + 'Dependency/getDropdown_filling_values', { params: { strDropdownname: "CasteName" } });
         }
-    }
+    };
 }]);

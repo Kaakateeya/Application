@@ -7,7 +7,7 @@
 <div id="PartnerProfilles">
     <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew">
         <p class="profile_no pull-left clearfix"></p>
-        <p class="label_check pull-left clearfix"><span> {{data.ProfileID}}</span></p>
+        <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
         <p></p>
         <div class="clear"></div>
         <div class="search_result_item_in clearfix">
@@ -65,13 +65,14 @@
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
-                        <img title="Mobile" ng-class="typeofdiv==='Grid'?'mobile-icon':'mobile-icon'"></img>
+                        <img title="Mobile" ng-class="typeofdiv==='Grid'?'mobile-icon':'mobile-icon_list'"></img>
+
                     </li>
                     <li>
-                        <img title="Emails" class="message-icon"></img>
+                        <img title="Emails" ng-class="typeofdiv==='Grid'?'message-icon':'message-icon_list'"></img>
                     </li>
                     <li>
-                        <img title="horo" class="planet-icon"></img>
+                        <img title="horo" ng-class="typeofdiv==='Grid'?'planet-icon':'planet-icon_list'"></img>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -79,20 +80,36 @@
             <div ng-class="typeofdiv==='Grid'?'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid':'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
                 <ul>
                     <li>
-                        <img class="bookmark-icon2" alt="Bookmark" title="BookMark">
-                        <div style="margin-top: 5px;"><img title="BookMark" class="bookmark-icon2" style="color: Black;" /></div>
+
+
+                        <div style="margin-top: 5px;"><img title="BookMark" ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" style="color: Black;float:left;" />
+                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                 BOOKMARK
+                   </span></div>
                     </li>
                     <li>
-                        <img class="interest-icon2" alt="Express interest" title="Express">
-                        <div style="padding:5px 6px 12px 12px;"><img title="Expressinterest" class="interest-icon2" style="color: Black;" /></div>
+
+
+                        <div style="padding:5px 6px 12px 12px;"><img title="Expressinterest" ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" style="color: Black;float:left;" />
+                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                         EXPRESS INTEREST
+                            </span></div>
                     </li>
                     <li>
-                        <img class="message-icon2-small" alt="Message" title="Message">
-                        <div style="padding: 5px 6px 7px 12px;"><img title="Message" class="message-icon2-small" style="color: Black;" /></div>
+
+
+                        <div style="padding: 5px 6px 7px 12px;"><img title="Message" ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" style="color: Black;float:left;" />
+                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                   MESSAGE
+                        </span></div>
                     </li>
                     <li>
-                        <img class="close-icon-small" alt="Notinterest" title="Ignore">
-                        <div style="padding: 5px 6px 11px 12px;"><img title="Ignore" class="close-icon-small" style="color: Black;" /></div>
+
+
+                        <div style="padding: 5px 6px 11px 12px;"><img title="Ignore" ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" style="color: Black;float:left;" />
+                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                       IGNORE
+                          </span></div>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -113,3 +130,15 @@
         <h3 style="color: maroon;">End</h3>
     </div>
 </div>
+
+<style type="text/css">
+    .spandisplay {
+        display: none;
+    }
+    
+    .spandisplayblock {
+        display: block;
+        margin-top: 5px;
+        margin-left: 1px;
+    }
+</style>

@@ -15,7 +15,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         }
         return scope.test;
 
-    }
+    };
     scope.gender = "2";
     scope.arrayAge = scope.Age();
     scope.Religion = "Religion";
@@ -23,7 +23,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     scope.Caste = "Caste";
     scope.divloginblock = function() {
         $('.login_block_header').toggle();
-    }
+    };
     scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
     scope.validate = function() {
 
@@ -47,13 +47,13 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }
 
         }
-    }
+    };
     scope.loginsubmit = function() {
 
-        if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
+        if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
 
             alert("Please enter password");
             return false;
@@ -61,14 +61,14 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             if (scope.validate()) {
                 authSvc.login(scope.username, scope.password).then(function(response) {
 
-                    authSvc.user(response.response != null ? response.response[0] : null);
+                    authSvc.user(response.response !== null ? response.response[0] : null);
                     // var d = authSvc.getCustId();
                     // var dd = authSvc.user();
                     window.location = "#/home";
                 });
             }
         }
-    }
+    };
     scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return expr.test(email);
@@ -82,42 +82,42 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     scope.ValidatequickRegister = function() {
 
         var srchobject = {};
-        srchobject.intCusID = null
-        srchobject.strCust_id = null
+        srchobject.intCusID = null;
+        srchobject.strCust_id = null;
         srchobject.intGender = scope.gender;
-        srchobject.FromAge = null
-        srchobject.ToAge = null
-        srchobject.iFromHeight = null
-        srchobject.iToHeight = null
-        srchobject.Maritalstatus = null
-        srchobject.intReligionID = null
-        srchobject.MotherTongue = null
-        srchobject.Caste = null
-        srchobject.iPhysicalstatus = null
-        srchobject.Complexion = null
-        srchobject.Country = null
-        srchobject.State = null
-        srchobject.Visastatus = null
-        srchobject.Educationcategory = null
-        srchobject.Education = null
-        srchobject.Professiongroup = null
-        srchobject.iFromSal = null
-        srchobject.iToSal = null
-        srchobject.iManglinkKujaDosham = null
-        srchobject.iStarLanguage = null
-        srchobject.Stars = null
-        srchobject.iDiet = null
-        srchobject.intPhotoCount = null
-        srchobject.StartIndex = null
-        srchobject.EndIndex = null
-        srchobject.i_Registrationdays = null
-        srchobject.iAnnualincome = null
-        srchobject.flagforurl = null
-        srchobject.SavedSearch = null
-        srchobject.SearchPageID = null
-        srchobject.PageName = null
-        srchobject.SavedSearchresultid = null
-        srchobject.Searchresult = null
-    }
+        srchobject.FromAge = null;
+        srchobject.ToAge = null;
+        srchobject.iFromHeight = null;
+        srchobject.iToHeight = null;
+        srchobject.Maritalstatus = null;
+        srchobject.intReligionID = null;
+        srchobject.MotherTongue = null;
+        srchobject.Caste = null;
+        srchobject.iPhysicalstatus = null;
+        srchobject.Complexion = null;
+        srchobject.Country = null;
+        srchobject.State = null;
+        srchobject.Visastatus = null;
+        srchobject.Educationcategory = null;
+        srchobject.Education = null;
+        srchobject.Professiongroup = null;
+        srchobject.iFromSal = null;
+        srchobject.iToSal = null;
+        srchobject.iManglinkKujaDosham = null;
+        srchobject.iStarLanguage = null;
+        srchobject.Stars = null;
+        srchobject.iDiet = null;
+        srchobject.intPhotoCount = null;
+        srchobject.StartIndex = null;
+        srchobject.EndIndex = null;
+        srchobject.i_Registrationdays = null;
+        srchobject.iAnnualincome = null;
+        srchobject.flagforurl = null;
+        srchobject.SavedSearch = null;
+        srchobject.SearchPageID = null;
+        srchobject.PageName = null;
+        srchobject.SavedSearchresultid = null;
+        srchobject.Searchresult = null;
+    };
 
 }]);

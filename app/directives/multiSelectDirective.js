@@ -1,8 +1,7 @@
-
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function (cons, service) {
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function(cons, service) {
     return {
         require: 'ng-model',
         scope: {
@@ -10,14 +9,12 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
             typeofdata: "=",
             parentVal: "="
         },
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
             scope.options = [];
 
-            scope.databind = function (data) {
+            scope.databind = function(data) {
                 element.multiselect('dataprovider', data);
-            }
-
-
+            };
             switch (scope.typeofdata) {
                 case 'MaritalStatus':
                     scope.databind(cons.MaritalStatus);
@@ -52,20 +49,20 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                     break;
 
                 case 'Country':
-                    service.countrySelect().then(function (response) {
+                    service.countrySelect().then(function(response) {
                         var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": 0 })
-                        _.each(response.data, function (item) {
+                        option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                        _.each(response.data, function(item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
                         scope.databind(option);
                     });
                     break;
                 case 'Caste':
-                    service.casteselect().then(function (response) {
+                    service.casteselect().then(function(response) {
                         var option = [];
                         option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                        _.each(response.data, function (item) {
+                        _.each(response.data, function(item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
                         scope.databind(option);
@@ -93,14 +90,14 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
             //element.multiselect('setOptions', secondConfigurationSet);
             //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
-            scope.$watch(function () {
+            scope.$watch(function() {
                 return element[0].length;
-            }, function () {
+            }, function() {
                 scope.$applyAsync(element.multiselect('rebuild'));
             });
 
             // Watch for any changes from outside the directive and refresh
-            scope.$watch(attrs.ngModel, function () {
+            scope.$watch(attrs.ngModel, function() {
                 element.multiselect('refresh');
             });
 

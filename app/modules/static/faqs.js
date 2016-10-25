@@ -1,4 +1,4 @@
-app.controller("faqs", ['$scope', function (scope) {
+app.controller("faqs", ['$scope', function(scope) {
     scope.filters = {
         search: ''
     };
@@ -29,25 +29,25 @@ app.controller("faqs", ['$scope', function (scope) {
     scope.styleanswer = false;
     scope.activeClass = 'faqs_list_main_item';
 }]);
-app.directive('faqdirective', function () {
+app.directive('faqdirective', function() {
     return {
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
-            scope.expanall = function () {
-                _.each(scope.arrayfaqs,function(item){
+            scope.expanall = function() {
+                _.each(scope.arrayfaqs, function(item) {
                     item.styleanswer = true;
                     item.activeClass = 'faqs_list_main_item active';
-                })
-            }
-            scope.collapseall = function () {
-                _.each(scope.arrayfaqs,function(item){
-                   item.styleanswer = false;
+                });
+            };
+            scope.collapseall = function() {
+                _.each(scope.arrayfaqs, function(item) {
+                    item.styleanswer = false;
                     item.activeClass = 'faqs_list_main_item';
                 });
-                
+
 
             };
-            scope.toggleans = function (faqs) {
+            scope.toggleans = function(faqs) {
                 faqs.styleanswer = !faqs.styleanswer;
                 faqs.activeClass = (faqs.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item');
 
