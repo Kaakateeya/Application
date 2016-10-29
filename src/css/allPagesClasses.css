@@ -25068,7 +25068,7 @@ h5.myorders_list_main_item_heading span {
 .water-mark,
 .whatsup {
     display: inline-block;
-    background: url(../images/downloadlatest.png) no-repeat;
+    background: url(src/images/downloadlatest.png) no-repeat;
     overflow: hidden;
     text-indent: -9999px;
     text-align: left
@@ -25297,7 +25297,7 @@ h5.myorders_list_main_item_heading span {
 
 .message-icon_list {
     display: inline-block;
-    background: url(../images/downloadlatest.png) no-repeat;
+    background: url(src/images/downloadlatest.png) no-repeat;
     overflow: hidden;
     text-indent: -9999px;
     text-align: left;
@@ -25327,7 +25327,7 @@ h5.myorders_list_main_item_heading span {
 
 .mobile-icon_list {
     display: inline-block;
-    background: url(../images/downloadlatest.png) no-repeat;
+    background: url(src/images/downloadlatest.png) no-repeat;
     overflow: hidden;
     text-indent: -9999px;
     text-align: left;
@@ -25352,7 +25352,7 @@ h5.myorders_list_main_item_heading span {
 
 .planet-icon_list {
     display: inline-block;
-    background: url(../images/downloadlatest.png) no-repeat;
+    background: url(src/images/downloadlatest.png) no-repeat;
     overflow: hidden;
     text-indent: -9999px;
     text-align: left

@@ -1,9 +1,10 @@
-app.filter('dateFilter',function(){
-return function(x) {
+'use strict';
+app.filter('dateFilter', function() {
+    return function(x) {
         var i, c, txt = "";
         for (i = 0; i < x.length; i++) {
             c = x[i];
-            if (i % 2 == 0) {
+            if (i % 2 === 0) {
                 c = c.toUpperCase();
             }
             txt += c;
@@ -148,18 +149,149 @@ app.constant('arrayConstants',
 
     }
 );
-app.constant('config',function(){
-return {
-    dbPath:'',
-    imagepath:'',
-    select:0
-}
+app.constant('config', function() {
+    return {
+        dbPath: '',
+        imagepath: '',
+        select: 0
+    };
 });
+// app.directive('myAlert', function($modal, $log) {
+//     return {
+//         restrict: 'E',
+//         scope: {
+//             mode: '@',
+//             boldTextTitle: '@',
+//             textAlert: '@'
+//         },
+//         link: function(scope, elm, attrs) {
 
+//             scope.data = {
+//                 mode: scope.mode || 'info',
+//                 boldTextTitle: scope.boldTextTitle || 'title',
+//                 textAlert: scope.textAlert || 'text'
+//             }
+
+//             var ModalInstanceCtrl = function($scope, $modalInstance, data) {
+//                 console.log(data);
+//                 $scope.data = data;
+//                 $scope.close = function() {
+//                     $modalInstance.close($scope.data);
+//                 };
+//             };
+//             elm.parent().bind("click", function(e) {
+//                 scope.open();
+//             });
+//             scope.open = function() {
+//                 var modalInstance = $modal.open({
+//                     templateUrl: 'templates\dynamicAlerts.html',
+//                     controller: ModalInstanceCtrl,
+//                     backdrop: true,
+//                     keyboard: true,
+//                     backdropClick: true,
+//                     size: 'lg',
+//                     resolve: {
+//                         data: function() {
+//                             return scope.data;
+//                         }
+//                     }
+//                 });
+//                 modalInstance.result.then(function(selectedItem) {
+//                     scope.selected = selectedItem;
+//                 }, function() {
+//                     $log.info('Modal dismissed at: ' + new Date());
+//                 });
+//             }
+//         }
+//     };
+// })
+
+// app.directive('modalDialog', function() {
+//     debugger;
+//     return {
+//         restrict: 'E',
+//         scope: {
+//             show: '='
+//         },
+//         replace: true, // Replace with the template below
+//         transclude: true, // we want to insert custom content inside the directive
+//         link: function(scope, element, attrs) {
+
+
+//         },
+//         template: 'templates\dynamicAlerts.html' // See below
+//     };
+// });
+// app.directive('notification', ['$timeout', function($timeout) {
+//     debugger;
+//     return {
+//         restrict: 'E',
+//         template: "<div class='modal fade' id='AlertModal' role='dialog' style=z-index: 100000000000!important'><div class='alert alert-{{alertData.type}}' ng-show='alertData.message' role='alert' data-notification='{{alertData.status}}'>{{alertData.message}}</div></div>",
+//         scope: {
+//             alertData: "="
+//         },
+//         replace: true
+//     };
+// }]);
+
+app.directive('igLogin', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        // template: '<div class="alert alert-danger fade">' +
+        //     '<button type="button" class="close" data-dismiss="alert">×</button>' +
+        //     '<strong>Alert!</strong> Here is my message..' +
+        //     '</div>',
+        template: '<div class="modal fade" id="myModal" role="dialog">' +
+            '<div class="modal-dialog">'
+
+
+            +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            ' <button type="button" class="close" data-dismiss="modal">&times;</button>' +
+            ' <h4 class="modal-title">Modal Header</h4>' +
+            ' </div>' +
+            ' <div class="modal-body">' +
+            ' <p>Some text in the modal.</p>' +
+            '  </div>' +
+            ' <div class="modal-footer">' +
+            '  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+            '  </div>' +
+            '</div>'
+
+            +
+            ' </div>' +
+            '</div>',
+        link: function(scope, element, attrs) {
+
+                scope.$on('alertzero', function() {
+                    // debugger;
+                    // scope.loggingIn = true;
+                    // $(".alert").removeClass("in").show();
+                    // $(".alert").delay(2000).addClass("in").fadeOut(2000);
+
+                    $("#myModal").modal();
+
+                });
+
+            }
+            //,
+            // controller: function($scope) {
+            //     $scope.$watch('loggingIn', function() {
+            //         debugger;
+            //         if ($scope.loggingIn) {
+            //             $(".alert").removeClass("in").show();
+            //             $(".alert").delay(100).addClass("in").fadeOut(2000);
+            //         };
+            //     });
+            // }
+    };
+});
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function (cons, service) {
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function(cons, service) {
     return {
         require: 'ng-model',
         scope: {
@@ -167,14 +299,12 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
             typeofdata: "=",
             parentVal: "="
         },
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
             scope.options = [];
 
-            scope.databind = function (data) {
+            scope.databind = function(data) {
                 element.multiselect('dataprovider', data);
-            }
-
-
+            };
             switch (scope.typeofdata) {
                 case 'MaritalStatus':
                     scope.databind(cons.MaritalStatus);
@@ -209,20 +339,20 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                     break;
 
                 case 'Country':
-                    service.countrySelect().then(function (response) {
+                    service.countrySelect().then(function(response) {
                         var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": 0 })
-                        _.each(response.data, function (item) {
+                        option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                        _.each(response.data, function(item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
                         scope.databind(option);
                     });
                     break;
                 case 'Caste':
-                    service.casteselect().then(function (response) {
+                    service.casteselect().then(function(response) {
                         var option = [];
                         option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                        _.each(response.data, function (item) {
+                        _.each(response.data, function(item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
                         scope.databind(option);
@@ -250,14 +380,14 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
             //element.multiselect('setOptions', secondConfigurationSet);
             //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
-            scope.$watch(function () {
+            scope.$watch(function() {
                 return element[0].length;
-            }, function () {
+            }, function() {
                 scope.$applyAsync(element.multiselect('rebuild'));
             });
 
             // Watch for any changes from outside the directive and refresh
-            scope.$watch(attrs.ngModel, function () {
+            scope.$watch(attrs.ngModel, function() {
                 element.multiselect('refresh');
             });
 
@@ -294,7 +424,7 @@ app.directive("partnerData", function() {
                 scope.loaderspin = false;
 
                 if (scope.array.length > 0) {
-                    scope.endindex = (scope.array[0].TotalRows > scope.endindex == true) ? scope.endindex : scope.array[0].TotalRows;
+                    scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                     scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
                 }
@@ -313,7 +443,7 @@ app.directive("partnerData", function() {
 
             });
         }
-    }
+    };
 });
 app.directive('setClassWhenAtTop', function($window) {
     var $win = angular.element($window); // wrap window object as jQuery object
@@ -332,9 +462,12 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'authSvc', function(scope, customerDashboardServices, authSvc) {
+
     var logincustid = authSvc.getCustId();
+
     scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     scope.typeodbind = 'C';
+    scope.typeofdiv = "Grid";
     scope.PartnerProfilesnew = [];
     scope.counts = 1;
     scope.bindallcounts = {};
@@ -348,9 +481,12 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
 
                 if (scope.counts == 1) {
                     scope.bindcounts(response.data.DashBoardCounts);
+                    console.log(response.data.DashBoardCounts);
+                    scope.bindallcounts = response.data.DashBoardCounts;
                     scope.PersonalInfo = (response.data.PersonalInfo);
+                    console.log(response.data.PersonalInfo);
                     scope.photopersonal = scope.PersonalInfo.Photo;
-
+                    scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                 }
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
@@ -376,7 +512,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
                     _.each(response.data.PartnerProfilesnew, function(item) {
                         scope.PartnerProfilesnew.push(item);
                     });
-                    scope.PartnerProfilesnew = response.data.PartnerProfilesnew;
+
                 } else {
                     _.each(response.data.PartnerProfilesnew, function(item) {
                         scope.PartnerProfilesnew.push(item);
@@ -388,7 +524,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
 
             });
         }
-    }
+    };
 
     scope.init = function() {
         scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
@@ -417,13 +553,169 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             { value: 'Profile Settings', bindvalue: null, hrefs: '/#profilesettings' },
             { value: 'help', bindvalue: null, hrefs: '/#help' },
         ];
+    };
+
+    var TypeOfReportexpress = null;
+    var yourFilterexpress = null;
+    var oppfilterexpress = null;
+
+    scope.flagexpress = 9;
+    scope.expressinterestselect = function(TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest) {
+
+        if (headertext === "1" || headertext === "2" || headertext === "3") {
+            scope.flagexpress = 9;
+            if (headertext === "1") {
+                yourFilterexpress = scope.expressmyinterest.indexOf('I interesed in') != -1 ? 'I' : null;
+                oppfilterexpress = scope.expressmyinterest.indexOf('I interesed in') == -1 ? 'I' : null;
+                TypeOfReportexpress = scope.expressmyinterest.indexOf('I interesed in') != -1 ? 'R' : 'S';
+            } else if (headertext === "2") {
+                yourFilterexpress = scope.expressmynotinterest.indexOf('I skipped') != -1 ? 'NI' : null;
+                oppfilterexpress = scope.expressmynotinterest.indexOf('I skipped') == -1 ? 'NI' : null;
+                TypeOfReportexpress = scope.expressmynotinterest.indexOf('I skipped') != -1 ? 'R' : 'S';
+            } else {
+                yourFilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') != -1 ? 'V,NV' : null;
+                oppfilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') == -1 ? 'V,NV' : null;
+                TypeOfReportexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') != -1 ? 'R' : 'S';
+            }
+        } else if (headertext === null) {
+            scope.flagexpress = 9;
+            TypeOfReportexpress = TypeOfReport;
+            yourFilterexpress = yourFilter;
+            oppfilterexpress = oppfilter;
+        } else {
+            TypeOfReportexpress = TypeOfReport;
+            yourFilterexpress = yourFilter;
+            oppfilterexpress = oppfilter;
+        }
+        debugger;
+        scope.startindexexpress = frompage === 1 ? 1 : scope.startindexexpress;
+        scope.endindexexpress = frompage === 1 ? 9 : scope.endindexexpress;
+        var exp = {
+            IntCustID: scope.custid,
+            TypeOfReport: TypeOfReportexpress,
+            yourFilter: yourFilterexpress,
+            oppfilter: oppfilterexpress,
+            pagefrom: scope.startindexexpress,
+            pageto: scope.endindexexpress
+        };
+        customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
+            console.log(response.data);
+            if (parseInt(frompage) === 1) {
+                scope.PartnerProfilesnew = [];
+
+                _.each(response.data, function(item) {
+                    scope.PartnerProfilesnew.push(item);
+                });
+
+                if (typeofinterest === "All Profiles") {
+                    scope.flagexpress = 9;
+                    scope.typeofdiv = headertext === 'All Profiles' ? 'Expressinterest' : 'Expressinterestsend';
+                    scope.expressmyinterest = TypeOfReport === 'R' ? 'I interesed in' : scope.Gendercustomer + ' interesed';
+                    scope.expressmynotinterest = TypeOfReport === 'R' ? 'I skipped' : scope.Gendercustomer + ' skipped';
+                    scope.expressmynotviewed = TypeOfReport === 'R' ? 'I Viewed/NotViewed' : scope.Gendercustomer + ' Viewed/NotViewed';
+                    if (scope.PartnerProfilesnew[0] != null && scope.PartnerProfilesnew[0] != undefined && scope.PartnerProfilesnew[0] != null) {
+                        scope.expressmyinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouProceed : scope.PartnerProfilesnew[0].OppProceed;
+                        scope.expressmynotinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].Youskipped : scope.PartnerProfilesnew[0].Oppskipped;
+                        scope.expressmynotviewedcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouPending : scope.PartnerProfilesnew[0].Opppending;
+                        scope.YouProceed = scope.PartnerProfilesnew[0].YouProceed;
+                        scope.Youskipped = scope.PartnerProfilesnew[0].Youskipped;
+                        scope.YouPending = scope.PartnerProfilesnew[0].YouPending;
+                        scope.OppProceed = scope.PartnerProfilesnew[0].OppProceed;
+                        scope.Oppskipped = scope.PartnerProfilesnew[0].Oppskipped;
+                        scope.Opppending = scope.PartnerProfilesnew[0].Opppending;
+                        scope.PartnerProfilesnewTotalrows = response.data[0] != undefined && response.data[0] != null && response.data[0] != "" ? response.data[0].TotalRows : 0;
+                        scope.lblUHaveviewd = TypeOfReport === 'R' ? 'Interest Expressed By ' + scope.Gendercustomer : headertext;
+                        scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                        scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                        scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+                    }
+
+                } else {
+                    if (scope.PartnerProfilesnew[0] != null && scope.PartnerProfilesnew[0] != undefined && scope.PartnerProfilesnew[0] != null) {
+                        scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                        scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                        scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+                    }
+                }
+
+
+            } else {
+                _.each(response.data, function(item) {
+                    scope.PartnerProfilesnew.push(item);
+                });
+            }
+
+
+        });
+    };
+
+    app.animation('.slideexpress', function() {
+
+        var NG_HIDE_CLASS = 'ng-hide';
+        return {
+            beforeAddClass: function(element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.slideUp(done);
+                }
+            },
+            removeClass: function(element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.hide().slideDown(done);
+                }
+            }
+        }
+    });
+
+    scope.zerorecorsalert = function() {
+        scope.$broadcast('alertzero');
+        //  alert("sorry No Records Found");
+    };
+    scope.loadmorehideshow = function() {
+        debugger;
+        if (scope.PartnerProfilesnew.length > 0) {
+            scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
+            scope.loadmoreexpress = (scope.totalrows > scope.endindexexpress) ? true : false;
+            scope.Norowsendexpress = (scope.totalrows === scope.endindexexpress) ? true : false;
+
+        }
+    };
+    scope.allloadmorepaging = function() {
+        debugger;
+        scope.spinexpress = true;
+        scope.Norowsendexpress = false;
+        switch (scope.typeofdiv) {
+            case "Expressinterest":
+            case "Expressinterestsend":
+                scope.flagexpress += 9;
+                scope.startindexexpress = scope.flagexpress - 8;
+                scope.endindexexpress = scope.flagexpress;
+                scope.loadmorehideshow();
+                scope.expressinterestselect(TypeOfReportexpress, yourFilterexpress, oppfilterexpress, scope.startindexexpress, scope.endindexexpress);
+                scope.spinexpress = false;
+                break;
+
+        }
+    };
+
+    scope.chatsdiv = function(status, fromindex, toindex) {
+
+
     }
+    scope.showLoginxxxx = function() {
+        //scope.$broadcast('alertzero');
+        $("#myModalsss").modal();
+        debugger;
+        // scope.loggingIn = true;
+        // $(".alert").removeClass("in").show();
+        // $(".alert").delay(2000).addClass("in").fadeOut(2000);
+    };
+
 
 }]);
 app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     scope.showhidetestbuttons = function() {
         var datatinfo = authSvc.user();
-        if (datatinfo.custid != "" && datatinfo.custid != undefined && datatinfo.custid != null) {
+        if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
             scope.loginstatus = false;
             scope.loginoutstatus = true;
             scope.usernamepersonal = datatinfo.username;
@@ -442,7 +734,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
             scope.withlogin = false;
             scope.withoutlogin = true;
         }
-    }
+    };
     scope.loginstatus = true;
     scope.loginoutstatus = false;
     scope.loginpopup = false;
@@ -452,7 +744,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     scope.divloginblock = function() {
         scope.loginpopup = true;
         $('.login_block_header').toggle();
-    }
+    };
     scope.validate = function() {
 
         if ((scope.username).indexOf("@") != -1) {
@@ -475,20 +767,20 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
             }
 
         }
-    }
+    };
     scope.loginsubmit = function() {
 
-        if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
+        if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
 
             alert("Please enter password");
             return false;
         } else {
             if (scope.validate()) {
                 authSvc.login(scope.username, scope.password).then(function(response) {
-                    authSvc.user(response.response != null ? response.response[0] : null);
+                    authSvc.user(response.response !== null ? response.response[0] : null);
                     var custidlogin = authSvc.getCustId();
                     window.location = "#/home";
                     scope.loginpopup = false;
@@ -496,7 +788,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
                 });
             }
         }
-    }
+    };
 
     scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -510,7 +802,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
         authSvc.logout();
         window.location = "#/";
 
-    }
+    };
 }]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function(scope, homepageservices, authSvc, successstoriesdata) {
     scope.fromge = 1;
@@ -529,7 +821,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         }
         return scope.test;
 
-    }
+    };
     scope.gender = "2";
     scope.arrayAge = scope.Age();
     scope.Religion = "Religion";
@@ -537,7 +829,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     scope.Caste = "Caste";
     scope.divloginblock = function() {
         $('.login_block_header').toggle();
-    }
+    };
     scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
     scope.validate = function() {
 
@@ -561,13 +853,13 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }
 
         }
-    }
+    };
     scope.loginsubmit = function() {
 
-        if (scope.username == "" || scope.username == null || scope.username == "ProfileID/EmailID") {
+        if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
             alert("Please enter user name");
             return false;
-        } else if (scope.password == "" || scope.password == null || scope.password == "Enter the Password") {
+        } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
 
             alert("Please enter password");
             return false;
@@ -575,14 +867,14 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             if (scope.validate()) {
                 authSvc.login(scope.username, scope.password).then(function(response) {
 
-                    authSvc.user(response.response != null ? response.response[0] : null);
+                    authSvc.user(response.response !== null ? response.response[0] : null);
                     // var d = authSvc.getCustId();
                     // var dd = authSvc.user();
                     window.location = "#/home";
                 });
             }
         }
-    }
+    };
     scope.ValidateEmail = function(email) {
         var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return expr.test(email);
@@ -596,43 +888,43 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     scope.ValidatequickRegister = function() {
 
         var srchobject = {};
-        srchobject.intCusID = null
-        srchobject.strCust_id = null
+        srchobject.intCusID = null;
+        srchobject.strCust_id = null;
         srchobject.intGender = scope.gender;
-        srchobject.FromAge = null
-        srchobject.ToAge = null
-        srchobject.iFromHeight = null
-        srchobject.iToHeight = null
-        srchobject.Maritalstatus = null
-        srchobject.intReligionID = null
-        srchobject.MotherTongue = null
-        srchobject.Caste = null
-        srchobject.iPhysicalstatus = null
-        srchobject.Complexion = null
-        srchobject.Country = null
-        srchobject.State = null
-        srchobject.Visastatus = null
-        srchobject.Educationcategory = null
-        srchobject.Education = null
-        srchobject.Professiongroup = null
-        srchobject.iFromSal = null
-        srchobject.iToSal = null
-        srchobject.iManglinkKujaDosham = null
-        srchobject.iStarLanguage = null
-        srchobject.Stars = null
-        srchobject.iDiet = null
-        srchobject.intPhotoCount = null
-        srchobject.StartIndex = null
-        srchobject.EndIndex = null
-        srchobject.i_Registrationdays = null
-        srchobject.iAnnualincome = null
-        srchobject.flagforurl = null
-        srchobject.SavedSearch = null
-        srchobject.SearchPageID = null
-        srchobject.PageName = null
-        srchobject.SavedSearchresultid = null
-        srchobject.Searchresult = null
-    }
+        srchobject.FromAge = null;
+        srchobject.ToAge = null;
+        srchobject.iFromHeight = null;
+        srchobject.iToHeight = null;
+        srchobject.Maritalstatus = null;
+        srchobject.intReligionID = null;
+        srchobject.MotherTongue = null;
+        srchobject.Caste = null;
+        srchobject.iPhysicalstatus = null;
+        srchobject.Complexion = null;
+        srchobject.Country = null;
+        srchobject.State = null;
+        srchobject.Visastatus = null;
+        srchobject.Educationcategory = null;
+        srchobject.Education = null;
+        srchobject.Professiongroup = null;
+        srchobject.iFromSal = null;
+        srchobject.iToSal = null;
+        srchobject.iManglinkKujaDosham = null;
+        srchobject.iStarLanguage = null;
+        srchobject.Stars = null;
+        srchobject.iDiet = null;
+        srchobject.intPhotoCount = null;
+        srchobject.StartIndex = null;
+        srchobject.EndIndex = null;
+        srchobject.i_Registrationdays = null;
+        srchobject.iAnnualincome = null;
+        srchobject.flagforurl = null;
+        srchobject.SavedSearch = null;
+        srchobject.SearchPageID = null;
+        srchobject.PageName = null;
+        srchobject.SavedSearchresultid = null;
+        srchobject.Searchresult = null;
+    };
 
 }]);
 app.controller('mobileverifyController',function(){
@@ -663,29 +955,28 @@ app.controller('savedsearchCtrl', ['$scope', function (scope) {
 }]);
 app.controller('aboutus', ['$scope', function (scope) {
 }]);
- app.controller("AccordionDemoCtrl", ['$scope', function (scope) {
- scope.groups = [
-    {
-      title: "Dynamic Group Header - 1",
-      content: "Dynamic Group Body - 1",
-      open: false
-    },
-    {
-      title: "Dynamic Group Header - 2",
-      content: "Dynamic Group Body - 2",
-      open: false
-    }
-  ];
-  
- scope.addNew = function() {
-   scope.groups.push({
-      title: "New One Created",
-      content: "Dynamically added new one",
-      open: false
-    });
-  }
-  
-}]);
+ app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
+     scope.groups = [{
+             title: "Dynamic Group Header - 1",
+             content: "Dynamic Group Body - 1",
+             open: false
+         },
+         {
+             title: "Dynamic Group Header - 2",
+             content: "Dynamic Group Body - 2",
+             open: false
+         }
+     ];
+
+     scope.addNew = function() {
+         scope.groups.push({
+             title: "New One Created",
+             content: "Dynamically added new one",
+             open: false
+         });
+     };
+
+ }]);
 app.controller('ModalDemoCtrl', function($uibModal, $log, $scope) {
     $scope.ddlvals = "aaaa";
     var $ctrl = this;
@@ -751,7 +1042,7 @@ function getvalues(test) {
     });
     alert(JSON.stringify(countries));
 }
-app.controller("faqs", ['$scope', function (scope) {
+app.controller("faqs", ['$scope', function(scope) {
     scope.filters = {
         search: ''
     };
@@ -782,25 +1073,25 @@ app.controller("faqs", ['$scope', function (scope) {
     scope.styleanswer = false;
     scope.activeClass = 'faqs_list_main_item';
 }]);
-app.directive('faqdirective', function () {
+app.directive('faqdirective', function() {
     return {
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
-            scope.expanall = function () {
-                _.each(scope.arrayfaqs,function(item){
+            scope.expanall = function() {
+                _.each(scope.arrayfaqs, function(item) {
                     item.styleanswer = true;
                     item.activeClass = 'faqs_list_main_item active';
-                })
-            }
-            scope.collapseall = function () {
-                _.each(scope.arrayfaqs,function(item){
-                   item.styleanswer = false;
+                });
+            };
+            scope.collapseall = function() {
+                _.each(scope.arrayfaqs, function(item) {
+                    item.styleanswer = false;
                     item.activeClass = 'faqs_list_main_item';
                 });
-                
+
 
             };
-            scope.toggleans = function (faqs) {
+            scope.toggleans = function(faqs) {
                 faqs.styleanswer = !faqs.styleanswer;
                 faqs.activeClass = (faqs.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item');
 
@@ -808,7 +1099,6 @@ app.directive('faqdirective', function () {
         }
     };
 });
-
 app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSvc', function(scope, reCAPTCHA, feedbacksubmit, authSvc) {
     reCAPTCHA.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
     scope.optionhereabout = [
@@ -872,18 +1162,18 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
     scope.submit = function() {
 
         var custid = authSvc.getCustId();
-        scope.Cust_ID = custid != undefined && custid != null && custid != "" ? custid : null;
+        scope.Cust_ID = custid !== undefined && custid !== null && custid !== "" ? custid : null;
         var objectfeedback = {};
         objectfeedback.Cust_ID = scope.Cust_ID;
-        objectfeedback.HearAbout = scope.HearAbout != undefined && scope.HearAbout != "" ? scope.HearAbout : null;
-        objectfeedback.ImproveWebsite = scope.ImproveWebsite != undefined && scope.ImproveWebsite != "" ? scope.ImproveWebsite : null;
-        objectfeedback.kaaPrices = scope.kaaPrices != undefined && scope.kaaPrices != "" ? scope.kaaPrices : null;
-        objectfeedback.DownLoadTime = scope.DownLoadTime != undefined && scope.DownLoadTime != "" ? scope.DownLoadTime : null;
-        objectfeedback.CompareSite = scope.CompareSite != undefined && scope.CompareSite != "" ? scope.CompareSite : null;
-        objectfeedback.FavSite = scope.FavSite != undefined && scope.FavSite != "" ? scope.FavSite : null;
-        objectfeedback.SearchRate = scope.SearchRate != undefined && scope.SearchRate != "" ? scope.SearchRate : null;
-        objectfeedback.Recommend = scope.Recommend != undefined && scope.Recommend != "" ? scope.Recommend : null;
-        objectfeedback.Comments = scope.Comments != undefined && scope.Comments != "" ? scope.Comments : null;
+        objectfeedback.HearAbout = scope.HearAbout !== undefined && scope.HearAbout !== "" ? scope.HearAbout : null;
+        objectfeedback.ImproveWebsite = scope.ImproveWebsite !== undefined && scope.ImproveWebsite !== "" ? scope.ImproveWebsite : null;
+        objectfeedback.kaaPrices = scope.kaaPrices !== undefined && scope.kaaPrices !== "" ? scope.kaaPrices : null;
+        objectfeedback.DownLoadTime = scope.DownLoadTime !== undefined && scope.DownLoadTime !== "" ? scope.DownLoadTime : null;
+        objectfeedback.CompareSite = scope.CompareSite !== undefined && scope.CompareSite !== "" ? scope.CompareSite : null;
+        objectfeedback.FavSite = scope.FavSite !== undefined && scope.FavSite !== "" ? scope.FavSite : null;
+        objectfeedback.SearchRate = scope.SearchRate !== undefined && scope.SearchRate !== "" ? scope.SearchRate : null;
+        objectfeedback.Recommend = scope.Recommend !== undefined && scope.Recommend !== "" ? scope.Recommend : null;
+        objectfeedback.Comments = scope.Comments !== undefined && scope.Comments !== "" ? scope.Comments : null;
         feedbacksubmit.feedbacksubmitinsert(objectfeedback).then(function(response) {
             if (response.data == 1) {
                 alert("Thank u for your valuable feedback");
@@ -903,15 +1193,15 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
         scope.SearchRate = 0;
         scope.Recommend = 0;
         scope.Comments = "";
-    }
+    };
 
 }]);
-app.controller("help", ['$uibModal', '$scope', 'helpService', function (uibModal, scope, helpService) {
+app.controller("help", ['$uibModal', '$scope', 'helpService', function(uibModal, scope, helpService) {
 
     scope.catgory = 'catgory';
     scope.Priority = 'Priority';
     scope.countryCode = 'countryCode';
-    scope.submit = function () {
+    scope.submit = function() {
         scope.inputObj = {
             profile: '',
             AssignedEmpID: null,
@@ -927,36 +1217,35 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', function (uibModal
             AreaCode: scope.txtphonecode,
             PhoneNum: scope.txtphnum,
             EmpID: 0
-        }
-    }
-    helpService.helpSubmit(scope.inputObj).then(function (response) {
+        };
+    };
+    helpService.helpSubmit(scope.inputObj).then(function(response) {
 
     });
 
 
-    scope.open = function (size) {
+    scope.open = function(size) {
 
         scope.modalInstance = uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'myModalContent.html',
-            size:size,
+            size: size,
             scope: scope
         });
     };
     scope.CustName = 'dear uuu';
-    scope.lblTicketID='KakWB158934';
-    scope.ok = function () {
+    scope.lblTicketID = 'KakWB158934';
+    scope.ok = function() {
         scope.modalInstance.close();
     };
 
-    scope.cancel = function () {
+    scope.cancel = function() {
         scope.modalInstance.dismiss();
     };
 
 
 }]);
-
 app.controller("blockerController",function(){
 
 
@@ -1142,6 +1431,7 @@ app.factory('authSvc', ['$injector', function($injector) {
             clearUserSession();
         },
         login: function(username, password) {
+            debugger;
             var body = {
                 Username: username,
                 Password: password
@@ -1162,76 +1452,78 @@ app.factory('authSvc', ['$injector', function($injector) {
 //   app.ng.config(['$httpProvider', function ($httpProvider) {
 //     $httpProvider.interceptors.push('authInterceptor');
 //   }]);
-app.factory('customerDashboardServices', ['$http', function (http) {
-  return {
-    getCustomercounts: function (custid, typeofaction, frompage, topage) {
-      return http.get(app.apiroot + 'DashboardRequest/DashboardRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
-    },
-    getcustomerpartnerdata: function (custid, typeofaction, frompage, topage) {
-      return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
-    }
-  }
-}]);
-
-
-app.factory('feedbacksubmit', ["$http", function (http) {
+app.factory('customerDashboardServices', ['$http', function(http) {
     return {
-        feedbacksubmitinsert: function (object) {
+        getCustomercounts: function(custid, typeofaction, frompage, topage) {
+            return http.get(app.apiroot + 'DashboardRequest/DashboardRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
+        },
+        getcustomerpartnerdata: function(custid, typeofaction, frompage, topage) {
+            return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
+        },
+        getexpressintersetdata: function(object) {
+            debugger;
+            return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object)
+
+        }
+    };
+}]);
+app.factory('feedbacksubmit', ["$http", function(http) {
+    return {
+        feedbacksubmitinsert: function(object) {
             return http.post(app.apiroot + 'StaticPages/CustomerRating_sendMail', object);
         }
 
-    }
+    };
 }]);
-app.factory('helpService', ["$http", function (http) {
+app.factory('helpService', ["$http", function(http) {
     return {
-        helpSubmit: function (object) {
+        helpSubmit: function(object) {
             return http.post(app.apiroot + 'StaticPages/CustomerRating_sendMail', object);
         }
 
-    }
+    };
 }]);
-app.factory('homepageservices', ['authSvc', function (http) {
+app.factory('homepageservices', ['authSvc', function(http) {
     return {
-        logininfo: function () {
-            var person = new Object();
-            person.Username = "011046091";
-            person.Password = "XowIvsTkzINyyKyJrPlmgg==";
-            
+        logininfo: function() {
+            var person = {
+                Username: "011046091",
+                Password: "XowIvsTkzINyyKyJrPlmgg=="
+            };
             return http.post(app.apiroot + 'DB/userLogin/person', person);
         }
-    }
+    };
 }]);
-
-app.factory('ourBranchService', ["$http", function (http) {
+app.factory('ourBranchService', ["$http", function(http) {
     return {
-         BranchSelect: function (value) {
-            return http.get(app.apiroot + 'StaticPages/getKaakateeyaBranchesDetails', { params: {  dependencyName: "BranchesAddress",dependencyValue: value, dependencyflagID: "" } });
+        BranchSelect: function(value) {
+            return http.get(app.apiroot + 'StaticPages/getKaakateeyaBranchesDetails', { params: { dependencyName: "BranchesAddress", dependencyValue: value, dependencyflagID: "" } });
         },
-         BranchPageloadSelect: function (value) {
-            return http.get(app.apiroot + 'StaticPages/getKaakateeyaBranchesDetails', { params: {  dependencyName: "BranchesAddress",dependencyValue: "", dependencyflagID: "" } });
+        BranchPageloadSelect: function(value) {
+            return http.get(app.apiroot + 'StaticPages/getKaakateeyaBranchesDetails', { params: { dependencyName: "BranchesAddress", dependencyValue: "", dependencyflagID: "" } });
         }
-    }
+    };
 }]);
-app.factory('SelectBindService', ["$http", function (http) {
+app.factory('SelectBindService', ["$http", function(http) {
     return {
-        countrySelect: function () {
+        countrySelect: function() {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "", dependencyValue: "" } });
         },
-        stateSelect: function (dependencyVal) {
+        stateSelect: function(dependencyVal) {
             alert(dependencyVal);
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal.join(',') } });
         },
-        casteselect: function () {
+        casteselect: function() {
 
             return http.get(app.apiroot + 'Dependency/getDropdown_filling_values', { params: { strDropdownname: "CasteName" } });
         }
-    }
+    };
 }]);
-app.factory('successstoriesdata', ['$http', function (http) {
+app.factory('successstoriesdata', ['$http', function(http) {
     return {
-        suceessdataget: function (frompage, topage) {
+        suceessdataget: function(frompage, topage) {
             var person = {};
-            person.successid = null
+            person.successid = null;
             person.vc_ProfileID = null;
             person.i_RegionID = null;
             person.casteiid = null;
@@ -1240,5 +1532,5 @@ app.factory('successstoriesdata', ['$http', function (http) {
             person.pageto = topage;
             return http.post(app.apiroot + 'StaticPages/GetSuccessStoriesdetails', person);
         }
-    }
+    };
 }]);

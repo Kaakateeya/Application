@@ -66,7 +66,7 @@ abbr[title] {
 
 b,
 strong {
-    font-weight: 700
+    /*font-weight: 700*/
 }
 
 dfn {
@@ -1549,7 +1549,7 @@ h6 small {
 h1,
 h2,
 h3 {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px
 }
 
@@ -7068,37 +7068,37 @@ button.close {
 }
 
 .modal-open {
-    overflow: hidden
+    overflow: hidden !important;
 }
 
 .modal {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 0%;
     z-index: 1050;
     display: none;
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
-    outline: 0
+    outline: 0;
 }
 
 .modal.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0, -25%);
-    -ms-transform: translate(0, -25%);
-    -o-transform: translate(0, -25%);
-    transform: translate(0, -25%)
+    -webkit-transition: -webkit-transform .3s ease-out !important;
+    -o-transition: -o-transform .3s ease-out !important;
+    transition: transform .3s ease-out !important;
+    -webkit-transform: translate(0, -25%) !important;
+    -ms-transform: translate(0, -25%) !important;
+    -o-transform: translate(0, -25%) !important;
+    transform: translate(0, -25%) !important
 }
 
 .modal.in .modal-dialog {
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -o-transform: translate(0, 0);
-    transform: translate(0, 0)
+    -webkit-transform: translate(0, 0) !important;
+    -ms-transform: translate(0, 0) !important;
+    -o-transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
 }
 
 .modal-open .modal {
@@ -7107,9 +7107,9 @@ button.close {
 }
 
 .modal-dialog {
-    position: relative;
-    width: auto;
-    margin: 10px
+    position: relative !important;
+    width: auto !important;
+    margin: 10px !important;
 }
 
 .modal-content {
@@ -7194,8 +7194,8 @@ button.close {
 
 @media (min-width:768px) {
     .modal-dialog {
-        width: 600px;
-        margin: 30px auto
+        width: 600px !important;
+        margin: 30px auto !important;
     }
     .modal-content {
         -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);

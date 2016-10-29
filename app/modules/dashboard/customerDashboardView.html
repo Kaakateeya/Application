@@ -56,30 +56,30 @@
                             <div class="panel-body">
                                 <div class="landing_page_sidebar_rt_list_item_menu">
                                     <div class="landing_page_sidebar_rt_list_item_in clearfix">
-                                        <a id="lnkallprofiles" class="clearfix" href="javascript:void(0);" ng-click="expressinterest(undefined,undefined,undefined,'lnkallprofiles');">
+                                        <a id="lnkallprofiles" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ExpressAllcount==0) ? zerorecorsalert() :expressinterestselect(null,null,null,1,9,'All Profiles','All Profiles')">
                                             <small>
                                                   <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                        <div id="imaallprofiles" class="icon-spl-4"></div>
                                            </div>
                                                 </small>
-                                            <span id="spnallprofiles">All Profiles</span>
+                                            <span id="spnallprofiles">All Profiles({{bindallcounts.ExpressAllcount}})</span>
                                         </a>
-                                        <a id="lnknewExp" class="clearfix" href="javascript:void(0);" ng-click="expressinterest('R',undefined,undefined,'lnknewExp');">
+                                        <a id="lnknewExp" class="clearfix" href="javascript:void(0);" ng-click='(bindallcounts.ExpressIntReceived==0) ? zerorecorsalert() :expressinterestselect("R",null,null,1,9,"Interest Expressed By","All Profiles")'>
                                             <small>
                                                 <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimageExp" class="icon-spl-4"></div>
                                                 </div>
                                                </small>
-                                            <span id="lnkNewIDsExp" style="width: 98%; padding-left: 10px; white-space: normal; text-overflow: unset; float: unset;">Interest Expressed By</span>
+                                            <span id="lnkNewIDsExp" style="width: 98%; padding-left: 10px; white-space: normal; text-overflow: unset; float: unset;">Interest Expressed By {{Gendercustomer}} ({{bindallcounts.ExpressIntReceived}})</span>
                                         </a>
-                                        <a id="lnkAcceptExp" class="clearfix" href="javascript:void(0);" ng-click="expressinterest('S',undefined,undefined,'lnkAcceptExp');">
+                                        <a id="lnkAcceptExp" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ExpressIntSent==0) ? zerorecorsalert() :expressinterestselect('S',null,null,1,9,'I sent interest','All Profiles')">
                                             <small>
                                                   <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Exp" class="icon-spl-2"></div>
                                                 </div>
                                                     
                                                 </small>
-                                            <span id="lnkACCEPTEDExp">I sent interest</span></a>
+                                            <span id="lnkACCEPTEDExp">I sent interest({{bindallcounts.ExpressIntSent}})</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -100,22 +100,22 @@
                                             <span id="lblSubHeaderchats"></span>
                                         </h5>
                                         <div id="uplnknewchat" class="clearfix">
-                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv()">
+                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv(463,1,9)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagechat" class="icon-spl-4"></div>
                                                 </div>
                                                        
                                                     </small>
-                                                <span id="lnkNewIDmsgs">New</span></a>
-                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv()">
+                                                <span id="lnkNewIDmsgs">New({{bindallcounts.NewMsgs}})</span></a>
+                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv('',1,9)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Img2" class="icon-spl-2"></div>
                                                 </div>
                                                         
                                                     </small>
-                                                <span id="lnkACCEPTEDmsgs">Messages</span></a>
+                                                <span id="lnkACCEPTEDmsgs">Messages({{bindallcounts.TotalMsgs}})</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                                 </div>
                                                        
                                                     </small>
-                                                <span id="lnkNewIDsReceivedReq">RecPhoto</span></a>
+                                                <span id="lnkNewIDsReceivedReq">RecPhoto({{bindallcounts.ReceivedPhotoRequestCount}})</span></a>
                                             <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
@@ -152,7 +152,7 @@
                                                 </div>
                                                       
                                                     </small>
-                                                <span id="lnkRecHoroReq">RecHoro</span></a>
+                                                <span id="lnkRecHoroReq">RecHoro({{bindallcounts.ReceivedHoroRequestCount}})</span></a>
                                         </div>
                                     </div>
                                     <div class="landing_page_sidebar_rt_list_item_in clearfix">
@@ -167,7 +167,7 @@
                                                 </div>
                                                        
                                                     </small>
-                                                <span id="lnkNewIDsSentReq">SentPhoto</span></a>
+                                                <span id="lnkNewIDsSentReq">SentPhoto({{bindallcounts.SentPhotoRequestCount}})</span></a>
                                             <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
@@ -175,7 +175,7 @@
                                                 </div>
                                                       
                                                     </small>
-                                                <span id="lnkSentHoroReq">SentHoro</span></a>
+                                                <span id="lnkSentHoroReq">SentHoro({{bindallcounts.SentHoroRequestCount}})</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                                                 </div>
                                                     
                                                     </small>
-                                                <span id="lnkNewIDsReceivedProtec">New</span></a>
+                                                <span id="lnkNewIDsReceivedProtec">New({{bindallcounts.ReceivedProtectedNew}})</span></a>
                                             <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
@@ -212,7 +212,7 @@
                                                 </div>
                                                       
                                                     </small>
-                                                <span id="lnkACCEPTEDReceivedProtec">Accepted</span></a>
+                                                <span id="lnkACCEPTEDReceivedProtec">Accepted({{bindallcounts.ReceivedProtectedAccept}})</span></a>
                                             <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
@@ -220,7 +220,7 @@
                                                 </div>
                                                      
                                                     </small>
-                                                <span id="lnkREJECTEDReceivedProtec">Rejected</span></a>
+                                                <span id="lnkREJECTEDReceivedProtec">Rejected({{bindallcounts.ReceivedProtectedReject}})</span></a>
                                         </div>
                                     </div>
                                     <div class="landing_page_sidebar_rt_list_item_in clearfix">
@@ -235,7 +235,7 @@
                                                 </div>
                                                       
                                                     </small>
-                                                <span id="lnkNewIDsSentProtec">Reply Pending</span></a>
+                                                <span id="lnkNewIDsSentProtec">Reply Pending({{bindallcounts.SentProtectedReply}})</span></a>
                                             <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
@@ -243,14 +243,14 @@
                                                 </div>
                                                      
                                                     </small>
-                                                <span id="lnkACCEPTEDSentProtec">Accepted</span></a>
+                                                <span id="lnkACCEPTEDSentProtec">Accepted({{bindallcounts.SentProtectedAccept}})</span></a>
                                             <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3sendpassword" class="icon-spl-6"></div>
                                                 </div>
                                                     </small>
-                                                <span id="lnkREJECTEDSentProtec">Rejected</span></a>
+                                                <span id="lnkREJECTEDSentProtec">Rejected({{bindallcounts.SentProtectedReject}})</span></a>
                                         </div>
                                     </div>
 
@@ -277,25 +277,189 @@
             <div id="Div1" class="landing_page_middle_in">
                 <div class="searched_list clearfix">
                     <div class="clear"></div>
-                    <div class="clearfix col-lg-9" style="padding: 0 0 0 0;">
+                    <div ng-class="typeofdiv==='Expressinterest' || typeofdiv==='Expressinterestsend'?'clearfix col-lg-12':'clearfix col-lg-9'" style="padding: 0 0 0 0;">
                         <div style="margin: 0;">
                             <h1 class="span1" style="margin-top: -15px;"><b>
                                     <label id="lblSearchresultCount" style="color: #d42e02;font-size:22px;">{{PartnerProfilesnewTotalrows}}</label>
                                 </b></h1>
                             <label id="lblUHaveviewd" class="control-label span5">{{lblUHaveviewd}}</label>
                         </div>
+
                         <div class="clear"></div>
+                        <div class="row" id="allinterestdivtabs" ng-style="typeofdiv==='Expressinterest'?{'display': 'block'}:{'display':'none'}">
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                <div id="youinterestdiv">
+                                    <h3 style="color: maroon; cursor: pointer; font-size: 18px; background-color: #ccc; padding: 10px 10px 10px 10px; border: 1px #ccc; border-radius: 4px;" ng-click="expand=!expand"><span>I</span><span id="spantoggleyou" class="indicator glyphicon glyphicon-chevron-up" style="margin-left: 10px;"></span></h3>
+                                </div>
+                                <div class="bs-callout bs-callout-info slideexpress" id="yourinterestbtnsdiv" ng-show="expand">
+
+                                    <div class="sugested_block_top_skip">
+                                        <ul>
+                                            <li><a class="active Removecolor" href="javascript:void(0);" id="lnkyourinterest" style="width: 117px;" ng-click='(YouProceed==0) ? zerorecorsalert() : expressinterestselect(null,"I",null,1,9,null)'>Interested  ({{YouProceed}})</a></li>
+                                            <li><a class="active Removecolor" id="lnkyournotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(Youskipped===0) ? zerorecorsalert():expressinterestselect(null,"NI",null,1,9,null)'>Skipped  ({{Youskipped}})</a></li>
+                                            <li><a class="active Removecolor" id="lnkyourpending" href="javascript:void(0);" style="width: 117px;" ng-click='(YouPending===0) ? zerorecorsalert():expressinterestselect(null,"V,NV",null,1,9,null)'>Pending  ({{YouPending}})</a></li>
+
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                <div id="partnerinterestdiv">
+                                    <h3 style="color: maroon; cursor: pointer; font-size: 18px; background-color: #ccc; padding: 10px 10px 10px 10px; border: 1px #ccc; border-radius: 4px;" ng-click="expandyour=!expandyour"><span id="partnerdivinterest">Groom</span><span id="spantogglebride" class="indicator glyphicon glyphicon-chevron-up" style="margin-left: 10px;"></span></h3>
+                                </div>
+                                <div class="bs-callout bs-callout-info slideexpress" id="Bridegroominterestbtnsdiv" ng-show="expandyour">
+
+                                    <div class="sugested_block_top_skip">
+                                        <ul>
+                                            <li><a class="active Removecolor" id="lnkbrideinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(OppProceed===0) ? zerorecorsalert():expressinterestselect(null,null,"I",1,9,null)'>Interested  ({{OppProceed}})</a></li>
+                                            <li><a class="active Removecolor" id="lnkbridenotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(Oppskipped===0) ? zerorecorsalert():expressinterestselect(null,null,"NI",1,9,null)'>Skipped  ({{Oppskipped}})</a></li>
+                                            <li><a class="active Removecolor" id="lnkbridePending" href="javascript:void(0);" style="width: 117px;" ng-click='(Opppending===0) ? zerorecorsalert():expressinterestselect(null,null,"V,NV",1,9,null)'>Pending  ({{Opppending}})</a></li>
+
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bs-callout bs-callout-info" id="ExpSentReceiveBlock" ng-style="typeofdiv==='Expressinterestsend'?{'display': 'block'}:{'display':'none'}">
+                            <div class="sugested_block_top_skip">
+                                <ul>
+                                    <li><a class="active Removecolors" href="javascript:void(0);" id="lnkIntrst" style="width:180px;" ng-click='(expressmyinterestcount===0) ? zerorecorsalert():expressinterestselect(null,"I",null,1,9,"1")'>{{expressmyinterest}}({{expressmyinterestcount}})</a></li>
+                                    <li><a class="active Removecolors" id="lnknotintrst" href="javascript:void(0);" style="width:180px;" ng-click='(expressmynotinterestcount===0) ? zerorecorsalert():expressinterestselect(null,"NI",null,1,9,"2")'>{{expressmynotinterest}}({{expressmynotinterestcount}})</a></li>
+                                    <li><a class="active Removecolors" id="lnkVwd" href="javascript:void(0);" style="width:180px;" ng-click='(expressmynotviewedcount===0) ? zerorecorsalert():expressinterestselect(null,"V,NV",null,1,9,"3")'>{{expressmynotviewed}}({{expressmynotviewedcount}})</a></li>
+
+                                </ul>
+                            </div>
+
+                        </div>
                         <!--all tabs-->
                     </div>
                     <div class="search_results_main clearfix" style="display: none;">
                         <div class="search_result_items_main clearfix">
                         </div>
                     </div>
-                    <partner-data array="PartnerProfilesnew"></partner-data>
+                    <partner-data array="PartnerProfilesnew" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}"></partner-data>
                 </div>
             </div>
             <div id="uctrldiv">
+                <div id="ExpressInterestDivuuuu" class="Exp" ng-style="typeofdiv==='Expressinterest' ||typeofdiv==='Expressinterestsend' ?{'display':'block'}:{'display':'none'}">
+                    <div class="search_result_items_main clearfix" style="width: 100%;">
+                        <!-- Suggested Matches Block  /-->
+                        <div class="search_result_item sugested_match clearfix">
+
+                            <br>
+                            <div class="sugested_block_main tab-content">
+                                <div class="tab-pane fade in active" id="match1">
+                                    <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
+                                        <div class="sugested_block sugested_block_top" id="ExpressDiv1">
+                                            <div class="sugested_block_top_lft"> <span class="cssMaskdiv clearfix Linkdisabled"><img style="height: 150px;width: 150px;"
+                                             src="{{expressint.Photo}}" alt="sugested" /></span>
+                                            </div>
+                                            <div class="sugested_block_top_rht">
+                                                <h2>{{expressint.NAME}} {{expressint.ProfileID}}</h2>
+                                                <ul>
+                                                    <li><span>{{expressint.Age}}</span></li>
+                                                    <li><span>{{expressint.Caste}}</span></li>
+                                                    <li><span>{{expressint.Height}}</span></li>
+                                                    <li><span>{{expressint.Education}} </span></li>
+                                                    <li><span class="no_bdr">{{expressint.profession}}</span></li>
+                                                </ul>
+                                                <div class="clear"></div>
+                                                <div class="sugested_block_top_skip">
+                                                    <ul>
+                                                        <li style="display:none;"><a class="active" href="javascript:void(0);">View Full Profile</a></li>
+                                                        <li style="display:none;"><a class="active" href="javascript:void(0);" style="width: 150px;">Proceed</a></li>
+                                                        <li style="display:none"><a href="javascript:void(0);">skip this profile</a></li>
+                                                        <li style="display:block;"><a class="active" href="javascript:void(0);">view Contacts</a></li>
+                                                        <li style="color: #ab1818;display:block;"><a class="active" href="javascript:void(0);" id="communication1">communication history</a></li>
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-5 col-lg-offset-1"><label class="" style="width: 101px;float: left;">Your Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.Mystatus}}</label>
+                                                <a style="display:block;" href="javascript:void(0);">View Full Profile</a>
+                                            </div>
+                                            <div class="col-lg-6"><label class="" style="width: 109px;float: left;">{{Gendercustomer}} Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.OppStatus}}</label></div>
+                                        </div>
+                                        <div class="sugested_block_branch">
+                                            <div class="sugested_block_branch_lft">
+                                                <h3>Services given branch:<span style="padding: 0 0 0 10px;">{{expressint.ServiceGivenBanch}}</span></h3>
+                                                <h3 class="no-padding">Relationship manager (RM):<em style="padding: 0 0 0 10px;">{{expressint.RelationShipManagerName}}</em><span class="no-padding">  91 - {{expressint.RelationShipManagerNumber}}<a href="javascript:void(0);">,
+                                                    {{expressint.RelationShipManagerEmail}}</a> </span></h3>
+                                            </div>
+                                            <div class="sugested_block_branch_rht"><a href="javascript:void(0);" style="width: 150px;display:block;">Message To RM</a></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="sugested_block_note">
+                                            <h4>Note: <span>This profile suggested by employee  -</span><em>{{expressint.SuggestEmpName}}- </em><span>Ph: </span><em>{{expressint.SuggestedEmpNumber}}</em></h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Suggested Matches Block  /-->
+                    </div>
+                </div>
+                <div id="MessagesDiv" style="display: block;">
+                    <div class="messages_list_item clearfix" ng-repeat="messages in PartnerProfilesnew">
+                        <div class="messages_list_item_lt"> <span class="cssMaskdiv clearfix Linkdisabled">                           
+                             <img id="Iimagesdisplay" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_91035_Images/img1_Images/210910352_ApplicationPhoto.jpg" style="height:120px;width:120px;"></span>
+                        </div>
+                        <div class="messages_list_item_rt">
+                            <p> Member Id : <span id="lblMseeageProfileID">{{messages.ProfileID}}</span></p>
+                            <p><span id="lblName">{{messages.NAME}}</span></p>
+                            <p class="Messages_profile_view clearfix"> <span id="lblAge">{{messages.Age}}</span><span id="lblCastIDs">{{messages.Caste}}</span><span id="lblheight">{{messages.Height}}</span> <span id="lblEducation">{{messages.Education}}</span>
+                                <span id="lblProfessionID">{{messages.profession}}</span></p>
+                            <div class="messages_list_item_ui clearfix">
+                                <div id="updateContentKK">
+                                    <ul>
+                                        <li class="clearfix" style="width: 100%;"> <a id="lnkViewCompleteProfile_Message" class="pull-left" href="javascript:void(0);">View Complete Profile</a>
+                                            <a id="lnkCommunicationHistory_Message" class="pull-right" href="javascript:void(0);">Communication History(<b style="color:Maroon">{{messages.COUNT}}</b>)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear"> </div>
+                            </div>
+                            <div class="messages_list_item_rt_rcdate">
+                                <p> Message Received Date : <span id="lblRequestDatemsg">{{messages.RequestDate}}</span></p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="JJHDDDDD">
+                            <div class="messages_list_item_form clearfix">
+                                <div class="messages_list_item_form_cont">
+                                    <h6>Message Status</h6>
+                                    <p> <span id="lblMessages"> Message unread by  {{messages.NAME}} : New mesage from  {{messages.NAME}} :
+                                         </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                            <div> </div>
+                        </div><label id="lblCustIDs6" style="display:none;">{{messages.CustID}}</label>
+                        <label id="lblReviewID6" style="display:none;">{{messages.IsReviewd}}</label><label id="lblMessageHistoryID6" style="display:none;">{{messages.Cust_MessageHistory_Id}}</label>
+                        <label id="lblMessageLinkID6" style="display:none;">{{messages.Cust_MessageLink_Id}}</label>
+                        <label id="lblMseeageProfileID6" style="display:none;">{{messages.ProfileID}}</label><label id="lblRowCount6" style="display:none;">{{messages.chatFlag}}</label></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br>
+            <div class='row col-lg-10'>
+                <div class="col-lg-offset-6" ng-show=loadmoreexpress>
+                    <a href="javascript:void(0);" ng-click="allloadmorepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+                </div>
+                <div class="col-lg-offset-6" ng-show=spinexpress>
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                </div>
+                <div class="col-lg-offset-3 text-center" ng-show=Norowsendexpress>
+                    <h3 style="color: maroon;">End</h3>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

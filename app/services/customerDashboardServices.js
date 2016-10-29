@@ -5,6 +5,15 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         getcustomerpartnerdata: function(custid, typeofaction, frompage, topage) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
+        },
+        getexpressintersetdata: function(object) {
+            debugger;
+            return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object);
+
+        },
+        getCustometDashBoardchats: function(object) {
+            debugger;
+            return http.get(app.apiroot + 'DashboardRequest/getCustometExpressIntrestDashBoardchats', { params: object });
         }
     };
 }]);

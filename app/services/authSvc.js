@@ -85,6 +85,7 @@ app.factory('authSvc', ['$injector', function($injector) {
             clearUserSession();
         },
         login: function(username, password) {
+            debugger;
             var body = {
                 Username: username,
                 Password: password

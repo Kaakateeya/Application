@@ -1,0 +1,23 @@
+<script type="text/ng-template" id="dynamicalert.html">
+    <div class="modal-header">
+        <h3 class="modal-title text-center" id="modal-title">Mail Preview </h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <ul>
+            <li class="clearfix">
+                <label id="lblabout" style="color: #9b2828; font-size: 13px;">
+            	 (Please don't write phone numbers/emails/any junk characters)*</label>
+                <textarea ng-model="txtAboutUS" style="width: 500px; height: 150px;" class="col-lg-10" maxlength="1000" required ng-class="aboutForm.$invalid==true && aboutForm.gg?'form-control danger':''" />
+                <div>
+                </div>
+                <label id="Label1" style="color: red; font-size: 13px;" class="pull-right">(max 1000 characters)</label>
+                <label id="lblaboutcount" style="color: #1e1c1c; font-size: 13px;">{{aboutForm.txtAboutUS.length}}</label>
+            </li>
+        </ul>
+
+    </div>
+    <div class="modal-footer">
+        <input value="Cancel" id="btnEduCancel" class="button_custom button_custom_reset" ng-click="cancel();" type="submit">
+        <input value="Submit" id="btnEduSubmit" class="button_custom" type="button">
+    </div>
+</script>

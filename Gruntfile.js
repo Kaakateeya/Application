@@ -41,20 +41,9 @@ module.exports = function(grunt) {
             },
             build: {
                 files: [{
-                        'dist/css/homepage.min.css': ['src/css/bootstrap.min.css', 'src/css/styleshome.css', 'src/css/styleshomerespinsive.css',
-                            'node_modules/font-awesome/css/font-awesome.min.css', 'src/css/bootstrap-responsive.min.css', 'src/css/stylekaakateeya.css',
-                            'style_responsive.css', 'src/css/uniform.default.css', 'src/css/chosen.css', 'src/css/jquery-css.css', 'src/css/bootstrap-fileupload.css',
-                            'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
-                            'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css', 'src/css/bootsrsapinner.min.css'
-                        ]
-                    },
-                    {
-                        'dist/css/inner.min.css': ['src/css/bootsrsapinner.min.css', 'node_modules/font-awesome/css/font-awesome.min.css', 'src/css/bootstrap-responsive.min.css', 'src/css/stylekaakateeya.css',
-                            'style_responsive.css', 'src/css/uniform.default.css', 'src/css/chosen.css', 'src/css/jquery-css.css', 'src/css/bootstrap-fileupload.css',
-                            'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
-                            'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css'
-                        ]
+                        'dist/css/main.min.css': 'dist/src/main.css'
                     }
+
                 ]
 
             }
@@ -121,9 +110,29 @@ module.exports = function(grunt) {
             },
         },
         concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */',
+                banner: "'use strict';\n",
+                // process: function(src, filepath) {
+                //     return '// Source: ' + filepath + '\n' +
+                //         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                // },
+                // separator: ';'
+            },
             js: { //target
                 src: ['app/**/*.js'],
                 dest: 'dist/src/mainnew.js'
+            },
+            css: {
+                src: ['src/css/bootstrap.min.css', 'src/css/styleshome.css', 'src/css/styleshomerespinsive.css',
+                    'node_modules/font-awesome/css/font-awesome.min.css', 'src/css/bootstrap-responsive.min.css', 'src/css/stylekaakateeya.css',
+                    'style_responsive.css', 'src/css/uniform.default.css', 'src/css/chosen.css', 'src/css/jquery-css.css', 'src/css/bootstrap-fileupload.css',
+                    'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
+                    'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css', 'src/css/bootsrsapinner.min.css'
+                ],
+                dest: 'dist/src/main.css'
             }
         }
 

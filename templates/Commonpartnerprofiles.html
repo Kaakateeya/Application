@@ -1,7 +1,7 @@
 <div class="clearfix" style="padding: 0 0 0 0;">
-    <div id="View" class="content-View clearfix pull-right" ng-show="true">
-        <a id="lnkgrid" class="gridk_view icon-list" title="Grid View" ng-click="typeofdiv='List'" style="cursor: pointer;" />
-        <a id="lnklist" class="normal_view icon-grid" title="List View" ng-click="typeofdiv='Grid'" style="cursor: pointer;" />
+    <div id="View" class="content-View clearfix pull-right" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
+        <a id="lnkgrid" class="gridk_view icon-list" title="Grid View" ng-click="typeofdiv='List'" style="cursor: pointer;display:none;" />
+        <a id="lnklist" class="normal_view icon-grid" title="List View" ng-click="typeofdiv='Grid'" style="cursor: pointer;display:none;" />
     </div>
 </div>
 <div id="PartnerProfilles">
@@ -117,7 +117,7 @@
         </div>
     </div>
 </div>
-<div class='row col-lg-10'>
+<div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
     <div class="col-lg-offset-5" ng-show=loadmore>
 
         <a href="javascript:void(0);" ng-click="directivepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>

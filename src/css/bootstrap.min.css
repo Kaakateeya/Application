@@ -5094,7 +5094,8 @@ input[type="submit"].btn.btn-mini {
     background-color: #fff
 }
 
-.modal-backdrop {
+
+/*.modal-backdrop {
     position: fixed;
     top: 0;
     right: 0;
@@ -5105,6 +5106,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal-backdrop.fade {
+    filter: alpha(opacity=0);
     opacity: 0
 }
 
@@ -5115,17 +5117,17 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    z-index: 1050;
-    width: 560px;
-    margin-left: -280px;
-    background-color: #fff;
-    border: 1px solid #999;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    *border: 1px solid #999;
-    -webkit-border-radius: 6px;
+    position: fixed !important;
+    top: 10% !important;
+    left: 50% !important;
+    z-index: 1050 !important;
+    width: 560px !important;
+    margin-left: -280px !important;
+    background-color: #fff !important;
+    border: 1px solid #999 !important;
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+    *border: 1px solid #999 !important;
+    -webkit-border-radius: 6px !important;
     -moz-border-radius: 6px;
     border-radius: 6px;
     outline: 0;
@@ -5211,7 +5213,7 @@ input[type="submit"].btn.btn-mini {
 
 .modal-footer .btn-block+.btn-block {
     margin-left: 0
-}
+}*/
 
 .tooltip {
     position: absolute;
