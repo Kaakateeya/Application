@@ -2,6 +2,10 @@
 
 // our wrapper function (required by grunt and its plugins)
 // all configuration goes inside this function
+var fs = require('fs');
+var packageJson = JSON.parse(fs.readFileSync('./package.json'));
+var plugins=packageJson.buildSettings.plugins;
+var css=packageJson.buildSettings.css;
 module.exports = function(grunt) {
 
     // ===========================================================================
@@ -31,7 +35,7 @@ module.exports = function(grunt) {
             build: {
                 files: {
 
-                    'dist/js/main.min.js': ['dist/src/mainnew.js']
+                    'dist/js/main.min.js': ['dist/src/main.js']
                 }
             }
         },
@@ -76,14 +80,7 @@ module.exports = function(grunt) {
                 files: [{
                     // Target-specific file lists and/or options go here. 
                     'index.html': [
-                        ['src/js/jquery-1.8.3.min.js', 'src/js/jquery.alert.js', 'src/js/scriptsKaakateeya.js', 'src/js/GI.TheWall.min.js', 'src/js/bootstrap-multiselect.js',
-                            'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache', 'src/js/scrollgress.js', 'src/js/jquery.blockui.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
-                            'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
-                            'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
-                            'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
-                            'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
-                            'bower_components/angular-ui-router-styles/ui-router-styles.js', 'index.js'
-                        ], 'app/**/*.js',
+                        plugins, 'index.js', 'app/**/*.js'
                     ]
                 }],
             },
@@ -96,15 +93,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // Target-specific file lists and/or options go here. 
-                    'index.html': [
-                        ['src/js/jquery-1.8.3.min.js', 'src/js/jquery.alert.js', 'src/js/scriptsKaakateeya.js', 'src/js/GI.TheWall.min.js', 'src/js/bootstrap-multiselect.js',
-                            'src/js/jquery-ui.js', 'src/js/lhnchatbutton-current.min.cache', 'src/js/scrollgress.js', 'src/js/jquery.blockui.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'bower_components/angular/angular.min.js',
-                            'node_modules/angular-ui-router/release/angular-ui-router.min.js', 'node_modules/underscore/underscore-min.js',
-                            'bower_components/angular-re-captcha/angular-re-captcha.js', 'bower_components/angular-ui-router-styles/ui-router-styles.js',
-                            'http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js',
-                            'node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js',
-                            'bower_components/angular-ui-router-styles/ui-router-styles.js', 'index.js'
-                        ], 'dist/js/*.js'
+                    'index.html': [plugins 'index.js', 'dist/js/*.js'
                     ]
                 },
             },
@@ -123,15 +112,10 @@ module.exports = function(grunt) {
             },
             js: { //target
                 src: ['app/**/*.js'],
-                dest: 'dist/src/mainnew.js'
+                dest: 'dist/src/main.js'
             },
             css: {
-                src: ['src/css/bootstrap.min.css', 'src/css/styleshome.css', 'src/css/styleshomerespinsive.css',
-                    'node_modules/font-awesome/css/font-awesome.min.css', 'src/css/bootstrap-responsive.min.css', 'src/css/stylekaakateeya.css',
-                    'style_responsive.css', 'src/css/uniform.default.css', 'src/css/chosen.css', 'src/css/jquery-css.css', 'src/css/bootstrap-fileupload.css',
-                    'src/css/custom_styles.css', 'src/css/custom_responsive.css', 'src/css/GITheWall.css', 'src/css/CustomerSearchResult_New.css',
-                    'src/css/dashBoard.css', 'src/css/allimagesClasses.css', 'node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css', 'src/css/bootsrsapinner.min.css'
-                ],
+                src: css,
                 dest: 'dist/src/main.css'
             }
         }

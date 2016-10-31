@@ -1,26 +1,41 @@
-app.factory('alert', ['$uibModal', function(uibModal) {
+app.factory('alert', function() {
     return {
-        open: function(scope, url, classname) {
-            classname = classname || "alert alert-info";
-            scope.modalInstance = uibModal.open({
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                template: ' <div class="modal-header ' + classname + '">' +
-                    '<h3 class="modal-title text-center" id="modal-title">Mail Preview </h3>' +
-                    '</div>' +
-                    ' <div class="modal-body" id="modal-body">' +
-                    ' ggggg'
-
-                    +
-                    ' </div>' +
-                    '<div class="modal-footer">' +
-                    '<input value="Cancel" id="btnEduCancel" class="button_custom button_custom_reset" ng-click="cancel();" type="submit">' +
-                    '  <input value="Submit" id="btnEduSubmit" class="button_custom" type="button">' +
-                    ' </div>',
-                openedClass: classname,
-                scope: scope,
-                backdropClass: classname
-            });
+        open: function(scope, msg, classname) {
+            classname = classname || "success";
+            toastr.options = {
+              "closeButton": true,
+              "debug": true,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": scope.postion || app.global.alertType,
+              "preventDuplicates": false,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": 5000,
+              "extendedTimeOut": 2000,
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "onclick":null
+            }
+            switch(classname){
+                case 'success':
+                toastr.success("<div class=Jumbotron><span id=helpBlock>A block of help text that breaks onto a new line and may extend beyond one line.</span></div>","done");
+                break;
+                case 'error':
+                toastr.error(msg, 'Oops');
+                break;
+                case 'warning':
+                toastr.warning(msg, 'Alert');
+                break;
+                case 'info':
+                toastr.info(msg, 'Info');
+                break;
+                default:
+                toastr.success(msg, 'Done');
+                break;
+            }
         }
     }
-}]);
+});

@@ -204,7 +204,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
     });
 
     scope.zerorecorsalert = function() {
-        alert.open(scope, "dynamicalert.html", "alert alert-danger");
+        alert.open();
     };
     scope.loadmorehideshow = function() {
         debugger;
