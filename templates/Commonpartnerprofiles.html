@@ -1,7 +1,7 @@
 <div class="clearfix" style="padding: 0 0 0 0;">
     <div id="View" class="content-View clearfix pull-right" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
-        <a id="lnkgrid" class="gridk_view icon-list" title="Grid View" ng-click="typeofdiv='List'" style="cursor: pointer;display:none;" />
-        <a id="lnklist" class="normal_view icon-grid" title="List View" ng-click="typeofdiv='Grid'" style="cursor: pointer;display:none;" />
+        <a id="lnkgrid" class="gridk_view icon-list" title="Grid View" ng-click="typeofdiv='List'" style="cursor: pointer;" />
+        <a id="lnklist" class="normal_view icon-grid" title="List View" ng-click="typeofdiv='Grid'" style="cursor: pointer;" />
     </div>
 </div>
 <div id="PartnerProfilles">
@@ -66,7 +66,6 @@
                 <ul>
                     <li>
                         <img title="Mobile" ng-class="typeofdiv==='Grid'?'mobile-icon':'mobile-icon_list'"></img>
-
                     </li>
                     <li>
                         <img title="Emails" ng-class="typeofdiv==='Grid'?'message-icon':'message-icon_list'"></img>
@@ -80,33 +79,29 @@
             <div ng-class="typeofdiv==='Grid'?'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid':'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
                 <ul>
                     <li>
-
-
-                        <div style="margin-top: 5px;"><img title="BookMark" ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" style="color: Black;float:left;" />
+                        <div style="margin-top: 5px;">
+                            <div ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" ng-click="serviceactions('B','data.Cust_ID','data.mybookmarked')" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                  BOOKMARK
                    </span></div>
                     </li>
                     <li>
-
-
-                        <div style="padding:5px 6px 12px 12px;"><img title="Expressinterest" ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" style="color: Black;float:left;" />
+                        <div style="padding:5px 6px 12px 12px;">
+                            <div ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" ng-click="serviceactions('E','data.Cust_ID','data.ExpressFlag')" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                          EXPRESS INTEREST
                             </span></div>
                     </li>
                     <li>
-
-
-                        <div style="padding: 5px 6px 7px 12px;"><img title="Message" ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" style="color: Black;float:left;" />
+                        <div style="padding: 5px 6px 7px 12px;">
+                            <div ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" ng-click="serviceactions('M','data.Cust_ID')" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                    MESSAGE
                         </span></div>
                     </li>
                     <li>
-
-
-                        <div style="padding: 5px 6px 11px 12px;"><img title="Ignore" ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" style="color: Black;float:left;" />
+                        <div style="padding: 5px 6px 11px 12px;">
+                            <div ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" ng-click="serviceactions('I','data.Cust_ID','data.ignode')" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                        IGNORE
                           </span></div>
@@ -119,18 +114,15 @@
 </div>
 <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
     <div class="col-lg-offset-5" ng-show=loadmore>
-
         <a href="javascript:void(0);" ng-click="directivepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
     </div>
     <div class="col-lg-offset-5" ng-show=loaderspin>
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-
     </div>
     <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
         <h3 style="color: maroon;">End</h3>
     </div>
 </div>
-
 <style type="text/css">
     .spandisplay {
         display: none;

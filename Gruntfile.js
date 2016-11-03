@@ -4,8 +4,8 @@
 // all configuration goes inside this function
 var fs = require('fs');
 var packageJson = JSON.parse(fs.readFileSync('./package.json'));
-var plugins=packageJson.buildSettings.plugins;
-var css=packageJson.buildSettings.css;
+var plugins = packageJson.buildSettings.plugins;
+var css = packageJson.buildSettings.css;
 module.exports = function(grunt) {
 
     // ===========================================================================
@@ -93,8 +93,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // Target-specific file lists and/or options go here. 
-                    'index.html': [plugins 'index.js', 'dist/js/*.js'
-                    ]
+                    'index.html': [plugins, 'index.js', 'dist/js/*.js']
                 },
             },
         },
@@ -123,10 +122,10 @@ module.exports = function(grunt) {
 
 
     });
-    grunt.registerTask('default', ['jshint', 'cssmin', 'scriptlinker:dev']);
+    grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev']);
 
     // this task will only run the dev configuration 
-    grunt.registerTask('dev', ['jshint', 'cssmin', 'scriptlinker:dev']);
+    grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev']);
 
     // only run production configuration 
     grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod']);

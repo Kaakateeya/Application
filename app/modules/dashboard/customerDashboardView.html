@@ -37,8 +37,7 @@
                 <h4>personalised services</h4>
                 <ul>
                     <li>
-                        <a ng-repeat="item in leftMenuArr" ng-click="item.bindvalue===null?'':gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind)" ng-if="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null"
-                        > ({{item.bindvalue}})</span></a>
+                        <a ng-repeat="item in leftMenuArr" ng-click="item.bindvalue!=null && item.bindvalue!=0?gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind):zerorecorsalert()" ng-show="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null"> ({{item.bindvalue}})</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -100,7 +99,7 @@
                                             <span id="lblSubHeaderchats"></span>
                                         </h5>
                                         <div id="uplnknewchat" class="clearfix">
-                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv(463,1,9)">
+                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.NewMsgs==0) ? zerorecorsalert() :chatsdiv(1,9,463,'Total Messages')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagechat" class="icon-spl-4"></div>
@@ -108,7 +107,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDmsgs">New({{bindallcounts.NewMsgs}})</span></a>
-                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv('',1,9)">
+                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.TotalMsgs==0) ? zerorecorsalert() :chatsdiv(1,9,'','Total Messages')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Img2" class="icon-spl-2"></div>
@@ -137,7 +136,7 @@
                                             <span id="lblSubHeaderReq">Received</span>
                                         </h5>
                                         <div id="uplnknewReq" class="clearfix">
-                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
+                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RP','Members are requesting to upload your photo','Requestphotos')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimageReq" class="icon-spl-4"></div>
@@ -145,7 +144,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsReceivedReq">RecPhoto({{bindallcounts.ReceivedPhotoRequestCount}})</span></a>
-                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
+                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RH','Members are requesting to upload your horoscope','Requestphotos')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Req" class="icon-spl-8"></div>
@@ -160,7 +159,7 @@
                                             <span id="lblSubHeader1">Sent</span>
                                         </h5>
                                         <div id="uplnknew1" class="clearfix">
-                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
+                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SP','Members photo request is sent by you','Requestphotos')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimage1" class="icon-spl-1"></div>
@@ -168,7 +167,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsSentReq">SentPhoto({{bindallcounts.SentPhotoRequestCount}})</span></a>
-                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="reqphotos()">
+                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SH','Members horoscope request is sent by you','Requestphotos')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image21" class="icon-spl-2"></div>
@@ -197,7 +196,7 @@
                                             <span id="lblSubHeaderpassword">Received</span>
                                         </h5>
                                         <div id="uplnknewpassword" class="clearfix">
-                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RN','Members are awaiting to view your photograph','RequestPassword')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagepassword" class="icon-spl-1"></div>
@@ -205,7 +204,7 @@
                                                     
                                                     </small>
                                                 <span id="lnkNewIDsReceivedProtec">New({{bindallcounts.ReceivedProtectedNew}})</span></a>
-                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RA','Members request has been accepted to view your photograph','RequestPassword')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2password" class="icon-spl-2"></div>
@@ -213,7 +212,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkACCEPTEDReceivedProtec">Accepted({{bindallcounts.ReceivedProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RR','Members requests are rejected','RequestPassword')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3password" class="icon-spl-9"></div>
@@ -228,7 +227,7 @@
                                             <span id="lblSubHeadersentpassword">Sent</span>
                                         </h5>
                                         <div id="uplnknewsendpassword" class="clearfix">
-                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SN','Members are still waiting to accept your request','RequestPassword')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagesentpassword" class="icon-spl-4"></div>
@@ -236,7 +235,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkNewIDsSentProtec">Reply Pending({{bindallcounts.SentProtectedReply}})</span></a>
-                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SA','Members have accepted your request','RequestPassword')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2sendpassword" class="icon-spl-5"></div>
@@ -244,7 +243,7 @@
                                                      
                                                     </small>
                                                 <span id="lnkACCEPTEDSentProtec">Accepted({{bindallcounts.SentProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="reqphotopasswordclick()">
+                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SR','Members have rejected','RequestPassword')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3sendpassword" class="icon-spl-6"></div>
@@ -353,11 +352,11 @@
                                 <div class="tab-pane fade in active" id="match1">
                                     <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
                                         <div class="sugested_block sugested_block_top" id="ExpressDiv1">
-                                            <div class="sugested_block_top_lft"> <span class="cssMaskdiv clearfix Linkdisabled"><img style="height: 150px;width: 150px;"
+                                            <div class="sugested_block_top_lft"> <span class=""><img style="height: 150px;width: 150px;"
                                              src="{{expressint.Photo}}" alt="sugested" /></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
-                                                <h2>{{expressint.NAME}} {{expressint.ProfileID}}</h2>
+                                                <h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2>
                                                 <ul>
                                                     <li><span>{{expressint.Age}}</span></li>
                                                     <li><span>{{expressint.Caste}}</span></li>
@@ -368,11 +367,11 @@
                                                 <div class="clear"></div>
                                                 <div class="sugested_block_top_skip">
                                                     <ul>
-                                                        <li style="display:none;"><a class="active" href="javascript:void(0);">View Full Profile</a></li>
-                                                        <li style="display:none;"><a class="active" href="javascript:void(0);" style="width: 150px;">Proceed</a></li>
-                                                        <li style="display:none"><a href="javascript:void(0);">skip this profile</a></li>
-                                                        <li style="display:block;"><a class="active" href="javascript:void(0);">view Contacts</a></li>
-                                                        <li style="color: #ab1818;display:block;"><a class="active" href="javascript:void(0);" id="communication1">communication history</a></li>
+                                                        <li ng-style="expressint.Mystatus =='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);">View Full Profile</a></li>
+                                                        <li ng-style="expressint.Mystatus == 'Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus =='Not Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" style="width: 150px;">Proceed</a></li>
+                                                        <li ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped'?{'display':'none'}:{'display':'block'}"><a href="javascript:void(0);">skip this profile</a></li>
+                                                        <li ng-style="expressint.Mystatus=='Proceed'?{'display':'block'}:{'display':'none'}"><a class='active' href='javascript:void(0);'>view Contacts</a></li>
+                                                        <li style="color: #ab1818;" ng-if="expressint.CommunicationHistoryFlag == 1"><a class='active' href="javascript:void(0);" id="communication1">communication history</a></li>
                                                     </ul>
                                                     <div class="clear"></div>
                                                 </div>
@@ -380,22 +379,27 @@
                                             <div class="clear"></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-5 col-lg-offset-1"><label class="" style="width: 101px;float: left;">Your Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.Mystatus}}</label>
-                                                <a style="display:block;" href="javascript:void(0);">View Full Profile</a>
+                                            <div class="col-lg-5 col-lg-offset-1"><label class="" style="width: 101px;float: left;">Your Status :</label><label class='control-label' style='float: left;width:120px;' ng-style="expressint.Mystatus === 'Proceed' || expressint.Mystatus === 'Skipped'?{'display':'block'}:{'display':'none'}">
+                                                {{expressint.Mystatus}}</label><a href='javascript:void(0);' style='float: left;width:120px;display:none;' ng-style="expressint.Mystatus != 'Proceed' || expressint.Mystatus != 'Skipped'?{'display':'none'}:{'display':'block'}">{{expressint.Mystatus}}</a>
+                                                <a ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'block'}:{'display':'none'}" href="javascript:void(0);">View Full Profile</a>
                                             </div>
                                             <div class="col-lg-6"><label class="" style="width: 109px;float: left;">{{Gendercustomer}} Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.OppStatus}}</label></div>
                                         </div>
                                         <div class="sugested_block_branch">
                                             <div class="sugested_block_branch_lft">
                                                 <h3>Services given branch:<span style="padding: 0 0 0 10px;">{{expressint.ServiceGivenBanch}}</span></h3>
-                                                <h3 class="no-padding">Relationship manager (RM):<em style="padding: 0 0 0 10px;">{{expressint.RelationShipManagerName}}</em><span class="no-padding">  91 - {{expressint.RelationShipManagerNumber}}<a href="javascript:void(0);">,
-                                                    {{expressint.RelationShipManagerEmail}}</a> </span></h3>
+                                                <h3 class="no-padding" ng-if="expressint.RelationShipManagerName != null && expressint.RelationShipManagerName != undefined">Relationship manager (RM):<em style="padding: 0 0 0 10px;">{{expressint.RelationShipManagerName}}</em>
+                                                    <span class="no-padding
+                                                          "> 91 - {{expressint.RelationShipManagerNumber}}<a href="javascript:void(0);">,
+                                                    {{expressint.RelationShipManagerEmail}}</a> </span>
+                                                </h3>
+                                                <h3 ng-if="expressint.RelationShipManagerName == null || expressint.RelationShipManagerName == undefined" class='no-padding'>Relationship manager (RM):<em> venkat - 9848344977</em></h3>
                                             </div>
                                             <div class="sugested_block_branch_rht"><a href="javascript:void(0);" style="width: 150px;display:block;">Message To RM</a></div>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="sugested_block_note">
-                                            <h4>Note: <span>This profile suggested by employee  -</span><em>{{expressint.SuggestEmpName}}- </em><span>Ph: </span><em>{{expressint.SuggestedEmpNumber}}</em></h4>
+                                            <h4 ng-if="expressint.SuggestionFlag == 1">Note: <span>This profile suggested by employee  -</span><em>{{expressint.SuggestEmpName}}- </em><span>Ph: </span><em>{{expressint.SuggestedEmpNumber}}</em></h4>
                                         </div>
                                     </div>
 
@@ -405,15 +409,16 @@
                         <!-- Suggested Matches Block  /-->
                     </div>
                 </div>
-                <div id="MessagesDiv" style="display: block;">
+                <div id="MessagesDiv" ng-style="typeofdiv==='chats' ?{ 'display': 'block'}:{ 'display': 'none'}">
                     <div class="messages_list_item clearfix" ng-repeat="messages in PartnerProfilesnew">
-                        <div class="messages_list_item_lt"> <span class="cssMaskdiv clearfix Linkdisabled">                           
+                        <div class="messages_list_item_lt"> <span class="">                           
                              <img id="Iimagesdisplay" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_91035_Images/img1_Images/210910352_ApplicationPhoto.jpg" style="height:120px;width:120px;"></span>
                         </div>
                         <div class="messages_list_item_rt">
                             <p> Member Id : <span id="lblMseeageProfileID">{{messages.ProfileID}}</span></p>
                             <p><span id="lblName">{{messages.NAME}}</span></p>
-                            <p class="Messages_profile_view clearfix"> <span id="lblAge">{{messages.Age}}</span><span id="lblCastIDs">{{messages.Caste}}</span><span id="lblheight">{{messages.Height}}</span> <span id="lblEducation">{{messages.Education}}</span>
+                            <p class="Messages_profile_view clearfix"> <span id="lblAge">{{messages.Age}}</span>
+                                <span id="lblCastIDs">{{messages.Caste}}</span><span id="lblheight">{{messages.Height}}</span> <span id="lblEducation">{{messages.Education}}</span>
                                 <span id="lblProfessionID">{{messages.profession}}</span></p>
                             <div class="messages_list_item_ui clearfix">
                                 <div id="updateContentKK">
@@ -445,10 +450,97 @@
                         <label id="lblMessageLinkID6" style="display:none;">{{messages.Cust_MessageLink_Id}}</label>
                         <label id="lblMseeageProfileID6" style="display:none;">{{messages.ProfileID}}</label><label id="lblRowCount6" style="display:none;">{{messages.chatFlag}}</label></div>
                 </div>
+
+                <div id="uctrlRequests" ng-style="typeofdiv==='Requestphotos' ?{ 'display': 'block'}:{ 'display': 'none'}">
+                    <div ng-repeat="requestphotos in PartnerProfilesnew">
+                        <div class="messages_list_item clearfix">
+                            <div class="messages_list_item_lt"> <span class="">  
+                                 <img src="http://kaakateeya.com/Customer_new/CutomerImages/List%20page/Mnoimage.jpg"> </span> </div>
+                            <div class="messages_list_item_rt">
+                                <p> Member Id :<span>{{requestphotos.ProfileID}}</span> </p>
+                                <p> <span>{{requestphotos.NAME}}</span> </p>
+                                <p class="Messages_profile_view clearfix"> <span>{{requestphotos.Age}}</span><span>{{requestphotos.Caste}}</span><span>{{requestphotos.Height}}</span><span>{{requestphotos.Education}}</span><span>{{requestphotos.profession}}</span> </p>
+                                <div class="messages_list_item_ui clearfix">
+                                    <div>
+                                        <ul>
+                                            <li class="clearfix"> <a href="javascript:void(0);">View Complete Profile</a></li>
+                                            <li class="clearfix"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="messages_list_item_rt_rcdate messages_list_item_rt_rcdate2">
+                                    <p> Request sent Date : <span>{{requestphotos.RequestDate}}</span> </p>
+                                </div>
+                                <p> <span></span></p>
+                                <div></div>
+                                <p></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div></div>
+                    </div>
+
+                </div>
+                <div id="uctrlPhotoPassword" ng-style="typeofdiv==='Requsetpassword' ?{ 'display': 'block'}:{ 'display': 'none'}">
+                    <div class='messages_list_item clearfix' ng-repeat="passwordrequest in PartnerProfilesnew">
+                        <div class='messages_list_item_lt'>
+                            <span class='photoclass'>
+                        <img src="{{passwordrequest.Photo}}">
+                         </span>
+                        </div>
+                        <div class='messages_list_item_rt'>
+                            <p>
+                                Member Id :
+                                <span>{{passwordrequest.ProfileID }} </span>
+                            </p>
+                            <p>
+                                <span>{{passwordrequest.NAME}} </span><span style='display: none;'></span>
+                            </p>
+                            <p class='Messages_profile_view clearfix'>
+
+                                <span>{{passwordrequest.Age}} </span><span>{{passwordrequest.Caste}} </span><span>{{passwordrequest.Height}} </span><span>{{passwordrequest.Education}} </span><span>{{passwordrequest.profession}} </span>
+                            </p>
+                            <div class='messages_list_item_ui clearfix'>
+                                <div>
+                                    <ul>
+                                        <li class='clearfix'>
+
+                                            <a href='javascript:void(0);'>View Complete Profile</a></li>
+                                        <li class='clearfix'></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class='messages_list_item_rt_rcdate' style='background-image: url(../images/interest_icon2.png);'>
+                                <p>
+                                    Request sent Date :
+                                    <span>{{passwordrequest.RequestDate}} </span>
+                                </p>
+                            </div>
+
+                            <div>
+                                <div class='messages_list_item_ui exprss_intrst_ui clearfix'>
+                                    <ul id='PhotoPassword   passwordCount'>
+                                        <li class='clearfix'>
+                                            <a href='javascript:void(0);'>Accept</a></li>
+                                        <li class='clearfix'>
+                                            <a href='javascript:void(0);'>Reject</a></li>
+                                        <input name='hdnAcceptReject' id='hdnAcceptReject' type='hidden' />
+                                    </ul>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class='clear'></div>
+                    </div>
+                </div>
             </div>
             <div class="clearfix"></div>
             <br>
-            <div class='row col-lg-10'>
+            <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'none'}:{'display':'block'}">
                 <div class="col-lg-offset-6" ng-show=loadmoreexpress>
                     <a href="javascript:void(0);" ng-click="allloadmorepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
                 </div>
@@ -461,5 +553,18 @@
             </div>
         </div>
     </div>
+    <script type="text/ng-template" id="myModalContent.html">
 
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="commontitle" style="color: black;">Enter your message here</h4>
+            </div>
+            <div class="modal-body" id="commonbody">
+                <div class="row col-lg-offset-1"><textarea name="ctl00$ContentPlaceHolder1$PartnerProfilles$txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" allowhtmlmode="true" class="col-lg-10"></textarea></div>
+            </div>
+            <div class="modal-footer" id="commonfooter"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary" ng-click="sendmessages()">Send Message</button></div>
+        </div>
+
+    </script>
 </div>

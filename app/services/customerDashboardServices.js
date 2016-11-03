@@ -12,8 +12,10 @@ app.factory('customerDashboardServices', ['$http', function(http) {
 
         },
         getCustometDashBoardchats: function(object) {
-            debugger;
             return http.get(app.apiroot + 'DashboardRequest/getCustometExpressIntrestDashBoardchats', { params: object });
+        },
+        insertcustomerservices: function(object) {
+            return http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object);
         }
     };
 }]);
