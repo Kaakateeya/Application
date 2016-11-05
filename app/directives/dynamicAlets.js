@@ -1,4 +1,5 @@
 app.factory('alert', function() {
+    var modalinstance;
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -21,7 +22,7 @@ app.factory('alert', function() {
             };
             switch (classname) {
                 case 'success':
-                    toastr.success("<div class=Jumbotron><span id=helpBlock>A block of help text that breaks onto a new line and may extend beyond one line.</span></div>", "done");
+                    toastr.success(msg, "done");
                     break;
                 case 'error':
                     toastr.error(msg, 'Oops');
@@ -37,16 +38,10 @@ app.factory('alert', function() {
                     break;
             }
         },
-        // dynamicpopup: function(size, template, params) {
-        //     return uibModal.open({
-        //         ariaLabelledBy: 'modal-title',
-        //         ariaDescribedBy: 'modal-body',
-        //         templateUrl: 'myModalContent.html',
-        //     });
-        // }
+
         dynamicpopup: function(url, scope, uibModal, custid) {
             debugger;
-            uibModal.open({
+            modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: url,
@@ -55,7 +50,7 @@ app.factory('alert', function() {
         },
 
         dynamicpopupclose: function() {
-
+            modalinstance.close();
         }
     };
 });

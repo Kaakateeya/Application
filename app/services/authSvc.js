@@ -77,6 +77,9 @@ app.factory('authSvc', ['$injector', function($injector) {
         getCustId: function() {
             return getSession('cust.id');
         },
+        getProfileid: function() {
+            return getSession('cust.profileid');
+        },
         clearUserSessionDetails: function() {
             return clearUserSession();
         },

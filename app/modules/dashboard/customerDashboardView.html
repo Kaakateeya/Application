@@ -367,11 +367,12 @@
                                                 <div class="clear"></div>
                                                 <div class="sugested_block_top_skip">
                                                     <ul>
-                                                        <li ng-style="expressint.Mystatus =='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);">View Full Profile</a></li>
+                                                        <li ng-style="expressint.Mystatus =='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" ng-click="redirectToGoogle()">View Full Profile</a></li>
                                                         <li ng-style="expressint.Mystatus == 'Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus =='Not Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" style="width: 150px;">Proceed</a></li>
                                                         <li ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped'?{'display':'none'}:{'display':'block'}"><a href="javascript:void(0);">skip this profile</a></li>
-                                                        <li ng-style="expressint.Mystatus=='Proceed'?{'display':'block'}:{'display':'none'}"><a class='active' href='javascript:void(0);'>view Contacts</a></li>
-                                                        <li style="color: #ab1818;" ng-if="expressint.CommunicationHistoryFlag == 1"><a class='active' href="javascript:void(0);" id="communication1">communication history</a></li>
+                                                        <li ng-style="expressint.Mystatus=='Proceed'?{'display':'block'}:{'display':'none'}"><a class='active' href='javascript:void(0);' ng-click="viewcontacts(expressint.Cust_ID,expressint.RelationShipManagerNumber
+																,expressint.RelationShipManagerEmail,expressint.PhoneNumber,expressint.Email)">view Contacts</a></li>
+                                                        <li style="color: #ab1818;" ng-if="expressint.CommunicationHistoryFlag == 1"><a class='active' href="javascript:void(0);" id="communication1" ng-click="messagetorm('Ticket',expressint.Cust_ID,expressint.NAME,expressint.ProfileID,expressint.LogID,expressint.TicketID)">communication history</a></li>
                                                     </ul>
                                                     <div class="clear"></div>
                                                 </div>
@@ -381,7 +382,7 @@
                                         <div class="row">
                                             <div class="col-lg-5 col-lg-offset-1"><label class="" style="width: 101px;float: left;">Your Status :</label><label class='control-label' style='float: left;width:120px;' ng-style="expressint.Mystatus === 'Proceed' || expressint.Mystatus === 'Skipped'?{'display':'block'}:{'display':'none'}">
                                                 {{expressint.Mystatus}}</label><a href='javascript:void(0);' style='float: left;width:120px;display:none;' ng-style="expressint.Mystatus != 'Proceed' || expressint.Mystatus != 'Skipped'?{'display':'none'}:{'display':'block'}">{{expressint.Mystatus}}</a>
-                                                <a ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'block'}:{'display':'none'}" href="javascript:void(0);">View Full Profile</a>
+                                                <a ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'block'}:{'display':'none'}" href="javascript:void(0);" ng-click="fullviewprofile(expressint.Cust_ID);">View Full Profile</a>
                                             </div>
                                             <div class="col-lg-6"><label class="" style="width: 109px;float: left;">{{Gendercustomer}} Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.OppStatus}}</label></div>
                                         </div>
@@ -395,7 +396,7 @@
                                                 </h3>
                                                 <h3 ng-if="expressint.RelationShipManagerName == null || expressint.RelationShipManagerName == undefined" class='no-padding'>Relationship manager (RM):<em> venkat - 9848344977</em></h3>
                                             </div>
-                                            <div class="sugested_block_branch_rht"><a href="javascript:void(0);" style="width: 150px;display:block;">Message To RM</a></div>
+                                            <div class="sugested_block_branch_rht"><a href="javascript:void(0);" style="width: 150px;display:block;" ng-click="messagetorm('RM',expressint.Cust_ID,expressint.NAME,expressint.ProfileID,expressint.LogID)">Message To RM</a></div>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="sugested_block_note">
@@ -557,13 +558,59 @@
 
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="commontitle" style="color: black;">Enter your message here</h4>
+                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                <h4 class="modal-title" id="commontitle" style="color: black;">{{modalpopupheadertext}}</h4>
             </div>
             <div class="modal-body" id="commonbody">
-                <div class="row col-lg-offset-1"><textarea name="ctl00$ContentPlaceHolder1$PartnerProfilles$txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" allowhtmlmode="true" class="col-lg-10"></textarea></div>
+                <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
+                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
+
+                <div id="communicationhistory" ng-if="modalbodyshow==3">
+                    <div class='row' ng-repeat="Ticket in Tickethistoryarray" ng-if="Ticket.TicketType=='INCOMING' || Ticket.TicketType=='OUT GOING'">
+                        <div class='col-lg-12 text-center' style='font-weight:bold;color: #2C2828;'>
+                            <c class='maroon'>{{Ticket.TicketInfo}}</c>
+                        </div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-5' style='color:maroon;'><label>Call Done By</label></div>
+                        <div class='col-lg-7'><label style='color:black;'>{{Ticket.EmployeeName}}</label></div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-5' style='color:maroon;'><label>Call Status</label></div>
+                        <div class='col-lg-7'><label><div style='color:black;'>{{Ticket.CallResult}}</div></label></div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-5' style='color:maroon;'><label>Call Received By</label></div>
+                        <div class='col-lg-7'><label><div style='color:black;'>{{Ticket.RelationName}} ({{Ticket.Relation}})</div></label></div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-12'><label style='color:maroon;'>Call Discussion</label>
+                            <div><label style='color:black;'>{{Ticket.Body}}</label></div>
+                        </div>
+                        <div class='clearfix'></div>
+                    </div>
+                    <div class='row' ng-repeat="Ticket in Tickethistoryarray" ng-if="Ticket.TicketType=='MatchFollowUpStatus' || Ticket.TicketType=='MatchFollowupReply'
+                    || Ticket.TicketType=='CLOSE' || Ticket.TicketType=='REPLY'">
+
+                        <div class='col-lg-12 text-center' style='font-weight:bold;color: #2C2828;'>
+                            <c class='maroon'>{{Ticket.TicketInfo}}</c>
+                        </div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-5' style='color:maroon;'><label>Customer Name</label></div>
+                        <div class='col-lg-7'><label><div style='color:black;'>{{Ticket.EmployeeName}}</div></label></div>
+                        <div class='clearfix'></div>
+                        <div class='col-lg-12'><label style='color:maroon;'>Comments</label>
+                            <div><label style='color:black;'>{{Ticket.Body}}</label></div>
+                        </div>
+                        <div class='clearfix'></div>
+                    </div>
+                    <br></div>
             </div>
-            <div class="modal-footer" id="commonfooter"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary" ng-click="sendmessages()">Send Message</button></div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="sendmessages(form)" ng-if="modalbodyshow==1">Send Message</button>
+                <button type="button" class="btn btn-primary" ng-click="sendmessagesRMM(form)" ng-if="modalbodyshow==2">Send Message</button>
+                <button type="button" class="btn btn-primary" ng-click="messagetorm('TH')" ng-if="modalbodyshow==3">MessageToRM</button>
+            </div>
+
+
         </div>
 
     </script>

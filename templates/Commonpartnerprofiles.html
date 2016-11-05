@@ -80,28 +80,28 @@
                 <ul>
                     <li>
                         <div style="margin-top: 5px;">
-                            <div ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" ng-click="serviceactions('B','data.Cust_ID','data.mybookmarked')" style="color: Black;float:left;cursor:pointer;" />
+                            <div ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" ng-click="serviceactions('B',data.Cust_ID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                  BOOKMARK
                    </span></div>
                     </li>
                     <li>
                         <div style="padding:5px 6px 12px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" ng-click="serviceactions('E','data.Cust_ID','data.ExpressFlag')" style="color: Black;float:left;cursor:pointer;" />
+                            <div ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" ng-click="serviceactions('E',data.Cust_ID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                          EXPRESS INTEREST
                             </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 7px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" ng-click="serviceactions('M','data.Cust_ID')" style="color: Black;float:left;cursor:pointer;" />
+                            <div ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" ng-click="sendmessegescommon('M',data.Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                    MESSAGE
                         </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 11px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" ng-click="serviceactions('I','data.Cust_ID','data.ignode')" style="color: Black;float:left;cursor:pointer;" />
+                            <div ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" ng-click="serviceactions('I',data.Cust_ID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
                             <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
                        IGNORE
                           </span></div>
