@@ -71,40 +71,41 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                                     break;
                                 case "M":
                                 case "TH":
-                                if (response.data == 1) {
-                                    scope.$emit('successfailer', "Message sent SuccessFully", "success");
-                                } else {
-                                    scope.$emit('successfailer', "Message sending Fail", "warning");
-                                }
-                                break;
+                                case "RP":
+                                    if (response.data == 1) {
+                                        scope.$emit('successfailer', "Message sent SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "Message sending Fail", "warning");
+                                    }
+                                    break;
                             }
                         });
                 });
 
             }
-            scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid) {
+            scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
                 var logincustid = authSvc.getCustId();
                 var loginprofileid = authSvc.getProfileid();
                 var object = {
                     IFromCustID: logincustid,
-                    IToCustID: 91022,
+                    IToCustID: tocustid,
                     TypeofInsert: type,
                     EncriptedText: null,
                     EncryptedRejectFlagText: null,
                     EncriptedTextrvr: null,
                     EncryptedRejectFlagTextrvr: null,
                     StrHtmlText: form != undefined ? form.message : null,
-                    MessageLinkId: null,
-                    MessageHistoryId: null,
+                    MessageLinkId: typeofactionflag != undefined ? typeofactionflag : null,
+                    MessageHistoryId: MessageHistoryId != undefined ? MessageHistoryId : null,
                     Logid: logid != undefined ? logid : null,
                     FromProfileID: loginprofileid,
                     ToProfileID: profileid != undefined ? profileid : null
                 };
                 scope.servicehttp(type, object);
             };
-            scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid) {
+            scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
                 debugger;
-                scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid);
+                scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                 scope.$emit("modalpopupclose", event);
             });
             scope.sendmessegescommon = function(type, tocustid) {

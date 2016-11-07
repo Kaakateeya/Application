@@ -1,1 +1,116 @@
-<div ng-controller="viewFullProfileCustomer">ggggggggggg</div>
+<div id="updateContents" ng-init="pageload()">
+    <div class="profile_full_main">
+        <div class="profile_full_header clearfix">
+            <div class="profile_full_header_pic">
+                <input name="iProfilePic" id="iProfilePic" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/customernoimages/Fnoimage_Rev.png" style="height:150px;width:150px;" type="image">
+            </div>
+            <div class="profile_full_header_in">
+                <h6>
+                    <span id="lblName">{{personalinfo[0].NAME}}</span>
+                    <span>
+                <span id="lblProfileIDs">{{personalinfo[0].ProfileID}}</span></span>
+                </h6>
+                <p>
+                    <span>
+                 <span id="lblAge">{{personalinfo[0].Age}}</span></span> | <span>
+                  <span id="lblheight">{{personalinfo[0].Height}}</span>
+                    </span>| <span>
+               <span id="lblreligion">{{personalinfo[0].ReligionName}}</span>-<span id="lblCasts">{{personalinfo[0].Caste}}</span>
+                    </span>| <span>
+                      <span id="lblNativePlace">{{personalinfo[0].StateName}}</span></span> | <span>
+                       <span id="lblEducation">{{personalinfo[0].Education}}</span>
+                    </span>
+                </p>
+                <div class="search_result_item_ui_exprsns">
+                    <ul>
+                        <li id="libookmark">
+                            <div class="bookmark-icon" ng-click="serviceactions('B',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
+                            <a id="lnkBookMark" href="javascript:void(0);" style="color: black;" title="BookMark" ng-click="serviceactions('B',personalinfo[0].Cust_ID,data.mybookmarked)">BookMark</a>
+                        </li>
+                        <li id="liexpress">
+                            <div class="interest-icon" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)" style="color: Black;float:left;cursor:pointer;" />
+                            <a id="lnkEXpressInterest" href="javascript:void(0);" style="color: black;" title="Express Interest" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)">Express Interest</a>
+                        </li>
+                        <li id="limsg">
+                            <div class="message-icon2" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
+                            <a id="lnkMessage" href="javascript:void(0);" style="color: black;" title="Message" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)">Message</a>
+                        </li>
+                        <li id="liignore">
+                            <div class="close-icon" ng-click="serviceactions('I',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
+                            <a id="lnkNotInterest" href="javascript:void(0);" style="color: black;" title="Not Interest" ng-click="serviceactions('I',personalinfo[0].Cust_ID)">Ignore</a>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <p>
+                    <span id="lblNames"></span> is: Family oriented, well educated, attractive
+                </p>
+            </div>
+            <div class="profile_full_header_in_ui clearfix" id="logidliproceed">
+
+                <a id="lnklogaccept" href="javascript:void(0);" onclick="return acceptlink('I');">Proceed</a>
+
+                <a id="lnklogSkipped" href="javascript:void(0);" onclick="return acceptlink('NI');">Skip This Profile</a>
+
+            </div>
+            <div class="profile_full_header_in_ui clearfix" id="liticket">
+                <a id="btnticket">View Ticket Status</a>
+            </div>
+            <div class="profile_full_header_in_ui clearfix">
+                <div id="updateHoror">
+                    <a id="lnkViewHoro" href="javascript:void(0);">View Horo</a>
+                </div>
+            </div>
+        </div>
+        <div class="personal_inform_main">
+            <div class="personal_inform_head clearfix">
+                <h4 style="color: #d42e02;">personal information</h4>
+                <a href="#" class="edit_prsnl"></a>
+            </div>
+            <div class="personal_inform_main_in">
+                <h4>about my
+                    <span id="lblRelation">{{personalinfo[0].GenderID===2?"Daughter":"Son"}}</span></h4>
+                <p>
+                    <span id="lblDesc">{{aboutmyself[0].Aboutyourself}}</span>
+                </p>
+            </div>
+            <div ng-repeat="item in arr" ng-if="item.header=='Headings' || item.header=='About' || item.header=='Primary'?'':item.header">
+                <div class="personal_inform_head clearfix">
+                    <h4>
+                        <span id="lblHeadings">{{item.header}}</span></h4>
+                    <a href="#" class="edit_prsnl"></a>
+                </div>
+                <div class="personal_inform_main_in">
+                    <div id="divStyle" ng-class="item.header=='Professional information'|| item.header=='Family details'|| item.header=='Sibling Details' || item.header=='Partner Preferences details'?'': 'personal_inform_main_in_list clearfix'">
+                        <p ng-repeat="itm in item.value">
+                            <span style="color:Black;font-weight:bold;">{{itm.columnname|| (itm.columnName==='1'?'Education':(itm.columnName==='2'|| itm.columnName==='3' || itm.columnName==='4' || itm.columnName==='5')?"":itm.columnName) ||itm.ColumnName}}</span>
+                            <span>
+                           <span id="lblTextName"> <span ng-if="itm.columnname!='' && itm.columnname!=null">:</span>
+                            <span ng-bind-html="itm.value || itm.Value"></span>
+                            </span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="myModalContent.html">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                <h4 class="modal-title" id="commontitle" style="color: black;">{{modalpopupheadertext}}</h4>
+            </div>
+            <div class="modal-body" id="commonbody">
+                <div class="row col-lg-offset-1">
+                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10"></textarea></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " ng-click="modalpopupclose()">Close</button>
+                    <button type="button" class="btn btn-primary " ng-click="sendmessages(form)">Send Message</button>
+                </div>
+            </div>
+
+    </script>
+    </div>

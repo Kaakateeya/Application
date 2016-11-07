@@ -21,7 +21,14 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/GetTicketinformation', { params: { Ticketid: Ticketid, Type: Type } });
         },
         Viewprofile: function() {
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: 91022, CustID: 91022 } })
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: 91035, CustID: 91022 } })
+        },
+        Viewprofileflags: function() {
+            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: 91035, ToCustID: 91022 } });
+        },
+        communicationhistorychats: function(obj) {
+            debugger;
+            return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);
         }
     };
 }]);

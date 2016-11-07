@@ -398,5 +398,42 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 console.log(response);
             });
         };
+        scope.communicationmessageshistory = function(messagechatlinkid, messagechatcustid, messagehistoryid) {
+            debugger;
+            scope.messagechatlinkid = messagechatlinkid;
+            scope.messagechatcustid = messagechatcustid;
+            scope.messagehistoryid = messagehistoryid;
+            alerts.dynamicpopup("mytickethistory.html", scope, uibModal);
+            var obj = {
+                CustID: scope.custid,
+                MessageStatusID: null,
+                MessageLinkId: messagechatlinkid,
+                i_PageSize: 15,
+                i_PageNumber: 1,
+                i_StartIndex: 1,
+                i_EndIndex: 15,
+                MessageID: null
+            };
+            customerDashboardServices.communicationhistorychats(obj).then(function(response) {
+                console.log(response);
+                _.each(response.data, function(item) {
+                    debugger;
+                    scope.arraytickethistory.push(item);
+                });
+            });
+        };
+        scope.SubmitMsg = function(form) {
+            scope.$broadcast('sendmsg', 'RP', scope.messagechatcustid, scope.messagechatlinkid, form, undefined, scope.messagehistoryid);
+        };
+        scope.PhotoPasswordAction = function(type, tocustid) {
+
+        };
+        scope.acceptlink = function(type) {
+
+        };
+        scope.acceptrejectpopup = function(custid, logid) {
+            scope.modalbodyshow = 4;
+            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
+        };
     }
 ]);
