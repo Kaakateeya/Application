@@ -634,11 +634,13 @@
                 <div class="bs-example">
                     <div id="Div3" class="" data-interval="3000" data-ride="carousel">
                         <div class="chatbox_remarks" id="divchatbox_remarks">
-                            <div ng-class="item.Sender===item.loginCustid? 'chatbox_remarks_item clearfix': 'chatbox_remarks_item chatbox_remarks_item_rev'">
-                                <p><label id="lblBodyTypesx">hi</label><label id="lblIsReviewd" style="display:none;">false</label><label id="lblsender" style="display:none;">91022</label> </p>
-                                <div class='chatbox_remarks_item_foot'>
-                                    <span>
-                                     <label id='lblMEssageRequestDates' >{{item.RequestDate}}</label></span>
+                            <div ng-repeat="item in arraytickethistory" ng-class='item.Sender== item.loginCustid ? "chatbox_remarks_item clearfix ": "chatbox_remarks_item chatbox_remarks_item_rev"'>
+                                <p><label ID='lblBodyTypesx'>{{item.IsReviewd == false && item.loginCustid!=item.Sender ? "Not authorized this message" : item.Body}}</label>
+                                    <label id="lblIsReviewd" style="display:none;">{{item.IsReviewd}}</label>
+                                    <label id="lblsender" style="display:none;">{{item.Sender}}</label>
+                                </p>
+                                <div class='chatbox_remarks_item_foot'><span>
+                                                               <label ID='lblMEssageRequestDates' >{{item.RequestDate}} </label></span>
                                     <div class='clear'>&nbsp;</div>
                                 </div>
                             </div>

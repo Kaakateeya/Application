@@ -414,6 +414,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 i_EndIndex: 15,
                 MessageID: null
             };
+            scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
                 console.log(response);
                 _.each(response.data, function(item) {
