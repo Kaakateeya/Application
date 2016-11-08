@@ -23,19 +23,19 @@
                 </p>
                 <div class="search_result_item_ui_exprsns">
                     <ul>
-                        <li id="libookmark">
+                        <li id="libookmark" ng-if="Bookmark[0].BookmarkFlag!== 1">
                             <div class="bookmark-icon" ng-click="serviceactions('B',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkBookMark" href="javascript:void(0);" style="color: black;" title="BookMark" ng-click="serviceactions('B',personalinfo[0].Cust_ID,data.mybookmarked)">BookMark</a>
                         </li>
-                        <li id="liexpress">
+                        <li id="liexpress" ng-if="Viewed[0].Viewedflag!== 1">
                             <div class="interest-icon" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkEXpressInterest" href="javascript:void(0);" style="color: black;" title="Express Interest" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)">Express Interest</a>
                         </li>
-                        <li id="limsg">
+                        <li id="limsg" ng-if="Express[0].ExpressFlag!== 1">
                             <div class="message-icon2" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkMessage" href="javascript:void(0);" style="color: black;" title="Message" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)">Message</a>
                         </li>
-                        <li id="liignore">
+                        <li id="liignore" ng-if="Ignore[0].IgnoreFlag!== 1">
                             <div class="close-icon" ng-click="serviceactions('I',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkNotInterest" href="javascript:void(0);" style="color: black;" title="Not Interest" ng-click="serviceactions('I',personalinfo[0].Cust_ID)">Ignore</a>
                         </li>
@@ -46,18 +46,18 @@
                     <span id="lblNames"></span> is: Family oriented, well educated, attractive
                 </p>
             </div>
-            <div class="profile_full_header_in_ui clearfix" id="logidliproceed">
+            <div class="profile_full_header_in_ui clearfix" id="logidliproceed" ng-if="locallogid!=null && locallogid!=undefined && Express[0].MatchFollowUpStatus!=1 && Express[0].SeenStatus!='Accept' && Express[0].SeenStatus!='Reject'">
 
-                <a id="lnklogaccept" href="javascript:void(0);" onclick="return acceptlink('I');">Proceed</a>
+                <a id="lnklogaccept" href="javascript:void(0);" ng-click="acceptlinkexp('I',personalinfo[0].Cust_ID);">Proceed</a>
 
-                <a id="lnklogSkipped" href="javascript:void(0);" onclick="return acceptlink('NI');">Skip This Profile</a>
+                <a id="lnklogSkipped" href="javascript:void(0);" ng-click="acceptlinkexp('NI',personalinfo[0].Cust_ID);">Skip This Profile</a>
 
             </div>
-            <div class="profile_full_header_in_ui clearfix" id="liticket">
-                <a id="btnticket">View Ticket Status</a>
+            <div class="profile_full_header_in_ui clearfix" id="liticket" ng-if="locallogid!=null && locallogid!=undefined && Express[0].MatchFollowUpStatus==1 && (Express[0].SeenStatus=='Accept' || Express[0].SeenStatus=='Reject')">
+                <a id="btnticket">{{Express[0].ViewTicket}}</a>
             </div>
             <div class="profile_full_header_in_ui clearfix">
-                <div id="updateHoror">
+                <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!='' && personalinfo[0].HoroscopeImage!=null && personalinfo[0].HoroscopeImage!='Not given'">
                     <a id="lnkViewHoro" href="javascript:void(0);">View Horo</a>
                 </div>
             </div>

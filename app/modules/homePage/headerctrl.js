@@ -87,6 +87,9 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     scope.ClearlocalStorage = function() {
         authSvc.logout();
         window.location = "#/";
-
+    };
+    scope.redirectTohome = function() {
+        var realpath = '#/home';
+        window.open(realpath, "_self");
     };
 }]);

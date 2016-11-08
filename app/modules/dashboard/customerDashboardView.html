@@ -13,7 +13,7 @@
                 <div class="landing_page_head_lt_in_cont">
                     <div id="notifyDivc">
                         <p ng-repeat="item in staticNotification" class="clearfix"> <span id="lblRepeateContains">{{item}}</span>
-                            <a id="lnkViewNotificationsbind" href="javascript:void(0);">View details</a></p>
+                            <a id="lnkViewNotificationsbind" href="javascript:void(0);" ng-click="item=='New profiles waiting for you from last month'?gettingpartnerdata('LMP',1,9,'New profiles waiting for you from last month'):gettingpartnerdata('CVP',1,9,'Members who viewed your photograph')">View details</a></p>
                     </div>
                 </div>
             </div>
@@ -367,9 +367,9 @@
                                                 <div class="clear"></div>
                                                 <div class="sugested_block_top_skip">
                                                     <ul>
-                                                        <li ng-style="expressint.Mystatus =='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" ng-click="redirectToGoogle()">View Full Profile</a></li>
-                                                        <li ng-style="expressint.Mystatus == 'Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus =='Not Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" style="width: 150px;">Proceed</a></li>
-                                                        <li ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped'?{'display':'none'}:{'display':'block'}"><a href="javascript:void(0);">skip this profile</a></li>
+                                                        <li ng-style="expressint.Mystatus =='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" ng-click="redirectToviewfull(expressint.Cust_ID,expressint.LogID)">View Full Profile</a></li>
+                                                        <li ng-style="expressint.Mystatus == 'Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus =='Not Viewed'?{'display':'none'}:{'display':'block'}"><a class="active" href="javascript:void(0);" style="width: 150px;" ng-click='acceptlinkexp("I",expressint.Cust_ID,expressint.LogID)'>Proceed</a></li>
+                                                        <li ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped'?{'display':'none'}:{'display':'block'}"><a href="javascript:void(0);" ng-click='acceptlinkexp("NI",expressint.Cust_ID,expressint.LogID)'>skip this profile</a></li>
                                                         <li ng-style="expressint.Mystatus=='Proceed'?{'display':'block'}:{'display':'none'}"><a class='active' href='javascript:void(0);' ng-click="viewcontacts(expressint.Cust_ID,expressint.RelationShipManagerNumber
 																,expressint.RelationShipManagerEmail,expressint.PhoneNumber,expressint.Email)">view Contacts</a></li>
                                                         <li style="color: #ab1818;" ng-if="expressint.CommunicationHistoryFlag == 1"><a class='active' href="javascript:void(0);" id="communication1" ng-click="messagetorm('Ticket',expressint.Cust_ID,expressint.NAME,expressint.ProfileID,expressint.LogID,expressint.TicketID)">communication history</a></li>
@@ -381,9 +381,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-5 col-lg-offset-1"><label class="" style="width: 101px;float: left;">Your Status :</label><label class='control-label' style='float: left;width:120px;' ng-if="expressint.Mystatus=='Proceed' || expressint.Mystatus=='Skipped'">
-                                                {{expressint.Mystatus}}</label><a href='javascript:void(0);' style='float: left;width:120px;display:none;' ng-style="expressint.Mystatus != 'Proceed' || expressint.Mystatus != 'Skipped'?{'display':'block'}:{'display':'none'}"
-                                                    ng-click="acceptrejectpopup(expressint.Cust_ID,expressint.LogID)">{{expressint.Mystatus}}</a>
-                                                <a ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'block'}:{'display':'none'}" href="javascript:void(0);" ng-click="fullviewprofile(expressint.Cust_ID);">View Full Profile</a>
+                                                {{expressint.Mystatus}}</label><a href='javascript:void(0);' style='float: left;width:120px;display:none;' ng-style="expressint.Mystatus != 'Proceed' && expressint.Mystatus != 'Skipped'?{'display':'block'}:{'display':'none'}"
+                                                    ng-click="acceptrejectpopup(expressint.Cust_ID,expressint.LogID,expressint.NAME)">{{expressint.Mystatus}}</a>
+                                                <a ng-style="expressint.Mystatus=='Proceed' || expressint.Mystatus == 'Skipped' || expressint.Mystatus == 'Viewed'?{'display':'block'}:{'display':'none'}" href="javascript:void(0);" ng-click="redirectToviewfull(expressint.Cust_ID,expressint.LogID)">View Full Profile</a>
                                             </div>
                                             <div class="col-lg-6"><label class="" style="width: 109px;float: left;">{{Gendercustomer}} Status :</label><label class="control-label" style="float: left;width:120px;">{{expressint.OppStatus}}</label></div>
                                         </div>
@@ -425,7 +425,7 @@
                             <div class="messages_list_item_ui clearfix">
                                 <div id="updateContentKK">
                                     <ul>
-                                        <li class="clearfix" style="width: 100%;"> <a id="lnkViewCompleteProfile_Message" class="pull-left" href="javascript:void(0);">View Complete Profile</a>
+                                        <li class="clearfix" style="width: 100%;"> <a id="lnkViewCompleteProfile_Message" class="pull-left" href="javascript:void(0);" ng-click="redirectToviewfull(messages.CustID,undefined)">View Complete Profile</a>
                                             <a id="lnkCommunicationHistory_Message" class="pull-right" href="javascript:void(0);" ng-click="communicationmessageshistory(messages.Cust_MessageLink_Id,messages.CustID,messages.Cust_MessageHistory_Id)">Communication History(<b style="color:Maroon">{{messages.COUNT}}</b>)</a>
                                         </li>
                                     </ul>
@@ -467,7 +467,7 @@
                                 <div class="messages_list_item_ui clearfix">
                                     <div>
                                         <ul>
-                                            <li class="clearfix"> <a href="javascript:void(0);">View Complete Profile</a></li>
+                                            <li class="clearfix"> <a href="javascript:void(0);" ng-click="redirectToviewfull(requestphotos.Cust_ID,undefined)">View Complete Profile</a></li>
                                             <li class="clearfix"></li>
                                         </ul>
                                     </div>
@@ -509,7 +509,7 @@
                                     <ul>
                                         <li class='clearfix'>
 
-                                            <a href='javascript:void(0);'>View Complete Profile</a></li>
+                                            <a href='javascript:void(0);' ng-click="redirectToviewfull(passwordrequest.Cust_ID,undefined)"> View Complete Profile</a></li>
                                         <li class='clearfix'></li>
                                     </ul>
 
@@ -563,16 +563,17 @@
             <div class="modal-header">
                 <button type="button" class="close" ng-click="modalpopupclose()">×</button>
                 <h4 class="modal-title" id="commontitle" style="color: black;">{{modalpopupheadertext}}</h4>
+
             </div>
-            <div class="modal-body" id="commonbody">
+            <div ng-class="modalbodyshow==3?'modal-body  pop_content_my clearfix':'modal-body'" id="commonbody">
                 <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
                     <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
                 <div class='row' ng-if="modalbodyshow==4">
                     <div class='col-lg-4 col-lg-offset-2'>
-                        <button type=button class='btn btn-success' ng-click='acceptlink("I");'>Proceed</button>
+                        <button type=button class='btn btn-success' ng-click='acceptlink("I")'>Proceed</button>
                     </div>
                     <div class='col-lg-5'>
-                        <button type='button' class='btn btn-danger' ng-click='acceptlink("NI");'>Skip This Profile</button>
+                        <button type='button' class='btn btn-danger' ng-click='acceptlink("NI")'>Skip This Profile</button>
                     </div>
                 </div>
                 <div id="communicationhistory" ng-if="modalbodyshow==3">
@@ -632,15 +633,15 @@
             </div>
             <div class="modal-body">
                 <div class="bs-example">
-                    <div id="Div3" class="" data-interval="3000" data-ride="carousel">
+                    <div id="Div3" class="" data-interval="3000">
                         <div class="chatbox_remarks" id="divchatbox_remarks">
                             <div ng-repeat="item in arraytickethistory" ng-class='item.Sender== item.loginCustid ? "chatbox_remarks_item clearfix ": "chatbox_remarks_item chatbox_remarks_item_rev"'>
-                                <p><label ID='lblBodyTypesx'>{{item.IsReviewd == false && item.loginCustid!=item.Sender ? "Not authorized this message" : item.Body}}</label>
+                                <p><label id='lblBodyTypesx'>{{item.IsReviewd == false && item.loginCustid!=item.Sender ? "Not authorized this message" : item.Body}}</label>
                                     <label id="lblIsReviewd" style="display:none;">{{item.IsReviewd}}</label>
                                     <label id="lblsender" style="display:none;">{{item.Sender}}</label>
                                 </p>
                                 <div class='chatbox_remarks_item_foot'><span>
-                                                               <label ID='lblMEssageRequestDates' >{{item.RequestDate}} </label></span>
+                                <label id='lblMEssageRequestDates' >{{item.RequestDate}} </label></span>
                                     <div class='clear'>&nbsp;</div>
                                 </div>
                             </div>

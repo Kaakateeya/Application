@@ -7,7 +7,6 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
         },
         getexpressintersetdata: function(object) {
-            debugger;
             return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object);
 
         },
@@ -20,15 +19,23 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         Tickethistory: function(Ticketid, Type) {
             return http.get(app.apiroot + 'DashboardRequest/GetTicketinformation', { params: { Ticketid: Ticketid, Type: Type } });
         },
-        Viewprofile: function() {
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: 91035, CustID: 91022 } })
+        Viewprofile: function(logcustid, tocustid) {
+            debugger;
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid } })
         },
-        Viewprofileflags: function() {
-            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: 91035, ToCustID: 91022 } });
+        Viewprofileflags: function(logcustid, tocustid) {
+            debugger;
+            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: logcustid, ToCustID: tocustid } });
         },
         communicationhistorychats: function(obj) {
-            debugger;
             return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);
+        },
+        acceptrejectexpressinterest: function(fromid, toid, logid, type, empid) {
+            debugger;
+            return http.get(app.apiroot + 'DashboardRequest/getInsertCustomerExpressinterest', { params: { fromcustid: fromid, tocustid: toid, logID: logid, interstTYpe: type, empid: "" } });
+        },
+        photopasswordactioninsert: function(fromcustid, tocustid, type) {
+            return http.get(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', { params: { loggedcustid: fromcustid, ToCustID: tocustid, Type: type } });
         }
     };
 }]);

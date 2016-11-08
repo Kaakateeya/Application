@@ -111,6 +111,10 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
             scope.sendmessegescommon = function(type, tocustid) {
                 scope.$emit('popuplogin', "myModalContent.html", tocustid);
             };
+            scope.redirectToviewfullprofile = function(custid, logid) {
+                debugger;
+                scope.$emit('redirectToviewfullprofiles', custid, logid);
+            }
         }
     };
 }]);

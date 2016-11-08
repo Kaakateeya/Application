@@ -1,7 +1,6 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
     'alert', '$window', '$location',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location) {
-
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -20,7 +19,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.typeodbind = type;
             if (type == 'C') {
                 customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
-
                     if (scope.counts == 1) {
                         scope.bindcounts(response.data.DashBoardCounts);
                         console.log(response.data.DashBoardCounts);
@@ -43,13 +41,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                     }
                     scope.$broadcast('loadmore');
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew[0].TotalRows;
+                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     scope.lblUHaveviewd = headertext;
 
                 });
             } else {
                 customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage).then(function(response) {
-
                     if (parseInt(frompage) === 1) {
                         scope.PartnerProfilesnew = [];
                         scope.typeofdiv = "Grid";
@@ -63,17 +60,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         });
                     }
                     scope.$broadcast('loadmore');
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew[0].TotalRows;
+                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     scope.lblUHaveviewd = headertext;
 
                 });
             }
         };
-
         scope.init = function() {
             scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
         };
-
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -84,7 +79,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.bindcounts = function(array) {
             scope.leftMenuArr = [
-
                 { value: 'Edit my profile', bindvalue: null, hrefs: '/#home' },
                 { value: 'Upgrade your membership', bindvalue: null, hrefs: '/#home' },
                 { value: 'manage photo', bindvalue: null, hrefs: '/#home' },
@@ -98,11 +92,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'help', bindvalue: null, hrefs: '/#help' },
             ];
         };
-
         var TypeOfReportexpress = null;
         var yourFilterexpress = null;
         var oppfilterexpress = null;
-
         scope.flagexpress = 9;
         scope.expressinterestselect = function(TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest) {
             debugger;
@@ -146,7 +138,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 console.log(response.data);
                 if (parseInt(frompage) === 1) {
                     scope.PartnerProfilesnew = [];
-
                     _.each(response.data, function(item) {
                         scope.PartnerProfilesnew.push(item);
                     });
@@ -181,20 +172,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
                         }
                     }
-
-
                 } else {
                     _.each(response.data, function(item) {
                         scope.PartnerProfilesnew.push(item);
                     });
                 }
-
-
             });
         };
-
         app.animation('.slideexpress', function() {
-
             var NG_HIDE_CLASS = 'ng-hide';
             return {
                 beforeAddClass: function(element, className, done) {
@@ -209,13 +194,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 }
             };
         });
-
         scope.zerorecorsalert = function() {
             alerts.open('Sorry No Records Found', 'warning');
         };
         scope.successfaileralert = function(msg, typewarning) {
-            debugger;
-
             alerts.open(msg, typewarning);
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -223,7 +205,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.messagecustid = "";
         scope.$on('popuplogin', function(event, url, custid) {
-            debugger;
             scope.modalpopupheadertext = "Enter your message here";
             scope.messagecustid = "";
             scope.messagecustid = custid;
@@ -270,16 +251,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            debugger;
             scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
         }
         scope.sendmessagesRMM = function(form) {
-            debugger;
             alerts.dynamicpopupclose();
             scope.$broadcast('sendmsg', 'TH', scope.messagecustid, undefined, form, scope.LogID);
         }
         scope.loadmorehideshow = function() {
-
             if (scope.PartnerProfilesnew.length > 0) {
                 scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
                 scope.loadmoreexpress = (scope.totalrows > scope.endindexexpress) ? true : false;
@@ -287,8 +265,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             }
         };
-
-
         scope.chatsdiv = function(fromindex, toindex, status, headertext) {
             if (fromindex === 1) {
                 scope.flagexpress = 9;
@@ -298,7 +274,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
             var object = { CustID: scope.custid, Status: scope.chatstatus, iStartIndex: fromindex, iEndIndex: toindex };
             customerDashboardServices.getCustometDashBoardchats(object).then(function(response) {
-
                 scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
                 if (parseInt(fromindex) === 1) {
                     scope.PartnerProfilesnew = [];
@@ -316,12 +291,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                 }
             });
-
         };
-
-
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv) {
-            debugger;
             if (fromindex === 1) {
                 scope.flagexpress = 9;
                 scope.lblUHaveviewd = headertext;
@@ -329,8 +300,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.chatstatus = type;
             }
             customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
-                console.log(response);
-                debugger;
                 scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                 if (parseInt(fromindex) === 1) {
                     scope.PartnerProfilesnew = [];
@@ -343,17 +312,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                     });
                 } else {
-                    debugger;
                     _.each(response.data.PartnerProfilesnew, function(item) {
-                        debugger;
                         scope.PartnerProfilesnew.push(item);
                     });
-
                 }
-
-
             });
-
         };
 
         scope.allloadmorepaging = function() {
@@ -388,18 +351,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
-        scope.redirectToGoogle = function() {
-            var realpath = $location.path() + '/viewprofile';
-            var url = $location.absUrl().split('?')[0];
+        scope.redirectToviewfull = function(custid, logid) {
+            debugger;
+            sessionStorage.removeItem("localcustid");
+            sessionStorage.removeItem("locallogid");
+            sessionStorage.setItem("localcustid", custid);
+            sessionStorage.setItem("locallogid", logid);
+            //  var realpath = $location.path() + '#/viewprofile';
+            var realpath = '#/viewFullProfileCustomer';
+            //var url = $location.absUrl().split('?')[0];
             window.open(realpath, '_blank');
         };
-        scope.fullviewprofile = function(tocustid) {
-            customerDashboardServices.Viewprofile().then(function(response) {
-                console.log(response);
-            });
-        };
+        scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
+            scope.redirectToviewfull(custid, logid);
+        });
+
         scope.communicationmessageshistory = function(messagechatlinkid, messagechatcustid, messagehistoryid) {
-            debugger;
             scope.messagechatlinkid = messagechatlinkid;
             scope.messagechatcustid = messagechatcustid;
             scope.messagehistoryid = messagehistoryid;
@@ -418,7 +385,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
                 console.log(response);
                 _.each(response.data, function(item) {
-                    debugger;
                     scope.arraytickethistory.push(item);
                 });
             });
@@ -427,12 +393,37 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.$broadcast('sendmsg', 'RP', scope.messagechatcustid, scope.messagechatlinkid, form, undefined, scope.messagehistoryid);
         };
         scope.PhotoPasswordAction = function(type, tocustid) {
-
+            customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
+                console.log(response);
+            });
         };
         scope.acceptlink = function(type) {
-
+            debugger;
+            customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
+                console.log(response);
+                if (response.data === 1) {
+                    alerts.open("Proceed successfully", "success");
+                } else {
+                    alerts.open("sorry Proceed Fail", "warning");
+                }
+                alerts.dynamicpopupclose();
+            });
         };
-        scope.acceptrejectpopup = function(custid, logid) {
+        scope.acceptlinkexp = function(type, custid, logid) {
+            customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
+                console.log(response);
+                if (response.data === 1) {
+                    alerts.open("Proceed successfully", "success");
+                } else {
+                    alerts.open("sorry Proceed Fail", "warning");
+                }
+                alerts.dynamicpopupclose();
+            });
+        };
+        scope.acceptrejectpopup = function(custid, logid, Name) {
+            scope.modalpopupheadertext = Name + " Status";
+            scope.expressintcustid = custid;
+            scope.expressintlogid = logid;
             scope.modalbodyshow = 4;
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
