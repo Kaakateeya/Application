@@ -37,7 +37,7 @@
                 <h4>personalised services</h4>
                 <ul>
                     <li>
-                        <a ng-repeat="item in leftMenuArr" ng-click="item.bindvalue!=null && item.bindvalue!=0?gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind):zerorecorsalert()" ng-show="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null"> ({{item.bindvalue}})</span></a>
+                        <a ng-repeat="item in leftMenuArr" ng-click="gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind,item.bindvalue)" ng-show="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null || item.bindvalue=='profile'"> ({{item.bindvalue}})</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -55,7 +55,7 @@
                             <div class="panel-body">
                                 <div class="landing_page_sidebar_rt_list_item_menu">
                                     <div class="landing_page_sidebar_rt_list_item_in clearfix">
-                                        <a id="lnkallprofiles" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ExpressAllcount==0) ? zerorecorsalert() :expressinterestselect(null,null,null,1,9,'All Profiles','All Profiles',null)">
+                                        <a id="lnkallprofiles" class="clearfix" href="javascript:void(0);" ng-click="expressinterestselect(bindallcounts.ExpressAllcount,null,null,null,1,9,'All Profiles','All Profiles',null)">
                                             <small>
                                                   <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                        <div id="imaallprofiles" class="icon-spl-4"></div>
@@ -63,7 +63,7 @@
                                                 </small>
                                             <span id="spnallprofiles">All Profiles({{bindallcounts.ExpressAllcount}})</span>
                                         </a>
-                                        <a id="lnknewExp" class="clearfix" href="javascript:void(0);" ng-click='(bindallcounts.ExpressIntReceived==0) ? zerorecorsalert() :expressinterestselect("R",null,null,1,9,"Interest Expressed By","All Profiles",null)'>
+                                        <a id="lnknewExp" class="clearfix" href="javascript:void(0);" ng-click='expressinterestselect(bindallcounts.ExpressIntReceived,"R",null,null,1,9,"Interest Expressed By","All Profiles",null)'>
                                             <small>
                                                 <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimageExp" class="icon-spl-4"></div>
@@ -71,7 +71,7 @@
                                                </small>
                                             <span id="lnkNewIDsExp" style="width: 98%; padding-left: 10px; white-space: normal; text-overflow: unset; float: unset;">Interest Expressed By {{Gendercustomer}} ({{bindallcounts.ExpressIntReceived}})</span>
                                         </a>
-                                        <a id="lnkAcceptExp" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ExpressIntSent==0) ? zerorecorsalert() :expressinterestselect('S',null,null,1,9,'I sent interest','All Profiles',null)">
+                                        <a id="lnkAcceptExp" class="clearfix" href="javascript:void(0);" ng-click="expressinterestselect(bindallcounts.ExpressIntSent,'S',null,null,1,9,'I sent interest','All Profiles',null)">
                                             <small>
                                                   <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Exp" class="icon-spl-2"></div>
@@ -99,7 +99,7 @@
                                             <span id="lblSubHeaderchats"></span>
                                         </h5>
                                         <div id="uplnknewchat" class="clearfix">
-                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.NewMsgs==0) ? zerorecorsalert() :chatsdiv(1,9,463,'Total Messages')">
+                                            <a id="lnknewchat" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv(1,9,463,'Total Messages',bindallcounts.NewMsgs)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagechat" class="icon-spl-4"></div>
@@ -107,7 +107,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDmsgs">New({{bindallcounts.NewMsgs}})</span></a>
-                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.TotalMsgs==0) ? zerorecorsalert() :chatsdiv(1,9,'','Total Messages')">
+                                            <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv(1,9,'','Total Messages',bindallcounts.TotalMsgs)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Img2" class="icon-spl-2"></div>
@@ -136,7 +136,7 @@
                                             <span id="lblSubHeaderReq">Received</span>
                                         </h5>
                                         <div id="uplnknewReq" class="clearfix">
-                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ReceivedPhotoRequestCount)==0?zerorecorsalert():receivesrecphotoss(1,9,'RP','Members are requesting to upload your photo','Requestphotos')">
+                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RP','Members are requesting to upload your photo','Requestphotos',bindallcounts.ReceivedPhotoRequestCount)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimageReq" class="icon-spl-4"></div>
@@ -144,7 +144,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsReceivedReq">RecPhoto({{bindallcounts.ReceivedPhotoRequestCount}})</span></a>
-                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ReceivedHoroRequestCount)==0?zerorecorsalert():receivesrecphotoss(1,9,'RH','Members are requesting to upload your horoscope','Requestphotos')">
+                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RH','Members are requesting to upload your horoscope','Requestphotos',bindallcounts.ReceivedHoroRequestCount)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Req" class="icon-spl-8"></div>
@@ -159,7 +159,7 @@
                                             <span id="lblSubHeader1">Sent</span>
                                         </h5>
                                         <div id="uplnknew1" class="clearfix">
-                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.SentPhotoRequestCount)==0?zerorecorsalert():receivesrecphotoss(1,9,'SP','Members photo request is sent by you','Requestphotos')">
+                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SP','Members photo request is sent by you','Requestphotos',bindallcounts.SentPhotoRequestCount)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimage1" class="icon-spl-1"></div>
@@ -167,7 +167,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsSentReq">SentPhoto({{bindallcounts.SentPhotoRequestCount}})</span></a>
-                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.SentHoroRequestCount)==0?zerorecorsalert():receivesrecphotoss(1,9,'SH','Members horoscope request is sent by you','Requestphotos')">
+                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SH','Members horoscope request is sent by you','Requestphotos',bindallcounts.SentHoroRequestCount)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image21" class="icon-spl-2"></div>
@@ -196,7 +196,7 @@
                                             <span id="lblSubHeaderpassword">Received</span>
                                         </h5>
                                         <div id="uplnknewpassword" class="clearfix">
-                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ReceivedProtectedNew)==0?zerorecorsalert():receivesrecphotoss(1,9,'RN','Members are awaiting to view your photograph','RequestPassword')">
+                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RN','Members are awaiting to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedNew)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagepassword" class="icon-spl-1"></div>
@@ -204,7 +204,7 @@
                                                     
                                                     </small>
                                                 <span id="lnkNewIDsReceivedProtec">New({{bindallcounts.ReceivedProtectedNew}})</span></a>
-                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ReceivedProtectedAccept)==0?zerorecorsalert():receivesrecphotoss(1,9,'RA','Members request has been accepted to view your photograph','RequestPassword')">
+                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RA','Members request has been accepted to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedAccept)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2password" class="icon-spl-2"></div>
@@ -212,7 +212,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkACCEPTEDReceivedProtec">Accepted({{bindallcounts.ReceivedProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.ReceivedProtectedReject)==0?zerorecorsalert():receivesrecphotoss(1,9,'RR','Members requests are rejected','RequestPassword')">
+                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RR','Members requests are rejected','RequestPassword',bindallcounts.ReceivedProtectedReject)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3password" class="icon-spl-9"></div>
@@ -227,7 +227,7 @@
                                             <span id="lblSubHeadersentpassword">Sent</span>
                                         </h5>
                                         <div id="uplnknewsendpassword" class="clearfix">
-                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.SentProtectedReply)==0?zerorecorsalert():receivesrecphotoss(1,9,'SN','Members are still waiting to accept your request','RequestPassword')">
+                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SN','Members are still waiting to accept your request','RequestPassword',bindallcounts.SentProtectedReply)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagesentpassword" class="icon-spl-4"></div>
@@ -235,7 +235,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkNewIDsSentProtec">Reply Pending({{bindallcounts.SentProtectedReply}})</span></a>
-                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.SentProtectedAccept)==0?zerorecorsalert():receivesrecphotoss(1,9,'SA','Members have accepted your request','RequestPassword')">
+                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SA','Members have accepted your request','RequestPassword',bindallcounts.SentProtectedAccept)">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2sendpassword" class="icon-spl-5"></div>
@@ -243,7 +243,7 @@
                                                      
                                                     </small>
                                                 <span id="lnkACCEPTEDSentProtec">Accepted({{bindallcounts.SentProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="(bindallcounts.SentProtectedReject)==0?zerorecorsalert():receivesrecphotoss(1,9,'SR','Members have rejected','RequestPassword')">
+                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SR','Members have rejected','RequestPassword',bindallcounts.SentProtectedReject)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3sendpassword" class="icon-spl-6"></div>
@@ -295,9 +295,9 @@
                                     <div class="sugested_block_top_skip">
                                         <ul>
 
-                                            <li><a ng-class="click==='YouProceed'?'activeclassdiv':''" class="active" href="javascript:void(0);" id="lnkyourinterest" style="width: 117px;" ng-click='(YouProceed==0) ? zerorecorsalert() :expressinterestselect(null,"I",null,1,9,null,null,"YouProceed")'>Interested  ({{YouProceed}})</a></li>
-                                            <li><a ng-class="click==='Youskipped'?'activeclassdiv':''" class="active" id="lnkyournotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(Youskipped===0) ? zerorecorsalert():expressinterestselect(null,"NI",null,1,9,null,null,"Youskipped")'>Skipped  ({{Youskipped}})</a></li>
-                                            <li><a ng-class="click==='YouPending'?'activeclassdiv':''" class="active" id="lnkyourpending" href="javascript:void(0);" style="width: 117px;" ng-click='(YouPending===0) ? zerorecorsalert():expressinterestselect(null,"V,NV",null,1,9,null,null,"YouPending")'>Pending  ({{YouPending}})</a></li>
+                                            <li><a ng-class="click==='YouProceed'?'activeclassdiv':''" class="active" href="javascript:void(0);" id="lnkyourinterest" style="width: 117px;" ng-click='expressinterestselect(YouProceed,null,"I",null,1,9,null,null,"YouProceed")'>Interested  ({{YouProceed}})</a></li>
+                                            <li><a ng-class="click==='Youskipped'?'activeclassdiv':''" class="active" id="lnkyournotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(Youskipped,null,"NI",null,1,9,null,null,"Youskipped")'>Skipped  ({{Youskipped}})</a></li>
+                                            <li><a ng-class="click==='YouPending'?'activeclassdiv':''" class="active" id="lnkyourpending" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(YouPending,null,"V,NV",null,1,9,null,null,"YouPending")'>Pending  ({{YouPending}})</a></li>
 
                                         </ul>
                                         <div class="clear"></div>
@@ -312,9 +312,9 @@
 
                                     <div class="sugested_block_top_skip">
                                         <ul>
-                                            <li><a ng-class="click==='OppProceed'?'activeclassdiv':''" class="active" id="lnkbrideinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(OppProceed===0) ? zerorecorsalert():expressinterestselect(null,null,"I",1,9,null,null,"OppProceed")'>Interested  ({{OppProceed}})</a></li>
-                                            <li><a ng-class="click==='Oppskipped'?'activeclassdiv':''" class="active" id="lnkbridenotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='(Oppskipped===0) ? zerorecorsalert():expressinterestselect(null,null,"NI",1,9,null,null,"Oppskipped")'>Skipped  ({{Oppskipped}})</a></li>
-                                            <li><a ng-class="click==='Opppending'?'activeclassdiv':''" class="active" id="lnkbridePending" href="javascript:void(0);" style="width: 117px;" ng-click='(Opppending===0) ? zerorecorsalert():expressinterestselect(null,null,"V,NV",1,9,null,null,"Opppending")'>Pending  ({{Opppending}})</a></li>
+                                            <li><a ng-class="click==='OppProceed'?'activeclassdiv':''" class="active" id="lnkbrideinterest" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(OppProceed,null,null,"I",1,9,null,null,"OppProceed")'>Interested  ({{OppProceed}})</a></li>
+                                            <li><a ng-class="click==='Oppskipped'?'activeclassdiv':''" class="active" id="lnkbridenotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(Oppskipped,null,null,"NI",1,9,null,null,"Oppskipped")'>Skipped  ({{Oppskipped}})</a></li>
+                                            <li><a ng-class="click==='Opppending'?'activeclassdiv':''" class="active" id="lnkbridePending" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(Opppending,null,null,"V,NV",1,9,null,null,"Opppending")'>Pending  ({{Opppending}})</a></li>
 
                                         </ul>
                                         <div class="clear"></div>
@@ -325,9 +325,11 @@
                         <div class="row bs-callout bs-callout-info expressinterestdiv" id="ExpSentReceiveBlock" ng-style="typeofdiv==='Expressinterestsend'?{'display': 'block'}:{'display':'none'}">
                             <div class="sugested_block_top_skip">
                                 <ul>
-                                    <li><a ng-class="click==='expressmyinterestcount'?'activeclassdiv':''" class="active" href="javascript:void(0);" id="lnkIntrst" style="width:180px;" ng-click='(expressmyinterestcount===0) ? zerorecorsalert():expressinterestselect(null,"I",null,1,9,"1",null,"expressmyinterestcount")'>{{expressmyinterest}}({{expressmyinterestcount}})</a></li>
-                                    <li><a ng-class="click==='expressmynotinterestcount'?'activeclassdiv':''" class="active" id="lnknotintrst" href="javascript:void(0);" style="width:180px;" ng-click='(expressmynotinterestcount===0) ? zerorecorsalert():expressinterestselect(null,"NI",null,1,9,"2",null,"expressmynotinterestcount")'>{{expressmynotinterest}}({{expressmynotinterestcount}})</a></li>
-                                    <li><a ng-class="click==='expressmynotviewedcount'?'activeclassdiv':''" class="active" id="lnkVwd" href="javascript:void(0);" style="width:280px;" ng-click='(expressmynotviewedcount===0) ? zerorecorsalert():expressinterestselect(null,"V,NV",null,1,9,"3",null,"expressmynotviewedcount")'>{{expressmynotviewed}}({{expressmynotviewedcount}})</a></li>
+                                    <li><a ng-class="click==='expressmyinterestcount'?'activeclassdiv':''" class="active" href="javascript:void(0);" id="lnkIntrst" style="width:180px;" ng-click='expressinterestselect(expressmyinterestcount,null,"I",null,1,9,"1",null,"expressmyinterestcount")'>
+                                        {{expressmyinterest}}({{expressmyinterestcount}})</a></li>
+                                    <li><a ng-class="click==='expressmynotinterestcount'?'activeclassdiv':''" class="active" id="lnknotintrst" href="javascript:void(0);" style="width:180px;" ng-click='expressinterestselect(expressmynotinterestcount,null,"NI",null,1,9,"2",null,"expressmynotinterestcount")'>{{expressmynotinterest}}({{expressmynotinterestcount}})</a></li>
+                                    <li><a ng-class="click==='expressmynotviewedcount'?'activeclassdiv':''" class="active" id="lnkVwd" href="javascript:void(0);" style="width:280px;" ng-click='expressinterestselect(expressmynotviewedcount,null,"V,NV",null,1,9,"3",null,"expressmynotviewedcount")'>
+                                        {{expressmynotviewed}}({{expressmynotviewedcount}})</a></li>
 
                                 </ul>
                             </div>
@@ -353,7 +355,7 @@
                                 <div class="tab-pane fade in active" id="match1">
                                     <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
                                         <div class="sugested_block sugested_block_top" id="ExpressDiv1">
-                                            <div class="sugested_block_top_lft"> <span ng-class="divclassmaskforexpressint(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"><img style="height: 150px;width: 150px;cursor:pointer;"
+                                            <div class="sugested_block_top_lft"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"><img style="height: 150px;width: 150px;cursor:pointer;"
                                              src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''"/></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
@@ -524,11 +526,11 @@
 
                             <div>
                                 <div class='messages_list_item_ui exprss_intrst_ui clearfix'>
-                                    <ul id='PhotoPassword   passwordCount'>
+                                    <ul>
                                         <li class='clearfix'>
-                                            <a href='javascript:void(0);' ng-click="PhotoPasswordAction('Accept',passwordrequest.Cust_ID)">Accept</a></li>
+                                            <a href='javascript:void(0);' ng-click="photoPasswordactionss(1,passwordrequest.Cust_ID)">Accept</a></li>
                                         <li class='clearfix'>
-                                            <a href='javascript:void(0);' ng-click="PhotoPasswordAction('reject',passwordrequest.Cust_ID)">Reject</a></li>
+                                            <a href='javascript:void(0);' ng-click="photoPasswordactionss(0,passwordrequest.Cust_ID)">Reject</a></li>
 
                                     </ul>
                                 </div>

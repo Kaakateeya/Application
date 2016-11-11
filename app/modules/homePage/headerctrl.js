@@ -30,11 +30,11 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
     });
     scope.acceptcontinue = function() {
-        ngIdle.setIdle(5);
+        ngIdle.setIdle(5 * 60);
         alertpopup.dynamicpopupclose();
     };
     scope.closesession = function() {
-        window.location = "#/";
+        authSvc.logout();
         alertpopup.dynamicpopupclose();
     };
     scope.loginstatus = true;
@@ -102,7 +102,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
     };
     scope.ClearlocalStorage = function() {
         authSvc.logout();
-        window.location = "#/";
     };
     scope.redirectTohome = function() {
         var realpath = '#/home';

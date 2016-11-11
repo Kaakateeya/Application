@@ -18,7 +18,7 @@
 //   }]);
 
 app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
-    Idle.watch();
+
 
     function setUser(value) {
         //console.log(value);
@@ -88,8 +88,8 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
             return clearUserSession();
         },
         logout: function() {
-
             clearUserSession();
+            window.location = "#/";
         },
         login: function(username, password) {
 
@@ -101,6 +101,7 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
                 return $http.post(app.apiroot + 'DB/userLogin/person', body)
                     .then(function(response) {
                         if (response.status === 200) {
+                            Idle.watch();
                             return { success: true, response: response.data };
                         }
                         return { success: false, response: response.data };

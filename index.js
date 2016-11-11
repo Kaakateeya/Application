@@ -19,7 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
     IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
-    IdleProvider.idle(5);
+    IdleProvider.idle(5 * 60);
 
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },

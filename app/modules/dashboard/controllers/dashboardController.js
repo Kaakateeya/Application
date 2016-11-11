@@ -15,72 +15,77 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.chatstatus;
         scope.form = {};
         scope.slides = [];
-        scope.gettingpartnerdata = function(type, frompage, topage, headertext) {
+        scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
+            if (bindvalue != null && bindvalue != 0 && bindvalue != 'profile') {
+                scope.flag = frompage === 1 ? 9 : scope.flag;
+                scope.typeodbind = type;
+                if (type == 'C') {
+                    customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
+                        console.log(response);
+                        if (scope.counts == 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.bindcounts(response.data.DashBoardCounts);
+                            console.log(response.data.DashBoardCounts);
+                            scope.bindallcounts = response.data.DashBoardCounts;
+                            scope.PersonalInfo = (response.data.PersonalInfo);
+                            console.log(response.data.PersonalInfo);
+                            scope.photopersonal = scope.PersonalInfo.Photo;
 
-            scope.flag = frompage === 1 ? 9 : scope.flag;
-            scope.typeodbind = type;
-            if (type == 'C') {
-                customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
-                    console.log(response);
-                    if (scope.counts == 1) {
-                        sessionStorage.removeItem("LoginPhotoIsActive");
-                        scope.bindcounts(response.data.DashBoardCounts);
-                        console.log(response.data.DashBoardCounts);
-                        scope.bindallcounts = response.data.DashBoardCounts;
-                        scope.PersonalInfo = (response.data.PersonalInfo);
-                        console.log(response.data.PersonalInfo);
-                        scope.photopersonal = scope.PersonalInfo.Photo;
+                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+                        }
+                        if (parseInt(frompage) === 1) {
+                            scope.PartnerProfilesnew = [];
+                            scope.typeofdiv = "Grid";
+                            _.each(response.data.PartnerProfilesnew, function(item) {
+                                scope.PartnerProfilesnew.push(item);
 
-                        scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                        sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                        scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-                    }
-                    if (parseInt(frompage) === 1) {
-                        scope.PartnerProfilesnew = [];
-                        scope.typeofdiv = "Grid";
-                        _.each(response.data.PartnerProfilesnew, function(item) {
-                            scope.PartnerProfilesnew.push(item);
+                            });
+                        } else {
+                            _.each(response.data.PartnerProfilesnew, function(item) {
+                                scope.PartnerProfilesnew.push(item);
+                            });
 
-                        });
-                    } else {
-                        _.each(response.data.PartnerProfilesnew, function(item) {
-                            scope.PartnerProfilesnew.push(item);
-                        });
+                        }
+                        scope.$broadcast('loadmore');
+                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.lblUHaveviewd = headertext;
 
-                    }
-                    scope.$broadcast('loadmore');
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                    scope.lblUHaveviewd = headertext;
+                    });
+                } else {
+                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage).then(function(response) {
+                        if (parseInt(frompage) === 1) {
+                            scope.PartnerProfilesnew = [];
+                            scope.typeofdiv = "Grid";
+                            _.each(response.data.PartnerProfilesnew, function(item) {
+                                scope.PartnerProfilesnew.push(item);
+                            });
 
-                });
+                        } else {
+                            _.each(response.data.PartnerProfilesnew, function(item) {
+                                scope.PartnerProfilesnew.push(item);
+                            });
+                        }
+                        scope.$broadcast('loadmore');
+                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.lblUHaveviewd = headertext;
+
+                    });
+                }
+            } else if (bindvalue == 'profile') {
+
             } else {
-                customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage).then(function(response) {
-                    if (parseInt(frompage) === 1) {
-                        scope.PartnerProfilesnew = [];
-                        scope.typeofdiv = "Grid";
-                        _.each(response.data.PartnerProfilesnew, function(item) {
-                            scope.PartnerProfilesnew.push(item);
-                        });
-
-                    } else {
-                        _.each(response.data.PartnerProfilesnew, function(item) {
-                            scope.PartnerProfilesnew.push(item);
-                        });
-                    }
-                    scope.$broadcast('loadmore');
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                    scope.lblUHaveviewd = headertext;
-
-                });
+                scope.zerorecorsalert();
             }
         };
         scope.init = function() {
-            scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you');
+            scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
         };
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
-            scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd);
+            scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd, 1);
         };
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
             scope.paging(frompage, topage, scope.typeodbind);
@@ -95,101 +100,104 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
                 { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
                 { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
-                { value: 'Saved search', bindvalue: array.SaveSearchCount, hrefs: '/#home' },
-                { value: 'Profile Settings', bindvalue: null, hrefs: '/#profilesettings' },
-                { value: 'help', bindvalue: null, hrefs: '/#help' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: '/#home' },
+                { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
+                { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
             ];
         };
         var TypeOfReportexpress = null;
         var yourFilterexpress = null;
         var oppfilterexpress = null;
         scope.flagexpress = 9;
-        scope.expressinterestselect = function(TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
-
-            if (eventclick != null) {
-                scope.click = eventclick;
-            };
-            if (headertext === "1" || headertext === "2" || headertext === "3") {
-                scope.flagexpress = 9;
-                if (headertext === "1") {
-                    yourFilterexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'I' : null;
-                    oppfilterexpress = scope.expressmyinterest.indexOf('I interesed in') == -1 ? 'I' : null;
-                    TypeOfReportexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'R' : 'S';
-                } else if (headertext === "2") {
-                    yourFilterexpress = scope.expressmynotinterest.indexOf('I skipped') !== -1 ? 'NI' : null;
-                    oppfilterexpress = scope.expressmynotinterest.indexOf('I skipped') == -1 ? 'NI' : null;
-                    TypeOfReportexpress = scope.expressmynotinterest.indexOf('I skipped') !== -1 ? 'R' : 'S';
-                } else {
-                    yourFilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') !== -1 ? 'V,NV' : null;
-                    oppfilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') == -1 ? 'V,NV' : null;
-                    TypeOfReportexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') !== -1 ? 'R' : 'S';
-                }
-            } else if (headertext === null) {
-                scope.flagexpress = 9;
-                TypeOfReportexpress = TypeOfReport;
-                yourFilterexpress = yourFilter;
-                oppfilterexpress = oppfilter;
-            } else {
-                TypeOfReportexpress = TypeOfReport;
-                yourFilterexpress = yourFilter;
-                oppfilterexpress = oppfilter;
-            }
-
-            scope.startindexexpress = frompage === 1 ? 1 : scope.startindexexpress;
-            scope.endindexexpress = frompage === 1 ? 9 : scope.endindexexpress;
-            var exp = {
-                IntCustID: scope.custid,
-                TypeOfReport: TypeOfReportexpress,
-                yourFilter: yourFilterexpress,
-                oppfilter: oppfilterexpress,
-                pagefrom: scope.startindexexpress,
-                pageto: scope.endindexexpress
-            };
-            customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-                console.log(response.data);
-                if (parseInt(frompage) === 1) {
-                    scope.PartnerProfilesnew = [];
-                    _.each(response.data, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-                    });
-
-                    if (typeofinterest === "All Profiles") {
-                        scope.click = "";
-                        scope.flagexpress = 9;
-                        scope.typeofdiv = headertext === 'All Profiles' ? 'Expressinterest' : 'Expressinterestsend';
-                        scope.expressmyinterest = TypeOfReport === 'R' ? 'I interesed in' : scope.Gendercustomer + ' interesed';
-                        scope.expressmynotinterest = TypeOfReport === 'R' ? 'I skipped' : scope.Gendercustomer + ' skipped';
-                        scope.expressmynotviewed = TypeOfReport === 'R' ? 'I Viewed/NotViewed' : scope.Gendercustomer + ' Viewed/NotViewed';
-                        if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
-                            scope.expressmyinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouProceed : scope.PartnerProfilesnew[0].OppProceed;
-                            scope.expressmynotinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].Youskipped : scope.PartnerProfilesnew[0].Oppskipped;
-                            scope.expressmynotviewedcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouPending : scope.PartnerProfilesnew[0].Opppending;
-                            scope.YouProceed = scope.PartnerProfilesnew[0].YouProceed;
-                            scope.Youskipped = scope.PartnerProfilesnew[0].Youskipped;
-                            scope.YouPending = scope.PartnerProfilesnew[0].YouPending;
-                            scope.OppProceed = scope.PartnerProfilesnew[0].OppProceed;
-                            scope.Oppskipped = scope.PartnerProfilesnew[0].Oppskipped;
-                            scope.Opppending = scope.PartnerProfilesnew[0].Opppending;
-                            scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
-                            scope.lblUHaveviewd = TypeOfReport === 'R' ? 'Interest Expressed By ' + scope.Gendercustomer : headertext;
-                            scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
-                            scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
-                            scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-                        }
-
+        scope.expressinterestselect = function(count, TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
+            if (count !== 0) {
+                if (eventclick != null) {
+                    scope.click = eventclick;
+                };
+                if (headertext === "1" || headertext === "2" || headertext === "3") {
+                    scope.flagexpress = 9;
+                    if (headertext === "1") {
+                        yourFilterexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'I' : null;
+                        oppfilterexpress = scope.expressmyinterest.indexOf('I interesed in') == -1 ? 'I' : null;
+                        TypeOfReportexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'R' : 'S';
+                    } else if (headertext === "2") {
+                        yourFilterexpress = scope.expressmynotinterest.indexOf('I skipped') !== -1 ? 'NI' : null;
+                        oppfilterexpress = scope.expressmynotinterest.indexOf('I skipped') == -1 ? 'NI' : null;
+                        TypeOfReportexpress = scope.expressmynotinterest.indexOf('I skipped') !== -1 ? 'R' : 'S';
                     } else {
-                        if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
-                            scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
-                            scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
-                            scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-                        }
+                        yourFilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') !== -1 ? 'V,NV' : null;
+                        oppfilterexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') == -1 ? 'V,NV' : null;
+                        TypeOfReportexpress = scope.expressmynotviewed.indexOf('I Viewed/NotViewed') !== -1 ? 'R' : 'S';
                     }
+                } else if (headertext === null) {
+                    scope.flagexpress = 9;
+                    TypeOfReportexpress = TypeOfReport;
+                    yourFilterexpress = yourFilter;
+                    oppfilterexpress = oppfilter;
                 } else {
-                    _.each(response.data, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-                    });
+                    TypeOfReportexpress = TypeOfReport;
+                    yourFilterexpress = yourFilter;
+                    oppfilterexpress = oppfilter;
                 }
-            });
+
+                scope.startindexexpress = frompage === 1 ? 1 : scope.startindexexpress;
+                scope.endindexexpress = frompage === 1 ? 9 : scope.endindexexpress;
+                var exp = {
+                    IntCustID: scope.custid,
+                    TypeOfReport: TypeOfReportexpress,
+                    yourFilter: yourFilterexpress,
+                    oppfilter: oppfilterexpress,
+                    pagefrom: scope.startindexexpress,
+                    pageto: scope.endindexexpress
+                };
+                customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
+                    console.log(response.data);
+                    if (parseInt(frompage) === 1) {
+                        scope.PartnerProfilesnew = [];
+                        _.each(response.data, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+                        });
+
+                        if (typeofinterest === "All Profiles") {
+                            scope.click = "";
+                            scope.flagexpress = 9;
+                            scope.typeofdiv = headertext === 'All Profiles' ? 'Expressinterest' : 'Expressinterestsend';
+                            scope.expressmyinterest = TypeOfReport === 'R' ? 'I interesed in' : scope.Gendercustomer + ' interesed';
+                            scope.expressmynotinterest = TypeOfReport === 'R' ? 'I skipped' : scope.Gendercustomer + ' skipped';
+                            scope.expressmynotviewed = TypeOfReport === 'R' ? 'I Viewed/NotViewed' : scope.Gendercustomer + ' Viewed/NotViewed';
+                            if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
+                                scope.expressmyinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouProceed : scope.PartnerProfilesnew[0].OppProceed;
+                                scope.expressmynotinterestcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].Youskipped : scope.PartnerProfilesnew[0].Oppskipped;
+                                scope.expressmynotviewedcount = TypeOfReport === 'R' ? scope.PartnerProfilesnew[0].YouPending : scope.PartnerProfilesnew[0].Opppending;
+                                scope.YouProceed = scope.PartnerProfilesnew[0].YouProceed;
+                                scope.Youskipped = scope.PartnerProfilesnew[0].Youskipped;
+                                scope.YouPending = scope.PartnerProfilesnew[0].YouPending;
+                                scope.OppProceed = scope.PartnerProfilesnew[0].OppProceed;
+                                scope.Oppskipped = scope.PartnerProfilesnew[0].Oppskipped;
+                                scope.Opppending = scope.PartnerProfilesnew[0].Opppending;
+                                scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
+                                scope.lblUHaveviewd = TypeOfReport === 'R' ? 'Interest Expressed By ' + scope.Gendercustomer : headertext;
+                                scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                                scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                                scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+                            }
+
+                        } else {
+                            if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
+                                scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                                scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                                scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+                            }
+                        }
+                    } else {
+                        _.each(response.data, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+                        });
+                    }
+                });
+            } else {
+                scope.zerorecorsalert();
+            }
         };
         app.animation('.slideexpress', function() {
             var NG_HIDE_CLASS = 'ng-hide';
@@ -291,59 +299,66 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             }
         };
-        scope.chatsdiv = function(fromindex, toindex, status, headertext) {
-            if (fromindex === 1) {
-                scope.flagexpress = 9;
-                scope.lblUHaveviewd = headertext;
-                scope.typeofdiv = "chats";
-                scope.chatstatus = status;
-            }
-            var object = { CustID: scope.custid, Status: scope.chatstatus, iStartIndex: fromindex, iEndIndex: toindex };
-            customerDashboardServices.getCustometDashBoardchats(object).then(function(response) {
-                scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
-                if (parseInt(fromindex) === 1) {
-                    scope.PartnerProfilesnew = [];
-                    _.each(response.data, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-                        scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
-                        scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
-                        scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
-                    });
-                } else {
-                    _.each(response.data, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-                    });
-
+        scope.chatsdiv = function(fromindex, toindex, status, headertext, countalert) {
+            if (countalert !== 0) {
+                if (fromindex === 1) {
+                    scope.flagexpress = 9;
+                    scope.lblUHaveviewd = headertext;
+                    scope.typeofdiv = "chats";
+                    scope.chatstatus = status;
                 }
-            });
+                var object = { CustID: scope.custid, Status: scope.chatstatus, iStartIndex: fromindex, iEndIndex: toindex };
+                customerDashboardServices.getCustometDashBoardchats(object).then(function(response) {
+                    scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
+                    if (parseInt(fromindex) === 1) {
+                        scope.PartnerProfilesnew = [];
+                        _.each(response.data, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+                            scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                            scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                            scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+
+                        });
+                    } else {
+                        _.each(response.data, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+                        });
+
+                    }
+                });
+            } else {
+                scope.zerorecorsalert();
+            }
         };
-        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv) {
-
-            if (fromindex === 1) {
-                scope.flagexpress = 9;
-                scope.lblUHaveviewd = headertext;
-                scope.typeofdiv = typeofdiv;
-                scope.chatstatus = type;
-            }
-            customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
-                scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                if (parseInt(fromindex) === 1) {
-                    scope.PartnerProfilesnew = [];
-                    _.each(response.data.PartnerProfilesnew, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-
-                        scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
-                        scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
-                        scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
-                    });
-                } else {
-                    _.each(response.data.PartnerProfilesnew, function(item) {
-                        scope.PartnerProfilesnew.push(item);
-                    });
+        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert) {
+            if (countalert !== 0) {
+                if (fromindex === 1) {
+                    scope.flagexpress = 9;
+                    scope.lblUHaveviewd = headertext;
+                    scope.typeofdiv = typeofdiv;
+                    scope.chatstatus = type;
                 }
-            });
+                customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
+                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                    if (parseInt(fromindex) === 1) {
+                        scope.PartnerProfilesnew = [];
+                        _.each(response.data.PartnerProfilesnew, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+
+                            scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
+                            scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
+                            scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
+
+                        });
+                    } else {
+                        _.each(response.data.PartnerProfilesnew, function(item) {
+                            scope.PartnerProfilesnew.push(item);
+                        });
+                    }
+                });
+            } else {
+                scope.zerorecorsalert();
+            }
         };
 
         scope.allloadmorepaging = function() {
@@ -356,7 +371,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             switch (scope.typeofdiv) {
                 case "Expressinterest":
                 case "Expressinterestsend":
-                    scope.expressinterestselect(TypeOfReportexpress, yourFilterexpress, oppfilterexpress, scope.startindexexpress, scope.endindexexpress);
+                    scope.expressinterestselect(1, TypeOfReportexpress, yourFilterexpress, oppfilterexpress, scope.startindexexpress, scope.endindexexpress);
                     scope.spinexpress = false;
                     break;
                 case "chats":
@@ -419,9 +434,23 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.SubmitMsg = function(form) {
             scope.$broadcast('sendmsg', 'RP', scope.messagechatcustid, scope.messagechatlinkid, form, undefined, scope.messagehistoryid);
         };
-        scope.PhotoPasswordAction = function(type, tocustid) {
+        scope.photoPasswordactionss = function(type, tocustid) {
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
                 console.log(response);
+                if (response.data === 1) {
+                    if (type === 1) {
+                        alerts.open("Accepted successfully", "success");
+                    } else {
+                        alerts.open("Rejected successfully", "success");
+                    }
+                } else {
+                    if (type === 1) {
+                        alerts.open("sorry Accepted Fail", "warning");
+                    } else {
+                        alerts.open("sorry Rejected Fail", "warning");
+                    }
+
+                }
             });
         };
         scope.acceptlink = function(type) {
@@ -467,9 +496,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
 
         });
-        scope.divclassmaskforexpressint = function(logphotostatus, photo, photocount) {
-            return customerDashboardServices.maskclassall(logphotostatus, photo, photocount);
-        };
+
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
         };

@@ -141,7 +141,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 });
             };
             scope.photoalbum = function(custid, profileid, photocount) {
-
                 scope.$emit('photoalbumopen', custid, profileid, photocount);
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {

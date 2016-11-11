@@ -12,11 +12,13 @@ app.factory('successstoriesdata', ['$http', function(http) {
             return http.post(app.apiroot + 'StaticPages/GetSuccessStoriesdetails', person);
         },
         maskclasspartner: function(logphotostatus, photo, photocount) {
-
+            debugger;
             var photoclass = "";
             var PhotoMaskDiv;
-            if (logphotostatus != "null" && logphotostatus != null)
+            if (logphotostatus != "null" && logphotostatus != null && photo.indexOf("ApplicationPhoto") != -1)
                 PhotoMaskDiv = logphotostatus != true && logphotostatus != "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
+            else if (logphotostatus != "null" && logphotostatus != null && photo.indexOf("ThumbNail") != -1)
+                PhotoMaskDiv = logphotostatus != true && logphotostatus != "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
             else
                 PhotoMaskDiv = photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdiv clearfix" : "";
 
