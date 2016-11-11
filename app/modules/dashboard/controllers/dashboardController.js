@@ -1,8 +1,9 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location) {
+    'alert', '$window', '$location', 'successstoriesdata',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
+        var loginpaidstatus = authSvc.getpaidstatus();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.typeodbind = 'C';
         scope.typeofdiv = "Grid";
@@ -13,19 +14,25 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus;
         scope.form = {};
+        scope.slides = [];
         scope.gettingpartnerdata = function(type, frompage, topage, headertext) {
-            debugger;
+
             scope.flag = frompage === 1 ? 9 : scope.flag;
             scope.typeodbind = type;
             if (type == 'C') {
                 customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
+                    console.log(response);
                     if (scope.counts == 1) {
+                        sessionStorage.removeItem("LoginPhotoIsActive");
                         scope.bindcounts(response.data.DashBoardCounts);
                         console.log(response.data.DashBoardCounts);
                         scope.bindallcounts = response.data.DashBoardCounts;
                         scope.PersonalInfo = (response.data.PersonalInfo);
                         console.log(response.data.PersonalInfo);
                         scope.photopersonal = scope.PersonalInfo.Photo;
+
+                        scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                        sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
                         scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                     }
                     if (parseInt(frompage) === 1) {
@@ -33,6 +40,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.typeofdiv = "Grid";
                         _.each(response.data.PartnerProfilesnew, function(item) {
                             scope.PartnerProfilesnew.push(item);
+
                         });
                     } else {
                         _.each(response.data.PartnerProfilesnew, function(item) {
@@ -96,8 +104,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var yourFilterexpress = null;
         var oppfilterexpress = null;
         scope.flagexpress = 9;
-        scope.expressinterestselect = function(TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest) {
-            debugger;
+        scope.expressinterestselect = function(TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
+
+            if (eventclick != null) {
+                scope.click = eventclick;
+            };
             if (headertext === "1" || headertext === "2" || headertext === "3") {
                 scope.flagexpress = 9;
                 if (headertext === "1") {
@@ -143,6 +154,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     });
 
                     if (typeofinterest === "All Profiles") {
+                        scope.click = "";
                         scope.flagexpress = 9;
                         scope.typeofdiv = headertext === 'All Profiles' ? 'Expressinterest' : 'Expressinterestsend';
                         scope.expressmyinterest = TypeOfReport === 'R' ? 'I interesed in' : scope.Gendercustomer + ' interesed';
@@ -214,8 +226,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
-            var mobilenumber = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-            alerts.open(mobilenumber, 'success');
+
+            customerDashboardServices.getprofilegrade(custid).then(function(response) {
+                console.log(response);
+                if (response.data != null && response.data != undefined) {
+                    debugger;
+                    if (response.data === 3) {
+                        var mobilenumber = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
+                        alerts.open(mobilenumber, 'success');
+                    } else {
+                        var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
+                        alerts.open(mobilenumber, 'warning');
+                    }
+                }
+
+            });
+
         };
         scope.Tickethistoryarray = [];
         scope.messagetorm = function(typeofdiv, custid, name, profileid, logid, TicketID) {
@@ -293,6 +319,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
         };
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv) {
+
             if (fromindex === 1) {
                 scope.flagexpress = 9;
                 scope.lblUHaveviewd = headertext;
@@ -338,7 +365,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     break;
                 case "Requestphotos":
                 case "RequestPassword":
-                    debugger;
+
                     scope.receivesrecphotoss(scope.startindexexpress, scope.endindexexpress);
                     scope.spinexpress = false;
                     break;
@@ -352,7 +379,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopupclose();
         });
         scope.redirectToviewfull = function(custid, logid) {
-            debugger;
+
             sessionStorage.removeItem("localcustid");
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
@@ -398,9 +425,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
         };
         scope.acceptlink = function(type) {
-            debugger;
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
-                console.log(response);
+
                 if (response.data === 1) {
                     alerts.open("Proceed successfully", "success");
                 } else {
@@ -427,5 +453,36 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.modalbodyshow = 4;
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
+
+        scope.$on("photoalbumopen", function(event, custid, profileid, photocount) {
+            //scope.popupphoto = 1;
+            alerts.dynamicpopup("photopopup.html", scope, uibModal);
+            customerDashboardServices.getphotoslideimages(custid).then(function(response) {
+                debugger;
+                scope.slides = [];
+                console.log(response);
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+
+        });
+        scope.divclassmaskforexpressint = function(logphotostatus, photo, photocount) {
+            return customerDashboardServices.maskclassall(logphotostatus, photo, photocount);
+        };
+        scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
+            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+        };
+        scope.incrementsdashboardcounts = function() {
+            customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9).then(function(response) {
+                scope.bindcounts(response.data.DashBoardCounts);
+                scope.bindallcounts = response.data.DashBoardCounts;
+            });
+        };
+        scope.$on("incrementcounts", function() {
+            debugger;
+            scope.incrementsdashboardcounts();
+        });
+
     }
 ]);

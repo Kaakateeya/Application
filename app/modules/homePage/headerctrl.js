@@ -1,4 +1,4 @@
-app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', function(scope, authSvc, ngIdle, alertpopup, uibModal) {
     scope.showhidetestbuttons = function() {
         var datatinfo = authSvc.user();
         if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
@@ -20,6 +20,22 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
             scope.withlogin = false;
             scope.withoutlogin = true;
         }
+    };
+
+    scope.$on('IdleTimeout', function() {
+
+        //show pop up with two choices,wherther enduser needs to continue session or logout of application
+        //Idle.setIdle(5);
+        //redirect to home page
+        alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
+    });
+    scope.acceptcontinue = function() {
+        ngIdle.setIdle(5);
+        alertpopup.dynamicpopupclose();
+    };
+    scope.closesession = function() {
+        window.location = "#/";
+        alertpopup.dynamicpopupclose();
     };
     scope.loginstatus = true;
     scope.loginoutstatus = false;
@@ -92,4 +108,9 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
         var realpath = '#/home';
         window.open(realpath, "_self");
     };
+
+    scope.viewfullmyprofile = function() {
+        var realpath = '#/viewFullProfileCustomer';
+        window.open(realpath, '_self');
+    }
 }]);

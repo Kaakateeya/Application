@@ -8,14 +8,19 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
-    'alertType': 'toast-top-center'
+    'alertType': 'toast-top-right'
 }
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider) {
+    IdleProvider.autoResume('notIdle');
+    // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
+    IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
+    IdleProvider.idle(5);
+
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: false },
@@ -78,7 +83,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         })
     });
-});
+}]);
 app.config(function(reCAPTCHAProvider) {
     reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
     // optional

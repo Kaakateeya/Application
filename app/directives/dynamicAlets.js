@@ -1,5 +1,6 @@
 app.factory('alert', function() {
     var modalinstance;
+
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -39,13 +40,14 @@ app.factory('alert', function() {
             }
         },
 
-        dynamicpopup: function(url, scope, uibModal, custid) {
+        dynamicpopup: function(url, scope, uibModal, custid, size) {
             debugger;
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: url,
-                scope: scope
+                scope: scope,
+                size: size || 'lg'
             });
         },
 

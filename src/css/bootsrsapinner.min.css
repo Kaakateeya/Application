@@ -7767,7 +7767,7 @@ button.close {
 .row:after,
 .row:before {
     display: table;
-    content: " "
+    /*content: " "*/
 }
 
 .btn-group-vertical>.btn-group:after,

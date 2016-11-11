@@ -1,0 +1,33 @@
+<script type="text/ng-template" id="photopopup.html">
+    <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="closepopup()">×</button>
+            <h4 class="modal-title">Slide show</h4>
+        </div>
+        <div class="modal-body" id="Div2">
+            <div class="bs-example">
+                <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel">
+
+                    <ol class="carousel-indicators">
+                        <li data-target="#slideshow" class="active" data-slide-to="0"></li>
+                        <li data-target="#slideshow" data-slide-to="1" class=""></li>
+                        <li data-target="#slideshow" data-slide-to="2" class=""></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active"><img id="imh" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_95933_Images/Img1_Images/210959330_FullPhoto.jpg"></div>
+                        <div class="item"><img id="ctl00_Repeater1_ctl01_imh" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_95933_Images/Img2_Images/210959330_FullPhoto.jpg"></div>
+                        <div class="item"><img id="ctl00_Repeater1_ctl01_imh" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_95933_Images/Img2_Images/210959330_FullPhoto.jpg"></div>
+                    </div>
+                    <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>

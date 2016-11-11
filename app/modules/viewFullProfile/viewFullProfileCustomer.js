@@ -3,7 +3,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
     function(customerDashboardServices, scope, alerts, authSvc, $injector) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
-        var localcustid = sessionStorage.getItem("localcustid");
+        var localcustid = sessionStorage.getItem("localcustid") != undefined && sessionStorage.getItem("localcustid") != "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
         debugger;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;

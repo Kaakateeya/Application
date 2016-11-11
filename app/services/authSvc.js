@@ -17,7 +17,8 @@
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', function($injector) {
+app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
+    Idle.watch();
 
     function setUser(value) {
         //console.log(value);
@@ -79,6 +80,9 @@ app.factory('authSvc', ['$injector', function($injector) {
         },
         getProfileid: function() {
             return getSession('cust.profileid');
+        },
+        getpaidstatus: function() {
+            return getSession('cust.paidstatus');
         },
         clearUserSessionDetails: function() {
             return clearUserSession();

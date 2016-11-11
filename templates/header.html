@@ -55,7 +55,7 @@
 
                         <ul>
                             <li>
-                                <a id="linkviewmyprofile" href="#/viewmyprofile">View My Profile</a>
+                                <a id="linkviewmyprofile" href="javascript:void(0);" ng-click="viewfullmyprofile()">View My Profile</a>
                             </li>
                             <li>
                                 <a id="linkeditprofile" href="#/EditProfile">Edit Profile</a>
@@ -184,7 +184,36 @@
             </div>
         </div>
     </div>
+
+    <script type="text/ng-template" id="sessionalert.html">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> Confirmation</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <h4 class="col-lg-offset-1">Do you want to continue Session</h4>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <div class='row'>
+                    <div class='col-lg-4 col-lg-offset-2'>
+                        <button type='button' class='btn btn-danger' ng-click='closesession()'>close</button>
+                    </div>
+                    <div class='col-lg-5'>
+                        <button type='button' class='btn btn-success' ng-click='acceptcontinue()'>Continue</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </script>
 </div>
+
+
 <style type="text/css">
         .fix-to-top {
         position: fixed;

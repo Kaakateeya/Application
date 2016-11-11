@@ -1,4 +1,7 @@
-app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSvc) {
+app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', function($injector, authSvc, successstoriesdata) {
+    var logincustid = authSvc.getCustId();
+    var loginprofileid = authSvc.getProfileid();
+
     return {
         restrict: "E",
         scope: {
@@ -6,12 +9,15 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
+            debugger;
+            scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
             scope.endindex = 9;
             scope.flag = 9;
             scope.loaderspin = false;
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
+            scope.indexvalues;
             scope.typeofdiv = "Grid";
             var i = 0;
             scope.directivepaging = function() {
@@ -50,6 +56,8 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                             switch (type) {
                                 case "B":
                                     if (response.data == 1) {
+                                        scope.array.splice(scope.indexvalues, 1);
+                                        scope.$emit('incrementcounts');
                                         scope.$emit('successfailer', "bookmarked suceessfully", "success");
                                     } else {
                                         scope.$emit('successfailer', "bookmarked failed", "warning");
@@ -57,6 +65,7 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                                     break;
                                 case "E":
                                     if (response.data == 1) {
+                                        scope.array.splice(scope.indexvalues, 1);
                                         scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
                                     } else {
                                         scope.$emit('successfailer', "EXpressInterest Fail", "warning");
@@ -64,6 +73,7 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                                     break;
                                 case "I":
                                     if (response.data == 1) {
+                                        scope.array.splice(scope.indexvalues, 1);
                                         scope.$emit('successfailer', "Ignore SuccessFully", "success");
                                     } else {
                                         scope.$emit('successfailer', "Ignore profile Fail", "warning");
@@ -84,8 +94,8 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
 
             }
             scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-                var logincustid = authSvc.getCustId();
-                var loginprofileid = authSvc.getProfileid();
+                debugger;
+                var indexvalue = scope.indexvalues;
                 var object = {
                     IFromCustID: logincustid,
                     IToCustID: tocustid,
@@ -104,7 +114,7 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                 scope.servicehttp(type, object);
             };
             scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-                debugger;
+
                 scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                 scope.$emit("modalpopupclose", event);
             });
@@ -112,9 +122,35 @@ app.directive("partnerData", ["$injector", 'authSvc', function($injector, authSv
                 scope.$emit('popuplogin', "myModalContent.html", tocustid);
             };
             scope.redirectToviewfullprofile = function(custid, logid) {
-                debugger;
+
                 scope.$emit('redirectToviewfullprofiles', custid, logid);
-            }
+            };
+
+            scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
+                password = password != null && password != "" ? 468 : 467;
+                return $injector.invoke(function($http) {
+                    return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
+                        .then(function(response) {
+                            console.log(response);
+                            if (response.data == 1) {
+                                scope.$emit('successfailer', "Request sent suceessfully", "success");
+                            } else {
+                                scope.$emit('successfailer', "Request sent Fail", "warning");
+                            }
+                        });
+                });
+            };
+            scope.photoalbum = function(custid, profileid, photocount) {
+
+                scope.$emit('photoalbumopen', custid, profileid, photocount);
+            };
+            scope.divclassmask = function(logphotostatus, photo, photocount) {
+                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+            };
+            scope.indexvalue = function(index) {
+                debugger;
+                scope.indexvalues = index;
+            };
         }
     };
 }]);

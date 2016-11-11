@@ -36,6 +36,49 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         photopasswordactioninsert: function(fromcustid, tocustid, type) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', { params: { loggedcustid: fromcustid, ToCustID: tocustid, Type: type } });
+        },
+
+        maskclassall: function(logphotostatus, photo, photocount) {
+            var photoclass = "";
+            var PhotoMaskDiv;
+            if (logphotostatus != "null" && logphotostatus != null)
+                PhotoMaskDiv = logphotostatus != true && logphotostatus != "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
+            else
+                PhotoMaskDiv = photo.indexOf("ThumbNail") != -1 ? "cssMaskdiv clearfix" : "";
+
+            if (PhotoMaskDiv == "cssMaskdiv clearfix") {
+
+                photoclass = PhotoMaskDiv == "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
+            } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
+
+                photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+            } else if (photo.toLowerCase().indexOf("_rev") != -1) {
+                photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+
+            } else if (photo.indexOf("noimage") != -1) {
+                photoclass = "Linkdisabled";
+            } else if (photo.indexOf("Password-Protected") != -1) {
+
+                if (PhotoMaskDiv == "cssMaskdiv clearfix") {
+                    photoclass = "cssMaskdiv clearfix Linkdisabled";
+                } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
+                    photoclass = "cssMaskdivrev clearfix Linkdisabled";
+                }
+
+                photoclass = "Linkdisabled";
+            } else if ((photocount) == 0) {
+                photoclass = "Linkdisabled";
+
+            } else {
+                photoclass = "";
+            }
+            return photoclass;
+        },
+        getprofilegrade: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getprofileGrade', { params: { CustID: custid } });
+        },
+        getphotoslideimages: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/GetPhotoSlideImages', { params: { CustID: custid } });
         }
     };
 }]);

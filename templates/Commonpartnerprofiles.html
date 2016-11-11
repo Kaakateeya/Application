@@ -5,29 +5,29 @@
     </div>
 </div>
 <div id="PartnerProfilles">
-    <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew">
+    <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
         <p></p>
         <div class="clear"></div>
         <div class="search_result_item_in clearfix">
             <div class="search_result_item_pic pull-left">
-                <span class="">
-                   
-                    <img name="imgProfilefullpic" ng-src="{{data.Photo}}" style="height: 250px; width: 250px;"></span>
+                <span ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotosCount)">
+                 <img name="imgProfilefullpic" ng-src="{{data.Photo}}" ng-class="data.PhotosCount==0?'Linkdisabled':''" style="height: 250px; width: 250px;cursor:pointer;" ng-click="photoalbum(data.Cust_ID,data.ProfileID,data.PhotosCount)"></span>
                 <p style="align-items: center; text-align: center;"></p>
                 <div>
-                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid'?{'display':' none'}:{'display':'block'}"></a>
+                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.Cust_ID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                        (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a>
                 </div>
             </div>
             <div class="search_result_item_descr pull-left">
                 <p>
-                    <span>He</span> was born and raised in
+                    <span>{{data.iGenderID===1?"He":"She"}}</span> was born and raised in
                     <label class="label_check"><span>{{data.placeofbirth}}</span></label>
                 </p>
 
                 <div class="search_result_item_descr_list clearfix">
-                    <p class="clearfix ipName" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
+                    <p class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Name</label>
                         <span>{{data.NAME}}</span>
                     </p>
@@ -39,14 +39,14 @@
                     <p class="clearfix">
                         <label>Caste</label><span>{{data.ReligionName}}</span><span>-</span><span>{{data.Caste}}</span>
                     </p>
-                    <p class="clearfix ipMaritalstatus" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
+                    <p class="clearfix ipMaritalstatus" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Marital status</label><span>{{data.MaritualStatus}}</span>
                     </p>
-                    <p class="clearfix ipStar" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
+                    <p class="clearfix ipStar" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Star</label>
                         <span>{{data.Star}}</span>
                     </p>
-                    <p class="clearfix ipLocation" ng-style="typeofdiv==='Grid'?{'display':'none'}:{'display':'block'}">
+                    <p class="clearfix ipLocation" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Location</label>
                         <span>{{ data.Location }}</span>
                     </p>
@@ -65,44 +65,44 @@
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
-                        <img title="Mobile" ng-class="typeofdiv==='Grid'?'mobile-icon':'mobile-icon_list'"></img>
+                        <img title="Mobile" ng-class="typeofdiv==='Grid' ? 'mobile-icon': 'mobile-icon_list'"></img>
                     </li>
                     <li>
-                        <img title="Emails" ng-class="typeofdiv==='Grid'?'message-icon':'message-icon_list'"></img>
+                        <img title="Emails" ng-class="typeofdiv==='Grid' ? 'message-icon': 'message-icon_list'"></img>
                     </li>
                     <li>
-                        <img title="horo" ng-class="typeofdiv==='Grid'?'planet-icon':'planet-icon_list'"></img>
+                        <img title="horo" ng-class="typeofdiv==='Grid' ? 'planet-icon': 'planet-icon_list'"></img>
                     </li>
                 </ul>
                 <div class="clear"></div>
             </div>
-            <div ng-class="typeofdiv==='Grid'?'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid':'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
+            <div ng-class="typeofdiv==='Grid' ? 'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid': 'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
                 <ul>
                     <li>
                         <div style="margin-top: 5px;">
-                            <div ng-class="typeofdiv==='Grid'?'bookmark-icon2':'bookmark-icon'" ng-click="serviceactions('B',data.Cust_ID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                            <div ng-class="typeofdiv==='Grid' ? 'bookmark-icon2': 'bookmark-icon'" ng-click="indexvalue($index);serviceactions('B',data.Cust_ID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'">
                  BOOKMARK
                    </span></div>
                     </li>
                     <li>
                         <div style="padding:5px 6px 12px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'interest-icon2':'interest-icon'" ng-click="serviceactions('E',data.Cust_ID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                            <div ng-class="typeofdiv==='Grid' ? 'interest-icon2': 'interest-icon'" ng-click="indexvalue($index);serviceactions('E',data.Cust_ID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'">
                          EXPRESS INTEREST
                             </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 7px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'message-icon2-small':'message-icon2'" ng-click="sendmessegescommon('M',data.Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                            <div ng-class="typeofdiv==='Grid' ? 'message-icon2-small': 'message-icon2'" ng-click="indexvalue($index);sendmessegescommon('M',data.Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'">
                    MESSAGE
                         </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 11px 12px;">
-                            <div ng-class="typeofdiv==='Grid'?'close-icon-small':'close-icon'" ng-click="serviceactions('I',data.Cust_ID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid'?'spandisplay':'spandisplayblock'">
+                            <div ng-class="typeofdiv==='Grid' ? 'close-icon-small': 'close-icon'" ng-click="indexvalue($index);serviceactions('I',data.Cust_ID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'">
                        IGNORE
                           </span></div>
                     </li>
@@ -112,7 +112,7 @@
         </div>
     </div>
 </div>
-<div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
+<div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
     <div class="col-lg-offset-5" ng-show=loadmore>
         <a href="javascript:void(0);" ng-click="directivepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
     </div>
@@ -123,6 +123,34 @@
         <h3 style="color: maroon;">End</h3>
     </div>
 </div>
+<script type="text/ng-template" id="photopopup.html">
+    <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+            <h4 class="modal-title">Slide show</h4>
+        </div>
+        <div class="modal-body" id="Div2">
+            <div class="bs-example">
+                <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" src="{{slide.FullPhotoPath}}"></div>
+                    </div>
+                    <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
 <style type="text/css">
     .spandisplay {
         display: none;
@@ -132,5 +160,14 @@
         display: block;
         margin-top: 5px;
         margin-left: 1px;
+    }
+    
+    .expressinterestdiv {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .activeclassdiv {
+        background-color: maroon;
     }
 </style>
