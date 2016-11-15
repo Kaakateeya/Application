@@ -1,13 +1,13 @@
-<md-switch class="md-secondary" ng-hide="true"></md-switch>
+
 
 <div class="search_page_main">
-    <div class="search_page_tabs profile_settings_tabs">
+    <div  class="search_page_tabs profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
-                <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect class="box">
+                <md-tabs md-selected="selectedIndex"  class="" flex md-border-bottom md-autoselect class="box">
                     <md-tab label="Edit Email">
-                        <div class="demo-tab tab">
-                            <div class="profile_search_main profile_settings_main clearfix" id="tab_mail">
+                        <div class="tab">
+                            <div id="tab_mail" class="profile_search_main profile_settings_main clearfix">
                                 <div class="row">
                                     <p class="col-lg-3">
                                         You can change your primary email id &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
@@ -33,11 +33,16 @@
                                         <label>Confirm New Email ID</label>
                                         <input ng-model="user.Confirmnewemail">
                                     </md-input-container>
+									
                                 </div>
-                                <br>
+                               	<div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button  class="md-raised  md-hue-1">Reset</md-button>
+                               	   </div>
+                                <md-divider ></md-divider>
                                 <div class="row">
                                     <p class="col-lg-3">
-                                        You can change your primary email id &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        You can change your Number &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="col-lg-1">
                                         <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
                                     </div>
@@ -63,39 +68,159 @@
                                         <input ng-model="user.Confirmnewemail">
                                     </md-input-container>
                                 </div>
+							 	<div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button class="md-raised md-hue-1">Reset</md-button>
+                               	   </div>
                             </div>
 
                         </div>
                     </md-tab>
                     <md-tab label="Edit Password">
-                        <div class="demo-tab tab" style="padding: 25px; text-align: center;">
+                      
+                          <div class="tab">
+                            <div id="tab_mail" class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <p class="col-lg-3">
+                                       You can change your password   &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                    <div class="">
+                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                    </div>
+                                </div>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Current Password</label>
+                                        <input ng-model="user.CurrentEmail">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>
+                                    New Password</label>
+                                        <input ng-model="user.NewEmail">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>
+                                       Confirm New Password</label>
+                                        <input ng-model="user.Confirmnewemail">
+                                    </md-input-container>
+                                </div>
+                               	<br>
+							
+							  <div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button class="md-raised md-hue-1">Reset</md-button>
+                               	   </div>
+                               
+                            </div>
 
                         </div>
+                        
                     </md-tab>
                     <md-tab label="Manage Alerts">
-                        <div class="demo-tab tab" style="padding: 25px; text-align: center;">
-                            <div id="ctl00_ContentPlaceHolder1_UpdatePanel1" class="tab_mail" style="display: block;">
+                        <div class="tab" >
+                            <div class="profile_search_main profile_settings_main clearfix">
+								  <div class="row">
+                                    <p class="col-lg-4">
+                                      You can change the Email/SMS alerts settings  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                    <div class="">
+                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                    </div>
+                                   </div>
+								  <div>
+					          <div layout-gt-sm="row">
+						       <md-radio-group layout="row" class="md-block" flex-gt-sm>
+									 Receive alerts by SMS &nbsp;&nbsp;&nbsp;&nbsp;
+                                   <md-radio-button value="Apple" class="md-primary">Yes</md-radio-button>
+                                    <md-radio-button value="Banana"> No </md-radio-button>
+                                   </md-radio-group>
+								    <md-radio-group layout="row" class="md-block" flex-gt-sm>
+									 Receive alerts by SMS &nbsp;&nbsp;&nbsp;&nbsp;
+                                   <md-radio-button value="Apple" class="md-primary">Yes</md-radio-button>
+                                    <md-radio-button value="Banana"> No </md-radio-button>
+                                   </md-radio-group>
+		                        </div>
+								<br>
+							 
+							  <div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button class="md-raised md-hue-1">Reset</md-button>
+                               	   </div>
                             </div>
-                            <br/>
-                        </div>
+                      </div>
                     </md-tab>
                     <md-tab label="Hide Profile">
-                        <div class="demo-tab tab" style="padding: 25px; text-align: center;">
-                            <div id="ctl00_ContentPlaceHolder1_UpdatePanel1" class="tab_mail" style="display: block;">
+                        <div class="tab" >
+                             <div class="profile_search_main profile_settings_main clearfix">
+								  <div class="row">
+                                    <p class="col-lg-9">
+                                      In order to hide profile for certain time period please select the option below and mention the reason for hiding the profile.  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                    <div class="">
+                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                    </div>
+                                   </div>
+								  <div>
+					           <div layout="row">
+                                  <md-input-container class="md-block"  flex="40">
+                                        <label>State</label>
+                                        <md-select ng-model="user.state">
+                                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                                {{state.abbrev}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                
+                                </div>
+								<div  layout="row">
+						     	 <md-input-container class="md-block"  flex="40">
+                                  <label>Provide narration for hidden</label>
+                                <textarea name="bio" ng-model="narration" rows=5  md-maxlength="150"></textarea>
+                                </md-input-container>
+								</div>
+							 	<div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button class="md-raised md-hue-1">Reset</md-button>
+                               	   </div>
                             </div>
-                            <br/>
                         </div>
                     </md-tab>
                     <md-tab label="Delete Profile">
-                        <div class="demo-tab tab" style="padding: 25px; text-align: center;">
-                            <div id="ctl00_ContentPlaceHolder1_UpdatePanel1" class="tab_mail" style="display: block;">
+                        <div class="tab" >
+                                <div class="profile_search_main profile_settings_main clearfix">
+								  <div class="row">
+                                    <p class="col-lg-4">
+                                     To delete your kaakateeya profile permanently.  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                    <div class="">
+                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                    </div>
+                                   </div>
+								  <div>
+					          <div  layout="row">
+						     	 <md-input-container class="md-block"  flex="40">
+                                  <label>Reason</label>
+                                <textarea name="bio" ng-model="narration" rows=3  md-maxlength="150"></textarea>
+                                </md-input-container>
+								
+								</div>
+                             <div layout-gt-sm="row">
+								 <md-checkbox ng-model="isChecked" aria-label="Married">
+                                     Delete my profile permanently
+                                  </md-checkbox>
+								  </div>
+							 	<div latout="row">
+						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                 <md-button class="md-raised md-hue-1">Reset</md-button>
+                               	   </div>
                             </div>
-                            <br/>
+                           
                         </div>
                     </md-tab>
                 </md-tabs>
             </md-content>
-            <div ng-hide="true">
+      	 </div>
+    </div>
+</div>
+  <div ng-hide="true">
                 <div>
                     <md-button ng-click="showAlert()" class="md-raised md-warn">
                         Employee Alert!
@@ -108,10 +233,7 @@
                 </div>
 
             </div>
-        </div>
-    </div>
-</div>
-<div>
+<div ng-hide="true">
     <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
             <label>First name</label>
@@ -153,16 +275,11 @@
         </md-input-container>
     </div>
 </div>
+<md-switch class="md-secondary" ng-hide="true"></md-switch>
 <style type="text/css">
-    /*.box {
-        color: white;
-        padding: 10px;
-        text-align: center;
-        border-style: inset;
-        border: 2px solid gray;
-    }*/
-    
-    .green {
-        background: gray;
+   
+	   md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    /*min-height: 248px*/
+    min-height: 500px;
     }
 </style>

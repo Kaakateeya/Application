@@ -68,6 +68,28 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                         scope.databind(option);
                     });
                     break;
+                    case 'catgory':
+                    scope.databind(cons.catgory);
+                    break;
+
+                case 'Priority':
+                    scope.databind(cons.Priority);
+                    break;
+
+                case 'countryCode':
+                    service.countryCodeselect().then(function (response) {
+                        var option = [];
+                        _.each(response.data, function (item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+
+                case 'region':
+                    scope.databind(cons.region);
+                    break;
+
             }
 
 

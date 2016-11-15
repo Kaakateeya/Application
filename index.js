@@ -15,7 +15,8 @@ app.global = {
     'alertType': 'toast-top-right'
 }
 
-
+  app.config(function($mdThemingProvider) {
+  })
 app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.

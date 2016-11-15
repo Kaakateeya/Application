@@ -1,4 +1,4 @@
-<div class="register_page_main branches_page_main" ng-controller="ourbranches">
+<div class="register_page_main branches_page_main">
     <h4>Branches</h4>
     <div class="rating_main help_page_main">
         <p>Contact any of the closest branches for immediate responce or post your queries in the sumission form provided below
@@ -31,14 +31,15 @@
             <div class="branches_addrss_main_in">
                 <h4>1. Hyderabad Ameerpet (HQ)</h4>
                 <p>
-                    103,109, Vijaya Sri Apartments, Behind Chermas, Ameerpet.<br> Contact : +91-7658180800, 040-23747777<br>                    Email : <span>kaakateeya.com@gmail.com</span><br> Timings : 9:00 AM To 9:00 pm
+                    103,109, Vijaya Sri Apartments, Behind Chermas, Ameerpet.<br /> Contact : +91-7658180800, 040-23747777<br
+                    /> Email : <span>kaakateeya.com@gmail.com</span><br /> Timings : 9:00 AM To 9:00 pm
                 </p>
             </div>
             <div class="branches_addrss_main_in">
                 <h4>1. Hyderabad Dilsukhnagar (BR)</h4>
                 <p>
                     2nd Floor, Pullareddy Sweets Building, Sai Baba Temple Road, Dilsukhnagar.
-                    <br> Contact : +91-984944222, 040-2406 8989<br> Email : <span>info@telugumarriages.com</span><br> Timings
+                    <br /> Contact : +91-984944222, 040-2406 8989<br> Email : <span>info@telugumarriages.com</span><br> Timings
                     : 9:00 AM To 9:00 pm
                 </p>
             </div>
@@ -48,574 +49,43 @@
             <div class="control-group span5 select-box-my">
                 <label class="control-label">Select the state where you are looking for</label>
                 <div class="controls clearfix">
-                    <div id="ctl00_ContentPlaceHolder1_updatecontents">
-
-                        <select name="ctl00$ContentPlaceHolder1$ddlbranches" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlbranches\',\'\')', 0)"
-                            id="ctl00_ContentPlaceHolder1_ddlbranches" class="chosen chzn-done" style="display: none;">
-		<option selected="selected" value="0">--Select--</option>
-		<option value="1">Telangana</option>
-		<option value="408">Andhra Pradesh</option>
-		<option value="409">Tamilnadu</option>
-		<option value="410">Karnataka</option>
-		<option value="2">Panducherry</option>
-
-	</select>
-                        <div id="ctl00_ContentPlaceHolder1_ddlbranches_chzn" class="chzn-container chzn-container-single"
-                            style="width: 125px;"><a href="javascript:void(0)" class="chzn-single" tabindex="-1"><span>--Select--</span><div><b></b></div></a>
-                            <div
-                                class="chzn-drop" style="left: -9000px; width: 123px; top: 34px;">
-                                <div class="chzn-search"><input autocomplete="off" style="width: 91.9px;" type="text"></div>
-                                <ul class="chzn-results">
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_0" class="active-result result-selected"
-                                        style="">--Select--</li>
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_1" class="active-result"
-                                        style="">Telangana</li>
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_2" class="active-result"
-                                        style="">Andhra Pradesh</li>
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_3" class="active-result"
-                                        style="">Tamilnadu</li>
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_4" class="active-result"
-                                        style="">Karnataka</li>
-                                    <li id="ctl00_ContentPlaceHolder1_ddlbranches_chzn_o_5" class="active-result"
-                                        style="">Panducherry</li>
-                                </ul>
-                        </div>
-                    </div>
-
+                    <select multiselectdropdown ng-model="ddlbranches" typeofdata="region" ng-change="changeBind('region');">  </select>
+                </div>
+            </div>
+            <div class="control-group span5 select-box-my">
+                <label class="control-label">Select the location where you are looking for</label>
+                <div class="controls clearfix">
+                    <select multiselectdropdown ng-model="ddlbranchaddress"  ng-change="changeBind('branch');" ng-options="item.value as item.label for item in BranchArr">  </select>
                 </div>
             </div>
         </div>
 
-        <div class="control-group span5 select-box-my">
-            <label class="control-label">Select the location where you are looking for</label>
-            <div class="controls clearfix">
-                <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+        <div class="branches_addrss_main clearfix">
+            <h4>contact phone number to your nearest branches</h4>
 
-                    <select name="ctl00$ContentPlaceHolder1$ddlbranchaddress" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ddlbranchaddress\',\'\')', 0)"
-                        id="ctl00_ContentPlaceHolder1_ddlbranchaddress" class="chosen chzn-done" style="display: none;">
+            <div class="branches_addrss_main_in" ng-repeat="item in BranchDetailsArr">
+                <h4>
+                    <span id="lblCount">{{item.count}}</span>
+                    <span id="lblBranchNames">{{item.BranchesName }}</span>
+                </h4>
 
-	</select>
-                    <div id="ctl00_ContentPlaceHolder1_ddlbranchaddress_chzn" class="chzn-container chzn-container-single chzn-container-single-nosearch"
-                        style="width: 26px;"><a href="javascript:void(0)" class="chzn-single chzn-default" tabindex="-1"><span>Select an Option</span><div><b></b></div></a>
-                        <div
-                            class="chzn-drop" style="left: -9000px; width: 24px; top: 34px;">
-                            <div class="chzn-search"><input autocomplete="off" style="width: 0px;" type="text"></div>
-                            <ul class="chzn-results"></ul>
-                    </div>
-                </div>
-
+                <p>
+                    <span id="lblBranchAddress">{{item.BranchAddress }}</span>
+                    <br />
+                    <span id="lblAddressBranch">{{item.Address }}</span>
+                    <br /> Contact :
+                    <span class="branch_spl_char" id="lblMobilenumber">{{"91-"+item.Mobilenumber+" & " }}</span>
+                    <span class="branch_spl_char" id="lblAreacode">{{item.Landlineareacode+" -" }}</span>
+                    <span class="branch_spl_char" id="lblLandnumber">{{item.Landlinenumber }}</span>
+                    <br /> Email : <span class="branch_spl_char">
+                        <span id="lblEmails">{{item.BranchemailID }}</span>
+                    </span>
+                    <br /> Timings :
+                    <span id="lblEmpFromTimes" >{{item.WorkingStartTime }}</span> -
+                    <span id="lblEmpToTimes">{{item.WorkingEndTime }}</span>
+                </p>
             </div>
+
         </div>
     </div>
-</div>
-
-<div class="branches_addrss_main clearfix">
-    <h4>contact phone number to your nearest branches</h4>
-    <div id="ctl00_ContentPlaceHolder1_updatebranchesupdate">
-
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblCount">1</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblBranchNames">Hyderabad - Ameerpet</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblBranchAddress">103 , 109, Vijayasree Apartments, Behind Chermas ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblAddressBranch">Ameerpet , Hyderabad-500073</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblMobilenumber" class="branch_spl_char">91-7675818080 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblAreacode" class="branch_spl_char">40 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblLandnumber" class="branch_spl_char">23742370</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblEmails">kaakateeya.com@gmail.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblEmpFromTimes">8:30:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl0_lblEmpToTimes">8:30:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblCount">2</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblBranchNames">Hyderabad-Dilsukhnagar</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblBranchAddress">2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblAddressBranch">Dilsukhnagar , Hyderabad - 500060</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblMobilenumber" class="branch_spl_char">91-9966636222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblAreacode" class="branch_spl_char">40 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblLandnumber" class="branch_spl_char">24065959</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl1_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblCount">3</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblBranchNames">Hyderabad-Kukatpally</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblBranchAddress">202 , Uday Krishna Complex , Bhagyanagar colony ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblAddressBranch">opp KPHB , Hyderabad-500072</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblMobilenumber" class="branch_spl_char">91-9392009391 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblAreacode" class="branch_spl_char">40 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblLandnumber" class="branch_spl_char">23067373</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl2_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblCount">4</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblBranchNames">Vijayawada</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblBranchAddress">Door No : 59-8-12 ,Opposite to Bhashyam Public School,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblAddressBranch">Pinnamaneni Polyclinic Road,Gayatrinagar, Vijayawada - 520008,Krishna Dist ,AP</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblMobilenumber" class="branch_spl_char">91-9394893947 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblAreacode" class="branch_spl_char">866 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblLandnumber" class="branch_spl_char">2475555</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblEmails">yvrao@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblEmpFromTimes">8:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl3_lblEmpToTimes">8:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblCount">5</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblBranchNames">BENGALURU - JAYANAGAR</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblBranchAddress">No.15/A 1st Floor 10th Main Behind Cosmopolitan Club Swimming pool Road Jayangar 3rd Block,Bengaluru</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblAddressBranch">Bengaluru</span><br> Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblMobilenumber" class="branch_spl_char">91-9342939343 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblAreacode" class="branch_spl_char">80 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblLandnumber" class="branch_spl_char">22454444</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl4_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblCount">6</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblBranchNames">Bengaluru - Shivananda</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblBranchAddress">D.12/4 ,1st Floor , Near Shivani Sangam Hotel , Beside Ravi Handi Crafts ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblAddressBranch">Yamuna Bai Road , Shivananda Circle , Madhav Nagar , Bengaluru -560001 </span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblMobilenumber" class="branch_spl_char">91-9342939346 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblAreacode" class="branch_spl_char">80 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblLandnumber" class="branch_spl_char">22208282</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl5_lblEmpToTimes">7:30:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblCount">7</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblBranchNames">Guntur</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblBranchAddress">5-60/2-31a , 3/2, Ashok Nagar</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblAddressBranch">Guntur</span><br> Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblMobilenumber" class="branch_spl_char">91-9848535375 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblAreacode" class="branch_spl_char">863 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblLandnumber" class="branch_spl_char">2211111</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblEmpFromTimes">9:30:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl6_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblCount">8</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblBranchNames">Vizag</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblBranchAddress">D.NO:50-50-32,B2 SAINIVAS(SUNNY RESIDENSY) ,RAMA HOSPITAL ROAD,NEAR GURUDWARA FUNCTION HALL,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblAddressBranch">BALAYYA SASTRY LAYOUT , Visakhapatnam-530013</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblMobilenumber" class="branch_spl_char">91-9848144222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblAreacode" class="branch_spl_char">891 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblLandnumber" class="branch_spl_char">2749797</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl7_lblEmpToTimes">7:30:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblCount">9</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblBranchNames">Kakinada</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblBranchAddress">Bhanugudi Junction,Charminar tea centre ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblAddressBranch">Opp Kotaiyya Sweet Stall 1st floor</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblMobilenumber" class="branch_spl_char">91-9848337378 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblAreacode" class="branch_spl_char">884 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblLandnumber" class="branch_spl_char">2346666</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl8_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblCount">10</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblBranchNames">Nellore</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblBranchAddress">#3,Green Meadows apartments,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblAddressBranch">Saraswathi Nagar,Dargamitta,Nellore-524003</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblMobilenumber" class="branch_spl_char">91-9848197222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblAreacode" class="branch_spl_char">861 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblLandnumber" class="branch_spl_char">2313833</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl9_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblCount">11</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblBranchNames">Rajahmundry</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblBranchAddress">Dr.no:46-7-25,koduri Enclave</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblAddressBranch">aditya jr.college road,dhanvaipeta</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblMobilenumber" class="branch_spl_char">91-9848123222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblAreacode" class="branch_spl_char">883 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblLandnumber" class="branch_spl_char">2444546</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl10_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblCount">12</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblBranchNames">Chennai-Tnagar</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblBranchAddress">New No : 98 ,C-3 , Muthu Apartments ,Habibulla Road ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblAddressBranch">opp Karnataka Sangam School ,T-Nagar , Chennai - 600017</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblMobilenumber" class="branch_spl_char">91-9841282222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblAreacode" class="branch_spl_char">44 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblLandnumber" class="branch_spl_char">42136666</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblEmpFromTimes">8:30:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl11_lblEmpToTimes">8:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblCount">13</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblBranchNames">Chennai-Annanagar</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblBranchAddress">J - 1490 , 13 th main road , G-2 , Varun Apartments ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblAddressBranch">Near Sridevi  Hospital  Cut , Annanagar ,Chennai - 600040</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblMobilenumber" class="branch_spl_char">91-9380473999 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblAreacode" class="branch_spl_char">44 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblLandnumber" class="branch_spl_char">26203030</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblEmpFromTimes">8:30:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl12_lblEmpToTimes">7:30:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblCount">14</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblBranchNames">Coimbatore</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblBranchAddress">No : 4, Ramakrishna Nagar</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblAddressBranch">New Sidhapudur , Coimbatore - 641044 </span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblMobilenumber" class="branch_spl_char">91-9842314444 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblAreacode" class="branch_spl_char">422 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblLandnumber" class="branch_spl_char">2243343</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblEmpFromTimes">8:30:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl13_lblEmpToTimes">7:30:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblCount">15</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblBranchNames">Chennai-Porur</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblBranchAddress">NO : 1, CSI Church Street , </span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblAddressBranch">Jai Nagar , Porur ,Chennai -600016</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblMobilenumber" class="branch_spl_char">91-9385599077 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblAreacode" class="branch_spl_char">44 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblLandnumber" class="branch_spl_char">42805757</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl14_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblCount">16</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblBranchNames">Trichy</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblBranchAddress">D 24, 7th Cross , Thillainagar West  Extn ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblAddressBranch">Thillainagar , Trichy - 620018 </span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblMobilenumber" class="branch_spl_char">91-9380474999 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblAreacode" class="branch_spl_char">431 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblLandnumber" class="branch_spl_char">4024022</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl15_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblCount">17</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblBranchNames">Salem</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblBranchAddress">No  34/1, 5 th Cross St , Brindavanam road , </span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblAddressBranch">Fair Lands , Near Perumal Kovil , Salem - 636016</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblMobilenumber" class="branch_spl_char">91-9941282222 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblAreacode" class="branch_spl_char">427 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblLandnumber" class="branch_spl_char">2443630</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl16_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblCount">18</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblBranchNames">Ongole</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblBranchAddress">Guptha's Square Complex,Shop No. 14, 2nd Floor,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblAddressBranch">A-Block, Beside Satyam Theater,60 Feet Road, </span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblMobilenumber" class="branch_spl_char">91-9348711223 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblAreacode" class="branch_spl_char">8592 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblLandnumber" class="branch_spl_char">282633</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblEmails">kaakateeya@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl17_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblCount">19</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblBranchNames">Erode</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblBranchAddress">No:47/4, Vasuki street ,D.No.3, 2nd  floor, Laakini towars,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblAddressBranch">Near M.G.R silai arugugil, Erode - 638001 </span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblMobilenumber" class="branch_spl_char">91-9385599011 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblAreacode" class="branch_spl_char">424 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblLandnumber" class="branch_spl_char">4020110</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl18_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblCount">20</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblBranchNames">Madurai</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblBranchAddress"> JDARCADE,NO.5L,VINAYAGA NAGAR,2ND STREET,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblAddressBranch">K.K.NAGAR,OPP TO MADURAI DISTRICT COURT,Madurai -625020</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblMobilenumber" class="branch_spl_char">91-9384887888 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblAreacode" class="branch_spl_char">452 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblLandnumber" class="branch_spl_char">4392299</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl19_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblCount">21</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblBranchNames">Tirupathi</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblBranchAddress">8/66,First Floor ,Upstairs of Srinivasa Sanitary Syndicate ,</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblAddressBranch">R.C.Road</span><br> Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblMobilenumber" class="branch_spl_char">91-9848535378 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblAreacode" class="branch_spl_char">877 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblLandnumber" class="branch_spl_char">2246777</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl20_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblCount">22</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblBranchNames">Vellore</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblBranchAddress">15/273 , phase-2 ,12 th cross street , Sathuvachary</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblAddressBranch">opp to Bombay Anandabhavan , Vellore</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblMobilenumber" class="branch_spl_char">91-9842127777 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblAreacode" class="branch_spl_char">416 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblLandnumber" class="branch_spl_char">2256056</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl21_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblCount">23</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblBranchNames">Pondicheery</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblBranchAddress">No 10 , 1st Floor , 2 nd Cross , Annanagar East , </span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblAddressBranch">Behind Housing Board , Puducherry ( Pondicherry ) - 600 005</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblMobilenumber" class="branch_spl_char">91-7668687687 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblAreacode" class="branch_spl_char">44 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblLandnumber" class="branch_spl_char">43543543</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblEmails">naveena@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl22_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblCount">24</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblBranchNames">WEB- Online</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblBranchAddress">103 , 109 , Vijayasree Apartment , </span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblAddressBranch">Ameerpet , Hyderabad-500073</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblMobilenumber" class="branch_spl_char">91-9848344977 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblAreacode" class="branch_spl_char">40 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblLandnumber" class="branch_spl_char">23747777</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblEmpFromTimes">9:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl23_lblEmpToTimes">7:0:00 PM</span>
-            </p>
-        </div>
-
-        <div class="branches_addrss_main_in">
-            <h4>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblCount">25</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblBranchNames">Eluru</span></h4>
-
-            <p>
-
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblBranchAddress">D.NO : 25-5-65/2 I ST FLOOR ,  Landmark : opp R &amp; B office</span><br>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblAddressBranch">Near MORE Supermarket , N.R PET , Eluru - 534006</span><br>                Contact :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblMobilenumber" class="branch_spl_char">91-9848031931 &amp; </span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblAreacode" class="branch_spl_char">8812 -</span>
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblLandnumber" class="branch_spl_char">222777</span><br>                Email : <span class="branch_spl_char">
-                                            <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblEmails">info@telugumarriages.com</span>
-
-                </span>
-                <br> Timings :
-                <span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblEmpFromTimes">8:0:00 AM</span>-<span id="ctl00_ContentPlaceHolder1_dtListBranch_ctrl24_lblEmpToTimes">8:0:00 PM</span>
-            </p>
-        </div>
-
-
-    </div>
-</div>
-</div>
 </div>

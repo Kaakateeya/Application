@@ -131,6 +131,41 @@ app.constant('arrayConstants',
             { "label": "Visakha", "title": "Visakha", "value": 53 },
             { "label": "Uttara", "title": "Uttara", "value": 54 },
             { "label": "Uttarabhadra", "title": "Uttarabhadra", "value": 55 }
+        ],   
+         "Priority": [
+            { "label": "--select--", "title": "--select--", "value": 0 },            
+            { "label": "HighPriority", "title": "HighPriority", "value": 69 },
+            { "label": "MediumPriority", "title": "MediumPriority", "value": 70 },
+            { "label": "LowPriority", "title": "LowPriority", "value": 71 },
+        ],
+        "catgory": [
+            { "label": "--select--", "title": "--select--", "value": 0 },
+            { "label": "Login", "title": "Login", "value": 374 },
+            { "label": "Siteerror", "title": "Siteerror", "value": 375 },
+            { "label": "Feed Back", "title": "Feed Back", "value": 376 },
+            { "label": "Registration", "title": "Registration", "value": 401 },
+            { "label": "Fees Details", "title": "Fees Details", "value": 402 },
+            { "label": "Success Stories", "title": "Success Stories", "value": 403 },
+            { "label": "Other", "title": "Other", "value": 404 },
+            { "label": "Forgot Password", "title": "Forgot Password", "value": 405 },
+            { "label": "Billings", "title": "Billings", "value": 406 },
+            { "label": "Photos", "title": "Photos", "value": 407 },
+            { "label": "MatchMeeting", "title": "MatchMeeting", "value": 430 },
+            { "label": "MatchFollowup", "title": "MatchFollowup", "value": 460 },
+            { "label": "Reviews", "title": "Reviews", "value": 461 },
+            { "label": "Marketing", "title": "Marketing", "value": 462 },
+            { "label": "SettledDeletedProfiles", "title": "SettledDeletedProfiles", "value": 474 },
+            { "label": "Report Abuse", "title": "Report Abuse", "value": 515 },
+
+        ],
+        "region": [
+            { "label": "--select--", "title": "--select--", "value": 0 },            
+            { "label": "Telangana", "title": "Telangana", "value": 1 },
+            { "label": "Andhra Pradesh", "title": "Andhra Pradesh", "value": 408 },
+            { "label": "Tamilnadu", "title": "Tamilnadu", "value": 409 },
+            { "label": "Karnataka", "title": "Karnataka", "value": 410 },
+            { "label": "Panducherry", "title": "Panducherry", "value": 2 },
+            
         ]
 
     }
