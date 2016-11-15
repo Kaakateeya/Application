@@ -20,7 +20,8 @@
     "moment": "latest",
     "multi-select": "*",
     "ng-numbers-only": "latest",
-    "underscore": "latest"
+    "underscore": "latest",
+    "editView": "git://github.com/Kaakateeya/EditViewRepo.git#grunt"
   },
   "devDependencies": {
     "angular-animate": "^1.5.8",

@@ -92,8 +92,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.bindcounts = function(array) {
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: null, hrefs: '/#home' },
-                { value: 'Upgrade your membership', bindvalue: null, hrefs: '/#home' },
+                { value: 'Edit my profile', bindvalue: null, hrefs: '#/editview/editparent' },
+                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
                 { value: 'manage photo', bindvalue: null, hrefs: '/#home' },
                 { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home' },
                 { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home' },

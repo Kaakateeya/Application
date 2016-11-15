@@ -89,7 +89,7 @@
             <div class="span9 search-area-index">
                 <h3 class="">Just a click to find your <b>Soulmate</b>
                     <div class="control-group pull-right radio-group-index">
-                        <div class="controls">
+                        <!--<div class="controls">
                             <table id="ddlLookingFor" class="radio">
                                 <tbody>
                                     <tr>
@@ -104,7 +104,15 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div>-->
+                            <div layout-gt-sm="row">
+						       <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
+								
+                                   <md-radio-button value="2"  class="md-primary">Bride</md-radio-button>
+                                    <md-radio-button value="1"> Groom </md-radio-button>
+                                   </md-radio-group>
+								  
+		                        </div>
                     </div>
                 </h3>
                 <div class="clear">&nbsp;</div>

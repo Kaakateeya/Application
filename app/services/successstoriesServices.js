@@ -9,7 +9,7 @@ app.factory('successstoriesdata', ['$http', function(http) {
             person.branchrom = null;
             person.pagefrom = frompage;
             person.pageto = topage;
-            return http.post(app.apiroot + 'StaticPages/GetSuccessStoriesdetails', person);
+            return http.post(app.apiroot + 'StaticPages/SuccessStoriesdetails', person);
         },
         maskclasspartner: function(logphotostatus, photo, photocount) {
             debugger;
