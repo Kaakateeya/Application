@@ -1,180 +1,177 @@
- 
 <div class="register_page_main">
-               <h4 class="pull-left">
-            <span id="ctl00_ContentPlaceHolder1_lblregistration">registration</span></h4>
-                <div class="clear"></div>
-        <div class="register_page_main_in clearfix">
-                         <div id="divregistration" class="clearfix">
-                 <div layout-gt-sm="row">
-               <md-input-container class="md-block" flex-gt-sm>
-                <h4>BASIC INFORMATION </h4>
-                                  </md-input-container>
-                       <md-input-container class="md-block" flex-gt-sm>
-                                        <h4>
-                                         PROFILE DETAILS</h4>
-                                       </md-input-container>
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <h4>MY PHOTOS</h4>
-                                     </md-input-container>
-                                        <md-input-container class="md-block" flex-gt-sm>
-                                        <h4>MY PAYMENTS</h4>
-                                     </md-input-container>
+    <h4 class="pull-left">
+        <span id="ctl00_ContentPlaceHolder1_lblregistration">registration</span></h4>
+    <div class="clear"></div>
+    <div class="register_page_main_in clearfix">
+        <div id="divregistration" class="clearfix">
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <h4>BASIC INFORMATION </h4>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <h4>
+                        PROFILE DETAILS</h4>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <h4>MY PHOTOS</h4>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <h4>MY PAYMENTS</h4>
+                </md-input-container>
 
-							   </div>
-                     <md-progress-linear class="md-raised md-warn md-hue-2" md-mode="buffer" value="{{determinateValue}}"
-              md-buffer-value="{{determinateValue2}}"
-                      ng-disabled="!showList[0]"></md-progress-linear>
-              
-                <div class="clear">&nbsp;</div>
-                <br>
-                <div class="vrepeatContainer"  ng-cloak>
-         <md-content layout="column">
-            <h2>Horizontal Repeat</h2>
-            <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
-               <div md-virtual-repeat="item in items"
-                  class="repeated-item-horizontal" flex>
-            <md-virtual-repeat-container id="vertical-container">
-                <div md-virtual-repeat="ite in items"
-                  class="repeated-item-vertical" flex>
-                  {{item}}---{{ite}}
-               </div>
-            </md-virtual-repeat-container>
-               </div>
-         </md-content>
-      </div>
             </div>
-            <div class="my_packages_main clearfix package_table_main">
-                <table id="ddlpayment" class="package_table_main" style="border-collapse:collapse;" cellspacing="0">
-	                  <tbody><tr>
-		              <td>
-                    <table class="package_table_inner">
-                            <tbody>
-                                <tr>
-                                    <td class="pack_heading1" id="mem-color">
-                                        <label id="lblServices">Basic</label>
-                                        <label id="lblvisible0" 
-                                           >Services & Features</label>
-                                        <label id="lblEmp_MembershipID" >{{Emp_Membership_ID}}</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                 
-                                    <td class="pack_heading2">
-                                        <small class="payment-label">
+            <md-progress-linear class="md-raised md-warn md-hue-2" md-mode="buffer" value="{{determinateValue}}" md-buffer-value="{{determinateValue2}}" ng-disabled="!showList[0]"></md-progress-linear>
+
+            <div class="clear">&nbsp;</div>
+            <br>
+            <div class="vrepeatContainer" ng-cloak>
+                <md-content layout="column">
+                    <h2>Horizontal Repeat</h2>
+                    <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
+                        <div md-virtual-repeat="item in items" class="repeated-item-horizontal" flex>
+                            <md-virtual-repeat-container id="vertical-container">
+                                <div md-virtual-repeat="ite in items" class="repeated-item-vertical" flex>
+                                    {{ite}}
+                                </div>
+                            </md-virtual-repeat-container>
+                        </div>
+                    </md-virtual-repeat-container>
+
+                </md-content>
+            </div>
+        </div>
+        <div class="my_packages_main clearfix package_table_main">
+            <table id="ddlpayment" class="package_table_main" style="border-collapse:collapse;" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <table class="package_table_inner">
+                                <tbody>
+                                    <tr>
+                                        <td class="pack_heading1" id="mem-color">
+                                            <label id="lblServices">Basic</label>
+                                            <label id="lblvisible0">Services & Features</label>
+                                            <label id="lblEmp_MembershipID">{{Emp_Membership_ID}}</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="pack_heading2">
+                                            <small class="payment-label">
                                             <label id="lblyear" CssClass="duration_of_pack">
                                                 {{<MemberShipDuration></MemberShipDuration>}}
                                             </label>
                                         </small>
 
-                                        <label id="lblamount">My Plans</label>
+                                            <label id="lblamount">My Plans</label>
 
-                                        <button id="btnselect"  CssClass="button_custom" CommandName="select" >Select</button>
-                                        <label id="lblvisible1" Text="My Plans"
-                                           ></label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pack_heading1">
-                                        <b>
+                                            <button id="btnselect" CssClass="button_custom" CommandName="select">Select</button>
+                                            <label id="lblvisible1" Text="My Plans"></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pack_heading1">
+                                            <b>
                                             <label id="lblprofilecount" ></label></b>
-                                        <label id="lblvisible20" CssClass="lblprofile"
-                                           >Profile Count</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pack_heading3">
-                                        <b>
+                                            <label id="lblvisible20" CssClass="lblprofile">Profile Count</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pack_heading3">
+                                            <b>
                                             <img id="image0"  />
                                             <label id="lblvisible2">SA Agreed</label>
                                         </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label id="lblonlineaccess" />
-                                        <label id="lblvisible3">Online Access</label></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label id="lblofflineaccess" />                                       
-                                         <label id="lblvisible4">Offline Access</label></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img id="Image3" />
-                                        <label id="lblvisible5" 
-                                          >Relationship Manager</label></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img id="Image4" />
-                                        <label id="lblvisible6" >Senior Relationship Manager</label></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                      <img id="Image5" />
-                                        <label id="lblvisible7" >Express Interest</label></td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
-                    </td>
-	                </tr>
-                    </tbody></table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="lblonlineaccess" />
+                                            <label id="lblvisible3">Online Access</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="lblofflineaccess" />
+                                            <label id="lblvisible4">Offline Access</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img id="Image3" />
+                                            <label id="lblvisible5">Relationship Manager</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img id="Image4" />
+                                            <label id="lblvisible6">Senior Relationship Manager</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img id="Image5" />
+                                            <label id="lblvisible7">Express Interest</label></td>
+                                    </tr>
 
-                <div class="clear">&nbsp;</div>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="clear">&nbsp;</div>
+        </div>
+        <div id="ttttt">
+
+            <div class="my_packages_main_bottom clearfix">
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex=55>
+                        <p>Interested in, exclusive match making services for our super special members, Contact us!</p>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex=20>
+                        <label>Number</label>
+                        <input ng-model="user.Confirmnewemail">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex=20>
+                        <md-button class="md-raised md-warn md-hue-2">Submit</md-button>
+                    </md-input-container>
+                    <div class="clear">&nbsp;</div>
+                </div>
             </div>
-            <div id="ttttt">
-                
-                    <div class="my_packages_main_bottom clearfix">
-                          <div layout-gt-sm="row">
-                          <md-input-container class="md-block" flex=55>
-                               <p>Interested in, exclusive match making services for our super special members, Contact us!</p>  </md-input-container>
-                           <md-input-container class="md-block" flex=20>
-                                        <label>Number</label>
-                                        <input ng-model="user.Confirmnewemail">
-                            </md-input-container>
-                          <md-input-container class="md-block" flex=20>
-                       <md-button class="md-raised md-warn md-hue-2">Submit</md-button>
-                       </md-input-container>
-                        <div class="clear">&nbsp;</div>
-                    </div>
-                      </div>
-           </div>
         </div>
-        </div>
-          <style type="text/css">
-         .vrepeatContainer #horizontal-container {
-           height: 300px;
-           width: 830px; 
-         }
-
-         .vrepeatContainer #vertical-container {
-             height: 292px;
-             width: 400px; 
-         }
-
-         .vrepeatContainer .repeated-item-horizontal {
-            border-right: 1px solid #ddd;
-            box-sizing: border-box;
-            display: inline-block;
-            height: 84px;
-            padding-top: 35px;
-            text-align: center;
-            width: 50px; 
-         }
-
-         .vrepeatContainer .repeated-item-vertical {
-            border-bottom: 1px solid #ddd;
-            box-sizing: border-box;
-            height: 40px;
-            padding-top: 10px;
-         }
-
-         .vrepeatContainer md-content {
-            margin: 16px; 
-         }
-         .vrepeatContainer md-virtual-repeat-container {
-            border: solid 1px grey; 
-         }	  
-	  </style>
+    </div>
+</div>
+<style type="text/css">
+    .vrepeatContainer #horizontal-container {
+        height: 100px;
+        width: 1030px;
+    }
+    
+    .vrepeatContainer #vertical-container {
+        height: 592px;
+        width: 400px;
+    }
+    
+    .vrepeatContainer .repeated-item-horizontal {
+        border-right: 1px solid #ddd;
+        box-sizing: border-box;
+        display: inline-block;
+        height: 84px;
+        padding-top: 35px;
+        text-align: center;
+        width: 50px;
+    }
+    
+    .vrepeatContainer .repeated-item-vertical {
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box;
+        height: 40px;
+        padding-top: 10px;
+    }
+    
+    .vrepeatContainer md-content {
+        margin: 16px;
+    }
+    
+    .vrepeatContainer md-virtual-repeat-container {
+        border: solid 1px grey;
+    }
+</style>

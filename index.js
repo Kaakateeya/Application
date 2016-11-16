@@ -8,14 +8,14 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
     'alertType': 'toast-top-right'
 }
 
- 
+
 app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.

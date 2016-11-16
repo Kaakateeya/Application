@@ -1,89 +1,195 @@
-app.controller("profilesettings", ['$scope', '$mdDialog', function(scope, $mdDialog) {
+app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindService', 'authSvc', 'alert', function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts) {
 
-
-var tabs = [
-    { title: 'One', content: "Tabs will become paginated if there isn't enough room for them." },
-    { title: 'Two', content: "You can swipe left and right on a mobile device to change tabs." },
-    { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element." },
-    { title: 'Four', content: "If you set the selected tab binding to -1, it will leave no tab selected." },
-    { title: 'Five', content: "If you remove a tab, it will try to select a new one." },
-    { title: 'Six', content: "There's an ink bar that follows the selected tab, you can turn it off if you want." },
-    { title: 'Seven', content: "If you set ng-disabled on a tab, it becomes unselectable. If the currently selected tab becomes disabled, it will try to select the next tab." },
-    { title: 'Eight', content: "If you look at the source, you're using tabs to look at a demo for tabs. Recursion!" },
-    { title: 'Nine', content: "If you set md-theme=\"green\" on the md-tabs element, you'll get green tabs." },
-    { title: 'Ten', content: "If you're still reading this, you should just go check out the API docs for tabs!" }
-];
-
-scope.tabs = tabs;
-var alert;
-scope.showAlert = showAlert;
-scope.showDialog = showDialog;
-scope.items = [1, 2, 3];
-// Internal method
-function showAlert() {
-    alert = $mdDialog.alert({
-        title: 'Attention',
-        textContent: 'This is an example of how easy dialogs can be!',
-        ok: 'Close'
-    });
-
-    $mdDialog
-        .show(alert)
-        .finally(function() {
-            alert = undefined;
+    var logincustid = authSvc.getCustId();
+    var loginprofileid = authSvc.getProfileid();
+    var loginpaidstatus = authSvc.getpaidstatus();
+    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+    scope.days = function() {
+        scope.test = [];
+        scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
+        for (var i = 1; i <= 30; i++) {
+            scope.test.push({ label: i + ' days', title: i + ' days', value: i });
+        }
+        return scope.test;
+    };
+    scope.countryCode = [];
+    scope.arraydays = scope.days();
+    scope.mailyes = "1";
+    scope.smsyes = "1";
+    scope.activated = false;
+    scope.disabled = true;
+    scope.activatedmobile = false;
+    scope.countrycodedisable = true;
+    scope.passwordsisableswitch = false;
+    scope.passwordsisable = true;
+    scope.alertmanageswitch = false;
+    scope.manageakerts = true;
+    //
+    scope.hideprofileswitch = false;
+    scope.hideprofile = true;
+    //
+    scope.deleteprofileswitch = false;
+    scope.deleteprofiledis = true;
+    service.countryCodeselect().then(function(response) {
+        scope.countryCode = [];
+        console.log(response);
+        scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
+        _.each(response.data, function(item) {
+            scope.countryCode.push({ label: item.Name, title: item.Name, value: item.ID });
         });
-}
 
-function showDialog($event) {
-    var parentEl = angular.element(document.body);
-    $mdDialog.show({
-        parent: parentEl,
-        targetEvent: $event,
-        template: '<md-dialog aria-label="List dialog">' +
-            '  <md-dialog-content>' +
-            '    <md-list>' +
-            '      <md-list-item ng-repeat="item in items">' +
-            '       <p>Number {{item}}</p>' +
-            '      ' +
-            '    </md-list-item></md-list>' +
-            '  </md-dialog-content>' +
-            '  <md-dialog-actions>' +
-            '    <md-button ng-click="closeDialog()" class="md-primary">' +
-            '      Close Dialog' +
-            '    </md-button>' +
-            '  </md-dialog-actions>' +
-            '</md-dialog>',
-        locals: {
-            items: scope.items
-        },
-        controller: DialogController
     });
+    scope.arrayprofilesettings = {};
+    customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
+        console.log(response);
+        _.each(response.data, function(item) {
+            debugger;
+            scope.arrayprofilesettings = item;
+            scope.mailyes = scope.arrayprofilesettings.AllowEmail !== null ? scope.arrayprofilesettings.AllowEmail : "1";
+            scope.smsyes = scope.arrayprofilesettings.AllowSMS !== null ? scope.arrayprofilesettings.AllowSMS : "1";
+        });
+    });
+    scope.toggleActivationsss = function(btntype) {
+        switch (btntype) {
+            case "email":
+                debugger;
+                if (scope.activated)
+                    scope.disabled = false;
+                else
+                    scope.disabled = true;
+                break;
+            case "mobile":
+                debugger;
+                if (scope.activatedmobile)
+                    scope.countrycodedisable = false;
+                else
+                    scope.countrycodedisable = true;
+                break;
+            case "password":
+                debugger;
+                if (scope.passwordsisableswitch)
+                    scope.passwordsisable = false;
+                else
+                    scope.passwordsisable = true;
+                break;
+            case "managealerts":
+                debugger;
+                if (scope.alertmanageswitch)
+                    scope.manageakerts = false;
+                else
+                    scope.manageakerts = true;
+                break;
+            case "hideprofiles":
+                debugger;
+                if (scope.hideprofileswitch)
+                    scope.hideprofile = false;
+                else
+                    scope.hideprofile = true;
+                break;
+            case "deleteprofile":
+                debugger;
+                if (scope.deleteprofileswitch)
+                    scope.deleteprofiledis = false;
+                else
+                    scope.deleteprofiledis = true;
+                break;
+        }
 
-    function DialogController($scope, $mdDialog, items) {
-        $scope.items = items;
-        $scope.closeDialog = function() {
-            $mdDialog.hide();
+    };
+    var alert;
+    scope.showAlert = showAlert;
+    scope.showDialog = showDialog;
+    scope.items = [1, 2, 3];
+    // Internal method
+    function showAlert() {
+        alert = $mdDialog.alert({
+            title: 'Attention',
+            textContent: 'This is an example of how easy dialogs can be!',
+            ok: 'Close'
+        });
+
+        $mdDialog
+            .show(alert)
+            .finally(function() {
+                alert = undefined;
+            });
+    }
+
+    function showDialog($event) {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            targetEvent: $event,
+            template: '<md-dialog aria-label="List dialog">' +
+                '  <md-dialog-content>' +
+                '    <md-list>' +
+                '      <md-list-item ng-repeat="item in items">' +
+                '       <p>Number {{item}}</p>' +
+                '      ' +
+                '    </md-list-item></md-list>' +
+                '  </md-dialog-content>' +
+                '  <md-dialog-actions>' +
+                '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                '      Close Dialog' +
+                '    </md-button>' +
+                '  </md-dialog-actions>' +
+                '</md-dialog>',
+            locals: {
+                items: scope.items
+            },
+            controller: DialogController
+        });
+
+        function DialogController($scope, $mdDialog, items) {
+            $scope.items = items;
+            $scope.closeDialog = function() {
+                $mdDialog.hide();
+            }
         }
     }
-}
 
-scope.user = {
-    title: 'Developer',
-    email: 'ipsum@lorem.com',
-    firstName: '',
-    lastName: '',
-    company: 'Google',
-    address: '1600 Amphitheatre Pkwy',
-    city: 'Mountain View',
-    state: 'CA',
-    biography: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
-    postalCode: '94043'
-};
-
-scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-    'WY').split(' ').map(function(state) {
-    return { abbrev: state };
-});
-
+    scope.submitpassword = function() {
+        debugger;
+        var OldPassword = scope.OldPassword;
+        var NewPassword = scope.NewPassword;
+        var ConfirmPassword = scope.ConfirmPassword;
+        var custId = scope.custid;
+        customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
+            console.log(response);
+            if (response.data == 1) {
+                alerts.open('Passsword updated successfully', 'success');
+            } else {
+                alerts.open('Passsword updated failed', 'warning');
+            }
+        });
+    };
+    scope.submithideprofile = function() {
+        var Expirydate = scope.hideprofiledays;
+        var CustID = scope.custid;
+        var iflag = 1;
+        var Narration = scope.hiddennarration;
+        customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
+            console.log(response);
+        });
+    };
+    scope.submitdeleteprofile = function() {
+        var ProfileID = scope.ProfileID;
+        var Narrtion = scope.Narrtion;
+        customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
+            console.log(response);
+        });
+    };
+    // scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
+    // scope.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', '...'];
+    // scope.submit = function() {
+    // submit code goes here
+    //  };
+    //  scope.reset = function() {
+    //      scope.obj = {
+    //         name: "",
+    //          myselect: "",
+    //        status: ""
+    //    }
+    // };
+    //scope.reset();
 }]);

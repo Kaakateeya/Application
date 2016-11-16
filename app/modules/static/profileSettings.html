@@ -1,10 +1,8 @@
-
-
 <div class="search_page_main">
-    <div  class="search_page_tabs profile_settings_tabs">
+    <div class="search_page_tabs profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
-                <md-tabs md-selected="selectedIndex"  class="" flex md-border-bottom md-autoselect class="box">
+                <md-tabs md-selected="selectedIndex" class="" flex md-border-bottom md-autoselect class="box">
                     <md-tab label="Edit Email">
                         <div class="tab">
                             <div id="tab_mail" class="profile_search_main profile_settings_main clearfix">
@@ -12,215 +10,227 @@
                                     <p class="col-lg-3">
                                         You can change your primary email id &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="col-lg-1">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                        <md-switch class="md-secondary" ng-hide="false" ng-model="activated" ng-change="toggleActivationsss('email')" style="height:18px;"></md-switch>
                                     </div>
                                 </div>
-
+                                {{arrayprofilesettings}}
                                 <div layout-gt-sm="row">
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>Current Email ID</label>
-                                        <input ng-model="user.CurrentEmail">
+                                        <input ng-model="arrayprofilesettings.Email">
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>
-                                              
-											  New Email ID</label>
-                                        <input ng-model="user.NewEmail">
+                                         New Email ID</label>
+                                        <input ng-model="user.NewEmail" ng-disabled='disabled'>
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>Confirm New Email ID</label>
-                                        <input ng-model="user.Confirmnewemail">
+                                        <input ng-model="user.Confirmnewemail" ng-disabled='disabled'>
                                     </md-input-container>
-									
+
                                 </div>
-                               	<div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button  class="md-raised  md-hue-1">Reset</md-button>
-                               	   </div>
-                                <md-divider ></md-divider>
+                                <div latout="row">
+                                    <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                    <md-button class="md-raised  md-hue-1">Reset</md-button>
+                                </div>
+                                <md-divider></md-divider>
                                 <div class="row">
                                     <p class="col-lg-3">
-                                        You can change your Number &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        You can change your Primary Number &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="col-lg-1">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                        <md-switch class="md-secondary" ng-model="activatedmobile" ng-hide="false" style="height:18px;" ng-change="toggleActivationsss('mobile')"></md-switch>
                                     </div>
                                 </div>
                                 <div layout-gt-sm="row">
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>
-                                 Country Code</label>
-                                        <input ng-model="user.CurrentEmail">
+                                Current Mobile Number</label>
+                                        <input ng-model="arrayprofilesettings.Mobilenumber">
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex-gt-sm>
-                                        <label>State</label>
-                                        <md-select ng-model="user.state">
-                                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                                {{state.abbrev}}
+                                        <label> Country Code</label>
+                                        <md-select ng-model="user.state" ng-disabled="countrycodedisable">
+                                            <md-option ng-repeat="items in countryCode" ng-value="{{items.value}}">
+                                                {{items.label}}
                                             </md-option>
                                         </md-select>
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>New Mobile Number</label>
-                                        <input ng-model="user.Confirmnewemail">
+                                        <input ng-model="user.Confirmnewemail" ng-disabled="countrycodedisable">
                                     </md-input-container>
                                 </div>
-							 	<div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                               	   </div>
+                                <div latout="row">
+                                    <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                    <md-button class="md-raised md-hue-1">Reset</md-button>
+                                </div>
                             </div>
 
                         </div>
                     </md-tab>
                     <md-tab label="Edit Password">
-                      
-                          <div class="tab">
-                            <div id="tab_mail" class="profile_search_main profile_settings_main clearfix">
-                                <div class="row">
-                                    <p class="col-lg-3">
-                                       You can change your password   &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
-                                    <div class="">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+
+                        <div class="tab">
+                            <form name="projectForm">
+                                <div id="tab_mail" class="profile_search_main profile_settings_main clearfix">
+                                    <div class="row">
+                                        <p class="col-lg-3">
+                                            You can change your password &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        <div class="">
+                                            <md-switch class="md-secondary" ng-model="passwordsisableswitch" ng-hide="false" style="height:18px;" ng-change="toggleActivationsss('password')"></md-switch>
+                                        </div>
                                     </div>
-                                </div>
-                                <div layout-gt-sm="row">
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>Current Password</label>
-                                        <input ng-model="user.CurrentEmail">
-                                    </md-input-container>
+                                    <div layout-gt-sm="row">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Current Password</label>
+                                            <input ng-model="OldPassword" type="password" name="OldPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <div ng-messages="projectForm.OldPassword.$error">
+                                                <div ng-message="required">This is required.</div>
+                                            </div>
+                                        </md-input-container>
 
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>
-                                    New Password</label>
-                                        <input ng-model="user.NewEmail">
-                                    </md-input-container>
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>
+                                             New Password</label>
+                                            <input name="NewPassword" ng-model="NewPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <div ng-messages="projectForm.NewPassword.$error">
+                                                <div ng-message="required">This is required.</div>
+                                            </div>
+                                        </md-input-container>
 
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>
-                                       Confirm New Password</label>
-                                        <input ng-model="user.Confirmnewemail">
-                                    </md-input-container>
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>
+                                            Confirm New Password</label>
+                                            <input name="ConfirmPassword" compare-to="NewPassword" ng-model="ConfirmPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <div ng-messages="projectForm.ConfirmPassword.$error">
+                                                <div ng-message="required">This is required.</div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                    <br>
+
+                                    <div latout="row">
+                                        <md-button class="md-raised md-warn md-hue-2" ng-disabled="projectForm.$invalid" ng-click="submitpassword()">Update</md-button>
+                                        <md-button class="md-raised md-hue-1">Reset</md-button>
+                                    </div>
+
                                 </div>
-                               	<br>
-							
-							  <div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                               	   </div>
-                               
-                            </div>
+                            </form>
 
                         </div>
-                        
+
                     </md-tab>
                     <md-tab label="Manage Alerts">
-                        <div class="tab" >
+                        <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
-								  <div class="row">
+                                <div class="row">
                                     <p class="col-lg-4">
-                                      You can change the Email/SMS alerts settings  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        You can change the Email/SMS alerts settings &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                        <md-switch class="md-secondary" ng-model="alertmanageswitch" ng-hide="false" style="height:18px;" ng-change="toggleActivationsss('managealerts')"></md-switch>
                                     </div>
-                                   </div>
-								  <div>
-					          <div layout-gt-sm="row">
-						       <md-radio-group layout="row" class="md-block" flex-gt-sm>
-									 Receive alerts by SMS &nbsp;&nbsp;&nbsp;&nbsp;
-                                   <md-radio-button value="Apple" class="md-primary">Yes</md-radio-button>
-                                    <md-radio-button value="Banana"> No </md-radio-button>
-                                   </md-radio-group>
-								    <md-radio-group layout="row" class="md-block" flex-gt-sm>
-									 Receive alerts by SMS &nbsp;&nbsp;&nbsp;&nbsp;
-                                   <md-radio-button value="Apple" class="md-primary">Yes</md-radio-button>
-                                    <md-radio-button value="Banana"> No </md-radio-button>
-                                   </md-radio-group>
-		                        </div>
-								<br>
-							 
-							  <div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                               	   </div>
+                                </div>
+                                <div>
+                                    <div layout-gt-sm="row">
+                                        {{arrayprofilesettings.AllowEmail}}
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Receive alerts by SMS &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                            <md-radio-button value="0"> No </md-radio-button>
+                                        </md-radio-group>
+                                        <md-radio-group layout="row" ng-model="smsyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Receive alerts by Email &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                            <md-radio-button value="0"> No </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                    <br>
+
+                                    <div latout="row">
+                                        <md-button class="md-raised md-warn md-hue-2">Update</md-button>
+                                        <md-button class="md-raised md-hue-1">Reset</md-button>
+                                    </div>
+                                </div>
                             </div>
-                      </div>
                     </md-tab>
                     <md-tab label="Hide Profile">
-                        <div class="tab" >
-                             <div class="profile_search_main profile_settings_main clearfix">
-								  <div class="row">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
                                     <p class="col-lg-9">
-                                      In order to hide profile for certain time period please select the option below and mention the reason for hiding the profile.  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        In order to hide profile for certain time period please select the option below and mention the reason for hiding the profile. &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                        <md-switch class="md-secondary" ng-hide="false" ng-model="hideprofileswitch" style="height:18px;" ng-change="toggleActivationsss('hideprofiles')"></md-switch>
                                     </div>
-                                   </div>
-								  <div>
-					           <div layout="row">
-                                  <md-input-container class="md-block"  flex="40">
-                                        <label>State</label>
-                                        <md-select ng-model="user.state">
-                                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                                {{state.abbrev}}
-                                            </md-option>
-                                        </md-select>
-                                    </md-input-container>
-                                
                                 </div>
-								<div  layout="row">
-						     	 <md-input-container class="md-block"  flex="40">
-                                  <label>Provide narration for hidden</label>
-                                <textarea name="bio" ng-model="narration" rows=5  md-maxlength="150"></textarea>
-                                </md-input-container>
-								</div>
-							 	<div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                               	   </div>
+                                <div>
+                                    <div layout="row">
+                                        <md-input-container class="md-block" flex="40">
+                                            <label>Hide my profile</label>
+                                            <md-select ng-model="hideprofiledays" ng-disabled="hideprofile">
+                                                <md-option ng-repeat="item in arraydays" value="{{item.value}}">
+
+                                                    {{item.label}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+
+                                    </div>
+                                    <div layout="row">
+                                        <md-input-container class="md-block" flex="40">
+                                            <label>Provide narration for hidden</label>
+                                            <textarea name="hiddennarration" ng-model="hiddennarration" ng-disabled="hideprofile" rows=5 md-maxlength="150"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                    <div latout="row">
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="submithideprofile()">Update</md-button>
+                                        <md-button class="md-raised md-hue-1">Reset</md-button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     </md-tab>
                     <md-tab label="Delete Profile">
-                        <div class="tab" >
-                                <div class="profile_search_main profile_settings_main clearfix">
-								  <div class="row">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
                                     <p class="col-lg-4">
-                                     To delete your kaakateeya profile permanently.  &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
+                                        To delete your kaakateeya profile permanently. &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
                                     <div class="">
-                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;"></md-switch>
+                                        <md-switch class="md-secondary" ng-hide="false" style="height:18px;" ng-model="deleteprofileswitch" ng-change="toggleActivationsss('deleteprofile')"></md-switch>
                                     </div>
-                                   </div>
-								  <div>
-					          <div  layout="row">
-						     	 <md-input-container class="md-block"  flex="40">
-                                  <label>Reason</label>
-                                <textarea name="bio" ng-model="narration" rows=3  md-maxlength="150"></textarea>
-                                </md-input-container>
-								
-								</div>
-                             <div layout-gt-sm="row">
-								 <md-checkbox ng-model="isChecked" aria-label="Married">
-                                     Delete my profile permanently
-                                  </md-checkbox>
-								  </div>
-							 	<div latout="row">
-						       <md-button class="md-raised md-warn md-hue-2">Update</md-button>
-                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                               	   </div>
+                                </div>
+                                <div>
+                                    <div layout="row">
+                                        <md-input-container class="md-block" flex="40">
+                                            <label>Reason</label>
+                                            <textarea name="narration" ng-model="Narration" rows=3 md-maxlength="150" ng-disabled="deleteprofiledis"></textarea>
+                                        </md-input-container>
+
+                                    </div>
+                                    <div layout-gt-sm="row">
+                                        <md-checkbox ng-model="isChecked" aria-label="Married" ng-disabled="deleteprofiledis">
+                                            Delete my profile permanently
+                                        </md-checkbox>
+                                    </div>
+                                    <div latout="row">
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="submitdeleteprofile()">Update</md-button>
+                                        <md-button class="md-raised md-hue-1">Reset</md-button>
+                                    </div>
+                                </div>
+
                             </div>
-                           
-                        </div>
                     </md-tab>
                 </md-tabs>
             </md-content>
-      	 </div>
-    </div>
-</div>
-  <div ng-hide="true">
+            </div>
+            </div>
+            </div>
+            <div ng-hide="true">
                 <div>
                     <md-button ng-click="showAlert()" class="md-raised md-warn">
                         Employee Alert!
@@ -233,53 +243,11 @@
                 </div>
 
             </div>
-<div ng-hide="true">
-    <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>First name</label>
-            <input ng-model="user.firstName">
-        </md-input-container>
 
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-            <input ng-model="theMax">
-        </md-input-container>
-    </div>
-    <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>City</label>
-            <input ng-model="user.city">
-        </md-input-container>
-
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>State</label>
-            <md-select ng-model="user.state">
-                <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                    {{state.abbrev}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Postal Code</label>
-            <input name="postalCode" ng-model="user.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-
-            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
-                </div>
-                <div ng-message="md-maxlength" class="my-message">
-                    Don't use the long version silly...we don't need to be that specific...
-                </div>
-            </div>
-        </md-input-container>
-    </div>
-</div>
-<md-switch class="md-secondary" ng-hide="true"></md-switch>
-<style type="text/css">
-   
-	   md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-    /*min-height: 248px*/
-    min-height: 500px;
-    }
-</style>
+            <md-switch class="md-secondary" ng-hide="true"></md-switch>
+            <style type="text/css">
+                md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+                    /*min-height: 248px*/
+                    min-height: 500px;
+                }
+            </style>
