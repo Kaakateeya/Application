@@ -1,8 +1,5 @@
 app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindService', 'authSvc', 'alert', function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts) {
-
     var logincustid = authSvc.getCustId();
-    var loginprofileid = authSvc.getProfileid();
-    var loginpaidstatus = authSvc.getpaidstatus();
     scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     scope.days = function() {
         scope.test = [];
@@ -12,6 +9,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         }
         return scope.test;
     };
+    scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
     scope.countryCode = [];
     scope.arraydays = scope.days();
     scope.mailyes = "1";
@@ -24,10 +22,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     scope.passwordsisable = true;
     scope.alertmanageswitch = false;
     scope.manageakerts = true;
-    //
-    scope.hideprofileswitch = false;
+    scope.hideprofileswitchs = false;
     scope.hideprofile = true;
-    //
     scope.deleteprofileswitch = false;
     scope.deleteprofiledis = true;
     service.countryCodeselect().then(function(response) {
@@ -40,15 +36,21 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
 
     });
     scope.arrayprofilesettings = {};
-    customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
-        console.log(response);
-        _.each(response.data, function(item) {
-            debugger;
-            scope.arrayprofilesettings = item;
-            scope.mailyes = scope.arrayprofilesettings.AllowEmail !== null ? scope.arrayprofilesettings.AllowEmail : "1";
-            scope.smsyes = scope.arrayprofilesettings.AllowSMS !== null ? scope.arrayprofilesettings.AllowSMS : "1";
+    scope.getdetails = function() {
+        customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
+            console.log(response);
+            _.each(response.data, function(item) {
+                scope.arrayprofilesettings = item;
+                scope.mailyes = scope.arrayprofilesettings.AllowEmail === "False" ? "0" : "1";
+                scope.smsyes = scope.arrayprofilesettings.AllowSMS === "False" ? "0" : "1";
+            });
         });
-    });
+    };
+    scope.pageload = function() {
+        scope.getdetails();
+    }
+
+
     scope.toggleActivationsss = function(btntype) {
         switch (btntype) {
             case "email":
@@ -59,21 +61,18 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     scope.disabled = true;
                 break;
             case "mobile":
-                debugger;
                 if (scope.activatedmobile)
                     scope.countrycodedisable = false;
                 else
                     scope.countrycodedisable = true;
                 break;
             case "password":
-                debugger;
                 if (scope.passwordsisableswitch)
                     scope.passwordsisable = false;
                 else
                     scope.passwordsisable = true;
                 break;
             case "managealerts":
-                debugger;
                 if (scope.alertmanageswitch)
                     scope.manageakerts = false;
                 else
@@ -81,73 +80,51 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 break;
             case "hideprofiles":
                 debugger;
-                if (scope.hideprofileswitch)
+                if (scope.hideprofileswitchs)
                     scope.hideprofile = false;
                 else
                     scope.hideprofile = true;
                 break;
             case "deleteprofile":
-                debugger;
                 if (scope.deleteprofileswitch)
                     scope.deleteprofiledis = false;
                 else
                     scope.deleteprofiledis = true;
                 break;
         }
-
     };
-    var alert;
-    scope.showAlert = showAlert;
-    scope.showDialog = showDialog;
-    scope.items = [1, 2, 3];
-    // Internal method
-    function showAlert() {
-        alert = $mdDialog.alert({
-            title: 'Attention',
-            textContent: 'This is an example of how easy dialogs can be!',
-            ok: 'Close'
-        });
-
-        $mdDialog
-            .show(alert)
-            .finally(function() {
-                alert = undefined;
-            });
-    }
-
-    function showDialog($event) {
-        var parentEl = angular.element(document.body);
-        $mdDialog.show({
-            parent: parentEl,
-            targetEvent: $event,
-            template: '<md-dialog aria-label="List dialog">' +
-                '  <md-dialog-content>' +
-                '    <md-list>' +
-                '      <md-list-item ng-repeat="item in items">' +
-                '       <p>Number {{item}}</p>' +
-                '      ' +
-                '    </md-list-item></md-list>' +
-                '  </md-dialog-content>' +
-                '  <md-dialog-actions>' +
-                '    <md-button ng-click="closeDialog()" class="md-primary">' +
-                '      Close Dialog' +
-                '    </md-button>' +
-                '  </md-dialog-actions>' +
-                '</md-dialog>',
-            locals: {
-                items: scope.items
-            },
-            controller: DialogController
-        });
-
-        function DialogController($scope, $mdDialog, items) {
-            $scope.items = items;
-            $scope.closeDialog = function() {
-                $mdDialog.hide();
-            }
+    scope.submitemailamdmobile = function(Typeofsub) {
+        switch (Typeofsub) {
+            case "email":
+                var NewEmail = scope.NewEmail;
+                var Confirmnewemail = scope.Confirmnewemail;
+                var custid = scope.custid;
+                var IsVerified = false;
+                customerProfilesettings.submitemailmobilesubmit(NewEmail, Confirmnewemail, IsVerified, custid).then(function(response) {
+                    console.log(response);
+                    if (response.data == 1) {
+                        alerts.open('Email Upadated successfully', 'success');
+                    } else {
+                        alerts.open('Email Updated failed', 'warning');
+                    }
+                });
+                break;
+            case "mobile":
+                var CountryCodeID = scope.ddlcountrycode;
+                var number = scope.Confirmnewnumber;
+                var custid = scope.custid;
+                var IsVerified = false;
+                customerProfilesettings.submitemailmobilesubmit(CountryCodeID, number, custid, IsVerified).then(function(response) {
+                    console.log(response);
+                    if (response.data == 1) {
+                        alerts.open('Mobile Upadated successfully', 'success');
+                    } else {
+                        alerts.open('Mobile Updated failed', 'warning');
+                    }
+                });
+                break;
         }
-    }
-
+    };
     scope.submitpassword = function() {
         debugger;
         var OldPassword = scope.OldPassword;
@@ -170,6 +147,11 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var Narration = scope.hiddennarration;
         customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
             console.log(response);
+            if (response.data == 1) {
+                alerts.open('Hide Profile successfully', 'success');
+            } else {
+                alerts.open('Hide Profile failed', 'warning');
+            }
         });
     };
     scope.submitdeleteprofile = function() {
@@ -177,19 +159,109 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var Narrtion = scope.Narrtion;
         customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
             console.log(response);
+            if (response.data == 1) {
+                alerts.open('Delete Profile successfully', 'success');
+            } else {
+                alerts.open('Delete Profile failed', 'warning');
+            }
         });
     };
-    // scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
-    // scope.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', '...'];
-    // scope.submit = function() {
-    // submit code goes here
-    //  };
-    //  scope.reset = function() {
-    //      scope.obj = {
-    //         name: "",
-    //          myselect: "",
-    //        status: ""
-    //    }
-    // };
-    //scope.reset();
+    scope.submitmanagealerts = function() {
+        var CustID = scope.custid;
+        var AllowEmail = scope.mailyes === "0" ? "false" : "true";
+        var AllowSMS = scope.smsyes === "0" ? "false" : "true";
+        customerProfilesettings.manageprofiles(CustID).then(function(response) {
+            console.log(response);
+            if (response.data == 1) {
+                alerts.open('Submit successfully', 'success');
+            } else {
+                alerts.open('submit failed', 'warning');
+            }
+        });
+    };
+    scope.unhideprofile = function() {
+        var Expirydate = null;
+        var CustID = scope.custid;
+        var iflag = 0;
+        customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
+            console.log(response);
+            if (response.data == 1) {
+                alerts.open('Unhide your Profile successfully', 'success');
+            } else {
+                alerts.open('Unhide your Profile failed', 'warning');
+            }
+        });
+    };
+    scope.Resetallfields = function(type) {
+        switch (type) {
+            case "email":
+                debugger;
+                scope.NewEmail = null;
+                scope.Confirmnewemail = null;
+                scope.getdetails();
+                scope.activated = false;
+                scope.disabled = true;
+                this.emailform.NewEmail = null;
+                this.emailform.Confirmnewemail = null;
+                this.emailform.$setPristine();
+                this.emailform.$setUntouched();
+                this.emailform.$setValidity();
+                break;
+            case "mobile":
+                scope.ddlcountrycode = null;
+                scope.Confirmnewnumber = null;
+                scope.getdetails();
+                scope.activatedmobile = false;
+                scope.countrycodedisable = true;
+                this.mobileform.ddlcountrycode = null;
+                this.mobileform.Confirmnewnumber = null;
+                this.mobileform.$setPristine();
+                this.mobileform.$setUntouched();
+                this.mobileform.$setValidity();
+                break;
+            case "password":
+                scope.OldPassword = null;
+                scope.NewPassword = null;
+                scope.ConfirmPassword = null;
+                scope.getdetails();
+                scope.passwordsisableswitch = false;
+                scope.passwordsisable = true;
+                this.projectForm.OldPassword = null;
+                this.projectForm.NewPassword = null;
+                this.projectForm.ConfirmPassword = null;
+                this.projectForm.$setPristine();
+                this.projectForm.$setUntouched();
+                this.projectForm.$setValidity();
+                break;
+            case "hide":
+                scope.hideprofiledays = null;
+                scope.hiddennarration = null;
+                scope.getdetails();
+                scope.hideprofileswitchs = false;
+                scope.hideprofile = true;
+                this.hideprofileform.hideprofiledays = null;
+                this.hideprofileform.$setPristine();
+                this.hideprofileform.$setUntouched();
+                this.hideprofileform.$setValidity();
+                break;
+            case "alerts":
+                scope.mailyes = null;
+                scope.smsyes = null;
+                scope.getdetails();
+                scope.alertmanageswitch = false;
+                scope.manageakerts = true;
+                break;
+            case "deleteprofiles":
+                scope.Narration = null;
+                scope.isChecked = null;
+                scope.getdetails();
+                scope.deleteprofileswitch = false;
+                scope.deleteprofiledis = true;
+                this.deleteprofileform.narration = null;
+                this.deleteprofileform.$setPristine();
+                this.deleteprofileform.$setUntouched();
+                this.deleteprofileform.$setValidity();
+                break;
+        }
+    };
 }]);

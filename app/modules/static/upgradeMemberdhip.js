@@ -1,4 +1,4 @@
-app.controller("upgrademembership", ['$scope', '$interval', function(scope, $interval) {
+app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory', function(scope, $interval, myAppFactory) {
     var j = 0,
         counter = 0;
 
@@ -7,9 +7,9 @@ app.controller("upgrademembership", ['$scope', '$interval', function(scope, $int
     scope.determinateValue2 = 30;
     scope.showList = [];
     scope.items = [];
-    for (var i = 0; i < 1000; i++) {
-        scope.items.push(i);
-    }
+    // for (var i = 0; i < 1000; i++) {
+    //     scope.items.push(i);
+    // }
     $interval(function() {
         scope.determinateValue += 1;
         scope.determinateValue2 += 1.5;
@@ -27,29 +27,34 @@ app.controller("upgrademembership", ['$scope', '$interval', function(scope, $int
 
     scope.test = [{ t: 1 }, { t: 3 }, { t: 2 }];
 
-    // scope.items = [{
-    //         itemtext: "Services & Features"
-    //     },
-    //     { itemtext: "My Plans" },
-    //     { itemtext: "Profile Count" },
-    //     { itemtext: "SA Agreed" },
-    //     { itemtext: "Online Access" },
-    //     { itemtext: "Offline Access" },
-    //     { itemtext: "Relationship Manager" },
-    //     { itemtext: "Senior Relationship Manager" },
-    //     {
-    //         itemtext: "Express Interest"
-    //     },
-    //     // {
-    //     //     service: "Services & Features",
-    //     //     MyPlans: "My Plans",
-    //     //     ProfileCount: "Profile Count",
-    //     //     SAAgreed: "SA Agreed",
-    //     //     OnlineAccess: "Online Access",
-    //     //     OfflineAccess: "Offline Access",
-    //     //     RelationshipManager: "Relationship Manager",
-    //     //     SeniorRelationshipManager: "Senior Relationship Manager",
-    //     //     ExpressInterest: "Express Interest"
-    //     // }
-    // ];
+    scope.items = ["Services & Features", "My Plans",
+        "Profile Count",
+        "SA Agreed",
+        "Online Access",
+        "Offline Access",
+        "Relationship Manager",
+        "Senior Relationship Manager",
+        "Express Interest",
+        // {
+        //     service: "Services & Features",
+        //     MyPlans: "My Plans",
+        //     ProfileCount: "Profile Count",
+        //     SAAgreed: "SA Agreed",
+        //     OnlineAccess: "Online Access",
+        //     OfflineAccess: "Offline Access",
+        //     RelationshipManager: "Relationship Manager",
+        //     SeniorRelationshipManager: "Senior Relationship Manager",
+        //     ExpressInterest: "Express Interest"
+        // }
+
+    ];
+    scope.gridOptions = {
+        data: [],
+        urlSync: false
+    };
+    myAppFactory.getData().then(function(responseData) {
+        scope.gridOptions.data = responseData.data;
+    })
+
+
 }]);

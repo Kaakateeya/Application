@@ -11,6 +11,12 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         },
         deleteprofile: function(ProfileID, Narrtion) {
             return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { ProfileID: ProfileID, Narrtion: Narrtion } });
+        },
+        manageprofiles: function(CustID) {
+            return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { CustID: CustID } });
+        },
+        submitemailmobilesubmit: function(NewEmail, Confirmnewemail, IsVerified, custid) {
+            return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { NewEmail: NewEmail, Confirmnewemail: Confirmnewemail, IsVerified: IsVerified, custid: custid } });
         }
     };
 }]);
