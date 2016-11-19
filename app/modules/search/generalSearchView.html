@@ -31,708 +31,501 @@
         margin-bottom: 10px;
     }
     
-    .Linkdisabledfalse {
-        /*pointer-events: none;
-        cursor: default;*/
-    }
-    
     .colorloading {
         color: black;
         margin-top: 10px;
     }
+    
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        /*min-height: 248px*/
+        min-height: 500px;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    .uneditable-input,
+    .fileupload-new .input-append .btn-file {
+        border: none !important;
+    }
+    
+    .select-box-my label {
+        text-transform: capitalize;
+        color: #000 !important;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
 </style>
-
-<div class="wrapper" id="divcontrols" style="display: block;" ng-controller="Generalsearch">
-    <!--/ Main Block 1 -->
-    <div class="search_page_main">
-        <div class="search_page_tabs">
-            <ul>
-                <li>
-                    <a id="lnkGeneralSearch" class="active" href="#/General">General Search</a>
-                </li>
-                <li>
-                    <a id="lnkAdvancedSearch" href="#/Advanced">Advanced Search</a>
-                </li>
-                <li>
-                    <a id="lnkProfileidSearch" href="#/profilidsrch">Profile id Search</a>
-                </li>
-                <li>
-                    <a id="lnkSaveandSearch" href="#/General" style="display: none;">Save&amp;Search</a>
-                </li>
-            </ul>
-            <div class="clear">&nbsp;</div>
-        </div>
-        <div class="search_fields general_fields clearfix">
-            <div class="control-group radio-group-my" id="divGender">
-                <div class="" id="gender" style="color: rgb(50, 40, 40);">
-                    <label class="">
-                            <div class="radio" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><input name="gender" value="2" checked="checked" style="opacity: 0;" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Bride</span>
-                        </label> &nbsp;
-                    <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><input name="gender" value="1" style="opacity: 0;" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Groom</span>
-                        </label> &nbsp;
-                </div>
-            </div>
-            <br>
-            <div class="control-group span3 select-box-my select-box-my-double">
-                <label class="control-label">Age</label>
-                <div class="controls clearfix row">
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                        <select id="ddlFromAge" size="1" class="commonselect" style="display: none;"><option value="0" label="--Select--" title="--select--"></option><option value="18" label="18 years" title="18 years"></option><option value="19" label="19 years" title="19 years"></option><option value="20" label="20 years" title="20 years"></option><option value="21" label="21 years" title="21 years"></option><option value="22" label="22 years" title="22 years"></option><option value="23" label="23 years" title="23 years"></option><option value="24" label="24 years" title="24 years"></option><option value="25" label="25 years" title="25 years"></option><option value="26" label="26 years" title="26 years"></option><option value="27" label="27 years" title="27 years"></option><option value="28" label="28 years" title="28 years"></option><option value="29" label="29 years" title="29 years"></option><option value="30" label="30 years" title="30 years"></option><option value="31" label="31 years" title="31 years"></option><option value="32" label="32 years" title="32 years"></option><option value="33" label="33 years" title="33 years"></option><option value="34" label="34 years" title="34 years"></option><option value="35" label="35 years" title="35 years"></option><option value="36" label="36 years" title="36 years"></option><option value="37" label="37 years" title="37 years"></option><option value="38" label="38 years" title="38 years"></option><option value="39" label="39 years" title="39 years"></option><option value="40" label="40 years" title="40 years"></option><option value="41" label="41 years" title="41 years"></option><option value="42" label="42 years" title="42 years"></option><option value="43" label="43 years" title="43 years"></option><option value="44" label="44 years" title="44 years"></option><option value="45" label="45 years" title="45 years"></option><option value="46" label="46 years" title="46 years"></option><option value="47" label="47 years" title="47 years"></option><option value="48" label="48 years" title="48 years"></option><option value="49" label="49 years" title="49 years"></option><option value="50" label="50 years" title="50 years"></option><option value="51" label="51 years" title="51 years"></option><option value="52" label="52 years" title="52 years"></option><option value="53" label="53 years" title="53 years"></option><option value="54" label="54 years" title="54 years"></option><option value="55" label="55 years" title="55 years"></option><option value="56" label="56 years" title="56 years"></option><option value="57" label="57 years" title="57 years"></option><option value="58" label="58 years" title="58 years"></option><option value="59" label="59 years" title="59 years"></option><option value="60" label="60 years" title="60 years"></option><option value="61" label="61 years" title="61 years"></option><option value="62" label="62 years" title="62 years"></option><option value="63" label="63 years" title="63 years"></option><option value="64" label="64 years" title="64 years"></option><option value="65" label="65 years" title="65 years"></option><option value="66" label="66 years" title="66 years"></option><option value="67" label="67 years" title="67 years"></option><option value="68" label="68 years" title="68 years"></option><option value="69" label="69 years" title="69 years"></option><option value="70" label="70 years" title="70 years"></option><option value="71" label="71 years" title="71 years"></option><option value="72" label="72 years" title="72 years"></option><option value="73" label="73 years" title="73 years"></option><option value="74" label="74 years" title="74 years"></option><option value="75" label="75 years" title="75 years"></option><option value="76" label="76 years" title="76 years"></option><option value="77" label="77 years" title="77 years"></option></select>
-                        <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                                title="21 years"><span class="multiselect-selected-text">21 years</span> <b class="caret"></b></button>
-                            <ul class="multiselect-container dropdown-menu">
-                                <li class="multiselect-item filter" value="0">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                        <input class="form-control multiselect-search" placeholder="Search" type="text">
-                                        <span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>
+<div class="search_page_main" ng-init="pageload()">
+    <div class="search_page_tabs profile_settings_tabs">
+        <div class="sample" layout="column" ng-cloak>
+            <md-content class="md-padding">
+                <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                    <md-tab label="General Search" ui-sref="General">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
                                     </div>
-                                </li>
-                                <li class=""><a tabindex="0"><label class="radio" title="--select--"><input value="0" type="radio"> --Select--</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="18 years"><input value="18" type="radio"> 18 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="19 years"><input value="19" type="radio"> 19 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="20 years"><input value="20" type="radio"> 20 years</label></a></li>
-                                <li class="active"><a tabindex="0"><label class="radio" title="21 years"><input value="21" type="radio"> 21 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="22 years"><input value="22" type="radio"> 22 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="23 years"><input value="23" type="radio"> 23 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="24 years"><input value="24" type="radio"> 24 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="25 years"><input value="25" type="radio"> 25 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="26 years"><input value="26" type="radio"> 26 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="27 years"><input value="27" type="radio"> 27 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="28 years"><input value="28" type="radio"> 28 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="29 years"><input value="29" type="radio"> 29 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="30 years"><input value="30" type="radio"> 30 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="31 years"><input value="31" type="radio"> 31 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="32 years"><input value="32" type="radio"> 32 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="33 years"><input value="33" type="radio"> 33 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="34 years"><input value="34" type="radio"> 34 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="35 years"><input value="35" type="radio"> 35 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="36 years"><input value="36" type="radio"> 36 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="37 years"><input value="37" type="radio"> 37 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="38 years"><input value="38" type="radio"> 38 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="39 years"><input value="39" type="radio"> 39 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="40 years"><input value="40" type="radio"> 40 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="41 years"><input value="41" type="radio"> 41 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="42 years"><input value="42" type="radio"> 42 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="43 years"><input value="43" type="radio"> 43 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="44 years"><input value="44" type="radio"> 44 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="45 years"><input value="45" type="radio"> 45 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="46 years"><input value="46" type="radio"> 46 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="47 years"><input value="47" type="radio"> 47 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="48 years"><input value="48" type="radio"> 48 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="49 years"><input value="49" type="radio"> 49 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="50 years"><input value="50" type="radio"> 50 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="51 years"><input value="51" type="radio"> 51 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="52 years"><input value="52" type="radio"> 52 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="53 years"><input value="53" type="radio"> 53 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="54 years"><input value="54" type="radio"> 54 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="55 years"><input value="55" type="radio"> 55 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="56 years"><input value="56" type="radio"> 56 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="57 years"><input value="57" type="radio"> 57 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="58 years"><input value="58" type="radio"> 58 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="59 years"><input value="59" type="radio"> 59 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="60 years"><input value="60" type="radio"> 60 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="61 years"><input value="61" type="radio"> 61 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="62 years"><input value="62" type="radio"> 62 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="63 years"><input value="63" type="radio"> 63 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="64 years"><input value="64" type="radio"> 64 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="65 years"><input value="65" type="radio"> 65 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="66 years"><input value="66" type="radio"> 66 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="67 years"><input value="67" type="radio"> 67 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="68 years"><input value="68" type="radio"> 68 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="69 years"><input value="69" type="radio"> 69 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="70 years"><input value="70" type="radio"> 70 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="71 years"><input value="71" type="radio"> 71 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="72 years"><input value="72" type="radio"> 72 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="73 years"><input value="73" type="radio"> 73 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="74 years"><input value="74" type="radio"> 74 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="75 years"><input value="75" type="radio"> 75 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="76 years"><input value="76" type="radio"> 76 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="77 years"><input value="77" type="radio"> 77 years</label></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 col-lg-pull-1">
-                        <select id="ddlToAge" size="1" style="display: none;"><option value="0" label="--Select--" title="--select--"></option><option value="18" label="18 years" title="18 years"></option><option value="19" label="19 years" title="19 years"></option><option value="20" label="20 years" title="20 years"></option><option value="21" label="21 years" title="21 years"></option><option value="22" label="22 years" title="22 years"></option><option value="23" label="23 years" title="23 years"></option><option value="24" label="24 years" title="24 years"></option><option value="25" label="25 years" title="25 years"></option><option value="26" label="26 years" title="26 years"></option><option value="27" label="27 years" title="27 years"></option><option value="28" label="28 years" title="28 years"></option><option value="29" label="29 years" title="29 years"></option><option value="30" label="30 years" title="30 years"></option><option value="31" label="31 years" title="31 years"></option><option value="32" label="32 years" title="32 years"></option><option value="33" label="33 years" title="33 years"></option><option value="34" label="34 years" title="34 years"></option><option value="35" label="35 years" title="35 years"></option><option value="36" label="36 years" title="36 years"></option><option value="37" label="37 years" title="37 years"></option><option value="38" label="38 years" title="38 years"></option><option value="39" label="39 years" title="39 years"></option><option value="40" label="40 years" title="40 years"></option><option value="41" label="41 years" title="41 years"></option><option value="42" label="42 years" title="42 years"></option><option value="43" label="43 years" title="43 years"></option><option value="44" label="44 years" title="44 years"></option><option value="45" label="45 years" title="45 years"></option><option value="46" label="46 years" title="46 years"></option><option value="47" label="47 years" title="47 years"></option><option value="48" label="48 years" title="48 years"></option><option value="49" label="49 years" title="49 years"></option><option value="50" label="50 years" title="50 years"></option><option value="51" label="51 years" title="51 years"></option><option value="52" label="52 years" title="52 years"></option><option value="53" label="53 years" title="53 years"></option><option value="54" label="54 years" title="54 years"></option><option value="55" label="55 years" title="55 years"></option><option value="56" label="56 years" title="56 years"></option><option value="57" label="57 years" title="57 years"></option><option value="58" label="58 years" title="58 years"></option><option value="59" label="59 years" title="59 years"></option><option value="60" label="60 years" title="60 years"></option><option value="61" label="61 years" title="61 years"></option><option value="62" label="62 years" title="62 years"></option><option value="63" label="63 years" title="63 years"></option><option value="64" label="64 years" title="64 years"></option><option value="65" label="65 years" title="65 years"></option><option value="66" label="66 years" title="66 years"></option><option value="67" label="67 years" title="67 years"></option><option value="68" label="68 years" title="68 years"></option><option value="69" label="69 years" title="69 years"></option><option value="70" label="70 years" title="70 years"></option><option value="71" label="71 years" title="71 years"></option><option value="72" label="72 years" title="72 years"></option><option value="73" label="73 years" title="73 years"></option><option value="74" label="74 years" title="74 years"></option><option value="75" label="75 years" title="75 years"></option><option value="76" label="76 years" title="76 years"></option><option value="77" label="77 years" title="77 years"></option></select>
-                        <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                                title="25 years"><span class="multiselect-selected-text">25 years</span> <b class="caret"></b></button>
-                            <ul class="multiselect-container dropdown-menu">
-                                <li class="multiselect-item filter" value="0">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                        <input class="form-control multiselect-search" placeholder="Search" type="text">
-                                        <span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Age</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="AgeFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Ageto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </li>
-                                <li class=""><a tabindex="0"><label class="radio" title="--select--"><input value="0" type="radio"> --Select--</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="18 years"><input value="18" type="radio"> 18 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="19 years"><input value="19" type="radio"> 19 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="20 years"><input value="20" type="radio"> 20 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="21 years"><input value="21" type="radio"> 21 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="22 years"><input value="22" type="radio"> 22 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="23 years"><input value="23" type="radio"> 23 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="24 years"><input value="24" type="radio"> 24 years</label></a></li>
-                                <li class="active"><a tabindex="0"><label class="radio" title="25 years"><input value="25" type="radio"> 25 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="26 years"><input value="26" type="radio"> 26 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="27 years"><input value="27" type="radio"> 27 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="28 years"><input value="28" type="radio"> 28 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="29 years"><input value="29" type="radio"> 29 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="30 years"><input value="30" type="radio"> 30 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="31 years"><input value="31" type="radio"> 31 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="32 years"><input value="32" type="radio"> 32 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="33 years"><input value="33" type="radio"> 33 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="34 years"><input value="34" type="radio"> 34 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="35 years"><input value="35" type="radio"> 35 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="36 years"><input value="36" type="radio"> 36 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="37 years"><input value="37" type="radio"> 37 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="38 years"><input value="38" type="radio"> 38 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="39 years"><input value="39" type="radio"> 39 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="40 years"><input value="40" type="radio"> 40 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="41 years"><input value="41" type="radio"> 41 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="42 years"><input value="42" type="radio"> 42 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="43 years"><input value="43" type="radio"> 43 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="44 years"><input value="44" type="radio"> 44 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="45 years"><input value="45" type="radio"> 45 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="46 years"><input value="46" type="radio"> 46 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="47 years"><input value="47" type="radio"> 47 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="48 years"><input value="48" type="radio"> 48 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="49 years"><input value="49" type="radio"> 49 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="50 years"><input value="50" type="radio"> 50 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="51 years"><input value="51" type="radio"> 51 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="52 years"><input value="52" type="radio"> 52 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="53 years"><input value="53" type="radio"> 53 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="54 years"><input value="54" type="radio"> 54 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="55 years"><input value="55" type="radio"> 55 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="56 years"><input value="56" type="radio"> 56 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="57 years"><input value="57" type="radio"> 57 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="58 years"><input value="58" type="radio"> 58 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="59 years"><input value="59" type="radio"> 59 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="60 years"><input value="60" type="radio"> 60 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="61 years"><input value="61" type="radio"> 61 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="62 years"><input value="62" type="radio"> 62 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="63 years"><input value="63" type="radio"> 63 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="64 years"><input value="64" type="radio"> 64 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="65 years"><input value="65" type="radio"> 65 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="66 years"><input value="66" type="radio"> 66 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="67 years"><input value="67" type="radio"> 67 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="68 years"><input value="68" type="radio"> 68 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="69 years"><input value="69" type="radio"> 69 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="70 years"><input value="70" type="radio"> 70 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="71 years"><input value="71" type="radio"> 71 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="72 years"><input value="72" type="radio"> 72 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="73 years"><input value="73" type="radio"> 73 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="74 years"><input value="74" type="radio"> 74 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="75 years"><input value="75" type="radio"> 75 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="76 years"><input value="76" type="radio"> 76 years</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="77 years"><input value="77" type="radio"> 77 years</label></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my select-box-my-double">
-                <label class="control-label">Height</label>
-                <div class="controls clearfix row">
-
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                        <select id="ddlFromheight" size="1" style="display: none;"><option value="0" label="--Select--" title="--select--"></option><option value="1" label="4'0 in - 122 cms" title="4'0 in - 122 cms"></option><option value="2" label="4'1 in - 124 cms" title="4'1 in - 124 cms"></option><option value="3" label="4'2 in - 127 cms" title="4'2 in - 127 cms"></option><option value="4" label="4'3 in - 130 cms" title="4'3 in - 130 cms"></option><option value="5" label="4'4 in - 132 cms" title="4'4 in - 132 cms"></option><option value="6" label="4'5 in - 135 cms" title="4'5 in - 135 cms"></option><option value="7" label="4'6 in - 137 cms" title="4'6 in - 137 cms"></option><option value="8" label="4'7 in - 140 cms" title="4'7 in - 140 cms"></option><option value="9" label="4'8 in - 142 cms" title="4'8 in - 142 cms"></option><option value="10" label="4'9 in - 144 cms" title="4'9 in - 144 cms"></option><option value="11" label="4'10 in - 147 cms" title="4'10 in - 147 cms"></option><option value="12" label="4'11 in - 150 cms" title="4'11 in - 150 cms"></option><option value="13" label="5'0 in - 152 cms" title="5'0 in - 152 cms"></option><option value="14" label="5'1 in - 155 cms" title="5'1 in - 155 cms"></option><option value="15" label="5'2 in - 157 cms" title="5'2 in - 157 cms"></option><option value="16" label="5'3 in - 160 cms" title="5'3 in - 160 cms"></option><option value="17" label="5'4 in - 162 cms" title="5'4 in - 162 cms"></option><option value="18" label="5'5 in - 165 cms" title="5'5 in - 165 cms"></option><option value="19" label="5'6 in - 167 cms" title="5'6 in - 167 cms"></option><option value="20" label="5'7 in - 170 cms" title="5'7 in - 170 cms"></option><option value="21" label="5'8 in - 172 cms" title="5'8 in - 172 cms"></option><option value="22" label="5'9 in - 175 cms" title="5'9 in - 175 cms"></option><option value="23" label="5'10 in - 177 cms" title="5'10 in - 177 cms"></option><option value="24" label="5'11 in - 180 cms" title="5'11 in - 180 cms"></option><option value="25" label="6'0 in - 183 cms" title="6'0 in - 183 cms"></option><option value="26" label="6'1 in - 185 cms" title="6'1 in - 185 cms"></option><option value="27" label="6'2 in - 188 cms" title="6'2 in - 188 cms"></option><option value="28" label="6'3 in - 190 cms" title="6'3 in - 190 cms"></option><option value="29" label="6'4 in - 193 cms" title="6'4 in - 193 cms"></option><option value="30" label="6'5 in - 195 cms" title="6'5 in - 195 cms"></option><option value="31" label="6'6 in - 198 cms" title="6'6 in - 198 cms"></option><option value="32" label="6'7 in - 200 cms" title="6'7 in - 200 cms"></option><option value="33" label="6'8 in - 203 cms" title="6'8 in - 203 cms"></option><option value="34" label="6'9 in - 205 cms" title="6'9 in - 205 cms"></option><option value="35" label="6'10 in - 208 cms" title="6'10 in - 208 cms"></option><option value="36" label="6'11 in - 210 cms" title="6'11 in - 210 cms"></option><option value="37" label="7'0 in - 213 cms	" title="7'0 in - 213 cms	"></option><option value="38" label="7'1 in - 215 cms	" title="7'1 in - 215 cms	"></option><option value="39" label="7'2 in - 218 cms	" title="7'2 in - 218 cms	"></option></select>
-                        <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                                title="5'4 in - 162 cms"><span class="multiselect-selected-text">5'4 in - 162 cms</span> <b class="caret"></b></button>
-                            <ul class="multiselect-container dropdown-menu">
-                                <li class="multiselect-item filter" value="0">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                        <input class="form-control multiselect-search" placeholder="Search" type="text">
-                                        <span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Height</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="HeightFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Heightto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </li>
-                                <li class=""><a tabindex="0"><label class="radio" title="--select--"><input value="0" type="radio"> --Select--</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'0 in - 122 cms"><input value="1" type="radio"> 4'0 in - 122 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'1 in - 124 cms"><input value="2" type="radio"> 4'1 in - 124 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'2 in - 127 cms"><input value="3" type="radio"> 4'2 in - 127 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'3 in - 130 cms"><input value="4" type="radio"> 4'3 in - 130 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'4 in - 132 cms"><input value="5" type="radio"> 4'4 in - 132 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'5 in - 135 cms"><input value="6" type="radio"> 4'5 in - 135 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'6 in - 137 cms"><input value="7" type="radio"> 4'6 in - 137 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'7 in - 140 cms"><input value="8" type="radio"> 4'7 in - 140 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'8 in - 142 cms"><input value="9" type="radio"> 4'8 in - 142 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'9 in - 144 cms"><input value="10" type="radio"> 4'9 in - 144 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'10 in - 147 cms"><input value="11" type="radio"> 4'10 in - 147 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'11 in - 150 cms"><input value="12" type="radio"> 4'11 in - 150 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'0 in - 152 cms"><input value="13" type="radio"> 5'0 in - 152 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'1 in - 155 cms"><input value="14" type="radio"> 5'1 in - 155 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'2 in - 157 cms"><input value="15" type="radio"> 5'2 in - 157 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'3 in - 160 cms"><input value="16" type="radio"> 5'3 in - 160 cms</label></a></li>
-                                <li class="active"><a tabindex="0"><label class="radio" title="5'4 in - 162 cms"><input value="17" type="radio"> 5'4 in - 162 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'5 in - 165 cms"><input value="18" type="radio"> 5'5 in - 165 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'6 in - 167 cms"><input value="19" type="radio"> 5'6 in - 167 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'7 in - 170 cms"><input value="20" type="radio"> 5'7 in - 170 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'8 in - 172 cms"><input value="21" type="radio"> 5'8 in - 172 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'9 in - 175 cms"><input value="22" type="radio"> 5'9 in - 175 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'10 in - 177 cms"><input value="23" type="radio"> 5'10 in - 177 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'11 in - 180 cms"><input value="24" type="radio"> 5'11 in - 180 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'0 in - 183 cms"><input value="25" type="radio"> 6'0 in - 183 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'1 in - 185 cms"><input value="26" type="radio"> 6'1 in - 185 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'2 in - 188 cms"><input value="27" type="radio"> 6'2 in - 188 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'3 in - 190 cms"><input value="28" type="radio"> 6'3 in - 190 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'4 in - 193 cms"><input value="29" type="radio"> 6'4 in - 193 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'5 in - 195 cms"><input value="30" type="radio"> 6'5 in - 195 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'6 in - 198 cms"><input value="31" type="radio"> 6'6 in - 198 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'7 in - 200 cms"><input value="32" type="radio"> 6'7 in - 200 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'8 in - 203 cms"><input value="33" type="radio"> 6'8 in - 203 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'9 in - 205 cms"><input value="34" type="radio"> 6'9 in - 205 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'10 in - 208 cms"><input value="35" type="radio"> 6'10 in - 208 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'11 in - 210 cms"><input value="36" type="radio"> 6'11 in - 210 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'0 in - 213 cms"><input value="37" type="radio"> 7'0 in - 213 cms	</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'1 in - 215 cms"><input value="38" type="radio"> 7'1 in - 215 cms	</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'2 in - 218 cms"><input value="39" type="radio"> 7'2 in - 218 cms	</label></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 col-lg-pull-1">
-                        <select id="ddlToheight" size="1" style="display: none;"><option value="0" label="--Select--" title="--select--"></option><option value="1" label="4'0 in - 122 cms" title="4'0 in - 122 cms"></option><option value="2" label="4'1 in - 124 cms" title="4'1 in - 124 cms"></option><option value="3" label="4'2 in - 127 cms" title="4'2 in - 127 cms"></option><option value="4" label="4'3 in - 130 cms" title="4'3 in - 130 cms"></option><option value="5" label="4'4 in - 132 cms" title="4'4 in - 132 cms"></option><option value="6" label="4'5 in - 135 cms" title="4'5 in - 135 cms"></option><option value="7" label="4'6 in - 137 cms" title="4'6 in - 137 cms"></option><option value="8" label="4'7 in - 140 cms" title="4'7 in - 140 cms"></option><option value="9" label="4'8 in - 142 cms" title="4'8 in - 142 cms"></option><option value="10" label="4'9 in - 144 cms" title="4'9 in - 144 cms"></option><option value="11" label="4'10 in - 147 cms" title="4'10 in - 147 cms"></option><option value="12" label="4'11 in - 150 cms" title="4'11 in - 150 cms"></option><option value="13" label="5'0 in - 152 cms" title="5'0 in - 152 cms"></option><option value="14" label="5'1 in - 155 cms" title="5'1 in - 155 cms"></option><option value="15" label="5'2 in - 157 cms" title="5'2 in - 157 cms"></option><option value="16" label="5'3 in - 160 cms" title="5'3 in - 160 cms"></option><option value="17" label="5'4 in - 162 cms" title="5'4 in - 162 cms"></option><option value="18" label="5'5 in - 165 cms" title="5'5 in - 165 cms"></option><option value="19" label="5'6 in - 167 cms" title="5'6 in - 167 cms"></option><option value="20" label="5'7 in - 170 cms" title="5'7 in - 170 cms"></option><option value="21" label="5'8 in - 172 cms" title="5'8 in - 172 cms"></option><option value="22" label="5'9 in - 175 cms" title="5'9 in - 175 cms"></option><option value="23" label="5'10 in - 177 cms" title="5'10 in - 177 cms"></option><option value="24" label="5'11 in - 180 cms" title="5'11 in - 180 cms"></option><option value="25" label="6'0 in - 183 cms" title="6'0 in - 183 cms"></option><option value="26" label="6'1 in - 185 cms" title="6'1 in - 185 cms"></option><option value="27" label="6'2 in - 188 cms" title="6'2 in - 188 cms"></option><option value="28" label="6'3 in - 190 cms" title="6'3 in - 190 cms"></option><option value="29" label="6'4 in - 193 cms" title="6'4 in - 193 cms"></option><option value="30" label="6'5 in - 195 cms" title="6'5 in - 195 cms"></option><option value="31" label="6'6 in - 198 cms" title="6'6 in - 198 cms"></option><option value="32" label="6'7 in - 200 cms" title="6'7 in - 200 cms"></option><option value="33" label="6'8 in - 203 cms" title="6'8 in - 203 cms"></option><option value="34" label="6'9 in - 205 cms" title="6'9 in - 205 cms"></option><option value="35" label="6'10 in - 208 cms" title="6'10 in - 208 cms"></option><option value="36" label="6'11 in - 210 cms" title="6'11 in - 210 cms"></option><option value="37" label="7'0 in - 213 cms	" title="7'0 in - 213 cms	"></option><option value="38" label="7'1 in - 215 cms	" title="7'1 in - 215 cms	"></option><option value="39" label="7'2 in - 218 cms	" title="7'2 in - 218 cms	"></option></select>
-                        <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                                title="5'9 in - 175 cms"><span class="multiselect-selected-text">5'9 in - 175 cms</span> <b class="caret"></b></button>
-                            <ul class="multiselect-container dropdown-menu">
-                                <li class="multiselect-item filter" value="0">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                        <input class="form-control multiselect-search" placeholder="Search" type="text">
-                                        <span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Marital status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
                                     </div>
-                                </li>
-                                <li class=""><a tabindex="0"><label class="radio" title="--select--"><input value="0" type="radio"> --Select--</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'0 in - 122 cms"><input value="1" type="radio"> 4'0 in - 122 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'1 in - 124 cms"><input value="2" type="radio"> 4'1 in - 124 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'2 in - 127 cms"><input value="3" type="radio"> 4'2 in - 127 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'3 in - 130 cms"><input value="4" type="radio"> 4'3 in - 130 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'4 in - 132 cms"><input value="5" type="radio"> 4'4 in - 132 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'5 in - 135 cms"><input value="6" type="radio"> 4'5 in - 135 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'6 in - 137 cms"><input value="7" type="radio"> 4'6 in - 137 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'7 in - 140 cms"><input value="8" type="radio"> 4'7 in - 140 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'8 in - 142 cms"><input value="9" type="radio"> 4'8 in - 142 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'9 in - 144 cms"><input value="10" type="radio"> 4'9 in - 144 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'10 in - 147 cms"><input value="11" type="radio"> 4'10 in - 147 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="4'11 in - 150 cms"><input value="12" type="radio"> 4'11 in - 150 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'0 in - 152 cms"><input value="13" type="radio"> 5'0 in - 152 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'1 in - 155 cms"><input value="14" type="radio"> 5'1 in - 155 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'2 in - 157 cms"><input value="15" type="radio"> 5'2 in - 157 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'3 in - 160 cms"><input value="16" type="radio"> 5'3 in - 160 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'4 in - 162 cms"><input value="17" type="radio"> 5'4 in - 162 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'5 in - 165 cms"><input value="18" type="radio"> 5'5 in - 165 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'6 in - 167 cms"><input value="19" type="radio"> 5'6 in - 167 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'7 in - 170 cms"><input value="20" type="radio"> 5'7 in - 170 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'8 in - 172 cms"><input value="21" type="radio"> 5'8 in - 172 cms</label></a></li>
-                                <li class="active"><a tabindex="0"><label class="radio" title="5'9 in - 175 cms"><input value="22" type="radio"> 5'9 in - 175 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'10 in - 177 cms"><input value="23" type="radio"> 5'10 in - 177 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="5'11 in - 180 cms"><input value="24" type="radio"> 5'11 in - 180 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'0 in - 183 cms"><input value="25" type="radio"> 6'0 in - 183 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'1 in - 185 cms"><input value="26" type="radio"> 6'1 in - 185 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'2 in - 188 cms"><input value="27" type="radio"> 6'2 in - 188 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'3 in - 190 cms"><input value="28" type="radio"> 6'3 in - 190 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'4 in - 193 cms"><input value="29" type="radio"> 6'4 in - 193 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'5 in - 195 cms"><input value="30" type="radio"> 6'5 in - 195 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'6 in - 198 cms"><input value="31" type="radio"> 6'6 in - 198 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'7 in - 200 cms"><input value="32" type="radio"> 6'7 in - 200 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'8 in - 203 cms"><input value="33" type="radio"> 6'8 in - 203 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'9 in - 205 cms"><input value="34" type="radio"> 6'9 in - 205 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'10 in - 208 cms"><input value="35" type="radio"> 6'10 in - 208 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="6'11 in - 210 cms"><input value="36" type="radio"> 6'11 in - 210 cms</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'0 in - 213 cms"><input value="37" type="radio"> 7'0 in - 213 cms	</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'1 in - 215 cms"><input value="38" type="radio"> 7'1 in - 215 cms	</label></a></li>
-                                <li><a tabindex="0"><label class="radio" title="7'2 in - 218 cms"><input value="39" type="radio"> 7'2 in - 218 cms	</label></a></li>
-                            </ul>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Country living in</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Religion</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Mother tongue</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container>
+                                                <md-select ng-model="selectedVegetables" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                    <md-select-header class="demo-select-header">
+                                                        <input ng-model="searchTerm" type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox md-text">
+                                                    </md-select-header>
+                                                    <md-optgroup label="vegetables">
+                                                        <md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
+                                             filter:searchTerm">{{vegetable}}</md-option>
+
+                                                    </md-optgroup>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3" ng-hide="true">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container class="md-block">
+                                                <label>REddy</label>
+                                                <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    Registration days :&nbsp;&nbsp;&nbsp;
+                                                    <md-radio-button value="0" class="md-primary"> All</md-radio-button>
+                                                    <md-radio-button value="15"> 15days </md-radio-button>
+                                                    <md-radio-button value="30"> 15days </md-radio-button>
+                                                    <md-radio-button value="45"> 15days </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
+                                            href="javascript:void(0);">Edit partner preference</a></p>
+                                    <button id="btnSaveAdvancesearch" class="button_custom">Search</button>
+                                    <button id="btnReset" class="button_custom button_custom_reset">Reset</button>
+                                    <button id="btnSavesearch" class="button_custom">Save&amp;Search</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </md-tab>
+                    <md-tab label="Advanced Search" ui-sref="Advanced">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Age</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="AgeFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Ageto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Height</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="HeightFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Heightto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Marital status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Religion</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
 
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my">
-                <label class="control-label">Marital status</label>
-                <div class="controls clearfix">
-                    <select id="lstMaritalstatus" class="multiple" data-live-search="true" multiple="" size="1" style="display: none;"><option value="43" label="Unmarried" title="Unmarried"></option><option value="44" label="Divorce" title="Divorce"></option><option value="45" label="Widow/Widower" title="Widow/Widower"></option><option value="46" label="Separated" title="Separated"></option></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                            title="Unmarried"><span class="multiselect-selected-text">Unmarried</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu">
-                            <li class="multiselect-item filter" value="0">
-                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search"
-                                        placeholder="Type To Search" type="text"><span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div>
-                            </li>
-                            <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input value="multiselect-all" type="checkbox"> Check all!</label></a></li>
-                            <li class="active"><a tabindex="0"><label class="checkbox" title="Unmarried"><input value="43" type="checkbox"> Unmarried</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Divorce"><input value="44" type="checkbox"> Divorce</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Widow/Widower"><input value="45" type="checkbox"> Widow/Widower</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Separated"><input value="46" type="checkbox"> Separated</label></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my">
-                <label class="control-label">Education</label>
-                <div class="controls clearfix">
-                    <select id="lstEducationcategory" class="multiple lstEducationcategory" multiple="" size="1" style="display: none;"><option value="1" label="Bachelors in Engineering" title="Bachelors in Engineering"></option><option value="2" label="Bachelors in Degree" title="Bachelors in Degree"></option><option value="3" label="Diploma" title="Diploma"></option><option value="4" label="Doctorate/phd" title="Doctorate/phd"></option><option value="5" label="Masters in Engineering" title="Masters in Engineering"></option><option value="6" label="Bachelors in Medicine" title="Bachelors in Medicine"></option><option value="7" label="Masters in Degree" title="Masters in Degree"></option><option value="10" label="Finance - ICWAI/CA/CS" title="Finance - ICWAI/CA/CS"></option><option value="11" label="Union Public Service Commision-Civil Services" title="Union Public Service Commision-Civil Services"></option><option value="13" label="Masters in Medicine" title="Masters in Medicine"></option><option value="15" label="Below Graduation" title="Below Graduation"></option><option value="21" label="Not given" title="Not given"></option><option value="22" label="Other" title="Other"></option></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="Any"><span class="multiselect-selected-text">Any</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu">
-                            <li class="multiselect-item filter" value="0">
-                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search"
-                                        placeholder="Type To Search" type="text"><span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div>
-                            </li>
-                            <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input value="multiselect-all" type="checkbox"> Check all!</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Bachelors in Engineering"><input value="1" type="checkbox"> Bachelors in Engineering</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Bachelors in Degree"><input value="2" type="checkbox"> Bachelors in Degree</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Diploma"><input value="3" type="checkbox"> Diploma</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Doctorate/phd"><input value="4" type="checkbox"> Doctorate/phd</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Masters in Engineering"><input value="5" type="checkbox"> Masters in Engineering</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Bachelors in Medicine"><input value="6" type="checkbox"> Bachelors in Medicine</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Masters in Degree"><input value="7" type="checkbox"> Masters in Degree</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Finance - ICWAI/CA/CS"><input value="10" type="checkbox"> Finance - ICWAI/CA/CS</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Union Public Service Commision-Civil Services"><input value="11" type="checkbox"> Union Public Service Commision-Civil Services</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Masters in Medicine"><input value="13" type="checkbox"> Masters in Medicine</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Below Graduation"><input value="15" type="checkbox"> Below Graduation</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Not given"><input value="21" type="checkbox"> Not given</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Other"><input value="22" type="checkbox"> Other</label></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <br>
-            <div class="control-group span3 select-box-my">
-                <label class="control-label">Country living in</label>
-                <div class="controls clearfix">
-                    <select id="lstCountrylivingin" class="multiple lstCountrylivingin" multiple="" size="1" style="display: none;"><option value="1" label="India" title="India"></option><option value="2" label="USA" title="USA"></option><option value="3" label="UK" title="UK"></option><option value="4" label="Canada" title="Canada"></option><option value="5" label="Australia" title="Australia"></option><option value="6" label="Singapore" title="Singapore"></option><option value="7" label="Saudi Arabia" title="Saudi Arabia"></option><option value="8" label="South Africa" title="South Africa"></option><option value="9" label="Kuwait" title="Kuwait"></option><option value="10" label="Pakistan" title="Pakistan"></option><option value="11" label="Afghanistan" title="Afghanistan"></option><option value="12" label="Albania" title="Albania"></option><option value="13" label="Algeria" title="Algeria"></option><option value="17" label="Anguiila" title="Anguiila"></option><option value="18" label="Antarctica" title="Antarctica"></option><option value="21" label="Armenia" title="Armenia"></option><option value="22" label="Aruba" title="Aruba"></option><option value="23" label="Austria" title="Austria"></option><option value="26" label="Bahrain" title="Bahrain"></option><option value="27" label="Bangladesh" title="Bangladesh"></option><option value="30" label="Belgium" title="Belgium"></option><option value="37" label="Botswana" title="Botswana"></option><option value="39" label="Brazil" title="Brazil"></option><option value="40" label="British Indian Ocean Territory" title="British Indian Ocean Territory"></option><option value="42" label="Brunei" title="Brunei"></option><option value="53" label="China" title="China"></option><option value="58" label="Congo" title="Congo"></option><option value="64" label="Czech Republic" title="Czech Republic"></option><option value="65" label="Denmark" title="Denmark"></option><option value="74" label="Eritrea" title="Eritrea"></option><option value="76" label="Ethiopia" title="Ethiopia"></option><option value="80" label="Finland" title="Finland"></option><option value="81" label="France" title="France"></option><option value="88" label="Germany" title="Germany"></option><option value="89" label="Ghana" title="Ghana"></option><option value="93" label="Grenada" title="Grenada"></option><option value="103" label="Hong Kong" title="Hong Kong"></option><option value="104" label="Hungary" title="Hungary"></option><option value="105" label="Iceland" title="Iceland"></option><option value="106" label="Indonesia" title="Indonesia"></option><option value="108" label="Iraq" title="Iraq"></option><option value="109" label="Ireland" title="Ireland"></option><option value="110" label="Israel" title="Israel"></option><option value="111" label="Italy" title="Italy"></option><option value="112" label="Ivory Coast" title="Ivory Coast"></option><option value="113" label="Jamaica" title="Jamaica"></option><option value="114" label="Japan" title="Japan"></option><option value="115" label="Jordan" title="Jordan"></option><option value="116" label="Kazakstan" title="Kazakstan"></option><option value="117" label="Kenya" title="Kenya"></option><option value="119" label="South Korea" title="South Korea"></option><option value="120" label="North Korea" title="North Korea"></option><option value="124" label="Lebanon" title="Lebanon"></option><option value="126" label="Liberia" title="Liberia"></option><option value="130" label="Luxembourg" title="Luxembourg"></option><option value="135" label="Malaysia" title="Malaysia"></option><option value="136" label="Maldives" title="Maldives"></option><option value="137" label="Mali" title="Mali"></option><option value="140" label="Martinique" title="Martinique"></option><option value="142" label="Mauritius" title="Mauritius"></option><option value="144" label="Mexico" title="Mexico"></option><option value="155" label="Nepal" title="Nepal"></option><option value="156" label="Netherlands" title="Netherlands"></option><option value="159" label="New Zealand" title="New Zealand"></option><option value="162" label="Nigeria" title="Nigeria"></option><option value="166" label="Norway" title="Norway"></option><option value="167" label="Oman" title="Oman"></option><option value="173" label="Philippines" title="Philippines"></option><option value="174" label="Poland" title="Poland"></option><option value="176" label="Puerto Rico" title="Puerto Rico"></option><option value="177" label="Qatar" title="Qatar"></option><option value="180" label="Russia" title="Russia"></option><option value="189" label="Senegal" title="Senegal"></option><option value="195" label="Spain" title="Spain"></option><option value="199" label="Sudan" title="Sudan"></option><option value="202" label="Swaziland" title="Swaziland"></option><option value="203" label="Sweden" title="Sweden"></option><option value="204" label="Switzerland " title="Switzerland "></option><option value="206" label="Taiwan" title="Taiwan"></option><option value="208" label="Tanzania" title="Tanzania"></option><option value="209" label="Thailand" title="Thailand"></option><option value="215" label="Turkey" title="Turkey"></option><option value="219" label="Uganda" title="Uganda"></option><option value="220" label="Ukraine" title="Ukraine"></option><option value="221" label="United Arab Emirates" title="United Arab Emirates"></option><option value="227" label="Vietnam" title="Vietnam"></option><option value="234" label="Zambia" title="Zambia"></option><option value="237" label="Not Given" title="Not Given"></option><option value="238" label="Other" title="Other"></option><option value="239" label="Srilanka" title="Srilanka"></option><option value="240" label="West Indies" title="West Indies"></option><option value="241" label="Europe" title="Europe"></option><option value="243" label="WEST AFRICA" title="WEST AFRICA"></option></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="Any"><span class="multiselect-selected-text">Any</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu">
-                            <li class="multiselect-item filter" value="0">
-                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search"
-                                        placeholder="Type To Search" type="text"><span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div>
-                            </li>
-                            <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input value="multiselect-all" type="checkbox"> Check all!</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="India"><input value="1" type="checkbox"> India</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="USA"><input value="2" type="checkbox"> USA</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="UK"><input value="3" type="checkbox"> UK</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Canada"><input value="4" type="checkbox"> Canada</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Australia"><input value="5" type="checkbox"> Australia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Singapore"><input value="6" type="checkbox"> Singapore</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Saudi Arabia"><input value="7" type="checkbox"> Saudi Arabia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="South Africa"><input value="8" type="checkbox"> South Africa</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Kuwait"><input value="9" type="checkbox"> Kuwait</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Pakistan"><input value="10" type="checkbox"> Pakistan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Afghanistan"><input value="11" type="checkbox"> Afghanistan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Albania"><input value="12" type="checkbox"> Albania</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Algeria"><input value="13" type="checkbox"> Algeria</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Anguiila"><input value="17" type="checkbox"> Anguiila</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Antarctica"><input value="18" type="checkbox"> Antarctica</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Armenia"><input value="21" type="checkbox"> Armenia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Aruba"><input value="22" type="checkbox"> Aruba</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Austria"><input value="23" type="checkbox"> Austria</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Bahrain"><input value="26" type="checkbox"> Bahrain</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Bangladesh"><input value="27" type="checkbox"> Bangladesh</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Belgium"><input value="30" type="checkbox"> Belgium</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Botswana"><input value="37" type="checkbox"> Botswana</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Brazil"><input value="39" type="checkbox"> Brazil</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="British Indian Ocean Territory"><input value="40" type="checkbox"> British Indian Ocean Territory</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Brunei"><input value="42" type="checkbox"> Brunei</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="China"><input value="53" type="checkbox"> China</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Congo"><input value="58" type="checkbox"> Congo</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Czech Republic"><input value="64" type="checkbox"> Czech Republic</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Denmark"><input value="65" type="checkbox"> Denmark</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Eritrea"><input value="74" type="checkbox"> Eritrea</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Ethiopia"><input value="76" type="checkbox"> Ethiopia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Finland"><input value="80" type="checkbox"> Finland</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="France"><input value="81" type="checkbox"> France</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Germany"><input value="88" type="checkbox"> Germany</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Ghana"><input value="89" type="checkbox"> Ghana</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Grenada"><input value="93" type="checkbox"> Grenada</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Hong Kong"><input value="103" type="checkbox"> Hong Kong</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Hungary"><input value="104" type="checkbox"> Hungary</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Iceland"><input value="105" type="checkbox"> Iceland</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Indonesia"><input value="106" type="checkbox"> Indonesia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Iraq"><input value="108" type="checkbox"> Iraq</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Ireland"><input value="109" type="checkbox"> Ireland</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Israel"><input value="110" type="checkbox"> Israel</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Italy"><input value="111" type="checkbox"> Italy</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Ivory Coast"><input value="112" type="checkbox"> Ivory Coast</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Jamaica"><input value="113" type="checkbox"> Jamaica</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Japan"><input value="114" type="checkbox"> Japan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Jordan"><input value="115" type="checkbox"> Jordan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Kazakstan"><input value="116" type="checkbox"> Kazakstan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Kenya"><input value="117" type="checkbox"> Kenya</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="South Korea"><input value="119" type="checkbox"> South Korea</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="North Korea"><input value="120" type="checkbox"> North Korea</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Lebanon"><input value="124" type="checkbox"> Lebanon</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Liberia"><input value="126" type="checkbox"> Liberia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Luxembourg"><input value="130" type="checkbox"> Luxembourg</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Malaysia"><input value="135" type="checkbox"> Malaysia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Maldives"><input value="136" type="checkbox"> Maldives</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Mali"><input value="137" type="checkbox"> Mali</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Martinique"><input value="140" type="checkbox"> Martinique</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Mauritius"><input value="142" type="checkbox"> Mauritius</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Mexico"><input value="144" type="checkbox"> Mexico</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Nepal"><input value="155" type="checkbox"> Nepal</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Netherlands"><input value="156" type="checkbox"> Netherlands</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="New Zealand"><input value="159" type="checkbox"> New Zealand</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Nigeria"><input value="162" type="checkbox"> Nigeria</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Norway"><input value="166" type="checkbox"> Norway</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Oman"><input value="167" type="checkbox"> Oman</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Philippines"><input value="173" type="checkbox"> Philippines</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Poland"><input value="174" type="checkbox"> Poland</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Puerto Rico"><input value="176" type="checkbox"> Puerto Rico</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Qatar"><input value="177" type="checkbox"> Qatar</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Russia"><input value="180" type="checkbox"> Russia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Senegal"><input value="189" type="checkbox"> Senegal</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Spain"><input value="195" type="checkbox"> Spain</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Sudan"><input value="199" type="checkbox"> Sudan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Swaziland"><input value="202" type="checkbox"> Swaziland</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Sweden"><input value="203" type="checkbox"> Sweden</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Switzerland "><input value="204" type="checkbox"> Switzerland </label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Taiwan"><input value="206" type="checkbox"> Taiwan</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Tanzania"><input value="208" type="checkbox"> Tanzania</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Thailand"><input value="209" type="checkbox"> Thailand</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Turkey"><input value="215" type="checkbox"> Turkey</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Uganda"><input value="219" type="checkbox"> Uganda</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Ukraine"><input value="220" type="checkbox"> Ukraine</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="United Arab Emirates"><input value="221" type="checkbox"> United Arab Emirates</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Vietnam"><input value="227" type="checkbox"> Vietnam</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Zambia"><input value="234" type="checkbox"> Zambia</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Not Given"><input value="237" type="checkbox"> Not Given</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Other"><input value="238" type="checkbox"> Other</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Srilanka"><input value="239" type="checkbox"> Srilanka</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="West Indies"><input value="240" type="checkbox"> West Indies</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Europe"><input value="241" type="checkbox"> Europe</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="WEST AFRICA"><input value="243" type="checkbox"> WEST AFRICA</label></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my">
-                <label class="control-label">Religion</label>
-                <div class="controls clearfix">
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Mother tongue</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3" ng-hide="true">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container class="md-block">
+                                                <label>REddy</label>
+                                                <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="control-group">
+                                        <label class="control-label control-label-marg">Physical status</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="25" class="md-primary"> Normal</md-radio-button>
+                                                    <md-radio-button value="26"> Physically Challenged </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="search_advance_block1">
+                                    <h4>CURRENT LOCATION</h4>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Country living in</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">State</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my" id="divVisastatus">
+                                        <label class="control-label">Visa status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Educational and professional details</h4>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education category</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
 
-                    <select id="ddlreligionid" class="ddlreligionid" size="1" style="display: none;"><option value="0" label="--Select--" title="--select--"></option><option value="1" label="Hindu" title="Hindu"></option><option value="2" label="Christian" title="Christian"></option><option value="3" label="Muslim" title="Muslim"></option><option value="6" label="Other" title="Other"></option><option value="9" label="Catholic" title="Catholic"></option><option value="15" label="Roma Catholic" title="Roma Catholic"></option><option value="16" label="ROMAN CATHOLIC" title="ROMAN CATHOLIC"></option></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                            title="Hindu"><span class="multiselect-selected-text">Hindu</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu">
-                            <li class="multiselect-item filter" value="0">
-                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search"
-                                        placeholder="Search" type="text"><span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div>
-                            </li>
-                            <li class=""><a tabindex="0"><label class="radio" title="--select--"><input value="0" type="radio"> --Select--</label></a></li>
-                            <li class="active"><a tabindex="0"><label class="radio" title="Hindu"><input value="1" type="radio"> Hindu</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="Christian"><input value="2" type="radio"> Christian</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="Muslim"><input value="3" type="radio"> Muslim</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="Other"><input value="6" type="radio"> Other</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="Catholic"><input value="9" type="radio"> Catholic</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="Roma Catholic"><input value="15" type="radio"> Roma Catholic</label></a></li>
-                            <li><a tabindex="0"><label class="radio" title="ROMAN CATHOLIC"><input value="16" type="radio"> ROMAN CATHOLIC</label></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my">
-                <label class="control-label">Mother tongue</label>
-                <div class="controls clearfix">
-                    <select id="lstMothertongue" class="multiple lstMothertongue" multiple="" size="1" style="display: none;"><option value="1" label="Telugu" title="Telugu"></option><option value="2" label="Tamil" title="Tamil"></option><option value="3" label="Kannada" title="Kannada"></option><option value="4" label="Hindi" title="Hindi"></option><option value="5" label="Punjabi" title="Punjabi"></option><option value="6" label="Urdu" title="Urdu"></option><option value="7" label="Lambadi" title="Lambadi"></option><option value="8" label="Marati" title="Marati"></option><option value="9" label="Gujaraathi" title="Gujaraathi"></option><option value="10" label="English" title="English"></option><option value="11" label="Malayalam" title="Malayalam"></option><option value="12" label="Saurashtra" title="Saurashtra"></option><option value="13" label="Orea" title="Orea"></option><option value="14" label="telugu" title="telugu"></option></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default ValueContains" data-toggle="dropdown"
-                            title="Telugu"><span class="multiselect-selected-text">Telugu</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu">
-                            <li class="multiselect-item filter" value="0">
-                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search"
-                                        placeholder="Type To Search" type="text"><span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter ValueContains" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div>
-                            </li>
-                            <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input value="multiselect-all" type="checkbox"> Check all!</label></a></li>
-                            <li class="active"><a tabindex="0"><label class="checkbox" title="Telugu"><input value="1" type="checkbox"> Telugu</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Tamil"><input value="2" type="checkbox"> Tamil</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Kannada"><input value="3" type="checkbox"> Kannada</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Hindi"><input value="4" type="checkbox"> Hindi</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Punjabi"><input value="5" type="checkbox"> Punjabi</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Urdu"><input value="6" type="checkbox"> Urdu</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Lambadi"><input value="7" type="checkbox"> Lambadi</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Marati"><input value="8" type="checkbox"> Marati</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Gujaraathi"><input value="9" type="checkbox"> Gujaraathi</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="English"><input value="10" type="checkbox"> English</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Malayalam"><input value="11" type="checkbox"> Malayalam</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Saurashtra"><input value="12" type="checkbox"> Saurashtra</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="Orea"><input value="13" type="checkbox"> Orea</label></a></li>
-                            <li><a tabindex="0"><label class="checkbox" title="telugu"><input value="14" type="checkbox"> telugu</label></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my" id="divCastLabel" style="display: block;">
-                <label class="control-label">Caste</label>
-                <div class="controls clearfix">
-                    <span id="lblCastidsdisplay" style="font-weight: bold; color: #000;">Reddy</span>
-                    <span id="lblCastids" style="font-weight: bold; display: none;">404,404</span>
-                </div>
-            </div>
-            <div class="control-group span3 select-box-my" id="divCste" style="display: none;">
-                <label class="control-label">Caste</label>
-                <div class="controls clearfix" onclick="javascript: CallMethodRefProfession(); return true;" id="divCasteids">
-                    <select id="lstCaste" class="multiple lstCaste" multiple="" size="1" disabled="" style="display: none;"></select>
-                    <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-default disabled" data-toggle="dropdown"
-                            title="Any" disabled=""><span class="multiselect-selected-text">Any</span> <b class="caret"></b></button>
-                        <ul class="multiselect-container dropdown-menu"></ul>
-                    </div>
-                    <button id="btnCaste" class="cssbtn">
-                    </button></div>
-            </div>
-            <div class="clearfix"></div>
-            <br>
-            <div class="control-group radio-group-my" id="divRegistrationdays" style="display: none;">
-                <div class="controls">
-                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
-                        <label class="control-label" style="font-weight: bold;">Registration days :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    </div>
-                    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
-                        <div class="" id="Div5" style="color: rgb(50, 40, 40);">
-                            <label class="">
-                                    <div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><input name="Regdays" value="0" title="All" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;All</span>
-                                </label> &nbsp;
-                            <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><input name="Regdays" value="15" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;15days</span>
-                                </label> &nbsp;
-                            <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><input name="Regdays" value="30" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;30days</span>
-                                </label> &nbsp;
-                            <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><div class="radio" id="uniform-undefined"><span><input name="Regdays" value="45" style="opacity: 0;" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;45days</span>
-                                </label> &nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Profession group</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my  select-box-my-trible select-box-my-trible2 clearfix">
+                                        <label class="control-label">Monthly  income</label>
+                                        <div class="controls clearfix row">
+                                            <div layout-gt-sm="row">
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <md-select ng-model="user.state">
+                                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                                            {{state.abbrev}}
+                                                        </md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>from</label>
+                                                    <input ng-model="user.city">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>to</label>
+                                                    <input name="postalCode" ng-model="user.postalCode">
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Astro details</h4>
+                                    <div class="control-group radio-group-my pull-left">
+                                        <label class="control-label control-label-marg">Manglink / Kuja dosham&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="0" class="md-primary"> Yes</md-radio-button>
+                                                    <md-radio-button value="1"> No </md-radio-button>
+                                                    <md-radio-button value=""> Doesn't Matter </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group radio-group-my pull-left">
+                                        <label class="control-label control-label-marg"> Star language &nbsp;&nbsp;</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="1" class="md-primary"> Telugu</md-radio-button>
+                                                    <md-radio-button value="2"> Tamil </md-radio-button>
+                                                    <md-radio-button value="3">Kannada </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span4 select-box-my">
+                                        <label class="control-label">Star</label>
+                                        <div class="controls clearfix">
+                                            <div layout-gt-sm="row">
+                                                <md-select ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Habits</h4>
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Diet : &nbsp;&nbsp;
+                                            <md-radio-button value="1" class="md-primary"> Veg</md-radio-button>
+                                            <md-radio-button value="2"> Non Veg </md-radio-button>
+                                            <md-radio-button value="">Both </md-radio-button>
+                                        </md-radio-group>
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Registration days :&nbsp;&nbsp;&nbsp;
+                                            <md-radio-button value="0" class="md-primary"> All</md-radio-button>
+                                            <md-radio-button value="15"> 15days </md-radio-button>
+                                            <md-radio-button value="30"> 15days </md-radio-button>
+                                            <md-radio-button value="45"> 15days </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
+                                <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();" href="javascript:void(0);">Edit partner preference</a></p>
+                                <button id="btnSaveAdvancesearch" class="button_custom">Search</button>
+                                <button id="btnReset" class="button_custom button_custom_reset">Reset</button>
+                                <button id="btnSavesearch" class="button_custom">Save&amp;Search</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <br>
-            <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;"
-                    onclick="return Editpartnerpreference();" href="javascript:void(0);">Edit partner preference</a></p>
+                    </md-tab>
+                    <md-tab label="profileid Search" ui-sref="profilidsrch">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <br>
+                                <div layout="row">
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Profile id</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>First name</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Last name</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+                                <button id="btnSaveAdvancesearch" class="button_custom" onclick="return SubmitAdvance();">Search</button>
+                                <button id="btnReset" class="button_custom button_custom_reset" style="display: none;">Reset</button>
+                                <div id="Div1" style="display: none;">
+                                    <button id="btnSavesearch" class="button_custom" style="display: none;">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </md-tab>
+                    <md-tab label="Saved Search" ui-sref="savedsearch">
+                        <div class="tab">
+                            <div class="search_fields general_fields clearfix">
+                                <div class="profile_search_main saved_search_main  clearfix">
+                                    <div class="span4 clearfix">
+                                        <div layout-gt-sm="row">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Search by ID</label>
+                                                <input ng-model="user.city">
+                                                <button class="button_custom">SEARCH</button>
+                                            </md-input-container>
+                                        </div>
 
-            <button id="btnSaveAdvancesearch" class="button_custom" onclick="return SubmitAdvance();">Search</button>
-            <button id="btnReset" class="button_custom button_custom_reset" style="display: none;">Reset</button>
-            <button id="btnSavesearch" class="button_custom" onclick="return saveandsearch();" style="display: none;">Save&amp;Search</button>
-
+                                    </div>
+                                    <div class="saved_search_list">
+                                        <div class="saved_search_list_item">
+                                            <h4><span id="Label1">testing</span><span style="display:none;">3764</span> <span style="display:none;">91022</span> <span style="display:none;">2</span><span style="display:none;">Generalsearch</span></h4>
+                                            <div class="saved_search_list_ui clearfix"><a href="javascript:void(0)">Search</a><a href="javascript:void(0)">Edit</a>
+                                                <a href="javascript:void(0)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
         </div>
     </div>
-    <!-- Main Block 1 /-->
-</div>
-<div class="col-lg-offset-5" id="divsubmitloader" style="display: none;">
-    <i class="fa fa-spinner fa-pulse fa-4x fa-fw margin-bottom colorloading"></i>
-</div>
-<div class="wrapper register_page_main clearfix" id="divsearchresult" style="display: none;">
-    <div class="clearfix">
-        <div class="refine_search_new clearfix" id="newsearchresultdiv" style="display: block;">
-            <div class="refine_search_new_sub clearfix">
-                <div class="refine_search_new_sub1 clearfix">
-                    <h4>Refine <span id="refinegender"></span></h4>
-                    <div class="clear">&nbsp;</div>
-                    <h6><span>Age:</span> <span id="refineAge">24 years - 28 years</span></h6>
-                    <h6><span>caste:</span><span id="refinecaste"> kamma</span></h6>
-                    <h6><span>education:</span> <span id="refineeducation">pg, btech, mtech</span></h6>
-                    <h6><span>height:</span><span id="spanrefineheight"> 5’.4”-167 cms</span></h6>
-                </div>
-                <div class="refine_search_new_sub2 clearfix">
-                    <div class="span3">
-                        <h6><span>Age</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <input id="amount" readonly="">
-                        <div id="slider_range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 5.26316%; width: 5.26316%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 5.26316%;"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10.5263%;"></span>
-                        </div>
-                        <input id="amountto" readonly="">
-                    </div>
-                    <div class="span3">
-                        <h6><span>Height</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <p id="amount2" style="display: none;">1</p>
-                        <input id="heightfrom" readonly="">
-                        <div id="slider_range2" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 2.5%; width: 97.5%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 2.5%;"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
-                        </div>
-                        <p id="amount2to" style="display: none;">40</p>
-                        <input id="heightto" readonly="">
-                    </div>
-                    <div class="span3 clearfix">
-                        <span class="checkbox_my checkbox">
-                            <label>
-                                <div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><input id="checkwithphoto" style="opacity: 0;" type="checkbox"></span></div>
-                    </span>
-                </div>
-                </span>
-            </div>
-            </span>
-        </div>
-        </span>
-    </div>With photo
-    </label>
-    </span>
-</div>
-<a href="javascript:void(0);" onclick="return refinesubmit();">Search more</a>
-</div>
-</div>
-</div>
-<!--/ Modal Gallery -->
-<div id="UpdateViewimage" class="UpdateViewimage clearfix">
-    <div class="row">
-        <div class="col-lg-6">
-            <div id="searchresultprofilesdiv" style="display: block;">
-                <h4>search results - <span>
-                            <label id="refinetotalrecords">0</label>
-                            <small>Profiles found</small></span></h4>
-            </div>
-        </div>
-        <div class="col-lg-6 clearfix">
-            <input id="imageslideshow" src="../images/slider.png" class="pull-right" title="SlideShow" data-toggle="modal" onclick="return Slideshowpage();"
-                style="height: 32px; width: 32px;" type="image">
-            <input id="playButton" class="btn btn-default btn-xs pull-right" title="Play" src="../images/play-button.png" style="height: 33px; width: 40px;"
-                type="image">
-            <input id="pauseButton" class="btn btn-default btn-xs pull-right" title="Pause" src="../images/pause-button.png" style="display: none; height: 33px; width: 40px;"
-                type="image">
-            <input name="lnkViewImages" id="lnkViewImages" title="Grid View" class="grid_view pull-right" src="../CutomerImages/List%20page/icon_grid.png"
-                style="font-weight: bold;" onclick="return Changelist();" type="image">
-            <input name="lnkNormal" id="lnkNormal" title="List View" class="normal_view pull-right" src="../CutomerImages/List%20page/icon_list.png"
-                style="font-weight: bold;" onclick="return Changetogrid();" type="image">
-            <a id="lnkModifsearch" class="view_similar pull-right" href="javascript:void(0);" onclick="return Modifursearch();">Modify Your Search</a>
-        </div>
-        <div class="clear"></div>
-        <div id="divviewdprofiles" class="col-lg-12" style="display: none;">
-            <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;">1</label>&nbsp;
-            <label style="color: #000;">Profiles</label>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <br>
-</div>
-<!-- Carousel Start-->
-<div id="slideShowCarousel" class="carousel slide slideShowCarousel">
-    <!-- Carousel items -->
-    <div class="carousel-inner" id="maincarousal">
-    </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#slideShowCarousel" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="#slideShowCarousel" data-slide="next">›</a>
-    <label style="display: none;" id="lblcurrentprofile"></label>
-    <label style="display: none;" id="lblcurSlide"></label>
-    <label style="display: none;" id="lnkLastSlide1"></label>
-</div>
-<!-- Carousel End -->
-</div>
-<div class="search_results_main clearfix">
-    <div class="search_result_items_main clearfix">
-        <div id="Refsearchllll">
-            <div id="divListV" class="message-row4">
-                <div id="updateList">
-                    <div class="Maindiv message-row4  wrapper--overflow">
-                    </div>
-                    <div class="clearfix"></div>
-                    <br>
-                    <div class="col-lg-offset-5" style="display: none;" id="divloadmore">
-                        <a href="javascript:void(0);" onclick="return Ladmore();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
-                    </div>
-                    <div class="col-lg-offset-5" id="divloader" style="display: none;">
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center" style="display: none;" id="Norows">
-                <h3 style="color: maroon;">End</h3>
-            </div>
-        </div>
-    </div>
-</div>
 </div>

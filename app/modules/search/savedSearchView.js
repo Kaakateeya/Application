@@ -1,3 +1,3 @@
-app.controller('savedsearchCtrl', ['$scope', function (scope) {
+app.controller('savedsearchCtrl', ['$scope', function(scope) {
     scope.data = [];
 }]);

@@ -31,230 +31,502 @@
         margin-bottom: 10px;
     }
     
-    .Linkdisabledfalse {
-        /*pointer-events: none;
-        cursor: default;*/
-    }
-    
     .colorloading {
         color: black;
         margin-top: 10px;
     }
+    
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        /*min-height: 248px*/
+        min-height: 250px;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"],
+    .uneditable-input,
+    .fileupload-new .input-append .btn-file {
+        border: none !important;
+    }
+    
+    .select-box-my label {
+        text-transform: capitalize;
+        color: #000 !important;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
 </style>
-<div class="wrapper" id="divcontrols" style="display: block;" ng-controller="profileidsrch">
-
-    <!--/ Main Block 1 -->
-    <div class="search_page_main">
-        <div class="search_page_tabs">
-            <ul>
-                <li>
-                    <a id="lnkGeneralSearch" href="#/General">General Search</a>
-
-                </li>
-                <li>
-                    <a id="lnkAdvancedSearch" href="#/Advanced">Advanced Search</a>
-
-                </li>
-                <li>
-                    <a id="lnkProfileidSearch" class="active" href="#/profilidsrch">Profile id Search</a>
-
-                </li>
-
-                <li>
-                    <a id="lnkSaveandSearch" href="#/General" style="display: none;">Save&amp;Search</a>
-
-                </li>
-            </ul>
-            <div class="clear">&nbsp;</div>
-        </div>
-
-        <div class="search_fields general_fields clearfix">
-            <div class="control-group radio-group-my" id="divGender" style="display: none;">
-                <div class="" id="gender" style="color: rgb(50, 40, 40);">
-                    <label class="">
-                            <div class="radio" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><div class="radio disabled" id="uniform-undefined"><span class="checked"><input name="gender" value="2" autocomplete="off" style="opacity: 0;" checked="checked" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Bride</span>
-                        </label> &nbsp;
-                    <label class=""><div class="radio" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><div class="radio disabled" id="uniform-undefined"><span><input name="gender" value="1" style="opacity: 0;" disabled="disabled" type="radio"></span></div></span></div></span></div></span></div></span></div><span>&nbsp;Groom</span>
-                        </label> &nbsp;
-                </div>
-            </div>
-            <br>
-            <div class="profile_search_main clearfix">
-                <div class="span4">
-                    <label class="control-label">Profile id</label>
-
-                    <input id="txtProfileid" aria-describedby="basic-addon1" maxlength="15" class="Number" type="text">
-                </div>
-                <div class="span4">
-                    <label class="control-label">First name</label>
-                    <input id="txtFirstNameProfileid" aria-describedby="basic-addon1" maxlength="50" type="text">
-                </div>
-                <div class="span4">
-                    <label class="control-label">Last name</label>
-                    <input id="txtLastNameProfileid" aria-describedby="basic-addon1" maxlength="50" type="text">
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-
-                <button id="btnSaveAdvancesearch" class="button_custom" onclick="return SubmitAdvance();">Search</button>
-                <button id="btnReset" class="button_custom button_custom_reset" style="display: none;">Reset</button>
-                <div id="Div1" style="display: none;">
-                    <button id="btnSavesearch" class="button_custom" style="display: none;">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Main Block 1 /-->
-</div>
-<div class="col-lg-offset-5" id="divsubmitloader" style="display: none;">
-    <i class="fa fa-spinner fa-pulse fa-4x fa-fw margin-bottom colorloading"></i>
-</div>
-<div class="wrapper register_page_main clearfix" id="divsearchresult" style="display: none;">
-    <div class="clearfix">
-
-        <div class="refine_search_new clearfix" id="newsearchresultdiv" style="display: block;">
-
-            <div class="refine_search_new_sub clearfix">
-                <div class="refine_search_new_sub1 clearfix">
-                    <h4>Refine <span id="refinegender"></span></h4>
-                    <div class="clear">&nbsp;</div>
-                    <h6><span>Age:</span> <span id="refineAge">24 years - 28 years</span></h6>
-                    <h6><span>caste:</span><span id="refinecaste"> kamma</span></h6>
-                    <h6><span>education:</span> <span id="refineeducation">pg, btech, mtech</span></h6>
-                    <h6><span>height:</span><span id="spanrefineheight"> 5’.4”-167 cms</span></h6>
-                </div>
-                <div class="refine_search_new_sub2 clearfix">
-                    <div class="span3">
-                        <h6><span>Age</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <input id="amount" readonly="">
-
-                        <div id="slider_range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 5.26316%; width: 5.26316%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 5.26316%;"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10.5263%;"></span>
+<div class="search_page_main" ng-init="pageload()">
+    <div class="search_page_tabs profile_settings_tabs">
+        <div class="sample" layout="column" ng-cloak>
+            <md-content class="md-padding">
+                <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                    <md-tab label="profileid Search" ui-sref="profilidsrch">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <br>
+                                <div layout="row">
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Profile id</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>First name</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <div class="span4">
+                                        <md-input-container class="md-block" flex-gt-sm>
+                                            <label>Last name</label>
+                                            <input ng-model="user.city">
+                                        </md-input-container>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+                                <button id="btnSaveAdvancesearch" class="button_custom" onclick="return SubmitAdvance();">Search</button>
+                                <button id="btnReset" class="button_custom button_custom_reset" style="display: none;">Reset</button>
+                                <div id="Div1" style="display: none;">
+                                    <button id="btnSavesearch" class="button_custom" style="display: none;">Update</button>
+                                </div>
+                            </div>
                         </div>
+                    </md-tab>
+                    <md-tab label="General Search" ui-sref="General">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Age</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="AgeFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Ageto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Height</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="HeightFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Heightto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Marital status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Country living in</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Religion</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Mother tongue</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container>
+                                                <md-select ng-model="selectedVegetables" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                    <md-select-header class="demo-select-header">
+                                                        <input ng-model="searchTerm" type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox md-text">
+                                                    </md-select-header>
+                                                    <md-optgroup label="vegetables">
+                                                        <md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
+                                             filter:searchTerm">{{vegetable}}</md-option>
 
-                        <input id="amountto" readonly="">
-                    </div>
-                    <div class="span3">
-                        <h6><span>Height</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <p id="amount2" style="display: none;">1</p>
-                        <input id="heightfrom" readonly="">
-                        <div id="slider_range2" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 2.5%; width: 97.5%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 2.5%;"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                                                    </md-optgroup>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3" ng-hide="true">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container class="md-block">
+                                                <label>REddy</label>
+                                                <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    Registration days :&nbsp;&nbsp;&nbsp;
+                                                    <md-radio-button value="0" class="md-primary"> All</md-radio-button>
+                                                    <md-radio-button value="15"> 15days </md-radio-button>
+                                                    <md-radio-button value="30"> 15days </md-radio-button>
+                                                    <md-radio-button value="45"> 15days </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
+                                            href="javascript:void(0);">Edit partner preference</a></p>
+                                    <button id="btnSaveAdvancesearch" class="button_custom">Search</button>
+                                    <button id="btnReset" class="button_custom button_custom_reset">Reset</button>
+                                    <button id="btnSavesearch" class="button_custom">Save&amp;Search</button>
+                                </div>
+                            </div>
                         </div>
-                        <p id="amount2to" style="display: none;">40</p>
-                        <input id="heightto" readonly="">
-                    </div>
-                    <div class="span3 clearfix">
-                        <span class="checkbox_my checkbox">
-                            <label>
-                                <div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><input id="checkwithphoto" style="opacity: 0;" type="checkbox"></span></div>
-                    </span>
-                </div>
-                </span>
-            </div>
-            </span>
-        </div>
-        </span>
-    </div>With photo
+                    </md-tab>
+                    <md-tab label="Advanced Search" ui-sref="Advanced">
+                        <div class="tab">
+                            <div class="profile_search_main profile_settings_main clearfix">
+                                <div class="row">
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                            <md-radio-button value="1"> Groom </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Age</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="AgeFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Ageto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my select-box-my-double">
+                                        <label class="control-label">Height</label>
+                                        <div class="controls clearfix row">
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="HeightFrom" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                                                <md-select placeholder="Heightto" ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Marital status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Religion</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
 
-    </label>
-    </span>
-</div>
-<a href="javascript:void(0);" onclick="return refinesubmit();">Search more</a>
-</div>
-</div>
-</div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Mother tongue</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3" ng-hide="true">
+                                        <label class="control-label">Caste</label>
+                                        <div class="controls clearfix">
+                                            <md-input-container class="md-block">
+                                                <label>REddy</label>
+                                                <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="control-group">
+                                        <label class="control-label control-label-marg">Physical status</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="25" class="md-primary"> Normal</md-radio-button>
+                                                    <md-radio-button value="26"> Physically Challenged </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="search_advance_block1">
+                                    <h4>CURRENT LOCATION</h4>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Country living in</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">State</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my" id="divVisastatus">
+                                        <label class="control-label">Visa status</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Educational and professional details</h4>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education category</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
 
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Education</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my">
+                                        <label class="control-label">Profession group</label>
+                                        <div class="controls clearfix">
+                                            <md-select ng-model="user">
+                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span3 select-box-my  select-box-my-trible select-box-my-trible2 clearfix">
+                                        <label class="control-label">Monthly  income</label>
+                                        <div class="controls clearfix row">
+                                            <div layout-gt-sm="row">
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <md-select ng-model="user.state">
+                                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                                            {{state.abbrev}}
+                                                        </md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>from</label>
+                                                    <input ng-model="user.city">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>to</label>
+                                                    <input name="postalCode" ng-model="user.postalCode">
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Astro details</h4>
+                                    <div class="control-group radio-group-my pull-left">
+                                        <label class="control-label control-label-marg">Manglink / Kuja dosham&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="0" class="md-primary"> Yes</md-radio-button>
+                                                    <md-radio-button value="1"> No </md-radio-button>
+                                                    <md-radio-button value=""> Doesn't Matter </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group radio-group-my pull-left">
+                                        <label class="control-label control-label-marg"> Star language &nbsp;&nbsp;</label>
+                                        <div class="controls">
+                                            <div layout-gt-sm="row">
+                                                <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-button value="1" class="md-primary"> Telugu</md-radio-button>
+                                                    <md-radio-button value="2"> Tamil </md-radio-button>
+                                                    <md-radio-button value="3">Kannada </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group span4 select-box-my">
+                                        <label class="control-label">Star</label>
+                                        <div class="controls clearfix">
+                                            <div layout-gt-sm="row">
+                                                <md-select ng-model="user">
+                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="search_advance_block1">
+                                    <h4>Habits</h4>
+                                    <div layout-gt-sm="row">
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Diet : &nbsp;&nbsp;
+                                            <md-radio-button value="1" class="md-primary"> Veg</md-radio-button>
+                                            <md-radio-button value="2"> Non Veg </md-radio-button>
+                                            <md-radio-button value="">Both </md-radio-button>
+                                        </md-radio-group>
+                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            Registration days :&nbsp;&nbsp;&nbsp;
+                                            <md-radio-button value="0" class="md-primary"> All</md-radio-button>
+                                            <md-radio-button value="15"> 15days </md-radio-button>
+                                            <md-radio-button value="30"> 15days </md-radio-button>
+                                            <md-radio-button value="45"> 15days </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
+                                <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();" href="javascript:void(0);">Edit partner preference</a></p>
+                                <button id="btnSaveAdvancesearch" class="button_custom">Search</button>
+                                <button id="btnReset" class="button_custom button_custom_reset">Reset</button>
+                                <button id="btnSavesearch" class="button_custom">Save&amp;Search</button>
+                            </div>
+                        </div>
+                    </md-tab>
 
-<!--/ Modal Gallery -->
+                    <md-tab label="Saved Search" ui-sref="savedsearch">
+                        <div class="tab">
+                            <div class="search_fields general_fields clearfix">
+                                <div class="profile_search_main saved_search_main  clearfix">
+                                    <div class="span4 clearfix">
+                                        <div layout-gt-sm="row">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Search by ID</label>
+                                                <input ng-model="user.city">
+                                                <button class="button_custom">SEARCH</button>
+                                            </md-input-container>
+                                        </div>
 
-
-<div id="UpdateViewimage" class="UpdateViewimage clearfix">
-    <div class="row">
-        <div class="col-lg-6">
-            <div id="searchresultprofilesdiv" style="display: block;">
-                <h4>search results - <span>
-                            <label id="refinetotalrecords">0</label>
-                            <small>Profiles found</small></span></h4>
-            </div>
-        </div>
-
-        <div class="col-lg-6 clearfix">
-
-            <input id="imageslideshow" src="../images/slider.png" class="pull-right" title="SlideShow" data-toggle="modal" onclick="return Slideshowpage();"
-                style="height: 32px; width: 32px;" type="image">
-
-            <input id="playButton" class="btn btn-default btn-xs pull-right" title="Play" src="../images/play-button.png" style="height: 33px; width: 40px;"
-                type="image">
-            <input id="pauseButton" class="btn btn-default btn-xs pull-right" title="Pause" src="../images/pause-button.png" style="display: none; height: 33px; width: 40px;"
-                type="image">
-
-            <input name="lnkViewImages" id="lnkViewImages" title="Grid View" class="grid_view pull-right" src="../CutomerImages/List%20page/icon_grid.png"
-                style="font-weight: bold;" onclick="return Changelist();" type="image">
-            <input name="lnkNormal" id="lnkNormal" title="List View" class="normal_view pull-right" src="../CutomerImages/List%20page/icon_list.png"
-                style="font-weight: bold;" onclick="return Changetogrid();" type="image">
-            <a id="lnkModifsearch" class="view_similar pull-right" href="javascript:void(0);" onclick="return Modifursearch();">Modify Your Search</a>
-        </div>
-        <div class="clear"></div>
-        <div id="divviewdprofiles" class="col-lg-12" style="display: none;">
-            <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;">1</label>&nbsp;
-            <label style="color: #000;">Profiles</label>
+                                    </div>
+                                    <div class="saved_search_list">
+                                        <div class="saved_search_list_item">
+                                            <h4><span id="Label1">testing</span><span style="display:none;">3764</span> <span style="display:none;">91022</span> <span style="display:none;">2</span><span style="display:none;">Generalsearch</span></h4>
+                                            <div class="saved_search_list_ui clearfix"><a href="javascript:void(0)">Search</a><a href="javascript:void(0)">Edit</a>
+                                                <a href="javascript:void(0)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
         </div>
     </div>
-
-    <div class="clear"></div>
-    <br>
-</div>
-<!-- Carousel Start-->
-
-<div id="slideShowCarousel" class="carousel slide slideShowCarousel">
-    <!-- Carousel items -->
-    <div class="carousel-inner" id="maincarousal">
-    </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#slideShowCarousel" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="#slideShowCarousel" data-slide="next">›</a>
-    <label style="display: none;" id="lblcurrentprofile"></label>
-    <label style="display: none;" id="lblcurSlide"></label>
-    <label style="display: none;" id="lnkLastSlide1"></label>
-
-
-</div>
-<!-- Carousel End -->
-</div>
-<div class="search_results_main clearfix">
-    <div class="search_result_items_main clearfix">
-        <div id="Refsearchllll">
-            <div id="divListV" class="message-row4">
-                <div id="updateList">
-                    <div class="Maindiv message-row4  wrapper--overflow">
-                    </div>
-                    <div class="clearfix"></div>
-                    <br>
-                    <div class="col-lg-offset-5" style="display: none;" id="divloadmore">
-
-                        <a href="javascript:void(0);" onclick="return Ladmore();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
-                    </div>
-                    <div class="col-lg-offset-5" id="divloader" style="display: none;">
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-                    </div>
-
-                </div>
-            </div>
-            <div class="text-center" style="display: none;" id="Norows">
-                <h3 style="color: maroon;">End</h3>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-
 </div>

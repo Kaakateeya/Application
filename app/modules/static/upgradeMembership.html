@@ -24,9 +24,9 @@
 
             <div class="clear">&nbsp;</div>
             <br>
-            <div class="vrepeatContainer" ng-cloak>
+            <div class="vrepeatContainer" ng-cloak ng-hide="true">
                 <md-content layout="column">
-                    <h2>Horizontal Repeat</h2>
+
                     <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
                         <div md-virtual-repeat="item in items" class="repeated-item-horizontal" flex>
                             <md-virtual-repeat-container id="vertical-container">
@@ -41,82 +41,44 @@
             </div>
         </div>
         <div class="my_packages_main clearfix package_table_main">
-            <table id="ddlpayment" class="package_table_main" style="border-collapse:collapse;" cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td>
-                            <table class="package_table_inner">
-                                <tbody>
-                                    <tr>
-                                        <td class="pack_heading1" id="mem-color">
-                                            <label id="lblServices">Basic</label>
-                                            <label id="lblvisible0">Services & Features</label>
-                                            <label id="lblEmp_MembershipID">{{Emp_Membership_ID}}</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
+            <div layout="column" layout-fill>
+                <md-content layout-padding layout="row" layout-align="center">
+                    <div flex-gt-md="60" flex-md="80" flex-xs="100">
+                        <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+                            <div layout-gt-sm="row" layout-sm="column" layout-align="center">
+                                <div flex-gt-sm="75" flex-xs="100">
+                                    <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                    <thead>
+                                        <tr>
+                                            <th sortable="code" class="sortable mdl-data-table__cell--non-numeric">
+                                                <span>{{items[0].MembershipName}}</span>
+                                            </th>
+                                            <th sortable="code" class="sortable mdl-data-table__cell--non-numeric" ng-repeat="item in items">
+                                                <span>{{item.MembershipName}}</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr grid-item>
+                                            <td class="mdl-data-table__cell--non-numeric">
+                                                <span ng-bind="items[0].MemberShipDuration"></span>
+                                            </td>
+                                            <td ng-bind="item.MemberShipDuration" ng-repeat="item in items"></td>
 
-                                        <td class="pack_heading2">
-                                            <small class="payment-label">
-                                            <label id="lblyear" CssClass="duration_of_pack">
-                                                {{<MemberShipDuration></MemberShipDuration>}}
-                                            </label>
-                                        </small>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                            <label id="lblamount">My Plans</label>
-
-                                            <button id="btnselect" CssClass="button_custom" CommandName="select">Select</button>
-                                            <label id="lblvisible1" Text="My Plans"></label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pack_heading1">
-                                            <b>
-                                            <label id="lblprofilecount" ></label></b>
-                                            <label id="lblvisible20" CssClass="lblprofile">Profile Count</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pack_heading3">
-                                            <b>
-                                            <img id="image0"  />
-                                            <label id="lblvisible2">SA Agreed</label>
-                                        </b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label id="lblonlineaccess" />
-                                            <label id="lblvisible3">Online Access</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label id="lblofflineaccess" />
-                                            <label id="lblvisible4">Offline Access</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img id="Image3" />
-                                            <label id="lblvisible5">Relationship Manager</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img id="Image4" />
-                                            <label id="lblvisible6">Senior Relationship Manager</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img id="Image5" />
-                                            <label id="lblvisible7">Express Interest</label></td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                        </div>
+                    </div>
+                </md-content>
+            </div>
             <div class="clear">&nbsp;</div>
         </div>
         <div id="ttttt">
@@ -139,49 +101,7 @@
         </div>
     </div>
 </div>
-<div layout="column" layout-fill>
 
-    <md-content layout-padding layout="row" layout-align="center">
-        <div flex-gt-md="60" flex-md="80" flex-xs="100">
-            <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
-                <div layout-gt-sm="row" layout-sm="column" layout-align="center">
-                    <div flex-gt-sm="75" flex-xs="100">
-                        <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center">
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                        <thead>
-                            <tr>
-                                <th sortable="code" class="sortable mdl-data-table__cell--non-numeric">
-                                    <span>Order #</span>
-                                </th>
-
-                                <th sortable="placed" class="sortable">
-                                    <span>Date Placed</span>
-                                </th>
-                                <th sortable='total.value' class="sortable">
-                                    <span>Total</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr grid-item>
-                                <td class="mdl-data-table__cell--non-numeric">
-                                    <span ng-bind="item.code"></span>
-                                </td>
-                                <td ng-bind="item.placed | date:'MM/dd/yyyy'"></td>
-                                <td ng-bind="item.total.formattedValue"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </md-content>
-</div>
 <style type="text/css">
     .vrepeatContainer #horizontal-container {
         height: 100px;
@@ -339,5 +259,4 @@
     .sortable.sort-descent span:after {
         display: none;
     }
-    
 </style>
