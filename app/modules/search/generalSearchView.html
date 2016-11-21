@@ -73,7 +73,7 @@
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
                 <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
-                    <md-tab label="General Search" ui-sref="General">
+                    <md-tab label="General Search">
                         <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
                                 <div class="row">
@@ -90,13 +90,13 @@
                                         <label class="control-label">Age</label>
                                         <div class="controls clearfix row">
                                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                <md-select placeholder="AgeFrom" ng-model="user">
-                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                <md-select placeholder="AgeFrom" ng-model="AgeFrom">
+                                                    <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                 </md-select>
                                             </div>
                                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                <md-select placeholder="Ageto" ng-model="user">
-                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                <md-select placeholder="Ageto" ng-model="Ageto">
+                                                    <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                 </md-select>
                                             </div>
                                         </div>
@@ -105,13 +105,13 @@
                                         <label class="control-label">Height</label>
                                         <div class="controls clearfix row">
                                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                <md-select placeholder="HeightFrom" ng-model="user">
-                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                <md-select placeholder="HeightFrom" ng-model="HeightFrom">
+                                                    <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                 </md-select>
                                             </div>
                                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                <md-select placeholder="Heightto" ng-model="user">
-                                                    <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                                <md-select placeholder="Heightto" ng-model="Heightto">
+                                                    <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                 </md-select>
                                             </div>
                                         </div>
@@ -119,16 +119,28 @@
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Marital status</label>
                                         <div class="controls clearfix">
-                                            <md-select ng-model="user">
-                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            <md-select ng-model="maritalstatus" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="maritalstatus" type="search" placeholder="Search for  MaritalStatus.." class="demo-header-searchbox md-text">
+                                                </md-select-header>
+                                                <md-optgroup label="MaritalStatus">
+                                                    <md-option ng-value="marital.value" ng-repeat="marital in MaritalStatus |
+                                             filter:searchTerm">{{marital.label}}</md-option>
+                                                </md-optgroup>
                                             </md-select>
                                         </div>
                                     </div>
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Education</label>
                                         <div class="controls clearfix">
-                                            <md-select ng-model="user">
-                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            <md-select ng-model="educationcat" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="educationcat" type="search" placeholder="Search for  educationcategory.." class="demo-header-searchbox md-text">
+                                                </md-select-header>
+                                                <md-optgroup label="educationcategory">
+                                                    <md-option ng-value="educationc.value" ng-repeat="educationc in educationcategory |
+                                             filter:searchTerm">{{educationc.label}}</md-option>
+                                                </md-optgroup>
                                             </md-select>
                                         </div>
                                     </div>
@@ -137,41 +149,53 @@
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Country living in</label>
                                         <div class="controls clearfix">
-                                            <md-select ng-model="user">
-                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            <md-select ng-model="country" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="country" type="search" placeholder="Search for  Country.." class="demo-header-searchbox md-text">
+                                                </md-select-header>
+                                                <md-optgroup label="Country">
+                                                    <md-option ng-value="country.value" ng-repeat="country in Country |
+                                             filter:searchTerm">{{country.label}}</md-option>
+                                                </md-optgroup>
                                             </md-select>
                                         </div>
                                     </div>
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Religion</label>
                                         <div class="controls clearfix">
-                                            <md-select ng-model="user">
-                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            <md-select ng-model="religion">
+                                                <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
                                             </md-select>
                                         </div>
                                     </div>
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Mother tongue</label>
                                         <div class="controls clearfix">
-                                            <md-input-container>
-                                                <md-select ng-model="selectedVegetables" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
-                                                    <md-select-header class="demo-select-header">
-                                                        <input ng-model="searchTerm" type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox md-text">
-                                                    </md-select-header>
-                                                    <md-optgroup label="vegetables">
-                                                        <md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
-                                             filter:searchTerm">{{vegetable}}</md-option>
-
-                                                    </md-optgroup>
-                                                </md-select>
-                                            </md-input-container>
+                                            <md-select ng-model="mothertongue" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="mothertongue" type="search" placeholder="Search for  Mothertongue.." class="demo-header-searchbox md-text">
+                                                </md-select-header>
+                                                <md-optgroup label="mothertongue">
+                                                    <md-option ng-value="motherton.value" ng-repeat="motherton in Mothertongue |
+                                             filter:searchTerm">{{motherton.label}}</md-option>
+                                                </md-optgroup>
+                                            </md-select>
                                         </div>
                                     </div>
                                     <div class="control-group span3 select-box-my">
                                         <label class="control-label">Caste</label>
                                         <div class="controls clearfix">
-                                            <md-select ng-model="user">
-                                                <md-option ng-value="user" ng-repeat="user in users">--select--</md-option>
+                                            <md-select ng-model="selectcaste" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="caste" type="search" placeholder="Search for  Mothertongue.." class="demo-header-searchbox md-text">
+                                                </md-select-header>
+                                                <md-optgroup label="Caste">
+                                                    <md-checkbox ng-checked="selectAllTest()">
+                                                    </md-checkbox>
+                                                    <md-button layout-fill value="all">Select all</md-button>
+                                                    <md-option ng-value="caste.value" ng-repeat="caste in Caste |
+                                             filter:searchTerm">{{caste.label}}</md-option>
+                                                </md-optgroup>
                                             </md-select>
                                         </div>
                                     </div>
@@ -208,7 +232,7 @@
                             </div>
                         </div>
                     </md-tab>
-                    <md-tab label="Advanced Search" ui-sref="Advanced">
+                    <md-tab label="Advanced Search">
                         <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
                                 <div class="row">
@@ -454,7 +478,7 @@
                             </div>
                         </div>
                     </md-tab>
-                    <md-tab label="profileid Search" ui-sref="profilidsrch">
+                    <md-tab label="profileid Search">
                         <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
                                 <div class="row">
@@ -498,7 +522,7 @@
                             </div>
                         </div>
                     </md-tab>
-                    <md-tab label="Saved Search" ui-sref="savedsearch">
+                    <md-tab label="Saved Search">
                         <div class="tab">
                             <div class="search_fields general_fields clearfix">
                                 <div class="profile_search_main saved_search_main  clearfix">
