@@ -12,7 +12,7 @@ app.factory('successstoriesdata', ['$http', function(http) {
             return http.post(app.apiroot + 'StaticPages/SuccessStoriesdetails', person);
         },
         maskclasspartner: function(logphotostatus, photo, photocount) {
-            debugger;
+
             var photoclass = "";
             var PhotoMaskDiv;
             if (logphotostatus != "null" && logphotostatus != null && photo.indexOf("ApplicationPhoto") != -1)

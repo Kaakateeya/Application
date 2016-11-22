@@ -1,7 +1,7 @@
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', function(cons, service) {
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', function(cons, service) {
     return {
         require: 'ng-model',
         scope: {
@@ -15,7 +15,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
             scope.databind = function(data) {
                 element.multiselect('dataprovider', data);
             };
+
             switch (scope.typeofdata) {
+
                 case 'MaritalStatus':
                     scope.databind(cons.MaritalStatus);
                     break;
@@ -44,14 +46,104 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                     scope.databind(cons.stars);
                     break;
 
-                case 'stars':
-                    scope.databind(cons.stars);
+                case 'region':
+                    scope.databind(cons.region);
+                    break;
+
+                case 'bodyType':
+                    scope.databind(cons.bodyType);
+                    break;
+
+                case 'bloodGroup':
+                    scope.databind(cons.bloodGroup);
+                    break;
+
+                case 'healthCondition':
+                    scope.databind(cons.healthCondition);
+                    break;
+
+                case 'starLanguage':
+                    scope.databind(cons.starLanguage);
+                    break;
+
+                case 'lagnam':
+                    scope.databind(cons.lagnam);
+                    break;
+
+                case 'ZodaicSign':
+                    scope.databind(cons.ZodaicSign);
+                    break;
+
+                case 'paadam':
+                    scope.databind(cons.paadam);
+                    break;
+
+                case 'familyStatus':
+                    scope.databind(cons.familyStatus);
+                    break;
+
+                case 'RelationshipType':
+                    scope.databind(cons.RelationshipType);
                     break;
 
                 case 'Country':
                     service.countrySelect().then(function(response) {
                         var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+
+                case 'ProfCatgory':
+
+                    service.ProfessionCatgory().then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+
+                case 'ProfGroup':
+                    service.ProfessionGroup().then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+
+                case 'indiaStates':
+                    service.stateSelect('1').then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+                case 'countryCode':
+                    service.countryCodeselect().then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+                case 'caste':
+                    service.casteselect().then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
                         _.each(response.data, function(item) {
                             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                         });
@@ -68,7 +160,17 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                         scope.databind(option);
                     });
                     break;
-                    case 'catgory':
+                case 'currency':
+                    service.currency().then(function(response) {
+                        var option = [];
+                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        _.each(response.data, function(item) {
+                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                        scope.databind(option);
+                    });
+                    break;
+                case 'catgory':
                     scope.databind(cons.catgory);
                     break;
 
@@ -76,22 +178,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindService', fun
                     scope.databind(cons.Priority);
                     break;
 
-                case 'countryCode':
-                    service.countryCodeselect().then(function (response) {
-                        var option = [];
-                        _.each(response.data, function (item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                        });
-                        scope.databind(option);
-                    });
-                    break;
-
-                case 'region':
-                    scope.databind(cons.region);
-                    break;
-
             }
-
 
             element.multiselect({
                 buttonClass: 'btn',

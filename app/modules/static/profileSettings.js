@@ -1,4 +1,4 @@
-app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindService', 'authSvc', 'alert', function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts) {
+app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindServiceApp', 'authSvc', 'alert', function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts) {
     var logincustid = authSvc.getCustId();
     scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     scope.days = function() {

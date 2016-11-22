@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {

@@ -1,7 +1,6 @@
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', function($injector, authSvc, successstoriesdata) {
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
-
     return {
         restrict: "E",
         scope: {
@@ -10,6 +9,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
             debugger;
+            scope.typeofdiv = "Grid";
+            // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
+            //     $('.search_result_items_main').attr("style", "width:80%;");
+            // } else {
+            //     $('.search_result_items_main').attr("style", "");
+            // }
             scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
             scope.endindex = 9;
@@ -18,7 +23,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
             scope.indexvalues;
-            scope.typeofdiv = "Grid";
+
             var i = 0;
             scope.directivepaging = function() {
                 scope.loaderspin = true;
@@ -30,13 +35,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
             };
             scope.$on('loadmore', function(event, endflag) {
                 scope.loaderspin = false;
-
                 if (scope.array.length > 0) {
                     scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                     scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
                 }
-
             });
             scope.$watch('array', function(value) {
                 scope.PartnerProfilesnew = scope.array;
@@ -48,6 +51,14 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                     scope.flag = 9;
                 }
             });
+            scope.listclick = function() {
+                scope.typeofdiv = 'List';
+                $('.search_result_items_main').attr("style", "width:80%;");
+            };
+            scope.gridclick = function() {
+                scope.typeofdiv = 'Grid';
+                $('.search_result_items_main').attr("style", "");
+            };
             scope.servicehttp = function(type, object) {
                 return $injector.invoke(function($http) {
                     return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -114,7 +125,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 scope.servicehttp(type, object);
             };
             scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-
                 scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                 scope.$emit("modalpopupclose", event);
             });
@@ -122,10 +132,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 scope.$emit('popuplogin', "myModalContent.html", tocustid);
             };
             scope.redirectToviewfullprofile = function(custid, logid) {
-
                 scope.$emit('redirectToviewfullprofiles', custid, logid);
             };
-
             scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
                 password = password != null && password != "" ? 468 : 467;
                 return $injector.invoke(function($http) {
