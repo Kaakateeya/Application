@@ -1,10 +1,10 @@
-<md-select ng-model="selectcaste" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
+<md-select ng-model="selectcaste" ng-change="onchange()" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
     <md-select-header class="demo-select-header">
-        <input ng-model="caste" type="search" placeholder="Search for  Mothertongue.." class="demo-header-searchbox md-text">
+        <input ng-model="caste" type="search" class="demo-header-searchbox md-text">
     </md-select-header>
     <md-optgroup label="Caste">
         <md-option ng-click="selectall()" ng-checked="exists(selectcaste)">selectall</md-option>
         <md-option ng-value="caste.value" ng-repeat="caste in Caste |
-        filter:searchTerm">{{caste.label}}</md-option>
+        filter:caste">{{caste.label}}</md-option>
     </md-optgroup>
 </md-select>

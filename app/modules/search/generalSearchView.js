@@ -54,10 +54,15 @@ app.controller('Generalsearch', ['$scope', '$element', 'arrayConstants', 'Select
     };
     // The md-select directive eats keydown events for some quick select
     // logic. Since we have a search input here, we don't need that logic.
-    $element.find('input').on('keydown', function(ev) {
-        ev.stopPropagation();
-    });
+    // $element.find('input').on('keydown', function(ev) {
+    //     ev.stopPropagation();
+    // });
+    scope.mothertongue = [1, 2, 3];
+    scope.onchangeevent = function() {
+        alert("hi");
+    };
     scope.generalsearchsubmit = function() {
+        alert(scope.mothertongue);
         scope.showcontrols = false;
         debugger;
         scope.truepartner = false;
@@ -68,4 +73,9 @@ app.controller('Generalsearch', ['$scope', '$element', 'arrayConstants', 'Select
             });
         });
     };
+    scope.$watch('mothertongue', function() {
+
+        alert("mothertongue");
+
+    });
 }]);
