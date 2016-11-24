@@ -14,16 +14,17 @@
                                     </div>
                                 </div>
                                 <!--arrayprofilesettings}}-->
-                                <form name="emailform" novalidate ng-submit="emailform.$valid &&  submitemailamdmobile('email')">
+                                <form name="emailform">
                                     <div layout-gt-sm="row">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Current Email ID</label>
                                             <input ng-model="arrayprofilesettings.Email" ng-disabled='true'>
+
                                         </md-input-container>
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>
                                          New Email ID</label>
-                                            <input ng-model="NewEmail" ng-pattern="word" ng-disabled='disabled' required md-no-asterisk name="NewEmail">
+                                            <input ng-model="NewEmail" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ng-disabled='disabled' required md-no-asterisk name="NewEmail">
                                             <div ng-messages="emailform.NewEmail.$error">
                                                 <div ng-message="required">This is required.</div>
                                                 <div ng-message="pattern">Your email address is invalid</div>
@@ -31,16 +32,18 @@
                                         </md-input-container>
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Confirm New Email ID</label>
-                                            <input ng-model="Confirmnewemail" ng-pattern="word" ng-disabled='disabled' required md-no-asterisk name="Confirmnewemail">
+                                            <input ng-model="Confirmnewemail" match-password="NewEmail" use-error-expression="NewEmail && Confirmnewemail && NewEmail!=Confirmnewemail" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ng-disabled='disabled' required md-no-asterisk name="Confirmnewemail">
                                             <div ng-messages="emailform.Confirmnewemail.$error">
                                                 <div ng-message="required">This is required.</div>
                                                 <div ng-message="pattern">Your email address is invalid</div>
+                                                <div ng-message="passwordMatch" class="message slide-left">Your email did not match</div>
                                             </div>
+
                                         </md-input-container>
                                     </div>
 
                                     <div latout="row" ng-if="activated">
-                                        <md-button class="md-raised md-warn md-hue-2" ng-disabled="emailform.$invalid">Update</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-disabled="emailform.$invalid" ng-click="submitemailamdmobile('email')">Update</md-button>
                                         <md-button class="md-raised  md-hue-1" ng-click="Resetallfields('email')">Reset</md-button>
                                     </div>
                                 </form>
@@ -119,9 +122,10 @@
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>
                                             Confirm New Password</label>
-                                            <input name="ConfirmPassword" type="password" compare-to="NewPassword" ng-model="ConfirmPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <input name="ConfirmPassword" match-password="NewPassword" type="password" ng-model="ConfirmPassword" ng-disabled="passwordsisable" required md-no-asterisk>
                                             <div ng-messages="projectForm.ConfirmPassword.$error">
                                                 <div ng-message="required">This is required.</div>
+                                                <div ng-message="passwordMatch" class="message slide-left">Your Password did not match</div>
                                             </div>
                                         </md-input-container>
                                     </div>

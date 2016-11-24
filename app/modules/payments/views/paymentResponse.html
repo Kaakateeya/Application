@@ -1,0 +1,81 @@
+<!--<div id="body" class="panel panel-success">
+
+    <div class="panel">
+        <a id="lnkbtnBacktoListMemberships" class="btn btn-danger pull-right" href="javascript:__doPostBack('lnkbtnBacktoListMemberships','')">Back to List of Memberships</a>
+    </div>
+    <div class="panel-body text-center">
+
+        <div role="form">
+            <div class="form-group">
+                Please Confirm the below Membership Details before you Pay
+            </div>
+            <div class="form-group">
+                Membership Name :
+                <span id="hdnMembershipName" style="font-weight:bold;">Basic</span>
+            </div>
+            <div class="form-group">
+                Membership Amount :
+                <span id="hdnMembershipAmnt" style="font-weight:bold;">2875</span>
+            </div>
+            <div class="form-group">
+                <span id="memduration">Membership Duration :</span>
+                <span id="hdnMembershipduration" style="font-weight:bold;">3  Months</span>
+            </div>
+            <div class="form-group">
+                Membership Points :
+                <span id="hdnMembershipPoints" style="font-weight:bold;">30</span>
+                <input name="hdnCustID" id="hdnCustID" value="91035" type="hidden">
+            </div>
+            <a id="imgProceedtoPay" class="btn btn-primary" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;imgProceedtoPay&quot;, &quot;&quot;, false, &quot;&quot;, &quot;https://secure.ccavenue.com/transaction/TransactionInitiator&quot;, false, true))"><span class="glyphicon glyphicon-share-alt"></span>Proceed To Payment</a>
+
+        </div>
+
+    </div>
+    <div>
+        <input name="Merchant_Id" id="Merchant_Id" value="M_151047_9927" type="hidden">
+        <input name="encRequest" id="encRequest" value="87d949f75bf7064c1f57a714a0f0dd2ba4c013e40d16bc8c98354d6006b455e67adf8756dc374876df97dd217f32bd670c491a7869b0db79064c9e47d35424ffd6597d5aa995a8fb5abb8a8e0db9014388ca7c005b6cf4491cdfd02f14f26db7d1061ae2b55d6aa1e8350de85afa6d549bcea2ea7ae1f802d8803ecfc087c1dbf5f643ca55d6c88a30c44aa9bd651212cfcf3427fe8217b6af69a6698573ff3f2d56e32f174bd270e4b1015536d4c92edebd2c6f85f2e8aabc92f6169467f2da"
+            type="hidden">
+    </div>
+</div>-->
+
+  <div class="control-group span7 select-box-my" ng-controller="payment">
+                                            <label class="control-label">Mother tongue</label>
+                                            <div class="controls clearfix">
+                                                <angular-multiselect array="Mothertongue" change="true" model="mothertongueccc">
+                                                </angular-multiselect>
+                                            </div>
+                                               <md-content class="md-padding">
+                <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                    <md-tab label="General Search">
+                        <div class="tab">
+                         
+                             
+                                    <div class="row">
+                                        <div layout-gt-sm="row">
+                                            <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
+                                                <md-radio-button value="1"> Groom </md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                       
+                                        <div class="control-group span3 select-box-my">
+                                            <label class="control-label">Mother tongue</label>
+                                            <div class="controls clearfix">
+                                                <angular-multiselect array="Mothertongue" change="true" model="mothertongue">
+                                                </angular-multiselect>
+                                            </div>
+                                        </div>
+                                                                    
+                        </div>
+                    </md-tab>
+                                         </md-tabs>
+            </md-content>
+                 <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit()">Search</md-button>
+             </div>
+
+
+
+                                     

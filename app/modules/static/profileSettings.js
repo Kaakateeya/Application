@@ -96,11 +96,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     scope.submitemailamdmobile = function(Typeofsub) {
         switch (Typeofsub) {
             case "email":
+                var FamilyID = scope.arrayprofilesettings.EmailCust_Family_ID;
                 var NewEmail = scope.NewEmail;
-                var Confirmnewemail = scope.Confirmnewemail;
-                var custid = scope.custid;
-                var IsVerified = false;
-                customerProfilesettings.submitemailmobilesubmit(NewEmail, Confirmnewemail, IsVerified, custid).then(function(response) {
+                customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
                     console.log(response);
                     if (response.data == 1) {
                         alerts.open('Email Upadated successfully', 'success');
@@ -110,11 +108,10 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 });
                 break;
             case "mobile":
+                var FamilyID = scope.arrayprofilesettings.MobileCustFamily_ID;
                 var CountryCodeID = scope.ddlcountrycode;
                 var number = scope.Confirmnewnumber;
-                var custid = scope.custid;
-                var IsVerified = false;
-                customerProfilesettings.submitemailmobilesubmit(CountryCodeID, number, custid, IsVerified).then(function(response) {
+                customerProfilesettings.submitemailmobilesubmit(FamilyID, number, CountryCodeID, 0).then(function(response) {
                     console.log(response);
                     if (response.data == 1) {
                         alerts.open('Mobile Upadated successfully', 'success');
@@ -168,9 +165,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     };
     scope.submitmanagealerts = function() {
         var CustID = scope.custid;
-        var AllowEmail = scope.mailyes === "0" ? "false" : "true";
-        var AllowSMS = scope.smsyes === "0" ? "false" : "true";
-        customerProfilesettings.manageprofiles(CustID).then(function(response) {
+        var AllowEmail = scope.mailyes === 0 ? 0 : 1;
+        var AllowSMS = scope.smsyes === 0 ? 0 : 1;
+        customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
             console.log(response);
             if (response.data == 1) {
                 alerts.open('Submit successfully', 'success');
@@ -264,4 +261,19 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 break;
         }
     };
+
+}]);
+app.directive('pwCheck', [function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ctrl) {
+            var firstPassword = '#' + attrs.pwCheck;
+            elem.add(firstPassword).on('keyup', function() {
+                scope.$apply(function() {
+                    var v = elem.val() === $(firstPassword).val();
+                    ctrl.$setValidity('pwmatch', v);
+                });
+            });
+        }
+    }
 }]);

@@ -5926,6 +5926,7 @@ a.badge:focus {
     left: 100%
 }
 
+
 /*.carousel-control {
     position: absolute;
     top: 40%;
@@ -23367,7 +23368,7 @@ div.radio span.checked {
 
 .register_page_main h4 {
     text-transform: capitalize;
-    line-height: 18px;
+    line-height: 0px;
     font-size: 16px;
     font-weight: 700;
     color: #313131;
@@ -30222,7 +30223,7 @@ h5.myorders_list_main_item_heading span {
 }
 
 .refine_search_new_sub1 {
-    padding: 0 20px 14px 20px;
+    padding: 0 1px 1px 10px;
     border-bottom: solid 1px #ccc;
 }
 
@@ -30242,6 +30243,7 @@ h5.myorders_list_main_item_heading span {
     font-size: 14px;
     display: inline-block;
     padding: 0 4% 0 0;
+     line-height: 4px !important;
 }
 
 .refine_search_new h6 span {
@@ -30249,7 +30251,7 @@ h5.myorders_list_main_item_heading span {
 }
 
 .refine_search_new_sub2 {
-    padding: 20px 0 0 0;
+    padding: 0px 0 0 0;
     position: relative;
 }
 

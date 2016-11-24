@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit', 'ngPassword']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
@@ -49,7 +49,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: false },
         { name: 'aboutUs', url: '/aboutUs', templateUrl: 'app/modules/static/aboutUs.html', isloginrequired: false },
-        { name: 'homedummy', url: '/homedummy', templateUrl: 'app/modules/homePage/homepagedummy.html', isloginrequired: false }
+        { name: 'homedummy', url: '/homedummy', templateUrl: 'app/modules/homePage/homepagedummy.html', isloginrequired: false },
+        { name: 'paymentresponse', url: '/paymentresponse', templateUrl: 'app/modules/payments/views/paymentResponse.html', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');

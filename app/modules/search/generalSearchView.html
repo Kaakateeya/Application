@@ -68,7 +68,7 @@
         line-height: 20px;
     }
 </style>
-<div class="search_page_main" ng-init="pageloadgeneral()" ng-if="showcontrols">
+<div class="search_page_main" ng-if="showcontrols">
     <div class="search_page_tabs profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
@@ -151,7 +151,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Mothertongue" change="true" ng-model="mothertongue">
+                                                <angular-multiselect array="Mothertongue" change="true" model="mothertongue">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -515,11 +515,9 @@
         </div>
     </div>
 </div>
-<div class="wrapper register_page_main clearfix" id="divsearchresult" style="display: block;">
+<div class="register_page_main clearfix" ng-hide="truepartner">
     <div class="clearfix">
-
-        <div class="refine_search_new clearfix" id="newsearchresultdiv" style="display: block;">
-
+        <div class="refine_search_new clearfix">
             <div class="refine_search_new_sub clearfix">
                 <div class="refine_search_new_sub1 clearfix">
                     <h4>Refine <span id="refinegender">Groom</span></h4>
@@ -527,77 +525,67 @@
                     <h6><span>Age:</span> <span id="refineAge">25 years-29 years</span></h6>
                     <h6><span>caste:</span><span id="refinecaste">Kamma,Balija,Mudaliar</span></h6>
                     <h6><span>education:</span> <span id="refineeducation">Any</span></h6>
-                    <h6><span>height:</span><span id="spanrefineheight">5'6 in - 167 cms-7'2 in - 218 cms	</span></h6>
+                    <h6><span>height:</span><span id="spanrefineheight">5'6 in - 167 cms-7'2 in - 218 cms</span></h6>
                 </div>
                 <div class="refine_search_new_sub2 clearfix">
-                    <div class="span3">
-                        <h6><span>Age</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <input id="amount" readonly="">
-
-                        <div id="slider_range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 5.26316%; width: 5.26316%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 5.26316%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10.5263%;"></span></div>
-
-                        <input id="amountto" readonly="">
+                    <div layout="row">
+                        <div class="col-lg-4">
+                            <h6><span>Age</span></h6>
+                            <md-slider-container flex-gt-xs>
+                                <p>{{invertform}}</p>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="invertform" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="invert" aria-label="Slider"></md-slider>
+                                <p>{{invert}}</p>
+                            </md-slider-container>
+                        </div>
+                        <div class="col-lg-4">
+                            <h6><span>Height</span></h6>
+                            <md-slider-container flex-gt-xs>
+                                <p>{{heightfrom}}</p>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="heightfrom" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="heightto" aria-label="Slider"></md-slider>
+                                <p>{{heightto}}</p>
+                            </md-slider-container>
+                        </div>
+                        <div class="col-lg-2">
+                            <h6><span style="display:none;">Height</span></h6>
+                            <br>
+                          
+                            <md-checkbox aria-label="Checkbox 1">
+                                withPhoto
+                            </md-checkbox>
+                        </div>
+                        <div class="col-lg-2">
+                            <h6><span style="display:none;">Height</span></h6>
+                            <br>
+                      
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <a href="javascript:void(0);">Search More
+                             <a>
+                             </md-input-container>
+                        </div>
                     </div>
-                    <div class="span3">
-                        <h6><span>Height</span></h6>
-                        <div class="clear">&nbsp;</div>
-                        <p id="amount2" style="display: none;">19</p>
-                        <input id="heightfrom" readonly="">
-                        <div id="slider_range2" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 47.5%; width: 50%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 47.5%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 97.5%;"></span></div>
-                        <p id="amount2to" style="display: none;">39</p>
-                        <input id="heightto" readonly="">
-                    </div>
-                    <div class="span3 clearfix">
-                        <span class="checkbox_my checkbox">
-                            <label>
-                                <div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><div class="checker" id="uniform-checkwithphoto"><span><input id="checkwithphoto" style="opacity: 0;" type="checkbox"></span></div>
-                    </span>
                 </div>
-                </span>
             </div>
-            </span>
         </div>
-        </span>
-    </div>With photo
-
-    </label>
-    </span>
-</div>
-<a href="javascript:void(0);" onclick="return refinesubmit();">Search more</a>
-</div>
-</div>
-</div>
-
-
-
-
-<div id="slideShowCarousel" class="carousel slide slideShowCarousel" style="display: none;">
-    <!-- Carousel items -->
-    <div class="carousel-inner" id="maincarousal">
     </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#slideShowCarousel" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="#slideShowCarousel" data-slide="next">›</a>
-    <label style="display: none;" id="lblcurrentprofile"></label>
-    <label style="display: none;" id="lblcurSlide"></label>
-    <label style="display: none;" id="lnkLastSlide1"></label>
-
-
 </div>
-<!-- Carousel End -->
-</div>
-
-</div>
-<div class="wrapper register_page_main clearfix">
+<div class="wrapper register_page_main clearfix" ng-hide="truepartner">
+    <div class="row">
+    <div class="col-lg-6">
+                    <div id="searchresultprofilesdiv" style="display: block;">
+                        <h4>search results - <span>
+                            <label id="refinetotalrecords">71</label>
+                            <small>Profiles found</small></span></h4>
+                    </div>
+                </div>
+                </div>
     <div class="search_results_main clearfix">
         <div class="search_result_items_main clearfix">
             <div class="message-row4">
                 <div id="Div1" class="Maindiv message-row4  wrapper--overflow">
                     <div class="searched_list clearfix">
-                        <partner-data array="PartnerProfilesnew" ng-hide="truepartner"></partner-data>
+                        <partner-data array="PartnerProfilesnew" ></partner-data>
                     </div>
                 </div>
             </div>

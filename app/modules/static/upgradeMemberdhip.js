@@ -1,4 +1,5 @@
-    app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory', function(scope, $interval, myAppFactory) {
+    app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory','authSvc', function(scope, $interval, myAppFactory,authSvc) 
+    {
         var j = 0,
             counter = 0;
 
@@ -6,10 +7,10 @@
         scope.determinateValue = 30;
         scope.determinateValue2 = 30;
         scope.showList = [];
-        scope.items = [];
-        // for (var i = 0; i < 1000; i++) {
-        //     scope.items.push(i);
-        // }
+          scope.paymentarray=[];
+          var logincustid = authSvc.getCustId();
+          scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+       
         $interval(function() {
             scope.determinateValue += 1;
             scope.determinateValue2 += 1.5;
@@ -25,38 +26,22 @@
             if (j == 2) scope.contained = "indeterminate";
         }, 100, 0, true);
 
-        scope.test = [{ t: 1 }, { t: 3 }, { t: 2 }];
-
-        // scope.items = ["Services & Features", "My Plans",
-        //     "Profile Count",
-        //     "SA Agreed",
-        //     "Online Access",
-        //     "Offline Access",
-        //     "Relationship Manager",
-        //     "Senior Relationship Manager",
-        //     "Express Interest",
-        //     // {
-        //     //     service: "Services & Features",
-        //     //     MyPlans: "My Plans",
-        //     //     ProfileCount: "Profile Count",
-        //     //     SAAgreed: "SA Agreed",
-        //     //     OnlineAccess: "Online Access",
-        //     //     OfflineAccess: "Offline Access",
-        //     //     RelationshipManager: "Relationship Manager",
-        //     //     SeniorRelationshipManager: "Senior Relationship Manager",
-        //     //     ExpressInterest: "Express Interest"
-        //     // }
-
-        // ];
-
-        scope.items = [{ MembershipName: "Services & Features", MemberShipDuration: "My Plans" }, { MembershipName: "Basic", MemberShipDuration: "3" }];
+           
         scope.gridOptions = {
             data: [],
             urlSync: false
         };
-        myAppFactory.getData().then(function(responseData) {
-            scope.gridOptions.data = responseData.data;
-        })
-
-
-    }]);
+        // myAppFactory.getData().then(function(responseData) {
+        //     scope.gridOptions.data = responseData.data;
+        // });
+     
+          myAppFactory.getpayment(91035).then(function(response) {
+              debugger;
+              console.log(response);
+               scope.paymentarray=[];
+              _.each(response.data, function(item) {
+             scope.paymentarray.push(item);
+               });
+            });
+     
+   }]);

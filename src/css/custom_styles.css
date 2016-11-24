@@ -1894,7 +1894,7 @@ div.radio span.checked {
 
 .register_page_main h4 {
     text-transform: capitalize;
-    line-height: 18px;
+    line-height: 0px;
     font-size: 16px;
     font-weight: 700;
     color: #313131;

@@ -58,9 +58,7 @@ app.controller('Generalsearch', ['$scope', '$element', 'arrayConstants', 'Select
     //     ev.stopPropagation();
     // });
     scope.mothertongue = [1, 2, 3];
-    scope.onchangeevent = function() {
-        alert("hi");
-    };
+
     scope.generalsearchsubmit = function() {
         alert(scope.mothertongue);
         scope.showcontrols = false;
@@ -73,9 +71,6 @@ app.controller('Generalsearch', ['$scope', '$element', 'arrayConstants', 'Select
             });
         });
     };
-    scope.$watch('mothertongue', function() {
 
-        alert("mothertongue");
 
-    });
 }]);
