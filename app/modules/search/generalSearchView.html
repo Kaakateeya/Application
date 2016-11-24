@@ -4,8 +4,7 @@
         background-color: #f0f0cc !important;
         /*border-color:green !important;*/
     }
-    
-    .has-error .control-label {
+        .has-error .control-label {
         color: #a94442 !important;
     }
     
@@ -68,7 +67,7 @@
         line-height: 20px;
     }
 </style>
-<div class="search_page_main" ng-if="showcontrols">
+<div class="search_page_main" ng-show="showcontrols" ng-init="generalpageload()">
     <div class="search_page_tabs profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
@@ -79,7 +78,7 @@
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -120,14 +119,14 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="MaritalStatus">
+                                                <angular-multiselect array="MaritalStatus" change="true" model="maritalstatus">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Education</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="educationcategory">
+                                                <angular-multiselect array="educationcategory"  change="true" model="educationcat">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -136,7 +135,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Country">
+                                                <angular-multiselect array="Country" change="true" model="country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -158,7 +157,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Caste">
+                                                <angular-multiselect array="Caste" change="true" model="caste">
                                                 </angular-multiselect>
 
 
@@ -169,7 +168,7 @@
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
                                                     <label>REddy</label>
-                                                    <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                                    <label id="lblCastids" style="font-weight: bold; display: none;">{{caste}}</label>
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -177,7 +176,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-group layout="row" ng-model="regdays" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                         Registration days :&nbsp;&nbsp;&nbsp;
                                                         <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                         <md-radio-button value="15"> 15days </md-radio-button>
@@ -190,9 +189,9 @@
                                         <div class="clearfix"></div>
                                         <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
                                                 href="javascript:void(0);">Edit partner preference</a></p>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit()">Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general')">Search</md-button>
                                         <md-button class="md-raised md-hue-1">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Save&Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general')">Save&Search</md-button>
                                     </div>
                                 </div>
                             </form>
@@ -200,11 +199,11 @@
                     </md-tab>
                     <md-tab label="Advanced Search">
                         <div class="tab">
-                            <form name="generalsearch" novalidate role="form" ng-submit="general(adv);">
+                            <form name="advancedsearch"  role="form" >
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="genderadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -216,12 +215,12 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="AgeFrom" ng-model="AgeFrom">
+                                                    <md-select placeholder="AgeFrom" ng-model="AgeFromadvance">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Ageto" ng-model="Ageto">
+                                                    <md-select placeholder="Ageto" ng-model="Agetoadvance">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -231,12 +230,12 @@
                                             <label class="control-label">Height</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="HeightFrom" ng-model="HeightFrom">
+                                                    <md-select placeholder="HeightFrom" ng-model="HeightFromadvance">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Heightto" ng-model="Heightto">
+                                                    <md-select placeholder="Heightto" ng-model="Heighttoadvance">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -245,32 +244,31 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="MaritalStatus">
+                                                <angular-multiselect array="MaritalStatus" change="true" model="maritalstatusadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religion">
+                                                <md-select ng-model="religionadvance">
                                                     <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
                                                 </md-select>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <br>
-
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Mothertongue">
+                                                <angular-multiselect array="Mothertongue" change="true" model="mothertobgueadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Caste">
+                                                <angular-multiselect array="Caste" change="true" model="casteadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -279,7 +277,7 @@
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
                                                     <label>REddy</label>
-                                                    <label id="lblCastids" style="font-weight: bold; display: none;">404,404</label>
+                                                    <label id="lblCastids" style="font-weight: bold; display: none;">{{casteadvance}}</label>
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -288,7 +286,7 @@
                                             <label class="control-label control-label-marg">Physical status</label>
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-group layout="row" ng-model="physicalstatusadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                         <md-radio-button value="25" class="md-primary"> Normal</md-radio-button>
                                                         <md-radio-button value="26"> Physically Challenged </md-radio-button>
                                                     </md-radio-group>
@@ -304,21 +302,21 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Country">
+                                                <angular-multiselect array="Country" change="true" model="countryadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">State</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="State">
+                                                <angular-multiselect array="State" change="true" model="stateadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my" id="divVisastatus">
                                             <label class="control-label">Visa status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="visastatus">
+                                                <angular-multiselect array="visastatus"  change="true" model="visastatusadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -330,21 +328,21 @@
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education category</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="educationcategory">
+                                                    <angular-multiselect array="educationcategory" change="true" model="educationcategoryadvance">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="Education">
+                                                    <angular-multiselect array="Education" change="true" model="Educationadvance">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Profession group</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="Professiongroup">
+                                                    <angular-multiselect array="Professiongroup" change="true" model="Professiongroupadvance">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
@@ -353,9 +351,9 @@
                                                 <div class="controls clearfix row">
                                                     <div layout-gt-sm="row">
                                                         <md-input-container class="md-block" flex-gt-sm>
-                                                            <md-select ng-model="mothhh">
+                                                            <md-select ng-model="monthsalcurrency">
                                                                 <md-option value="0">--select--</md-option>
-                                                                <md-option ng-repeat="currency in Currency" value="currency.value">
+                                                                <md-option ng-repeat="currency in Currency track by $index" value="currency.value">
                                                                     {{currency.label}}
                                                                 </md-option>
                                                             </md-select>
@@ -375,14 +373,13 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="search_advance_block1">
-
                                         <h4>Astro details</h4>
                                         <div layout="row">
                                             <div class="control-group span4">
                                                 <label class="control-label control-label-marg">Manglink / Kuja dosham&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                 <div class="controls">
                                                     <div layout-gt-sm="row">
-                                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                        <md-radio-group layout="row" ng-model="kujadosham" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                             <md-radio-button value="0" class="md-primary"> Yes</md-radio-button>
                                                             <md-radio-button value="1"> No </md-radio-button>
                                                             <md-radio-button value=""> Doesn't Matter </md-radio-button>
@@ -394,7 +391,7 @@
                                                 <label class="control-label control-label-marg"> Star language &nbsp;&nbsp;</label>
                                                 <div class="controls">
                                                     <div layout-gt-sm="row">
-                                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                        <md-radio-group layout="row" ng-model="starlanguage" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                             <md-radio-button value="1" class="md-primary"> Telugu</md-radio-button>
                                                             <md-radio-button value="2"> Tamil </md-radio-button>
                                                             <md-radio-button value="3">Kannada </md-radio-button>
@@ -405,10 +402,8 @@
                                             <div class="control-group span4 select-box-my">
                                                 <label class="control-label">Star</label>
                                                 <div class="controls clearfix">
-
-                                                    <angular-multiselect array="stars">
+                                                    <angular-multiselect array="stars" change="true" model="starsadvance">
                                                     </angular-multiselect>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -417,13 +412,13 @@
                                     <div class="search_advance_block1">
                                         <h4>Habits</h4>
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="diet" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 Diet : &nbsp;&nbsp;
                                                 <md-radio-button value="1" class="md-primary"> Veg</md-radio-button>
                                                 <md-radio-button value="2"> Non Veg </md-radio-button>
                                                 <md-radio-button value="">Both </md-radio-button>
                                             </md-radio-group>
-                                            <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="regdaysadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                 <md-radio-button value="15"> 15days </md-radio-button>
@@ -435,9 +430,9 @@
                                     <md-divider ng-if="!$last"></md-divider>
                                     <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
                                             href="javascript:void(0);">Edit partner preference</a></p>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced')">Search</md-button>
                                     <md-button class="md-raised md-hue-1">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Save&Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced')">Save&Search</md-button>
                                 </div>
                             </form>
                         </div>
@@ -458,19 +453,19 @@
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Profile id</label>
-                                            <input ng-model="user.city">
+                                            <input ng-model="profileid">
                                         </md-input-container>
                                     </div>
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>First name</label>
-                                            <input ng-model="user.city">
+                                            <input ng-model="firstname">
                                         </md-input-container>
                                     </div>
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Last name</label>
-                                            <input ng-model="user.city">
+                                            <input ng-model="lastname">
                                         </md-input-container>
                                     </div>
                                     <br>
@@ -478,9 +473,9 @@
                                     <br>
                                     <br>
                                 </div>
-                                <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Search</md-button>
+                                <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid')">Search</md-button>
                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                                <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Save&Search</md-button>
+                                <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid')">Save&Search</md-button>
                             </div>
                         </div>
                     </md-tab>
@@ -579,7 +574,7 @@
                             <small>Profiles found</small></span></h4>
                     </div>
                 </div>
-                </div>
+   </div>
     <div class="search_results_main clearfix">
         <div class="search_result_items_main clearfix">
             <div class="message-row4">
@@ -592,3 +587,27 @@
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="savedsearch.html">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                <h4 class="modal-title" id="commontitle" style="color: black;">Save and Search</h4>
+
+            </div>
+            <div ng-class="modalbodyshow==3?'modal-body  pop_content_my clearfix':'modal-body'" id="commonbody">
+                <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
+                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
+               
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+              
+                <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit()" ng-if="modalbodyshow==3">save&search</button>
+            </div>
+
+
+        </div>
+
+    </script>

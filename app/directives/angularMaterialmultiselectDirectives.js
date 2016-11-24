@@ -12,9 +12,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
 
         templateUrl: "templates/angualarMaterialmultiselect.html",
         link: function(scope, element, attrs) {
-
             scope.Caste = scope.array;
-
             scope.model = scope.model;
             scope.selectall = function() {
                 if (scope.model.length === scope.Caste.length) {
