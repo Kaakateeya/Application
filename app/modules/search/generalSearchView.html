@@ -4,7 +4,8 @@
         background-color: #f0f0cc !important;
         /*border-color:green !important;*/
     }
-        .has-error .control-label {
+    
+    .has-error .control-label {
         color: #a94442 !important;
     }
     
@@ -126,7 +127,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Education</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="educationcategory"  change="true" model="educationcat">
+                                                <angular-multiselect array="educationcategory" change="true" model="educationcat">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -142,7 +143,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religion">
+                                                <md-select ng-model="religion" ng-change="changeBind('caste',religion,mothertongue)">
                                                     <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
                                                 </md-select>
                                             </div>
@@ -159,16 +160,14 @@
                                             <div class="controls clearfix">
                                                 <angular-multiselect array="Caste" change="true" model="caste">
                                                 </angular-multiselect>
-
-
                                             </div>
                                         </div>
                                         <div class="control-group span3" ng-hide="true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
-                                                    <label>REddy</label>
-                                                    <label id="lblCastids" style="font-weight: bold; display: none;">{{caste}}</label>
+                                                    <label>{{castetext}}</label>
+                                                    <label style="font-weight: bold; display: none;">{{caste}}</label>
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -187,11 +186,10 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
-                                                href="javascript:void(0);">Edit partner preference</a></p>
+                                        <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general')">Search</md-button>
                                         <md-button class="md-raised md-hue-1">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general')">Save&Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                                     </div>
                                 </div>
                             </form>
@@ -199,7 +197,7 @@
                     </md-tab>
                     <md-tab label="Advanced Search">
                         <div class="tab">
-                            <form name="advancedsearch"  role="form" >
+                            <form name="advancedsearch" role="form">
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
@@ -276,8 +274,8 @@
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
-                                                    <label>REddy</label>
-                                                    <label id="lblCastids" style="font-weight: bold; display: none;">{{casteadvance}}</label>
+                                                    <label>{{casteadvancetext}}</label>
+                                                    <label style="font-weight: bold; display: none;">{{casteadvance}}</label>
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -316,7 +314,7 @@
                                         <div class="control-group span3 select-box-my" id="divVisastatus">
                                             <label class="control-label">Visa status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="visastatus"  change="true" model="visastatusadvance">
+                                                <angular-multiselect array="visastatus" change="true" model="visastatusadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -353,7 +351,7 @@
                                                         <md-input-container class="md-block" flex-gt-sm>
                                                             <md-select ng-model="monthsalcurrency">
                                                                 <md-option value="0">--select--</md-option>
-                                                                <md-option ng-repeat="currency in Currency track by $index" value="currency.value">
+                                                                <md-option ng-repeat="currency in Currency" value="currency.value">
                                                                     {{currency.label}}
                                                                 </md-option>
                                                             </md-select>
@@ -428,11 +426,10 @@
                                         </div>
                                     </div>
                                     <md-divider ng-if="!$last"></md-divider>
-                                    <p id="editpartnerpref" style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" onclick="return Editpartnerpreference();"
-                                            href="javascript:void(0);">Edit partner preference</a></p>
+                                    <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced')">Search</md-button>
                                     <md-button class="md-raised md-hue-1">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced')">Save&Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                                 </div>
                             </form>
                         </div>
@@ -475,7 +472,7 @@
                                 </div>
                                 <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid')">Search</md-button>
                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                                <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid')">Save&Search</md-button>
+                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                             </div>
                         </div>
                     </md-tab>
@@ -545,7 +542,6 @@
                         <div class="col-lg-2">
                             <h6><span style="display:none;">Height</span></h6>
                             <br>
-                          
                             <md-checkbox aria-label="Checkbox 1">
                                 withPhoto
                             </md-checkbox>
@@ -553,7 +549,6 @@
                         <div class="col-lg-2">
                             <h6><span style="display:none;">Height</span></h6>
                             <br>
-                      
                             <md-input-container class="md-block" flex-gt-sm>
                                 <a href="javascript:void(0);">Search More
                              <a>
@@ -568,12 +563,12 @@
 <div class="wrapper register_page_main clearfix" ng-hide="truepartner">
     <div class="row">
     <div class="col-lg-6">
-                    <div id="searchresultprofilesdiv" style="display: block;">
-                        <h4>search results - <span>
-                            <label id="refinetotalrecords">71</label>
-                            <small>Profiles found</small></span></h4>
-                    </div>
-                </div>
+         <div id="searchresultprofilesdiv" style="display: block;">
+            <h4>search results - <span>
+                  <label id="refinetotalrecords">{{PartnerProfilesnew[0].Totalrows}}</label>
+                  <small>Profiles found</small></span></h4>
+               </div>
+          </div>
    </div>
     <div class="search_results_main clearfix">
         <div class="search_result_items_main clearfix">
@@ -587,27 +582,24 @@
         </div>
     </div>
 </div>
-
 <script type="text/ng-template" id="savedsearch.html">
-
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="modalpopupclose()">×</button>
                 <h4 class="modal-title" id="commontitle" style="color: black;">Save and Search</h4>
-
             </div>
-            <div ng-class="modalbodyshow==3?'modal-body  pop_content_my clearfix':'modal-body'" id="commonbody">
-                <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
-                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
-               
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-              
-                <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit()" ng-if="modalbodyshow==3">save&search</button>
+            <div ng-class="modal-body" >
+                <div class="row col-lg-offset-1">
+               <div class="span4">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Save SearchName:</label>
+                          <input ng-model="savesearchName">
+                 </md-input-container>
+              </div>
+              </div>
+             <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+           <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit(savedsearch)">save&search</button>
             </div>
-
-
         </div>
-
-    </script>
+ </script>

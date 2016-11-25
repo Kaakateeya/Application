@@ -1,8 +1,11 @@
 app.factory('searches', ["$http", function(http) {
     return {
-        partnerdetails: function(custid,empid) {
-         return http.get(app.apiroot + 'CustomerSearch/getPartnerpreferencedetails', {params:{CustID:custid,EmpID:empid}});
+        partnerdetails: function(custid, empid) {
+            return http.get(app.apiroot + 'CustomerSearch/getPartnerpreferencedetails', { params: { CustID: custid, EmpID: empid } });
         },
-        
-    }
+        profileidsearch: function(ProfileIDSearch) {
+            debugger;
+            return http.post(app.apiroot + 'CustomerSearch/CustomerProfileIdsearch', ProfileIDSearch);
+        }
+    };
 }]);

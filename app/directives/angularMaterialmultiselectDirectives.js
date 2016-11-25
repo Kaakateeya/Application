@@ -12,8 +12,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
 
         templateUrl: "templates/angualarMaterialmultiselect.html",
         link: function(scope, element, attrs) {
-            scope.Caste = scope.array;
-            scope.model = scope.model;
+            scope.Caste = scope.array != undefined && scope.array != "" && scope.array != null ? scope.array : [];
             scope.selectall = function() {
                 if (scope.model.length === scope.Caste.length) {
                     scope.model = [];
@@ -29,12 +28,8 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
             scope.exists = function(item) {
                 return scope.Caste.indexOf(item) > -1;
             };
-            // scope.keydownevent = function(ev) {
-            //     //alert(2);
-            //     ev.stopPropagation();
-            // };
-            element.find('input').on('keydown', function(ev) {
 
+            element.find('input').on('keydown', function(ev) {
                 ev.stopPropagation();
             });
         }
