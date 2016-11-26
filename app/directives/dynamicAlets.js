@@ -41,7 +41,7 @@ app.factory('alert', function() {
         },
 
         dynamicpopup: function(url, scope, uibModal, custid, size) {
-            debugger;
+             
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',

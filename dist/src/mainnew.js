@@ -207,7 +207,7 @@ app.constant('config', function() {
 // })
 
 // app.directive('modalDialog', function() {
-//     debugger;
+//      
 //     return {
 //         restrict: 'E',
 //         scope: {
@@ -223,7 +223,7 @@ app.constant('config', function() {
 //     };
 // });
 // app.directive('notification', ['$timeout', function($timeout) {
-//     debugger;
+//      
 //     return {
 //         restrict: 'E',
 //         template: "<div class='modal fade' id='AlertModal' role='dialog' style=z-index: 100000000000!important'><div class='alert alert-{{alertData.type}}' ng-show='alertData.message' role='alert' data-notification='{{alertData.status}}'>{{alertData.message}}</div></div>",
@@ -266,7 +266,7 @@ app.directive('igLogin', function() {
         link: function(scope, element, attrs) {
 
                 scope.$on('alertzero', function() {
-                    // debugger;
+                    //  
                     // scope.loggingIn = true;
                     // $(".alert").removeClass("in").show();
                     // $(".alert").delay(2000).addClass("in").fadeOut(2000);
@@ -279,7 +279,7 @@ app.directive('igLogin', function() {
             //,
             // controller: function($scope) {
             //     $scope.$watch('loggingIn', function() {
-            //         debugger;
+            //          
             //         if ($scope.loggingIn) {
             //             $(".alert").removeClass("in").show();
             //             $(".alert").delay(100).addClass("in").fadeOut(2000);
@@ -587,7 +587,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             yourFilterexpress = yourFilter;
             oppfilterexpress = oppfilter;
         }
-        debugger;
+         
         scope.startindexexpress = frompage === 1 ? 1 : scope.startindexexpress;
         scope.endindexexpress = frompage === 1 ? 9 : scope.endindexexpress;
         var exp = {
@@ -671,7 +671,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
         //  alert("sorry No Records Found");
     };
     scope.loadmorehideshow = function() {
-        debugger;
+         
         if (scope.PartnerProfilesnew.length > 0) {
             scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
             scope.loadmoreexpress = (scope.totalrows > scope.endindexexpress) ? true : false;
@@ -680,7 +680,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
         }
     };
     scope.allloadmorepaging = function() {
-        debugger;
+         
         scope.spinexpress = true;
         scope.Norowsendexpress = false;
         switch (scope.typeofdiv) {
@@ -704,7 +704,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
     scope.showLoginxxxx = function() {
         //scope.$broadcast('alertzero');
         $("#myModalsss").modal();
-        debugger;
+         
         // scope.loggingIn = true;
         // $(".alert").removeClass("in").show();
         // $(".alert").delay(2000).addClass("in").fadeOut(2000);
@@ -1431,7 +1431,7 @@ app.factory('authSvc', ['$injector', function($injector) {
             clearUserSession();
         },
         login: function(username, password) {
-            debugger;
+             
             var body = {
                 Username: username,
                 Password: password
@@ -1461,7 +1461,7 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
         },
         getexpressintersetdata: function(object) {
-            debugger;
+             
             return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object)
 
         }

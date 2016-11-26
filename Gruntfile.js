@@ -7,7 +7,7 @@ var packageJson = JSON.parse(fs.readFileSync('./package.json'));
 var plugins = packageJson.buildSettings.plugins;
 var css = packageJson.buildSettings.css;
 module.exports = function(grunt) {
-
+    console.log(plugins);
     // ===========================================================================
     // CONFIGURE GRUNT ===========================================================
     // ===========================================================================

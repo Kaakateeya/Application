@@ -15,12 +15,12 @@ app.factory('successstoriesdata', ['$http', function(http) {
 
             var photoclass = "";
             var PhotoMaskDiv;
-            if (logphotostatus != "null" && logphotostatus != null && photo.indexOf("ApplicationPhoto") != -1)
-                PhotoMaskDiv = logphotostatus != true && logphotostatus != "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
-            else if (logphotostatus != "null" && logphotostatus != null && photo.indexOf("ThumbNail") != -1)
-                PhotoMaskDiv = logphotostatus != true && logphotostatus != "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
+            if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ApplicationPhoto") != -1)
+                PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
+            else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") != -1)
+                PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
             else
-                PhotoMaskDiv = photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdiv clearfix" : "";
+                PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdiv clearfix" : "";
 
             if (PhotoMaskDiv == "cssMaskdiv clearfix") {
 
@@ -42,7 +42,7 @@ app.factory('successstoriesdata', ['$http', function(http) {
                 }
 
                 photoclass = "Linkdisabled";
-            } else if ((photocount) == 0) {
+            } else if ((photocount) === 0) {
                 photoclass = "Linkdisabled";
 
             } else {

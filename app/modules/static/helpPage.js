@@ -1,10 +1,10 @@
-app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', function (uibModal, scope, helpService, arrayConstants) {
+app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', function(uibModal, scope, helpService, arrayConstants) {
 
     scope.catgory = 'catgory';
     scope.Priority = 'Priority';
     scope.countryCode = 'countryCode';
     scope.lblpopupCategory = 'dffdf';
-    scope.open = function (size) {
+    scope.open = function(size) {
         scope.modalInstance = uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
@@ -13,8 +13,8 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
         });
     };
 
-    scope.submit = function () {
-       debugger;
+    scope.submit = function() {
+
         if (scope.helpForm.$valid) {
 
             scope.inputObj = {
@@ -32,9 +32,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 AreaCode: scope.txtphonecode,
                 PhoneNum: scope.txtphnum,
                 EmpID: 0
-            }
+            };
 
-            helpService.helpSubmit(scope.inputObj).then(function (response) {
+            helpService.helpSubmit(scope.inputObj).then(function(response) {
                 console.log(response);
                 scope.CustName = scope.txtname;
                 scope.lblTicketID = response.data.Ticket;
@@ -43,10 +43,10 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             });
         }
 
-    }
+    };
 
 
-    scope.SendMail = function () {
+    scope.SendMail = function() {
 
 
         scope.SendMailObj = {
@@ -56,9 +56,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             strEmail: scope.txtemail,
             EmpID: 0,
             EmpTicketID: 0
-        }
+        };
 
-        helpService.SendMail(scope.SendMailObj).then(function (response) {
+        helpService.SendMail(scope.SendMailObj).then(function(response) {
             console.log(response);
             if (response.data == 1) {
                 alert('mail has sent successfully');

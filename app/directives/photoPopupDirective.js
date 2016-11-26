@@ -10,7 +10,7 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
         },
         templateUrl: "templates/photopopup.html",
         link: function(scope, element, attrs) {
-            debugger;
+             
             var vvv = scope.arrayphotos;
             if (scope.arrayphotos === 1) {
                 modalinstance = uibModal.open({
@@ -21,9 +21,9 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
                 });
             }
             scope.closepopup = function() {
-                debugger;
+                 
                 modalinstance.close();
-            }
+            };
         }
     };
 }]);

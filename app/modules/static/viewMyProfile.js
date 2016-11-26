@@ -1,4 +1,10 @@
 app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function(customerDashboardServices, scope) {
+    var logincustid = authSvc.getCustId();
+    var loginprofileid = authSvc.getProfileid();
+    var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
+    var locallogid = sessionStorage.getItem("locallogid");
+
+    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
     customerDashboardServices.Viewprofile().then(function(response) {
         scope.arr = [];
         scope.personalinfo = {};

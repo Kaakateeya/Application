@@ -4,7 +4,7 @@ app.factory('searches', ["$http", function(http) {
             return http.get(app.apiroot + 'CustomerSearch/getPartnerpreferencedetails', { params: { CustID: custid, EmpID: empid } });
         },
         profileidsearch: function(ProfileIDSearch) {
-            debugger;
+             
             return http.post(app.apiroot + 'CustomerSearch/CustomerProfileIdsearch', ProfileIDSearch);
         }
     };

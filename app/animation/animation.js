@@ -17,5 +17,5 @@ app.animation('.fade123', function() {
                 done();
             });
         }
-    }
+    };
 });

@@ -8,5 +8,5 @@ app.factory('helpService', ["$http", function(http) {
             console.log(JSON.stringify(object));
             return http.post(app.apiroot + 'StaticPages/SendTicketMail', object);
         }
-    }
+    };
 }]);

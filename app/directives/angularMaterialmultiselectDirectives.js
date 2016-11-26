@@ -12,7 +12,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
 
         templateUrl: "templates/angualarMaterialmultiselect.html",
         link: function(scope, element, attrs) {
-            scope.Caste = scope.array != undefined && scope.array != "" && scope.array != null ? scope.array : [];
+            scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
             scope.selectall = function() {
                 if (scope.model.length === scope.Caste.length) {
                     scope.model = [];
@@ -20,7 +20,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                     _.each(scope.Caste, function(item) {
                         scope.model.push(item.value);
                     });
-                };
+                }
             };
             scope.isChecked = function() {
                 return scope.model.length === scope.Caste.length;

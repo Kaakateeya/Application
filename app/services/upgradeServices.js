@@ -7,7 +7,7 @@ app.factory('myAppFactory', ["$http", function(http) {
             });
         },
     getpayment:function(custid) {
-          debugger;
+           
         return http.get(app.apiroot + 'Payment/GetPaymentDetails', {params: {CustID:custid}});
         }
     };

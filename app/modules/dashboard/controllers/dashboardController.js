@@ -12,17 +12,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.bindallcounts = {};
         scope.lblUHaveviewd = 'Suitable Profiles that match you';
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
-        scope.chatstatus;
+        scope.chatstatus = null;
         scope.form = {};
         scope.slides = [];
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
-            if (bindvalue != null && bindvalue != 0 && bindvalue != 'profile') {
+            if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
-                if (type == 'C') {
+                if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
                         console.log(response);
-                        if (scope.counts == 1) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.bindcounts(response.data.DashBoardCounts);
                             console.log(response.data.DashBoardCounts);
@@ -49,7 +49,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew !== undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
                     });
@@ -68,7 +68,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             });
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew != undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew !== undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
                     });
@@ -92,7 +92,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.bindcounts = function(array) {
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: null, hrefs: '#/editview/editparent' },
+                { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
                 { value: 'manage photo', bindvalue: null, hrefs: '/#home' },
                 { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home' },
@@ -111,9 +111,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.flagexpress = 9;
         scope.expressinterestselect = function(count, TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
             if (count !== 0) {
-                if (eventclick != null) {
+                if (eventclick !== null) {
                     scope.click = eventclick;
-                };
+                }
                 if (headertext === "1" || headertext === "2" || headertext === "3") {
                     scope.flagexpress = 9;
                     if (headertext === "1") {
@@ -237,11 +237,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
                 console.log(response);
-                if (response.data != null && response.data != undefined) {
-                    debugger;
+                if (response.data !== null && response.data !== undefined) {
+
                     if (response.data === 3) {
-                        var mobilenumber = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-                        alerts.open(mobilenumber, 'success');
+                        var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
+                        alerts.open(mobilenumbers, 'success');
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
                         alerts.open(mobilenumber, 'warning');
@@ -286,11 +286,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.sendmessages = function(form) {
             scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
-        }
+        };
         scope.sendmessagesRMM = function(form) {
             alerts.dynamicpopupclose();
             scope.$broadcast('sendmsg', 'TH', scope.messagecustid, undefined, form, scope.LogID);
-        }
+        };
         scope.loadmorehideshow = function() {
             if (scope.PartnerProfilesnew.length > 0) {
                 scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
@@ -339,7 +339,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.chatstatus = type;
                 }
                 customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew != null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     if (parseInt(fromindex) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data.PartnerProfilesnew, function(item) {
@@ -389,7 +389,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
-        }
+        };
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
@@ -487,7 +487,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             //scope.popupphoto = 1;
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
             customerDashboardServices.getphotoslideimages(custid).then(function(response) {
-                debugger;
+
                 scope.slides = [];
                 console.log(response);
                 _.each(response.data, function(item) {
@@ -507,7 +507,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
         };
         scope.$on("incrementcounts", function() {
-            debugger;
+
             scope.incrementsdashboardcounts();
         });
 

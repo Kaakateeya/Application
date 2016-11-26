@@ -4,11 +4,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
     return {
         restrict: "E",
         scope: {
-            array: '='
+            array: '=',
+            typeofsearch: '='
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
-            debugger;
+
+            scope.searchestype = scope.typeofsearch;
             scope.typeofdiv = "Grid";
             // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
             //     $('.search_result_items_main').attr("style", "width:80%;");
@@ -22,7 +24,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
             scope.loaderspin = false;
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
-            scope.indexvalues;
+            scope.indexvalues = 0;
 
             var i = 0;
             scope.directivepaging = function() {
@@ -103,9 +105,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                         });
                 });
 
-            }
+            };
             scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-                debugger;
+
                 var indexvalue = scope.indexvalues;
                 var object = {
                     IFromCustID: logincustid,
@@ -115,12 +117,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                     EncryptedRejectFlagText: null,
                     EncriptedTextrvr: null,
                     EncryptedRejectFlagTextrvr: null,
-                    StrHtmlText: form != undefined ? form.message : null,
-                    MessageLinkId: typeofactionflag != undefined ? typeofactionflag : null,
-                    MessageHistoryId: MessageHistoryId != undefined ? MessageHistoryId : null,
-                    Logid: logid != undefined ? logid : null,
+                    StrHtmlText: form !== undefined ? form.message : null,
+                    MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                    MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
+                    Logid: logid !== undefined ? logid : null,
                     FromProfileID: loginprofileid,
-                    ToProfileID: profileid != undefined ? profileid : null
+                    ToProfileID: profileid !== undefined ? profileid : null
                 };
                 scope.servicehttp(type, object);
             };
@@ -135,12 +137,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 scope.$emit('redirectToviewfullprofiles', custid, logid);
             };
             scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
-                password = password != null && password != "" ? 468 : 467;
+                password = password !== null && password !== "" ? 468 : 467;
                 return $injector.invoke(function($http) {
                     return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
                         .then(function(response) {
                             console.log(response);
-                            if (response.data == 1) {
+                            if (response.data === 1) {
                                 scope.$emit('successfailer', "Request sent suceessfully", "success");
                             } else {
                                 scope.$emit('successfailer', "Request sent Fail", "warning");
@@ -155,8 +157,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
             };
             scope.indexvalue = function(index) {
-                debugger;
+
                 scope.indexvalues = index;
+            };
+
+            scope.modifyursearch = function() {
+                scope.$emit('modifyursearchpartner');
             };
         }
     };

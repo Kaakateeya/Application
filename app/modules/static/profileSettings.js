@@ -48,13 +48,13 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     };
     scope.pageload = function() {
         scope.getdetails();
-    }
+    };
 
 
     scope.toggleActivationsss = function(btntype) {
         switch (btntype) {
             case "email":
-                debugger;
+
                 if (scope.activated)
                     scope.disabled = false;
                 else
@@ -79,7 +79,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     scope.manageakerts = true;
                 break;
             case "hideprofiles":
-                debugger;
+
                 if (scope.hideprofileswitchs)
                     scope.hideprofile = false;
                 else
@@ -108,10 +108,10 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 });
                 break;
             case "mobile":
-                var FamilyID = scope.arrayprofilesettings.MobileCustFamily_ID;
+                var FamilyIDs = scope.arrayprofilesettings.MobileCustFamily_ID;
                 var CountryCodeID = scope.ddlcountrycode;
                 var number = scope.Confirmnewnumber;
-                customerProfilesettings.submitemailmobilesubmit(FamilyID, number, CountryCodeID, 0).then(function(response) {
+                customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
                     console.log(response);
                     if (response.data == 1) {
                         alerts.open('Mobile Upadated successfully', 'success');
@@ -123,7 +123,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         }
     };
     scope.submitpassword = function() {
-        debugger;
+
         var OldPassword = scope.OldPassword;
         var NewPassword = scope.NewPassword;
         var ConfirmPassword = scope.ConfirmPassword;
@@ -192,7 +192,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     scope.Resetallfields = function(type) {
         switch (type) {
             case "email":
-                debugger;
+
                 scope.NewEmail = null;
                 scope.Confirmnewemail = null;
                 scope.getdetails();
@@ -262,18 +262,4 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         }
     };
 
-}]);
-app.directive('pwCheck', [function() {
-    return {
-        require: 'ngModel',
-        link: function(scope, elem, attrs, ctrl) {
-            var firstPassword = '#' + attrs.pwCheck;
-            elem.add(firstPassword).on('keyup', function() {
-                scope.$apply(function() {
-                    var v = elem.val() === $(firstPassword).val();
-                    ctrl.$setValidity('pwmatch', v);
-                });
-            });
-        }
-    }
 }]);

@@ -1,12 +1,14 @@
 app.constant('arrayConstants', {
     'MaritalStatus': [
+
         { "label": "Unmarried", "title": "Unmarried", "value": 43 },
         { "label": "Divorce", "title": "Divorce", "value": 44 },
         { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
         { "label": "Separated", "title": "Separated", "value": 46 }
     ],
     "height": [
-        { "label": "--Select--", "title": "--select--", "value": "0" },
+
+
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
         { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
@@ -26,11 +28,11 @@ app.constant('arrayConstants', {
         { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 }, { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
         { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 }, { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
         { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 }, { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
-        { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms\t", "title": "7'0 in - 213 cms\t", "value": 37 },
-        { "label": "7'1 in - 215 cms\t", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms\t", "title": "7'2 in - 218 cms\t", "value": 39 }
+        { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms", "title": "7'0 in - 213 cms", "value": 37 },
+        { "label": "7'1 in - 215 cms", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms", "title": "7'2 in - 218 cms", "value": 39 }
     ],
     "Religion": [
-        { "label": "--Select--", "title": "--select--", "value": "0" },
+
         { "label": "Hindu", "title": "Hindu", "value": 1 },
         { "label": "Christian", "title": "Christian", "value": 2 },
         { "label": "Muslim", "title": "Muslim", "value": 3 },
@@ -40,6 +42,7 @@ app.constant('arrayConstants', {
         { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
     ],
     "Mothertongue": [
+
         { "label": "Telugu", "title": "Telugu", "value": 1 },
         { "label": "Tamil", "title": "Tamil", "value": 2 },
         { "label": "Kannada", "title": "Kannada", "value": 3 },
@@ -55,6 +58,7 @@ app.constant('arrayConstants', {
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
     "educationcategory": [
+
         { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
         { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
         { "label": "Diploma", "title": "Diploma", "value": 3 },
@@ -70,6 +74,7 @@ app.constant('arrayConstants', {
         { "label": "Other", "title": "Other", "value": 22 }
     ],
     "visastatus": [
+
         { "label": "Student Visa", "title": "Student Visa", "value": 284 },
         { "label": "Work Permit", "title": "Work Permit", "value": 285 },
         { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
@@ -78,6 +83,7 @@ app.constant('arrayConstants', {
         { "label": "Green Card", "title": "Green Card", "value": 553 }
     ],
     "stars": [
+
         { "label": "Bharani", "title": "Bharani", "value": 2 },
         { "label": "Krithika", "title": "Krithika", "value": 3 },
         { "label": "Rohini", "title": "Rohini", "value": 4 },
@@ -158,13 +164,101 @@ app.constant('arrayConstants', {
 
     ],
     "region": [
-        { "label": "--select--", "title": "--select--", "value": 0 },
+        { "label": "--Select--", "title": "--Select--", "value": "" },
         { "label": "Telangana", "title": "Telangana", "value": 1 },
         { "label": "Andhra Pradesh", "title": "Andhra Pradesh", "value": 408 },
         { "label": "Tamilnadu", "title": "Tamilnadu", "value": 409 },
         { "label": "Karnataka", "title": "Karnataka", "value": 410 },
         { "label": "Panducherry", "title": "Panducherry", "value": 2 },
 
+    ],
+    'bodyType': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "Athletic", "title": "Athletic", "value": 21 },
+        { "label": "Average", "title": "Average", "value": 22 },
+        { "label": "Slim", "title": "Slim", "value": 23 },
+        { "label": "Heavy", "title": "Heavy", "value": 24 },
+        { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 37 }
+    ],
+    'bloodGroup': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "O+", "title": "O+", "value": 61 },
+        { "label": "A+", "title": "A+", "value": 63 },
+        { "label": "B+", "title": "B+", "value": 64 },
+        { "label": "AB+", "title": "AB+", "value": 65 },
+        { "label": "O-", "title": "O-", "value": 66 },
+        { "label": "A-", "title": "A-", "value": 67 },
+        { "label": "B-", "title": "B-", "value": 68 }
+    ],
+    'healthCondition': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "No Health Problems", "title": "No Health Problems", "value": 220 },
+        { "label": "HIV", "title": "HIV", "value": 222 },
+        { "label": "Diabetes", "title": "Diabetes", "value": 223 },
+        { "label": "LowBP", "title": "LowBP", "value": 224 },
+        { "label": "HighBP", "title": "HighBP", "value": 225 },
+        { "label": "Heart Ailments", "title": "Heart Ailments", "value": 226 }
+    ],
+    'lagnam': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "Dhansu", "title": "Dhansu", "value": 1 },
+        { "label": "Kanya", "title": "Kanya", "value": 2 },
+        { "label": "Karkatakam", "title": "Karkatakam", "value": 3 },
+        { "label": "Khumbam", "title": "Khumbam", "value": 4 },
+        { "label": "Makhram", "title": "Makhram", "value": 5 },
+        { "label": "Meenam", "title": "Meenam", "value": 6 },
+        { "label": "Mesham", "title": "Mesham", "value": 7 },
+        { "label": "Midhunam", "title": "Midhunam", "value": 8 },
+        { "label": "Simham", "title": "Simham", "value": 9 },
+        { "label": "Thula", "title": "Thula", "value": 10 },
+        { "label": "Vrichikam", "title": "Vrichikam", "value": 11 },
+        { "label": "Vrushabam", "title": "Vrushabam", "value": 12 }
+    ],
+    'ZodaicSign': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "mesha", "title": "mesha", "value": 527 },
+        { "label": "vrushaba", "title": "vrushaba", "value": 528 },
+        { "label": "midhuna", "title": "midhuna", "value": 529 },
+        { "label": "karkataka", "title": "karkataka", "value": 530 },
+        { "label": "Simha", "title": "Simha", "value": 531 },
+        { "label": "Kanya", "title": "Kanya", "value": 532 },
+        { "label": "Thula", "title": "Thula", "value": 533 },
+        { "label": "Vruchika", "title": "Vruchika", "value": 534 },
+        { "label": "Dhanu", "title": "Dhanu", "value": 535 },
+        { "label": "Makara", "title": "Makara", "value": 536 },
+        { "label": "Kumbha", "title": "Kumbha", "value": 537 },
+        { "label": "Meena", "title": "Meena", "value": 538 },
+    ],
+    'paadam': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "1", "title": "1", "value": 304 },
+        { "label": "2", "title": "2", "value": 305 },
+        { "label": "3", "title": "3", "value": 306 },
+        { "label": "4", "title": "4", "value": 539 },
+
+    ],
+    'familyStatus': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "Lower Middle Class", "title": "Lower Middle Class", "value": 290 },
+        { "label": "Middle Class", "title": "Middle Class", "value": 291 },
+        { "label": "Upper Middle Class", "title": "Upper Middle Class", "value": 292 },
+        { "label": "Rich", "title": "Rich", "value": 293 },
+        { "label": "Affluent", "title": "Affluent", "value": 294 },
+        { "label": "Others", "title": "Others", "value": 516 },
+        { "label": "High Class", "title": "High Class", "value": 517 }
+    ],
+    'RelationshipType': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "Friend", "title": "Friend", "value": 318 },
+        { "label": "Relative", "title": "Relative", "value": 319 },
+        { "label": "Not Given", "title": "Not Given", "value": 549 },
+
+    ],
+    'starLanguage': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "Telugu", "title": "Telugu", "value": 1 },
+        { "label": "Tamil", "title": "Tamil", "value": 2 },
+        { "label": "Kannada", "title": "Kannada", "value": 3 },
     ]
 
 

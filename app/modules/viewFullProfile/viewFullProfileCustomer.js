@@ -3,12 +3,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
     function(customerDashboardServices, scope, alerts, authSvc, $injector) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
-        var localcustid = sessionStorage.getItem("localcustid") != undefined && sessionStorage.getItem("localcustid") != "" ? sessionStorage.getItem("localcustid") : null;
+        var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
-        debugger;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.pageload = function() {
             customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
+
                 console.log(response);
                 scope.arr = [];
                 scope.personalinfo = {};
@@ -31,7 +31,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 console.log(response);
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    if (testArr[0] != undefined) {
+                    if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
                                 scope.Bookmark = testArr;
@@ -105,7 +105,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         }
                     });
             });
-        }
+        };
         scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
             var logincustid = authSvc.getCustId();
             var loginprofileid = authSvc.getProfileid();
@@ -117,17 +117,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 EncryptedRejectFlagText: null,
                 EncriptedTextrvr: null,
                 EncryptedRejectFlagTextrvr: null,
-                StrHtmlText: form != undefined ? form.message : null,
-                MessageLinkId: typeofactionflag != undefined ? typeofactionflag : null,
-                MessageHistoryId: MessageHistoryId != undefined ? MessageHistoryId : null,
-                Logid: logid != undefined ? logid : null,
+                StrHtmlText: form !== undefined ? form.message : null,
+                MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
+                Logid: logid !== undefined ? logid : null,
                 FromProfileID: loginprofileid,
-                ToProfileID: profileid != undefined ? profileid : null
+                ToProfileID: profileid !== undefined ? profileid : null
             };
             scope.servicehttp(type, object);
         };
         scope.sendmessages = function(form) {
-            debugger;
+
             scope.serviceactions("M", scope.messagecustid, undefined, undefined, form, undefined, undefined);
             alerts.dynamicpopupclose();
         };

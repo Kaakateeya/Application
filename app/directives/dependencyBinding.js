@@ -122,7 +122,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return starArr;
         },
         casteDepedency: function(parentval1, parentval2) {
-            debugger;
+
             var casteArr = [];
             casteArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             SelectBindService.castedependency(parentval1, parentval2).then(function(response) {

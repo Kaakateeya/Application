@@ -1,8 +1,7 @@
 <div class="register_page_main branches_page_main">
     <h4>Branches</h4>
     <div class="rating_main help_page_main">
-        <p>Contact any of the closest branches for immediate responce or post your queries in the sumission form provided below
-            and we will get back to you shortly</p>
+        <p>Contact any of the closest branches for immediate responce or post your queries in the sumission form provided below and we will get back to you shortly</p>
         <div class="help_no_list clearfix">
             <h4>contact phone number to your nearest head quarters</h4>
             <ul>
@@ -31,16 +30,14 @@
             <div class="branches_addrss_main_in">
                 <h4>1. Hyderabad Ameerpet (HQ)</h4>
                 <p>
-                    103,109, Vijaya Sri Apartments, Behind Chermas, Ameerpet.<br /> Contact : +91-7658180800, 040-23747777<br
-                    /> Email : <span>kaakateeya.com@gmail.com</span><br /> Timings : 9:00 AM To 9:00 pm
+                    103,109, Vijaya Sri Apartments, Behind Chermas, Ameerpet.<br /> Contact : +91-7658180800, 040-23747777<br /> Email : <span>kaakateeya.com@gmail.com</span><br /> Timings : 9:00 AM To 9:00 pm
                 </p>
             </div>
             <div class="branches_addrss_main_in">
                 <h4>1. Hyderabad Dilsukhnagar (BR)</h4>
                 <p>
                     2nd Floor, Pullareddy Sweets Building, Sai Baba Temple Road, Dilsukhnagar.
-                    <br /> Contact : +91-984944222, 040-2406 8989<br> Email : <span>info@telugumarriages.com</span><br> Timings
-                    : 9:00 AM To 9:00 pm
+                    <br /> Contact : +91-984944222, 040-2406 8989<br> Email : <span>info@telugumarriages.com</span><br> Timings : 9:00 AM To 9:00 pm
                 </p>
             </div>
         </div>
@@ -55,7 +52,7 @@
             <div class="control-group span5 select-box-my">
                 <label class="control-label">Select the location where you are looking for</label>
                 <div class="controls clearfix">
-                    <select multiselectdropdown ng-model="ddlbranchaddress"  ng-change="changeBind('branch');" ng-options="item.value as item.label for item in BranchArr">  </select>
+                    <select multiselectdropdown ng-model="ddlbranchaddress" ng-change="changeBind('branch');" ng-options="item.value as item.label for item in BranchArr">  </select>
                 </div>
             </div>
         </div>
@@ -81,7 +78,7 @@
                         <span id="lblEmails">{{item.BranchemailID }}</span>
                     </span>
                     <br /> Timings :
-                    <span id="lblEmpFromTimes" >{{item.WorkingStartTime }}</span> -
+                    <span id="lblEmpFromTimes">{{item.WorkingStartTime }}</span> -
                     <span id="lblEmpToTimes">{{item.WorkingEndTime }}</span>
                 </p>
             </div>
@@ -89,3 +86,21 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    .branches_addrss_main_in {
+        padding: 1% 1% !important;
+    }
+    
+    .branches_addrss_main_in {
+        width: 48% !important;
+        padding: 0 1% !important;
+        float: left !important;
+        min-height: 150px !important;
+    }
+    
+    .multiselect.dropdown-toggle {
+        margin: 0 !important;
+        width: 538px !important;
+    }
+</style>

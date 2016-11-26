@@ -109,7 +109,11 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
     };
 
     scope.viewfullmyprofile = function() {
+        var custidlogin = authSvc.getCustId();
+        sessionStorage.removeItem("localcustid");
+        sessionStorage.removeItem("locallogid");
+        sessionStorage.setItem("localcustid", custidlogin);
         var realpath = '#/viewFullProfileCustomer';
         window.open(realpath, '_self');
-    }
+    };
 }]);
