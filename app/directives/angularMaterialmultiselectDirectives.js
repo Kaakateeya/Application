@@ -6,7 +6,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
 
         scope: {
             array: '=',
-            change: '=',
+            type: '=',
             model: '='
         },
 
@@ -20,7 +20,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                     _.each(scope.Caste, function(item) {
                         scope.model.push(item.value);
                     });
-                }
+                };
             };
             scope.isChecked = function() {
                 return scope.model.length === scope.Caste.length;
@@ -32,6 +32,13 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
             element.find('input').on('keydown', function(ev) {
                 ev.stopPropagation();
             });
+            scope.$watch('array', function() {
+                scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
+            });
+            scope.directivechangeevent = function(model) {
+
+                scope.$emit('directivechangeevent', model, scope.type);
+            };
         }
     };
 }]);

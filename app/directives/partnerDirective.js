@@ -9,9 +9,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
-
+            debugger;
             scope.searchestype = scope.typeofsearch;
             scope.typeofdiv = "Grid";
+            scope.slideshowsearches = false;
+            scope.partnersearchessearches = true;
             // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
             //     $('.search_result_items_main').attr("style", "width:80%;");
             // } else {
@@ -36,8 +38,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
             };
             scope.$on('loadmore', function(event, endflag) {
+
                 scope.loaderspin = false;
                 if (scope.array.length > 0) {
+                    debugger;
                     scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                     scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
@@ -163,6 +167,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
 
             scope.modifyursearch = function() {
                 scope.$emit('modifyursearchpartner');
+            };
+
+            scope.Slideshowpage = function() {
+                scope.slideshowsearches = true;
+                scope.partnersearchessearches = false;
             };
         }
     };

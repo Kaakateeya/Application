@@ -2,13 +2,101 @@
 
     <div id="View" class="content-View clearfix pull-right" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
         <a id="lnkModifsearch" ng-click="modifyursearch()" class="view_similar pull-left" ng-hide="searchestype" href="javascript:void(0);">Modify Your Search</a>
-        <input id="imageslideshow" ng-hide="searchestype" src="src\images\slider.png" class="pull-right" title="SlideShow" data-toggle="modal" onclick="return Slideshowpage();" style="height: 32px; width: 32px; display: block;" type="image">
+        <input id="imageslideshow" ng-hide="searchestype" src="src\images\slider.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="Slideshowpage();" style="height: 32px; width: 32px; display: block;" type="image">
         <a id="lnkgrid" class="gridk_view icon-list" title="List View" ng-click="listclick()" style="cursor: pointer;" />
         <a id="lnklist" class="normal_view icon-grid" title="Grid View" ng-click="gridclick()" style="cursor: pointer;" />
 
     </div>
 </div>
-<div id="PartnerProfilles">
+
+<div id="slideShowCarousel" class="carousel slide slideShowCarousel" ng-show="slideshowsearches">
+    <br>
+    <!-- Carousel items -->
+    <div class="carousel-inner" id="maincarousal">
+        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="data in PartnerProfilesnew">
+            <div class="container">
+                <div id="galleryCarousel_0" class="slide span6">
+                    <div class="Linkdisabled">
+                        <img name="imagepath" style="height: 300px;width: 300px !important;" class="undefined" ng-src="data.Photo" /></div>
+                    <div>
+                        <a href="javascript:void(0)" style="font-weight: bold; text-decoration: underline;">Photo Request</a></div>
+                </div>
+                <div class="span6">
+                    <table>
+                        <caption>{{data.NAME}}</caption>
+                        <tbody>
+                            <tr>
+                                <th>Profile ID</th>
+                                <td> {{data.ProfileID}}</td>
+                            </tr>
+                            <tr>
+                                <th>Age / Height</th>
+                                <td>{{data.Age}}-{{data.Height}}</td>
+                            </tr>
+                            <tr>
+                                <th>Caste</th>
+                                <td>{{data.ReligionName}}-{{data.Caste}}</td>
+                            </tr>
+                            <tr>
+                                <th>Marital Status</th>
+                                <td>{{data.MaritualStatus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Star</th>
+                                <td> {{data.Star}}</td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>{{ data.Location }}</td>
+                            </tr>
+                            <tr>
+                                <th>Education</th>
+                                <td>{{data.Education}}</td>
+                            </tr>
+                            <tr>
+                                <th>Occupation</th>
+                                <td>{{data.profession}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="slideShowCarousel_foot clearfix">
+                <div class="container clearfix">
+                    <ul class="slideShowCarousel_ui clearfix">
+                        <li>
+                            <a href="javascript:void(0)" title="BookMark" ng-click="serviceactions('B',data.intCusID,data.mybookmarked)"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" title="Express interest" ng-click="serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)"></a>
+                        
+                        </li>
+                        <li>
+                            <a title="Message" href="javascript:void(0)" ng-click="sendmessegescommon('M',data.intCusID)"></a>
+                           
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" title="Ignore"  ng-click="serviceactions('I',data.intCusID,data.ignode)"></a>
+                           
+                        </li>
+                    </ul>
+                    <ul class="slideShowCarousel_ui2 clearfix">
+                        <li><a href="javascript:void(0)" ng-click="modifyursearch()">Modify search</a></li>
+                        <li><a href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogId)">view complete profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel"  ng-hide="false" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" data-slide="next">›</a>
+    <label style="display: none;" id="lblcurrentprofile"></label>
+    <label style="display: none;" id="lblcurSlide">1</label>
+    <label style="display: none;" id="lnkLastSlide1"></label>
+</div>
+<div id="PartnerProfilles" ng-show="partnersearchessearches">
     <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>

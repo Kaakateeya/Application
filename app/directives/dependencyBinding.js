@@ -26,7 +26,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         },
         StateBind: function(parentval) {
             var stateArr = [];
-            stateArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+
             SelectBindService.stateSelect(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     stateArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -69,8 +69,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return professionArr;
         },
         educationGroupBind: function(parentval) {
+            debugger;
             var educationGroupArr = [];
-            educationGroupArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             SelectBindService.EducationGroup(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     educationGroupArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -113,7 +113,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         },
         starBind: function(parentval) {
             var starArr = [];
-            starArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             SelectBindService.stars(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     starArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -122,9 +121,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return starArr;
         },
         casteDepedency: function(parentval1, parentval2) {
-
+            debugger;
             var casteArr = [];
-            casteArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             SelectBindService.castedependency(parentval1, parentval2).then(function(response) {
                 _.each(response.data, function(item) {
                     casteArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });

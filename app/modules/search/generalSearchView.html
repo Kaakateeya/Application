@@ -141,9 +141,10 @@
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
+
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religion" ng-change="changeBind('caste',religion,mothertongue)">
+                                                <md-select ng-model="religion" ng-change="changeBindsearhes('caste',religion,mothertongue)">
                                                     <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
                                                 </md-select>
                                             </div>
@@ -151,7 +152,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Mothertongue" change="true" model="mothertongue">
+                                                <angular-multiselect array="Mothertongue" type="'caste'" model="mothertongue">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -187,7 +188,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general')">Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general',1,9)">Search</md-button>
                                         <md-button class="md-raised md-hue-1">Reset</md-button>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                                     </div>
@@ -249,8 +250,8 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religionadvance">
-                                                    <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
+                                                <md-select ng-model="religionadvance" ng-change="changeBindsearhes('casteadv',religionadvance,mothertobgueadvance)">
+                                                    <md-option ng-value="religions.value" ng-repeat="religions in Religion">{{religions.label}}</md-option>
                                                 </md-select>
                                             </div>
                                         </div>
@@ -259,7 +260,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Mothertongue" change="true" model="mothertobgueadvance">
+                                                <angular-multiselect array="Mothertongue" type="'casteadv'" model="mothertobgueadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -300,7 +301,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Country" change="true" model="countryadvance">
+                                                <angular-multiselect array="Country" type="'Country'" model="countryadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -326,14 +327,14 @@
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education category</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="educationcategory" change="true" model="educationcategoryadvance">
+                                                    <angular-multiselect array="educationcategory" type="'EducationCatgory'" model="educationcategoryadvance">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="Education" change="true" model="Educationadvance">
+                                                    <angular-multiselect array="Educationgroup" change="true" model="Educationadvance">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
@@ -351,7 +352,7 @@
                                                         <md-input-container class="md-block" flex-gt-sm>
                                                             <md-select ng-model="monthsalcurrency">
                                                                 <md-option value="0">--select--</md-option>
-                                                                <md-option ng-repeat="currency in Currency" value="currency.value">
+                                                                <md-option ng-repeat="currency in Currency track by $index" ng-value="{{currency.value}}">
                                                                     {{currency.label}}
                                                                 </md-option>
                                                             </md-select>
@@ -389,7 +390,7 @@
                                                 <label class="control-label control-label-marg"> Star language &nbsp;&nbsp;</label>
                                                 <div class="controls">
                                                     <div layout-gt-sm="row">
-                                                        <md-radio-group layout="row" ng-model="starlanguage" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                        <md-radio-group layout="row" ng-model="starlanguage" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="changeBindsearhes('star',starlanguage)">
                                                             <md-radio-button value="1" class="md-primary"> Telugu</md-radio-button>
                                                             <md-radio-button value="2"> Tamil </md-radio-button>
                                                             <md-radio-button value="3">Kannada </md-radio-button>
@@ -427,7 +428,7 @@
                                     </div>
                                     <md-divider ng-if="!$last"></md-divider>
                                     <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced')">Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,9)">Search</md-button>
                                     <md-button class="md-raised md-hue-1">Reset</md-button>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                                 </div>
@@ -470,7 +471,7 @@
                                     <br>
                                     <br>
                                 </div>
-                                <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid')">Search</md-button>
+                                <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid',1,9)">Search</md-button>
                                 <md-button class="md-raised md-hue-1">Reset</md-button>
                                 <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
                             </div>
@@ -565,7 +566,7 @@
     <div class="col-lg-6">
          <div id="searchresultprofilesdiv" style="display: block;">
             <h4>search results - <span>
-                  <label id="refinetotalrecords">{{PartnerProfilesnew[0].Totalrows}}</label>
+                  <label id="refinetotalrecords">{{PartnerProfilesnew[0].TotalRows}}</label>
                   <small>Profiles found</small></span></h4>
                </div>
           </div>
@@ -581,25 +582,26 @@
             </div>
         </div>
     </div>
+    
 </div>
 <script type="text/ng-template" id="savedsearch.html">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
-                <h4 class="modal-title" id="commontitle" style="color: black;">Save and Search</h4>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+            <h4 class="modal-title" id="commontitle" style="color: black;">Save and Search</h4>
+        </div>
+        <div ng-class="modal-body">
+            <div class="row col-lg-offset-1">
+                <div class="span4">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Save SearchName:</label>
+                        <input ng-model="savesearchName">
+                    </md-input-container>
+                </div>
             </div>
-            <div ng-class="modal-body" >
-                <div class="row col-lg-offset-1">
-               <div class="span4">
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Save SearchName:</label>
-                          <input ng-model="savesearchName">
-                 </md-input-container>
-              </div>
-              </div>
-             <div class="modal-footer">
-            <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-           <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit(savedsearch)">save&search</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit('savedsearch',1,9)">save&search</button>
             </div>
         </div>
- </script>
+</script>
