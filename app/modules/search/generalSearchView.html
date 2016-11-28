@@ -202,7 +202,7 @@
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="genderadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -214,12 +214,12 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="AgeFrom" ng-model="AgeFromadvance">
+                                                    <md-select placeholder="AgeFrom" ng-model="AgeFrom">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Ageto" ng-model="Agetoadvance">
+                                                    <md-select placeholder="Ageto" ng-model="Ageto">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -229,12 +229,12 @@
                                             <label class="control-label">Height</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="HeightFrom" ng-model="HeightFromadvance">
+                                                    <md-select placeholder="HeightFrom" ng-model="HeightFrom">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Heightto" ng-model="Heighttoadvance">
+                                                    <md-select placeholder="Heightto" ng-model="Heightto">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -243,14 +243,14 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="MaritalStatus" change="true" model="maritalstatusadvance">
+                                                <angular-multiselect array="MaritalStatus" change="true" model="maritalstatus">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religionadvance" ng-change="changeBindsearhes('casteadv',religionadvance,mothertobgueadvance)">
+                                                <md-select ng-model="religion" ng-change="changeBindsearhes('caste',religion,mothertongue)">
                                                     <md-option ng-value="religions.value" ng-repeat="religions in Religion">{{religions.label}}</md-option>
                                                 </md-select>
                                             </div>
@@ -260,14 +260,14 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Mothertongue" type="'casteadv'" model="mothertobgueadvance">
+                                                <angular-multiselect array="Mothertongue" type="'caste'" model="mothertongue">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Caste" change="true" model="casteadvance">
+                                                <angular-multiselect array="Caste" change="true" model="caste">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -275,8 +275,8 @@
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
-                                                    <label>{{casteadvancetext}}</label>
-                                                    <label style="font-weight: bold; display: none;">{{casteadvance}}</label>
+                                                    <label>{{castetext}}</label>
+                                                    <label style="font-weight: bold; display: none;">{{caste}}</label>
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -301,7 +301,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Country" type="'Country'" model="countryadvance">
+                                                <angular-multiselect array="Country" type="'Country'" model="country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -327,7 +327,7 @@
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education category</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="educationcategory" type="'EducationCatgory'" model="educationcategoryadvance">
+                                                    <angular-multiselect array="educationcategory" type="'EducationCatgory'"  model="educationcat">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
@@ -417,7 +417,7 @@
                                                 <md-radio-button value="2"> Non Veg </md-radio-button>
                                                 <md-radio-button value="">Both </md-radio-button>
                                             </md-radio-group>
-                                            <md-radio-group layout="row" ng-model="regdaysadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="regdays" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                 <md-radio-button value="15"> 15days </md-radio-button>
@@ -551,7 +551,7 @@
                             <h6><span style="display:none;">Height</span></h6>
                             <br>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <a href="javascript:void(0);">Search More
+                                <a href="javascript:void(0);" ng-click="refinesubmit()">Search More
                              <a>
                              </md-input-container>
                         </div>

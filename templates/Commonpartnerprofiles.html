@@ -16,10 +16,11 @@
         <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="data in PartnerProfilesnew">
             <div class="container">
                 <div id="galleryCarousel_0" class="slide span6">
-                    <div class="Linkdisabled">
+                    <div ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
                         <img name="imagepath" style="height: 300px;width: 300px !important;" class="undefined" ng-src="data.Photo" /></div>
                     <div>
-                        <a href="javascript:void(0)" style="font-weight: bold; text-decoration: underline;">Photo Request</a></div>
+                        <a href="javascript:void(0)" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')" style="font-weight: bold; text-decoration: underline;">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                        (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a></div>
                 </div>
                 <div class="span6">
                     <table>
