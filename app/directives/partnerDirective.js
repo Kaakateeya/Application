@@ -223,39 +223,39 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
 
                 var totalItems = $('#' + carouselID).find('.item').length;
-                if (totalItems == 0) {
+                if (totalItems === 0) {
                     scope.$emit('slideshowsubmit', 1, 10);
                     scope.checkitemnew(carouselID);
                 }
                 scope.ArrowMove(carouselID);
                 scope.checkitemGlobal(carouselID);
-            }
+            };
             scope.pageloadslidebind = function() {
-                debugger;
+
                 $('.list-inline li a').removeClass('selected');
                 $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                 var totalItems1 = $('#slideShowCarousel').find('.item').length;
                 var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
-                if (scope.playpausebuttons == false) {
+                if (scope.playpausebuttons === false) {
                     $('#slideShowCarousel').carousel('pause');
                     scope.playpausebuttons = false;
                     scope.pauseplaybuttons = true;
                 }
                 $('#slideShowCarousel').find('div.active').index();
                 scope.lnkLastSlide = currentIndex1;
-                debugger;
+
                 if (currentslide < currentIndex1) {
-                    if (logincustid != undefined && logincustid != null && logincustid != "") {
-                        if (parseInt(totalItems1) - parseInt(currentIndex1) == 4) {
+                    if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                        if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
                             scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10);
-                            debugger;
+
                             if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                                 $('#slideShowCarousel').find('.left').show();
                                 $('#slideShowCarousel').find('.right').show();
                             }
                         }
                     } else {
-                        if (parseInt(totalItems1) - parseInt(currentIndex1) == 0) {
+                        if (parseInt(totalItems1) - parseInt(currentIndex1) === 0) {
                             scope.$emit('showloginpopup');
                         }
                     }
@@ -265,7 +265,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             scope.pageloadslide = function() {
                 var currentslide = 1,
                     totalItems = $('#slideShowCarousel').find('.item').length;
-                if (totalItems == 0) {
+                if (totalItems === 0) {
                     scope.$emit('slideshowsubmit', 1, 10);
                     if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                         $('#slideShowCarousel').find('.left').show();
@@ -285,10 +285,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                     scope.checkitemnew("slideShowCarousel");
                 };
                 $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
-            }
+            };
 
             scope.Slideshowpage = function() {
-                debugger;
+
                 scope.slideshowsearches = true;
                 scope.playpausebuttons = false;
                 scope.partnersearchessearches = false;
@@ -314,12 +314,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 $('#slideShowCarousel').carousel('pause');
             };
             scope.nextslide = function() {
-                debugger;
+
                 scope.pageloadslidebind();
             };
 
             scope.prevslide = function() {
-                debugger;
+             
                 $('.list-inline li a').removeClass('selected');
                 $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                 var totalItems1 = $('#slideShowCarousel').find('.item').length;

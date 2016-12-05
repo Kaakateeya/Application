@@ -34,7 +34,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
-            debugger;
+
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
 
                 _.each(response.data, function(item) {
@@ -63,15 +63,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.religion = response.data.Religion;
             scope.mothertongue = response.data.MotherTongue.split(',');
             scope.Caste = commonFactory.casteDepedency(response.data.Religion, response.data.MotherTongue);
-            scope.caste = response.data.Caste != null ? response.data.Caste.split(',') : "0";
+            scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
             scope.State = commonFactory.StateBind(response.data.Country);
-            scope.stateadvance = response.data.State != null ? response.data.State.split(',') : "0";
+            scope.stateadvance = response.data.State !== null ? response.data.State.split(',') : "0";
             scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
-            scope.Educationadvance = response.data.Education != null ? response.data.Education.split(',') : "0";
-            scope.starsadvance = response.data.Stars != null ? response.data.Stars.split(',') : "0";
-        }
+            scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
+            scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
+        };
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             scope.Age = function() {
@@ -116,20 +116,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
                 scope.savedsearchselectmethod(scope.custid, "", 1);
 
-            } else if (scope.object != undefined && scope.object != null && scope.object != null) {
-                debugger;
+            } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
+
                 scope.gender = (scope.object.intGender) === 1 ? 2 : 1;
                 scope.AgeFrom = scope.object.FromAge;
                 scope.Ageto = scope.object.ToAge;
                 scope.country = scope.object.Country;
                 scope.religion = scope.object.intReligionID;
-                scope.caste = scope.object.Caste != null ? scope.object.Caste : "0";
+                scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
                 scope.generalsearchsubmit("general", 1, 9);
             } else {
                 scope.gender = null;
                 scope.AgeFrom = 18;
                 scope.Ageto = 30;
-                scope.religion = 1
+                scope.religion = 1;
             }
         };
         scope.clearSearchTerm = function() {
@@ -233,7 +233,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case "savedsearch":
 
-                    debugger;
                     scope.submitobjectcommongenad(frompage, topage);
                     scope.submitsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
@@ -301,7 +300,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         intCasteID: null,
                         StartIndex: frompage,
                         EndIndex: topage,
-                    }
+                    };
                     scope.submitprofileidsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
                         GetDetails: {
@@ -365,7 +364,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
-            if (scope.custid != null && scope.custid != undefined && scope.custid != "") {
+            if (scope.custid !== null && scope.custid !== undefined && scope.custid !== "") {
                 scope.generalsearchsubmit(scope.typesearch, frompage, topage);
             } else {
                 scope.showloginpopup();
@@ -379,13 +378,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.hightTorefine = function() {
             scope.Heighttotext = scope.checkheight(scope.Heightto);
-        }
+        };
 
         scope.checkheight = function(value) {
             var values;
             values = (checknumber(value));
             return values;
-        }
+        };
         var numberInRange = function(number, lower, upper) {
             return number >= lower && number <= upper;
         };
@@ -425,7 +424,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             $scope.validate = function() {
 
-                if (($scope.username).indexOf("@") != -1) {
+                if (($scope.username).indexOf("@") !== -1) {
 
                     if (!$scope.ValidateEmail($scope.username)) {
                         $scope.username = '';
@@ -435,7 +434,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         return true;
                     }
                 } else {
-                    if (!$scope.Validatnumber($scope.username) || ($scope.username).length != 9) {
+                    if (!$scope.Validatnumber($scope.username) || ($scope.username).length !== 9) {
                         alert("Please enter valid ProfileID/Email");
                         $scope.username = '';
                         return false;
@@ -447,7 +446,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 }
             };
             $scope.loginsubmit = function() {
-                debugger;
+
                 if ($scope.username === "" || $scope.username === null || $scope.username === "ProfileID/EmailID") {
                     alert("Please enter user name");
                     return false;
@@ -479,11 +478,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
-                    debugger;
+
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
-                        debugger;
+
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                         } else if (SearchpageID === "2") {
@@ -495,12 +494,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     });
                     break;
                 case "edit":
-                    debugger;
+
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
                         scope.showcontrols = true;
                         scope.truepartner = true;
-                        debugger;
+
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                             scope.selectedIndex = 2;

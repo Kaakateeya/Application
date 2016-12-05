@@ -1,4 +1,4 @@
-app.controller("supporttickets" ['$scope', 'customerProfilesettings', 'authSvc',
+app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc',
     function(scope, customerProfilesettings, authSvc) {
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -7,9 +7,10 @@ app.controller("supporttickets" ['$scope', 'customerProfilesettings', 'authSvc',
             var obj = {
                 PageID: 1,
                 CustID: scope.custid,
-                TicketID:null,
-                 ProfileID:null, Complaint:null,
-                  FeedBackStatus:null
+                TicketID: null,
+                ProfileID: null,
+                Complaint: null,
+                FeedBackStatus: null
             };
             customerProfilesettings.getmysupporttickets(obj).then(function(response) {
                 scope.supporttickets = [];

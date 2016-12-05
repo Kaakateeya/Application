@@ -20,7 +20,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                     _.each(scope.Caste, function(item) {
                         scope.model.push(item.value);
                     });
-                };
+                }
             };
             scope.isChecked = function() {
                 return scope.model.length === scope.Caste.length;

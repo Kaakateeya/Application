@@ -1,5 +1,5 @@
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$timeout', '$mdDialog',
-    function(scope, homepageservices, authSvc, successstoriesdata, timeout, $mdDialog) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -144,7 +144,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             $scope.cancel = function() {
                 $mdDialog.cancel();
 
-            }
+            };
         }
         scope.showforgetpasswordpopup = function() {
             scope.showforgetpassword();

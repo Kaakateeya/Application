@@ -11,12 +11,11 @@ app.factory('searches', ["$http", function(http) {
             return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearch', obj);
         },
         CustomerGeneralandAdvancedSavedSearch: function(obj) {
-            console.log(obj);
-            debugger;
+
             return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSavedSearch', obj);
         },
         CustomerProfileIDSavedSearch: function(obj) {
-            debugger;
+
             return http.post(app.apiroot + 'CustomerSearch/CustomerProfileIDSavedSearch', obj);
         },
         savedsearchselectmethod: function(Cust_ID, SaveSearchName, iEditDelete) {
