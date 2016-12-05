@@ -190,7 +190,7 @@
                                         <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general',1,9)">Search</md-button>
                                         <md-button class="md-raised md-hue-1">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup('general')">Save&Search</md-button>
                                     </div>
                                 </div>
                             </form>
@@ -327,7 +327,7 @@
                                             <div class="control-group span3 select-box-my">
                                                 <label class="control-label">Education category</label>
                                                 <div class="controls clearfix">
-                                                    <angular-multiselect array="educationcategory" type="'EducationCatgory'"  model="educationcat">
+                                                    <angular-multiselect array="educationcategory" type="'EducationCatgory'" model="educationcat">
                                                     </angular-multiselect>
                                                 </div>
                                             </div>
@@ -430,7 +430,7 @@
                                     <p style="display: block;">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="javascript:void(0);">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,9)">Search</md-button>
                                     <md-button class="md-raised md-hue-1">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup('advanced')">Save&Search</md-button>
                                 </div>
                             </form>
                         </div>
@@ -473,7 +473,7 @@
                                 </div>
                                 <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid',1,9)">Search</md-button>
                                 <md-button class="md-raised md-hue-1">Reset</md-button>
-                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup()">Save&Search</md-button>
+                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedseapopup('profileid')">Save&Search</md-button>
                             </div>
                         </div>
                     </md-tab>
@@ -485,17 +485,19 @@
                                         <div layout-gt-sm="row">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Search by ID</label>
-                                                <input ng-model="user.city">
-                                                <md-button class="md-raised md-warn md-hue-2" ng-click="general(gen);">Search</md-button>
+                                                <input ng-model="txtsavesearchname">
+                                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethod(custid,txtsavesearchname,1);">Search</md-button>
                                             </md-input-container>
                                         </div>
 
                                     </div>
                                     <div class="saved_search_list">
-                                        <div class="saved_search_list_item">
-                                            <h4><span id="Label1">testing</span><span style="display:none;">3764</span> <span style="display:none;">91022</span> <span style="display:none;">2</span><span style="display:none;">Generalsearch</span></h4>
-                                            <div class="saved_search_list_ui clearfix"><a href="javascript:void(0)">Search</a><a href="javascript:void(0)">Edit</a>
-                                                <a href="javascript:void(0)">Delete</a>
+                                        <div class="saved_search_list_item" ng-repeat="saved in savedsearchselect">
+                                            <h4><span>{{saved.CustSavedSearchName}}</span></h4>
+                                            <div class="saved_search_list_ui clearfix">
+                                                <a href="javascript:void(0)" ng-click="gettingsavedsearcheditsearch('search',saved.SearchResult_ID,SearchpageID)">Search<span class="material-icons">search</span></a>
+                                                <a href="javascript:void(0)" ng-click="gettingsavedsearcheditsearch('edit',saved.SearchResult_ID,SearchpageID)">Edit<i class="material-icons">mode_edit</i></a>
+                                                <a href="javascript:void(0)" ng-click="savedsearchselectmethod(saved.SearchResult_ID,'',0)">Delete<i class="material-icons" >delete</i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -513,10 +515,10 @@
         <div class="refine_search_new clearfix">
             <div class="refine_search_new_sub clearfix">
                 <div class="refine_search_new_sub1 clearfix">
-                    <h4>Refine <span id="refinegender">Groom</span></h4>
+                    <h4>Refine <span>{{gender===2?'Bride':'Groom'}}</span></h4>
                     <div class="clear">&nbsp;</div>
-                    <h6><span>Age:</span> <span id="refineAge">25 years-29 years</span></h6>
-                    <h6><span>caste:</span><span id="refinecaste">Kamma,Balija,Mudaliar</span></h6>
+                    <h6><span>Age:</span> <span id="refineAge">{{AgeFrom}} years-{{Ageto}} years</span></h6>
+                    <h6><span>caste:</span><span id="refinecaste">{{caste.label}}</span></h6>
                     <h6><span>education:</span> <span id="refineeducation">Any</span></h6>
                     <h6><span>height:</span><span id="spanrefineheight">5'6 in - 167 cms-7'2 in - 218 cms</span></h6>
                 </div>
@@ -525,25 +527,26 @@
                         <div class="col-lg-4">
                             <h6><span>Age</span></h6>
                             <md-slider-container flex-gt-xs>
-                                <p>{{invertform}}</p>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="invertform" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="invert" aria-label="Slider"></md-slider>
-                                <p>{{invert}}</p>
+                                <p>{{AgeFrom}}</p>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="AgeFrom" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="Ageto" aria-label="Slider"></md-slider>
+                                <p>{{Ageto}}</p>
                             </md-slider-container>
                         </div>
                         <div class="col-lg-4">
                             <h6><span>Height</span></h6>
                             <md-slider-container flex-gt-xs>
-                                <p>{{heightfrom}}</p>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="heightfrom" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="heightto" aria-label="Slider"></md-slider>
-                                <p>{{heightto}}</p>
+                                <p>{{HeightFromtext}}</p>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
+                                <p>{{Heighttotext}}</p>
                             </md-slider-container>
                         </div>
                         <div class="col-lg-2">
                             <h6><span style="display:none;">Height</span></h6>
                             <br>
-                            <md-checkbox aria-label="Checkbox 1">
+
+                            <md-checkbox ng-model="isCheckedphoto" aria-label="chkwithphoto">
                                 withPhoto
                             </md-checkbox>
                         </div>
@@ -595,13 +598,13 @@
                 <div class="span4">
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Save SearchName:</label>
-                        <input ng-model="savesearchName">
+                        <input ng-model="form.savesearchNames">
                     </md-input-container>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit('savedsearch',1,9)">save&search</button>
+                <button type="button" class="btn btn-primary" ng-click="generalsearchsubmit('savedsearch',1,9,form)">save&search</button>
             </div>
         </div>
 </script>

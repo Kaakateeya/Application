@@ -1,4 +1,4 @@
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', function(scope, homepageservices, authSvc, successstoriesdata) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$timeout', function(scope, homepageservices, authSvc, successstoriesdata, timeout) {
     scope.fromge = 1;
     scope.topage = 5;
     scope.homeinit = function() {
@@ -17,6 +17,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
     };
     scope.gender = "2";
+    // scope.loadUsers = function() {
+    //     return timeout(function() {
+    //         scope.arrayAge = scope.arrayAge || scope.Age();
+    //     }, 650);
+    // };
     scope.arrayAge = scope.Age();
     scope.Religion = "Religion";
     scope.Country = "Country";
@@ -85,17 +90,17 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         srchobject.intCusID = null;
         srchobject.strCust_id = null;
         srchobject.intGender = scope.gender;
-        srchobject.FromAge = null;
-        srchobject.ToAge = null;
+        srchobject.FromAge = scope.Agefrom;
+        srchobject.ToAge = scope.Ageto;
         srchobject.iFromHeight = null;
         srchobject.iToHeight = null;
         srchobject.Maritalstatus = null;
-        srchobject.intReligionID = null;
+        srchobject.intReligionID = scope.religion;
         srchobject.MotherTongue = null;
-        srchobject.Caste = null;
+        srchobject.Caste = scope.caste;
         srchobject.iPhysicalstatus = null;
         srchobject.Complexion = null;
-        srchobject.Country = null;
+        srchobject.Country = scope.country;
         srchobject.State = null;
         srchobject.Visastatus = null;
         srchobject.Educationcategory = null;
@@ -118,6 +123,12 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         srchobject.PageName = null;
         srchobject.SavedSearchresultid = null;
         srchobject.Searchresult = null;
+        // sessionStorage.removeItem("homepageobject");
+        sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
+        var realpath = '#/General';
+        window.open(realpath, "_self");
     };
+
+
 
 }]);

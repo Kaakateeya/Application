@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit', 'ngPassword']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit', 'ngPassword', 'material.svgAssetsCache', 'KaakateeyaRegistration']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
@@ -43,8 +43,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'viewmyprofile', url: '/viewmyprofile', templateUrl: 'app/modules/static/viewMyProfile.html', controller: 'viewmyprofile', isloginrequired: true },
         { name: 'viewFullProfileCustomer', url: '/viewFullProfileCustomer', templateUrl: 'app/modules/viewFullProfile/viewFullProfileCustomer.html', controller: 'viewFullProfileCustomer', isloginrequired: true },
         { name: 'termsAndConditions', url: '/termsAndConditions', templateUrl: 'app/modules/static/termsAndConditions.html', isloginrequired: false },
-        { name: 'Registration', url: '/Registration', templateUrl: 'app/modules/registration/views/registrationView.html', controller: "registration", isloginrequired: false },
-        { name: 'regprofiles', url: '/regprofiles', templateUrl: 'app/modules/registration/views/registrationRegProfiles.html', controller: "registrationReg", isloginrequired: false },
+        // { name: 'Registration', url: '/Registration', templateUrl: 'app/modules/registration/views/registrationView.html', controller: "registration", isloginrequired: false },
+        // { name: 'regprofiles', url: '/regprofiles', templateUrl: 'app/modules/registration/views/registrationRegProfiles.html', controller: "registrationReg", isloginrequired: false },
         { name: 'ourbranches', url: '/ourbranches', templateUrl: 'app/modules/static/ourBranches.html', controller: 'ourbranches', isloginrequired: false },
         { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: false },

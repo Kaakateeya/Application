@@ -1,6 +1,5 @@
-app.factory('alert', function() {
+app.factory('alert', ['$mdDialog', function($mdDialog) {
     var modalinstance;
-
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -39,9 +38,7 @@ app.factory('alert', function() {
                     break;
             }
         },
-
         dynamicpopup: function(url, scope, uibModal, custid, size) {
-             
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
@@ -50,9 +47,22 @@ app.factory('alert', function() {
                 size: size || 'lg'
             });
         },
-
         dynamicpopupclose: function() {
             modalinstance.close();
+        },
+        showloginpopup: function() {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'login.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+
+            });
+        },
+        mddiologcancel: function() {
+            $mdDialog.hide();
         }
+
+
     };
-});
+}]);

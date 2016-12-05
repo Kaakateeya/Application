@@ -1,6 +1,7 @@
-app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', function($injector, authSvc, successstoriesdata) {
+app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$mdDialog', function($injector, authSvc, successstoriesdata, $mdDialog) {
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
+    var currentslide = 1;
     return {
         restrict: "E",
         scope: {
@@ -9,11 +10,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
-            debugger;
             scope.searchestype = scope.typeofsearch;
             scope.typeofdiv = "Grid";
             scope.slideshowsearches = false;
+            scope.playpausebuttons = true;
+            scope.pauseplaybuttons = true;
             scope.partnersearchessearches = true;
+            scope.lnkLastSlide = 1;
             // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
             //     $('.search_result_items_main').attr("style", "width:80%;");
             // } else {
@@ -27,7 +30,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
             scope.indexvalues = 0;
-
             var i = 0;
             scope.directivepaging = function() {
                 scope.loaderspin = true;
@@ -38,10 +40,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
             };
             scope.$on('loadmore', function(event, endflag) {
-
                 scope.loaderspin = false;
                 if (scope.array.length > 0) {
-                    debugger;
                     scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                     scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                     scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
@@ -60,10 +60,20 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
             scope.listclick = function() {
                 scope.typeofdiv = 'List';
                 $('.search_result_items_main').attr("style", "width:80%;");
+                scope.slideshowsearches = false;
+                scope.playpausebuttons = true;
+                scope.pauseplaybuttons = true;
+                scope.partnersearchessearches = true;
+                scope.searchestype = false;
             };
             scope.gridclick = function() {
                 scope.typeofdiv = 'Grid';
                 $('.search_result_items_main').attr("style", "");
+                scope.slideshowsearches = false;
+                scope.playpausebuttons = true;
+                scope.pauseplaybuttons = true;
+                scope.partnersearchessearches = true;
+                scope.searchestype = false;
             };
             scope.servicehttp = function(type, object) {
                 return $injector.invoke(function($http) {
@@ -111,25 +121,30 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
 
             };
             scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+                if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                    var indexvalue = scope.indexvalues;
+                    var object = {
+                        IFromCustID: logincustid,
+                        IToCustID: tocustid,
+                        TypeofInsert: type,
+                        EncriptedText: null,
+                        EncryptedRejectFlagText: null,
+                        EncriptedTextrvr: null,
+                        EncryptedRejectFlagTextrvr: null,
+                        StrHtmlText: form !== undefined ? form.message : null,
+                        MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                        MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
+                        Logid: logid !== undefined ? logid : null,
+                        FromProfileID: loginprofileid,
+                        ToProfileID: profileid !== undefined ? profileid : null
+                    };
+                    scope.servicehttp(type, object);
+                } else {
+                    scope.$emit('showloginpopup');
 
-                var indexvalue = scope.indexvalues;
-                var object = {
-                    IFromCustID: logincustid,
-                    IToCustID: tocustid,
-                    TypeofInsert: type,
-                    EncriptedText: null,
-                    EncryptedRejectFlagText: null,
-                    EncriptedTextrvr: null,
-                    EncryptedRejectFlagTextrvr: null,
-                    StrHtmlText: form !== undefined ? form.message : null,
-                    MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
-                    MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
-                    Logid: logid !== undefined ? logid : null,
-                    FromProfileID: loginprofileid,
-                    ToProfileID: profileid !== undefined ? profileid : null
-                };
-                scope.servicehttp(type, object);
+                }
             };
+
             scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
                 scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                 scope.$emit("modalpopupclose", event);
@@ -161,18 +176,159 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', func
                 return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
             };
             scope.indexvalue = function(index) {
-
                 scope.indexvalues = index;
             };
 
             scope.modifyursearch = function() {
-                scope.$emit('modifyursearchpartner');
+                scope.$emit('modifyursearchpartner', 1, 10);
             };
 
-            scope.Slideshowpage = function() {
-                scope.slideshowsearches = true;
-                scope.partnersearchessearches = false;
+            scope.checkitemnew = function(carouselID) {
+                var $this;
+                $this = $("#" + carouselID);
+                if ($("#" + carouselID + " .carousel-inner .item:first").hasClass("active")) {
+                    $("#" + carouselID).find('.left').hide();
+                    $("#" + carouselID).find('.right').show();
+                } else if ($("#" + carouselID + " .carousel-inner .item:last").hasClass("active")) {
+                    $("#" + carouselID).find('.left').show();
+                    $("#" + carouselID).find('.right').hide();
+
+                } else {
+                    $("#" + carouselID).find('.left').show();
+                    $("#" + carouselID).find('.right').show();
+                }
+
             };
+            //method to move slide to left or right arrow press
+            scope.ArrowMove = function(carouselID) {
+                $(document).bind('keyup', function(e) {
+                    var totalItems = $('#' + carouselID).find('.item').length;
+                    var currentIndex = $('#' + carouselID).find('div.active').index() + 1;
+                    if (e.which == 39) {
+                        if (totalItems != currentIndex)
+                            $('#' + carouselID).carousel('next');
+                    } else if (e.which == 37) {
+                        if (currentIndex != 1)
+                            $('#' + carouselID).carousel('prev');
+                    }
+                });
+            };
+
+            scope.checkitemGlobal = function(carouselID) {
+                var checkitem = function() {
+                    scope.checkitemnew(carouselID);
+                };
+                $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
+            };
+            scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+
+                var totalItems = $('#' + carouselID).find('.item').length;
+                if (totalItems == 0) {
+                    scope.$emit('slideshowsubmit', 1, 10);
+                    scope.checkitemnew(carouselID);
+                }
+                scope.ArrowMove(carouselID);
+                scope.checkitemGlobal(carouselID);
+            }
+            scope.pageloadslidebind = function() {
+                debugger;
+                $('.list-inline li a').removeClass('selected');
+                $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
+                var totalItems1 = $('#slideShowCarousel').find('.item').length;
+                var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                if (scope.playpausebuttons == false) {
+                    $('#slideShowCarousel').carousel('pause');
+                    scope.playpausebuttons = false;
+                    scope.pauseplaybuttons = true;
+                }
+                $('#slideShowCarousel').find('div.active').index();
+                scope.lnkLastSlide = currentIndex1;
+                debugger;
+                if (currentslide < currentIndex1) {
+                    if (logincustid != undefined && logincustid != null && logincustid != "") {
+                        if (parseInt(totalItems1) - parseInt(currentIndex1) == 4) {
+                            scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10);
+                            debugger;
+                            if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
+                                $('#slideShowCarousel').find('.left').show();
+                                $('#slideShowCarousel').find('.right').show();
+                            }
+                        }
+                    } else {
+                        if (parseInt(totalItems1) - parseInt(currentIndex1) == 0) {
+                            scope.$emit('showloginpopup');
+                        }
+                    }
+                }
+                currentslide = currentIndex1;
+            };
+            scope.pageloadslide = function() {
+                var currentslide = 1,
+                    totalItems = $('#slideShowCarousel').find('.item').length;
+                if (totalItems == 0) {
+                    scope.$emit('slideshowsubmit', 1, 10);
+                    if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
+                        $('#slideShowCarousel').find('.left').show();
+                        $('#slideShowCarousel').find('.right').show();
+                    }
+                    return false;
+                }
+                scope.pageloadslidebind();
+                //play and pause function on click event
+                $('#slideShowCarousel').carousel({
+                    interval: 2000,
+                    pause: "false"
+                });
+
+                //hide slide arrows for  first and last slide slides  
+                var checkitem = function() {
+                    scope.checkitemnew("slideShowCarousel");
+                };
+                $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
+            }
+
+            scope.Slideshowpage = function() {
+                debugger;
+                scope.slideshowsearches = true;
+                scope.playpausebuttons = false;
+                scope.partnersearchessearches = false;
+                scope.searchestype = true;
+                scope.loadmore = false;
+                scope.pageloadslide();
+                scope.checkitemnew("slideShowCarousel");
+                scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
+                $('#slideShowCarousel').carousel('pause');
+            };
+
+            scope.playslide = function() {
+                scope.playpausebuttons = true;
+                scope.pauseplaybuttons = false;
+                $('#slideShowCarousel').carousel({
+                    interval: 2000,
+                    pause: "false"
+                });
+            };
+            scope.pauseslide = function() {
+                scope.playpausebuttons = false;
+                scope.pauseplaybuttons = true;
+                $('#slideShowCarousel').carousel('pause');
+            };
+            scope.nextslide = function() {
+                debugger;
+                scope.pageloadslidebind();
+            };
+
+            scope.prevslide = function() {
+                debugger;
+                $('.list-inline li a').removeClass('selected');
+                $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
+                var totalItems1 = $('#slideShowCarousel').find('.item').length;
+                var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                $('#slideShowCarousel').find('div.active').index();
+                scope.lnkLastSlide = currentIndex1;
+            };
+
         }
     };
+
 }]);

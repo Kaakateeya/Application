@@ -17,6 +17,7 @@
         "angular-ui-router": "^0.3.1",
         "bootstrap": "latest",
         "editView": "git://github.com/Kaakateeya/EditViewRepo.git#grunt",
+        "registration": "git+https://github.com/Kaakateeya/Registration.git",
         "font-awesome": "latest",
         "jquery": "latest",
         "moment": "latest",

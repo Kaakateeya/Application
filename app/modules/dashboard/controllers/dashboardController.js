@@ -507,9 +507,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
         };
         scope.$on("incrementcounts", function() {
-
             scope.incrementsdashboardcounts();
         });
+
 
     }
 ]);

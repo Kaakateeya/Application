@@ -69,7 +69,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return professionArr;
         },
         educationGroupBind: function(parentval) {
-            debugger;
+           
             var educationGroupArr = [];
             SelectBindService.EducationGroup(parentval).then(function(response) {
                 _.each(response.data, function(item) {
@@ -121,7 +121,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return starArr;
         },
         casteDepedency: function(parentval1, parentval2) {
-            debugger;
+         
             var casteArr = [];
             SelectBindService.castedependency(parentval1, parentval2).then(function(response) {
                 _.each(response.data, function(item) {

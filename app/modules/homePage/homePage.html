@@ -34,7 +34,7 @@
 
                     <div id="navbar" class="nav-collapse collapse pull-left">
                         <ul class="nav">
-                            <li><a href="#/Registration">Register Free</a></li>
+                            <li><a href="#/registration">Register Free</a></li>
                             <li><a href="#/General">Search</a></li>
                             <li><a ng-click="divloginblock()" href="javascript:void(0)">Upgrade</a></li>
                             <li><a href="#/successstories">success stories</a></li>
@@ -56,7 +56,7 @@
                 <div class="login_help">
 
                     <a id="lnkForgotPassword">Forgot Password</a>
-                    <a href="#/Registration">New User Sign Up</a>
+                    <a href="#/registration">New User Sign Up</a>
 
                 </div>
                 <input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myFormss.$invalid" class="button_custom" value="Login" />
@@ -107,7 +107,6 @@
                         </div>-->
                         <div layout-gt-sm="row">
                             <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
-
                                 <md-radio-button value="2" class="md-primary">Bride</md-radio-button>
                                 <md-radio-button value="1"> Groom </md-radio-button>
                             </md-radio-group>
@@ -122,12 +121,17 @@
                         <div id="updateContentdd">
                             <div class="" style="width: 61px;float: left;">
                                 <select name="ddlAgrFrom" ng-model="Agefrom" id="ddlAgrFrom" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
-                          
                             	</select>
+                                <!-- <md-select placeholder="Agefrom" ng-model="Agefrom" md-on-open="loadUsers()" style="left: -9000px;width:80px;top: 36px;">
+                               <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
+                                </md-select>-->
                             </div>
                             <div class="col-lg-6" style="width: 61px;float: left;">
                                 <select name="ddlAgeTo" ng-model="Ageto" id="ddlAgeTo" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
-		                 	</select>
+                                </select>
+                                <!-- <md-select placeholder="Ageto" ng-model="Ageto" md-on-open="loadUsers()" style="left: -9000px;width:80px;top: 36px;">
+                                    <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
+                                </md-select>-->
                             </div>
                         </div>
                     </div>
@@ -189,7 +193,7 @@
                     <p><span><b>Register for FREE</b></span> and take the first step towards marriage </p>
                     <br />
 
-                    <a href="#/Registration" class="button_custom pull-left">register now</a>
+                    <a href="#/registration" class="button_custom pull-left">register now</a>
                     <h5 class="pull-left">get regular alerts and notifications</h5>
                 </div>
                 <div class="color_strip strip-color">&nbsp;</div>

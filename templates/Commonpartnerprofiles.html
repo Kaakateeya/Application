@@ -2,13 +2,18 @@
 
     <div id="View" class="content-View clearfix pull-right" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
         <a id="lnkModifsearch" ng-click="modifyursearch()" class="view_similar pull-left" ng-hide="searchestype" href="javascript:void(0);">Modify Your Search</a>
+        <input id="playButton" ng-hide="playpausebuttons" src="src\images\play-button.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="playslide();" style="height: 32px; width: 32px; display: block;" type="image">
+        <input id="pauseButton" ng-hide="pauseplaybuttons" src="src\images\pause-button.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="pauseslide();" style="height: 32px; width: 32px; display: block;" type="image">
         <input id="imageslideshow" ng-hide="searchestype" src="src\images\slider.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="Slideshowpage();" style="height: 32px; width: 32px; display: block;" type="image">
         <a id="lnkgrid" class="gridk_view icon-list" title="List View" ng-click="listclick()" style="cursor: pointer;" />
         <a id="lnklist" class="normal_view icon-grid" title="Grid View" ng-click="gridclick()" style="cursor: pointer;" />
 
     </div>
 </div>
-
+<div id="divviewdprofiles" class="col-lg-12" ng-show="slideshowsearches">
+    <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;">{{lnkLastSlide}}</label>&nbsp;
+    <label style="color: #000;">Profiles</label>
+</div>
 <div id="slideShowCarousel" class="carousel slide slideShowCarousel" ng-show="slideshowsearches">
     <br>
     <!-- Carousel items -->
@@ -17,7 +22,7 @@
             <div class="container">
                 <div id="galleryCarousel_0" class="slide span6">
                     <div ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
-                        <img name="imagepath" style="height: 300px;width: 300px !important;" class="undefined" ng-src="data.Photo" /></div>
+                        <img name="imagepath" style="height: 300px;width: 300px !important;" class="undefined" ng-src="{{data.Photo}}" /></div>
                     <div>
                         <a href="javascript:void(0)" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')" style="font-weight: bold; text-decoration: underline;">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
                         (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a></div>
@@ -25,6 +30,7 @@
                 <div class="span6">
                     <table>
                         <caption>{{data.NAME}}</caption>
+                        <label id="labaljdjs" ng-hide="true">{{$index}}</label>
                         <tbody>
                             <tr>
                                 <th>Profile ID</th>
@@ -70,15 +76,15 @@
                         </li>
                         <li>
                             <a href="javascript:void(0)" title="Express interest" ng-click="serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)"></a>
-                        
+
                         </li>
                         <li>
                             <a title="Message" href="javascript:void(0)" ng-click="sendmessegescommon('M',data.intCusID)"></a>
-                           
+
                         </li>
                         <li>
-                            <a href="javascript:void(0)" title="Ignore"  ng-click="serviceactions('I',data.intCusID,data.ignode)"></a>
-                           
+                            <a href="javascript:void(0)" title="Ignore" ng-click="serviceactions('I',data.intCusID,data.ignode)"></a>
+
                         </li>
                     </ul>
                     <ul class="slideShowCarousel_ui2 clearfix">
@@ -91,8 +97,8 @@
 
     </div>
     <!-- Carousel nav -->
-    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel"  ng-hide="false" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" data-slide="next">›</a>
+    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel" ng-hide="false" ng-click="prevslide()" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" ng-click="nextslide()" data-slide="next">›</a>
     <label style="display: none;" id="lblcurrentprofile"></label>
     <label style="display: none;" id="lblcurSlide">1</label>
     <label style="display: none;" id="lnkLastSlide1"></label>
@@ -243,6 +249,46 @@
         </div>
 
     </div>
+</script>
+<script type="text/ng-template" id="login.html">
+    <md-dialog>
+        <form ng-cloak name="myFormlogin">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Existing User Login</h2>
+                    <span flex></span>
+                    <a href="javascript:void(0)">
+                        <i class="material-icons" ng-click="cancel()">close</i></a>
+                </div>
+            </md-toolbar>
+            <md-dialog-content>
+                <div class="md-dialog-content">
+                    <p>To login into your account, please provide your username and password</p>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>UserName</label>
+                            <input type="text" id="txtusername" ng-model="username" required>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Password</label>
+                            <input type="password" id="txtPassword" ng-model="password" required>
+                        </md-input-container>
+                    </div>
+                    <a href="#/Registration"> To create your kaakateeya matrimonial account Click Register Now</a>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row">
+                <md-button ng-click="loginsubmit()" ng-disabled="myFormlogin.$invalid">
+                    Login
+                </md-button>
+                <md-button ng-click="cancel()">
+                    Cancel
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
 </script>
 <style type="text/css">
     .spandisplay {
