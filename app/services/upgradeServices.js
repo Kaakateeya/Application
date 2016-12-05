@@ -6,9 +6,9 @@ app.factory('myAppFactory', ["$http", function(http) {
                 url: 'http://angular-data-grid.github.io/demo/data.json'
             });
         },
-    getpayment:function(custid) {
-           
-        return http.get(app.apiroot + 'Payment/GetPaymentDetails', {params: {CustID:custid}});
+        getpayment: function(custid) {
+            return http.get(app.apiroot + 'Payment/GetPaymentDetails', { params: { CustID: custid } });
         }
+
     };
- }]);
+}]);

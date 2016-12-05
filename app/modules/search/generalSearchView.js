@@ -1,7 +1,7 @@
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
-    '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
+    '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog', '$location',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog) {
+        customerDashboardServices, authSvc, $mdDialog, $location) {
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -13,6 +13,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.savedsearchselect = [];
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         // scope.searches = 'searches';
+        var searchObjectquery = $location.search();
+        scope.selectedIndex = searchObjectquery.selectedIndex;
+        //alert(scope.selectedIndex);
         scope.changeBindsearhes = function(type, parentval, parentval2) {
             switch (type) {
                 case 'Country':
@@ -24,7 +27,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case 'caste':
                     scope.Caste = [];
                     scope.Caste = commonFactory.casteDepedency(parentval, (parentval2).toString());
-                    console.log((scope.Caste));
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(parentval);
@@ -34,14 +36,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
             debugger;
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
-                console.log(response.data);
+
                 _.each(response.data, function(item) {
                     scope.savedsearchselect.push(item);
                 });
             });
             if (iEditDelete === 0) {
                 searches.savedsearchselectmethod(custid, "", 1).then(function(response) {
-                    console.log(response.data);
+
                     _.each(response.data, function(item) {
                         scope.savedsearchselect.push(item);
                     });
@@ -86,7 +88,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.educationcategory = arrayConstants.educationcategory;
             service.countrySelect().then(function(response) {
                 scope.Country = [];
-                console.log(response);
+
                 _.each(response.data, function(item) {
                     scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                 });
@@ -109,6 +111,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.stars = arrayConstants.stars;
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
+                    console.log(response.data);
                     scope.partnerbindings(response);
                 });
                 scope.savedsearchselectmethod(scope.custid, "", 1);
@@ -186,7 +189,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case "general":
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
-                        console.log(response);
+
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -214,7 +217,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         EndIndex: topage,
                     };
                     searches.profileidsearch(SearchRequest).then(function(response) {
-                        console.log(response);
+
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -274,7 +277,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
-                        console.log(response);
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -315,7 +317,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                     };
                     searches.CustomerProfileIDSavedSearch(scope.submitprofileidsavedsearchobject).then(function(response) {
-                        console.log(response);
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -357,7 +358,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case 'caste':
                     scope.Caste = [];
                     scope.Caste = commonFactory.casteDepedency(scope.religion, (modal).toString());
-                    console.log((scope.Caste));
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(modal);
@@ -484,9 +484,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
                         debugger;
-                        if (SearchpageID === 1) {
-                            typeofsearch = ""
-                        } else if (SearchpageID === 2) {
+                        if (SearchpageID === "1") {
+                            typeofsearch = "profileid";
+                        } else if (SearchpageID === "2") {
                             typeofsearch = "general";
                         } else {
                             typeofsearch = "advanced";
@@ -498,6 +498,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     debugger;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
+                        scope.showcontrols = true;
+                        scope.truepartner = true;
+                        debugger;
+                        if (SearchpageID === "1") {
+                            typeofsearch = "profileid";
+                            scope.selectedIndex = 2;
+                        } else if (SearchpageID === "2") {
+                            typeofsearch = "general";
+                            scope.selectedIndex = 0;
+                        } else {
+                            typeofsearch = "advanced";
+                            scope.selectedIndex = 1;
+                        }
                     });
                     break;
             }
