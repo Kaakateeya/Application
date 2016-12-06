@@ -1,179 +1,305 @@
+<style type="text/css">
+    .ValueContains {
+        margin: 0 !important;
+        background-color: #f0f0cc !important;
+        /*border-color:green !important;*/
+    }
+    
+    .has-error .control-label {
+        color: #a94442 !important;
+    }
+    
+    .has-error .form-control {
+        color: #a94442 !important;
+        border-color: #a94442 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    }
+    
+    .has-success .control-label {
+        color: green !important;
+    }
+    
+    .has-success .form-control {
+        color: green !important;
+        border-color: green !important;
+        box-shadow: inset 0 1px 1px green;
+    }
+    
+    select {
+        width: 100px;
+        height: 34px;
+        margin-bottom: 10px;
+    }
+    
+    .colorloading {
+        color: black;
+        margin-top: 10px;
+    }
+    
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        /*min-height: 248px*/
+        min-height: 600px;
+    }
+    
+    .select-box-my label {
+        text-transform: capitalize;
+        color: #000 !important;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+</style>
 <div class="wrapper" ng-init="pageinit()">
-
-
     <!--/ Main Block 1 -->
     <div class="search_page_main tickets_main">
         <div class="search_page_tabs">
-            <ul>
-                <li>
-                    <a id="lnkopen" class="active" href="javascript:void(0);">Open / Pending</a></li>
-                <li>
-                    <a id="lnkClosed" href="javascript:void(0);">Closed Tickets</a></li>
-                <li>
-                    <a id="lnkDeleted" href="javascript:void(0);">Deleted Tickets</a></li>
-                <li>
-                    <a id="lnkAll" href="javascript:void(0);">All Tickets</a></li>
-            </ul>
-            <div class="clear">&nbsp;</div>
-        </div>
+            <div class="sample" layout="column" ng-cloak>
+                <md-content class="md-padding">
+                    <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                        <md-tab label="OPEN / PENDING">
+                            <div class="tab">
+                                <form name="open" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Opened On</span></th>
+                                                        <th>
+                                                            <span>Updated On</span></th>
+                                                        <th>
+                                                            <span>Assigned To</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Email ID :</b><span>
+                                                        <span id="lblEmail">{{support.Email}}</span></span>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.OpenedDate}}</span></td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo">{{support.AssignedToEmp}}</span>
+                                                            <a href="javascript:void(0);" style="display: none;">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-        <table id="toppaging" class="clearfix" style="padding: 14px 0 0 18px; display: block;">
-            <tbody>
-                <tr>
-                    <td>
-                        <input name="btnFirst" id="btnFirst" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_left_double.png" type="image">
-                    </td>
-                    <td>
-                        <input name="btnprevious" id="btnprevious" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_left.png" type="image">
-                    </td>
-                    <td>
-                        <input name="txtpageno" value="1" maxlength="2" onchange="javascript:setTimeout('__doPostBack(\'txtpageno\',\'\')', 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="txtpageno" class="page_no_enter" onblur="ValidationRange(this.id);"
-                            style="width:35px;" type="text">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="CLOSED TICKETS">
+                            <div class="tab">
+                                <form name="close" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Actions</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
 
-                    </td>
-                    <td>
-                        <span id="lblTextbox">of</span>
-                    </td>
-                    <td>
-                        <span id="lblTotaonoofpages" class="current_page">1</span>
-                    </td>
-                    <td>
-                        <input name="btnNext" id="btnNext" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_right.png" type="image">
-                    </td>
-                    <td>
-                        <input name="BtnLast" id="BtnLast" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_right_double.png" type="image">
-                    </td>
-                    <td>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo"></span>
+                                                            <a href="javascript:void(0);" ng-click="reopenticket(support.TicketNO)">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                    </td>
-                    <td>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="DELETED TICKETS">
+                            <div class="tab">
+                                <form name="deleted" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Actions</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
 
-                    </td>
-                    <td>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo"></span>
+                                                            <a href="javascript:void(0);" ng-click="reopenticket(support.TicketNO)">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                    </td>
-                    <td>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="ALL TICKETS">
+                            <div class="tab">
+                                <form name="alltickets" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Assigned To</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
 
-                    </td>
-                    <td>
 
-                    </td>
-                    <td>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo">{{support.AssignedToEmp}}</span>
+                                                            <a href="javascript:void(0);" style="display: none;">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <div class="tickets_main_content">
-
-
-            <div id="uptickets">
-
-
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ticket ID</th>
-                        <th>Ticket Details</th>
-                        <th>
-                            <span id="lblOpenedOnID">Opened On</span></th>
-                        <th>
-                            <span id="lblUpdatedID">Updated On</span></th>
-                        <th>
-                            <span id="lblAssignID">Assigned To</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <a id="rptopenedTickets_ctl00_lblTickesID" href="javascript:__doPostBack('rptopenedTickets$ctl00$lblTickesID','')">KakWB134819</a>
-                        </td>
-                        <td>
-                            <p class="clearfix">
-                                <b>Ticket Status :</b><span>
-                                                        <span id="rptopenedTickets_ctl00_lblopenticketStatus">Open</span></span>
-                            </p>
-                            <p class="clearfix">
-                                <b>Cat :</b><span>
-                                                        <span id="rptopenedTickets_ctl00_lblopenCat">Marketing</span></span>
-                            </p>
-                            <p class="clearfix">
-                                <b>Sub :</b>
-                                <span id="rptopenedTickets_ctl00_lblSubject">Marketing</span>
-                            </p>
-                            <p class="clearfix">
-                                <b>Reported By :</b><span>
-                                                        <span id="rptopenedTickets_ctl00_lblReportedBy">Anil S</span></span>
-                            </p>
-                            <p class="clearfix">
-                                <b>Email ID :</b><span>
-                                                        <span id="rptopenedTickets_ctl00_lblEmail">anil.singareddy@gmail.com</span></span>
-                            </p>
-                        </td>
-                        <td>
-                            <span id="rptopenedTickets_ctl00_lblopenedOn">08-Oct-2015</span></td>
-                        <td>
-                            <span id="rptopenedTickets_ctl00_lblUpdatedOn">27-Apr-2016</span></td>
-                        <td>
-                            <span id="rptopenedTickets_ctl00_lblAssignedTo">VYDEHIPENDAYALA</span>
-                            <a id="rptopenedTickets_ctl00_lnkReopen" href="javascript:__doPostBack('rptopenedTickets$ctl00$lnkReopen','')" style="display: none;">Reopen</a></td>
-                    </tr>
-
-
-
-
-                </tbody>
-            </table>
-
         </div>
-        <table id="bottompaging" style="padding: 0 0 14px 18px; display: block;">
-            <tbody>
-                <tr>
-                    <td>
-                        <input name="btnFirst1" id="btnFirst1" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_left_double.png" type="image">
-                    </td>
-                    <td>
-                        <input name="btnPrevious1" id="btnPrevious1" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_left.png" type="image">
-                    </td>
-                    <td>
-                        <input name="txtPageno2" value="1" maxlength="2" onchange="javascript:setTimeout('__doPostBack(\'txtPageno2\',\'\')', 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="txtPageno2" onblur="ValidationRange(this.id);" style="width: 32px; height: 30px; text-align: center; font-weight: 400; font-size: 14px;"
-                            type="text">
-
-                    </td>
-                    <td>
-                        <span id="Label2">to</span>
-                    </td>
-                    <td>
-                        <span id="lblNoofPages1" class="current_page">1</span>
-                    </td>
-                    <td>
-                        <input name="btnNext1" id="btnNext1" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_right.png" type="image">
-                    </td>
-                    <td>
-                        <input name="btnLast1" id="btnLast1" disabled="disabled" class="aspNetDisabled paging_button" src="../images/arrow_right_double.png" type="image">
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
     </div>
-    <!-- Main Block 1 /-->
+
 </div>

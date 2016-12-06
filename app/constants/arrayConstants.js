@@ -32,7 +32,7 @@ app.constant('arrayConstants', {
         { "label": "7'1 in - 215 cms", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms", "title": "7'2 in - 218 cms", "value": 39 }
     ],
     "Religion": [
-
+        { "label": "--select--", "title": "--select--", "value": 0 },
         { "label": "Hindu", "title": "Hindu", "value": 1 },
         { "label": "Christian", "title": "Christian", "value": 2 },
         { "label": "Muslim", "title": "Muslim", "value": 3 },

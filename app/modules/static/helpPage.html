@@ -79,7 +79,7 @@
 
                 </div>
 
-                <div class="control-group pics_upload span6 file_upload_help">
+                <div class="control-group pics_upload span6 file_upload_help" ng-hide="true">
                     <label class="control-label">Upload your image</label>
                     <div class="controls">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -111,26 +111,11 @@
                 </div>
                 <div class="clear clear_my"></div>
                 <div class="rating_submit_main clearfix">
-                    <div class="rating_captcha help_captcha">
-
-                        <label class="control-label">Please enter the security code here</label>
-                        <div class="rating_captcha_in clearfix">
-                            <input name="CaptchaInputField" ng-model="CaptchaInputField" class="verify" type="text">
-                            <img id="Captcha1" captchalength="5" noisecolor="#B1B1B1" alt="" captchaheight="60" captchabackgroundnoise="Low" captchamaxtimeout="240" fontcolor="#D20B0C" captchamintimeout="5" src="/Customer_new/Customerdesignedpages/CustomerNewHelp.aspx?oboutcaptchaguid=411542236&amp;width=200&amp;height=40"
-                                captchawidth="200" style="height:40px;width:200px;">
-                            <div class="clear"></div>
-                            <span id="lblfileuploadsize" style="display: block"></span>
-                        </div>
-
-                        <a href="javascript: $find('Captcha1').getNewImage();">Generate a New
-                                                            Image</a>
-                        <img id="GenerateNew" alt="" title="Generate a new image" onclick="$find('Captcha1').getNewImage();" src="../images/icon_refresh.png" style="cursor: pointer">
-
+                    <div class="rating_captcha">
+                        <label class="control-label">Please enter the security code</label>
+                        <div re-captcha ng-model="user.captcha"></div>
                     </div>
-
-
                     <input name="btnSub" value="submit" class="button_custom pull-right" type="submit" ng-click="submit();">
-
                 </div>
 
             </div>

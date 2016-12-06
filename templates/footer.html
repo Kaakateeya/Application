@@ -1,4 +1,4 @@
-<footer>
+<footer ng-controller="footercontrol">
     <div class="footer_in" id="divFooterinner">
         <a class="logo2 pull-left" style="margin: 10px 40px 0 0;">&nbsp;</a>
 
@@ -82,7 +82,7 @@
         <div class="span2">
             <h6>information</h6>
             <ul>
-                <li><a onclick="return ShowForgotPassword();" href="javascript:void(0)">Forgot Password</a></li>
+                <li><a ng-click="showforgetpasswordpopup()" href="javascript:void(0)">Forgot Password</a></li>
                 <li>
                     <a id="lnkFeedBackFooter" href="#/feedback">Feed Back</a>
                 </li>
@@ -116,4 +116,5 @@
         <div class="color_strip strip-color">&nbsp;</div>
         <div class="strip-color color_strip2">&nbsp;</div>
     </div>
+    <forgot-password></forgot-password>
 </footer>

@@ -32,9 +32,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
         scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
-
             if ((scope.username).indexOf("@") != -1) {
-
                 if (!scope.ValidateEmail(scope.username)) {
                     scope.username = '';
                     alert(" Please enter valid ProfileID/Email");
@@ -129,25 +127,10 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             var realpath = '#/General';
             window.open(realpath, "_self");
         };
-        scope.showforgetpassword = function() {
-            $mdDialog.show({
-                controller: forgetcontroller,
-                templateUrl: 'forgetpassword.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
 
-            });
-        };
-
-
-        function forgetcontroller($scope, $mdDialog) {
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-
-            };
-        }
         scope.showforgetpasswordpopup = function() {
-            scope.showforgetpassword();
+            scope.$broadcast('showforgetpassword');
+            
         };
 
     }

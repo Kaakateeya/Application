@@ -24,6 +24,12 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         },
         getmysupporttickets: function(obj) {
             return http.post(app.apiroot + 'StaticPages/TicketDetails', obj);
+        },
+        getopenticket: function(PageID, ProfileID, TicketID) {
+            return http.get(app.apiroot + 'StaticPages/getCustomerReopenTicketStatus', { params: { PageID: PageID, ProfileID: ProfileID, TicketID: TicketID } });
+        },
+        forgotpassword: function(emailorprofileid) {
+            return http.get(app.apiroot + 'StaticPages/getForgotPassword', { params: { Username: emailorprofileid } });
         }
     };
 }]);

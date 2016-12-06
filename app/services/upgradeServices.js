@@ -8,6 +8,9 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         getpayment: function(custid) {
             return http.get(app.apiroot + 'Payment/GetPaymentDetails', { params: { CustID: custid } });
+        },
+        sendsms: function(CategoryID, Cust_ID, SendPhonenumber) {
+            return http.get(app.apiroot + 'StaticPages/getUnpaidMembersOwnerNotification', { params: { CategoryID: CategoryID, Cust_ID: Cust_ID, SendPhonenumber: SendPhonenumber } });
         }
 
     };
