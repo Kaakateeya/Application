@@ -37,7 +37,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
         scope.sendsmspayment = function(payment) {
             myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
                 console.log(response);
-                alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success')
+                alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
             });
         };
         scope.ccavenuepage = function() {

@@ -67,7 +67,7 @@ app.constant('arrayConstants', {
         { "label": "7'1 in - 215 cms", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms", "title": "7'2 in - 218 cms", "value": 39 }
     ],
     "Religion": [
-
+        { "label": "--select--", "title": "--select--", "value": 0 },
         { "label": "Hindu", "title": "Hindu", "value": 1 },
         { "label": "Christian", "title": "Christian", "value": 2 },
         { "label": "Muslim", "title": "Muslim", "value": 3 },
@@ -590,6 +590,56 @@ app.factory('alert', ['$mdDialog', function($mdDialog) {
 
     };
 }]);
+app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
+    '$mdDialog',
+    function(authSvc, customerProfilesettings, alerts, $mdDialog) {
+        var logincustid = authSvc.getCustId();
+        var loginprofileid = authSvc.getProfileid();
+        return {
+            restrict: "E",
+            scope: {
+                arrayphotos: '='
+            },
+            templateUrl: "templates/forgotPasswordDirective.html",
+            link: function(scope, element, attrs) {
+                scope.showforgetpassword = function() {
+                    $mdDialog.show({
+                        controller: forgetcontroller,
+                        templateUrl: 'forgetpassword.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+
+                    });
+                };
+
+
+                function forgetcontroller($scope, $mdDialog) {
+                    $scope.cancel = function() {
+                        $mdDialog.cancel();
+                    };
+                    $scope.forgotpasswordsubmit = function(form) {
+                        customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
+                            if (response.data == 1) {
+                                alerts.open('Mail sent to your email, To reset your password check your mail.', "success");
+                                $mdDialog.cancel();
+                            } else if (response.data == 2) {
+                                alerts.open("Invalid Matrimony ID OR  E-mail-ID.", "warning");
+                            } else {
+                                alerts.open("Invalid Matrimony ID OR  E-mail-ID.", "warning");
+                            }
+                        });
+                    };
+                }
+
+                scope.$on('showforgetpassword', function(event) {
+                    scope.showforgetpassword();
+                });
+
+
+            }
+        };
+    }
+]);
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
@@ -1701,6 +1751,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
     }
 ]);
+app.controller('footercontrol', ['$scope', 'authSvc', function(scope, authSvc) {
+
+    scope.showforgetpasswordpopup = function() {
+        scope.$broadcast('showforgetpassword');
+
+    };
+
+}]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', function(scope, authSvc, ngIdle, alertpopup, uibModal) {
     scope.showhidetestbuttons = function() {
         var datatinfo = authSvc.user();
@@ -1854,9 +1912,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
         scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
-
             if ((scope.username).indexOf("@") != -1) {
-
                 if (!scope.ValidateEmail(scope.username)) {
                     scope.username = '';
                     alert(" Please enter valid ProfileID/Email");
@@ -1951,25 +2007,10 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             var realpath = '#/General';
             window.open(realpath, "_self");
         };
-        scope.showforgetpassword = function() {
-            $mdDialog.show({
-                controller: forgetcontroller,
-                templateUrl: 'forgetpassword.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
 
-            });
-        };
-
-
-        function forgetcontroller($scope, $mdDialog) {
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-
-            };
-        }
         scope.showforgetpasswordpopup = function() {
-            scope.showforgetpassword();
+            scope.$broadcast('showforgetpassword');
+            
         };
 
     }
@@ -1982,17 +2023,20 @@ app.controller("payment",function()
 {
 
 });
-app.controller('payment', ['$scope', '$element', 'arrayConstants', 'SelectBindServiceApp', 'customerDashboardServices', function(scope, $element, arrayConstants, service, customerDashboardServices) {
-       scope.Mothertongue = arrayConstants.Mothertongue;
-    scope.mothertongue = [1, 2, 3];
-scope.mothertongueccc=[1,2,3];
-    
-scope.generalsearchsubmit=function()
-{
-alert(scope.mothertongue);  
-alert(scope.mothertongueccc);  
-};
-}]);
+app.controller('paymentresponse', ['$scope',
+    function(scope) {
+        scope.pageloadpayment = function() {
+
+            scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
+            console.log(scope.paymentobject);
+        };
+        scope.backtopayment = function() {
+            var realpath = '#/UpgradeMembership';
+            window.open(realpath, "_self");
+        };
+
+    }
+]);
 app.controller("registration", function () {
 
 });
@@ -2769,78 +2813,79 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSv
     };
 
 }]);
-app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', function(uibModal, scope, helpService, arrayConstants) {
+app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 'reCAPTCHA',
+    function(uibModal, scope, helpService, arrayConstants, reCAPTCHA) {
 
-    scope.catgory = 'catgory';
-    scope.Priority = 'Priority';
-    scope.countryCode = 'countryCode';
-    scope.lblpopupCategory = 'dffdf';
-    scope.open = function(size) {
-        scope.modalInstance = uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'myModalContent.html',
-            scope: scope
-        });
-    };
-
-    scope.submit = function() {
-
-        if (scope.helpForm.$valid) {
-
-            scope.inputObj = {
-                profile: '210910352',
-                AssignedEmpID: null,
-                BranchID: 0,
-                Name: scope.txtname,
-                Email: scope.txtemail,
-                subject: scope.txtsubject,
-                Category: scope.ddlcategory,
-                Message: scope.txtmsg,
-                Priority: scope.ddlpriority,
-                Image: null,
-                CountryCode: scope.ddlcountrycode,
-                AreaCode: scope.txtphonecode,
-                PhoneNum: scope.txtphnum,
-                EmpID: 0
-            };
-
-            helpService.helpSubmit(scope.inputObj).then(function(response) {
-                console.log(response);
-                scope.CustName = scope.txtname;
-                scope.lblTicketID = response.data.Ticket;
-                scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
-                scope.open();
+        scope.catgory = 'catgory';
+        scope.Priority = 'Priority';
+        scope.countryCode = 'countryCode';
+        scope.lblpopupCategory = 'dffdf';
+        scope.open = function(size) {
+            scope.modalInstance = uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'myModalContent.html',
+                scope: scope
             });
-        }
-
-    };
-
-
-    scope.SendMail = function() {
-
-
-        scope.SendMailObj = {
-            TicketID: scope.lblTicketID,
-            Name: scope.CustName,
-            CategoryName: scope.lblpopupCategory,
-            strEmail: scope.txtemail,
-            EmpID: 0,
-            EmpTicketID: 0
         };
 
-        helpService.SendMail(scope.SendMailObj).then(function(response) {
-            console.log(response);
-            if (response.data == 1) {
-                alert('mail has sent successfully');
+        scope.submit = function() {
+
+            if (scope.helpForm.$valid) {
+
+                scope.inputObj = {
+                    profile: '210910352',
+                    AssignedEmpID: null,
+                    BranchID: 0,
+                    Name: scope.txtname,
+                    Email: scope.txtemail,
+                    subject: scope.txtsubject,
+                    Category: scope.ddlcategory,
+                    Message: scope.txtmsg,
+                    Priority: scope.ddlpriority,
+                    Image: null,
+                    CountryCode: scope.ddlcountrycode,
+                    AreaCode: scope.txtphonecode,
+                    PhoneNum: scope.txtphnum,
+                    EmpID: 0
+                };
+
+                helpService.helpSubmit(scope.inputObj).then(function(response) {
+                    console.log(response);
+                    scope.CustName = scope.txtname;
+                    scope.lblTicketID = response.data.Ticket;
+                    scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
+                    scope.open();
+                });
             }
-        });
+
+        };
+
+
+        scope.SendMail = function() {
+
+
+            scope.SendMailObj = {
+                TicketID: scope.lblTicketID,
+                Name: scope.CustName,
+                CategoryName: scope.lblpopupCategory,
+                strEmail: scope.txtemail,
+                EmpID: 0,
+                EmpTicketID: 0
+            };
+
+            helpService.SendMail(scope.SendMailObj).then(function(response) {
+                console.log(response);
+                if (response.data == 1) {
+                    alert('mail has sent successfully');
+                }
+            });
 
 
 
 
-        scope.modalInstance.close();
-    };
+            scope.modalInstance.close();
+        };
 
 
 
@@ -2851,7 +2896,8 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
 
 
-}]);
+    }
+]);
 app.controller("blockerController",function(){
 
 
@@ -3260,14 +3306,14 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function (scope
         }
     });
 }]);
-app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc',
-    function(scope, customerProfilesettings, authSvc) {
+app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc', 'alert',
+    function(scope, customerProfilesettings, authSvc, alerts) {
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.supporttickets = [];
-        scope.pageinit = function() {
+        scope.submitsupporttickets = function(pageid) {
             var obj = {
-                PageID: 1,
+                PageID: pageid,
                 CustID: scope.custid,
                 TicketID: null,
                 ProfileID: null,
@@ -3281,6 +3327,43 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
                     scope.supporttickets = JSON.parse(item);
                     console.log(scope.supporttickets);
                 });
+            });
+        };
+        scope.pageinit = function() {
+            scope.submitsupporttickets(1);
+        };
+        scope.$watch('selectedIndex', function(current, old) {
+            console.log('current', current);
+            console.log('old', old);
+            switch (current) {
+
+                case 0:
+
+                    scope.submitsupporttickets(1);
+                    break;
+                case 1:
+
+                    scope.submitsupporttickets(2);
+                    break;
+                case 2:
+                    scope.submitsupporttickets(3);
+                    break;
+                case 3:
+                    scope.submitsupporttickets(4);
+                    break;
+            }
+        });
+        scope.reopenticket = function(ticketid) {
+            customerProfilesettings.getopenticket(6, "", ticketid).then(function(response) {
+                console.log(response);
+                if (response.data == 1) {
+                    alerts.open("Your ticket have been reopened successfully", "success");
+                    scope.supporttickets = [];
+                    scope.submitsupporttickets(3);
+                } else {
+                    alerts.open("Failed please contact admin", "warning");
+                }
+
             });
         };
     }
@@ -3307,26 +3390,53 @@ app.controller('termsandconditions', ['$scope', function (scope) {
     };
 
 }]);
-app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory', 'authSvc', function(scope, $interval, myAppFactory, authSvc) {
-    scope.paymentarray = [];
-    var logincustid = authSvc.getCustId();
-    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-    myAppFactory.getpayment(scope.custid).then(function(response) {
-        console.log(response);
+app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
+    'authSvc', 'alert',
+    function(scope, $interval, myAppFactory, authSvc, alerts) {
         scope.paymentarray = [];
-        scope.paymentarray.push({
-            MembershipName: "Services & Features",
-            MembershipAmount: "My Plans",
-            AllottedServicePoints: "Profile Count",
-            onlineaccess: "Online Access",
-            offlineaccess: "Offline Access"
+        var logincustid = authSvc.getCustId();
+        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        myAppFactory.getpayment(scope.custid).then(function(response) {
+            console.log(response);
+            scope.paymentarray = [];
+            scope.paymentarray.push({
+                MembershipName: "Services & Features",
+                MembershipAmount: "My Plans",
+                AllottedServicePoints: "Profile Count",
+                onlineaccess: "Online Access",
+                offlineaccess: "Offline Access"
+            });
+            _.each(response.data, function(item) {
+                scope.paymentarray.push(item);
+            });
         });
-        _.each(response.data, function(item) {
-            scope.paymentarray.push(item);
-        });
-    });
 
-}]);
+        scope.selectpaymantoption = function(membershipd, amount, profilecount, discount, custid, servicename, year) {
+            var paymentobject = {
+                MembershipID: membershipd,
+                Amount: amount,
+                Points: profilecount,
+                DiscountID: discount,
+                CustID: custid,
+                MembershipName: servicename,
+                Duration: year
+            };
+            sessionStorage.setItem("paymentobject", JSON.stringify(paymentobject));
+            var realpath = '#/paymentresponse';
+            window.open(realpath, "_self");
+        };
+
+        scope.sendsmspayment = function(payment) {
+            myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
+                console.log(response);
+                alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
+            });
+        };
+        scope.ccavenuepage = function() {
+            window.open("https://secure.ccavenue.com/transaction/TransactionInitiator", "_self");
+        };
+    }
+]);
 app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function(customerDashboardServices, scope) {
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
@@ -3802,6 +3912,12 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         },
         getmysupporttickets: function(obj) {
             return http.post(app.apiroot + 'StaticPages/TicketDetails', obj);
+        },
+        getopenticket: function(PageID, ProfileID, TicketID) {
+            return http.get(app.apiroot + 'StaticPages/getCustomerReopenTicketStatus', { params: { PageID: PageID, ProfileID: ProfileID, TicketID: TicketID } });
+        },
+        forgotpassword: function(emailorprofileid) {
+            return http.get(app.apiroot + 'StaticPages/getForgotPassword', { params: { Username: emailorprofileid } });
         }
     };
 }]);
@@ -3961,6 +4077,9 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         getpayment: function(custid) {
             return http.get(app.apiroot + 'Payment/GetPaymentDetails', { params: { CustID: custid } });
+        },
+        sendsms: function(CategoryID, Cust_ID, SendPhonenumber) {
+            return http.get(app.apiroot + 'StaticPages/getUnpaidMembersOwnerNotification', { params: { CategoryID: CategoryID, Cust_ID: Cust_ID, SendPhonenumber: SendPhonenumber } });
         }
 
     };

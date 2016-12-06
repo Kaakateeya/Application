@@ -30,11 +30,11 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             switch (current) {
 
                 case 0:
-                    debugger;
+
                     scope.submitsupporttickets(1);
                     break;
                 case 1:
-                    debugger;
+
                     scope.submitsupporttickets(2);
                     break;
                 case 2:

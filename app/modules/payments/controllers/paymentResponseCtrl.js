@@ -1,7 +1,7 @@
 app.controller('paymentresponse', ['$scope',
     function(scope) {
         scope.pageloadpayment = function() {
-            debugger;
+
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
             console.log(scope.paymentobject);
         };

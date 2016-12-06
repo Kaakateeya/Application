@@ -36,7 +36,7 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                                 alerts.open("Invalid Matrimony ID OR  E-mail-ID.", "warning");
                             }
                         });
-                    }
+                    };
                 }
 
                 scope.$on('showforgetpassword', function(event) {
