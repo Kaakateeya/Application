@@ -54,7 +54,7 @@
     "license": "ISC",
     "buildSettings": {
         "plugins": [
-            "src/js/jquery-1.8.3.min.js",
+            "node_modules/jquery/dist/jquery.min.js",
             "src/js/jquery.alert.js",
             "src/js/scriptsKaakateeya.js",
             "src/js/GI.TheWall.min.js",
