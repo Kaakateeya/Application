@@ -166,7 +166,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (1)) {
                         globalheight = obj.label;
-                        alert(globalheight);
+
 
                     }
                 });
@@ -174,7 +174,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (38)) {
                         globalheightto = obj.label;
-                        alert(globalheightto);
+
                     }
                 });
                 scope.Heighttotext = globalheightto;
@@ -400,7 +400,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (1)) {
                         globalheight = obj.label;
-                        alert(globalheight);
+
 
                     }
                 });
@@ -408,7 +408,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (38)) {
                         globalheightto = obj.label;
-                        alert(globalheightto);
+
                     }
                 });
                 scope.Heighttotext = globalheightto;
@@ -587,7 +587,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.clickvalues = function(text) {
-            alert(text);
             scope.HeightFromtext = text;
 
         };

@@ -89,7 +89,8 @@ app.constant('arrayConstants', {
         { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
         { "label": "English", "title": "English", "value": 10 },
         { "label": "Malayalam", "title": "Malayalam", "value": 11 },
-        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 }, { "label": "Orea", "title": "Orea", "value": 13 },
+        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 },
+        { "label": "Orea", "title": "Orea", "value": 13 },
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
     "educationcategory": [
@@ -1220,6 +1221,31 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
         }
     };
 }]);
+app.factory('singlestaticbindings', ['arrayConstants', 'SelectBindServiceApp', function(arrayConstants, SelectBindService) {
+    return {
+        Age: function() {
+            var Age = [];
+            Age = [{ label: "--Select--", title: "--select--", value: "0" }];
+            for (var i = 18; i < 78; i++) {
+                Age.push({ label: i + ' years', title: i + ' years', value: i });
+            }
+            return Age;
+        },
+        Country: function() {
+            var Countryi = [];
+            SelectBindService.countrySelect().then(function(response) {
+
+                Countryi = [{ label: "--Select--", title: "--select--", value: "0" }];
+                _.each(response.data, function(item) {
+                    Countryi.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+            });
+            return Countryi;
+        }
+
+    };
+
+}]);
 app.directive('setClassWhenAtTop', function($window) {
     var $win = angular.element($window); // wrap window object as jQuery object
 
@@ -2028,6 +2054,58 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
     }
 ]);
+app.controller('missingfieldsctrl', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'alert',
+    'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog', '$location', 'singlestaticbindings',
+    function(scope, arrayConstants, service, alerts, commonFactory,
+        customerDashboardServices, authSvc, $mdDialog, $location, singlestaticbindings) {
+        var logincustid = authSvc.getCustId();
+        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.showloginpopup = function() {
+            $mdDialog.show({
+                templateUrl: 'missingfieldspopup.html',
+                parent: angular.element(document.body),
+                scope: scope,
+                clickOutsideToClose: true,
+            });
+        };
+        scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        scope.loginsubmit = function() {};
+        scope.height = [];
+        scope.height = arrayConstants.height;
+        scope.MaritalStatus = arrayConstants.MaritalStatus;
+        scope.educationcategory = arrayConstants.educationcategory;
+        service.countrySelect().then(function(response) {
+            scope.Country = [];
+            scope.Country = [{ label: "--Select--", title: "--select--", value: "0" }];
+            _.each(response.data, function(item) {
+                scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
+        scope.Religion = arrayConstants.Religion;
+        scope.Mothertongue = arrayConstants.Mothertongue;
+        scope.visastatus = arrayConstants.visastatus;
+        service.ProfessionGroup().then(function(response) {
+            scope.Professiongroup = [];
+            scope.Professiongroup = [{ label: "--Select--", title: "--select--", value: "0" }];
+            _.each(response.data, function(item) {
+                scope.Professiongroup.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
+        service.currency().then(function(response) {
+            scope.Currency = [];
+            scope.Currency = [{ label: "--Select--", title: "--select--", value: "0" }];
+            _.each(response.data, function(item) {
+                scope.Currency.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
+        scope.starLanguage = arrayConstants.starLanguage;
+        scope.stars = (arrayConstants.stars);
+        console.log(scope.height);
+        scope.showloginpopup();
+    }
+]);
 app.controller('mobileverifyController',function(){
 
 
@@ -2227,7 +2305,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (1)) {
                         globalheight = obj.label;
-                        alert(globalheight);
+
 
                     }
                 });
@@ -2235,7 +2313,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (38)) {
                         globalheightto = obj.label;
-                        alert(globalheightto);
+
                     }
                 });
                 scope.Heighttotext = globalheightto;
@@ -2461,7 +2539,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (1)) {
                         globalheight = obj.label;
-                        alert(globalheight);
+
 
                     }
                 });
@@ -2469,7 +2547,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (38)) {
                         globalheightto = obj.label;
-                        alert(globalheightto);
+
                     }
                 });
                 scope.Heighttotext = globalheightto;
@@ -2648,7 +2726,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.clickvalues = function(text) {
-            alert(text);
             scope.HeightFromtext = text;
 
         };

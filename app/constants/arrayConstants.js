@@ -54,7 +54,8 @@ app.constant('arrayConstants', {
         { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
         { "label": "English", "title": "English", "value": 10 },
         { "label": "Malayalam", "title": "Malayalam", "value": 11 },
-        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 }, { "label": "Orea", "title": "Orea", "value": 13 },
+        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 },
+        { "label": "Orea", "title": "Orea", "value": 13 },
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
     "educationcategory": [

@@ -1,0 +1,248 @@
+<script type="text/ng-template" id="missingfieldspopup.html">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()">×</button>
+            <h4 class="modal-title text-center" style="margin-top: -13px; color: maroon;">More About You..</h4>
+            <br />
+            <h4><span id="spanText" style="color: rgb(176, 24, 24);">We Want To Know More About You</span></h4>
+        </div>
+        <div ng-class="modal-body">
+            <div class="row">
+                <div class="col-lg-6" id="divCol">
+                    <div class="control-group" id="divHeight" layout="flex-gt-sm">
+                        <label class="control-label" flex="20">Height</label>
+                        <md-select ng-model="Heightmissing">
+                            <md-option ng-value="heights.value" ng-repeat="heights in height">{{heights.label}}</md-option>
+                        </md-select>
+                        <label id="lblheight" flex="20"></label>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divMaritalstatus">
+                        <div class="col-lg-4">
+                            <label class="control-label">Marital status</label>
+                        </div>
+                        <div class="col-lg-8" id="lstMaritalstatusdiv">
+                            <md-select ng-model="maritalstatus">
+                                <md-option ng-value="marital.value" ng-repeat="marital in MaritalStatus">{{marital.label}} </md-option>
+                            </md-select>
+                        </div>
+
+                        <div class="col-lg-8" id="lbllstMaritalstatusdiv">
+                            <label id="lbllstMaritalstatus"></label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divComplexion">
+                        <div class="col-lg-4">
+                            <label class="control-label">Complexion</label>
+                        </div>
+                        <div class="col-lg-8" id="lstComplexiondiv">
+                            <md-select ng-model="Complexionmissing">
+                                <md-option ng-value="com.value" ng-repeat="com in Complexion">{{com.label}} </md-option>
+                            </md-select>
+                        </div>
+                        <div class="col-lg-8" id="lbllstComplexiondiv">
+                            <label id="lbllstComplexion"></label>
+                        </div>
+                    </div>
+                    <div id="divProfession">
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="control-group  col-lg-12" id="divJobLocCountry">
+                            <div class="col-lg-4">
+                                <label class="control-label">JobLoc Country</label>
+                            </div>
+                            <div class="col-lg-8" id="lstJoblocCountrydiv">
+                                <md-select ng-model="countrymissing">
+                                    <md-option ng-value="country.value" ng-repeat="country in Country">{{country.label}} </md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-lg-8" id="lbllstJoblocCountrydiv">
+                                <label id="lbllstJoblocCountry"></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="control-group  col-lg-12" id="divJobLocState">
+                            <div class="col-lg-4">
+                                <label class="control-label">JobLoc State</label>
+                            </div>
+                            <div class="col-lg-8" id="lstjoblocstatediv">
+                                <md-select ng-model="statemissing">
+                                    <md-option ng-value="state.value" ng-repeat="state in State">{{state.label}} </md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-lg-8" id="lbllstjoblocstatediv">
+                                <label id="lbllstjoblocstate"></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="control-group  col-lg-12" id="JobLocDistrict">
+                            <div class="col-lg-4">
+                                <label class="control-label">JobLoc District</label>
+                            </div>
+                            <div class="col-lg-8" id="lstjoblocdistrictdiv">
+                                <md-select ng-model="Districtmissing">
+                                    <md-option ng-value="dist.value" ng-repeat="dist in District">{{dist.label}} </md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
+                                <label id="lbllstjoblocdistrict"></label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="control-group  col-lg-12" id="JobLoc">
+                            <div class="col-lg-4">
+                                <label class="control-label">Job Location</label>
+                            </div>
+                            <div class="col-lg-8" id="lstjoblocationdiv">
+                                <md-select ng-model="joblocmissing">
+                                    <md-option ng-value="jobl.value" ng-repeat="jobl in joblocation">{{jobl.label}} </md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-lg-8" id="lbllstjoblocationdiv">
+                                <label id="lbllstjoblocation"></label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="control-group  col-lg-12" id="divFatherNative">
+                        <div class="col-lg-4">
+                            <label class="control-label">
+                                    Father Native</label>
+                        </div>
+                        <div class="col-lg-8" id="txtfathernativediv">
+                            <input type="text" ng-model="fathernativemissing" id="txtfathernative"></input>
+                        </div>
+                        <div class="col-lg-8" id="lblfathernativediv">
+                            <label id="lblfathernative"></label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divMotherNative">
+                        <div class="col-lg-4">
+                            <label class="control-label">
+                           Mother Native</label>
+                        </div>
+                        <div class="col-lg-8" id="txtmothernativediv">
+                            <input ng-model="mothernative" id="txtMothernative"></input>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divSalary">
+                        <div class="col-lg-4">
+                            <label class="control-label">Salary</label>
+                        </div>
+                        <div class="col-lg-8" id="ddlAnnualincomediv" style="padding-left: 0px;">
+                            <div class="col-lg-6 pull-left">
+                                <md-select ng-model="currencymissing">
+                                    <md-option ng-value="currency.value" ng-repeat="currency in Currency">{{currency.label}} </md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <input ng-model="salary" id="txtSalary"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-8" id="lblsalarydiv">
+                            <label id="lblsalary"></label>
+                            <label id="lblcustiddd"></label>
+                            <label id="lblprofileidmissing"></label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divIssharedproperty">
+                        <div class="col-lg-4">
+                            <label class="control-label">
+                                    Shared property</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <md-select ng-model="propertymissing">
+                                <md-option ng-value="property.value" ng-repeat="property in sharedproperty">{{property.label}} </md-option>
+                            </md-select>
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divProperty">
+                        <div class="col-lg-4">
+                            <label class="control-label">
+                                    Property lakhs</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input id="txtProperty" ng-model="propertylakhs"></input>
+
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="control-group  col-lg-12" id="divStarlanguage">
+                        <div class="col-lg-4">
+                            <label class="control-label">Star language</label>
+                        </div>
+                        <div class="col-lg-8" id="ddlstarlanguagesdiv">
+                            <md-select ng-model="starlangmissing">
+                                <md-option ng-value="starl.value" ng-repeat="starl in starLanguage">{{starl.label}} </md-option>
+                            </md-select>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="col-lg-8" id="lblddlstarlanguagesdiv">
+                            <label id="lblddlstarlanguages"></label>
+
+                        </div>
+                    </div>
+                    <div class="control-group  col-lg-12" id="divStar">
+                        <div class="col-lg-4">
+                            <label class="control-label">Star</label>
+                        </div>
+                        <div class="col-lg-8" id="lststardiv">
+                            <md-select ng-model="starsmissing">
+                                <md-option ng-value="0">--select--</md-option>
+                                <md-option ng-value="star.value" ng-repeat="star in stars">{{star.label}} </md-option>
+                            </md-select>
+                        </div>
+
+                        <div class="col-lg-8" id="lbllststardiv">
+                            <label id="lblupdateflag"></label>
+                            <label id="lblAstroFlag"></label>
+                            <label id="lblParentsFlag"></label>
+                            <label id="lblFFCustFamilyID"></label>
+                            <label id="lblMFCustFamilyID"></label>
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div class="control-group  col-lg-12" id="divGothram">
+                        <div class="col-lg-4">
+                            <label class="control-label">
+                                    Gothram/Gotra</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input ng-model="gothram" id="txtgothram"></input>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+</script>
