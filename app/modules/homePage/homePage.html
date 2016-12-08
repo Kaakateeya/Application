@@ -15,6 +15,11 @@
     #countrycoquick .dropdown-toggle {
         width: 140px !important;
     }
+    
+    md-radio-button.md-default-theme .md-off,
+    md-radio-button .md-off {
+        border-color: #fff;
+    }
 </style>
 <div id="homepageid" ng-init="homeinit()">
     <div class="wrapper">
@@ -89,110 +94,72 @@
             <div class="span9 search-area-index">
                 <h3 class="">Just a click to find your <b>Soulmate</b>
                     <div class="control-group pull-right radio-group-index">
-                        <!--<div class="controls">
-                            <table id="ddlLookingFor" class="radio">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div ng-class="gender==='2'?'radio-activenew':'radio-inactivenew'">
-                                                <input name="ddlLookingFor" ng-model="gender" value="2" style="opacity: 0;" type="radio">
-                                            </div><label>Bride</label></td>
-                                        <td>
-                                            <div ng-class="gender==='1'?'radio-activenew':'radio-inactivenew'">
-                                                <input name="ddlLookingFor" ng-model="gender" value="1" style="opacity: 0;" type="radio"></div>
-                                            <label>Groom</label></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>-->
                         <div layout-gt-sm="row">
                             <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                 <md-radio-button value="2" class="md-primary">Bride</md-radio-button>
                                 <md-radio-button value="1"> Groom </md-radio-button>
                             </md-radio-group>
-
                         </div>
                     </div>
                 </h3>
                 <div class="clear">&nbsp;</div>
-                <div class="control-group selectbox-index selectbox-index2 span2">
+                <div class="control-group selectbox-index selectbox-index2 span2" style="height: 82px;">
                     <label class="control-label">Age</label>
-                    <div class="controls">
-                        <div id="updateContentdd">
-                            <div class="" style="width: 61px;float: left;">
-                                <select name="ddlAgrFrom" ng-model="Agefrom" id="ddlAgrFrom" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
-                            	</select>
-                                <!-- <md-select placeholder="Agefrom" ng-model="Agefrom" md-on-open="loadUsers()" style="left: -9000px;width:80px;top: 36px;">
-                               <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
-                                </md-select>-->
-                            </div>
-                            <div class="col-lg-6" style="width: 61px;float: left;">
-                                <select name="ddlAgeTo" ng-model="Ageto" id="ddlAgeTo" multiselectdropdown ng-options="item.value as item.label for item in arrayAge" style="left: -9000px;width:80px;top: 36px;">
-                                </select>
-                                <!-- <md-select placeholder="Ageto" ng-model="Ageto" md-on-open="loadUsers()" style="left: -9000px;width:80px;top: 36px;">
-                                    <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
-                                </md-select>-->
-                            </div>
-                        </div>
+                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
+                        <md-select placeholder="Agefrom" flex="50" ng-model="Agefrom" style="background-color:white;margin-right: 7px;">
+                            <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
+                        </md-select>
+                        <md-select placeholder="Ageto" flex="50" ng-model="Ageto" style="background-color:white;">
+                            <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
+                        </md-select>
                     </div>
                 </div>
-                <div class="control-group selectbox-index span2">
+                <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Religion</label>
-                    <div class="controls">
-                        <div id="IIII">
-                            <select name="ddlQuickReligion" id="ddlreligion" multiselectdropdown ng-model="religion" style="width: 170px;" typeofdata="Religion">
-			              </select>
-                        </div>
+                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
+                        <md-select placeholder="Religion" flex="90" ng-model="religion" style="background-color:white;">
+                            <md-option ng-value="item.value" ng-repeat="item in Religion">{{item.label}}</md-option>
+                        </md-select>
                     </div>
                 </div>
-                <div class="control-group selectbox-index span2">
+                <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Caste</label>
-                    <div class="controls">
-                        <div id="VVVV">
-                            <select name="ddlQuickCaste" id="ddlQuickCaste" multiselectdropdown ng-model="caste" style="width: 170px;" typeofdata="Caste">
-		</select>
-                        </div>
+                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
+                        <md-select placeholder="Caste" flex="90" ng-model="caste" style="background-color:white;">
+                            <md-option ng-value="item.value" ng-repeat="item in Caste">{{item.label}}</md-option>
+                        </md-select>
                     </div>
                 </div>
-                <div class="control-group selectbox-index span2">
+                <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Current location</label>
-                    <div class="controls">
-                        <div id="countrycoquick">
-                            <select name="ddlQuickCountry" id="ddlQuickCountry" multiselectdropdown ng-model="country" typeofdata="Country" style="width: 170px;">
-	                        </select>
-                        </div>
-
+                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
+                        <md-select placeholder="Country" flex="90" ng-model="country" style="background-color:white;">
+                            <md-option ng-value="item.value" ng-repeat="item in Country">{{item.label}}</md-option>
+                        </md-select>
                     </div>
                 </div>
                 <div class="clear"></div>
                 <br>
-
                 <h4 class="pull-left"><small>Contact</small>+91-9390999999</h4>
-
                 <input name="btnSearch" value="find your partner now !" ng-click="ValidatequickRegister();" id="btnSearch" class="pull-right button_custom" type="submit">
                 <div class="clear"></div>
             </div>
         </div>
         <!-- Banner /-->
-
         <!--/ Main Block 1 -->
         <div class="row-fluid main_block1">
             <div class="span12">
                 <div class="span6 main_block1_lt">
                     <h4>South India's most reputated and trusted <b>matrimonial portal</b></h4>
-
-
                     <p>
                         <span>Kaakateeya Marriages </span>is the solution for delivering reliable and quality match making services to all the brides and grooms seeking to enter into marital bliss.We arrange alliances through our extensive database to
                         match your needs and tastes. Since 1982,we have been very successful in providing alliances and settling marriages to thousands of our valued customers and committed to discover you better half !
                     </p>
-
                 </div>
                 <div class="span6">
                     <h4>Join us to start your journey <b>Choose your life partner from our vast collection</b></h4>
                     <p><span><b>Register for FREE</b></span> and take the first step towards marriage </p>
                     <br />
-
                     <a href="#/registration" class="button_custom pull-left">register now</a>
                     <h5 class="pull-left">get regular alerts and notifications</h5>
                 </div>
@@ -229,7 +196,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                     <div class="color_strip strip-color">&nbsp;</div>
                 </div>
             </div>
@@ -246,7 +212,6 @@
             </div>
         </div>
         <!-- Main Block 3 /-->
-
         <forgot-password></forgot-password>
     </div>
 </div>

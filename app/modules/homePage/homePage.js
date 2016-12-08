@@ -1,5 +1,5 @@
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -24,9 +24,22 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         //     }, 650);
         // };
         scope.arrayAge = scope.Age();
-        scope.Religion = "Religion";
-        scope.Country = "Country";
-        scope.Caste = "Caste";
+        scope.Religion = arrayConstants.Religion;
+        service.countrySelect().then(function(response) {
+            scope.Country = [];
+            scope.Country.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
+            _.each(response.data, function(item) {
+                scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
+
+        service.casteselect().then(function(response) {
+            scope.Caste = [];
+            scope.Caste.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
+            _.each(response.data, function(item) {
+                scope.Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
         scope.divloginblock = function() {
             $('.login_block_header').toggle();
         };
@@ -130,7 +143,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
         scope.showforgetpasswordpopup = function() {
             scope.$broadcast('showforgetpassword');
-            
+
         };
 
     }

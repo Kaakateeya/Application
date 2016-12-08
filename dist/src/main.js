@@ -1878,8 +1878,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         window.open(realpath, '_self');
     };
 }]);
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -1904,9 +1904,22 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         //     }, 650);
         // };
         scope.arrayAge = scope.Age();
-        scope.Religion = "Religion";
-        scope.Country = "Country";
-        scope.Caste = "Caste";
+        scope.Religion = arrayConstants.Religion;
+        service.countrySelect().then(function(response) {
+            scope.Country = [];
+            scope.Country.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
+            _.each(response.data, function(item) {
+                scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
+
+        service.casteselect().then(function(response) {
+            scope.Caste = [];
+            scope.Caste.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
+            _.each(response.data, function(item) {
+                scope.Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            });
+        });
         scope.divloginblock = function() {
             $('.login_block_header').toggle();
         };
@@ -2010,7 +2023,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
         scope.showforgetpasswordpopup = function() {
             scope.$broadcast('showforgetpassword');
-            
+
         };
 
     }
@@ -2059,6 +2072,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         var logincustid = authSvc.getCustId();
         scope.typesearch = "";
         scope.savedsearchselect = [];
+        var globalheight;
+        var globalheightto;
+        var refineheightfrom;
+        var refineheightto;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         // scope.searches = 'searches';
         var searchObjectquery = $location.search();
@@ -2081,23 +2098,22 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
             }
         };
+
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
-
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
-
                 _.each(response.data, function(item) {
                     scope.savedsearchselect.push(item);
                 });
             });
             if (iEditDelete === 0) {
                 searches.savedsearchselectmethod(custid, "", 1).then(function(response) {
-
                     _.each(response.data, function(item) {
                         scope.savedsearchselect.push(item);
                     });
                 });
             }
         };
+
         scope.partnerbindings = function(response) {
             console.log(response.data);
             scope.gender = (response.data.intGender) === 1 ? 2 : 1;
@@ -2119,6 +2135,21 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
             scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
             scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
+            _.filter(scope.height, function(obj) {
+                if ((obj.value) == (response.data.Heightto)) {
+                    globalheight = obj.label;
+                }
+            });
+
+            _.filter(scope.height, function(obj) {
+                if ((obj.value) == (response.data.Heightfrom)) {
+                    globalheightto = obj.label;
+                }
+            });
+            // refineheightfrom = globalheight.indexOf(" in ") != -1 ? globalheight.split(" in ") : globalheight;
+            // refineheightto = globalheightto.indexOf(" in ") != -1 ? globalheightto.split(" in ") : globalheightto;
+            scope.HeightFromtext = globalheight;
+            scope.Heighttotext = globalheightto;
         };
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
@@ -2136,7 +2167,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.educationcategory = arrayConstants.educationcategory;
             service.countrySelect().then(function(response) {
                 scope.Country = [];
-
                 _.each(response.data, function(item) {
                     scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                 });
@@ -2172,12 +2202,43 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.country = scope.object.Country;
                 scope.religion = scope.object.intReligionID;
                 scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
+                scope.HeightFrom = 1;
+                scope.Heightto = 38;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (1)) {
+                        globalheight = obj.label;
+                    }
+                });
+                scope.HeightFromtext = globalheight;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (38)) {
+                        globalheightto = obj.label;
+                    }
+                });
+                scope.Heighttotext = globalheightto;
                 scope.generalsearchsubmit("general", 1, 9);
             } else {
-                scope.gender = null;
+                scope.gender = 2;
                 scope.AgeFrom = 18;
                 scope.Ageto = 30;
                 scope.religion = 1;
+                scope.HeightFrom = 1;
+                scope.Heightto = 38;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (1)) {
+                        globalheight = obj.label;
+                        alert(globalheight);
+
+                    }
+                });
+                scope.HeightFromtext = globalheight;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (38)) {
+                        globalheightto = obj.label;
+                        alert(globalheightto);
+                    }
+                });
+                scope.Heighttotext = globalheightto;
             }
         };
         scope.clearSearchTerm = function() {
@@ -2229,7 +2290,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return SearchRequest;
         };
         scope.generalsearchsubmit = function(type, frompage, topage, form) {
-
             scope.showcontrols = false;
             scope.truepartner = false;
             switch (type) {
@@ -2388,6 +2448,33 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
         };
         scope.$on("modifyursearchpartner", function(event) {
+            scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
+            if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
+                scope.gender = (scope.object.intGender) === 1 ? 2 : 1;
+                scope.AgeFrom = scope.object.FromAge;
+                scope.Ageto = scope.object.ToAge;
+                scope.country = scope.object.Country;
+                scope.religion = scope.object.intReligionID;
+                scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
+                scope.HeightFrom = 1;
+                scope.Heightto = 38;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (1)) {
+                        globalheight = obj.label;
+                        alert(globalheight);
+
+                    }
+                });
+                scope.HeightFromtext = globalheight;
+                _.filter(scope.height, function(obj) {
+                    if ((obj.value) == (38)) {
+                        globalheightto = obj.label;
+                        alert(globalheightto);
+                    }
+                });
+                scope.Heighttotext = globalheightto;
+                sessionStorage.removeItem("homepageobject");
+            }
             scope.showcontrols = true;
             scope.truepartner = true;
         });
@@ -2526,7 +2613,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
-
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
@@ -2542,7 +2628,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     });
                     break;
                 case "edit":
-
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
                         scope.showcontrols = true;
@@ -2561,6 +2646,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     });
                     break;
             }
+        };
+        scope.clickvalues = function(text) {
+            alert(text);
+            scope.HeightFromtext = text;
+
         };
     }
 ]);
