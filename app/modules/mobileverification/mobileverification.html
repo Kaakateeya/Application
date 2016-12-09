@@ -1,4 +1,4 @@
-<div class="register_page_main" ng-controller="mobileverifyController">
+<div class="register_page_main">
     <h4>Validate your Account </h4>
 
     <div class="verfy_main_block1">
@@ -12,34 +12,31 @@
     <div class="verfy_main_block2">
         <div class="verfy_main_block2_in clearfix">
             <span class="verify_count">1</span>
-            <img id="Imobileverf" src="../images/verify_pic2.png" width="150" height="150" />
+            <img id="Imobileverf" src="{{mobVerify===true?'src/images/mobVerf.gif':'src/images/verify_pic2.png'}}" width="150" height="150" />
 
             <div class="verfy_main_block2_in_cont">
-                <h6>
-                    <label id="lblMesseagetext"><span>Mobile Confirmation</span><span>Kindly enter the code sent to your mobile</span></label>
+                <h6 ng-show="!mobVerify">
+                    <span ng-model="lblMesseagetext">Mobile Confirmation</span><span>Kindly enter the code sent to your mobile</span>
                 </h6>
-
+                <h6 ng-show="mobVerify">
+                    <span id="lblMesseagetext">Your mobile has been verified successfully, thereby allowing you to recieve alerts from our website.</span>
+                </h6>
                 <div class="verify_mob clearfix">
                     <h4>
-                        <label id="lblMobileNumber"></label>
+                        <span id="lblMobileNumber">{{pageloadSelect.Number}}</span>
                     </h4>
                     <span class="edit_number"></span>
                 </div>
-                <div class="verify_mob_input_code clearfix" id="divMobilenumber">
+                <div class="verify_mob_input_code clearfix" id="divMobilenumber" ng-show="!mobVerify">
 
-                    <input type="text" id="txtEnteryourpin" maxlength="6" />
+                    <input type="text" ng-model="txtEnteryourpin" maxlength="6" />
 
-                    <input type="submit" id="btnverifymobile" value="verify" onclientclick="return validateTextboxs();" onclick="btnverifymobile_Click" />
-                    <label id="lblMObileVref" visible="false"></label>
-                    <label id="lblmobieCountry" visible="false"></label>
-                    <label id="lblcountryCodes" visible="false"></label>
-                    <label id="lblCust_ContactNumbers_ID" visible="false"></label>
-                    <label id="lblisemailverf" visible="false"></label>
+                    <input type="submit" id="btnverifymobile" value="verify" ng-click="verifyMobileCode();" />
+
                 </div>
-                <p id="IrecieveSMS">
+                <p id="IrecieveSMS" ng-show="!mobVerify">
                     If you have not received an SMS,&nbsp;
-                                <a id="lnkresentPIN" href="javascript:void(0);" onclick="lnkresentPIN_Click">Click here to resend</a>
-
+                    <a id="lnkresentPIN" href="javascript:void(0);" ng-click="resendMobCode();">Click here to resend</a>
                 </p>
             </div>
 
@@ -51,22 +48,24 @@
     <div class="verfy_main_block2" style="background: #fff;">
         <div class="verfy_main_block2_in clearfix">
             <span class="verify_count">2</span>
-            <img id="IEmailsVerf" src="../images/N_EmailVerification.png" />
+            <img id="IEmailsVerf" src="{{emailVerify===true?'src/images/Y_EmailVerification.png':'src/images/N_EmailVerification.png'}}" />
 
             <div class="verfy_main_block2_in_cont">
-                <h6><span id="test">Email Confirmation</span><span id="lnlEmailsverf">Kindly click on the Verify link, we have emailed to you</span>
+                <h6 ng-show="!emailVerify"><span id="test">Email Confirmation</span><span id="lnlEmailsverf">Kindly click on the Verify link, we have emailed to you</span>
+                </h6>
+                <h6 ng-show="emailVerify"><span id="test">your email has been verified successfully, thus allowing you to recieve emails from our website</span>
                 </h6>
                 <div class="verify_mob clearfix">
                     <h4>
-                        <label id="lblEmails"></label>
+                        <span>{{pageloadSelect.Email}}</span>
                     </h4>
                     <span class="edit_number"></span>
                 </div>
                 <div class="verify_mob_input_code clearfix">
                 </div>
-                <p id="iPEmailVerf">
+                <p id="iPEmailVerf" ng-show="!emailVerify">
                     If you have not received an email,
-                        <a id="lnksendEmailVer" onclick="lnksendEmailVer_Click">Click here to resend</a>
+                    <a id="lnksendEmailVer" ng-click="resendMailLink();" href="javascript:void(0);">Click here to resend</a>
                 </p>
             </div>
         </div>
@@ -76,16 +75,16 @@
     <div class="verfy_main_block2">
         <div class="verfy_main_block2_in clearfix">
             <span class="verify_count">3</span>
-            <img src="../images/verify_pic4.png" alt="Verify" />
+            <img src="src/images/verify_pic4.png" alt="Verify" />
 
             <div class="verfy_main_block2_in_cont verfy_main_block3_in_cont">
                 <h6>Upgrade to <b>premium packages</b></h6>
                 <p>
-                    In case of any inconvenience in the above verification process or membership schemes contact  <b>SUPPORT @ <span style="color: red;">
+                    In case of any inconvenience in the above verification process or membership schemes contact <b>SUPPORT @ <span style="color: red;">
                         <span style="color: red;">91-9848344977 &nbsp; ( 9 am to 8 pm IST)</span>
                                                                                                                                  
                     </b>we would be happy to help you.
-                                                                                                                    
+
                 </p>
             </div>
 
@@ -93,6 +92,4 @@
 
     </div>
 
-
-    <!-- Main Block 1 /-->
 </div>

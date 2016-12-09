@@ -6,17 +6,20 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
         restrict: "E",
         scope: {
             array: '=',
-            typeofsearch: '='
+            typeofsearch: '=',
+            pagging: '='
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
             scope.searchestype = scope.typeofsearch;
-            scope.typeofdiv = "Grid";
+            scope.typeofdiv = "List";
+            $('.search_result_items_main').attr("style", "width:80%;");
             scope.slideshowsearches = false;
             scope.playpausebuttons = true;
             scope.pauseplaybuttons = true;
             scope.partnersearchessearches = true;
             scope.lnkLastSlide = 1;
+            scope.paggingflag = scope.pagging;
             // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
             //     $('.search_result_items_main').attr("style", "width:80%;");
             // } else {
@@ -24,20 +27,24 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             // }
             scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
-            scope.endindex = 9;
-            scope.flag = 9;
+            scope.endindex = scope.paggingflag === false ? 8 : 9;
+            scope.flag = scope.paggingflag === false ? 8 : 9;
             scope.loaderspin = false;
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
             scope.indexvalues = 0;
             var i = 0;
             scope.directivepaging = function() {
-                scope.loaderspin = true;
-                scope.loadmore = false;
-                scope.flag += 9;
-                scope.startindex = scope.flag - 8;
-                scope.endindex = scope.flag;
-                scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
+                if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                    scope.loaderspin = true;
+                    scope.loadmore = false;
+                    scope.flag += 9;
+                    scope.startindex = scope.flag - 8;
+                    scope.endindex = scope.flag;
+                    scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.$on('loadmore', function(event, endflag) {
                 scope.loaderspin = false;
@@ -173,7 +180,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 scope.$emit('photoalbumopen', custid, profileid, photocount);
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {
-                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
             };
             scope.indexvalue = function(index) {
                 scope.indexvalues = index;
@@ -319,7 +326,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             };
 
             scope.prevslide = function() {
-             
+
                 $('.list-inline li a').removeClass('selected');
                 $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                 var totalItems1 = $('#slideShowCarousel').find('.item').length;

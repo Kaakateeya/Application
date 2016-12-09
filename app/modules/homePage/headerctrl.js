@@ -116,4 +116,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         var realpath = '#/viewFullProfileCustomer';
         window.open(realpath, '_self');
     };
+    scope.redirecthomeordashboard = function() {
+        var custidlogin = authSvc.getCustId();
+        if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
+            var realpaths = '#/home';
+            window.open(realpaths, "_self");
+
+        } else {
+            var realpath = '#/';
+            window.open(realpath, "_self");
+        }
+
+    };
 }]);

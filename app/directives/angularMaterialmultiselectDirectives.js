@@ -22,9 +22,9 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                     });
                 }
             };
-            scope.isChecked = function() {
-                return scope.model.length === scope.Caste.length;
-            };
+            // scope.isChecked = function() {
+            //     return scope.model.length === scope.Caste.length;
+            // };
             scope.exists = function(item) {
                 return scope.Caste.indexOf(item) > -1;
             };
@@ -36,8 +36,18 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                 scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
             });
             scope.directivechangeevent = function(model) {
-
                 scope.$emit('directivechangeevent', model, scope.type);
+            };
+
+            scope.applycolorsdirecive = function(value) {
+
+                var colors = "selectborderclass";
+                if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                    colors = "selectborderclasscolor";
+                } else {
+                    colors = "selectborderclass";
+                }
+                return colors;
             };
         }
     };

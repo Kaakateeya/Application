@@ -6,20 +6,33 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
         scope.truepartner = true;
+        scope.truepartnerrefine = true;
         scope.showcontrols = true;
         var SearchRequest = 0;
         var logincustid = authSvc.getCustId();
+
         scope.typesearch = "";
         scope.savedsearchselect = [];
         var globalheight;
         var globalheightto;
         var refineheightfrom;
         var refineheightto;
+        scope.getpaidstatus = authSvc.getpaidstatus();
+        scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         // scope.searches = 'searches';
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
         //alert(scope.selectedIndex);
+        scope.applycolors = function(value) {
+            var colors = "selectborderclass";
+            if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                colors = "selectborderclasscolor";
+            } else {
+                colors = "selectborderclass";
+            }
+            return colors;
+        };
         scope.changeBindsearhes = function(type, parentval, parentval2) {
             switch (type) {
                 case 'Country':
@@ -135,6 +148,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
 
+                scope.truepartner = true;
+                scope.truepartnerrefine = true;
                 scope.gender = (scope.object.intGender) === 1 ? 2 : 1;
                 scope.AgeFrom = scope.object.FromAge;
                 scope.Ageto = scope.object.ToAge;
@@ -155,8 +170,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                 });
                 scope.Heighttotext = globalheightto;
-                scope.generalsearchsubmit("general", 1, 9);
+                scope.generalsearchsubmit("general", 1, 8);
             } else {
+                scope.truepartner = true;
+                scope.truepartnerrefine = true;
                 scope.gender = 2;
                 scope.AgeFrom = 18;
                 scope.Ageto = 30;
@@ -182,6 +199,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.clearSearchTerm = function() {
             scope.searchTerm = '';
+        };
+        scope.resetfunctionality = function() {
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.gender = 2;
+            scope.AgeFrom = 18;
+            scope.Ageto = 30;
+            scope.religion = 1;
+            scope.HeightFrom = 1;
+            scope.Heightto = 38;
         };
         scope.returnnullvalue = function(value) {
             var obj = value !== null && value !== undefined && value !== "" ? (value.toString()) : null;
@@ -231,12 +258,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.generalsearchsubmit = function(type, frompage, topage, form) {
             scope.showcontrols = false;
             scope.truepartner = false;
+            if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
+                scope.truepartnerrefine = false;
+            } else {
+                scope.truepartnerrefine = true;
+            }
             switch (type) {
                 case "advanced":
                 case "general":
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
-
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -250,7 +281,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     });
                     scope.$broadcast('loadmore');
                     break;
-
                 case "profileid":
                     scope.typesearch = type;
                     SearchRequest = {
@@ -264,7 +294,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         EndIndex: topage,
                     };
                     searches.profileidsearch(SearchRequest).then(function(response) {
-
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -279,7 +308,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.$broadcast('loadmore');
                     break;
                 case "savedsearch":
-
                     scope.submitobjectcommongenad(frompage, topage);
                     scope.submitsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
@@ -416,6 +444,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             scope.showcontrols = true;
             scope.truepartner = true;
+            scope.truepartnerrefine = true;
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide) {
             scope.generalsearchsubmit(scope.typesearch, frompageslide, topageslide);
@@ -445,7 +474,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.refinesubmit = function() {
-            scope.generalsearchsubmit(scope.typesearch, 1, 9);
+            scope.generalsearchsubmit(scope.typesearch, 1, 8);
         };
         scope.hightFromrefine = function() {
             scope.HeightFromtext = scope.checkheight(scope.HeightFrom);
@@ -552,6 +581,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
+                    scope.PartnerProfilesnew = [];
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
@@ -563,15 +593,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         } else {
                             typeofsearch = "advanced";
                         }
-                        scope.generalsearchsubmit(typeofsearch, 1, 9, "");
+                        scope.generalsearchsubmit(typeofsearch, 1, 8, "");
                     });
                     break;
                 case "edit":
+                    scope.PartnerProfilesnew = [];
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
                         scope.showcontrols = true;
                         scope.truepartner = true;
-
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                             scope.selectedIndex = 2;
@@ -589,6 +619,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.clickvalues = function(text) {
             scope.HeightFromtext = text;
 
+        };
+        scope.resetgenral = function(type) {
+            switch (type) {
+                case "general":
+                    if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
+                        searches.partnerdetails(scope.custid, "", "").then(function(response) {
+                            console.log(response.data);
+                            scope.partnerbindings(response);
+                        });
+                    } else {
+                        scope.resetfunctionality();
+                    }
+                    break;
+            }
         };
     }
 ]);

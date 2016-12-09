@@ -18,7 +18,7 @@
     
     md-radio-button.md-default-theme .md-off,
     md-radio-button .md-off {
-        border-color: #fff;
+        border-color: #fff !important;
     }
 </style>
 <div id="homepageid" ng-init="homeinit()">
@@ -40,7 +40,7 @@
                     <div id="navbar" class="nav-collapse collapse pull-left">
                         <ul class="nav">
                             <li><a href="#/registration">Register Free</a></li>
-                            <li><a href="#/General">Search</a></li>
+                            <li><a href="#/General?selectedIndex=2">Search</a></li>
                             <li><a ng-click="divloginblock()" href="javascript:void(0)">Upgrade</a></li>
                             <li><a href="#/successstories">success stories</a></li>
                             <li><a href="#/help">Help</a></li>
@@ -96,8 +96,8 @@
                     <div class="control-group pull-right radio-group-index">
                         <div layout-gt-sm="row">
                             <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
-                                <md-radio-button value="2" class="md-primary">Bride</md-radio-button>
-                                <md-radio-button value="1"> Groom </md-radio-button>
+                                <md-radio-button value="2" class="md-warn">Bride</md-radio-button>
+                                <md-radio-button value="1" class="md-warn"> Groom </md-radio-button>
                             </md-radio-group>
                         </div>
                     </div>
@@ -106,10 +106,10 @@
                 <div class="control-group selectbox-index selectbox-index2 span2" style="height: 82px;">
                     <label class="control-label">Age</label>
                     <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Agefrom" flex="50" ng-model="Agefrom" style="background-color:white;margin-right: 7px;">
+                        <md-select placeholder="Agefrom" flex="50" ng-model="Agefrom" style="background-color:white;margin-right: 7px;padding-left: 4px;">
                             <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
                         </md-select>
-                        <md-select placeholder="Ageto" flex="50" ng-model="Ageto" style="background-color:white;">
+                        <md-select placeholder="Ageto" flex="50" ng-model="Ageto" style="background-color:white;padding-left: 4px;">
                             <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
                         </md-select>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Religion</label>
                     <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Religion" flex="90" ng-model="religion" style="background-color:white;">
+                        <md-select placeholder="Religion" flex="90" ng-model="religion" style="background-color:white;padding-left: 4px;">
                             <md-option ng-value="item.value" ng-repeat="item in Religion">{{item.label}}</md-option>
                         </md-select>
                     </div>
@@ -125,7 +125,7 @@
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Caste</label>
                     <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Caste" flex="90" ng-model="caste" style="background-color:white;">
+                        <md-select placeholder="Caste" flex="90" ng-model="caste" style="background-color:white;padding-left: 4px;">
                             <md-option ng-value="item.value" ng-repeat="item in Caste">{{item.label}}</md-option>
                         </md-select>
                     </div>
@@ -133,7 +133,7 @@
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Current location</label>
                     <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Country" flex="90" ng-model="country" style="background-color:white;">
+                        <md-select placeholder="Country" flex="90" ng-model="country" style="background-color:white;padding-left: 4px;">
                             <md-option ng-value="item.value" ng-repeat="item in Country">{{item.label}}</md-option>
                         </md-select>
                     </div>

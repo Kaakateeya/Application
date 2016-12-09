@@ -330,9 +330,9 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                     });
                 }
             };
-            scope.isChecked = function() {
-                return scope.model.length === scope.Caste.length;
-            };
+            // scope.isChecked = function() {
+            //     return scope.model.length === scope.Caste.length;
+            // };
             scope.exists = function(item) {
                 return scope.Caste.indexOf(item) > -1;
             };
@@ -344,8 +344,18 @@ app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata
                 scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
             });
             scope.directivechangeevent = function(model) {
-
                 scope.$emit('directivechangeevent', model, scope.type);
+            };
+
+            scope.applycolorsdirecive = function(value) {
+
+                var colors = "selectborderclass";
+                if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                    colors = "selectborderclasscolor";
+                } else {
+                    colors = "selectborderclass";
+                }
+                return colors;
             };
         }
     };
@@ -866,17 +876,20 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
         restrict: "E",
         scope: {
             array: '=',
-            typeofsearch: '='
+            typeofsearch: '=',
+            pagging: '='
         },
         templateUrl: "templates/Commonpartnerprofiles.html",
         link: function(scope, element, attrs) {
             scope.searchestype = scope.typeofsearch;
-            scope.typeofdiv = "Grid";
+            scope.typeofdiv = "List";
+            $('.search_result_items_main').attr("style", "width:80%;");
             scope.slideshowsearches = false;
             scope.playpausebuttons = true;
             scope.pauseplaybuttons = true;
             scope.partnersearchessearches = true;
             scope.lnkLastSlide = 1;
+            scope.paggingflag = scope.pagging;
             // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
             //     $('.search_result_items_main').attr("style", "width:80%;");
             // } else {
@@ -884,20 +897,24 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             // }
             scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
-            scope.endindex = 9;
-            scope.flag = 9;
+            scope.endindex = scope.paggingflag === false ? 8 : 9;
+            scope.flag = scope.paggingflag === false ? 8 : 9;
             scope.loaderspin = false;
             scope.Norowsend = false;
             scope.PartnerProfilesnew = scope.array;
             scope.indexvalues = 0;
             var i = 0;
             scope.directivepaging = function() {
-                scope.loaderspin = true;
-                scope.loadmore = false;
-                scope.flag += 9;
-                scope.startindex = scope.flag - 8;
-                scope.endindex = scope.flag;
-                scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
+                if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                    scope.loaderspin = true;
+                    scope.loadmore = false;
+                    scope.flag += 9;
+                    scope.startindex = scope.flag - 8;
+                    scope.endindex = scope.flag;
+                    scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.$on('loadmore', function(event, endflag) {
                 scope.loaderspin = false;
@@ -1033,7 +1050,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 scope.$emit('photoalbumopen', custid, profileid, photocount);
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {
-                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
             };
             scope.indexvalue = function(index) {
                 scope.indexvalues = index;
@@ -1179,7 +1196,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             };
 
             scope.prevslide = function() {
-             
+
                 $('.list-inline li a').removeClass('selected');
                 $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                 var totalItems1 = $('#slideShowCarousel').find('.item').length;
@@ -1364,7 +1381,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
                 { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
                 { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: '/#home' },
+                { value: 'Saved search', bindvalue: 'profile', href: '#/General?selectedIndex=2' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
             ];
@@ -1903,6 +1920,18 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         var realpath = '#/viewFullProfileCustomer';
         window.open(realpath, '_self');
     };
+    scope.redirecthomeordashboard = function() {
+        var custidlogin = authSvc.getCustId();
+        if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
+            var realpaths = '#/home';
+            window.open(realpaths, "_self");
+
+        } else {
+            var realpath = '#/';
+            window.open(realpath, "_self");
+        }
+
+    };
 }]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
@@ -2106,10 +2135,58 @@ app.controller('missingfieldsctrl', ['$scope', 'arrayConstants', 'SelectBindServ
         scope.showloginpopup();
     }
 ]);
-app.controller('mobileverifyController',function(){
+app.controller('mobileverifyController', ['$scope', 'mobileVerificationService', 'authSvc', function(scope, mobileVerificationService, authSvc) {
+
+    scope.pageloadSelect = {};
+
+    var logincustid = authSvc.getCustId();
+    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+
+    scope.pageLoad = function(custid) {
+
+        mobileVerificationService.getmobileverificationData(custid).then(function(res) {
+            console.log(res);
+            scope.pageloadSelect = res.data;
+            scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
+            scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
+        });
+    };
+
+    scope.pageLoad(scope.custid);
 
 
-});
+    scope.verifyMobileCode = function() {
+
+        if (scope.pageloadSelect.NumberVerificationcode === scope.txtEnteryourpin) {
+            mobileVerificationService.verifyMobile(scope.txtEnteryourpin, 2, scope.pageloadSelect.Cust_ContactNumbers_ID).then(function(res) {
+                console.log(res);
+                scope.pageLoad(scope.custid);
+            });
+        } else {
+            alert('Please enter valid mobile verify code');
+        }
+
+    };
+    scope.resendMobCode = function() {
+        var inputOBj = {
+            iCountryID: scope.pageloadSelect.CountryCodeID,
+            iCCode: scope.pageloadSelect.CountryCodes,
+            MobileNumber: scope.pageloadSelect.Number,
+            CustContactNumbersID: scope.pageloadSelect.Cust_ContactNumbers_ID
+        };
+        mobileVerificationService.resendMobileCode(inputOBj).then(function(res) {
+            console.log(res);
+            alert('Valid Mobile Verify code sent successfully');
+        });
+    };
+
+    scope.resendMailLink = function() {
+        mobileVerificationService.resendEmailLink(scope.custid).then(function(res) {
+            console.log(res);
+        });
+    };
+
+}]);
 app.controller("payment",function()
 {
 
@@ -2145,20 +2222,33 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
         scope.truepartner = true;
+        scope.truepartnerrefine = true;
         scope.showcontrols = true;
         var SearchRequest = 0;
         var logincustid = authSvc.getCustId();
+
         scope.typesearch = "";
         scope.savedsearchselect = [];
         var globalheight;
         var globalheightto;
         var refineheightfrom;
         var refineheightto;
+        scope.getpaidstatus = authSvc.getpaidstatus();
+        scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         // scope.searches = 'searches';
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
         //alert(scope.selectedIndex);
+        scope.applycolors = function(value) {
+            var colors = "selectborderclass";
+            if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                colors = "selectborderclasscolor";
+            } else {
+                colors = "selectborderclass";
+            }
+            return colors;
+        };
         scope.changeBindsearhes = function(type, parentval, parentval2) {
             switch (type) {
                 case 'Country':
@@ -2274,6 +2364,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
 
+                scope.truepartner = true;
+                scope.truepartnerrefine = true;
                 scope.gender = (scope.object.intGender) === 1 ? 2 : 1;
                 scope.AgeFrom = scope.object.FromAge;
                 scope.Ageto = scope.object.ToAge;
@@ -2294,8 +2386,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                 });
                 scope.Heighttotext = globalheightto;
-                scope.generalsearchsubmit("general", 1, 9);
+                scope.generalsearchsubmit("general", 1, 8);
             } else {
+                scope.truepartner = true;
+                scope.truepartnerrefine = true;
                 scope.gender = 2;
                 scope.AgeFrom = 18;
                 scope.Ageto = 30;
@@ -2321,6 +2415,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.clearSearchTerm = function() {
             scope.searchTerm = '';
+        };
+        scope.resetfunctionality = function() {
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.gender = 2;
+            scope.AgeFrom = 18;
+            scope.Ageto = 30;
+            scope.religion = 1;
+            scope.HeightFrom = 1;
+            scope.Heightto = 38;
         };
         scope.returnnullvalue = function(value) {
             var obj = value !== null && value !== undefined && value !== "" ? (value.toString()) : null;
@@ -2370,12 +2474,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.generalsearchsubmit = function(type, frompage, topage, form) {
             scope.showcontrols = false;
             scope.truepartner = false;
+            if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
+                scope.truepartnerrefine = false;
+            } else {
+                scope.truepartnerrefine = true;
+            }
             switch (type) {
                 case "advanced":
                 case "general":
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
-
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -2389,7 +2497,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     });
                     scope.$broadcast('loadmore');
                     break;
-
                 case "profileid":
                     scope.typesearch = type;
                     SearchRequest = {
@@ -2403,7 +2510,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         EndIndex: topage,
                     };
                     searches.profileidsearch(SearchRequest).then(function(response) {
-
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -2418,7 +2524,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.$broadcast('loadmore');
                     break;
                 case "savedsearch":
-
                     scope.submitobjectcommongenad(frompage, topage);
                     scope.submitsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
@@ -2555,6 +2660,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             scope.showcontrols = true;
             scope.truepartner = true;
+            scope.truepartnerrefine = true;
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide) {
             scope.generalsearchsubmit(scope.typesearch, frompageslide, topageslide);
@@ -2584,7 +2690,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.refinesubmit = function() {
-            scope.generalsearchsubmit(scope.typesearch, 1, 9);
+            scope.generalsearchsubmit(scope.typesearch, 1, 8);
         };
         scope.hightFromrefine = function() {
             scope.HeightFromtext = scope.checkheight(scope.HeightFrom);
@@ -2691,6 +2797,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
+                    scope.PartnerProfilesnew = [];
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
@@ -2702,15 +2809,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         } else {
                             typeofsearch = "advanced";
                         }
-                        scope.generalsearchsubmit(typeofsearch, 1, 9, "");
+                        scope.generalsearchsubmit(typeofsearch, 1, 8, "");
                     });
                     break;
                 case "edit":
+                    scope.PartnerProfilesnew = [];
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
                         scope.showcontrols = true;
                         scope.truepartner = true;
-
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                             scope.selectedIndex = 2;
@@ -2728,6 +2835,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.clickvalues = function(text) {
             scope.HeightFromtext = text;
 
+        };
+        scope.resetgenral = function(type) {
+            switch (type) {
+                case "general":
+                    if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
+                        searches.partnerdetails(scope.custid, "", "").then(function(response) {
+                            console.log(response.data);
+                            scope.partnerbindings(response);
+                        });
+                    } else {
+                        scope.resetfunctionality();
+                    }
+                    break;
+            }
         };
     }
 ]);
@@ -3999,6 +4120,23 @@ app.factory('homepageservices', ['authSvc', function(http) {
         }
     };
 }]);
+app.factory('mobileVerificationService', ['$http', function(http) {
+    return {
+        getmobileverificationData: function(custid) {
+            return http.get(app.apiroot + 'EmailMobileVerf/EmailMobileVerfRequest', { params: { id: custid } });
+        },
+        verifyMobile: function(VCode, flag, CustContactnumID) {
+            return http.get(app.apiroot + 'StaticPages/getEmilVerificationCode', { params: { VerificationCode: VCode, i_EmilMobileVerification: flag, CustContactNumbersID: CustContactnumID } });
+        },
+        resendMobileCode: function(obj) {
+            console.log(obj);
+            return http.get(app.apiroot + 'StaticPages/getResendmobile', { params: { iCountryID: obj.iCountryID, iCCode: obj.iCCode, MobileNumber: obj.MobileNumber, CustContactNumbersID: obj.CustContactNumbersID } });
+        },
+        resendEmailLink: function(obj) {
+            return http.get(app.apiroot + 'StaticPages/getResendEmailVerficationLink', { params: { CustID: obj } });
+        }
+    };
+}]);
 app.factory('angularselects', ["SelectBindserviceApp","arrayConstants", function(service,cons) {
     return {
         countrySelect: function() {
@@ -4192,42 +4330,43 @@ app.factory('successstoriesdata', ['$http', function(http) {
             person.pageto = topage;
             return http.post(app.apiroot + 'StaticPages/SuccessStoriesdetails', person);
         },
-        maskclasspartner: function(logphotostatus, photo, photocount) {
-
+        maskclasspartner: function(logphotostatus, photo, photocount, custid) {
             var photoclass = "";
             var PhotoMaskDiv;
-            if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ApplicationPhoto") != -1)
-                PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
-            else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") != -1)
-                PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
-            else
-                PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdiv clearfix" : "";
-
-            if (PhotoMaskDiv == "cssMaskdiv clearfix") {
-
-                photoclass = PhotoMaskDiv == "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
-            } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
-
-                photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
-            } else if (photo.toLowerCase().indexOf("_rev") != -1) {
-                photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
-
-            } else if (photo.indexOf("noimage") != -1) {
-                photoclass = "Linkdisabled";
-            } else if (photo.indexOf("Password-Protected") != -1) {
+            if (custid !== undefined && custid !== null && custid !== "") {
+                if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ApplicationPhoto") != -1)
+                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
+                else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") != -1)
+                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
+                else
+                    PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdiv clearfix" : "";
 
                 if (PhotoMaskDiv == "cssMaskdiv clearfix") {
-                    photoclass = "cssMaskdiv clearfix Linkdisabled";
+
+                    photoclass = PhotoMaskDiv == "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
                 } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
-                    photoclass = "cssMaskdivrev clearfix Linkdisabled";
+
+                    photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+                } else if (photo.toLowerCase().indexOf("_rev") != -1) {
+                    photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+
+                } else if (photo.indexOf("noimage") != -1) {
+                    photoclass = "Linkdisabled";
+                } else if (photo.indexOf("Password-Protected") != -1) {
+
+                    if (PhotoMaskDiv == "cssMaskdiv clearfix") {
+                        photoclass = "cssMaskdiv clearfix Linkdisabled";
+                    } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
+                        photoclass = "cssMaskdivrev clearfix Linkdisabled";
+                    }
+
+                    photoclass = "Linkdisabled";
+                } else if ((photocount) === 0) {
+                    photoclass = "Linkdisabled";
+
+                } else {
+                    photoclass = "";
                 }
-
-                photoclass = "Linkdisabled";
-            } else if ((photocount) === 0) {
-                photoclass = "Linkdisabled";
-
-            } else {
-                photoclass = "";
             }
             return photoclass;
         }
