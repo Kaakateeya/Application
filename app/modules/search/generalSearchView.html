@@ -92,12 +92,16 @@
     .lnkdisplay {
         display: none;
     }
+    
+    .textboxcolor {
+        border: 1px solid #b1a8a8;
+    }
 </style>
 <div class="search_page_main" ng-show="showcontrols" ng-init="generalpageload()">
     <div class="search_page_tabs profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
-                <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                <md-tabs md-selected="selectedIndex" md-dynamic-height flex md-border-bottom md-autoselect>
                     <md-tab label="General Search">
                         <div class="tab">
                             <form name="generalsearch" role="form">
@@ -169,7 +173,7 @@
 
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix margintopclass">
-                                                <md-select ng-model="religion" style="width: 252px;" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-class="applycolors(religion)">
+                                                <md-select ng-model="religion" placeholder="Religion" style="width: 252px;" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-class="applycolors(religion)">
                                                     <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
                                                 </md-select>
                                             </div>
@@ -240,12 +244,12 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="AgeFrom" ng-model="AgeFrom">
+                                                    <md-select placeholder="AgeFrom" ng-model="AgeFrom" ng-class="applycolors(AgeFrom)">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Ageto" ng-model="Ageto">
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6" style="margin-left: -20px;">
+                                                    <md-select placeholder="Ageto" ng-model="Ageto" ng-class="applycolors(Ageto)">
                                                         <md-option ng-value="Age.value" ng-repeat="Age in arrayAge">{{Age.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -255,12 +259,12 @@
                                             <label class="control-label">Height</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="HeightFrom" ng-model="HeightFrom">
+                                                    <md-select placeholder="HeightFrom" ng-model="HeightFrom" ng-class="applycolors(HeightFrom)">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                                                    <md-select placeholder="Heightto" ng-model="Heightto">
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6" style="margin-left: -20px;">
+                                                    <md-select placeholder="Heightto" ng-model="Heightto" ng-class="applycolors(Heightto)">
                                                         <md-option ng-value="h.value" ng-repeat="h in height">{{h.label}} </md-option>
                                                     </md-select>
                                                 </div>
@@ -276,7 +280,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix">
-                                                <md-select ng-model="religion" ng-change="changeBindsearhes('caste',religion,mothertongue)">
+                                                <md-select ng-model="religion" placeholder="Religion" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-class="applycolors(religion)">
                                                     <md-option ng-value="religions.value" ng-repeat="religions in Religion">{{religions.label}}</md-option>
                                                 </md-select>
                                             </div>
@@ -376,7 +380,7 @@
                                             <div class="controls clearfix row">
                                                 <div layout-gt-sm="row">
                                                     <md-input-container class="md-block" flex-gt-sm>
-                                                        <md-select ng-model="monthsalcurrency">
+                                                        <md-select ng-model="monthsalcurrency" placeholder="RS" ng-class="applycolors(monthsalcurrency)">
                                                             <md-option value="0">--select--</md-option>
                                                             <md-option ng-repeat="currency in Currency track by $index" ng-value="{{currency.value}}">
                                                                 {{currency.label}}

@@ -23,6 +23,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         // scope.searches = 'searches';
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
+
+        //alert(scope.selectedIndex);
         //alert(scope.selectedIndex);
         scope.applycolors = function(value) {
             var colors = "selectborderclass";
@@ -43,7 +45,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case 'caste':
                     scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2).toString());
+
+                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(parentval);

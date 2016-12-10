@@ -160,7 +160,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 scope.$emit('popuplogin', "myModalContent.html", tocustid);
             };
             scope.redirectToviewfullprofile = function(custid, logid) {
-                scope.$emit('redirectToviewfullprofiles', custid, logid);
+                if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                    scope.$emit('redirectToviewfullprofiles', custid, logid);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
                 password = password !== null && password !== "" ? 468 : 467;
@@ -177,7 +181,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 });
             };
             scope.photoalbum = function(custid, profileid, photocount) {
-                scope.$emit('photoalbumopen', custid, profileid, photocount);
+                if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                    scope.$emit('photoalbumopen', custid, profileid, photocount);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {
                 return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);

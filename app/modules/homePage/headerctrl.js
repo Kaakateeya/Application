@@ -128,4 +128,25 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         }
 
     };
+    scope.searchpage = function(typeurl) {
+        sessionStorage.removeItem("homepageobject");
+        switch (typeurl) {
+            case "profile":
+                var realpath = '#/General?selectedIndex=2';
+                window.open(realpath, "_self");
+                location.reload();
+                break;
+            case "general":
+                var realpathgen = '#/General?selectedIndex=0';
+                window.open(realpathgen, "_self");
+                location.reload();
+                break;
+            case "advanced":
+                var realpathadvan = '#/General?selectedIndex=1';
+                window.open(realpathadvan, "_self");
+                location.reload();
+                break;
+        }
+
+    };
 }]);

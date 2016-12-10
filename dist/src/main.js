@@ -1030,7 +1030,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 scope.$emit('popuplogin', "myModalContent.html", tocustid);
             };
             scope.redirectToviewfullprofile = function(custid, logid) {
-                scope.$emit('redirectToviewfullprofiles', custid, logid);
+                if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                    scope.$emit('redirectToviewfullprofiles', custid, logid);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
                 password = password !== null && password !== "" ? 468 : 467;
@@ -1047,7 +1051,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 });
             };
             scope.photoalbum = function(custid, profileid, photocount) {
-                scope.$emit('photoalbumopen', custid, profileid, photocount);
+                if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                    scope.$emit('photoalbumopen', custid, profileid, photocount);
+                } else {
+                    scope.$emit('showloginpopup');
+                }
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {
                 return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
@@ -1932,6 +1940,27 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', f
         }
 
     };
+    scope.searchpage = function(typeurl) {
+        sessionStorage.removeItem("homepageobject");
+        switch (typeurl) {
+            case "profile":
+                var realpath = '#/General?selectedIndex=2';
+                window.open(realpath, "_self");
+                location.reload();
+                break;
+            case "general":
+                var realpathgen = '#/General?selectedIndex=0';
+                window.open(realpathgen, "_self");
+                location.reload();
+                break;
+            case "advanced":
+                var realpathadvan = '#/General?selectedIndex=1';
+                window.open(realpathadvan, "_self");
+                location.reload();
+                break;
+        }
+
+    };
 }]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
@@ -2080,7 +2109,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.$broadcast('showforgetpassword');
 
         };
-
+        scope.searchpage = function() {
+            sessionStorage.removeItem("homepageobject");
+            var realpath = '#/General?selectedIndex=2';
+            window.open(realpath, "_self");
+        };
     }
 ]);
 app.controller('missingfieldsctrl', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'alert',
@@ -2239,6 +2272,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         // scope.searches = 'searches';
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
+
+        //alert(scope.selectedIndex);
         //alert(scope.selectedIndex);
         scope.applycolors = function(value) {
             var colors = "selectborderclass";
@@ -2259,7 +2294,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case 'caste':
                     scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2).toString());
+
+                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(parentval);

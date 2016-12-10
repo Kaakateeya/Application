@@ -145,6 +145,10 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.$broadcast('showforgetpassword');
 
         };
-
+        scope.searchpage = function() {
+            sessionStorage.removeItem("homepageobject");
+            var realpath = '#/General?selectedIndex=2';
+            window.open(realpath, "_self");
+        };
     }
 ]);
