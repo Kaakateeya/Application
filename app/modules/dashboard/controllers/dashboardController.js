@@ -1,6 +1,6 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata, $rootscope) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -15,6 +15,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.chatstatus = null;
         scope.form = {};
         scope.slides = [];
+        var searchObjectquery = $location.search();
+        scope.Typeofdatabind = searchObjectquery.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -30,7 +32,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.PersonalInfo = (response.data.PersonalInfo);
                             console.log(response.data.PersonalInfo);
                             scope.photopersonal = scope.PersonalInfo.Photo;
-
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
@@ -80,7 +81,31 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.init = function() {
+            scope.PartnerProfilesnew = [];
             scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+            switch (scope.Typeofdatabind) {
+                case "MB":
+                    scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                    break;
+                case "WB":
+                    scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                    break;
+                case "I":
+                    scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                    break;
+                case "WV":
+                    scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
+                    break;
+                case "chats":
+                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    break;
+                case "requests":
+                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    break;
+                case "express":
+                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    break;
+            }
         };
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
@@ -510,6 +535,26 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.incrementsdashboardcounts();
         });
 
+        $rootscope.$on("homepage", function(event, type, headertext) {
+            //do something
+            scope.gettingpartnerdata(type, 1, 9, headertext, 1);
+        });
 
+        $rootscope.$on("Chatsreqexpress", function(event, type, headertext) {
+            //do something
+            scope.PartnerProfilesnew = [];
+            switch (type) {
+                case "Chats":
+                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    break;
+                case "Requests":
+                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    break;
+                case "Express":
+                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    break;
+            }
+
+        });
     }
 ]);

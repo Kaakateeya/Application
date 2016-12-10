@@ -1,5 +1,6 @@
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -149,6 +150,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             sessionStorage.removeItem("homepageobject");
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
+            $rootscope.$broadcast("profile", 2);
         };
     }
 ]);

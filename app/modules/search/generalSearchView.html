@@ -540,6 +540,9 @@
         </div>
     </div>
 </div>
+<div class="row" ng-show="loadinging">
+    <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" ng-disabled="!activated" md-diameter="60"></md-progress-circular>
+</div>
 <div class="register_page_main clearfix" ng-hide="truepartnerrefine">
     <div class="clearfix">
         <div class="refine_search_new clearfix">
@@ -605,7 +608,7 @@
         </div>
    </div>
     <div class="search_results_main clearfix">
-        <div class="search_result_items_main clearfix">
+        <div class="search_result_items_main clearfix" style="width:80%;">
             <div class="message-row4">
                 <div id="Div1" class="Maindiv message-row4  wrapper--overflow">
                     <div class="searched_list clearfix">

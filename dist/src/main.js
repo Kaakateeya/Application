@@ -883,18 +883,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
         link: function(scope, element, attrs) {
             scope.searchestype = scope.typeofsearch;
             scope.typeofdiv = "List";
-            $('.search_result_items_main').attr("style", "width:80%;");
             scope.slideshowsearches = false;
             scope.playpausebuttons = true;
             scope.pauseplaybuttons = true;
             scope.partnersearchessearches = true;
             scope.lnkLastSlide = 1;
             scope.paggingflag = scope.pagging;
-            // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
-            //     $('.search_result_items_main').attr("style", "width:80%;");
-            // } else {
-            //     $('.search_result_items_main').attr("style", "");
-            // }
             scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
             scope.endindex = scope.paggingflag === false ? 8 : 9;
@@ -908,8 +902,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                     scope.loaderspin = true;
                     scope.loadmore = false;
-                    scope.flag += 9;
-                    scope.startindex = scope.flag - 8;
+                    scope.flag += scope.paggingflag === false ? 8 : 9;
+                    scope.startindex = scope.flag - (scope.paggingflag === false ? 7 : 8);
                     scope.endindex = scope.flag;
                     scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
                 } else {
@@ -927,11 +921,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             scope.$watch('array', function(value) {
                 scope.PartnerProfilesnew = scope.array;
                 if (scope.array.length > 0) {
-                    scope.loadmore = scope.array[0].TotalRows > 9 || scope.array[0].TotalRows > scope.endindex ? true : false;
-                    scope.Norowsend = scope.array[0].TotalRows < 9 || scope.array[0].TotalRows < scope.endindex ? true : false;
+                    scope.loadmore = scope.array[0].TotalRows > (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows > scope.endindex ? true : false;
+                    scope.Norowsend = scope.array[0].TotalRows < (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows < scope.endindex ? true : false;
                     scope.startindex = 1;
-                    scope.endindex = 9;
-                    scope.flag = 9;
+                    scope.endindex = scope.paggingflag === false ? 8 : 9;
+                    scope.flag = scope.paggingflag === false ? 8 : 9;
                 }
             });
             scope.listclick = function() {
@@ -1288,8 +1282,8 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata, $rootscope) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1304,6 +1298,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.chatstatus = null;
         scope.form = {};
         scope.slides = [];
+        var searchObjectquery = $location.search();
+        scope.Typeofdatabind = searchObjectquery.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -1319,7 +1315,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.PersonalInfo = (response.data.PersonalInfo);
                             console.log(response.data.PersonalInfo);
                             scope.photopersonal = scope.PersonalInfo.Photo;
-
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
@@ -1369,7 +1364,31 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.init = function() {
+            scope.PartnerProfilesnew = [];
             scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+            switch (scope.Typeofdatabind) {
+                case "MB":
+                    scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                    break;
+                case "WB":
+                    scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                    break;
+                case "I":
+                    scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                    break;
+                case "WV":
+                    scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
+                    break;
+                case "chats":
+                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    break;
+                case "requests":
+                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    break;
+                case "express":
+                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    break;
+            }
         };
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
@@ -1799,7 +1818,27 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.incrementsdashboardcounts();
         });
 
+        $rootscope.$on("homepage", function(event, type, headertext) {
+            //do something
+            scope.gettingpartnerdata(type, 1, 9, headertext, 1);
+        });
 
+        $rootscope.$on("Chatsreqexpress", function(event, type, headertext) {
+            //do something
+            scope.PartnerProfilesnew = [];
+            switch (type) {
+                case "Chats":
+                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    break;
+                case "Requests":
+                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    break;
+                case "Express":
+                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    break;
+            }
+
+        });
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', function(scope, authSvc) {
@@ -1810,160 +1849,204 @@ app.controller('footercontrol', ['$scope', 'authSvc', function(scope, authSvc) {
     };
 
 }]);
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', function(scope, authSvc, ngIdle, alertpopup, uibModal) {
-    scope.showhidetestbuttons = function() {
-        var datatinfo = authSvc.user();
-        if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
-            scope.loginstatus = false;
-            scope.loginoutstatus = true;
-            scope.usernamepersonal = datatinfo.username;
-            scope.profileid = datatinfo.profileid;
-            scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
-            scope.profilepic = datatinfo.profilepic;
-            scope.withlogin = true;
-            scope.withoutlogin = false;
-        } else {
-            scope.loginstatus = true;
-            scope.loginoutstatus = false;
-            scope.usernamepersonal = "";
-            scope.profileid = "";
-            scope.paidstatus = "";
-            scope.profilepic = "";
-            scope.withlogin = false;
-            scope.withoutlogin = true;
-        }
-    };
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope) {
+        scope.showhidetestbuttons = function() {
+            var datatinfo = authSvc.user();
+            if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
+                scope.loginstatus = false;
+                scope.loginoutstatus = true;
+                scope.usernamepersonal = datatinfo.username;
+                scope.profileid = datatinfo.profileid;
+                scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
+                scope.profilepic = datatinfo.profilepic;
+                scope.withlogin = true;
+                scope.withoutlogin = false;
+            } else {
+                scope.loginstatus = true;
+                scope.loginoutstatus = false;
+                scope.usernamepersonal = "";
+                scope.profileid = "";
+                scope.paidstatus = "";
+                scope.profilepic = "";
+                scope.withlogin = false;
+                scope.withoutlogin = true;
+            }
+        };
 
-    scope.$on('IdleTimeout', function() {
+        scope.$on('IdleTimeout', function() {
 
-        //show pop up with two choices,wherther enduser needs to continue session or logout of application
-        //Idle.setIdle(5);
-        //redirect to home page
-        alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
-    });
-    scope.acceptcontinue = function() {
-        ngIdle.setIdle(5 * 60);
-        alertpopup.dynamicpopupclose();
-    };
-    scope.closesession = function() {
-        authSvc.logout();
-        alertpopup.dynamicpopupclose();
-    };
-    scope.loginstatus = true;
-    scope.loginoutstatus = false;
-    scope.loginpopup = false;
-    scope.withlogin = false;
-    scope.withoutlogin = true;
-    scope.showhidetestbuttons();
-    scope.divloginblock = function() {
-        scope.loginpopup = true;
-        $('.login_block_header').toggle();
-    };
-    scope.validate = function() {
+            //show pop up with two choices,wherther enduser needs to continue session or logout of application
+            //Idle.setIdle(5);
+            //redirect to home page
+            alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
+        });
+        scope.acceptcontinue = function() {
+            ngIdle.setIdle(5 * 60);
+            alertpopup.dynamicpopupclose();
+        };
+        scope.closesession = function() {
+            authSvc.logout();
+            alertpopup.dynamicpopupclose();
+        };
+        scope.loginstatus = true;
+        scope.loginoutstatus = false;
+        scope.loginpopup = false;
+        scope.withlogin = false;
+        scope.withoutlogin = true;
+        scope.showhidetestbuttons();
+        scope.divloginblock = function() {
+            scope.loginpopup = true;
+            $('.login_block_header').toggle();
+        };
+        scope.validate = function() {
 
-        if ((scope.username).indexOf("@") != -1) {
+            if ((scope.username).indexOf("@") != -1) {
 
-            if (!scope.ValidateEmail(scope.username)) {
-                scope.username = '';
-                alert(" Please enter valid ProfileID/Email");
+                if (!scope.ValidateEmail(scope.username)) {
+                    scope.username = '';
+                    alert(" Please enter valid ProfileID/Email");
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (!scope.Validatnumber(scope.username) || (scope.username).length != 9) {
+                    alert("Please enter valid ProfileID/Email");
+                    scope.username = '';
+                    return false;
+
+                } else {
+                    return true;
+                }
+
+            }
+        };
+        scope.loginsubmit = function() {
+
+            if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
+                alert("Please enter user name");
+                return false;
+            } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
+
+                alert("Please enter password");
                 return false;
             } else {
-                return true;
+                if (scope.validate()) {
+                    authSvc.login(scope.username, scope.password).then(function(response) {
+                        authSvc.user(response.response !== null ? response.response[0] : null);
+                        var custidlogin = authSvc.getCustId();
+                        window.location = "#/home";
+                        scope.loginpopup = false;
+                        scope.showhidetestbuttons();
+                    });
+                }
             }
-        } else {
-            if (!scope.Validatnumber(scope.username) || (scope.username).length != 9) {
-                alert("Please enter valid ProfileID/Email");
-                scope.username = '';
-                return false;
+        };
+
+        scope.ValidateEmail = function(email) {
+            var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return expr.test(email);
+        };
+        scope.Validatnumber = function(num) {
+            var expr1 = /[0-9 -()+]+$/;
+            return expr1.test(num);
+        };
+        scope.ClearlocalStorage = function() {
+            authSvc.logout();
+        };
+
+
+        scope.viewfullmyprofile = function() {
+            var custidlogin = authSvc.getCustId();
+            sessionStorage.removeItem("localcustid");
+            sessionStorage.removeItem("locallogid");
+            sessionStorage.setItem("localcustid", custidlogin);
+            var realpath = '#/viewFullProfileCustomer';
+            window.open(realpath, '_self');
+        };
+        scope.redirecthomeordashboard = function() {
+            var custidlogin = authSvc.getCustId();
+            if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
+                var realpaths = '#/home';
+                window.open(realpaths, "_self");
 
             } else {
-                return true;
-            }
-
-        }
-    };
-    scope.loginsubmit = function() {
-
-        if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
-            alert("Please enter user name");
-            return false;
-        } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
-
-            alert("Please enter password");
-            return false;
-        } else {
-            if (scope.validate()) {
-                authSvc.login(scope.username, scope.password).then(function(response) {
-                    authSvc.user(response.response !== null ? response.response[0] : null);
-                    var custidlogin = authSvc.getCustId();
-                    window.location = "#/home";
-                    scope.loginpopup = false;
-                    scope.showhidetestbuttons();
-                });
-            }
-        }
-    };
-
-    scope.ValidateEmail = function(email) {
-        var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        return expr.test(email);
-    };
-    scope.Validatnumber = function(num) {
-        var expr1 = /[0-9 -()+]+$/;
-        return expr1.test(num);
-    };
-    scope.ClearlocalStorage = function() {
-        authSvc.logout();
-    };
-    scope.redirectTohome = function() {
-        var realpath = '#/home';
-        window.open(realpath, "_self");
-    };
-
-    scope.viewfullmyprofile = function() {
-        var custidlogin = authSvc.getCustId();
-        sessionStorage.removeItem("localcustid");
-        sessionStorage.removeItem("locallogid");
-        sessionStorage.setItem("localcustid", custidlogin);
-        var realpath = '#/viewFullProfileCustomer';
-        window.open(realpath, '_self');
-    };
-    scope.redirecthomeordashboard = function() {
-        var custidlogin = authSvc.getCustId();
-        if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
-            var realpaths = '#/home';
-            window.open(realpaths, "_self");
-
-        } else {
-            var realpath = '#/';
-            window.open(realpath, "_self");
-        }
-
-    };
-    scope.searchpage = function(typeurl) {
-        sessionStorage.removeItem("homepageobject");
-        switch (typeurl) {
-            case "profile":
-                var realpath = '#/General?selectedIndex=2';
+                var realpath = '#/';
                 window.open(realpath, "_self");
-                //location.reload();
-                break;
-            case "general":
-                var realpathgen = '#/General?selectedIndex=0';
-                window.open(realpathgen, "_self");
-                //location.reload();
-                break;
-            case "advanced":
-                var realpathadvan = '#/General?selectedIndex=1';
-                window.open(realpathadvan, "_self");
-                //location.reload();
-                break;
-        }
+            }
 
-    };
-}]);
-app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata', '$mdDialog', 'arrayConstants', 'SelectBindServiceApp',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service) {
+        };
+        scope.searchpage = function(typeurl) {
+            sessionStorage.removeItem("homepageobject");
+            switch (typeurl) {
+                case "profile":
+                    var realpath = '#/General?selectedIndex=2';
+                    window.open(realpath, "_self");
+                    $rootscope.$broadcast("profile", 2);
+                    break;
+                case "general":
+                    var realpathgen = '#/General?selectedIndex=0';
+                    window.open(realpathgen, "_self");
+                    $rootscope.$broadcast("profile", 0);
+                    break;
+                case "advanced":
+                    var realpathadvan = '#/General?selectedIndex=1';
+                    window.open(realpathadvan, "_self");
+                    $rootscope.$broadcast("profile", 1);
+                    break;
+            }
+        };
+
+        scope.homepagelinks = function(typeurl) {
+            switch (typeurl) {
+                case "BookMarked":
+                    var realpath = '#/home?type=MB';
+                    window.open(realpath, "_self");
+                    $rootscope.$broadcast("homepage", "MB", "My BookMarked Profiles");
+                    break;
+                case "BookMarkedme":
+                    var realpathgen = '#/home?type=WB';
+                    window.open(realpathgen, "_self");
+                    $rootscope.$broadcast("homepage", "WB", "Who BookMarked Me");
+                    break;
+                case "Ignored":
+                    var realpathadvan = '#/home?type=I';
+                    window.open(realpathadvan, "_self");
+                    $rootscope.$broadcast("homepage", "I", "Ignored Profiles");
+                    break;
+                case "myprofile":
+                    var myprofile = '#/home?type=WV';
+                    window.open(myprofile, "_self");
+                    $rootscope.$broadcast("homepage", "WV", "My profile viewed by others");
+                    break;
+                case "myhome":
+                    var myhome = '#/home?type=C';
+                    window.open(myhome, "_self");
+                    $rootscope.$broadcast("homepage", "C", "Suitable Profiles that match you");
+                    break;
+                case "Chats":
+                    var Chats = '#/home?type=chats';
+                    window.open(Chats, "_self");
+                    $rootscope.$broadcast("Chatsreqexpress", "Chats", "Total Messages");
+                    break;
+                case "Requests":
+                    var Requests = '#/home?type=requests';
+                    window.open(Requests, "_self");
+                    $rootscope.$broadcast("Chatsreqexpress", "Requests", "Members are requesting to upload your photo");
+                    break;
+                case "Express":
+                    var Express = '#/home?type=express';
+                    window.open(Express, "_self");
+                    $rootscope.$broadcast("Chatsreqexpress", "Express", "All Profiles");
+                    break;
+            }
+        };
+    }
+]);
+app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -2113,6 +2196,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             sessionStorage.removeItem("homepageobject");
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
+            $rootscope.$broadcast("profile", 2);
         };
     }
 ]);
@@ -2248,9 +2332,10 @@ app.controller('advancesearchCtrl', ['$scope', function (scope) {
     scope.data = [];
 }]);
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
-    '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog', '$location',
+    '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
+    '$location', 'getArray', '$timeout', '$rootScope',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog, $location) {
+        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope) {
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -2259,7 +2344,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.showcontrols = true;
         var SearchRequest = 0;
         var logincustid = authSvc.getCustId();
-
         scope.typesearch = "";
         scope.savedsearchselect = [];
         var globalheight;
@@ -2269,12 +2353,35 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.getpaidstatus = authSvc.getpaidstatus();
         scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-        // scope.searches = 'searches';
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
+        scope.loadinging = false;
+        scope.activated = true;
+        //scope.selectedIndex = 2;
+        scope.controlsbinding = function() {
+            timeout(function() {
+                scope.arrayAge = scope.Age();
+                scope.height = arrayConstants.height;
+                scope.MaritalStatus = arrayConstants.MaritalStatus;
+                scope.educationcategory = arrayConstants.educationcategory;
+                scope.Religion = arrayConstants.Religion;
+                scope.Mothertongue = arrayConstants.Mothertongue;
+                scope.visastatus = arrayConstants.visastatus;
+                scope.stars = arrayConstants.stars;
+                scope.Country = getArray.GArray('Country');
+                scope.Professiongroup = getArray.GArray('ProfGroup');
+                scope.Currency = getArray.GArray('currency');
+            }, 1000);
+        };
+        scope.dependencybind = function(parent1, parent2) {
 
-        //alert(scope.selectedIndex);
-        //alert(scope.selectedIndex);
+            var caste = [];
+            timeout(function() {
+                caste = commonFactory.casteDepedency(parent1, parent2);
+            }, 1000);
+            return caste;
+
+        };
         scope.applycolors = function(value) {
             var colors = "selectborderclass";
             if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
@@ -2283,6 +2390,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 colors = "selectborderclass";
             }
             return colors;
+        };
+        scope.Age = function() {
+            scope.test = [];
+            scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
+            for (var i = 18; i < 78; i++) {
+                scope.test.push({ label: i + ' years', title: i + ' years', value: i });
+            }
+            return scope.test;
         };
         scope.changeBindsearhes = function(type, parentval, parentval2) {
             switch (type) {
@@ -2294,8 +2409,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case 'caste':
                     scope.Caste = [];
-
-                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
+                    scope.Caste = scope.dependencybind(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(parentval);
@@ -2330,7 +2444,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.country = response.data.Country.split(',');
             scope.religion = response.data.Religion;
             scope.mothertongue = response.data.MotherTongue.split(',');
-            scope.Caste = commonFactory.casteDepedency(response.data.Religion, response.data.MotherTongue);
+            scope.Caste = scope.dependencybind(response.data.Religion, response.data.MotherTongue);
             scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
@@ -2357,49 +2471,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
-            scope.Age = function() {
-                scope.test = [];
-                scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
-                for (var i = 18; i < 78; i++) {
-                    scope.test.push({ label: i + ' years', title: i + ' years', value: i });
-                }
-                return scope.test;
-            };
-            scope.arrayAge = scope.Age();
-            scope.height = arrayConstants.height;
-            scope.MaritalStatus = arrayConstants.MaritalStatus;
-            scope.educationcategory = arrayConstants.educationcategory;
-            service.countrySelect().then(function(response) {
-                scope.Country = [];
-                _.each(response.data, function(item) {
-                    scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                });
-            });
-            scope.Religion = arrayConstants.Religion;
-            scope.Mothertongue = arrayConstants.Mothertongue;
-            scope.visastatus = arrayConstants.visastatus;
-            service.ProfessionGroup().then(function(response) {
-                scope.Professiongroup = [];
-                _.each(response.data, function(item) {
-                    scope.Professiongroup.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                });
-            });
-            service.currency().then(function(response) {
-                scope.Currency = [];
-                _.each(response.data, function(item) {
-                    scope.Currency.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                });
-            });
-            scope.stars = arrayConstants.stars;
+            scope.controlsbinding();
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
-                    console.log(response.data);
                     scope.partnerbindings(response);
                 });
                 scope.savedsearchselectmethod(scope.custid, "", 1);
 
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
-
                 scope.truepartner = true;
                 scope.truepartnerrefine = true;
                 scope.gender = (scope.object.intGender) === 1 ? 2 : 1;
@@ -2508,6 +2587,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return SearchRequest;
         };
         scope.generalsearchsubmit = function(type, frompage, topage, form) {
+            scope.loadinging = true;
             scope.showcontrols = false;
             scope.truepartner = false;
             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -2614,7 +2694,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             });
                         }
                     });
-                    // alerts.dynamicpopupclose();
+
                     scope.$broadcast('loadmore');
                     break;
                 case "profileidsavedsearch":
@@ -2658,6 +2738,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     alerts.dynamicpopupclose();
                     break;
             }
+            scope.loadinging = false;
         };
         scope.savedseapopup = function(type) {
             scope.typesearch = type;
@@ -2680,15 +2761,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (1)) {
                         globalheight = obj.label;
-
-
                     }
                 });
                 scope.HeightFromtext = globalheight;
                 _.filter(scope.height, function(obj) {
                     if ((obj.value) == (38)) {
                         globalheightto = obj.label;
-
                     }
                 });
                 scope.Heighttotext = globalheightto;
@@ -2711,7 +2789,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case 'caste':
                     scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(scope.religion, (modal).toString());
+                    scope.Caste = scope.dependencybind(scope.religion, (modal).toString());
                     break;
                 case 'star':
                     scope.stars = commonFactory.starBind(modal);
@@ -2761,10 +2839,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.showloginpopup = function() {
             $mdDialog.show({
-                controller: DialogController,
+
                 templateUrl: 'login.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true,
+                scope: scope
 
             });
         };
@@ -2772,64 +2851,64 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.showloginpopup();
         });
 
-        function DialogController($scope, $mdDialog) {
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
 
-            $scope.validate = function() {
+        scope.cancel = function() {
+            $mdDialog.cancel();
+        };
 
-                if (($scope.username).indexOf("@") !== -1) {
+        scope.validate = function() {
 
-                    if (!$scope.ValidateEmail($scope.username)) {
-                        $scope.username = '';
-                        alert(" Please enter valid ProfileID/Email");
-                        return false;
-                    } else {
-                        return true;
-                    }
-                } else {
-                    if (!$scope.Validatnumber($scope.username) || ($scope.username).length !== 9) {
-                        alert("Please enter valid ProfileID/Email");
-                        $scope.username = '';
-                        return false;
+            if ((scope.username).indexOf("@") !== -1) {
 
-                    } else {
-                        return true;
-                    }
-
-                }
-            };
-            $scope.loginsubmit = function() {
-
-                if ($scope.username === "" || $scope.username === null || $scope.username === "ProfileID/EmailID") {
-                    alert("Please enter user name");
-                    return false;
-                } else if ($scope.password === "" || $scope.password === null || $scope.password === "Enter the Password") {
-
-                    alert("Please enter password");
+                if (!scope.ValidateEmail(scope.username)) {
+                    scope.username = '';
+                    alert(" Please enter valid ProfileID/Email");
                     return false;
                 } else {
-                    if ($scope.validate()) {
-                        authSvc.login($scope.username, $scope.password).then(function(response) {
-                            authSvc.user(response.response !== null ? response.response[0] : null);
-                            var custidlogin = authSvc.getCustId();
-                            window.location = "#/home";
-                            $scope.cancel();
-                        });
-                    }
+                    return true;
                 }
-            };
+            } else {
+                if (!scope.Validatnumber(scope.username) || (scope.username).length !== 9) {
+                    alert("Please enter valid ProfileID/Email");
+                    scope.username = '';
+                    return false;
 
-            $scope.ValidateEmail = function(email) {
-                var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                return expr.test(email);
-            };
-            $scope.Validatnumber = function(num) {
-                var expr1 = /[0-9 -()+]+$/;
-                return expr1.test(num);
-            };
-        }
+                } else {
+                    return true;
+                }
+
+            }
+        };
+        scope.loginsubmit = function() {
+
+            if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
+                alert("Please enter user name");
+                return false;
+            } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
+
+                alert("Please enter password");
+                return false;
+            } else {
+                if (scope.validate()) {
+                    authSvc.login(scope.username, scope.password).then(function(response) {
+                        authSvc.user(response.response !== null ? response.response[0] : null);
+                        var custidlogin = authSvc.getCustId();
+                        window.location = "#/home";
+                        scope.cancel();
+                    });
+                }
+            }
+        };
+
+        scope.ValidateEmail = function(email) {
+            var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return expr.test(email);
+        };
+        scope.Validatnumber = function(num) {
+            var expr1 = /[0-9 -()+]+$/;
+            return expr1.test(num);
+        };
+
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
@@ -2886,6 +2965,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
             }
         };
+
+        $rootscope.$on("profile", function(event, indexvalue) {
+            scope.selectedIndex = indexvalue;
+        });
+
+
     }
 ]);
 app.controller('profileidsrch',['$scope',function(scope){

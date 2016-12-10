@@ -8,7 +8,7 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'jcs-autoValidate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'uiRouterStyles', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'dataGrid', 'pagination', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration']);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
@@ -97,6 +97,7 @@ app.config(function(reCAPTCHAProvider) {
 app.run(function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
         //console.log(to);
+
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();

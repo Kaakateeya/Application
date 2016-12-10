@@ -13,18 +13,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
         link: function(scope, element, attrs) {
             scope.searchestype = scope.typeofsearch;
             scope.typeofdiv = "List";
-            $('.search_result_items_main').attr("style", "width:80%;");
             scope.slideshowsearches = false;
             scope.playpausebuttons = true;
             scope.pauseplaybuttons = true;
             scope.partnersearchessearches = true;
             scope.lnkLastSlide = 1;
             scope.paggingflag = scope.pagging;
-            // if (scope.typeofstyle != undefined && scope.typeofstyle != null && scope.typeofstyle != "" && scope.typeofdiv === "List") {
-            //     $('.search_result_items_main').attr("style", "width:80%;");
-            // } else {
-            //     $('.search_result_items_main').attr("style", "");
-            // }
             scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
             scope.startindex = 1;
             scope.endindex = scope.paggingflag === false ? 8 : 9;
@@ -38,8 +32,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                     scope.loaderspin = true;
                     scope.loadmore = false;
-                    scope.flag += 9;
-                    scope.startindex = scope.flag - 8;
+                    scope.flag += scope.paggingflag === false ? 8 : 9;
+                    scope.startindex = scope.flag - (scope.paggingflag === false ? 7 : 8);
                     scope.endindex = scope.flag;
                     scope.$emit('directivecallingpaging', scope.startindex, scope.endindex);
                 } else {
@@ -57,11 +51,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
             scope.$watch('array', function(value) {
                 scope.PartnerProfilesnew = scope.array;
                 if (scope.array.length > 0) {
-                    scope.loadmore = scope.array[0].TotalRows > 9 || scope.array[0].TotalRows > scope.endindex ? true : false;
-                    scope.Norowsend = scope.array[0].TotalRows < 9 || scope.array[0].TotalRows < scope.endindex ? true : false;
+                    scope.loadmore = scope.array[0].TotalRows > (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows > scope.endindex ? true : false;
+                    scope.Norowsend = scope.array[0].TotalRows < (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows < scope.endindex ? true : false;
                     scope.startindex = 1;
-                    scope.endindex = 9;
-                    scope.flag = 9;
+                    scope.endindex = scope.paggingflag === false ? 8 : 9;
+                    scope.flag = scope.paggingflag === false ? 8 : 9;
                 }
             });
             scope.listclick = function() {
