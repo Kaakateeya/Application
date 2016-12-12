@@ -11,7 +11,6 @@ app.factory('singlestaticbindings', ['arrayConstants', 'SelectBindServiceApp', f
         Country: function() {
             var Countryi = [];
             SelectBindService.countrySelect().then(function(response) {
-
                 Countryi = [{ label: "--Select--", title: "--select--", value: "0" }];
                 _.each(response.data, function(item) {
                     Countryi.push({ "label": item.Name, "title": item.Name, "value": item.ID });

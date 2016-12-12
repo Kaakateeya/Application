@@ -78,10 +78,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-
                         authSvc.user(response.response !== null ? response.response[0] : null);
-                        // var d = authSvc.getCustId();
-                        // var dd = authSvc.user();
+                        sessionStorage.removeItem("LoginPhotoIsActive");
                         window.location = "#/home";
                     });
                 }
@@ -138,8 +136,9 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.Searchresult = null;
             // sessionStorage.removeItem("homepageobject");
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
-            var realpath = '#/General';
+            var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
+            $rootscope.$broadcast("profile", 2);
         };
 
         scope.showforgetpasswordpopup = function() {

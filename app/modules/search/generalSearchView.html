@@ -108,7 +108,7 @@
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -185,14 +185,14 @@
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3 select-box-my">
+                                        <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix margintopclass">
                                                 <angular-multiselect array="Caste" change="true" model="caste">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3" ng-hide="true">
+                                        <div class="control-group span3" ng-hide="casteshow">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix margintopclass">
                                                 <md-input-container class="md-block">
@@ -232,7 +232,7 @@
                                 <div class="profile_search_main profile_settings_main clearfix">
                                     <div class="row">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -294,19 +294,20 @@
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3 select-box-my">
+                                        <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
                                                 <angular-multiselect array="Caste" change="true" model="caste">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3" ng-hide="true">
+                                        <div class="control-group span3" ng-hide="casteshow">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
                                                 <md-input-container class="md-block">
                                                     <label>{{castetext}}</label>
                                                     <label style="font-weight: bold; display: none;">{{caste}}</label>
+
                                                 </md-input-container>
                                             </div>
                                         </div>
@@ -459,7 +460,7 @@
                                     <md-divider ng-if="!$last"></md-divider>
                                     <p ng-show="custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="#/editview/editPartnerPreferences">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,8)">Search</md-button>
-                                    <md-button class="md-raised md-hue-1">Reset</md-button>
+                                    <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
                                     <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">Save&Search</md-button>
                                 </div>
                             </form>
@@ -470,7 +471,7 @@
                             <div class="profile_search_main profile_settings_main clearfix">
                                 <div class="row">
                                     <div layout-gt-sm="row">
-                                        <md-radio-group layout="row" ng-model="mailyes" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                        <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                             <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                             <md-radio-button value="1"> Groom </md-radio-button>
                                         </md-radio-group>
@@ -481,19 +482,19 @@
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Profile id</label>
-                                            <input ng-model="profileid">
+                                            <input ng-model="profileid" id="txtProfileid">
                                         </md-input-container>
                                     </div>
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>First name</label>
-                                            <input ng-model="firstname">
+                                            <input ng-model="firstname" id="txtFirstNameProfileid">
                                         </md-input-container>
                                     </div>
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Last name</label>
-                                            <input ng-model="lastname">
+                                            <input ng-model="lastname" id="txtLastNameProfileid">
                                         </md-input-container>
                                     </div>
                                     <br>
@@ -502,7 +503,7 @@
                                     <br>
                                 </div>
                                 <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid',1,8)">Search</md-button>
-                                <md-button class="md-raised md-hue-1">Reset</md-button>
+                                <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
                                 <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('profileid')">Save&Search</md-button>
                             </div>
                         </div>
@@ -540,9 +541,7 @@
         </div>
     </div>
 </div>
-<div class="row" ng-show="loadinging">
-    <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" ng-disabled="!activated" md-diameter="60"></md-progress-circular>
-</div>
+
 <div class="register_page_main clearfix" ng-hide="truepartnerrefine">
     <div class="clearfix">
         <div class="refine_search_new clearfix">
@@ -608,10 +607,14 @@
         </div>
    </div>
     <div class="search_results_main clearfix">
+      
         <div class="search_result_items_main clearfix" style="width:80%;">
             <div class="message-row4">
                 <div id="Div1" class="Maindiv message-row4  wrapper--overflow">
                     <div class="searched_list clearfix">
+                         <div class="row" ng-hide="loadinging">
+                           <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" md-diameter="60"></md-progress-circular>
+                         </div>
                         <partner-data array="PartnerProfilesnew" typeofsearch="false" pagging="false"></partner-data>
                     </div>
                 </div>

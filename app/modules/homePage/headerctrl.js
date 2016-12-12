@@ -85,6 +85,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
+                        sessionStorage.removeItem("LoginPhotoIsActive");
                         window.location = "#/home";
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();

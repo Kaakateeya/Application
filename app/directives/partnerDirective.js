@@ -2,6 +2,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
     var currentslide = 1;
+    var photoclass = "";
     return {
         restrict: "E",
         scope: {
@@ -182,7 +183,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata', '$md
                 }
             };
             scope.divclassmask = function(logphotostatus, photo, photocount) {
-                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                    return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                } else {
+                    return "";
+                }
             };
             scope.indexvalue = function(index) {
                 scope.indexvalues = index;
