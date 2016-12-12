@@ -41,6 +41,9 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
             });
         });
+        scope.Agefrom = 18;
+        scope.Ageto = 30;
+        scope.religion = 1;
         scope.divloginblock = function() {
             $('.login_block_header').toggle();
         };
@@ -67,12 +70,10 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }
         };
         scope.loginsubmit = function() {
-
             if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
                 alert("Please enter user name");
                 return false;
             } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
-
                 alert("Please enter password");
                 return false;
             } else {
@@ -80,7 +81,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
-                        window.location = "#/home";
+                        if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
+                            window.location = "#/home";
+                        } else {
+                            window.location = "#/mobileverf";
+                        }
                     });
                 }
             }
@@ -96,7 +101,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
 
         scope.ValidatequickRegister = function() {
-
             var srchobject = {};
             srchobject.intCusID = null;
             srchobject.strCust_id = null;

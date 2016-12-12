@@ -86,7 +86,11 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
-                        window.location = "#/home";
+                        if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
+                            window.location = "#/home";
+                        } else {
+                            window.location = "#/mobileverf";
+                        }
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
@@ -116,6 +120,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             window.open(realpath, '_self');
         };
         scope.redirecthomeordashboard = function() {
+            sessionStorage.removeItem("LoginPhotoIsActive");
             var custidlogin = authSvc.getCustId();
             if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
                 var realpaths = '#/home';
@@ -171,6 +176,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     $rootscope.$broadcast("homepage", "WV", "My profile viewed by others");
                     break;
                 case "myhome":
+                    sessionStorage.removeItem("LoginPhotoIsActive");
                     var myhome = '#/home?type=C';
                     window.open(myhome, "_self");
                     $rootscope.$broadcast("homepage", "C", "Suitable Profiles that match you");

@@ -16,6 +16,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
             });
             _.each(response.data, function(item) {
                 scope.paymentarray.push(item);
+
             });
         });
 

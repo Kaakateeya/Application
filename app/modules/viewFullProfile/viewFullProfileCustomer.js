@@ -9,7 +9,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.pageload = function() {
             customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
 
-                console.log(response);
+                console.log(JSON.stringify(response));
                 scope.arr = [];
                 scope.personalinfo = {};
                 scope.aboutmyself = {};

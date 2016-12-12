@@ -14,7 +14,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        scope.slides = [];
+        // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
@@ -508,19 +508,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
 
-        scope.$on("photoalbumopen", function(event, custid, profileid, photocount) {
-            //scope.popupphoto = 1;
-            alerts.dynamicpopup("photopopup.html", scope, uibModal);
-            customerDashboardServices.getphotoslideimages(custid).then(function(response) {
+        // scope.$on("photoalbumopen", function(event, custid, profileid, photocount) {
 
-                scope.slides = [];
-                console.log(response);
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
-                });
-            });
+        //     alerts.dynamicpopup("photopopup.html", scope, uibModal);
+        //     customerDashboardServices.getphotoslideimages(custid).then(function(response) {
 
-        });
+        //         scope.slides = [];
+        //         console.log(response);
+        //         _.each(response.data, function(item) {
+        //             scope.slides.push(item);
+        //         });
+        //     });
+
+        // });
 
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);

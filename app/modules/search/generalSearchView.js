@@ -26,6 +26,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.loadinging = true;
         scope.activated = true;
         scope.casteshow = true;
+
         //scope.selectedIndex = 2;
         scope.textlabels = function() {
             _.filter(scope.height, function(obj) {
@@ -183,11 +184,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 // scope.country = scope.object.Country;
                 // scope.religion = scope.object.intReligionID;
                 // scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
-
                 SearchRequest = {
                     intCusID: null,
                     strCust_id: null,
-                    intGender: (scope.object.intGender) === 2 ? 2 : 1,
+                    intGender: (scope.object.intGender) === '2' ? 2 : 1,
                     FromAge: scope.object.FromAge,
                     ToAge: scope.object.ToAge,
                     iFromHeight: null,
@@ -703,5 +703,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.showcontrols = true;
             scope.selectedIndex = indexvalue;
         });
+
+
+
     }
 ]);

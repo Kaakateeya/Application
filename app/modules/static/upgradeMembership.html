@@ -52,19 +52,20 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{payment.Ppath}}
-                                        <img ng-src="{{payment.Ppath}}" ng-hide="payment.MembershipName=='Services & Features'?true:false" />
+
+                                        <img ng-src="{{payment.Ppath==='../images/icon_tick_mark.png'?'src/images/icon_tick_mark.png':'src/images/icon_x_mark.png'}}" ng-hide="payment.MembershipName=='Services & Features'?true:false" />
                                         <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Relationship Manager</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{payment.Ppluspath}}
-                                        <img ng-hide="payment.MembershipName=='Services & Features'?true:false" ng-src='{{payment.Ppluspath}}' />
+
+                                        <img ng-hide="payment.MembershipName=='Services & Features'?true:false" ng-src="{{payment.Ppluspath==='../images/icon_tick_mark.png'?'src/images/icon_tick_mark.png':'src/images/icon_x_mark.png'}}" />
                                         <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Senior Relationship Manager</label>
                                     </td>
                                 </tr>
                                 <tr>
+
                                     <td>
                                         <img src="src/images/icon_tick_mark.png" ng-hide="payment.MembershipName=='Services & Features'?true:false" />
                                         <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Express Interest</label>
