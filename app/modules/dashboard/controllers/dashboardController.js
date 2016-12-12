@@ -556,5 +556,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
 
         });
+        scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
+            if (loginpaidstatus === "1") {
+                scope.gettingpartnerdata(type, frompage, topage, headertext);
+            } else {
+                alerts.open('Please Upgrade membership', 'warning');
+            }
+        };
     }
 ]);

@@ -13,7 +13,7 @@
                 <div class="landing_page_head_lt_in_cont">
                     <div id="notifyDivc">
                         <p ng-repeat="item in staticNotification" class="clearfix"> <span id="lblRepeateContains">{{item}}</span>
-                            <a id="lnkViewNotificationsbind" href="javascript:void(0);" ng-click="item=='New profiles waiting for you from last month'?gettingpartnerdata('LMP',1,9,'New profiles waiting for you from last month'):gettingpartnerdata('CVP',1,9,'Members who viewed your photograph')">View details</a></p>
+                            <a id="lnkViewNotificationsbind" href="javascript:void(0);" ng-click="item=='New profiles waiting for you from last month'?newprofileawaiting('LMP',1,9,'New profiles waiting for you from last month'):newprofileawaiting('CVP',1,9,'Members who viewed your photograph')">View details</a></p>
                     </div>
                 </div>
             </div>

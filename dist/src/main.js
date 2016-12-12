@@ -870,9 +870,11 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
 }]);
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
-    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,uibModal) {
+    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices, uibModal) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
+        var loginpaidstatus = authSvc.getpaidstatus();
+        //alert(loginpaidstatus === '1');
         var currentslide = 1;
         var photoclass = "";
         return {
@@ -966,11 +968,15 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         }
                                         break;
                                     case "E":
-                                        if (response.data == 1) {
-                                            scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
+                                        if (loginpaidstatus === "1") {
+                                            if (response.data == 1) {
+                                                scope.array.splice(scope.indexvalues, 1);
+                                                scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
+                                            } else {
+                                                scope.$emit('successfailer', "EXpressInterest Fail", "warning");
+                                            }
                                         } else {
-                                            scope.$emit('successfailer', "EXpressInterest Fail", "warning");
+                                            alerts.open('please upgrade membership', 'warning');
                                         }
                                         break;
                                     case "I":
@@ -1856,6 +1862,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
 
         });
+        scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
+            if (loginpaidstatus === "1") {
+                scope.gettingpartnerdata(type, frompage, topage, headertext);
+            } else {
+                alerts.open('Please Upgrade membership', 'warning');
+            }
+        };
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
