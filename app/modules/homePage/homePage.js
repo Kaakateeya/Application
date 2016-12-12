@@ -138,7 +138,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
-            $rootscope.$broadcast("profile", 2);
+            //$rootscope.$broadcast("profile", 2);
         };
 
         scope.showforgetpasswordpopup = function() {

@@ -697,6 +697,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
         $rootscope.$on("profile", function(event, indexvalue) {
+            sessionStorage.removeItem("homepageobject");
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.showcontrols = true;
             scope.selectedIndex = indexvalue;
         });
     }

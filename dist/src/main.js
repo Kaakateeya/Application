@@ -2208,7 +2208,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
-            $rootscope.$broadcast("profile", 2);
+            //$rootscope.$broadcast("profile", 2);
         };
 
         scope.showforgetpasswordpopup = function() {
@@ -3053,6 +3053,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
         $rootscope.$on("profile", function(event, indexvalue) {
+            sessionStorage.removeItem("homepageobject");
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.showcontrols = true;
             scope.selectedIndex = indexvalue;
         });
     }
