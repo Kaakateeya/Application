@@ -1092,6 +1092,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.modifyursearch = function() {
+                    scope.PartnerProfilesnew = [];
+                    scope.listclick();
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
 
@@ -2747,10 +2749,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
-                            _.each(response.data, function(item) {
-                                console.log(response.data);
-                                scope.PartnerProfilesnew.push(item);
-                            });
+                            console.log(response.data);
+                            if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                                scope.showcontrols = false;
+                                scope.truepartner = false;
+                                _.each(response.data, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            } else {
+                                scope.showcontrols = true;
+                                scope.truepartner = true;
+                                scope.truepartnerrefine = true;
+                                alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                            }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
                                 _.each(response.data, function(item) {
@@ -2770,9 +2781,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(SearchRequest).then(function(response) {
                         scope.PartnerProfilesnew = [];
-                        _.each(response.data, function(item) {
-                            scope.PartnerProfilesnew.push(item);
-                        });
+                        if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                            _.each(response.data, function(item) {
+                                scope.PartnerProfilesnew.push(item);
+                            });
+                        } else {
+                            alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                        }
                         scope.loadinging = true;
                     });
                     scope.$broadcast('loadmore');
@@ -2793,9 +2808,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         searches.profileidsearch(SearchRequest).then(function(response) {
                             if (parseInt(frompage) === 1) {
                                 scope.PartnerProfilesnew = [];
-                                _.each(response.data, function(item) {
-                                    scope.PartnerProfilesnew.push(item);
-                                });
+                                if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                                    _.each(response.data, function(item) {
+                                        scope.PartnerProfilesnew.push(item);
+                                    });
+                                } else {
+                                    scope.showcontrols = true;
+                                    scope.truepartner = true;
+                                    scope.truepartnerrefine = true;
+                                    alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                                }
                             } else {
                                 _.each(response.data, function(item) {
                                     scope.PartnerProfilesnew.push(item);
@@ -3898,14 +3920,13 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     };
     $(window).scroll(function() {
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-
             scope.loadmore = false;
             scope.loaderspin = true;
             scope.flag += 8;
             scope.fromge = scope.flag - 7;
             scope.topage = scope.flag;
             suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-                if (response.data !== null && response.data !== "" && response.data !== undefined) {
+                if (response.data !== null && response.data !== "" && response.data !== undefined && response.data.length > 0) {
                     scope.success = $.unique((scope.success).concat(response.data));
                     scope.loadmore = true;
                     scope.loaderspin = false;
@@ -3918,14 +3939,13 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     });
 
     scope.loadmorefunction = function() {
-
         scope.loadmore = false;
         scope.loaderspin = true;
         scope.flag += 8;
         scope.fromge = scope.flag - 7;
         scope.topage = scope.flag;
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-            if (response.data !== null && response.data !== "" && response.data !== undefined) {
+            if (response.data !== null && response.data !== "" && response.data !== undefined && response.data.length > 0) {
                 scope.success = $.unique((scope.success).concat(response.data));
                 scope.loadmore = true;
                 scope.loaderspin = false;

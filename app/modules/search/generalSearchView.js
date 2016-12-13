@@ -337,7 +337,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                alerts.open('No Records Found,Please Change search Criteria', 'warning')
+                                alerts.open('No Records Found,Please Change search Criteria', 'warning');
                             }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -363,7 +363,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            alerts.open('No Records Found,Please Change search Criteria', 'warning')
+                            alerts.open('No Records Found,Please Change search Criteria', 'warning');
                         }
                         scope.loadinging = true;
                     });
@@ -393,7 +393,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    alerts.open('No Records Found,Please Change search Criteria', 'warning')
+                                    alerts.open('No Records Found,Please Change search Criteria', 'warning');
                                 }
                             } else {
                                 _.each(response.data, function(item) {
