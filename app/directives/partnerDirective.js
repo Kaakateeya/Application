@@ -220,6 +220,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.modifyursearch = function() {
+                    scope.PartnerProfilesnew = [];
+                    scope.listclick();
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
 

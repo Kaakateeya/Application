@@ -13,14 +13,13 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     };
     $(window).scroll(function() {
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-
             scope.loadmore = false;
             scope.loaderspin = true;
             scope.flag += 8;
             scope.fromge = scope.flag - 7;
             scope.topage = scope.flag;
             suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-                if (response.data !== null && response.data !== "" && response.data !== undefined) {
+                if (response.data !== null && response.data !== "" && response.data !== undefined && response.data.length > 0) {
                     scope.success = $.unique((scope.success).concat(response.data));
                     scope.loadmore = true;
                     scope.loaderspin = false;
@@ -33,14 +32,13 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     });
 
     scope.loadmorefunction = function() {
-
         scope.loadmore = false;
         scope.loaderspin = true;
         scope.flag += 8;
         scope.fromge = scope.flag - 7;
         scope.topage = scope.flag;
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-            if (response.data !== null && response.data !== "" && response.data !== undefined) {
+            if (response.data !== null && response.data !== "" && response.data !== undefined && response.data.length > 0) {
                 scope.success = $.unique((scope.success).concat(response.data));
                 scope.loadmore = true;
                 scope.loaderspin = false;
