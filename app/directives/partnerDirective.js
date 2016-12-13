@@ -36,7 +36,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.slides = [];
                 scope.directivepaging = function() {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
-                        debugger;
+
                         scope.loaderspin = true;
                         scope.loadmore = false;
                         scope.flag += scope.paggingflag === false ? 8 : 9;
@@ -75,7 +75,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.searchestype = scope.paggingflag === false ? false : true;
                 };
                 scope.gridclick = function() {
-                    debugger;
+
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
