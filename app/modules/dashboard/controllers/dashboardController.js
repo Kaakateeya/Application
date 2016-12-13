@@ -117,6 +117,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
+            console.log(array.SaveSearchCount);
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
@@ -126,7 +127,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
                 { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
                 { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
-                { value: 'Saved search', bindvalue: 'profile', href: '#/General?selectedIndex=2' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: '#/General?selectedIndex=3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
             ];

@@ -77,9 +77,13 @@
             height: 70px;
         }
         
-        toast-top-right {
+        #toast-container {
+            position: fixed;
+            z-index: 999999;
+            pointer-events: none;
             left: 50%;
             margin-left: -150px;
+            top: 50%;
         }
         
         .input-group {
