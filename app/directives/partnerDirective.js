@@ -348,10 +348,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
+
                     scope.loadmore = false;
                     scope.Norowsend = false;
                     scope.loaderspin = false;
                     scope.pageloadslidebind();
+                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                    scope.lnkLastSlide = currentIndex1 + 1;
                 };
 
                 scope.prevslide = function() {
@@ -361,11 +364,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
 
                 };
+
 
             }
         };

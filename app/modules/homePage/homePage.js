@@ -1,6 +1,6 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope) {
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope, alerts) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {

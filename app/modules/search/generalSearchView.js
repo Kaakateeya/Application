@@ -21,6 +21,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.getpaidstatus = authSvc.getpaidstatus();
         scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.genderdiabled = scope.custid !== null ? true : false;
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
         scope.loadinging = true;

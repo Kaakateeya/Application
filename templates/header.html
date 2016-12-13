@@ -6,7 +6,7 @@
         <input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();" />
         <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
         <div class="login_block_header" ng-show="loginpopup" id="divLogin">
-            <form name="myForm">
+            <form name="myForms">
                 <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="username" required/>
                 <input type="password" id="txtPassword" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
                 <span class="clear">&nbsp;</span>
@@ -14,7 +14,7 @@
                     <a id="lnkForgotPassword">Forgot Password</a>
                     <a href="#/Registration">New User Sign Up</a>
                 </div>
-                <input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForm.$invalid" class="button_custom" value="Login" />
+                <md-button id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForms.$invalid" class="md-raised md-warn">Login</md-button>
             </form>
             <span class="clear">&nbsp;</span>
         </div>

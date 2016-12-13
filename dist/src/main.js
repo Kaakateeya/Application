@@ -1218,10 +1218,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
+
                     scope.loadmore = false;
                     scope.Norowsend = false;
                     scope.loaderspin = false;
                     scope.pageloadslidebind();
+                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                    scope.lnkLastSlide = currentIndex1 + 1;
                 };
 
                 scope.prevslide = function() {
@@ -1231,11 +1234,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
+                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
 
                 };
+
 
             }
         };
@@ -2108,8 +2112,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope) {
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope, alerts) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -2434,6 +2438,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.getpaidstatus = authSvc.getpaidstatus();
         scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.genderdiabled = scope.custid !== null ? true : false;
         var searchObjectquery = $location.search();
         scope.selectedIndex = searchObjectquery.selectedIndex;
         scope.loadinging = true;
@@ -4213,7 +4218,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, alerts) {
 
 
     function setUser(value) {
@@ -4248,6 +4253,7 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
         clearSession('cust.profileid');
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
+        sessionStorage.removeItem("LoginPhotoIsActive");
     }
 
     function getUser() {
@@ -4296,9 +4302,14 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'DB/userLogin/person', body)
                     .then(function(response) {
+                     
                         if (response.status === 200) {
-                            Idle.watch();
-                            return { success: true, response: response.data };
+                            if (response.data !== null) {
+                                Idle.watch();
+                                return { success: true, response: response.data };
+                            } else {
+                                alerts.open("please enter valid EmailID/Username", "warning");
+                            }
                         }
                         return { success: false, response: response.data };
                     });

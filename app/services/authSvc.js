@@ -17,7 +17,7 @@
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, alerts) {
 
 
     function setUser(value) {
@@ -52,6 +52,7 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
         clearSession('cust.profileid');
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
+        sessionStorage.removeItem("LoginPhotoIsActive");
     }
 
     function getUser() {
@@ -100,9 +101,14 @@ app.factory('authSvc', ['$injector', 'Idle', function($injector, Idle) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'DB/userLogin/person', body)
                     .then(function(response) {
+                     
                         if (response.status === 200) {
-                            Idle.watch();
-                            return { success: true, response: response.data };
+                            if (response.data !== null) {
+                                Idle.watch();
+                                return { success: true, response: response.data };
+                            } else {
+                                alerts.open("please enter valid EmailID/Username", "warning");
+                            }
                         }
                         return { success: false, response: response.data };
                     });
