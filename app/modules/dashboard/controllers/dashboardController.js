@@ -113,6 +113,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd, 1);
         };
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
+
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {

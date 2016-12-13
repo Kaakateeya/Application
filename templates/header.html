@@ -11,8 +11,8 @@
                 <input type="password" id="txtPassword" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
                 <span class="clear">&nbsp;</span>
                 <div class="login_help">
-                    <a id="lnkForgotPassword">Forgot Password</a>
-                    <a href="#/Registration">New User Sign Up</a>
+                    <a id="lnkForgotPassword" href="javascript:void(0)" ng-click="showforgetpasswordpopup()">Forgot Password</a>
+                    <a href="#/registration">New User Sign Up</a>
                 </div>
                 <md-button id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForms.$invalid" class="md-raised md-warn">Login</md-button>
             </form>
@@ -184,7 +184,7 @@
             </div>
         </div>
     </div>
-
+    <forgot-password></forgot-password>
     <script type="text/ng-template" id="sessionalert.html">
         <div class="modal-content">
             <div class="modal-header">

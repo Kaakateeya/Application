@@ -1,8 +1,8 @@
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope) {
+        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup) {
         sessionStorage.removeItem("LoginPhotoIsActive");
         scope.searchTerm = 0;
         scope.selectcaste = 0;
@@ -27,21 +27,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.loadinging = true;
         scope.activated = true;
         scope.casteshow = true;
-
+        scope.slideshow = "";
         //scope.selectedIndex = 2;
         scope.textlabels = function() {
             _.filter(scope.height, function(obj) {
                 if ((obj.value) == (1)) {
                     globalheight = obj.label;
-
-
                 }
             });
             scope.HeightFromtext = globalheight;
             _.filter(scope.height, function(obj) {
                 if ((obj.value) == (38)) {
                     globalheightto = obj.label;
-
                 }
             });
             scope.Heighttotext = globalheightto;
@@ -325,12 +322,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "advanced":
                 case "general":
-                case "slideshow":
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
+                                console.log(response.data);
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
@@ -344,7 +341,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                         scope.loadinging = true;
                     });
-                    if (type !== "slideshow") {
+                    if (scope.slideshow !== "slideshow") {
                         scope.$broadcast('loadmore');
                     }
                     break;
@@ -385,7 +382,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             }
                             scope.loadinging = true;
                         });
-                        scope.$broadcast('loadmore');
+                        if (scope.slideshow !== "slideshow") {
+                            scope.$broadcast('loadmore');
+                        }
                     } else {
                         scope.loadinging = true;
                         scope.showcontrols = true;
@@ -450,7 +449,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         scope.loadinging = true;
                     });
 
-                    scope.$broadcast('loadmore');
+                    if (scope.slideshow !== "slideshow") {
+                        scope.$broadcast('loadmore');
+                    }
                     break;
                 case "profileidsavedsearch":
                     SearchRequest = {
@@ -490,7 +491,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                         scope.loadinging = true;
                     });
-                    scope.$broadcast('loadmore');
+                    if (scope.slideshow !== "slideshow") {
+                        scope.$broadcast('loadmore');
+                    }
                     alerts.dynamicpopupclose();
                     break;
             }
@@ -522,8 +525,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartner = true;
             scope.truepartnerrefine = true;
         });
-        scope.$on('slideshowsubmit', function(event, frompageslide, topageslide) {
-            scope.generalsearchsubmit("slideshow", frompageslide, topageslide);
+        scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
+            scope.slideshow = "slideshow";
+            scope.generalsearchsubmit(scope.typesearch, frompageslide, topageslide);
         });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
@@ -543,6 +547,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
+            scope.slideshow = "";
             if (scope.custid !== null && scope.custid !== undefined && scope.custid !== "") {
                 scope.generalsearchsubmit(scope.typesearch, frompage, topage);
             } else {
@@ -584,20 +589,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.showloginpopup = function() {
-            $mdDialog.show({
-
-                templateUrl: 'login.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-                scope: scope
-
-            });
+            commonpopup.open('login.html', scope, uibModal, 'sm');
         };
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });
-        scope.cancel = function() {
-            $mdDialog.cancel();
+        scope.cancelpopup = function() {
+
+            commonpopup.closepopup();
+
         };
         scope.validate = function() {
             if ((scope.username).indexOf("@") !== -1) {
@@ -722,5 +722,25 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
         });
+        scope.successfaileralert = function(msg, typewarning) {
+            alerts.open(msg, typewarning);
+        };
+        scope.$on('successfailer', function(event, msg, typewarning) {
+            scope.successfaileralert(msg, typewarning);
+        });
+
+        scope.$on('popuplogin', function(event, url, custid) {
+            scope.modalpopupheadertext = "Enter your message here";
+            scope.messagecustid = "";
+            scope.messagecustid = custid;
+            scope.modalbodyshow = 1;
+            scope.buttonname = "Send Message";
+            alerts.dynamicpopup(url, scope, uibModal);
+
+        });
+        scope.sendmessages = function(form) {
+
+            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+        };
     }
 ]);

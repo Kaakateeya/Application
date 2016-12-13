@@ -644,3 +644,21 @@
             </div>
         </div>
 </script>
+   <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                <h4 class="modal-title" id="commontitle" style="color: black;">Send Message</h4>
+
+            </div>
+            <div class="modal-body" id="commonbody">
+                <div class="row col-lg-offset-1">
+                 <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
+             
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="sendmessages(form)" >Send Message</button>
+           </div>
+        </div>
+    </script>

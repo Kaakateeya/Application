@@ -1,6 +1,7 @@
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
-    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices, uibModal) {
+    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
+        uibModal) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -36,7 +37,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.slides = [];
                 scope.directivepaging = function() {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
-
                         scope.loaderspin = true;
                         scope.loadmore = false;
                         scope.flag += scope.paggingflag === false ? 8 : 9;
@@ -73,6 +73,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
+
                 };
                 scope.gridclick = function() {
 
@@ -83,6 +84,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
+
                 };
                 scope.servicehttp = function(type, object) {
                     return $injector.invoke(function($http) {
@@ -103,6 +105,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         if (loginpaidstatus === "1") {
                                             if (response.data == 1) {
                                                 scope.array.splice(scope.indexvalues, 1);
+                                                scope.$emit('incrementcounts');
                                                 scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
                                             } else {
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
@@ -114,6 +117,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                     case "I":
                                         if (response.data == 1) {
                                             scope.array.splice(scope.indexvalues, 1);
+                                            scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "Ignore SuccessFully", "success");
                                         } else {
                                             scope.$emit('successfailer', "Ignore profile Fail", "warning");
@@ -159,10 +163,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
+
                     scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
+                    alert(tocustid);
                     scope.$emit('popuplogin', "myModalContent.html", tocustid);
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {
@@ -255,10 +261,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
                 };
                 scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
-
                     var totalItems = $('#' + carouselID).find('.item').length;
                     if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10);
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
                         scope.checkitemnew(carouselID);
                     }
                     scope.ArrowMove(carouselID);
@@ -281,7 +286,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     if (currentslide < currentIndex1) {
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
-                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10);
+                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
 
                                 if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                                     $('#slideShowCarousel').find('.left').show();
@@ -300,7 +305,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentslide = 1,
                         totalItems = $('#slideShowCarousel').find('.item').length;
                     if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10);
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
                         if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                             $('#slideShowCarousel').find('.left').show();
                             $('#slideShowCarousel').find('.right').show();
@@ -326,7 +331,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.playpausebuttons = false;
                     scope.partnersearchessearches = false;
                     scope.searchestype = true;
-                    scope.loadmore = false;
                     scope.pageloadslide();
                     $('.search_result_items_main').attr("style", "width:100%;");
                     scope.checkitemnew("slideShowCarousel");
@@ -348,19 +352,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
-
-                    scope.loadmore = false;
-                    scope.Norowsend = false;
-                    scope.loaderspin = false;
                     scope.pageloadslidebind();
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
 
                 scope.prevslide = function() {
-                    scope.loadmore = false;
-                    scope.Norowsend = false;
-                    scope.loaderspin = false;
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;

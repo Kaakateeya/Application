@@ -654,7 +654,7 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', function(cons, service) {
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', '$timeout', function(cons, service, timeout) {
     return {
         require: 'ng-model',
         scope: {
@@ -668,7 +668,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             scope.databind = function(data) {
                 element.multiselect('dataprovider', data);
             };
-
+            timeout(function() {
+                element.multiselect('select', scope.ngModel);
+            }, 500);
             switch (scope.typeofdata) {
 
                 case 'MaritalStatus':
@@ -846,8 +848,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 enableCaseInsensitiveFiltering: true,
                 filterPlaceholder: 'Type To Search',
                 buttonContainer: '<div class="btn-group" />',
-                maxHeight: false,
-                select: ['1', '2']
+                maxHeight: false
+
             });
             //element.multiselect('setOptions', secondConfigurationSet);
             //element.multiselect('rebuild');
@@ -870,7 +872,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
 }]);
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
-    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices, uibModal) {
+    function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
+        uibModal) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -906,7 +909,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.slides = [];
                 scope.directivepaging = function() {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
-
                         scope.loaderspin = true;
                         scope.loadmore = false;
                         scope.flag += scope.paggingflag === false ? 8 : 9;
@@ -943,6 +945,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
+
                 };
                 scope.gridclick = function() {
 
@@ -953,6 +956,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
+
                 };
                 scope.servicehttp = function(type, object) {
                     return $injector.invoke(function($http) {
@@ -973,6 +977,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         if (loginpaidstatus === "1") {
                                             if (response.data == 1) {
                                                 scope.array.splice(scope.indexvalues, 1);
+                                                scope.$emit('incrementcounts');
                                                 scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
                                             } else {
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
@@ -984,6 +989,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                     case "I":
                                         if (response.data == 1) {
                                             scope.array.splice(scope.indexvalues, 1);
+                                            scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "Ignore SuccessFully", "success");
                                         } else {
                                             scope.$emit('successfailer', "Ignore profile Fail", "warning");
@@ -1029,10 +1035,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
+
                     scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
+                    alert(tocustid);
                     scope.$emit('popuplogin', "myModalContent.html", tocustid);
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {
@@ -1125,10 +1133,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
                 };
                 scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
-
                     var totalItems = $('#' + carouselID).find('.item').length;
                     if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10);
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
                         scope.checkitemnew(carouselID);
                     }
                     scope.ArrowMove(carouselID);
@@ -1151,7 +1158,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     if (currentslide < currentIndex1) {
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
-                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10);
+                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
 
                                 if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                                     $('#slideShowCarousel').find('.left').show();
@@ -1170,7 +1177,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentslide = 1,
                         totalItems = $('#slideShowCarousel').find('.item').length;
                     if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10);
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
                         if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                             $('#slideShowCarousel').find('.left').show();
                             $('#slideShowCarousel').find('.right').show();
@@ -1196,7 +1203,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.playpausebuttons = false;
                     scope.partnersearchessearches = false;
                     scope.searchestype = true;
-                    scope.loadmore = false;
                     scope.pageloadslide();
                     $('.search_result_items_main').attr("style", "width:100%;");
                     scope.checkitemnew("slideShowCarousel");
@@ -1218,19 +1224,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
-
-                    scope.loadmore = false;
-                    scope.Norowsend = false;
-                    scope.loaderspin = false;
                     scope.pageloadslidebind();
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
 
                 scope.prevslide = function() {
-                    scope.loadmore = false;
-                    scope.Norowsend = false;
-                    scope.loaderspin = false;
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
@@ -1430,6 +1429,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd, 1);
         };
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
+
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
@@ -2109,6 +2109,10 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     break;
             }
         };
+        scope.showforgetpasswordpopup = function() {
+            scope.$broadcast('showforgetpassword');
+
+        };
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
@@ -2417,9 +2421,9 @@ app.controller('advancesearchCtrl', ['$scope', function (scope) {
 }]);
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope) {
+        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup) {
         sessionStorage.removeItem("LoginPhotoIsActive");
         scope.searchTerm = 0;
         scope.selectcaste = 0;
@@ -2444,21 +2448,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.loadinging = true;
         scope.activated = true;
         scope.casteshow = true;
-
+        scope.slideshow = "";
         //scope.selectedIndex = 2;
         scope.textlabels = function() {
             _.filter(scope.height, function(obj) {
                 if ((obj.value) == (1)) {
                     globalheight = obj.label;
-
-
                 }
             });
             scope.HeightFromtext = globalheight;
             _.filter(scope.height, function(obj) {
                 if ((obj.value) == (38)) {
                     globalheightto = obj.label;
-
                 }
             });
             scope.Heighttotext = globalheightto;
@@ -2742,12 +2743,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "advanced":
                 case "general":
-                case "slideshow":
                     scope.typesearch = type;
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
+                                console.log(response.data);
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
@@ -2761,7 +2762,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                         scope.loadinging = true;
                     });
-                    if (type !== "slideshow") {
+                    if (scope.slideshow !== "slideshow") {
                         scope.$broadcast('loadmore');
                     }
                     break;
@@ -2802,7 +2803,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             }
                             scope.loadinging = true;
                         });
-                        scope.$broadcast('loadmore');
+                        if (scope.slideshow !== "slideshow") {
+                            scope.$broadcast('loadmore');
+                        }
                     } else {
                         scope.loadinging = true;
                         scope.showcontrols = true;
@@ -2867,7 +2870,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         scope.loadinging = true;
                     });
 
-                    scope.$broadcast('loadmore');
+                    if (scope.slideshow !== "slideshow") {
+                        scope.$broadcast('loadmore');
+                    }
                     break;
                 case "profileidsavedsearch":
                     SearchRequest = {
@@ -2907,7 +2912,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                         scope.loadinging = true;
                     });
-                    scope.$broadcast('loadmore');
+                    if (scope.slideshow !== "slideshow") {
+                        scope.$broadcast('loadmore');
+                    }
                     alerts.dynamicpopupclose();
                     break;
             }
@@ -2939,8 +2946,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartner = true;
             scope.truepartnerrefine = true;
         });
-        scope.$on('slideshowsubmit', function(event, frompageslide, topageslide) {
-            scope.generalsearchsubmit("slideshow", frompageslide, topageslide);
+        scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
+            scope.slideshow = "slideshow";
+            scope.generalsearchsubmit(scope.typesearch, frompageslide, topageslide);
         });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
@@ -2960,6 +2968,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
+            scope.slideshow = "";
             if (scope.custid !== null && scope.custid !== undefined && scope.custid !== "") {
                 scope.generalsearchsubmit(scope.typesearch, frompage, topage);
             } else {
@@ -3001,20 +3010,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.showloginpopup = function() {
-            $mdDialog.show({
-
-                templateUrl: 'login.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-                scope: scope
-
-            });
+            commonpopup.open('login.html', scope, uibModal, 'sm');
         };
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });
-        scope.cancel = function() {
-            $mdDialog.cancel();
+        scope.cancelpopup = function() {
+
+            commonpopup.closepopup();
+
         };
         scope.validate = function() {
             if ((scope.username).indexOf("@") !== -1) {
@@ -3139,6 +3143,26 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
         });
+        scope.successfaileralert = function(msg, typewarning) {
+            alerts.open(msg, typewarning);
+        };
+        scope.$on('successfailer', function(event, msg, typewarning) {
+            scope.successfaileralert(msg, typewarning);
+        });
+
+        scope.$on('popuplogin', function(event, url, custid) {
+            scope.modalpopupheadertext = "Enter your message here";
+            scope.messagecustid = "";
+            scope.messagecustid = custid;
+            scope.modalbodyshow = 1;
+            scope.buttonname = "Send Message";
+            alerts.dynamicpopup(url, scope, uibModal);
+
+        });
+        scope.sendmessages = function(form) {
+
+            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+        };
     }
 ]);
 app.controller('profileidsrch',['$scope',function(scope){
@@ -3859,29 +3883,58 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     };
 
 }]);
-app.controller('suceesstories', ['$scope', 'successstoriesdata', function (scope, suceessdata) {
+app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope, suceessdata) {
     scope.success = [];
 
     scope.flag = 8;
     scope.fromge = 1;
     scope.topage = 8;
-    scope.init = function () {
-        suceessdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
+    scope.loadmore = true;
+    scope.init = function() {
+        suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
             console.log(response.data);
             scope.success = response.data;
         });
     };
-    $(window).scroll(function () {
-
+    $(window).scroll(function() {
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+            scope.loadmore = false;
+            scope.loaderspin = true;
             scope.flag += 8;
             scope.fromge = scope.flag - 7;
             scope.topage = scope.flag;
-            suceessdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
-                scope.success = $.unique((scope.success).concat(response.data));
+            suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
+                if (response.data !== null && response.data !== "" && response.data !== undefined) {
+                    scope.success = $.unique((scope.success).concat(response.data));
+                    scope.loadmore = true;
+                    scope.loaderspin = false;
+                } else {
+                    scope.loadmore = false;
+                    scope.loaderspin = false;
+                }
             });
         }
     });
+
+    scope.loadmorefunction = function() {
+
+        scope.loadmore = false;
+        scope.loaderspin = true;
+        scope.flag += 8;
+        scope.fromge = scope.flag - 7;
+        scope.topage = scope.flag;
+        suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
+            if (response.data !== null && response.data !== "" && response.data !== undefined) {
+                scope.success = $.unique((scope.success).concat(response.data));
+                scope.loadmore = true;
+                scope.loaderspin = false;
+            } else {
+                scope.loadmore = false;
+                scope.loaderspin = false;
+            }
+        });
+    };
 }]);
 app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc', 'alert',
     function(scope, customerProfilesettings, authSvc, alerts) {

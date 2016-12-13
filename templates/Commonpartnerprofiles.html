@@ -104,6 +104,7 @@
     <label style="display: none;" id="lnkLastSlide1"></label>
 </div>
 <div id="PartnerProfilles" ng-show="partnersearchessearches">
+
     <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
@@ -156,7 +157,7 @@
                         <label>Occupation</label><span>{{data.profession}}</span>
                     </p>
                 </div>
-                <a class="view_profile" href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.Cust_ID,data.LogID)">View full Profile</a>
+                <a class="view_profile" href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogID)">View full Profile</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -179,29 +180,29 @@
                 <ul>
                     <li>
                         <div style="margin-top: 5px;">
-                            <div ng-class="typeofdiv==='Grid' ? 'bookmark-icon2': 'bookmark-icon'" ng-click="indexvalue($index);serviceactions('B',data.Cust_ID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" style="color: Black;float:left;cursor:pointer;" ng-click="indexvalue($index);serviceactions('B',data.Cust_ID,data.mybookmarked)">
+                            <div ng-class="typeofdiv==='Grid' ? 'bookmark-icon2': 'bookmark-icon'" ng-click="indexvalue($index);serviceactions('B',data.intCusID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" style="color: Black;float:left;cursor:pointer;" ng-click="indexvalue($index);serviceactions('B',data.intCusID,data.mybookmarked)">
                  BOOKMARK
                    </span></div>
                     </li>
                     <li>
                         <div style="padding:5px 6px 12px 12px;">
-                            <div ng-class="typeofdiv==='Grid' ? 'interest-icon2': 'interest-icon'" ng-click="indexvalue($index);serviceactions('E',data.Cust_ID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('E',data.Cust_ID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;">
+                            <div ng-class="typeofdiv==='Grid' ? 'interest-icon2': 'interest-icon'" ng-click="indexvalue($index);serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;">
                          EXPRESS INTEREST
                             </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 7px 12px;">
-                            <div ng-class="typeofdiv==='Grid' ? 'message-icon2-small': 'message-icon2'" ng-click="indexvalue($index);sendmessegescommon('M',data.Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);sendmessegescommon('M',data.Cust_ID)" style="color: Black;float:left;cursor:pointer;">
+                            <div ng-class="typeofdiv==='Grid' ? 'message-icon2-small': 'message-icon2'" ng-click="indexvalue($index);sendmessegescommon('M',data.intCusID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);sendmessegescommon('M',data.intCusID)" style="color: Black;float:left;cursor:pointer;">
                    MESSAGE
                         </span></div>
                     </li>
                     <li>
                         <div style="padding: 5px 6px 11px 12px;">
-                            <div ng-class="typeofdiv==='Grid' ? 'close-icon-small': 'close-icon'" ng-click="indexvalue($index);serviceactions('I',data.Cust_ID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
-                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('I',data.Cust_ID,data.ignode)" style="color: Black;float:left;cursor:pointer;">
+                            <div ng-class="typeofdiv==='Grid' ? 'close-icon-small': 'close-icon'" ng-click="indexvalue($index);serviceactions('I',data.intCusID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('I',data.intCusID,data.ignode)" style="color: Black;float:left;cursor:pointer;">
                        IGNORE
                           </span></div>
                     </li>
@@ -210,18 +211,19 @@
             </div>
         </div>
     </div>
+    <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
+        <div class="col-lg-offset-5" ng-show=loadmore>
+            <a href="javascript:void(0)" ng-click="directivepaging()"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+        </div>
+        <div class="col-lg-offset-5" ng-show=loaderspin>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+        </div>
+        <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
+            <h3 style="color: maroon;">End</h3>
+        </div>
+    </div>
 </div>
-<div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
-    <div class="col-lg-offset-5" ng-show=loadmore>
-        <a href="javascript:void(0);" ng-click="directivepaging();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
-    </div>
-    <div class="col-lg-offset-5" ng-show=loaderspin>
-        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-    </div>
-    <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
-        <h3 style="color: maroon;">End</h3>
-    </div>
-</div>
+
 <script type="text/ng-template" id="photopopup.html">
     <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
     <div class="modal-content">
@@ -251,45 +253,44 @@
     </div>
 </script>
 <script type="text/ng-template" id="login.html">
-    <md-dialog>
-        <form ng-cloak name="myFormlogin">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2>Existing User Login</h2>
-                    <span flex></span>
-                    <a href="javascript:void(0)">
-                        <i class="material-icons" ng-click="cancel()">close</i></a>
-                </div>
-            </md-toolbar>
-            <md-dialog-content>
-                <div class="md-dialog-content">
-                    <p>To login into your account, please provide your username and password</p>
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>UserName</label>
-                            <input type="text" id="txtusername" ng-model="username" required>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Password</label>
-                            <input type="password" id="txtPassword" ng-model="password" required>
-                        </md-input-container>
-                    </div>
-                    <a href="#/Registration"> To create your kaakateeya matrimonial account Click Register Now</a>
-                </div>
-            </md-dialog-content>
-            <md-dialog-actions layout="row">
-                <md-button ng-click="loginsubmit()" ng-disabled="myFormlogin.$invalid">
-                    Login
-                </md-button>
-                <md-button ng-click="cancel()">
-                    Cancel
-                </md-button>
-            </md-dialog-actions>
-        </form>
-    </md-dialog>
+
+    <form ng-cloak name="myFormlogin">
+
+
+        <div class="modal-header">
+            <h2>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
+            </h2>
+            <span flex></span>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <p>To login into your account, please provide your username and password</p>
+            <div class="clearfix">
+                <br/>
+                <md-input-container class="md-block span3" flex-gt-sm>
+                    <label>UserName</label>
+                    <input type="text" id="txtusername" ng-model="username" required>
+                </md-input-container>
+                <md-input-container class="md-block span2" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" id="txtPassword" ng-model="password" required>
+                </md-input-container>
+            </div>
+            <a href="#/Registration"> To create your kaakateeya matrimonial account Click Register Now</a>
+        </div>
+        <div class="modal-footer">
+            <md-button ng-click="loginsubmit()" class="md-raised md-warn" ng-disabled="myFormlogin.$invalid">
+                Login
+            </md-button>
+            <md-button ng-click="cancelpopup()" type="button">
+                Cancel
+            </md-button>
+
+        </div>
+
+    </form>
+
 </script>
+
 <style type="text/css">
     .spandisplay {
         display: none;

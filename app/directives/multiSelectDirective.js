@@ -1,7 +1,7 @@
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', function(cons, service) {
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', '$timeout', function(cons, service, timeout) {
     return {
         require: 'ng-model',
         scope: {
@@ -15,7 +15,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             scope.databind = function(data) {
                 element.multiselect('dataprovider', data);
             };
-
+            timeout(function() {
+                element.multiselect('select', scope.ngModel);
+            }, 500);
             switch (scope.typeofdata) {
 
                 case 'MaritalStatus':
@@ -193,8 +195,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 enableCaseInsensitiveFiltering: true,
                 filterPlaceholder: 'Type To Search',
                 buttonContainer: '<div class="btn-group" />',
-                maxHeight: false,
-                select: ['1', '2']
+                maxHeight: false
+
             });
             //element.multiselect('setOptions', secondConfigurationSet);
             //element.multiselect('rebuild');

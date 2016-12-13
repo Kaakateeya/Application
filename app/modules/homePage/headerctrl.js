@@ -198,5 +198,9 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     break;
             }
         };
+        scope.showforgetpasswordpopup = function() {
+            scope.$broadcast('showforgetpassword');
+
+        };
     }
 ]);
