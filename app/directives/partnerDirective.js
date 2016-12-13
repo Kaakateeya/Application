@@ -36,6 +36,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.slides = [];
                 scope.directivepaging = function() {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                        debugger;
                         scope.loaderspin = true;
                         scope.loadmore = false;
                         scope.flag += scope.paggingflag === false ? 8 : 9;
@@ -71,16 +72,17 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
-                    scope.searchestype = false;
+                    scope.searchestype = scope.paggingflag === false ? false : true;
                 };
                 scope.gridclick = function() {
+                    debugger;
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
-                    scope.searchestype = false;
+                    scope.searchestype = scope.paggingflag === false ? false : true;
                 };
                 scope.servicehttp = function(type, object) {
                     return $injector.invoke(function($http) {
@@ -320,13 +322,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.Slideshowpage = function() {
-
                     scope.slideshowsearches = true;
                     scope.playpausebuttons = false;
                     scope.partnersearchessearches = false;
                     scope.searchestype = true;
                     scope.loadmore = false;
                     scope.pageloadslide();
+                    $('.search_result_items_main').attr("style", "width:100%;");
                     scope.checkitemnew("slideShowCarousel");
                     scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
                     $('#slideShowCarousel').carousel('pause');
@@ -346,18 +348,23 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
-
+                    scope.loadmore = false;
+                    scope.Norowsend = false;
+                    scope.loaderspin = false;
                     scope.pageloadslidebind();
                 };
 
                 scope.prevslide = function() {
-
+                    scope.loadmore = false;
+                    scope.Norowsend = false;
+                    scope.loaderspin = false;
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
+
                 };
 
             }
