@@ -111,7 +111,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                             }
                                         } else {
-                                            alerts.open('please upgrade membership', 'warning');
+                                            alerts.open('please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
                                         }
                                         break;
                                     case "I":
@@ -168,7 +168,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
-                    alert(tocustid);
                     scope.$emit('popuplogin', "myModalContent.html", tocustid);
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {

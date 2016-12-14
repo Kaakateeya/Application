@@ -983,7 +983,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                             }
                                         } else {
-                                            alerts.open('please upgrade membership', 'warning');
+                                            alerts.open('please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
                                         }
                                         break;
                                     case "I":
@@ -1040,7 +1040,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
-                    alert(tocustid);
                     scope.$emit('popuplogin', "myModalContent.html", tocustid);
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {
@@ -1880,7 +1879,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                alerts.open('Please Upgrade membership', 'warning');
+                alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
             }
         };
     }
@@ -2199,6 +2198,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
+                        console.log(response);
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
@@ -3183,9 +3183,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-
             scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
         };
+      
+        scope.$on("modalpopupclose", function(event) {
+            alerts.dynamicpopupclose();
+        });
     }
 ]);
 app.controller('profileidsrch',['$scope',function(scope){

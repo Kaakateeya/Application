@@ -759,8 +759,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-
             scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
         };
+      
+        scope.$on("modalpopupclose", function(event) {
+            alerts.dynamicpopupclose();
+        });
     }
 ]);

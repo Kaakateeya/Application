@@ -562,7 +562,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                alerts.open('Please Upgrade membership', 'warning');
+                alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
             }
         };
     }

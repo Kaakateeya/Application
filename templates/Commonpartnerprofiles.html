@@ -157,7 +157,7 @@
                         <label>Occupation</label><span>{{data.profession}}</span>
                     </p>
                 </div>
-                <a class="view_profile" href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogID)">View full Profile</a>
+                <a class="view_profile" href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogId)">View full Profile</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -253,29 +253,28 @@
     </div>
 </script>
 <script type="text/ng-template" id="login.html">
-
     <form ng-cloak name="myFormlogin">
-
-
         <div class="modal-header">
-            <h2>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
-            </h2>
-            <span flex></span>
+            <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
+            </h4>
+
         </div>
         <div class="modal-body" id="modal-body">
             <p>To login into your account, please provide your username and password</p>
-            <div class="clearfix">
-                <br/>
-                <md-input-container class="md-block span3" flex-gt-sm>
+            <br/>
+            <div layout="row">
+                <md-input-container class="md-block" flex-gt-sm>
                     <label>UserName</label>
-                    <input type="text" id="txtusername" ng-model="username" required>
+                    <input type="text" id="txtusername" ng-model="username" required style="border: 1px solid #a59898 !important;
+    border-radius: 3px !important;">
                 </md-input-container>
-                <md-input-container class="md-block span2" flex-gt-sm>
+                <md-input-container class="md-block" flex-gt-sm>
                     <label>Password</label>
-                    <input type="password" id="txtPassword" ng-model="password" required>
+                    <input type="password" id="txtPassword" ng-model="password" required style="border: 1px solid #a59898 !important;
+    border-radius: 3px !important;">
                 </md-input-container>
             </div>
-            <a href="#/Registration"> To create your kaakateeya matrimonial account Click Register Now</a>
+            <p class="col-lg-offset-1"> To create your kaakateeya matrimonial account Click <a href="#/registration" style="color:maroon;">Register Now</a></p>
         </div>
         <div class="modal-footer">
             <md-button ng-click="loginsubmit()" class="md-raised md-warn" ng-disabled="myFormlogin.$invalid">

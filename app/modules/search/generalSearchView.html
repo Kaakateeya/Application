@@ -482,7 +482,7 @@
                                     <div class="span4">
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>Profile id</label>
-                                            <input ng-model="profileid" id="txtProfileid">
+                                            <input ng-model="profileid" id="txtProfileid" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="15">
                                         </md-input-container>
                                     </div>
                                     <div class="span4">
