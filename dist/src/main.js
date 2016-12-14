@@ -295,8 +295,60 @@ app.constant('arrayConstants', {
         { "label": "Telugu", "title": "Telugu", "value": 1 },
         { "label": "Tamil", "title": "Tamil", "value": 2 },
         { "label": "Kannada", "title": "Kannada", "value": 3 },
+    ],
+    'hereabout': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Search Engine', title: 'Search Engine', value: 481 },
+        { label: 'Newspaper', title: 'Newspaper', value: 482 },
+        { label: 'Magzine', title: 'Magzine', value: 483 },
+        { label: 'Friend', title: 'Friend', value: 484 },
+        { label: 'Email', title: 'Email', value: 485 },
+        { label: 'No Answer', title: 'No Answer', value: 486 }
+    ],
+    'improveourwebsite': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Search', title: 'Search', value: 487 },
+        { label: 'Registration', title: 'Registration', value: 488 },
+        { label: 'Login', title: 'Login', value: 489 },
+        { label: 'FAQ', title: 'FAQ', value: 490 },
+        { label: 'About Us', title: 'About Us', value: 491 },
+        { label: 'No Answer', title: 'No Answer', value: 492 }
+    ],
+    'prices': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Expensive', title: 'Expensive', value: 493 },
+        { label: 'OK', title: 'OK', value: 494 },
+        { label: 'Cheap', title: 'Cheap', value: 495 },
+        { label: 'No comments', title: 'No comments', value: 496 },
+        { label: 'No Answer', title: 'No Answer', value: 497 },
+    ],
+    'downloadtime': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Fast', title: 'Fast', value: 498 },
+        { label: 'Average', title: 'Average', value: 499 },
+        { label: 'Slow', title: 'Slow', value: 500 },
+        { label: 'No Answer', title: 'No Answer', value: 501 },
+    ],
+    'yourratethesearch': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Valuable', title: 'Valuable', value: 507 },
+        { label: 'Average', title: 'Average', value: 508 },
+        { label: 'Bad', title: 'Bad', value: 509 },
+        { label: 'No Answer', title: 'No Answer', value: 510 },
+    ],
+    'comparesites': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Better', title: 'Better', value: 502 },
+        { label: 'Same', title: 'Same', value: 503 },
+        { label: 'Bad', title: 'Bad', value: 504 },
+        { label: 'No Answer', title: 'No Answer', value: 505 },
+    ],
+    'recomendedtofriends': [
+        { label: '--select--', title: '--select--', value: 0 },
+        { label: 'Yes', title: 'Yes', value: 511 },
+        { label: 'No', title: 'No', value: 512 },
+        { label: 'No Answer', title: 'No Answer', value: 513 },
     ]
-
 
 });
 app.constant('config', function() {
@@ -694,171 +746,202 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             };
             timeout(function() {
                 element.multiselect('select', scope.ngModel);
+
             }, 500);
-            switch (scope.typeofdata) {
+            timeout(function() {
+                switch (scope.typeofdata) {
 
-                case 'MaritalStatus':
-                    scope.databind(cons.MaritalStatus);
-                    break;
+                    case 'MaritalStatus':
+                        scope.databind(cons.MaritalStatus);
+                        break;
 
-                case 'height':
-                    scope.databind(cons.height);
-                    break;
+                    case 'height':
+                        scope.databind(cons.height);
+                        break;
 
-                case 'Religion':
-                    scope.databind(cons.Religion);
-                    break;
+                    case 'Religion':
+                        scope.databind(cons.Religion);
+                        break;
 
-                case 'Mothertongue':
-                    scope.databind(cons.Mothertongue);
-                    break;
+                    case 'Mothertongue':
+                        scope.databind(cons.Mothertongue);
+                        break;
 
-                case 'educationcategory':
-                    scope.databind(cons.educationcategory);
-                    break;
+                    case 'educationcategory':
+                        scope.databind(cons.educationcategory);
+                        break;
 
-                case 'visastatus':
-                    scope.databind(cons.visastatus);
-                    break;
+                    case 'visastatus':
+                        scope.databind(cons.visastatus);
+                        break;
 
-                case 'stars':
-                    scope.databind(cons.stars);
-                    break;
+                    case 'stars':
+                        scope.databind(cons.stars);
+                        break;
 
-                case 'region':
-                    scope.databind(cons.region);
-                    break;
+                    case 'region':
+                        scope.databind(cons.region);
+                        break;
 
-                case 'bodyType':
-                    scope.databind(cons.bodyType);
-                    break;
+                    case 'bodyType':
+                        scope.databind(cons.bodyType);
+                        break;
 
-                case 'bloodGroup':
-                    scope.databind(cons.bloodGroup);
-                    break;
+                    case 'bloodGroup':
+                        scope.databind(cons.bloodGroup);
+                        break;
 
-                case 'healthCondition':
-                    scope.databind(cons.healthCondition);
-                    break;
+                    case 'healthCondition':
+                        scope.databind(cons.healthCondition);
+                        break;
 
-                case 'starLanguage':
-                    scope.databind(cons.starLanguage);
-                    break;
+                    case 'starLanguage':
+                        scope.databind(cons.starLanguage);
+                        break;
 
-                case 'lagnam':
-                    scope.databind(cons.lagnam);
-                    break;
+                    case 'lagnam':
+                        scope.databind(cons.lagnam);
+                        break;
 
-                case 'ZodaicSign':
-                    scope.databind(cons.ZodaicSign);
-                    break;
+                    case 'ZodaicSign':
+                        scope.databind(cons.ZodaicSign);
+                        break;
 
-                case 'paadam':
-                    scope.databind(cons.paadam);
-                    break;
+                    case 'paadam':
+                        scope.databind(cons.paadam);
+                        break;
 
-                case 'familyStatus':
-                    scope.databind(cons.familyStatus);
-                    break;
+                    case 'familyStatus':
+                        scope.databind(cons.familyStatus);
+                        break;
 
-                case 'RelationshipType':
-                    scope.databind(cons.RelationshipType);
-                    break;
+                    case 'RelationshipType':
+                        scope.databind(cons.RelationshipType);
+                        break;
 
-                case 'Country':
-                    service.countrySelect().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    case 'hereabout':
+                        scope.databind(cons.hereabout);
+                        break;
+
+
+                    case 'improveourwebsite':
+                        scope.databind(cons.improveourwebsite);
+                        break;
+
+                    case 'prices':
+                        scope.databind(cons.prices);
+                        break;
+
+                    case 'downloadtime':
+                        scope.databind(cons.downloadtime);
+                        break;
+
+                    case 'yourratethesearch':
+                        scope.databind(cons.yourratethesearch);
+                        break;
+
+                    case 'comparesites':
+                        scope.databind(cons.comparesites);
+                        break;
+
+                    case 'recomendedtofriends':
+                        scope.databind(cons.recomendedtofriends);
+                        break;
+
+                    case 'Country':
+                        service.countrySelect().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
+                        break;
 
-                case 'ProfCatgory':
+                    case 'ProfCatgory':
 
-                    service.ProfessionCatgory().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        service.ProfessionCatgory().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
+                        break;
 
-                case 'ProfGroup':
-                    service.ProfessionGroup().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    case 'ProfGroup':
+                        service.ProfessionGroup().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
+                        break;
 
-                case 'indiaStates':
-                    service.stateSelect('1').then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    case 'indiaStates':
+                        service.stateSelect('1').then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
-                case 'countryCode':
-                    service.countryCodeselect().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        break;
+                    case 'countryCode':
+                        service.countryCodeselect().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
-                case 'caste':
-                    service.casteselect().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        break;
+                    case 'caste':
+                        service.casteselect().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
-                case 'Caste':
-                    service.casteselect().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        break;
+                    case 'Caste':
+                        service.casteselect().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
-                case 'currency':
-                    service.currency().then(function(response) {
-                        var option = [];
-                        option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                        _.each(response.data, function(item) {
-                            option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        break;
+                    case 'currency':
+                        service.currency().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
                         });
-                        scope.databind(option);
-                    });
-                    break;
-                case 'catgory':
-                    scope.databind(cons.catgory);
-                    break;
+                        break;
+                    case 'catgory':
+                        scope.databind(cons.catgory);
+                        break;
 
-                case 'Priority':
-                    scope.databind(cons.Priority);
-                    break;
+                    case 'Priority':
+                        scope.databind(cons.Priority);
+                        break;
 
-            }
-
+                }
+            }, 1000);
             element.multiselect({
                 buttonClass: 'btn',
                 buttonWidth: 'auto',
@@ -873,7 +956,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 filterPlaceholder: 'Type To Search',
                 buttonContainer: '<div class="btn-group" />',
                 maxHeight: false
-
             });
             //element.multiselect('setOptions', secondConfigurationSet);
             //element.multiselect('rebuild');
@@ -3381,62 +3463,62 @@ app.directive('faqdirective', function() {
 });
 app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit', 'authSvc', function(scope, reCAPTCHA, feedbacksubmit, authSvc) {
     reCAPTCHA.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
-    scope.optionhereabout = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Search Engine', title: 'Search Engine', value: 481 },
-        { label: 'Newspaper', title: 'Newspaper', value: 482 },
-        { label: 'Magzine', title: 'Magzine', value: 483 },
-        { label: 'Friend', title: 'Friend', value: 484 },
-        { label: 'Email', title: 'Email', value: 485 },
-        { label: 'No Answer', title: 'No Answer', value: 486 }
-    ];
-    scope.improveourwebsite = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Search', title: 'Search', value: 487 },
-        { label: 'Registration', title: 'Registration', value: 488 },
-        { label: 'Login', title: 'Login', value: 489 },
-        { label: 'FAQ', title: 'FAQ', value: 490 },
-        { label: 'About Us', title: 'About Us', value: 491 },
-        { label: 'No Answer', title: 'No Answer', value: 492 }
-    ];
+    // scope.optionhereabout = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Search Engine', title: 'Search Engine', value: 481 },
+    //     { label: 'Newspaper', title: 'Newspaper', value: 482 },
+    //     { label: 'Magzine', title: 'Magzine', value: 483 },
+    //     { label: 'Friend', title: 'Friend', value: 484 },
+    //     { label: 'Email', title: 'Email', value: 485 },
+    //     { label: 'No Answer', title: 'No Answer', value: 486 }
+    // ];
+    // scope.improveourwebsite = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Search', title: 'Search', value: 487 },
+    //     { label: 'Registration', title: 'Registration', value: 488 },
+    //     { label: 'Login', title: 'Login', value: 489 },
+    //     { label: 'FAQ', title: 'FAQ', value: 490 },
+    //     { label: 'About Us', title: 'About Us', value: 491 },
+    //     { label: 'No Answer', title: 'No Answer', value: 492 }
+    // ];
 
-    scope.prices = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Expensive', title: 'Expensive', value: 493 },
-        { label: 'OK', title: 'OK', value: 494 },
-        { label: 'Cheap', title: 'Cheap', value: 495 },
-        { label: 'No comments', title: 'No comments', value: 496 },
-        { label: 'No Answer', title: 'No Answer', value: 497 },
-    ];
+    // scope.prices = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Expensive', title: 'Expensive', value: 493 },
+    //     { label: 'OK', title: 'OK', value: 494 },
+    //     { label: 'Cheap', title: 'Cheap', value: 495 },
+    //     { label: 'No comments', title: 'No comments', value: 496 },
+    //     { label: 'No Answer', title: 'No Answer', value: 497 },
+    // ];
 
-    scope.downloadtime = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Fast', title: 'Fast', value: 498 },
-        { label: 'Average', title: 'Average', value: 499 },
-        { label: 'Slow', title: 'Slow', value: 500 },
-        { label: 'No Answer', title: 'No Answer', value: 501 },
-    ];
+    // scope.downloadtime = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Fast', title: 'Fast', value: 498 },
+    //     { label: 'Average', title: 'Average', value: 499 },
+    //     { label: 'Slow', title: 'Slow', value: 500 },
+    //     { label: 'No Answer', title: 'No Answer', value: 501 },
+    // ];
 
-    scope.yourratethesearch = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Valuable', title: 'Valuable', value: 507 },
-        { label: 'Average', title: 'Average', value: 508 },
-        { label: 'Bad', title: 'Bad', value: 509 },
-        { label: 'No Answer', title: 'No Answer', value: 510 },
-    ];
-    scope.comparesites = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Better', title: 'Better', value: 502 },
-        { label: 'Same', title: 'Same', value: 503 },
-        { label: 'Bad', title: 'Bad', value: 504 },
-        { label: 'No Answer', title: 'No Answer', value: 505 },
-    ];
-    scope.recomendedtofriends = [
-        { label: '--select--', title: '--select--', value: 0 },
-        { label: 'Yes', title: 'Yes', value: 511 },
-        { label: 'No', title: 'No', value: 512 },
-        { label: 'No Answer', title: 'No Answer', value: 513 },
-    ];
+    // scope.yourratethesearch = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Valuable', title: 'Valuable', value: 507 },
+    //     { label: 'Average', title: 'Average', value: 508 },
+    //     { label: 'Bad', title: 'Bad', value: 509 },
+    //     { label: 'No Answer', title: 'No Answer', value: 510 },
+    // ];
+    // scope.comparesites = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Better', title: 'Better', value: 502 },
+    //     { label: 'Same', title: 'Same', value: 503 },
+    //     { label: 'Bad', title: 'Bad', value: 504 },
+    //     { label: 'No Answer', title: 'No Answer', value: 505 },
+    // ];
+    // scope.recomendedtofriends = [
+    //     { label: '--select--', title: '--select--', value: 0 },
+    //     { label: 'Yes', title: 'Yes', value: 511 },
+    //     { label: 'No', title: 'No', value: 512 },
+    //     { label: 'No Answer', title: 'No Answer', value: 513 },
+    // ];
 
     //scope.HearAbout = "481";
     scope.submit = function() {
