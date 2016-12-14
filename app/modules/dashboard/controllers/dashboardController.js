@@ -312,7 +312,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+                scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            } else {
+                alerts.open('please enter Message', 'warning');
+            }
         };
         scope.sendmessagesRMM = function(form) {
             alerts.dynamicpopupclose();

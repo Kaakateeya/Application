@@ -306,60 +306,84 @@ app.constant('config', function() {
         select: 0
     };
 });
-app.directive("angularMultiselect", ["$injector", 'authSvc', 'successstoriesdata', function($injector, authSvc, successstoriesdata) {
-    var logincustid = authSvc.getCustId();
-    var loginprofileid = authSvc.getProfileid();
-    return {
-        restrict: "E",
+app.directive("angularMultiselect", ["$injector", 'authSvc',
+    'successstoriesdata', 'alert',
+    function($injector, authSvc, successstoriesdata, alerts) {
+        var logincustid = authSvc.getCustId();
+        var loginprofileid = authSvc.getProfileid();
+        return {
+            restrict: "E",
 
-        scope: {
-            array: '=',
-            type: '=',
-            model: '='
-        },
+            scope: {
+                array: '=',
+                type: '=',
+                model: '='
+            },
 
-        templateUrl: "templates/angualarMaterialmultiselect.html",
-        link: function(scope, element, attrs) {
-            scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
-            scope.selectall = function() {
-                if (scope.model.length === scope.Caste.length) {
-                    scope.model = [];
-                } else if (scope.model.length === 0 || scope.model.length > 0) {
-                    _.each(scope.Caste, function(item) {
-                        scope.model.push(item.value);
-                    });
-                }
-            };
-            // scope.isChecked = function() {
-            //     return scope.model.length === scope.Caste.length;
-            // };
-            scope.exists = function(item) {
-                return scope.Caste.indexOf(item) > -1;
-            };
+            templateUrl: "templates/angualarMaterialmultiselect.html",
+            link: function(scope, element, attrs) {
+                scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
+                scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
+                scope.selectall = function() {
+                    if (scope.model.length === scope.Caste.length) {
+                        scope.model = [];
+                    } else if (scope.model.length === 0 || scope.model.length > 0) {
+                        _.each(scope.Caste, function(item) {
+                            scope.model.push(item.value);
+                        });
+                    }
+                };
+                // scope.isChecked = function() {
+                //     return scope.model.length === scope.Caste.length;
+                // };
+                scope.exists = function(item) {
+                    return scope.Caste.indexOf(item) > -1;
+                };
 
-            element.find('input').on('keydown', function(ev) {
-                ev.stopPropagation();
-            });
-            scope.$watch('array', function() {
-                scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
-            });
-            scope.directivechangeevent = function(model) {
-                scope.$emit('directivechangeevent', model, scope.type);
-            };
+                element.find('input').on('keydown', function(ev) {
+                    ev.stopPropagation();
+                });
+                scope.$watch('array', function() {
+                    scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
+                });
+                scope.directivechangeevent = function(model) {
 
-            scope.applycolorsdirecive = function(value) {
+                    scope.$emit('directivechangeevent', model, scope.type);
+                };
 
-                var colors = "selectborderclass";
-                if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
-                    colors = "selectborderclasscolor";
-                } else {
-                    colors = "selectborderclass";
-                }
-                return colors;
-            };
-        }
-    };
-}]);
+                scope.applycolorsdirecive = function(value) {
+
+                    var colors = "selectborderclass";
+                    if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                        colors = "selectborderclasscolor";
+                    } else {
+                        colors = "selectborderclass";
+                    }
+                    return colors;
+                };
+                // scope.alertopen = function(model) {
+
+                //     if (scope.Castehide) {
+                //         alert(model);
+                //         switch (scope.type) {
+
+                //             case "Country":
+                //                 alerts.open("please select Country", "warning");
+                //                 break;
+                //             case "EducationCatgory":
+                //                 alerts.open("please select Educationgroup", "warning");
+                //                 break;
+                //             case "caste":
+
+                //                 alerts.open("please select Mothertongue And Religion", "warning");
+                //                 break;
+                //         }
+                //     }
+                // };
+            }
+        };
+    }
+]);
 app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindService) {
     var modalpopupopen;
 
@@ -1040,7 +1064,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
-                    scope.$emit('popuplogin', "myModalContent.html", tocustid);
+                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                        scope.$emit('popuplogin', "myModalContent.html", tocustid);
+                    } else {
+                        scope.$emit('showloginpopup');
+                    }
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
@@ -1629,7 +1657,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+                scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            } else {
+                alerts.open('please enter Message', 'warning');
+            }
         };
         scope.sendmessagesRMM = function(form) {
             alerts.dynamicpopupclose();
@@ -3043,19 +3075,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             commonpopup.closepopup();
 
         };
-        scope.validate = function() {
-            if ((scope.username).indexOf("@") !== -1) {
-                if (!scope.ValidateEmail(scope.username)) {
-                    scope.username = '';
+        scope.validate = function(formloagin) {
+            if ((formloagin.username).indexOf("@") !== -1) {
+                if (!scope.ValidateEmail(formloagin.username)) {
+                    formloagin.username = '';
                     alert(" Please enter valid ProfileID/Email");
                     return false;
                 } else {
                     return true;
                 }
             } else {
-                if (!scope.Validatnumber(scope.username) || (scope.username).length !== 9) {
+                if (!scope.Validatnumber(formloagin.username) || (formloagin.username).length !== 9) {
                     alert("Please enter valid ProfileID/Email");
-                    scope.username = '';
+                    formloagin.username = '';
                     return false;
 
                 } else {
@@ -3064,20 +3096,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             }
         };
-        scope.loginsubmit = function() {
-            if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
+        scope.loginsubmit = function(formloagin) {
+            if (formloagin.username === "" || formloagin.username === null || formloagin.username === "ProfileID/EmailID") {
                 alert("Please enter user name");
                 return false;
-            } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
+            } else if (formloagin.password === "" || formloagin.password === null || formloagin.password === "Enter the Password") {
                 alert("Please enter password");
                 return false;
             } else {
-                if (scope.validate()) {
-                    authSvc.login(scope.username, scope.password).then(function(response) {
+                if (scope.validate(formloagin)) {
+                    authSvc.login(formloagin.username, formloagin.password).then(function(response) {
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         window.location = "#/home";
-                        scope.cancel();
+                        commonpopup.closepopup();
                     });
                 }
             }
@@ -3183,9 +3215,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+                scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            } else {
+                alerts.open('please enter Message', 'warning');
+            }
         };
-      
+
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
@@ -4331,6 +4367,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
         sessionStorage.removeItem("LoginPhotoIsActive");
+        sessionStorage.removeItem("homepageobject");
     }
 
     function getUser() {
@@ -4379,7 +4416,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'DB/userLogin/person', body)
                     .then(function(response) {
-                     
+
                         if (response.status === 200) {
                             if (response.data !== null) {
                                 Idle.watch();

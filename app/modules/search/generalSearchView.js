@@ -619,19 +619,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             commonpopup.closepopup();
 
         };
-        scope.validate = function() {
-            if ((scope.username).indexOf("@") !== -1) {
-                if (!scope.ValidateEmail(scope.username)) {
-                    scope.username = '';
+        scope.validate = function(formloagin) {
+            if ((formloagin.username).indexOf("@") !== -1) {
+                if (!scope.ValidateEmail(formloagin.username)) {
+                    formloagin.username = '';
                     alert(" Please enter valid ProfileID/Email");
                     return false;
                 } else {
                     return true;
                 }
             } else {
-                if (!scope.Validatnumber(scope.username) || (scope.username).length !== 9) {
+                if (!scope.Validatnumber(formloagin.username) || (formloagin.username).length !== 9) {
                     alert("Please enter valid ProfileID/Email");
-                    scope.username = '';
+                    formloagin.username = '';
                     return false;
 
                 } else {
@@ -640,20 +640,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             }
         };
-        scope.loginsubmit = function() {
-            if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
+        scope.loginsubmit = function(formloagin) {
+            if (formloagin.username === "" || formloagin.username === null || formloagin.username === "ProfileID/EmailID") {
                 alert("Please enter user name");
                 return false;
-            } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
+            } else if (formloagin.password === "" || formloagin.password === null || formloagin.password === "Enter the Password") {
                 alert("Please enter password");
                 return false;
             } else {
-                if (scope.validate()) {
-                    authSvc.login(scope.username, scope.password).then(function(response) {
+                if (scope.validate(formloagin)) {
+                    authSvc.login(formloagin.username, formloagin.password).then(function(response) {
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         window.location = "#/home";
-                        scope.cancel();
+                        commonpopup.closepopup();
                     });
                 }
             }
@@ -759,9 +759,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-            scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+                scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+            } else {
+                alerts.open('please enter Message', 'warning');
+            }
         };
-      
+
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });

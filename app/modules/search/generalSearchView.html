@@ -662,3 +662,38 @@
            </div>
         </div>
     </script>
+
+    <script type="text/ng-template" id="login.html">
+    <form ng-cloak name="myFormlogin">
+        <div class="modal-header">
+           <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
+                                </h4>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <p>To login into your account, please provide your username and password</p>
+                            <br/>
+                            <div layout="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>UserName</label>
+                                    <input type="text" id="txtusername" ng-model="formloagin.username" required style="border: 1px solid #a59898 !important;
+                                border-radius: 3px !important;">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Password</label>
+                                    <input type="password" id="txtPassword" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
+                                   border-radius: 3px !important;">
+                                </md-input-container>
+                            </div>
+                            <p class="col-lg-offset-1"> To create your kaakateeya matrimonial account Click <a href="#/registration" style="color:maroon;">Register Now</a></p>
+                        </div>
+                        <div class="modal-footer">
+                            <md-button ng-click="loginsubmit(formloagin)" class="md-raised md-warn" ng-disabled="myFormlogin.$invalid">
+                                Login
+                            </md-button>
+                            <md-button ng-click="cancelpopup()" type="button">
+                                Cancel
+                            </md-button>
+
+                        </div>
+                        </form>
+                        </script>

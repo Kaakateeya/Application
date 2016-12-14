@@ -168,7 +168,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {
-                    scope.$emit('popuplogin', "myModalContent.html", tocustid);
+                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                        scope.$emit('popuplogin', "myModalContent.html", tocustid);
+                    } else {
+                        scope.$emit('showloginpopup');
+                    }
                 };
                 scope.redirectToviewfullprofile = function(custid, logid) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {

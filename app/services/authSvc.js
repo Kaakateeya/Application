@@ -53,6 +53,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
         sessionStorage.removeItem("LoginPhotoIsActive");
+        sessionStorage.removeItem("homepageobject");
     }
 
     function getUser() {
@@ -101,7 +102,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'DB/userLogin/person', body)
                     .then(function(response) {
-                     
+
                         if (response.status === 200) {
                             if (response.data !== null) {
                                 Idle.watch();
