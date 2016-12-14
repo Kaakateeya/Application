@@ -108,7 +108,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
                                 Idle.watch();
                                 return { success: true, response: response.data };
                             } else {
-                                alerts.open("please enter valid EmailID/Username", "warning");
+                                alert("please enter valid Email ID/User Name");
                             }
                         }
                         return { success: false, response: response.data };

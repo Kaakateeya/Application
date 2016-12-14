@@ -315,7 +315,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
-                alerts.open('please enter Message', 'warning');
+                alert('please enter Message');
             }
         };
         scope.sendmessagesRMM = function(form) {

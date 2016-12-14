@@ -1,5 +1,6 @@
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window) {
+        window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {

@@ -28,6 +28,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.activated = true;
         scope.casteshow = true;
         scope.slideshow = "";
+        scope.mesagesend = "";
         //scope.selectedIndex = 2;
         scope.textlabels = function() {
             _.filter(scope.height, function(obj) {
@@ -759,13 +760,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
+            debugger;
+            alert(form.message);
             if (form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
-                alerts.open('please enter Message', 'warning');
+                alert('please enter Message');
             }
         };
-
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
