@@ -2038,6 +2038,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.usernamepersonal = datatinfo.username;
                 scope.profileid = datatinfo.profileid;
                 scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
+                //scope.javascript = "javascript:void(0)";
+                scope.hrefpaid = datatinfo.paidstatus == 1 ? "#/UpgradeMembership" : "#/UpgradeMembership";
                 scope.profilepic = datatinfo.profilepic;
                 scope.withlogin = true;
                 scope.withoutlogin = false;
