@@ -3,7 +3,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
     '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
         customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup) {
-        sessionStorage.removeItem("LoginPhotoIsActive");
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -760,9 +759,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-            debugger;
-            alert(form.message);
-            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+
+            if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
                 alert('please enter Message');

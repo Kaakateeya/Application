@@ -362,7 +362,7 @@
                                     <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
                                         <div class="sugested_block sugested_block_top" id="ExpressDiv1">
                                             <div class="sugested_block_top_lft"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"><img style="height: 150px;width: 150px;cursor:pointer;"
-                                             src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''"/></span>
+                                             src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotosCount)"/></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
                                                 <h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2>

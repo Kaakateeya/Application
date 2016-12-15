@@ -163,7 +163,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-
                     scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     scope.$emit("modalpopupclose", event);
                 });
@@ -372,7 +371,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
 
-
+                scope.modalpopupclose = function() {
+                    alerts.dynamicpopupclose();
+                };
             }
         };
 

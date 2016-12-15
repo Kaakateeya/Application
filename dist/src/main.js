@@ -1141,7 +1141,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-
                     scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     scope.$emit("modalpopupclose", event);
                 });
@@ -1350,7 +1349,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
 
-
+                scope.modalpopupclose = function() {
+                    alerts.dynamicpopupclose();
+                };
             }
         };
 
@@ -1739,10 +1740,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+            if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
-                alerts.open('please enter Message', 'warning');
+                alert('please enter Message');
             }
         };
         scope.sendmessagesRMM = function(form) {
@@ -1852,7 +1853,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopupclose();
         });
         scope.redirectToviewfull = function(custid, logid) {
-
             sessionStorage.removeItem("localcustid");
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
@@ -1996,6 +1996,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
             }
         };
+
+
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
@@ -2025,8 +2027,9 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         }
     };
 }]);
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window) {
+        window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
@@ -2541,7 +2544,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
     '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
         customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup) {
-        sessionStorage.removeItem("LoginPhotoIsActive");
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -2566,6 +2568,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.activated = true;
         scope.casteshow = true;
         scope.slideshow = "";
+        scope.mesagesend = "";
         //scope.selectedIndex = 2;
         scope.textlabels = function() {
             _.filter(scope.height, function(obj) {
@@ -3297,13 +3300,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+
+            if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
-                alerts.open('please enter Message', 'warning');
+                alert('please enter Message');
             }
         };
-
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
@@ -4504,7 +4507,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
                                 Idle.watch();
                                 return { success: true, response: response.data };
                             } else {
-                                alerts.open("please enter valid EmailID/Username", "warning");
+                                alert("please enter valid Email ID/User Name");
                             }
                         }
                         return { success: false, response: response.data };

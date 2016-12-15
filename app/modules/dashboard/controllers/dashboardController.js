@@ -312,7 +312,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            if (form.message !== "" && form.message !== null && form.message !== undefined) {
+            if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
                 alert('please enter Message');
@@ -425,7 +425,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopupclose();
         });
         scope.redirectToviewfull = function(custid, logid) {
-
             sessionStorage.removeItem("localcustid");
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
@@ -569,5 +568,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
             }
         };
+
+
     }
 ]);

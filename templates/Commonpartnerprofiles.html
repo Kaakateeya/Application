@@ -22,7 +22,7 @@
             <div class="container">
                 <div id="galleryCarousel_0" class="slide span6">
                     <div ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
-                        <img name="imagepath" style="height: 300px;width: 300px !important;" class="undefined" ng-src="{{data.Photo}}" /></div>
+                        <img name="imagepath" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)" style="height: 300px;width: 300px !important;cursor:pointer;" class="undefined" ng-src="{{data.Photo}}" /></div>
                     <div>
                         <a href="javascript:void(0)" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')" style="font-weight: bold; text-decoration: underline;">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
                         (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a></div>
@@ -112,11 +112,11 @@
         <div class="clear"></div>
         <div class="search_result_item_in clearfix">
             <div class="search_result_item_pic pull-left">
-                <span ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotosCount)">
-                 <img name="imgProfilefullpic" ng-src="{{data.Photo}}" ng-class="data.PhotosCount==0?'Linkdisabled':''" style="height: 250px; width: 250px;cursor:pointer;" ng-click="photoalbum(data.Cust_ID,data.ProfileID,data.PhotosCount)"></span>
+                <span ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
+                 <img name="imgProfilefullpic" ng-src="{{data.Photo}}" ng-class="data.PhotoCount==0?'Linkdisabled':''" style="height: 250px; width: 250px;cursor:pointer;" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)"></span>
                 <p style="align-items: center; text-align: center;"></p>
                 <div>
-                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.Cust_ID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
                         (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a>
                 </div>
             </div>
@@ -224,7 +224,7 @@
     </div>
 </div>
 
-<script type="text/ng-template" id="photopopup.html">
+<script type="text/ng-template" id="photopopup.html" style="z-index: 999999999999 !important;">
     <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
     <div class="modal-content">
         <div class="modal-header">
@@ -272,5 +272,10 @@
     
     .activeclassdiv {
         background-color: maroon;
+    }
+    
+    .modal {
+        z-index: 999999999999 !important;
+        display: block;
     }
 </style>
