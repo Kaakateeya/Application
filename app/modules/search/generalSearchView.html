@@ -107,9 +107,9 @@
                         <div class="tab">
                             <form name="generalsearch" role="form">
                                 <div class="profile_search_main profile_settings_main clearfix">
-                                    <div class="row">
+                                    <div class="row" ng-hide="genderdiabled">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="genderdiabled">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -231,9 +231,9 @@
                         <div class="tab">
                             <form name="advancedsearch" role="form">
                                 <div class="profile_search_main profile_settings_main clearfix">
-                                    <div class="row">
+                                    <div class="row" ng-hide="genderdiabled">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="genderdiabled">
+                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -470,9 +470,9 @@
                     <md-tab label="profileid Search">
                         <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
-                                <div class="row">
+                                <div class="row" ng-hide="genderdiabled">
                                     <div layout-gt-sm="row">
-                                        <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm ng-disabled="genderdiabled">
+                                        <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
                                             <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                             <md-radio-button value="1"> Groom </md-radio-button>
                                         </md-radio-group>

@@ -980,12 +980,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
         uibModal) {
-        var logincustid = authSvc.getCustId();
-        var loginprofileid = authSvc.getProfileid();
-        var loginpaidstatus = authSvc.getpaidstatus();
-        //alert(loginpaidstatus === '1');
-        var currentslide = 1;
-        var photoclass = "";
+
         return {
             restrict: "E",
             scope: {
@@ -995,6 +990,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
             },
             templateUrl: "templates/Commonpartnerprofiles.html",
             link: function(scope, element, attrs) {
+                var logincustid = authSvc.getCustId();
+                var loginprofileid = authSvc.getProfileid();
+                var loginpaidstatus = authSvc.getpaidstatus();
+                var currentslide = 1;
+                var photoclass = "";
                 scope.searchestype = scope.typeofsearch;
                 scope.typeofdiv = "List";
                 scope.slideshowsearches = false;
@@ -1189,7 +1189,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                 };
                 scope.divclassmask = function(logphotostatus, photo, photocount) {
+                    logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+
                         return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
                     } else {
                         return "";
@@ -2115,6 +2117,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
+                        sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
@@ -2318,6 +2321,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         console.log(response);
+                        sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
@@ -3193,6 +3197,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 if (scope.validate(formloagin)) {
                     authSvc.login(formloagin.username, formloagin.password).then(function(response) {
+                        sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         window.location = "#/home";

@@ -80,6 +80,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         console.log(response);
+                        sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {

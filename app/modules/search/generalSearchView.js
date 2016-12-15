@@ -650,6 +650,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 if (scope.validate(formloagin)) {
                     authSvc.login(formloagin.username, formloagin.password).then(function(response) {
+                        sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         window.location = "#/home";
