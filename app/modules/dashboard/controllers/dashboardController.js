@@ -569,6 +569,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
 
+        scope.photoalbumdashboard = function(custid, profileid, photocount) {
 
+            scope.$broadcast('photoalbum', custid, profileid, photocount);
+        };
     }
 ]);

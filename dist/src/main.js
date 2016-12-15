@@ -623,7 +623,7 @@ app.factory('alert', ['$mdDialog', function($mdDialog) {
                 "preventDuplicates": false,
                 "showDuration": "300",
                 "hideDuration": "1000",
-                "timeOut": 5000,
+                "timeOut": 3000,
                 "extendedTimeOut": 2000,
                 "showEasing": "swing",
                 "hideEasing": "linear",
@@ -1354,6 +1354,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
+                scope.$on("photoalbum", function(event, custid, profileid, photocount) {
+
+                    scope.photoalbum(custid, profileid, photocount);
+                });
             }
         };
 
@@ -1999,7 +2003,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
 
+        scope.photoalbumdashboard = function(custid, profileid, photocount) {
 
+            scope.$broadcast('photoalbum', custid, profileid, photocount);
+        };
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
@@ -3653,10 +3660,17 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
     }
 ]);
-app.controller("blockerController",function(){
-
-
-});
+ app.controller("blockerController", ['$scope', 'cerateNewPwd', '$stateParams', function(scope, cerateNewPwd, stateParams) {
+     cerateNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
+         var custData = (res.data).split(';');
+         console.log(custData);
+         scope.profileID = custData[1];
+         //scope.custID = custData[2];
+         scope.RelationShipManager = custData[3];
+         scope.mngrMob = custData[4] === 'NoEmpOfficialCCn' ? '' : custData[4];
+         console.log(res.data);
+     });
+ }]);
 app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
     function(scope, customerProfilesettings, authSvc) {
         var logincustid = authSvc.getCustId();

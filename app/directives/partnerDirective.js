@@ -376,6 +376,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
+                scope.$on("photoalbum", function(event, custid, profileid, photocount) {
+
+                    scope.photoalbum(custid, profileid, photocount);
+                });
             }
         };
 
