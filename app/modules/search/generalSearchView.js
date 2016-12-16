@@ -770,5 +770,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
+
+        scope.onlyAlphabets = function(e, t) {
+            var inputValue = window.event.keyCode;
+            if (!(inputValue >= 65 && inputValue <= 120) && (inputValue !== 32 && inputValue !== 0)) {
+                event.preventDefault();
+            }
+        };
     }
 ]);

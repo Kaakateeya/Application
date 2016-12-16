@@ -1,49 +1,21 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert',
-    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog, arrayConstants, service, $rootscope, alerts) {
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
+    function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
+        arrayConstants, service, $rootscope, alerts, timeout) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
             successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
                 scope.successstoriesarray = response.data;
+                scope.gender = "2";
+                scope.selectAgefrom = {};
+                timeout(function() {
+                    scope.Agefrom = 18;
+                    scope.Ageto = 30;
+                    scope.religion = 1;
+                }, 1000);
             });
         };
-
-        scope.Age = function() {
-            scope.test = [];
-            scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
-            for (var i = 18; i < 78; i++) {
-                scope.test.push({ label: i + ' years', title: i + ' years', value: i });
-            }
-            return scope.test;
-
-        };
-        scope.gender = "2";
-        // scope.loadUsers = function() {
-        //     return timeout(function() {
-        //         scope.arrayAge = scope.arrayAge || scope.Age();
-        //     }, 650);
-        // };
-        scope.arrayAge = scope.Age();
-        scope.Religion = arrayConstants.Religion;
-        service.countrySelect().then(function(response) {
-            scope.Country = [];
-            scope.Country.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
-            _.each(response.data, function(item) {
-                scope.Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-            });
-        });
-
-        service.casteselect().then(function(response) {
-            scope.Caste = [];
-            scope.Caste.push({ "label": "--Select--", "title": "--Select--", "value": "0" });
-            _.each(response.data, function(item) {
-                scope.Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-            });
-        });
-        scope.Agefrom = 18;
-        scope.Ageto = 30;
-        scope.religion = 1;
         scope.divloginblock = function() {
             $('.login_block_header').toggle();
         };
@@ -157,5 +129,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             window.open(realpath, "_self");
             $rootscope.$broadcast("profile", 2);
         };
+
     }
 ]);

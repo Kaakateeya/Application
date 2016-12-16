@@ -211,6 +211,14 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         scope.databind(cons.Priority);
                         break;
 
+                    case 'Age':
+                        var test = [];
+                        test.push({ label: "--select--", title: "--select--", value: "0" });
+                        for (var i = 18; i < 78; i++) {
+                            test.push({ label: i + ' years', title: i + ' years', value: i });
+                        }
+                        scope.databind(test);
+                        break;
                 }
             }, 1000);
             element.multiselect({
@@ -235,6 +243,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 return element[0].length;
             }, function() {
                 scope.$applyAsync(element.multiselect('rebuild'));
+                element.multiselect('select', scope.ngModel);
             });
 
             // Watch for any changes from outside the directive and refresh

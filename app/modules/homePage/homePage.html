@@ -1,24 +1,41 @@
 <style type="text/css">
-    #homepageid .dropdown-toggle {
+    #homeage .dropdown-toggle {
         background-color: white !important;
         width: 70px !important;
     }
     
-    #IIII .dropdown-toggle {
+    #homeageto .dropdown-toggle {
+        background-color: white !important;
+        width: 70px !important;
+        margin-left: 9px !important;
+    }
+    
+    #homereligion .dropdown-toggle {
+        background-color: white !important;
         width: 140px !important;
     }
     
-    #VVVV .dropdown-toggle {
+    #homecaste .dropdown-toggle {
+        background-color: white !important;
         width: 140px !important;
     }
     
-    #countrycoquick .dropdown-toggle {
+    #homelocation .dropdown-toggle {
+        background-color: white !important;
         width: 140px !important;
     }
     
     md-radio-button.md-default-theme .md-off,
     md-radio-button .md-off {
         border-color: #fff !important;
+    }
+    
+    .btn .caret {
+        margin-top: 3px;
+    }
+    
+    .radio input {
+        display: none;
     }
 </style>
 <div id="homepageid" ng-init="homeinit()">
@@ -105,37 +122,41 @@
                 <div class="clear">&nbsp;</div>
                 <div class="control-group selectbox-index selectbox-index2 span2" style="height: 82px;">
                     <label class="control-label">Age</label>
-                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="AgeFrom" flex="50" ng-model="Agefrom" style="background-color:white;margin-right: 7px;padding-left: 4px;">
-                            <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
-                        </md-select>
-                        <md-select placeholder="AgeTo" flex="50" ng-model="Ageto" style="background-color:white;padding-left: 4px;">
-                            <md-option ng-value="item.value" ng-repeat="item in arrayAge">{{item.label}}</md-option>
-                        </md-select>
+                    <div class="controls" layout="flex-gt-sm">
+                        <div id="homeage">
+                            <select multiselectdropdown placeholder="AgeFrom" ng-model="Agefrom" typeofdata="'Age'">   
+                        </select>
+
+                        </div>
+
+                        <div id="homeageto">
+                            <select multiselectdropdown placeholder="AgeTo" ng-model="Ageto" typeofdata="'Age'">   
+                        </select>
+                        </div>
                     </div>
                 </div>
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Religion</label>
-                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Religion" flex="90" ng-model="religion" style="background-color:white;padding-left: 4px;">
-                            <md-option ng-value="item.value" ng-repeat="item in Religion">{{item.label}}</md-option>
-                        </md-select>
+                    <div class="controls" id="homereligion">
+                        <select multiselectdropdown typeofdata="'Religion'" placeholder="Religion" ng-model="religion">   
+                        </select>
                     </div>
                 </div>
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Caste</label>
-                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Caste" flex="90" ng-model="caste" style="background-color:white;padding-left: 4px;">
-                            <md-option ng-value="item.value" ng-repeat="item in Caste">{{item.label}}</md-option>
-                        </md-select>
+                    <div class="controls" id="homecaste" layout="flex-gt-sm">
+
+
+                        <select multiselectdropdown typeofdata="'Caste'" placeholder="Caste" ng-model="caste">   
+                        </select>
                     </div>
                 </div>
                 <div class="control-group selectbox-index span2" style="height: 82px;">
                     <label class="control-label">Current location</label>
-                    <div class="controls" layout="flex-gt-sm" style="margin-top: -20px;">
-                        <md-select placeholder="Country" flex="90" ng-model="country" style="background-color:white;padding-left: 4px;">
-                            <md-option ng-value="item.value" ng-repeat="item in Country">{{item.label}}</md-option>
-                        </md-select>
+                    <div class="controls" layout="flex-gt-sm" id="homelocation">
+
+                        <select multiselectdropdown typeofdata="'Country'" placeholder="Country" ng-model="country">   
+                        </select>
                     </div>
                 </div>
                 <div class="clear"></div>
