@@ -86,7 +86,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         getpaidstatus: function() {
             return getSession('cust.paidstatus');
         },
-        
         clearUserSessionDetails: function() {
             return clearUserSession();
         },
