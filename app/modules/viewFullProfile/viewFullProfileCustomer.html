@@ -1,8 +1,10 @@
 <div id="updateContents" ng-init="pageload()">
     <div class="profile_full_main">
         <div class="profile_full_header clearfix">
-            <div class="profile_full_header_pic">
-                <input name="iProfilePic" id="iProfilePic" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/customernoimages/Fnoimage_Rev.png" style="height:150px;width:150px;" type="image">
+            <div class="profile_full_header_pic" >
+             <div ng-class="divclassmask(LoginPhotoIsActive)">
+                <img name="iProfilePic"  id="iProfilePic" ng-click="photoalbum()" ng-src="{{slides[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
+              </div>
             </div>
             <div class="profile_full_header_in">
                 <h6>
@@ -21,7 +23,7 @@
                        <span id="lblEducation">{{personalinfo[0].Education}}</span>
                     </span>
                 </p>
-                <div class="search_result_item_ui_exprsns">
+                <div class="search_result_item_ui_exprsns" ng-hide="custid===localcustidhide">
                     <ul>
                         <li id="libookmark" ng-if="Bookmark[0].BookmarkFlag!== 1">
                             <div class="bookmark-icon" ng-click="serviceactions('B',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
@@ -58,7 +60,7 @@
             </div>
             <div class="profile_full_header_in_ui clearfix">
                 <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!='' && personalinfo[0].HoroscopeImage!=null && personalinfo[0].HoroscopeImage!='Not given'">
-                    <a id="lnkViewHoro" href="javascript:void(0);">View Horo</a>
+                    <a id="lnkViewHoro" href="javascript:void(0);" ng-click="viewhoroscopeimage()">View Horo</a>
                 </div>
             </div>
         </div>
@@ -112,5 +114,38 @@
                 </div>
             </div>
 
+    </script>
+
+    <script type="text/ng-template" id="photopopup.html" style="z-index: 999999999999 !important;">
+        <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                <h4 class="modal-title">{{scope.headerpopup}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="bs-example">
+                    <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel" ng-hide="popupmodalbody">
+                        <ol class="carousel-indicators">
+                            <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" src="{{slide.FullPhotoPath}}"></div>
+                        </div>
+                        <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+
+                    <div ng-hide="!popupmodalbody">
+                        <img ng-src="{{personalinfo[0].HoroscopeImage}}" style="height: 500px; width: 500px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </script>
     </div>

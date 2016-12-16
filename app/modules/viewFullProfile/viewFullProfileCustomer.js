@@ -1,14 +1,17 @@
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector',
-    function(customerDashboardServices, scope, alerts, authSvc, $injector) {
+    'authSvc', '$injector', '$uibModal','successstoriesdata','$timeout',
+    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal,successstoriesdata,timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
+        scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.headerpopup = "Slide show";
+        scope.popupmodalbody = false;
+        scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
         scope.pageload = function() {
             customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
-
                 console.log(JSON.stringify(response));
                 scope.arr = [];
                 scope.personalinfo = {};
@@ -20,6 +23,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 
                     } else if (testArr[0].TableName === "Primary") {
                         scope.personalinfo = testArr;
+                         scope.divclassmask = function(logphotostatus) {
+                      
+                      var photo=scope.slides[0].ApplicationPhotoPath;
+                     var photocount= scope.personalinfo[0].PhotoName_Cust;
+                      logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                    } else {
+                        return "";
+                    }
+              };
 
                     } else {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -57,7 +71,16 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     }
                 });
             });
-        };
+
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+                console.log(response);
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+            };
+       
         scope.servicehttp = function(type, object) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -149,6 +172,29 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
                 alerts.dynamicpopupclose();
             });
+        };
+
+        scope.photoalbum = function() {
+            scope.headerpopup = "Slide show";
+            scope.popupmodalbody = false;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                alerts.dynamicpopup("photopopup.html", scope, uibModal);
+            }
+        };
+        scope.modalpopupclose = function() {
+            alerts.dynamicpopupclose();
+        };
+        scope.viewhoroscopeimage = function() {
+            scope.headerpopup = "Horoscope";
+            scope.popupmodalbody = true;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
+                    scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
+                    window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
+                } else {
+                    alerts.dynamicpopup("photopopup.html", scope, uibModal);
+                }
+            }
         };
     }
 ]);

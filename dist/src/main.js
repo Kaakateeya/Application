@@ -1029,6 +1029,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
             templateUrl: "templates/Commonpartnerprofiles.html",
             link: function(scope, element, attrs) {
                 var logincustid = authSvc.getCustId();
+                scope.LcustID = logincustid;
                 var loginprofileid = authSvc.getProfileid();
                 var loginpaidstatus = authSvc.getpaidstatus();
                 var currentslide = 1;
@@ -1941,15 +1942,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 console.log(response);
                 if (response.data === 1) {
                     if (type === 1) {
-                        alerts.open("Accepted successfully", "success");
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
+                        //alerts.open("Accepted successfully", "success");
                     } else {
-                        alerts.open("Rejected successfully", "success");
+                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
+                        //alerts.open("Rejected successfully", "success");
                     }
                 } else {
                     if (type === 1) {
-                        alerts.open("sorry Accepted Fail", "warning");
+                        //alerts.open("sorry Accepted Fail", "warning");
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
                     } else {
-                        alerts.open("sorry Rejected Fail", "warning");
+                        //alerts.open("sorry Rejected Fail", "warning");
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
                     }
 
                 }
@@ -1959,9 +1964,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
 
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                    //alerts.open("Proceed successfully", "success");
+
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                    //alerts.open("sorry Proceed Fail", "warning");
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -1970,9 +1978,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
                 console.log(response);
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                      scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -1985,20 +1993,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
 
-        // scope.$on("photoalbumopen", function(event, custid, profileid, photocount) {
-
-        //     alerts.dynamicpopup("photopopup.html", scope, uibModal);
-        //     customerDashboardServices.getphotoslideimages(custid).then(function(response) {
-
-        //         scope.slides = [];
-        //         console.log(response);
-        //         _.each(response.data, function(item) {
-        //             scope.slides.push(item);
-        //         });
-        //     });
-
-        // });
-
+        
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
         };
@@ -2037,7 +2032,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
+                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
+                //scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>',3000);
             }
         };
 
@@ -2594,19 +2590,42 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.slideshow = "";
         scope.mesagesend = "";
         //scope.selectedIndex = 2;
-        scope.textlabels = function() {
-            _.filter(scope.height, function(obj) {
-                if ((obj.value) == (1)) {
-                    globalheight = obj.label;
-                }
-            });
-            scope.HeightFromtext = globalheight;
-            _.filter(scope.height, function(obj) {
-                if ((obj.value) == (38)) {
-                    globalheightto = obj.label;
-                }
-            });
-            scope.Heighttotext = globalheightto;
+       scope.filtervalues = function(arr, whereValue) {
+            var storeValue = "";
+          
+            if (whereValue.indexOf(',') === -1) {
+                _.filter(arr, function(obj) {
+                    if ((obj.value) == parseInt(whereValue)) {
+                        storeValue = obj.label;
+                    }
+                });
+            } else {
+                var arrvals = whereValue.split(',');
+               // for (var i = 0; i < arrvals.length; i++) {
+
+
+_.each(arrvals,function(item,index){
+ _.filter(arr, function(obj) {
+                        if ((obj.value) == parseInt(arrvals[index])) {
+                            storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
+                        }
+                    });
+
+});
+
+                   
+               // }
+            }
+            return storeValue;
+        };
+
+
+
+        scope.textlabels = function(fromheight, toheight, caste, education) {
+            scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
+            scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
+            scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
+            // alert(scope.Castetxt);
         };
         scope.checkLength = function() {
             var textboxprofileid = document.getElementById("txtProfileid");
@@ -2615,14 +2634,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if ((textboxprofileid.value !== "" && textboxprofileid.value !== null) || (textbox.value !== "" && textbox.value !== null) || (textboxlastname.value !== "" && textboxlastname.value !== null)) {
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
-                        alerts.open('Mininum 3 charactes required For Name', 'warning');
+
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name',2500);
+                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         return false;
                     } else {
                         return true;
                     }
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
-                        alerts.open('Mininum 3 charactes required For Name', 'warning');
+                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
+                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName',2500);
                         return false;
                     } else {
                         return true;
@@ -2631,18 +2653,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                alerts.open('pls enter atleast one fileld', 'alert alert-danger', 'warning');
+                //alerts.open('pls enter atleast one fileld', 'alert alert-danger', 'warning');
+                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld',2500);
                 return false;
             }
 
         };
         scope.controlsbinding = function() {
+             scope.height = arrayConstants.height;
+              scope.educationcategory = arrayConstants.educationcategory;
             timeout(function() {
                 scope.arrayAge = scope.Age();
-                scope.height = arrayConstants.height;
-                scope.MaritalStatus = arrayConstants.MaritalStatus;
-                scope.educationcategory = arrayConstants.educationcategory;
-                scope.Religion = arrayConstants.Religion;
+                 scope.MaritalStatus = arrayConstants.MaritalStatus;
+                 scope.Religion = arrayConstants.Religion;
                 scope.Mothertongue = arrayConstants.Mothertongue;
                 scope.visastatus = arrayConstants.visastatus;
                 scope.stars = arrayConstants.stars;
@@ -2724,9 +2747,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             //scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
             // scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
             // scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
-            scope.textlabels();
-            // refineheightfrom = globalheight.indexOf(" in ") != -1 ? globalheight.split(" in ") : globalheight;
-            // refineheightto = globalheightto.indexOf(" in ") != -1 ? globalheightto.split(" in ") : globalheightto;
+           scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
+           
         };
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
@@ -2796,7 +2818,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.religion = 1;
                 scope.HeightFrom = 1;
                 scope.Heightto = 38;
-                scope.textlabels();
+               
             }
         };
         scope.clearSearchTerm = function() {
@@ -2902,7 +2924,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                                //alerts.open('No Records Found,Please Change search Criteria', 'warning');
+
+                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
                             }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -2928,7 +2952,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                     // alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
                         }
                         scope.loadinging = true;
                     });
@@ -2958,7 +2983,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                                    //alerts.open('No Records Found,Please Change search Criteria', 'warning');
+
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
                                 }
                             } else {
                                 _.each(response.data, function(item) {
@@ -3103,7 +3130,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
                 scope.HeightFrom = 1;
                 scope.Heightto = 38;
-                scope.textlabels();
                 sessionStorage.removeItem("homepageobject");
             }
             scope.showcontrols = true;
@@ -3218,7 +3244,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
-                        window.location = "#/home";
+                        sessionStorage.removeItem("LoginPhotoIsActive");
+                        if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
+                            window.location = "#/home";
+                        } else {
+                            window.location = "#/mobileverf";
+                        }
                         commonpopup.closepopup();
                     });
                 }
@@ -3310,6 +3341,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.successfaileralert = function(msg, typewarning) {
             alerts.open(msg, typewarning);
+
+            
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -3340,6 +3373,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             var inputValue = window.event.keyCode;
             if (!(inputValue >= 65 && inputValue <= 120) && (inputValue !== 32 && inputValue !== 0)) {
                 event.preventDefault();
+            }
+        };
+
+
+         scope.checkCasteParents = function() {
+
+            if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
+
+            } else {
+                alert('please select mothertongue and religion');
             }
         };
     }
@@ -4286,16 +4329,19 @@ app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function
     });
 }]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector',
-    function(customerDashboardServices, scope, alerts, authSvc, $injector) {
+    'authSvc', '$injector', '$uibModal','successstoriesdata','$timeout',
+    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal,successstoriesdata,timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
+        scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.headerpopup = "Slide show";
+        scope.popupmodalbody = false;
+        scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
         scope.pageload = function() {
             customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
-
                 console.log(JSON.stringify(response));
                 scope.arr = [];
                 scope.personalinfo = {};
@@ -4307,6 +4353,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 
                     } else if (testArr[0].TableName === "Primary") {
                         scope.personalinfo = testArr;
+                         scope.divclassmask = function(logphotostatus) {
+                      
+                      var photo=scope.slides[0].ApplicationPhotoPath;
+                     var photocount= scope.personalinfo[0].PhotoName_Cust;
+                      logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                    } else {
+                        return "";
+                    }
+              };
 
                     } else {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -4344,7 +4401,16 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     }
                 });
             });
-        };
+
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+                console.log(response);
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+            };
+       
         scope.servicehttp = function(type, object) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -4436,6 +4502,29 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
                 alerts.dynamicpopupclose();
             });
+        };
+
+        scope.photoalbum = function() {
+            scope.headerpopup = "Slide show";
+            scope.popupmodalbody = false;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                alerts.dynamicpopup("photopopup.html", scope, uibModal);
+            }
+        };
+        scope.modalpopupclose = function() {
+            alerts.dynamicpopupclose();
+        };
+        scope.viewhoroscopeimage = function() {
+            scope.headerpopup = "Horoscope";
+            scope.popupmodalbody = true;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
+                    scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
+                    window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
+                } else {
+                    alerts.dynamicpopup("photopopup.html", scope, uibModal);
+                }
+            }
         };
     }
 ]);

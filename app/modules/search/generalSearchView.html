@@ -189,7 +189,7 @@
                                         <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix margintopclass">
-                                                <angular-multiselect array="Caste" change="true" model="caste">
+                                                <angular-multiselect array="Caste" change="true" model="caste" ng-click="checkCasteParents()">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -298,7 +298,7 @@
                                         <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="Caste" change="true" model="caste">
+                                                <angular-multiselect array="Caste" change="true" model="caste" ng-click="checkCasteParents()">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -487,7 +487,7 @@
                                                 <input ng-model="profileid" id="txtProfileid" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="10">
                                             </md-input-container>
                                         </div>
-                                        <div class="span4"  style="margin-right:20px;">
+                                        <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>First name</label>
                                                 <input ng-model="firstname" ng-keypress="onlyAlphabets(event)" id="txtFirstNameProfileid">
@@ -555,8 +555,8 @@
                     <h4>Refine <span>{{gender===2?'Bride':'Groom'}}</span></h4>
                     <div class="clear">&nbsp;</div>
                     <h6><span>Age:</span> <span id="refineAge">{{AgeFrom}} years-{{Ageto}} years</span></h6>
-                    <h6><span>caste:</span><span id="refinecaste">{{caste.label}}</span></h6>
-                    <h6><span>education:</span> <span id="refineeducation">Any</span></h6>
+                    <h6><span>caste:</span><span id="refinecaste">{{castetext}}</span></h6>
+                    <h6><span>education:</span> <span id="refineeducation">{{educationcategorytxt}}</span></h6>
                     <h6><span>height:</span><span id="spanrefineheight">{{HeightFromtext}}-{{Heighttotext}}</span></h6>
                 </div>
                 <div class="refine_search_new_sub2 clearfix">
@@ -628,6 +628,7 @@
     </div>
     
 </div>
+<alert-directive></alert-directive>
 <script type="text/ng-template" id="savedsearch.html">
     <div class="modal-content">
         <div class="modal-header">
@@ -680,12 +681,12 @@
                             <div layout="row">
                                 <md-input-container class="md-block" flex-gt-sm>
                                     <label>UserName</label>
-                                    <input type="text" id="txtusername" ng-model="formloagin.username" required style="border: 1px solid #a59898 !important;
+                                    <input type="text" id="txtusername" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.username" required style="border: 1px solid #a59898 !important;
                border-radius: 3px !important;">
                                 </md-input-container>
                                 <md-input-container class="md-block" flex-gt-sm>
                                     <label>Password</label>
-                                    <input type="password" id="txtPassword" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
+                                    <input type="password" id="txtPassword" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
                border-radius: 3px !important;">
                                 </md-input-container>
                             </div>

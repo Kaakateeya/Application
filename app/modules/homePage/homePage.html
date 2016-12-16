@@ -72,8 +72,8 @@
         </div>
         <div class="login_block_header" style="display: none;" id="divLogin">
             <form name="myFormss">
-                <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" style="height: 38px;" ng-model="username" required/>
-                <input type="password" id="txtPassword" placeholder="Password" style="height: 38px;" ng-model="password" required/>
+                <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="username" required/>
+                <input type="password" id="txtPassword" placeholder="Password" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="password" required/>
                 <span class="clear">&nbsp;</span>
                 <div class="login_help">
 

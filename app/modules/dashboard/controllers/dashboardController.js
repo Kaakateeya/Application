@@ -469,15 +469,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 console.log(response);
                 if (response.data === 1) {
                     if (type === 1) {
-                        alerts.open("Accepted successfully", "success");
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
+                        //alerts.open("Accepted successfully", "success");
                     } else {
-                        alerts.open("Rejected successfully", "success");
+                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
+                        //alerts.open("Rejected successfully", "success");
                     }
                 } else {
                     if (type === 1) {
-                        alerts.open("sorry Accepted Fail", "warning");
+                        //alerts.open("sorry Accepted Fail", "warning");
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
                     } else {
-                        alerts.open("sorry Rejected Fail", "warning");
+                        //alerts.open("sorry Rejected Fail", "warning");
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
                     }
 
                 }
@@ -487,9 +491,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
 
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                    //alerts.open("Proceed successfully", "success");
+
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                    //alerts.open("sorry Proceed Fail", "warning");
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -498,9 +505,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
                 console.log(response);
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                      scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -513,20 +520,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
 
-        // scope.$on("photoalbumopen", function(event, custid, profileid, photocount) {
-
-        //     alerts.dynamicpopup("photopopup.html", scope, uibModal);
-        //     customerDashboardServices.getphotoslideimages(custid).then(function(response) {
-
-        //         scope.slides = [];
-        //         console.log(response);
-        //         _.each(response.data, function(item) {
-        //             scope.slides.push(item);
-        //         });
-        //     });
-
-        // });
-
+        
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
         };
@@ -565,7 +559,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
+                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
+                //scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>',3000);
             }
         };
 

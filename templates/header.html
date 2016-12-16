@@ -7,8 +7,8 @@
         <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
         <div class="login_block_header" ng-show="loginpopup" id="divLogin">
             <form name="myForms">
-                <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="username" required/>
-                <input type="password" id="txtPassword" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
+                <input type="text" id="txtUserName" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="ProfileID/EmailID" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="username" required/>
+                <input type="password" id="txtPassword" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
                 <span class="clear">&nbsp;</span>
                 <div class="login_help">
                     <a id="lnkForgotPassword" href="javascript:void(0)" ng-click="showforgetpasswordpopup()">Forgot Password</a>

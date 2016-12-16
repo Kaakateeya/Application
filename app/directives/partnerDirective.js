@@ -13,6 +13,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
             templateUrl: "templates/Commonpartnerprofiles.html",
             link: function(scope, element, attrs) {
                 var logincustid = authSvc.getCustId();
+                scope.LcustID = logincustid;
                 var loginprofileid = authSvc.getProfileid();
                 var loginpaidstatus = authSvc.getpaidstatus();
                 var currentslide = 1;
