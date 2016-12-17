@@ -86,6 +86,9 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         getpaidstatus: function() {
             return getSession('cust.paidstatus');
         },
+        getprofilepic: function() {
+            return getSession('cust.profilepic');
+        },
         clearUserSessionDetails: function() {
             return clearUserSession();
         },
@@ -108,7 +111,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
                                 Idle.watch();
                                 return { success: true, response: response.data };
                             } else {
-                                alert("please enter valid Email ID/User Name");
+                                alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
                             }
                         }
                         return { success: false, response: response.data };

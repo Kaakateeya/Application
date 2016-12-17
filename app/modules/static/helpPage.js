@@ -48,8 +48,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
 
         scope.SendMail = function() {
-
-
             scope.SendMailObj = {
                 TicketID: scope.lblTicketID,
                 Name: scope.CustName,
@@ -63,23 +61,24 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 console.log(response);
                 if (response.data == 1) {
                     alert('mail has sent successfully');
+                      scope.resethelp();
                 }
             });
-
-
-
-
             scope.modalInstance.close();
+          
         };
-
-
-
-
-
-
-
-
-
-
+   scope.resethelp=function()
+   {  
+scope.txtname="";
+scope.txtemail="";
+scope.txtsubject="";
+scope.ddlcategory=null;
+scope.ddlcountrycode=null;
+scope.txtmsg="";
+scope.ddlpriority=null;
+scope.txtphonecode="";
+scope.txtphnum="";
+ scope.captcha="";
+    };
     }
 ]);

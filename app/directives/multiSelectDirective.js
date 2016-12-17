@@ -215,7 +215,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         var test = [];
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
-                            test.push({ label: i + ' years', title: i + ' years', value: i });
+                            test.push({ label: i, title: i, value: i });
                         }
                         scope.databind(test);
                         break;

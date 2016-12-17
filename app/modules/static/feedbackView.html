@@ -75,8 +75,8 @@
                     </div>
                     <div class="rating_submit_main clearfix" id="divcaptcha">
                         <div class="rating_captcha">
-                            <label class="control-label">Please enter the security code</label>
-                            <div re-captcha ng-model="user.captcha"></div>
+                            <label class="control-label">Please enter the security code<span style="color:red;">*</span></label>
+                            <div re-captcha ng-model="scope.captcha"></div>
                         </div>
                         <button ng-disabled="feedbackform.$invalid" id="btnsubmit" class="btn btn-primary pull-right" ng-click="submit()">Submit</button>
                     </div>

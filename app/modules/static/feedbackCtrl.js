@@ -94,6 +94,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
             scope.SearchRate = 0;
             scope.Recommend = 0;
             scope.Comments = "";
+            scope.captcha="";
         };
 
     }

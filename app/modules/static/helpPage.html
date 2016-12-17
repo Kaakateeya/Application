@@ -112,8 +112,8 @@
                 <div class="clear clear_my"></div>
                 <div class="rating_submit_main clearfix">
                     <div class="rating_captcha">
-                        <label class="control-label">Please enter the security code</label>
-                        <div re-captcha ng-model="user.captcha"></div>
+                        <label class="control-label">Please enter the security code<span style="color:red;">*</span></label>
+                        <div re-captcha ng-model="scope.captcha"></div>
                     </div>
                     <input name="btnSub" value="submit" class="button_custom pull-right" type="submit" ng-click="submit();">
                 </div>
