@@ -944,7 +944,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         var test = [];
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
-                            test.push({ label: i + ' years', title: i + ' years', value: i });
+                            test.push({ label: i, title: i, value: i });
                         }
                         scope.databind(test);
                         break;
@@ -1317,6 +1317,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                             }
                         } else {
+                            
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 0) {
                                 scope.$emit('showloginpopup');
                             }
@@ -2833,21 +2834,21 @@ _.each(arrvals,function(item,index){
             scope.religion = 1;
             scope.HeightFrom = 1;
             scope.Heightto = 38;
-            scope.maritalstatus = 0;
-            scope.educationcat = 0;
-            scope.country = 0;
-            scope.mothertongue = 0;
-            scope.caste = 0;
+            scope.maritalstatus = null;
+            scope.educationcat = null;
+            scope.country =null;
+            scope.mothertongue = null;
+            scope.caste = null;
             scope.regdays = null;
             scope.physicalstatusadvance = null;
-            scope.stateadvance = 0;
-            scope.visastatusadvance = 0;
-            scope.Educationadvance = 0;
-            scope.Professiongroupadvance = 0;
-            scope.monthsalcurrency = 0;
+            scope.stateadvance = null;
+            scope.visastatusadvance = null;
+            scope.Educationadvance = null;
+            scope.Professiongroupadvance = null;
+            scope.monthsalcurrency = null;
             scope.kujadosham = null;
             scope.starlanguage = null;
-            scope.starsadvance = 0;
+            scope.starsadvance =null;
             scope.profileid = "";
             scope.firstname = "";
             scope.lastname = "";
@@ -3635,6 +3636,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
             scope.SearchRate = 0;
             scope.Recommend = 0;
             scope.Comments = "";
+            scope.captcha="";
         };
 
     }
@@ -3689,8 +3691,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
 
         scope.SendMail = function() {
-
-
             scope.SendMailObj = {
                 TicketID: scope.lblTicketID,
                 Name: scope.CustName,
@@ -3704,24 +3704,25 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 console.log(response);
                 if (response.data == 1) {
                     alert('mail has sent successfully');
+                      scope.resethelp();
                 }
             });
-
-
-
-
             scope.modalInstance.close();
+          
         };
-
-
-
-
-
-
-
-
-
-
+   scope.resethelp=function()
+   {  
+scope.txtname="";
+scope.txtemail="";
+scope.txtsubject="";
+scope.ddlcategory=null;
+scope.ddlcountrycode=null;
+scope.txtmsg="";
+scope.ddlpriority=null;
+scope.txtphonecode="";
+scope.txtphnum="";
+ scope.captcha="";
+    };
     }
 ]);
  app.controller("blockerController", ['$scope', 'cerateNewPwd', '$stateParams', function(scope, cerateNewPwd, stateParams) {
@@ -4551,12 +4552,13 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
 
 
     function setUser(value) {
-        //console.log(value);
+        console.log(value);
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
         setSession('cust.paidstatus', (value.PaidStatus));
         setSession('cust.profilepic', (value.ProfilePic));
+        setSession('cust.GenderID',(value.GenderID));
     }
 
     function getSession(key) {
@@ -4582,6 +4584,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         clearSession('cust.profileid');
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
+        clearSession('cust.GenderID');
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
     }
@@ -4592,8 +4595,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             username: getSession('cust.username'),
             profileid: getSession('cust.profileid'),
             paidstatus: getSession('cust.paidstatus'),
-            profilepic: getSession('cust.profilepic')
-
+            profilepic: getSession('cust.profilepic'),
+           GenderID:getSession('cust.GenderID')
         };
     }
 
@@ -4615,6 +4618,13 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         },
         getpaidstatus: function() {
             return getSession('cust.paidstatus');
+        },
+        getprofilepic: function() {
+            return getSession('cust.profilepic');
+        },
+        getGenderID:function()
+        {
+         return getSession('cust.GenderID');
         },
         clearUserSessionDetails: function() {
             return clearUserSession();
@@ -4638,7 +4648,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
                                 Idle.watch();
                                 return { success: true, response: response.data };
                             } else {
-                                alert("please enter valid Email ID/User Name");
+                                alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
                             }
                         }
                         return { success: false, response: response.data };

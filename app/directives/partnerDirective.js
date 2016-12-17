@@ -301,6 +301,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                             }
                         } else {
+                            
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 0) {
                                 scope.$emit('showloginpopup');
                             }
