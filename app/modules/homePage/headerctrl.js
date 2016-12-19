@@ -1,5 +1,5 @@
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window','$state',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window,$state) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -158,47 +158,105 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
 
         scope.homepagelinks = function(typeurl) {
+              var currentstatte= $state.current;
             switch (typeurl) {
                 case "BookMarked":
-                    var realpath = '#/home?type=MB';
+                 
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var realpath = '#/home?type=MB';
                     window.open(realpath, "_self");
-                    $rootscope.$broadcast("homepage", "MB", "My BookMarked Profiles");
+                   }
+                   else{
+                    var realpathb = '#/Dashboard?type=MB';
+                    window.open(realpathb, "_self");
+                   }
                     break;
                 case "BookMarkedme":
-                    var realpathgen = '#/home?type=WB';
-                    window.open(realpathgen, "_self");
-                    $rootscope.$broadcast("homepage", "WB", "Who BookMarked Me");
+                   
+                     if(currentstatte.name==="dashboardnew")
+                    {
+                   var BookMarkedme = '#/home?type=WB';
+                    window.open(BookMarkedme, "_self");
+                   }
+                   else{
+                    var BookMarkedmes = '#/Dashboard?type=WB';
+                    window.open(BookMarkedmes, "_self");
+                   }
                     break;
                 case "Ignored":
-                    var realpathadvan = '#/home?type=I';
-                    window.open(realpathadvan, "_self");
-                    $rootscope.$broadcast("homepage", "I", "Ignored Profiles");
+                    
+                     if(currentstatte.name==="dashboardnew")
+                    {
+                   var Ignored = '#/home?type=I';
+                    window.open(Ignored, "_self");
+                   }
+                   else{
+                    var Ignoreds = '#/Dashboard?type=I';
+                    window.open(Ignoreds, "_self");
+                   }
                     break;
                 case "myprofile":
+                    
+                     if(currentstatte.name==="dashboardnew")
+                    {
                     var myprofile = '#/home?type=WV';
                     window.open(myprofile, "_self");
-                    $rootscope.$broadcast("homepage", "WV", "My profile viewed by others");
+                   }
+                   else{
+                    var myprofiledd = '#/Dashboard?type=WV';
+                    window.open(myprofiledd, "_self");
+                   }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-                    var myhome = '#/home?type=C';
+                  
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var myhome = '#/home?type=C';
                     window.open(myhome, "_self");
-                    $rootscope.$broadcast("homepage", "C", "Suitable Profiles that match you");
+                   }
+                   else{
+                    var ddddd = '#/Dashboard?type=C';
+                    window.open(ddddd, "_self");
+                   }
+                     console.log(currentstatte);
                     break;
                 case "Chats":
-                    var Chats = '#/home?type=chats';
+                
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Chatsss = '#/home?type=Chats';
+                    window.open(Chatsss, "_self");
+                   }
+                   else{
+                    var Chats = '#/Dashboard?type=Chats';
                     window.open(Chats, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Chats", "Total Messages");
+                   }
                     break;
                 case "Requests":
-                    var Requests = '#/home?type=requests';
+                   
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Requests = '#/home?type=Requests';
                     window.open(Requests, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Requests", "Members are requesting to upload your photo");
+                   }
+                   else{
+                    var Requestsss = '#/Dashboard?type=Requests';
+                    window.open(Requestsss, "_self");
+                   }
                     break;
                 case "Express":
-                    var Express = '#/home?type=express';
+                   
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Express = '#/home?type=Express';
                     window.open(Express, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Express", "All Profiles");
+                   }
+                   else{
+                    var Expressdd = '#/Dashboard?type=Express';
+                    window.open(Expressdd, "_self");
+                   }
                     break;
             }
         };
@@ -206,5 +264,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             scope.$broadcast('showforgetpassword');
 
         };
+        
     }
 ]);

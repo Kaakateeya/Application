@@ -302,7 +302,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             }
                         } else {
                             
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 0) {
+                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
                         }
@@ -372,7 +372,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-
+                  currentslide = parseInt(currentIndex1 - 1);
                 };
 
                 scope.modalpopupclose = function() {

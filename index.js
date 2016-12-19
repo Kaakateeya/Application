@@ -25,6 +25,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/home', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
+         { name: 'dashboardnew', url: '/Dashboard', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
         { name: 'Advanced', url: '/Advanced', templateUrl: 'app/modules/search/advancesearchView.html', controller: 'advancesearchCtrl', isloginrequired: false },
         { name: 'General', url: '/General', templateUrl: 'app/modules/search/generalSearchView.html', controller: 'Generalsearch', isloginrequired: false },

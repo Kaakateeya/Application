@@ -14,9 +14,10 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             });
         };
 
-        scope.submit = function() {
+       scope.submit = function() {
 
-            if (scope.helpForm.$valid) {
+            if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
+                (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
 
                 scope.inputObj = {
                     profile: '210910352',
@@ -42,10 +43,12 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
                     scope.open();
                 });
+            } else {
+                alert('Please enter Catgory and Priority');
+
             }
 
         };
-
 
         scope.SendMail = function() {
             scope.SendMailObj = {
@@ -78,7 +81,7 @@ scope.txtmsg="";
 scope.ddlpriority=null;
 scope.txtphonecode="";
 scope.txtphnum="";
- scope.captcha="";
+  Recaptcha.reload();
     };
     }
 ]);

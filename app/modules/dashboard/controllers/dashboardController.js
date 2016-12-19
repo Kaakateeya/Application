@@ -1,6 +1,7 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata, $rootscope) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope','$timeout',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts, 
+    window, $location, successstoriesdata, $rootscope,$timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -17,6 +18,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
+      
+       
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -80,33 +83,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        scope.init = function() {
-            scope.PartnerProfilesnew = [];
-            scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
-            switch (scope.Typeofdatabind) {
-                case "MB":
-                    scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
-                    break;
-                case "WB":
-                    scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
-                    break;
-                case "I":
-                    scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
-                    break;
-                case "WV":
-                    scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
-                    break;
-                case "chats":
-                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                    break;
-                case "requests":
-                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                    break;
-                case "express":
-                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                    break;
-            }
-        };
+        
+       
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -122,11 +100,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
                 { value: 'manage photo', bindvalue: 'profile', hrefs: '#/editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home?type=MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home?type=WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home?type=RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home?type=WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home?type=I' },
                 { value: 'Saved search', bindvalue: 'profile', hrefs: '#/General?selectedIndex=3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
@@ -470,17 +448,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (response.data === 1) {
                     if (type === 1) {
                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
-                        //alerts.open("Accepted successfully", "success");
+                       
                     } else {
                          scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
-                        //alerts.open("Rejected successfully", "success");
+                       
                     }
                 } else {
                     if (type === 1) {
-                        //alerts.open("sorry Accepted Fail", "warning");
+                      
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
                     } else {
-                        //alerts.open("sorry Rejected Fail", "warning");
+                       
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
                     }
 
@@ -489,13 +467,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
-
                 if (response.data === 1) {
-                    //alerts.open("Proceed successfully", "success");
-
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    //alerts.open("sorry Proceed Fail", "warning");
+                    
                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
@@ -534,27 +509,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.incrementsdashboardcounts();
         });
 
-        $rootscope.$on("homepage", function(event, type, headertext) {
-            //do something
-            scope.gettingpartnerdata(type, 1, 9, headertext, 1);
-        });
-
-        $rootscope.$on("Chatsreqexpress", function(event, type, headertext) {
-            //do something
-            scope.PartnerProfilesnew = [];
-            switch (type) {
-                case "Chats":
-                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                    break;
-                case "Requests":
-                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                    break;
-                case "Express":
-                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                    break;
-            }
-
-        });
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
@@ -568,5 +522,100 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
+        scope.pageloadbind=function(response)
+        {
+                        scope.bindcounts(response.data.DashBoardCounts);
+                            console.log(response.data.DashBoardCounts);
+                            scope.bindallcounts = response.data.DashBoardCounts;
+                            scope.PersonalInfo = (response.data.PersonalInfo);
+                            console.log(response.data.PersonalInfo);
+                            scope.photopersonal = scope.PersonalInfo.Photo;
+                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+      
+        };
+         scope.init = function() {
+            
+           scope.PartnerProfilesnew = [];
+             switch (scope.Typeofdatabind) {
+                case "MB":
+                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                     });
+                  break;
+                case "WB":
+                 customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                     });
+                    break;
+                case "I":
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                     });
+                    break;
+                case "WV":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
+                     });
+                    break;
+                      case "RV":
+                       customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1);
+                     });
+                  break;
+                case "Chats":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                     });
+                    break;
+                case "Requests":
+                customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                            scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                     });
+                    break;
+                case "Express":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                            scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                     });
+                    break;
+               default:
+                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+                break;
+            }
+        };
+      
     }
 ]);

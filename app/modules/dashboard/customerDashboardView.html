@@ -362,7 +362,7 @@
                                     <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
                                         <div class="sugested_block sugested_block_top" id="ExpressDiv1">
                                             <div class="sugested_block_top_lft"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"><img style="height: 150px;width: 150px;cursor:pointer;"
-                                             src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''" ng-click="photoalbumdashboard(expressint.Cust_ID,expressint.ProfileID,expressint.PhotosCount)"/></span>
+                                             ng-src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''" ng-click="photoalbumdashboard(expressint.Cust_ID,expressint.ProfileID,expressint.PhotosCount)"/></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
                                                 <h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2>
@@ -423,7 +423,7 @@
                 <div id="MessagesDiv" ng-style="typeofdiv==='chats' ?{ 'display': 'block'}:{ 'display': 'none'}">
                     <div class="messages_list_item clearfix" ng-repeat="messages in PartnerProfilesnew">
                         <div class="messages_list_item_lt"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,messages.Photo,messages.PhotosCount)">                           
-                             <img id="Iimagesdisplay" src="{{messages.Photo}}" ng-class="messages.PhotosCount==0?'Linkdisabled':''" style="height:120px;width:120px;cursor:pointer;"></span>
+                             <img id="Iimagesdisplay" ng-src="{{messages.Photo}}" ng-class="messages.PhotosCount==0?'Linkdisabled':''" style="height:120px;width:120px;cursor:pointer;"></span>
                         </div>
                         <div class="messages_list_item_rt">
                             <p> Member Id : <span id="lblMseeageProfileID">{{messages.ProfileID}}</span></p>
@@ -467,7 +467,7 @@
                     <div ng-repeat="requestphotos in PartnerProfilesnew">
                         <div class="messages_list_item clearfix">
                             <div class="messages_list_item_lt"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,requestphotos.Photo,requestphotos.PhotosCount)">  
-                                 <img src="{{requestphotos.Photo}}" style="height:120px;width:120px;cursor:pointer;" ng-class="requestphotos.PhotosCount==0?'Linkdisabled':''"> </span> </div>
+                                 <img ng-src="{{requestphotos.Photo}}" style="height:120px;width:120px;cursor:pointer;" ng-class="requestphotos.PhotosCount==0?'Linkdisabled':''"> </span> </div>
                             <div class="messages_list_item_rt">
                                 <p> Member Id :<span>{{requestphotos.ProfileID}}</span> </p>
                                 <p> <span>{{requestphotos.NAME}}</span> </p>
@@ -497,7 +497,7 @@
                     <div class='messages_list_item clearfix' ng-repeat="passwordrequest in PartnerProfilesnew">
                         <div class='messages_list_item_lt'>
                             <span ng-class="divclassmaskforall(LoginPhotoIsActive,passwordrequest.Photo,passwordrequest.PhotosCount)">
-                        <img src="{{passwordrequest.Photo}}" ng-class="passwordrequest.PhotosCount==0?'Linkdisabled':''" style="height:120px;width:120px;cursor:pointer;">
+                        <img ng-src="{{passwordrequest.Photo}}" ng-class="passwordrequest.PhotosCount==0?'Linkdisabled':''" style="height:120px;width:120px;cursor:pointer;">
                          </span>
                         </div>
                         <div class='messages_list_item_rt'>

@@ -14,12 +14,7 @@ app.filter('dateFilter', function() {
 });
 app.animation('.fade123', function() {
     return {
-        enter: function(element, done) {
-            element.css('display', 'none');
-            $(element).fadeIn(1000, function() {
-                done();
-            });
-        },
+
         leave: function(element, done) {
             $(element).fadeOut(1000, function() {
                 done();
@@ -1318,7 +1313,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             }
                         } else {
                             
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 0) {
+                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
                         }
@@ -1388,7 +1383,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-
+                  currentslide = parseInt(currentIndex1 - 1);
                 };
 
                 scope.modalpopupclose = function() {
@@ -1473,8 +1468,9 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, window, $location, successstoriesdata, $rootscope) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope','$timeout',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts, 
+    window, $location, successstoriesdata, $rootscope,$timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1491,6 +1487,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
+      
+       
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -1554,33 +1552,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        scope.init = function() {
-            scope.PartnerProfilesnew = [];
-            scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
-            switch (scope.Typeofdatabind) {
-                case "MB":
-                    scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
-                    break;
-                case "WB":
-                    scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
-                    break;
-                case "I":
-                    scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
-                    break;
-                case "WV":
-                    scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
-                    break;
-                case "chats":
-                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                    break;
-                case "requests":
-                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                    break;
-                case "express":
-                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                    break;
-            }
-        };
+        
+       
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -1596,11 +1569,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
                 { value: 'manage photo', bindvalue: 'profile', hrefs: '#/editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home?type=MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home?type=WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home?type=RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home?type=WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home?type=I' },
                 { value: 'Saved search', bindvalue: 'profile', hrefs: '#/General?selectedIndex=3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
@@ -1944,17 +1917,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (response.data === 1) {
                     if (type === 1) {
                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
-                        //alerts.open("Accepted successfully", "success");
+                       
                     } else {
                          scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
-                        //alerts.open("Rejected successfully", "success");
+                       
                     }
                 } else {
                     if (type === 1) {
-                        //alerts.open("sorry Accepted Fail", "warning");
+                      
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
                     } else {
-                        //alerts.open("sorry Rejected Fail", "warning");
+                       
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
                     }
 
@@ -1963,13 +1936,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
-
                 if (response.data === 1) {
-                    //alerts.open("Proceed successfully", "success");
-
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
-                    //alerts.open("sorry Proceed Fail", "warning");
+                    
                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
                 }
                 alerts.dynamicpopupclose();
@@ -2008,27 +1978,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.incrementsdashboardcounts();
         });
 
-        $rootscope.$on("homepage", function(event, type, headertext) {
-            //do something
-            scope.gettingpartnerdata(type, 1, 9, headertext, 1);
-        });
-
-        $rootscope.$on("Chatsreqexpress", function(event, type, headertext) {
-            //do something
-            scope.PartnerProfilesnew = [];
-            switch (type) {
-                case "Chats":
-                    scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                    break;
-                case "Requests":
-                    scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                    break;
-                case "Express":
-                    scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                    break;
-            }
-
-        });
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
@@ -2042,6 +1991,101 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
+        scope.pageloadbind=function(response)
+        {
+                        scope.bindcounts(response.data.DashBoardCounts);
+                            console.log(response.data.DashBoardCounts);
+                            scope.bindallcounts = response.data.DashBoardCounts;
+                            scope.PersonalInfo = (response.data.PersonalInfo);
+                            console.log(response.data.PersonalInfo);
+                            scope.photopersonal = scope.PersonalInfo.Photo;
+                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+      
+        };
+         scope.init = function() {
+            
+           scope.PartnerProfilesnew = [];
+             switch (scope.Typeofdatabind) {
+                case "MB":
+                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                     });
+                  break;
+                case "WB":
+                 customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                     });
+                    break;
+                case "I":
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                     });
+                    break;
+                case "WV":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
+                     });
+                    break;
+                      case "RV":
+                       customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1);
+                     });
+                  break;
+                case "Chats":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                         scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                     });
+                    break;
+                case "Requests":
+                customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                            scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                     });
+                    break;
+                case "Express":
+                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                         if (scope.counts === 1) {
+                            sessionStorage.removeItem("LoginPhotoIsActive");
+                            scope.pageloadbind(response);
+                        }
+                            scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                     });
+                    break;
+               default:
+                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+                break;
+            }
+        };
+      
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
@@ -2071,8 +2115,8 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         }
     };
 }]);
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window','$state',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window,$state) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -2231,47 +2275,105 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
 
         scope.homepagelinks = function(typeurl) {
+              var currentstatte= $state.current;
             switch (typeurl) {
                 case "BookMarked":
-                    var realpath = '#/home?type=MB';
+                 
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var realpath = '#/home?type=MB';
                     window.open(realpath, "_self");
-                    $rootscope.$broadcast("homepage", "MB", "My BookMarked Profiles");
+                   }
+                   else{
+                    var realpathb = '#/Dashboard?type=MB';
+                    window.open(realpathb, "_self");
+                   }
                     break;
                 case "BookMarkedme":
-                    var realpathgen = '#/home?type=WB';
-                    window.open(realpathgen, "_self");
-                    $rootscope.$broadcast("homepage", "WB", "Who BookMarked Me");
+                   
+                     if(currentstatte.name==="dashboardnew")
+                    {
+                   var BookMarkedme = '#/home?type=WB';
+                    window.open(BookMarkedme, "_self");
+                   }
+                   else{
+                    var BookMarkedmes = '#/Dashboard?type=WB';
+                    window.open(BookMarkedmes, "_self");
+                   }
                     break;
                 case "Ignored":
-                    var realpathadvan = '#/home?type=I';
-                    window.open(realpathadvan, "_self");
-                    $rootscope.$broadcast("homepage", "I", "Ignored Profiles");
+                    
+                     if(currentstatte.name==="dashboardnew")
+                    {
+                   var Ignored = '#/home?type=I';
+                    window.open(Ignored, "_self");
+                   }
+                   else{
+                    var Ignoreds = '#/Dashboard?type=I';
+                    window.open(Ignoreds, "_self");
+                   }
                     break;
                 case "myprofile":
+                    
+                     if(currentstatte.name==="dashboardnew")
+                    {
                     var myprofile = '#/home?type=WV';
                     window.open(myprofile, "_self");
-                    $rootscope.$broadcast("homepage", "WV", "My profile viewed by others");
+                   }
+                   else{
+                    var myprofiledd = '#/Dashboard?type=WV';
+                    window.open(myprofiledd, "_self");
+                   }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-                    var myhome = '#/home?type=C';
+                  
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var myhome = '#/home?type=C';
                     window.open(myhome, "_self");
-                    $rootscope.$broadcast("homepage", "C", "Suitable Profiles that match you");
+                   }
+                   else{
+                    var ddddd = '#/Dashboard?type=C';
+                    window.open(ddddd, "_self");
+                   }
+                     console.log(currentstatte);
                     break;
                 case "Chats":
-                    var Chats = '#/home?type=chats';
+                
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Chatsss = '#/home?type=Chats';
+                    window.open(Chatsss, "_self");
+                   }
+                   else{
+                    var Chats = '#/Dashboard?type=Chats';
                     window.open(Chats, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Chats", "Total Messages");
+                   }
                     break;
                 case "Requests":
-                    var Requests = '#/home?type=requests';
+                   
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Requests = '#/home?type=Requests';
                     window.open(Requests, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Requests", "Members are requesting to upload your photo");
+                   }
+                   else{
+                    var Requestsss = '#/Dashboard?type=Requests';
+                    window.open(Requestsss, "_self");
+                   }
                     break;
                 case "Express":
-                    var Express = '#/home?type=express';
+                   
+                   if(currentstatte.name==="dashboardnew")
+                   {
+                   var Express = '#/home?type=Express';
                     window.open(Express, "_self");
-                    $rootscope.$broadcast("Chatsreqexpress", "Express", "All Profiles");
+                   }
+                   else{
+                    var Expressdd = '#/Dashboard?type=Express';
+                    window.open(Expressdd, "_self");
+                   }
                     break;
             }
         };
@@ -2279,6 +2381,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             scope.$broadcast('showforgetpassword');
 
         };
+        
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
@@ -3636,7 +3739,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
             scope.SearchRate = 0;
             scope.Recommend = 0;
             scope.Comments = "";
-            scope.captcha="";
+            Recaptcha.reload();
         };
 
     }
@@ -3657,9 +3760,10 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             });
         };
 
-        scope.submit = function() {
+       scope.submit = function() {
 
-            if (scope.helpForm.$valid) {
+            if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
+                (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
 
                 scope.inputObj = {
                     profile: '210910352',
@@ -3685,10 +3789,12 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
                     scope.open();
                 });
+            } else {
+                alert('Please enter Catgory and Priority');
+
             }
 
         };
-
 
         scope.SendMail = function() {
             scope.SendMailObj = {
@@ -3721,7 +3827,7 @@ scope.txtmsg="";
 scope.ddlpriority=null;
 scope.txtphonecode="";
 scope.txtphnum="";
- scope.captcha="";
+  Recaptcha.reload();
     };
     }
 ]);
