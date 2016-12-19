@@ -1,6 +1,6 @@
 app.directive("angularMultiselect", ["$injector", 'authSvc',
-    'successstoriesdata', 'alert',
-    function($injector, authSvc, successstoriesdata, alerts) {
+    'successstoriesdata', 'alert', '$timeout',
+    function($injector, authSvc, successstoriesdata, alerts, timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         return {
@@ -9,21 +9,28 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
             scope: {
                 array: '=',
                 type: '=',
-                model: '='
+                model: '=',
+                castehideval: '@'
             },
 
             templateUrl: "templates/angualarMaterialmultiselect.html",
             link: function(scope, element, attrs) {
                 scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
                 scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
+                scope.Castehide = scope.castehideval === 'castehid' ? true : false;
                 scope.selectall = function() {
-                    if (scope.model.length === scope.Caste.length) {
-                        scope.model = [];
-                    } else if (scope.model.length === 0 || scope.model.length > 0) {
-                        _.each(scope.Caste, function(item) {
-                            scope.model.push(item.value);
-                        });
-                    }
+                    timeout(function() {
+                        scope.checkVal = !scope.checkVal;
+                        if (scope.model === undefined)
+                            scope.model = [];
+                        if (scope.model.length === parseInt(scope.Caste.length)) {
+                            scope.model = [];
+                        } else if (scope.model.length === 1) {
+                            _.each(scope.Caste, function(item) {
+                                scope.model.push(item.value);
+                            });
+                        }
+                    }, 50);
                 };
                 // scope.isChecked = function() {
                 //     return scope.model.length === scope.Caste.length;
