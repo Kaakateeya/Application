@@ -2694,9 +2694,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.slideshow = "";
         scope.mesagesend = "";
         //scope.selectedIndex = 2;
-       scope.filtervalues = function(arr, whereValue) {
+        scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
-          
+
             if (whereValue.indexOf(',') === -1) {
                 _.filter(arr, function(obj) {
                     if ((obj.value) == parseInt(whereValue)) {
@@ -2705,20 +2705,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
             } else {
                 var arrvals = whereValue.split(',');
-               // for (var i = 0; i < arrvals.length; i++) {
+                // for (var i = 0; i < arrvals.length; i++) {
 
 
-_.each(arrvals,function(item,index){
- _.filter(arr, function(obj) {
+                _.each(arrvals, function(item, index) {
+                    _.filter(arr, function(obj) {
                         if ((obj.value) == parseInt(arrvals[index])) {
                             storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
                         }
                     });
 
-});
+                });
 
-                   
-               // }
+
+                // }
             }
             return storeValue;
         };
@@ -2739,7 +2739,7 @@ _.each(arrvals,function(item,index){
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
 
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name',2500);
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
                         //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         return false;
                     } else {
@@ -2748,7 +2748,7 @@ _.each(arrvals,function(item,index){
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
                         //alerts.open('Mininum 3 charactes required For Name', 'warning');
-                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName',2500);
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
                         return false;
                     } else {
                         return true;
@@ -2758,18 +2758,18 @@ _.each(arrvals,function(item,index){
                 }
             } else {
                 //alerts.open('pls enter atleast one fileld', 'alert alert-danger', 'warning');
-                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld',2500);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
                 return false;
             }
 
         };
         scope.controlsbinding = function() {
-             scope.height = arrayConstants.height;
-              scope.educationcategory = arrayConstants.educationcategory;
+            scope.height = arrayConstants.height;
+            scope.educationcategory = arrayConstants.educationcategory;
             timeout(function() {
                 scope.arrayAge = scope.Age();
-                 scope.MaritalStatus = arrayConstants.MaritalStatus;
-                 scope.Religion = arrayConstants.Religion;
+                scope.MaritalStatus = arrayConstants.MaritalStatus;
+                scope.Religion = arrayConstants.Religion;
                 scope.Mothertongue = arrayConstants.Mothertongue;
                 scope.visastatus = arrayConstants.visastatus;
                 scope.stars = arrayConstants.stars;
@@ -2851,8 +2851,8 @@ _.each(arrvals,function(item,index){
             //scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
             // scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
             // scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
-           scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
-           
+            scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
+
         };
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
@@ -2922,7 +2922,7 @@ _.each(arrvals,function(item,index){
                 scope.religion = 1;
                 scope.HeightFrom = 1;
                 scope.Heightto = 38;
-               
+
             }
         };
         scope.clearSearchTerm = function() {
@@ -2939,7 +2939,7 @@ _.each(arrvals,function(item,index){
             scope.Heightto = 38;
             scope.maritalstatus = null;
             scope.educationcat = null;
-            scope.country =null;
+            scope.country = null;
             scope.mothertongue = null;
             scope.caste = null;
             scope.regdays = null;
@@ -2951,7 +2951,7 @@ _.each(arrvals,function(item,index){
             scope.monthsalcurrency = null;
             scope.kujadosham = null;
             scope.starlanguage = null;
-            scope.starsadvance =null;
+            scope.starsadvance = null;
             scope.profileid = "";
             scope.firstname = "";
             scope.lastname = "";
@@ -3030,7 +3030,7 @@ _.each(arrvals,function(item,index){
                                 scope.truepartnerrefine = true;
                                 //alerts.open('No Records Found,Please Change search Criteria', 'warning');
 
-                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                             }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -3056,8 +3056,8 @@ _.each(arrvals,function(item,index){
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                     // alerts.open('No Records Found,Please Change search Criteria', 'warning');
-                            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
+                            // alerts.open('No Records Found,Please Change search Criteria', 'warning');
+                            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                         }
                         scope.loadinging = true;
                     });
@@ -3089,7 +3089,7 @@ _.each(arrvals,function(item,index){
                                     scope.truepartnerrefine = true;
                                     //alerts.open('No Records Found,Please Change search Criteria', 'warning');
 
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria',2500);
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
                             } else {
                                 _.each(response.data, function(item) {
@@ -3416,6 +3416,7 @@ _.each(arrvals,function(item,index){
                     if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                         searches.partnerdetails(scope.custid, "", "").then(function(response) {
                             console.log(response.data);
+                            scope.resetfunctionality();
                             scope.partnerbindings(response);
                         });
                     } else {
@@ -3446,7 +3447,7 @@ _.each(arrvals,function(item,index){
         scope.successfaileralert = function(msg, typewarning) {
             alerts.open(msg, typewarning);
 
-            
+
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -3481,7 +3482,7 @@ _.each(arrvals,function(item,index){
         };
 
 
-         scope.checkCasteParents = function() {
+        scope.checkCasteParents = function() {
 
             if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
 
