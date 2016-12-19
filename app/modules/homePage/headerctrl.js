@@ -1,5 +1,5 @@
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window','$state',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window,$state) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window', '$state',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -137,6 +137,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 
         };
         scope.searchpage = function(typeurl) {
+
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
@@ -158,105 +159,88 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
 
         scope.homepagelinks = function(typeurl) {
-              var currentstatte= $state.current;
+            var currentstatte = $state.current;
             switch (typeurl) {
                 case "BookMarked":
-                 
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var realpath = '#/home?type=MB';
-                    window.open(realpath, "_self");
-                   }
-                   else{
-                    var realpathb = '#/Dashboard?type=MB';
-                    window.open(realpathb, "_self");
-                   }
+                    if (currentstatte.name === "dashboardnew") {
+                        var realpath = '#/home?type=MB';
+                        window.open(realpath, "_self");
+                    } else {
+                        var realpathb = '#/Dashboard?type=MB';
+                        window.open(realpathb, "_self");
+                    }
                     break;
                 case "BookMarkedme":
-                   
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                   var BookMarkedme = '#/home?type=WB';
-                    window.open(BookMarkedme, "_self");
-                   }
-                   else{
-                    var BookMarkedmes = '#/Dashboard?type=WB';
-                    window.open(BookMarkedmes, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var BookMarkedme = '#/home?type=WB';
+                        window.open(BookMarkedme, "_self");
+                    } else {
+                        var BookMarkedmes = '#/Dashboard?type=WB';
+                        window.open(BookMarkedmes, "_self");
+                    }
                     break;
                 case "Ignored":
-                    
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                   var Ignored = '#/home?type=I';
-                    window.open(Ignored, "_self");
-                   }
-                   else{
-                    var Ignoreds = '#/Dashboard?type=I';
-                    window.open(Ignoreds, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Ignored = '#/home?type=I';
+                        window.open(Ignored, "_self");
+                    } else {
+                        var Ignoreds = '#/Dashboard?type=I';
+                        window.open(Ignoreds, "_self");
+                    }
                     break;
                 case "myprofile":
-                    
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                    var myprofile = '#/home?type=WV';
-                    window.open(myprofile, "_self");
-                   }
-                   else{
-                    var myprofiledd = '#/Dashboard?type=WV';
-                    window.open(myprofiledd, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var myprofile = '#/home?type=WV';
+                        window.open(myprofile, "_self");
+                    } else {
+                        var myprofiledd = '#/Dashboard?type=WV';
+                        window.open(myprofiledd, "_self");
+                    }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-                  
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var myhome = '#/home?type=C';
-                    window.open(myhome, "_self");
-                   }
-                   else{
-                    var ddddd = '#/Dashboard?type=C';
-                    window.open(ddddd, "_self");
-                   }
-                     console.log(currentstatte);
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var myhome = '#/home?type=C';
+                        window.open(myhome, "_self");
+                    } else {
+                        var ddddd = '#/Dashboard?type=C';
+                        window.open(ddddd, "_self");
+                    }
+                    console.log(currentstatte);
                     break;
                 case "Chats":
-                
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Chatsss = '#/home?type=Chats';
-                    window.open(Chatsss, "_self");
-                   }
-                   else{
-                    var Chats = '#/Dashboard?type=Chats';
-                    window.open(Chats, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Chatsss = '#/home?type=Chats';
+                        window.open(Chatsss, "_self");
+                    } else {
+                        var Chats = '#/Dashboard?type=Chats';
+                        window.open(Chats, "_self");
+                    }
                     break;
                 case "Requests":
-                   
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Requests = '#/home?type=Requests';
-                    window.open(Requests, "_self");
-                   }
-                   else{
-                    var Requestsss = '#/Dashboard?type=Requests';
-                    window.open(Requestsss, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Requests = '#/home?type=Requests';
+                        window.open(Requests, "_self");
+                    } else {
+                        var Requestsss = '#/Dashboard?type=Requests';
+                        window.open(Requestsss, "_self");
+                    }
                     break;
                 case "Express":
-                   
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Express = '#/home?type=Express';
-                    window.open(Express, "_self");
-                   }
-                   else{
-                    var Expressdd = '#/Dashboard?type=Express';
-                    window.open(Expressdd, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Express = '#/home?type=Express';
+                        window.open(Express, "_self");
+                    } else {
+                        var Expressdd = '#/Dashboard?type=Express';
+                        window.open(Expressdd, "_self");
+                    }
                     break;
             }
         };
@@ -264,6 +248,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             scope.$broadcast('showforgetpassword');
 
         };
-        
+
     }
 ]);

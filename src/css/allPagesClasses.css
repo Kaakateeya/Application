@@ -19123,7 +19123,7 @@ td.pack_heading1_color {
     color: #4f4f4f;
     font-weight: 600;
     padding: 14px 0;
-    background: url(../images/icon_plus.png) center right no-repeat;
+    /*background: url(../images/icon_plus.png) center right no-repeat;*/
     cursor: pointer
 }
 
@@ -19143,7 +19143,7 @@ td.pack_heading1_color {
 }
 
 .faqs_list_main_item.active h5 {
-    background-image: url(../images/icon_minus.png);
+    /*background-image: url(../images/icon_minus.png);*/
     color: #d42e02
 }
 
@@ -19382,7 +19382,7 @@ td.pack_heading1_color {
 
 .saved_search_list_ui a {
     font-weight: 500;
-    background: url(../images/search_icon2.png) 90% center no-repeat;
+    /*background: url(../images/search_icon2.png) 90% center no-repeat;*/
     background-size: 14px 14px;
     display: inline-block;
     float: left;
@@ -19395,12 +19395,12 @@ td.pack_heading1_color {
 }
 
 .saved_search_list_ui a+a {
-    background-image: url(../images/editicon-hover.png);
+    /*background-image: url(../images/editicon-hover.png);*/
     background-size: 18px 18px
 }
 
 .saved_search_list_ui a+a+a {
-    background-image: url(../images/deleteicon_hover.png)
+    /*background-image: url(../images/deleteicon_hover.png)*/
 }
 
 input[type=text],
@@ -19820,11 +19820,11 @@ span.duration_of_pack:after {
 }
 
 .edit_page_edit_button {
-    background: url(../images/editicon-hover.png) center right no-repeat
+    /*background: url(../images/editicon-hover.png) center right no-repeat*/
 }
 
 .edit_page_add_button {
-    background: url(../images/icon_plus.png) center right no-repeat;
+    /*background: url(../images/icon_plus.png) center right no-repeat;*/
     line-height: 24px;
     padding: 0 30px 0 0!important
 }
@@ -19838,7 +19838,7 @@ span.duration_of_pack:after {
 }
 
 .edit_page_del_button {
-    background: url(../images/delete2_hover.png) center right no-repeat
+    /*background: url(../images/delete2_hover.png) center right no-repeat*/
 }
 
 .edit_page_details_item {
@@ -20454,7 +20454,7 @@ span.duration_of_pack:after {
 
 .personal_inform_head .edit_prsnl {
     float: right;
-    background: url(../images/icon_edit.png) center center no-repeat;
+    /*background: url(../images/icon_edit.png) center center no-repeat;*/
     width: 30px;
     height: 30px;
     display: block
@@ -21608,7 +21608,7 @@ h5.myorders_list_main_item_heading {
     color: #000;
     font-weight: 700;
     padding: 14px 20px;
-    background: url(../images/icon_plus.png) 99% center no-repeat;
+    /*background: url(../images/icon_plus.png) 99% center no-repeat;*/
     cursor: pointer
 }
 
@@ -21625,7 +21625,7 @@ h5.myorders_list_main_item_heading span {
 }
 
 .myorders_list_main_item.active h5 {
-    background-image: url(../images/icon_minus.png);
+    /*background-image: url(../images/icon_minus.png);*/
     color: #d42e02
 }
 

@@ -112,8 +112,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                             }
                                         } else {
-                                            alerts.open('please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
-                                        }
+                                            scope.$emit('successfailer', "upgrade", "warning");
+                                    }
                                         break;
                                     case "I":
                                         if (response.data == 1) {

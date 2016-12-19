@@ -1,6 +1,7 @@
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector', '$uibModal','successstoriesdata','$timeout',
-    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal,successstoriesdata,timeout) {
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog',
+    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
+        $mdDialog) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
@@ -18,22 +19,20 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 scope.aboutmyself = {};
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    if (testArr[0].TableName === "About") {
+                    if (testArr[0].TableName!==undefined && testArr[0].TableName === "About") {
                         scope.aboutmyself = testArr;
-
-                    } else if (testArr[0].TableName === "Primary") {
+                    } else if (testArr[0].TableName!==undefined && testArr[0].TableName === "Primary") {
                         scope.personalinfo = testArr;
-                         scope.divclassmask = function(logphotostatus) {
-                      
-                      var photo=scope.slides[0].ApplicationPhotoPath;
-                     var photocount= scope.personalinfo[0].PhotoName_Cust;
-                      logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
-                    } else {
-                        return "";
-                    }
-              };
+                        scope.divclassmask = function(logphotostatus) {
+                            var photo = scope.slides[0].ApplicationPhotoPath;
+                            var photocount = scope.personalinfo[0].PhotoName_Cust;
+                            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                            } else {
+                                return "";
+                            }
+                        };
 
                     } else {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -79,8 +78,8 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.slides.push(item);
                 });
             });
-            };
-       
+        };
+
         scope.servicehttp = function(type, object) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -89,40 +88,31 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         switch (type) {
                             case "B":
                                 if (response.data == 1) {
-                                    alerts.open("bookmarked suceessfully", "success");
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                                 } else {
-                                    alerts.open("bookmarked failed", "warning");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
                                 }
                                 break;
                             case "E":
                                 if (response.data == 1) {
-                                    alerts.open("EXpressInterest done SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                                 } else {
-                                    alerts.open("EXpressInterest Fail", "warning");
-
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
                                 }
                                 break;
                             case "I":
                                 if (response.data == 1) {
-                                    alerts.open("Ignore SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                                 } else {
-                                    alerts.open("Ignore profile Fail", "warning");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
                                 }
                                 break;
                             case "M":
-                            case "TH":
-                            case "RP":
                                 if (response.data == 1) {
-                                    alerts.open("Message sent SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
                                 } else {
-                                    alerts.open("Message sending Fail", "warning");
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
                                 }
                                 break;
                         }
@@ -157,7 +147,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.sendmessegescommon = function(type, tocustid) {
             scope.modalpopupheadertext = "Enter your message here";
             scope.messagecustid = tocustid;
-            alerts.dynamicpopup(url, scope, uibModal);
+            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
 
         };
 
@@ -166,9 +156,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
                 console.log(response);
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Proceed successfully", 2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "sorry Proceed Fail", 2500);
                 }
                 alerts.dynamicpopupclose();
             });

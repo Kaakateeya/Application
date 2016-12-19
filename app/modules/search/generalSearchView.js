@@ -28,10 +28,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.casteshow = true;
         scope.slideshow = "";
         scope.mesagesend = "";
-        //scope.selectedIndex = 2;
         scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
-
             if (whereValue.indexOf(',') === -1) {
                 _.filter(arr, function(obj) {
                     if ((obj.value) == parseInt(whereValue)) {
@@ -40,31 +38,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
             } else {
                 var arrvals = whereValue.split(',');
-                // for (var i = 0; i < arrvals.length; i++) {
-
-
                 _.each(arrvals, function(item, index) {
                     _.filter(arr, function(obj) {
                         if ((obj.value) == parseInt(arrvals[index])) {
                             storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
                         }
                     });
-
                 });
-
-
-                // }
             }
             return storeValue;
         };
-
-
-
         scope.textlabels = function(fromheight, toheight, caste, education) {
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
             scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
-            // alert(scope.Castetxt);
         };
         scope.checkLength = function() {
             var textboxprofileid = document.getElementById("txtProfileid");
@@ -73,16 +60,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if ((textboxprofileid.value !== "" && textboxprofileid.value !== null) || (textbox.value !== "" && textbox.value !== null) || (textboxlastname.value !== "" && textboxlastname.value !== null)) {
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
-
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
-                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         return false;
                     } else {
                         return true;
                     }
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
-                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
                         return false;
                     } else {
@@ -92,7 +76,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                //alerts.open('pls enter atleast one fileld', 'alert alert-danger', 'warning');
                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
                 return false;
             }
@@ -101,13 +84,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.controlsbinding = function() {
             scope.height = arrayConstants.height;
             scope.educationcategory = arrayConstants.educationcategory;
+            scope.arrayAge = scope.Age();
+            scope.MaritalStatus = arrayConstants.MaritalStatus;
+            scope.Religion = arrayConstants.Religion;
+            scope.Mothertongue = arrayConstants.Mothertongue;
+            scope.visastatus = arrayConstants.visastatus;
+            scope.stars = arrayConstants.stars;
             timeout(function() {
-                scope.arrayAge = scope.Age();
-                scope.MaritalStatus = arrayConstants.MaritalStatus;
-                scope.Religion = arrayConstants.Religion;
-                scope.Mothertongue = arrayConstants.Mothertongue;
-                scope.visastatus = arrayConstants.visastatus;
-                scope.stars = arrayConstants.stars;
                 scope.Country = getArray.GArray('Country');
                 scope.Professiongroup = getArray.GArray('ProfGroup');
                 scope.Currency = getArray.GArray('currency');
@@ -130,23 +113,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.test.push({ label: i + ' years', title: i + ' years', value: i });
             }
             return scope.test;
-        };
-        scope.changeBindsearhes = function(type, parentval, parentval2) {
-            switch (type) {
-                case 'Country':
-                    scope.State = commonFactory.StateBind(parentval);
-                    break;
-                case 'EducationCatgory':
-                    scope.Educationgroup = commonFactory.educationGroupBind(parentval);
-                    break;
-                case 'caste':
-                    scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
-                    break;
-                case 'star':
-                    scope.stars = commonFactory.starBind(parentval);
-                    break;
-            }
         };
 
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
@@ -177,37 +143,26 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.country = response.data.Country.split(',');
             scope.religion = response.data.Religion;
             scope.mothertongue = response.data.MotherTongue.split(',');
-            // scope.Caste = commonFactory.casteDepedency(response.data.Religion, response.data.MotherTongue);
             scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
-            scope.State = commonFactory.StateBind(response.data.Country);
+            scope.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
             scope.stateadvance = response.data.State !== null ? response.data.State.split(',') : "0";
-            //scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
-            // scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
-            // scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
 
         };
         scope.generalpageload = function() {
-            scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
 
+            scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                 });
                 scope.savedsearchselectmethod(scope.custid, "", 1);
-
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
                 scope.truepartner = true;
                 scope.truepartnerrefine = true;
-                // scope.gender = (scope.object.intGender) === 2 ? 2 : 1;
-                // scope.AgeFrom = scope.object.FromAge;
-                // scope.Ageto = scope.object.ToAge;
-                // scope.country = scope.object.Country;
-                // scope.religion = scope.object.intReligionID;
-                // scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
                 SearchRequest = {
                     intCusID: null,
                     strCust_id: null,
@@ -363,8 +318,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                //alerts.open('No Records Found,Please Change search Criteria', 'warning');
-
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                             }
                         } else {
@@ -391,7 +344,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            // alerts.open('No Records Found,Please Change search Criteria', 'warning');
                             scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                         }
                         scope.loadinging = true;
@@ -422,8 +374,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    //alerts.open('No Records Found,Please Change search Criteria', 'warning');
-
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
                             } else {
@@ -483,7 +433,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             searchPageName: type === "advanced" ? "Advancesearch" : "Generalsearch",
                             searchPageID: type === "advanced" ? "3" : "2",
                             SearchResult_ID: null
-                                //
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
@@ -780,9 +729,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.redirectToviewfull(custid, logid);
         });
         scope.successfaileralert = function(msg, typewarning) {
-            alerts.open(msg, typewarning);
-
-
+            if (typewarning === "success") {
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 2500);
+            } else {
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 2500);
+            }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -798,7 +749,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-
             if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
@@ -815,10 +765,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 event.preventDefault();
             }
         };
-
-
         scope.checkCasteParents = function() {
-
             if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
 
             } else {

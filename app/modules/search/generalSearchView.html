@@ -175,7 +175,7 @@
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix margintopclass">
                                                 <md-select ng-model="religion" placeholder="Religion" style="width: 252px;" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-class="applycolors(religion)">
-                                                    <md-option ng-value="religion.value" ng-repeat="religion in Religion">{{religion.label}}</md-option>
+                                                    <md-option ng-value="religions.value" ng-repeat="religions in Religion">{{religions.label}}</md-option>
                                                 </md-select>
                                             </div>
                                         </div>
@@ -660,19 +660,17 @@
          <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" class="col-lg-10"></textarea>
      </div>
  </div>
-    <div class="modal-footer">
+      <div class="modal-footer">
      <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
      <button type="button" class="btn btn-primary" ng-click="sendmessages(form)">Send Message</button>
       </div>
   </div>
  </script>
 
- 
-    <script type="text/ng-template" id="login.html">
+  <script type="text/ng-template" id="login.html">
      <form name="myFormlogin">
         <div class="modal-header">
-            <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
-                                </h4>
+            <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a></h4>
                         </div>
                         <div class="modal-body">
                             <p>To login into your account, please provide your username and password</p>
@@ -681,12 +679,12 @@
                                 <md-input-container class="md-block" flex-gt-sm>
                                     <label>UserName</label>
                                     <input type="text" id="txtusername" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.username" required style="border: 1px solid #a59898 !important;
-               border-radius: 3px !important;">
+                                border-radius: 3px !important;">
                                 </md-input-container>
                                 <md-input-container class="md-block" flex-gt-sm>
                                     <label>Password</label>
                                     <input type="password" id="txtPassword" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
-               border-radius: 3px !important;">
+       border-radius: 3px !important;">
                                 </md-input-container>
                             </div>
                             <p class="col-lg-offset-1">To create your kaakateeya matrimonial account Click <a href="#/registration" style="color: maroon;">Register Now</a></p>

@@ -1,10 +1,10 @@
 <div id="updateContents" ng-init="pageload()">
     <div class="profile_full_main">
         <div class="profile_full_header clearfix">
-            <div class="profile_full_header_pic" >
-             <div ng-class="divclassmask(LoginPhotoIsActive)">
-                <img name="iProfilePic"  id="iProfilePic" ng-click="photoalbum()" ng-src="{{slides[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
-              </div>
+            <div class="profile_full_header_pic">
+                <div ng-class="divclassmask(LoginPhotoIsActive)">
+                    <img name="iProfilePic" id="iProfilePic" ng-click="photoalbum()" ng-src="{{slides[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
+                </div>
             </div>
             <div class="profile_full_header_in">
                 <h6>
@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-
+    <alert-directive></alert-directive>
     <script type="text/ng-template" id="myModalContent.html">
 
         <div class="modal-content">
@@ -130,7 +130,7 @@
                             <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
                         </ol>
                         <div class="carousel-inner">
-                            <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" src="{{slide.FullPhotoPath}}"></div>
+                            <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
                         </div>
                         <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left"></span>

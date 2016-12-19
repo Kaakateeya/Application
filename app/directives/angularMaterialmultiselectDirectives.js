@@ -39,12 +39,10 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
                 scope.directivechangeevent = function(model) {
-
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
 
                 scope.applycolorsdirecive = function(value) {
-
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
                         colors = "selectborderclasscolor";
@@ -53,25 +51,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     }
                     return colors;
                 };
-                // scope.alertopen = function(model) {
 
-                //     if (scope.Castehide) {
-                //         alert(model);
-                //         switch (scope.type) {
-
-                //             case "Country":
-                //                 alerts.open("please select Country", "warning");
-                //                 break;
-                //             case "EducationCatgory":
-                //                 alerts.open("please select Educationgroup", "warning");
-                //                 break;
-                //             case "caste":
-
-                //                 alerts.open("please select Mothertongue And Religion", "warning");
-                //                 break;
-                //         }
-                //     }
-                // };
             }
         };
     }

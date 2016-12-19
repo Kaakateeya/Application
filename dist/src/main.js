@@ -394,12 +394,10 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
                 scope.directivechangeevent = function(model) {
-
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
 
                 scope.applycolorsdirecive = function(value) {
-
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
                         colors = "selectborderclasscolor";
@@ -408,25 +406,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     }
                     return colors;
                 };
-                // scope.alertopen = function(model) {
 
-                //     if (scope.Castehide) {
-                //         alert(model);
-                //         switch (scope.type) {
-
-                //             case "Country":
-                //                 alerts.open("please select Country", "warning");
-                //                 break;
-                //             case "EducationCatgory":
-                //                 alerts.open("please select Educationgroup", "warning");
-                //                 break;
-                //             case "caste":
-
-                //                 alerts.open("please select Mothertongue And Religion", "warning");
-                //                 break;
-                //         }
-                //     }
-                // };
             }
         };
     }
@@ -1123,8 +1103,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                                 scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                             }
                                         } else {
-                                            alerts.open('please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
-                                        }
+                                            scope.$emit('successfailer', "upgrade", "warning");
+                                    }
                                         break;
                                     case "I":
                                         if (response.data == 1) {
@@ -1468,9 +1448,9 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope','$timeout',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, 
-    window, $location, successstoriesdata, $rootscope,$timeout) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts,
+        window, $location, successstoriesdata, $rootscope, $timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1487,22 +1467,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
-      
-       
+
+
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
-                       
+
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.bindcounts(response.data.DashBoardCounts);
-                         
+
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-                          
+
                             scope.photopersonal = scope.PersonalInfo.Photo;
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -1552,8 +1532,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        
-       
+
+
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -1564,7 +1544,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-           
+
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
@@ -1625,7 +1605,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     pageto: scope.endindexexpress
                 };
                 customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-                
+
                     if (parseInt(frompage) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data, function(item) {
@@ -1689,10 +1669,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
         });
         scope.zerorecorsalert = function() {
-            alerts.open('Sorry No Records Found', 'warning');
+            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Sorry No Records Found', 2500);
         };
         scope.successfaileralert = function(msg, typewarning) {
-            alerts.open(msg, typewarning);
+            if (typewarning === "success") {
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg,3000);
+            } else {
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg,3000);
+            }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -1708,17 +1692,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
-
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
-             
                 if (response.data !== null && response.data !== undefined) {
-
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-                        alerts.open(mobilenumbers, 'success');
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', mobilenumbers, 3000);
+
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
-                        alerts.open(mobilenumber, 'warning');
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', mobilenumber, 3000);
                     }
                 }
 
@@ -1741,7 +1723,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.modalpopupheadertext = "Match Followup Of " + name + "(" + profileid + ")";
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     customerDashboardServices.Tickethistory(TicketID, 'H').then(function(response) {
-                       
+
                         scope.Tickethistoryarray = [];
                         _.each(response.data, function(item) {
                             scope.Tickethistoryarray.push(item);
@@ -1902,7 +1884,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
             scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
-               
+
                 _.each(response.data, function(item) {
                     scope.arraytickethistory.push(item);
                 });
@@ -1913,22 +1895,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.photoPasswordactionss = function(type, tocustid) {
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
-             
+
                 if (response.data === 1) {
                     if (type === 1) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
-                       
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully', 2500);
+
                     } else {
-                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
-                       
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully', 2500);
+
                     }
                 } else {
                     if (type === 1) {
-                      
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
+
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
-                       
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
+
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
 
                 }
@@ -1937,21 +1919,21 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
                 if (response.data === 1) {
-                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                    
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
+
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
-               
+
                 if (response.data === 1) {
-                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                      scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -1964,7 +1946,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
 
-        
+
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
         };
@@ -1982,8 +1964,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
-                //scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>',3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade',3000);
             }
         };
 
@@ -1991,101 +1972,100 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
-        scope.pageloadbind=function(response)
-        {
-                        scope.bindcounts(response.data.DashBoardCounts);
-                          
-                            scope.bindallcounts = response.data.DashBoardCounts;
-                            scope.PersonalInfo = (response.data.PersonalInfo);
-                           
-                            scope.photopersonal = scope.PersonalInfo.Photo;
-                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-      
+        scope.pageloadbind = function(response) {
+            scope.bindcounts(response.data.DashBoardCounts);
+
+            scope.bindallcounts = response.data.DashBoardCounts;
+            scope.PersonalInfo = (response.data.PersonalInfo);
+
+            scope.photopersonal = scope.PersonalInfo.Photo;
+            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
         };
-         scope.init = function() {
-            
-           scope.PartnerProfilesnew = [];
-             switch (scope.Typeofdatabind) {
+        scope.init = function() {
+
+            scope.PartnerProfilesnew = [];
+            switch (scope.Typeofdatabind) {
                 case "MB":
-                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
-                     });
-                  break;
+                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                    });
+                    break;
                 case "WB":
-                 customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
-                     });
+                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                    });
                     break;
                 case "I":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
-                     });
+                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                    });
                     break;
                 case "WV":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
                         scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
-                     });
+                    });
                     break;
-                      case "RV":
-                       customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                case "RV":
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
                         scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1);
-                     });
-                  break;
+                    });
+                    break;
                 case "Chats":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                     });
+                        scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    });
                     break;
                 case "Requests":
-                customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                            scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                     });
+                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    });
                     break;
                 case "Express":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                            scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                     });
+                        scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    });
                     break;
-               default:
-                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
-                break;
+                default:
+                    scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+                    break;
             }
         };
-      
+
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
@@ -2115,8 +2095,8 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         }
     };
 }]);
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window','$state',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window,$state) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window', '$state',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -2254,6 +2234,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 
         };
         scope.searchpage = function(typeurl) {
+
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
@@ -2275,105 +2256,88 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
 
         scope.homepagelinks = function(typeurl) {
-              var currentstatte= $state.current;
+            var currentstatte = $state.current;
             switch (typeurl) {
                 case "BookMarked":
-                 
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var realpath = '#/home?type=MB';
-                    window.open(realpath, "_self");
-                   }
-                   else{
-                    var realpathb = '#/Dashboard?type=MB';
-                    window.open(realpathb, "_self");
-                   }
+                    if (currentstatte.name === "dashboardnew") {
+                        var realpath = '#/home?type=MB';
+                        window.open(realpath, "_self");
+                    } else {
+                        var realpathb = '#/Dashboard?type=MB';
+                        window.open(realpathb, "_self");
+                    }
                     break;
                 case "BookMarkedme":
-                   
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                   var BookMarkedme = '#/home?type=WB';
-                    window.open(BookMarkedme, "_self");
-                   }
-                   else{
-                    var BookMarkedmes = '#/Dashboard?type=WB';
-                    window.open(BookMarkedmes, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var BookMarkedme = '#/home?type=WB';
+                        window.open(BookMarkedme, "_self");
+                    } else {
+                        var BookMarkedmes = '#/Dashboard?type=WB';
+                        window.open(BookMarkedmes, "_self");
+                    }
                     break;
                 case "Ignored":
-                    
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                   var Ignored = '#/home?type=I';
-                    window.open(Ignored, "_self");
-                   }
-                   else{
-                    var Ignoreds = '#/Dashboard?type=I';
-                    window.open(Ignoreds, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Ignored = '#/home?type=I';
+                        window.open(Ignored, "_self");
+                    } else {
+                        var Ignoreds = '#/Dashboard?type=I';
+                        window.open(Ignoreds, "_self");
+                    }
                     break;
                 case "myprofile":
-                    
-                     if(currentstatte.name==="dashboardnew")
-                    {
-                    var myprofile = '#/home?type=WV';
-                    window.open(myprofile, "_self");
-                   }
-                   else{
-                    var myprofiledd = '#/Dashboard?type=WV';
-                    window.open(myprofiledd, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var myprofile = '#/home?type=WV';
+                        window.open(myprofile, "_self");
+                    } else {
+                        var myprofiledd = '#/Dashboard?type=WV';
+                        window.open(myprofiledd, "_self");
+                    }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-                  
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var myhome = '#/home?type=C';
-                    window.open(myhome, "_self");
-                   }
-                   else{
-                    var ddddd = '#/Dashboard?type=C';
-                    window.open(ddddd, "_self");
-                   }
-                     console.log(currentstatte);
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var myhome = '#/home?type=C';
+                        window.open(myhome, "_self");
+                    } else {
+                        var ddddd = '#/Dashboard?type=C';
+                        window.open(ddddd, "_self");
+                    }
+                    console.log(currentstatte);
                     break;
                 case "Chats":
-                
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Chatsss = '#/home?type=Chats';
-                    window.open(Chatsss, "_self");
-                   }
-                   else{
-                    var Chats = '#/Dashboard?type=Chats';
-                    window.open(Chats, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Chatsss = '#/home?type=Chats';
+                        window.open(Chatsss, "_self");
+                    } else {
+                        var Chats = '#/Dashboard?type=Chats';
+                        window.open(Chats, "_self");
+                    }
                     break;
                 case "Requests":
-                   
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Requests = '#/home?type=Requests';
-                    window.open(Requests, "_self");
-                   }
-                   else{
-                    var Requestsss = '#/Dashboard?type=Requests';
-                    window.open(Requestsss, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Requests = '#/home?type=Requests';
+                        window.open(Requests, "_self");
+                    } else {
+                        var Requestsss = '#/Dashboard?type=Requests';
+                        window.open(Requestsss, "_self");
+                    }
                     break;
                 case "Express":
-                   
-                   if(currentstatte.name==="dashboardnew")
-                   {
-                   var Express = '#/home?type=Express';
-                    window.open(Express, "_self");
-                   }
-                   else{
-                    var Expressdd = '#/Dashboard?type=Express';
-                    window.open(Expressdd, "_self");
-                   }
+
+                    if (currentstatte.name === "dashboardnew") {
+                        var Express = '#/home?type=Express';
+                        window.open(Express, "_self");
+                    } else {
+                        var Expressdd = '#/Dashboard?type=Express';
+                        window.open(Expressdd, "_self");
+                    }
                     break;
             }
         };
@@ -2381,7 +2345,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             scope.$broadcast('showforgetpassword');
 
         };
-        
+
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
@@ -2660,9 +2624,6 @@ app.controller("registration", function () {
 app.controller("registrationReg", function () {
 
 });
-app.controller('advancesearchCtrl', ['$scope', function (scope) {
-    scope.data = [];
-}]);
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
     '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory',
@@ -2693,10 +2654,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.casteshow = true;
         scope.slideshow = "";
         scope.mesagesend = "";
-        //scope.selectedIndex = 2;
         scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
-
             if (whereValue.indexOf(',') === -1) {
                 _.filter(arr, function(obj) {
                     if ((obj.value) == parseInt(whereValue)) {
@@ -2705,31 +2664,20 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
             } else {
                 var arrvals = whereValue.split(',');
-                // for (var i = 0; i < arrvals.length; i++) {
-
-
                 _.each(arrvals, function(item, index) {
                     _.filter(arr, function(obj) {
                         if ((obj.value) == parseInt(arrvals[index])) {
                             storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
                         }
                     });
-
                 });
-
-
-                // }
             }
             return storeValue;
         };
-
-
-
         scope.textlabels = function(fromheight, toheight, caste, education) {
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
             scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
-            // alert(scope.Castetxt);
         };
         scope.checkLength = function() {
             var textboxprofileid = document.getElementById("txtProfileid");
@@ -2738,16 +2686,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if ((textboxprofileid.value !== "" && textboxprofileid.value !== null) || (textbox.value !== "" && textbox.value !== null) || (textboxlastname.value !== "" && textboxlastname.value !== null)) {
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
-
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
-                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         return false;
                     } else {
                         return true;
                     }
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
-                        //alerts.open('Mininum 3 charactes required For Name', 'warning');
                         scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
                         return false;
                     } else {
@@ -2757,7 +2702,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                //alerts.open('pls enter atleast one fileld', 'alert alert-danger', 'warning');
                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
                 return false;
             }
@@ -2766,13 +2710,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.controlsbinding = function() {
             scope.height = arrayConstants.height;
             scope.educationcategory = arrayConstants.educationcategory;
+            scope.arrayAge = scope.Age();
+            scope.MaritalStatus = arrayConstants.MaritalStatus;
+            scope.Religion = arrayConstants.Religion;
+            scope.Mothertongue = arrayConstants.Mothertongue;
+            scope.visastatus = arrayConstants.visastatus;
+            scope.stars = arrayConstants.stars;
             timeout(function() {
-                scope.arrayAge = scope.Age();
-                scope.MaritalStatus = arrayConstants.MaritalStatus;
-                scope.Religion = arrayConstants.Religion;
-                scope.Mothertongue = arrayConstants.Mothertongue;
-                scope.visastatus = arrayConstants.visastatus;
-                scope.stars = arrayConstants.stars;
                 scope.Country = getArray.GArray('Country');
                 scope.Professiongroup = getArray.GArray('ProfGroup');
                 scope.Currency = getArray.GArray('currency');
@@ -2795,23 +2739,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.test.push({ label: i + ' years', title: i + ' years', value: i });
             }
             return scope.test;
-        };
-        scope.changeBindsearhes = function(type, parentval, parentval2) {
-            switch (type) {
-                case 'Country':
-                    scope.State = commonFactory.StateBind(parentval);
-                    break;
-                case 'EducationCatgory':
-                    scope.Educationgroup = commonFactory.educationGroupBind(parentval);
-                    break;
-                case 'caste':
-                    scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(parentval, (parentval2 !== undefined && parentval2 !== null) ? (parentval2).toString() : 0);
-                    break;
-                case 'star':
-                    scope.stars = commonFactory.starBind(parentval);
-                    break;
-            }
         };
 
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
@@ -2842,37 +2769,26 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.country = response.data.Country.split(',');
             scope.religion = response.data.Religion;
             scope.mothertongue = response.data.MotherTongue.split(',');
-            // scope.Caste = commonFactory.casteDepedency(response.data.Religion, response.data.MotherTongue);
             scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
-            scope.State = commonFactory.StateBind(response.data.Country);
+            scope.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
             scope.stateadvance = response.data.State !== null ? response.data.State.split(',') : "0";
-            //scope.Educationgroup = commonFactory.educationGroupBind(response.data.Educationcategory);
-            // scope.Educationadvance = response.data.Education !== null ? response.data.Education.split(',') : "0";
-            // scope.starsadvance = response.data.Stars !== null ? response.data.Stars.split(',') : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
 
         };
         scope.generalpageload = function() {
-            scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
 
+            scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                 });
                 scope.savedsearchselectmethod(scope.custid, "", 1);
-
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
                 scope.truepartner = true;
                 scope.truepartnerrefine = true;
-                // scope.gender = (scope.object.intGender) === 2 ? 2 : 1;
-                // scope.AgeFrom = scope.object.FromAge;
-                // scope.Ageto = scope.object.ToAge;
-                // scope.country = scope.object.Country;
-                // scope.religion = scope.object.intReligionID;
-                // scope.caste = scope.object.Caste !== null ? scope.object.Caste : "0";
                 SearchRequest = {
                     intCusID: null,
                     strCust_id: null,
@@ -3028,8 +2944,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                //alerts.open('No Records Found,Please Change search Criteria', 'warning');
-
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                             }
                         } else {
@@ -3056,7 +2970,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            // alerts.open('No Records Found,Please Change search Criteria', 'warning');
                             scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                         }
                         scope.loadinging = true;
@@ -3087,8 +3000,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    //alerts.open('No Records Found,Please Change search Criteria', 'warning');
-
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
                             } else {
@@ -3148,7 +3059,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             searchPageName: type === "advanced" ? "Advancesearch" : "Generalsearch",
                             searchPageID: type === "advanced" ? "3" : "2",
                             SearchResult_ID: null
-                                //
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
@@ -3445,9 +3355,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.redirectToviewfull(custid, logid);
         });
         scope.successfaileralert = function(msg, typewarning) {
-            alerts.open(msg, typewarning);
-
-
+            if (typewarning === "success") {
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 2500);
+            } else {
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 2500);
+            }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -3463,7 +3375,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         });
         scope.sendmessages = function(form) {
-
             if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
@@ -3480,10 +3391,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 event.preventDefault();
             }
         };
-
-
         scope.checkCasteParents = function() {
-
             if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
 
             } else {
@@ -3492,12 +3400,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
     }
 ]);
-app.controller('profileidsrch',['$scope',function(scope){
-    scope.data=[];
-}]);
-app.controller('savedsearchCtrl', ['$scope', function(scope) {
-    scope.data = [];
-}]);
 app.controller('aboutus', ['$scope', function (scope) {
 }]);
  app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
@@ -4437,8 +4339,9 @@ app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function
     });
 }]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector', '$uibModal','successstoriesdata','$timeout',
-    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal,successstoriesdata,timeout) {
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog',
+    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
+        $mdDialog) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
@@ -4456,22 +4359,20 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 scope.aboutmyself = {};
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    if (testArr[0].TableName === "About") {
+                    if (testArr[0].TableName!==undefined && testArr[0].TableName === "About") {
                         scope.aboutmyself = testArr;
-
-                    } else if (testArr[0].TableName === "Primary") {
+                    } else if (testArr[0].TableName!==undefined && testArr[0].TableName === "Primary") {
                         scope.personalinfo = testArr;
-                         scope.divclassmask = function(logphotostatus) {
-                      
-                      var photo=scope.slides[0].ApplicationPhotoPath;
-                     var photocount= scope.personalinfo[0].PhotoName_Cust;
-                      logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
-                    } else {
-                        return "";
-                    }
-              };
+                        scope.divclassmask = function(logphotostatus) {
+                            var photo = scope.slides[0].ApplicationPhotoPath;
+                            var photocount = scope.personalinfo[0].PhotoName_Cust;
+                            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                            } else {
+                                return "";
+                            }
+                        };
 
                     } else {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -4517,8 +4418,8 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.slides.push(item);
                 });
             });
-            };
-       
+        };
+
         scope.servicehttp = function(type, object) {
             return $injector.invoke(function($http) {
                 return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -4527,40 +4428,31 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         switch (type) {
                             case "B":
                                 if (response.data == 1) {
-                                    alerts.open("bookmarked suceessfully", "success");
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                                 } else {
-                                    alerts.open("bookmarked failed", "warning");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
                                 }
                                 break;
                             case "E":
                                 if (response.data == 1) {
-                                    alerts.open("EXpressInterest done SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                                 } else {
-                                    alerts.open("EXpressInterest Fail", "warning");
-
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
                                 }
                                 break;
                             case "I":
                                 if (response.data == 1) {
-                                    alerts.open("Ignore SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                                 } else {
-                                    alerts.open("Ignore profile Fail", "warning");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
                                 }
                                 break;
                             case "M":
-                            case "TH":
-                            case "RP":
                                 if (response.data == 1) {
-                                    alerts.open("Message sent SuccessFully", "success");
-
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
                                 } else {
-                                    alerts.open("Message sending Fail", "warning");
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
                                 }
                                 break;
                         }
@@ -4595,7 +4487,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.sendmessegescommon = function(type, tocustid) {
             scope.modalpopupheadertext = "Enter your message here";
             scope.messagecustid = tocustid;
-            alerts.dynamicpopup(url, scope, uibModal);
+            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
 
         };
 
@@ -4604,9 +4496,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
                 console.log(response);
                 if (response.data === 1) {
-                    alerts.open("Proceed successfully", "success");
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Proceed successfully", 2500);
                 } else {
-                    alerts.open("sorry Proceed Fail", "warning");
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "sorry Proceed Fail", 2500);
                 }
                 alerts.dynamicpopupclose();
             });

@@ -1,7 +1,7 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope','$timeout',
-    function(uibModal, scope, customerDashboardServices, authSvc, alerts, 
-    window, $location, successstoriesdata, $rootscope,$timeout) {
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout',
+    function(uibModal, scope, customerDashboardServices, authSvc, alerts,
+        window, $location, successstoriesdata, $rootscope, $timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -18,22 +18,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
-      
-       
+
+
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
-                       
+
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.bindcounts(response.data.DashBoardCounts);
-                         
+
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-                          
+
                             scope.photopersonal = scope.PersonalInfo.Photo;
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -83,8 +83,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        
-       
+
+
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -95,7 +95,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-           
+
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
@@ -156,7 +156,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     pageto: scope.endindexexpress
                 };
                 customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-                
+
                     if (parseInt(frompage) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data, function(item) {
@@ -220,10 +220,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
         });
         scope.zerorecorsalert = function() {
-            alerts.open('Sorry No Records Found', 'warning');
+            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Sorry No Records Found', 2500);
         };
         scope.successfaileralert = function(msg, typewarning) {
-            alerts.open(msg, typewarning);
+            if (typewarning === "success") {
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg,3000);
+            } else {
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg,3000);
+            }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
@@ -239,17 +243,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
-
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
-             
                 if (response.data !== null && response.data !== undefined) {
-
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-                        alerts.open(mobilenumbers, 'success');
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', mobilenumbers, 3000);
+
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
-                        alerts.open(mobilenumber, 'warning');
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', mobilenumber, 3000);
                     }
                 }
 
@@ -272,7 +274,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.modalpopupheadertext = "Match Followup Of " + name + "(" + profileid + ")";
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     customerDashboardServices.Tickethistory(TicketID, 'H').then(function(response) {
-                       
+
                         scope.Tickethistoryarray = [];
                         _.each(response.data, function(item) {
                             scope.Tickethistoryarray.push(item);
@@ -433,7 +435,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
             scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
-               
+
                 _.each(response.data, function(item) {
                     scope.arraytickethistory.push(item);
                 });
@@ -444,22 +446,22 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.photoPasswordactionss = function(type, tocustid) {
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
-             
+
                 if (response.data === 1) {
                     if (type === 1) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
-                       
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully', 2500);
+
                     } else {
-                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully',2500);
-                       
+                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully', 2500);
+
                     }
                 } else {
                     if (type === 1) {
-                      
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail',2500);
+
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
-                       
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail',2500);
+
+                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
 
                 }
@@ -468,21 +470,21 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
                 if (response.data === 1) {
-                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                    
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
+
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
-               
+
                 if (response.data === 1) {
-                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                      scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail',2500);
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -495,7 +497,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
 
-        
+
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
         };
@@ -513,8 +515,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                 alerts.open('Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>', 'warning');
-                //scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a>',3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade',3000);
             }
         };
 
@@ -522,100 +523,99 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
-        scope.pageloadbind=function(response)
-        {
-                        scope.bindcounts(response.data.DashBoardCounts);
-                          
-                            scope.bindallcounts = response.data.DashBoardCounts;
-                            scope.PersonalInfo = (response.data.PersonalInfo);
-                           
-                            scope.photopersonal = scope.PersonalInfo.Photo;
-                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-      
+        scope.pageloadbind = function(response) {
+            scope.bindcounts(response.data.DashBoardCounts);
+
+            scope.bindallcounts = response.data.DashBoardCounts;
+            scope.PersonalInfo = (response.data.PersonalInfo);
+
+            scope.photopersonal = scope.PersonalInfo.Photo;
+            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
         };
-         scope.init = function() {
-            
-           scope.PartnerProfilesnew = [];
-             switch (scope.Typeofdatabind) {
+        scope.init = function() {
+
+            scope.PartnerProfilesnew = [];
+            switch (scope.Typeofdatabind) {
                 case "MB":
-                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
-                     });
-                  break;
+                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                    });
+                    break;
                 case "WB":
-                 customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
-                     });
+                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                    });
                     break;
                 case "I":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
-                     });
+                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                    });
                     break;
                 case "WV":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
                         scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
-                     });
+                    });
                     break;
-                      case "RV":
-                       customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                case "RV":
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
                         scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1);
-                     });
-                  break;
+                    });
+                    break;
                 case "Chats":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                         scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
-                     });
+                        scope.chatsdiv(1, 9, 463, 'Total Messages', scope.bindallcounts.NewMsgs);
+                    });
                     break;
                 case "Requests":
-                customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                            scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
-                     });
+                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                    });
                     break;
                 case "Express":
-                  customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
-                         if (scope.counts === 1) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                        if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                            scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
-                     });
+                        scope.expressinterestselect(scope.bindallcounts.ExpressAllcount, null, null, null, 1, 9, 'All Profiles', 'All Profiles', null);
+                    });
                     break;
-               default:
-                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
-                break;
+                default:
+                    scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+                    break;
             }
         };
-      
+
     }
 ]);
