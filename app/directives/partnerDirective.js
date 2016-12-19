@@ -91,7 +91,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                             .then(function(response) {
-                                console.log(response);
+                               
                                 switch (type) {
                                     case "B":
                                         if (response.data == 1) {
@@ -186,7 +186,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
                             .then(function(response) {
-                                console.log(response);
+                             
                                 if (response.data === 1) {
                                     scope.$emit('successfailer', "Request sent suceessfully", "success");
                                 } else {
@@ -197,11 +197,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        //scope.$emit('photoalbumopen', custid, profileid, photocount);
+                     
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-                            console.log(response);
+                           
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });

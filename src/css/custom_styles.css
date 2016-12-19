@@ -631,7 +631,7 @@ a.more:before {
 }
 
 .main_block3 {
-    background: url(../images/background1.jpg) no-repeat center top;
+    /*background: url(../images/background1.jpg) no-repeat center top;*/
     background-size: cover;
 }
 
@@ -3376,7 +3376,7 @@ div.radio span.checked {
 .help_icons_pos {
     display: block;
     position: absolute;
-    background: url(../images/icon_chat.png) no-repeat center center #c8c8c8;
+    /*background: url(../images/icon_chat.png) no-repeat center center #c8c8c8;*/
     border-radius: 100%;
     width: 46px;
     height: 46px;
@@ -5684,7 +5684,7 @@ span.duration_of_pack:after {
 
 .verify_mob .edit_number {
     float: left;
-    background: url(../images/icon_edit2.png) no-repeat center center;
+    /*background: url(../images/icon_edit2.png) no-repeat center center;*/
     width: 20px;
     height: 20px;
     display: block;

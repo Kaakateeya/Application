@@ -16690,7 +16690,7 @@ a.more:before {
 }
 
 .main_block3 {
-    background: url(../images/background1.jpg) center top no-repeat;
+    /*background: url(../images/background1.jpg) center top no-repeat;*/
     background-size: cover
 }
 
@@ -19244,7 +19244,7 @@ td.pack_heading1_color {
 .help_icons_pos {
     display: block;
     position: absolute;
-    background: url(../images/icon_chat.png) center center no-repeat #c8c8c8;
+    /*background: url(../images/icon_chat.png) center center no-repeat #c8c8c8;*/
     border-radius: 100%;
     width: 46px;
     height: 46px
@@ -21412,7 +21412,7 @@ span.duration_of_pack:after {
 
 .verify_mob .edit_number {
     float: left;
-    background: url(../images/icon_edit2.png) center center no-repeat;
+    /*background: url(../images/icon_edit2.png) center center no-repeat;*/
     width: 20px;
     height: 20px;
     display: block;

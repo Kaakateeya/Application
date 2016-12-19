@@ -1102,7 +1102,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                             .then(function(response) {
-                                console.log(response);
+                               
                                 switch (type) {
                                     case "B":
                                         if (response.data == 1) {
@@ -1197,7 +1197,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
                             .then(function(response) {
-                                console.log(response);
+                             
                                 if (response.data === 1) {
                                     scope.$emit('successfailer', "Request sent suceessfully", "success");
                                 } else {
@@ -1208,11 +1208,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        //scope.$emit('photoalbumopen', custid, profileid, photocount);
+                     
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-                            console.log(response);
+                           
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });
@@ -1495,14 +1495,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.typeodbind = type;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
-                        console.log(response);
+                       
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.bindcounts(response.data.DashBoardCounts);
-                            console.log(response.data.DashBoardCounts);
+                         
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-                            console.log(response.data.PersonalInfo);
+                          
                             scope.photopersonal = scope.PersonalInfo.Photo;
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -1564,7 +1564,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-            console.log(array.SaveSearchCount);
+           
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
@@ -1625,7 +1625,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     pageto: scope.endindexexpress
                 };
                 customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-                    console.log(response.data);
+                
                     if (parseInt(frompage) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data, function(item) {
@@ -1710,7 +1710,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
 
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
-                console.log(response);
+             
                 if (response.data !== null && response.data !== undefined) {
 
                     if (response.data === 3) {
@@ -1741,7 +1741,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.modalpopupheadertext = "Match Followup Of " + name + "(" + profileid + ")";
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     customerDashboardServices.Tickethistory(TicketID, 'H').then(function(response) {
-                        console.log(response);
+                       
                         scope.Tickethistoryarray = [];
                         _.each(response.data, function(item) {
                             scope.Tickethistoryarray.push(item);
@@ -1902,7 +1902,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
             scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
-                console.log(response);
+               
                 _.each(response.data, function(item) {
                     scope.arraytickethistory.push(item);
                 });
@@ -1913,7 +1913,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.photoPasswordactionss = function(type, tocustid) {
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
-                console.log(response);
+             
                 if (response.data === 1) {
                     if (type === 1) {
                         scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully',2500);
@@ -1947,7 +1947,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
-                console.log(response);
+               
                 if (response.data === 1) {
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully',2500);
                 } else {
@@ -1994,10 +1994,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.pageloadbind=function(response)
         {
                         scope.bindcounts(response.data.DashBoardCounts);
-                            console.log(response.data.DashBoardCounts);
+                          
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-                            console.log(response.data.PersonalInfo);
+                           
                             scope.photopersonal = scope.PersonalInfo.Photo;
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
