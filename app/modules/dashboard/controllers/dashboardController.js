@@ -18,8 +18,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
-
-
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -224,9 +222,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg,3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 3000);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg,3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 3000);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -499,7 +497,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
 
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
-            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+
+            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid);
+
         };
         scope.incrementsdashboardcounts = function() {
             customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9).then(function(response) {
@@ -515,7 +516,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade',3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade', 3000);
             }
         };
 

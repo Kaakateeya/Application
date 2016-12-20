@@ -1474,8 +1474,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         // scope.slides = [];
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
-
-
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
@@ -1680,9 +1678,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg,3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 3000);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg,3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 3000);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -1955,7 +1953,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
 
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
-            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount);
+
+            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid);
+
         };
         scope.incrementsdashboardcounts = function() {
             customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9).then(function(response) {
@@ -1971,7 +1972,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (loginpaidstatus === "1") {
                 scope.gettingpartnerdata(type, frompage, topage, headertext);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade',3000);
+                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade', 3000);
             }
         };
 
@@ -4983,29 +4984,29 @@ app.factory('successstoriesdata', ['$http', function(http) {
             var photoclass = "";
             var PhotoMaskDiv;
             if (custid !== undefined && custid !== null && custid !== "") {
-                if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ApplicationPhoto") != -1)
-                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") != -1 ? "cssMaskdivrev clearfix" : "";
-                else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") != -1)
-                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") != -1 ? "cssMaskdivrev clearfix" : "";
+                if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ApplicationPhoto") !== -1)
+                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdivrev clearfix" : "";
+                else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") !== -1)
+                    PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
                 else
-                    PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdiv clearfix" : "";
+                    PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
 
-                if (PhotoMaskDiv == "cssMaskdiv clearfix") {
+                if (PhotoMaskDiv === "cssMaskdiv clearfix") {
 
-                    photoclass = PhotoMaskDiv == "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
-                } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
+                    photoclass = PhotoMaskDiv === "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
+                } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {
 
-                    photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
-                } else if (photo.toLowerCase().indexOf("_rev") != -1) {
-                    photoclass = PhotoMaskDiv == "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+                    photoclass = PhotoMaskDiv === "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
+                } else if (photo.toLowerCase().indexOf("_rev") !== -1) {
+                    photoclass = PhotoMaskDiv === "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
 
-                } else if (photo.indexOf("noimage") != -1) {
+                } else if (photo.indexOf("noimage") !== -1) {
                     photoclass = "Linkdisabled";
-                } else if (photo.indexOf("Password-Protected") != -1) {
+                } else if (photo.indexOf("Password-Protected") !== -1) {
 
-                    if (PhotoMaskDiv == "cssMaskdiv clearfix") {
+                    if (PhotoMaskDiv === "cssMaskdiv clearfix") {
                         photoclass = "cssMaskdiv clearfix Linkdisabled";
-                    } else if (PhotoMaskDiv == "cssMaskdivrev clearfix") {
+                    } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {
                         photoclass = "cssMaskdivrev clearfix Linkdisabled";
                     }
 

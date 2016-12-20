@@ -238,7 +238,7 @@
                         <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" src="{{slide.FullPhotoPath}}"></div>
+                        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
                     </div>
                     <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>

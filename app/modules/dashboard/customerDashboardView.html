@@ -21,16 +21,13 @@
         <div class="landing_page_head_rt">
             <h6>Your profile</h6>
             <p class="progress_profile"></p>
-
             <p>
                 You have provided
                 <label id="percentagecontrol"></label> of your details
             </p>
             <a href="#/editview" id="lnkpaymentpage">Please update your profile completely</a>
         </div>
-
     </div>
-
     <div class="landing_page_content clearfix">
         <div class="landing_page_sidebar_lt">
             <div class="landing_page_sidebar_lt_in clearfix">
@@ -76,8 +73,7 @@
                                                   <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Exp" class="icon-spl-2"></div>
                                                 </div>
-                                                    
-                                                </small>
+                                            </small>
                                             <span id="lnkACCEPTEDExp">I sent interest({{bindallcounts.ExpressIntSent}})</span></a>
                                     </div>
                                 </div>
@@ -104,16 +100,14 @@
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagechat" class="icon-spl-4"></div>
                                                 </div>
-                                                       
-                                                    </small>
+                                               </small>
                                                 <span id="lnkNewIDmsgs">New({{bindallcounts.NewMsgs}})</span></a>
                                             <a id="lnkAcceptMsgs" class="clearfix" href="javascript:void(0);" ng-click="chatsdiv(1,9,'','Total Messages',bindallcounts.TotalMsgs)">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Img2" class="icon-spl-2"></div>
                                                 </div>
-                                                        
-                                                    </small>
+                                              </small>
                                                 <span id="lnkACCEPTEDmsgs">Messages({{bindallcounts.TotalMsgs}})</span></a>
                                         </div>
                                     </div>
@@ -149,8 +143,7 @@
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Req" class="icon-spl-8"></div>
                                                 </div>
-                                                      
-                                                    </small>
+                                               </small>
                                                 <span id="lnkRecHoroReq">RecHoro({{bindallcounts.ReceivedHoroRequestCount}})</span></a>
                                         </div>
                                     </div>
@@ -172,8 +165,7 @@
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image21" class="icon-spl-2"></div>
                                                 </div>
-                                                      
-                                                    </small>
+                                              </small>
                                                 <span id="lnkSentHoroReq">SentHoro({{bindallcounts.SentHoroRequestCount}})</span></a>
                                         </div>
                                     </div>
@@ -252,7 +244,6 @@
                                                 <span id="lnkREJECTEDSentProtec">Rejected({{bindallcounts.SentProtectedReject}})</span></a>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -297,7 +288,6 @@
 
                                     <div class="sugested_block_top_skip">
                                         <ul>
-
                                             <li><a ng-class="click==='YouProceed'?'activeclassdiv':''" class="active" href="javascript:void(0);" id="lnkyourinterest" style="width: 117px;" ng-click='expressinterestselect(YouProceed,null,"I",null,1,9,null,null,"YouProceed")'>Interested  ({{YouProceed}})</a></li>
                                             <li><a ng-class="click==='Youskipped'?'activeclassdiv':''" class="active" id="lnkyournotinterest" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(Youskipped,null,"NI",null,1,9,null,null,"Youskipped")'>Skipped  ({{Youskipped}})</a></li>
                                             <li><a ng-class="click==='YouPending'?'activeclassdiv':''" class="active" id="lnkyourpending" href="javascript:void(0);" style="width: 117px;" ng-click='expressinterestselect(YouPending,null,"V,NV",null,1,9,null,null,"YouPending")'>Pending  ({{YouPending}})</a></li>
@@ -361,8 +351,11 @@
                                 <div class="tab-pane fade in active" id="match1">
                                     <div style="border-bottom: solid 3px #888;margin-bottom: 24px;" ng-repeat="expressint in PartnerProfilesnew">
                                         <div class="sugested_block sugested_block_top" id="ExpressDiv1">
-                                            <div class="sugested_block_top_lft"> <span ng-class="divclassmaskforall(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"><img style="height: 150px;width: 150px;cursor:pointer;"
-                                             ng-src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''" ng-click="photoalbumdashboard(expressint.Cust_ID,expressint.ProfileID,expressint.PhotosCount)"/></span>
+                                            <div class="sugested_block_top_lft">
+                                                <span ng-class="divclassmaskforall(LoginPhotoIsActive,expressint.Photo,expressint.PhotosCount)"> 
+                                                <img style="height: 150px;width: 150px;cursor:pointer;"
+                                             ng-src="{{expressint.Photo}}" alt="sugested"  ng-class="expressint.PhotosCount==0?'Linkdisabled':''" 
+                                             ng-click="photoalbumdashboard(expressint.Cust_ID,expressint.ProfileID,expressint.PhotosCount)"/></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
                                                 <h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2>
@@ -567,12 +560,10 @@
     </div>
 
     <script type="text/ng-template" id="myModalContent.html">
-
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="modalpopupclose()">×</button>
                 <h4 class="modal-title" id="commontitle" style="color: black;">{{modalpopupheadertext}}</h4>
-
             </div>
             <div ng-class="modalbodyshow==3?'modal-body  pop_content_my clearfix':'modal-body'" id="commonbody">
                 <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
@@ -622,18 +613,13 @@
                     <br></div>
             </div>
             <div class="modal-footer">
-
                 <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
                 <button type="button" class="btn btn-primary" ng-click="sendmessages(form)" ng-if="modalbodyshow==1">Send Message</button>
                 <button type="button" class="btn btn-primary" ng-click="sendmessagesRMM(form)" ng-if="modalbodyshow==2">Send Message</button>
                 <button type="button" class="btn btn-primary" ng-click="messagetorm( 'TH')" ng-if="modalbodyshow==3">MessageToRM</button>
             </div>
-
-
         </div>
-
     </script>
-
     <script type="text/ng-template" id="mytickethistory.html">
         <div class="modal-content">
             <div class="modal-header">
@@ -655,7 +641,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="chatbox_remarks_item_submit clearfix">
@@ -677,7 +662,4 @@
 			color: white !important;
 		}
 	</style>
-   
-   
- 
-</div>
+   </div>
