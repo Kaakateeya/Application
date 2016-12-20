@@ -210,7 +210,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         var ddddd = '#/Dashboard?type=C';
                         window.open(ddddd, "_self");
                     }
-                    console.log(currentstatte);
+
                     break;
                 case "Chats":
 

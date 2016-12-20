@@ -96,6 +96,20 @@
     .textboxcolor {
         border: 1px solid #b1a8a8;
     }
+    
+    .pop_label_left {
+        display: inline-block;
+        line-height: 20px !important;
+        font-size: 13px;
+        color: #000!important;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+    
+    md-input-container {
+        padding: 2px;
+        margin: 8px 0 !important;
+    }
 </style>
 
 <div class="search_page_main" ng-show="showcontrols" ng-init="generalpageload()">
@@ -666,8 +680,7 @@
       </div>
   </div>
  </script>
-
-  <script type="text/ng-template" id="login.html">
+ <script type="text/ng-template" id="login.html">
      <form name="myFormlogin">
         <div class="modal-header">
             <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a></h4>

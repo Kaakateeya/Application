@@ -7,7 +7,7 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     scope.loadmore = true;
     scope.init = function() {
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-            console.log(response.data);
+
             scope.success = response.data;
         });
     };

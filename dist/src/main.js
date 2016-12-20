@@ -1089,7 +1089,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                             .then(function(response) {
-                               
+
                                 switch (type) {
                                     case "B":
                                         if (response.data == 1) {
@@ -1111,7 +1111,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                             }
                                         } else {
                                             scope.$emit('successfailer', "upgrade", "warning");
-                                    }
+                                        }
                                         break;
                                     case "I":
                                         if (response.data == 1) {
@@ -1184,7 +1184,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
                             .then(function(response) {
-                             
+
                                 if (response.data === 1) {
                                     scope.$emit('successfailer', "Request sent suceessfully", "success");
                                 } else {
@@ -1195,11 +1195,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                     
+
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-                           
+
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });
@@ -1299,7 +1299,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                             }
                         } else {
-                            
+
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
@@ -1370,7 +1370,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-                  currentslide = parseInt(currentIndex1 - 1);
+                    currentslide = parseInt(currentIndex1 - 1);
                 };
 
                 scope.modalpopupclose = function() {
@@ -1379,6 +1379,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.$on("photoalbum", function(event, custid, profileid, photocount) {
 
                     scope.photoalbum(custid, profileid, photocount);
+                });
+
+                scope.$on('setslide', function(event) {
+                    scope.listclick();
                 });
             }
         };
@@ -2315,7 +2319,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         var ddddd = '#/Dashboard?type=C';
                         window.open(ddddd, "_self");
                     }
-                    console.log(currentstatte);
+
                     break;
                 case "Chats":
 
@@ -2409,7 +2413,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-                        console.log(response);
+
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
@@ -2538,7 +2542,7 @@ app.controller('missingfieldsctrl', ['$scope', 'arrayConstants', 'SelectBindServ
         });
         scope.starLanguage = arrayConstants.starLanguage;
         scope.stars = (arrayConstants.stars);
-        console.log(scope.height);
+
         scope.showloginpopup();
     }
 ]);
@@ -2552,7 +2556,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     scope.pageLoad = function(custid) {
 
         mobileVerificationService.getmobileverificationData(custid).then(function(res) {
-            console.log(res);
+
             scope.pageloadSelect = res.data;
             scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
             scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
@@ -2569,7 +2573,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     scope.verifyMobileCode = function() {
         if (scope.pageloadSelect.NumberVerificationcode === scope.txtEnteryourpin) {
             mobileVerificationService.verifyMobile(scope.txtEnteryourpin, 2, scope.pageloadSelect.Cust_ContactNumbers_ID).then(function(res) {
-                console.log(res);
+
                 scope.pageloadSelect = scope.pageLoad(scope.custid);
                 scope.pageloadSelect.ismobileverf = true;
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
@@ -2592,17 +2596,13 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
             CustContactNumbersID: scope.pageloadSelect.Cust_ContactNumbers_ID
         };
         mobileVerificationService.resendMobileCode(inputOBj).then(function(res) {
-            console.log(res);
             scope.pageLoad(scope.custid);
-
-
             alert('Valid Mobile Verify code sent successfully');
         });
     };
 
     scope.resendMailLink = function() {
         mobileVerificationService.resendEmailLink(scope.custid).then(function(res) {
-            console.log(res);
             alert('We have re-sent a mail to the provided Email');
         });
     };
@@ -2615,9 +2615,7 @@ app.controller("payment",function()
 app.controller('paymentresponse', ['$scope',
     function(scope) {
         scope.pageloadpayment = function() {
-
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
-            console.log(scope.paymentobject);
         };
         scope.backtopayment = function() {
             var realpath = '#/UpgradeMembership';
@@ -2765,7 +2763,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
         scope.partnerbindings = function(response) {
-            console.log(response.data);
             scope.casteshow = false;
             scope.gender = (response.data.intGender) === 2 ? 2 : 1;
             scope.AgeFrom = response.data.Ageto;
@@ -2786,7 +2783,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         };
         scope.generalpageload = function() {
-
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
@@ -2941,7 +2937,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
-                            console.log(response.data);
                             if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
                                 scope.showcontrols = false;
                                 scope.truepartner = false;
@@ -3189,6 +3184,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.refinesubmit = function() {
             scope.generalsearchsubmit(scope.typesearch, 1, 8);
+            scope.$broadcast('setslide');
         };
         scope.hightFromrefine = function() {
             scope.HeightFromtext = scope.checkheight(scope.HeightFrom);
@@ -3333,7 +3329,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case "general":
                     if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                         searches.partnerdetails(scope.custid, "", "").then(function(response) {
-                            console.log(response.data);
                             scope.resetfunctionality();
                             scope.partnerbindings(response);
                         });
@@ -3671,7 +3666,7 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             });
         };
 
-       scope.submit = function() {
+        scope.submit = function() {
 
             if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
                 (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
@@ -3694,7 +3689,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 };
 
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
-                    console.log(response);
                     scope.CustName = scope.txtname;
                     scope.lblTicketID = response.data.Ticket;
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
@@ -3718,39 +3712,35 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             };
 
             helpService.SendMail(scope.SendMailObj).then(function(response) {
-                console.log(response);
                 if (response.data == 1) {
                     alert('mail has sent successfully');
-                      scope.resethelp();
+                    scope.resethelp();
                 }
             });
             scope.modalInstance.close();
-          
+
         };
-   scope.resethelp=function()
-   {  
-scope.txtname="";
-scope.txtemail="";
-scope.txtsubject="";
-scope.ddlcategory=null;
-scope.ddlcountrycode=null;
-scope.txtmsg="";
-scope.ddlpriority=null;
-scope.txtphonecode="";
-scope.txtphnum="";
-  Recaptcha.reload();
-    };
+        scope.resethelp = function() {
+            scope.txtname = "";
+            scope.txtemail = "";
+            scope.txtsubject = "";
+            scope.ddlcategory = null;
+            scope.ddlcountrycode = null;
+            scope.txtmsg = "";
+            scope.ddlpriority = null;
+            scope.txtphonecode = "";
+            scope.txtphnum = "";
+            Recaptcha.reload();
+        };
     }
 ]);
  app.controller("blockerController", ['$scope', 'cerateNewPwd', '$stateParams', function(scope, cerateNewPwd, stateParams) {
      cerateNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
          var custData = (res.data).split(';');
-         console.log(custData);
          scope.profileID = custData[1];
          //scope.custID = custData[2];
          scope.RelationShipManager = custData[3];
          scope.mngrMob = custData[4] === 'NoEmpOfficialCCn' ? '' : custData[4];
-         console.log(res.data);
      });
  }]);
 app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
@@ -3761,10 +3751,10 @@ app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
         scope.pageinit = function() {
             customerProfilesettings.getmyorderspayments(scope.custid).then(function(response) {
                 scope.myorders = [];
-                console.log(response);
+
                 _.each(response.data, function(item) {
                     scope.myorders = JSON.parse(item);
-                    console.log(scope.myorders);
+
                 });
             });
         };
@@ -3794,7 +3784,7 @@ app.controller("ourbranches", ["$scope", "ourBranchService", function(scope, our
 
             scope.BranchDetailsArr = [];
             if (scope.ddlbranchaddress !== null && scope.ddlbranchaddress !== undefined) {
-                console.log(scope.ddlbranchaddress);
+
                 scope.BranchDetailsArr = _.where(scope.telanganaArr, { Branch_ID: parseInt(scope.ddlbranchaddress) });
                 _.map(scope.BranchDetailsArr, function(item, index) {
                     item.count = parseInt(index + 1);
@@ -3898,7 +3888,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     scope.deleteprofiledis = true;
     service.countryCodeselect().then(function(response) {
         scope.countryCode = [];
-        console.log(response);
+
         scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
         _.each(response.data, function(item) {
             scope.countryCode.push({ label: item.Name, title: item.Name, value: item.ID });
@@ -3908,7 +3898,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
     scope.arrayprofilesettings = {};
     scope.getdetails = function() {
         customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
-            console.log(response);
+
             _.each(response.data, function(item) {
                 scope.arrayprofilesettings = item;
                 scope.mailyes = scope.arrayprofilesettings.AllowEmail === "False" ? "0" : "1";
@@ -3969,7 +3959,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 var FamilyID = scope.arrayprofilesettings.EmailCust_Family_ID;
                 var NewEmail = scope.NewEmail;
                 customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
-                    console.log(response);
+
                     if (response.data == 1) {
                         alerts.open('Email Upadated successfully', 'success');
                     } else {
@@ -3982,7 +3972,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 var CountryCodeID = scope.ddlcountrycode;
                 var number = scope.Confirmnewnumber;
                 customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
-                    console.log(response);
+
                     if (response.data == 1) {
                         alerts.open('Mobile Upadated successfully', 'success');
                     } else {
@@ -3999,7 +3989,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var ConfirmPassword = scope.ConfirmPassword;
         var custId = scope.custid;
         customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
-            console.log(response);
+
             if (response.data == 1) {
                 alerts.open('Passsword updated successfully', 'success');
             } else {
@@ -4013,7 +4003,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var iflag = 1;
         var Narration = scope.hiddennarration;
         customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-            console.log(response);
+
             if (response.data == 1) {
                 alerts.open('Hide Profile successfully', 'success');
             } else {
@@ -4025,7 +4015,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var ProfileID = scope.ProfileID;
         var Narrtion = scope.Narrtion;
         customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
-            console.log(response);
+
             if (response.data == 1) {
                 alerts.open('Delete Profile successfully', 'success');
             } else {
@@ -4038,7 +4028,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var AllowEmail = scope.mailyes === 0 ? 0 : 1;
         var AllowSMS = scope.smsyes === 0 ? 0 : 1;
         customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
-            console.log(response);
+
             if (response.data == 1) {
                 alerts.open('Submit successfully', 'success');
             } else {
@@ -4051,7 +4041,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var CustID = scope.custid;
         var iflag = 0;
         customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-            console.log(response);
+
             if (response.data == 1) {
                 alerts.open('Unhide your Profile successfully', 'success');
             } else {
@@ -4142,7 +4132,7 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     scope.loadmore = true;
     scope.init = function() {
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-            console.log(response.data);
+
             scope.success = response.data;
         });
     };
@@ -4200,10 +4190,10 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             };
             customerProfilesettings.getmysupporttickets(obj).then(function(response) {
                 scope.supporttickets = [];
-                console.log(response);
+
                 _.each(response.data, function(item) {
                     scope.supporttickets = JSON.parse(item);
-                    console.log(scope.supporttickets);
+
                 });
             });
         };
@@ -4211,16 +4201,11 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             scope.submitsupporttickets(1);
         };
         scope.$watch('selectedIndex', function(current, old) {
-            console.log('current', current);
-            console.log('old', old);
             switch (current) {
-
                 case 0:
-
                     scope.submitsupporttickets(1);
                     break;
                 case 1:
-
                     scope.submitsupporttickets(2);
                     break;
                 case 2:
@@ -4233,7 +4218,6 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
         });
         scope.reopenticket = function(ticketid) {
             customerProfilesettings.getopenticket(6, "", ticketid).then(function(response) {
-                console.log(response);
                 if (response.data == 1) {
                     alerts.open("Your ticket have been reopened successfully", "success");
                     scope.supporttickets = [];
@@ -4275,7 +4259,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         myAppFactory.getpayment(scope.custid).then(function(response) {
-            console.log(response);
+
             scope.paymentarray = [];
             scope.paymentarray.push({
                 MembershipName: "Services & Features",
@@ -4307,7 +4291,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
 
         scope.sendsmspayment = function(payment) {
             myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
-                console.log(response);
+
                 alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
             });
         };
@@ -4331,19 +4315,19 @@ app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function
             var testArr = JSON.parse(item);
             if (testArr[0].TableName === "About") {
                 scope.aboutmyself = testArr;
-                console.log(scope.aboutmyself);
+
             } else if (testArr[0].TableName === "Primary") {
                 scope.personalinfo = testArr;
-                console.log(scope.personalinfo);
+
             } else {
                 scope.arr.push({ header: testArr[0].TableName, value: testArr });
             }
         });
-        console.log(scope.arr);
+
     });
 
     customerDashboardServices.Viewprofileflags().then(function(response) {
-        console.log(response);
+
     });
 }]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
@@ -4559,13 +4543,13 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
 
 
     function setUser(value) {
-        console.log(value);
+
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
         setSession('cust.paidstatus', (value.PaidStatus));
         setSession('cust.profilepic', (value.ProfilePic));
-        setSession('cust.GenderID',(value.GenderID));
+        setSession('cust.GenderID', (value.GenderID));
     }
 
     function getSession(key) {
@@ -4603,7 +4587,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             profileid: getSession('cust.profileid'),
             paidstatus: getSession('cust.paidstatus'),
             profilepic: getSession('cust.profilepic'),
-           GenderID:getSession('cust.GenderID')
+            GenderID: getSession('cust.GenderID')
         };
     }
 
@@ -4629,9 +4613,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         getprofilepic: function() {
             return getSession('cust.profilepic');
         },
-        getGenderID:function()
-        {
-         return getSession('cust.GenderID');
+        getGenderID: function() {
+            return getSession('cust.GenderID');
         },
         clearUserSessionDetails: function() {
             return clearUserSession();
@@ -4743,11 +4726,11 @@ app.factory('feedbacksubmit', ["$http", function(http) {
 app.factory('helpService', ["$http", function(http) {
     return {
         helpSubmit: function(object) {
-            console.log(JSON.stringify(object));
+
             return http.post(app.apiroot + 'StaticPages/InsertTicketInfo', object);
         },
         SendMail: function(object) {
-            console.log(JSON.stringify(object));
+
             return http.post(app.apiroot + 'StaticPages/SendTicketMail', object);
         }
     };
@@ -4772,7 +4755,7 @@ app.factory('mobileVerificationService', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getEmilVerificationCode', { params: { VerificationCode: VCode, i_EmilMobileVerification: flag, CustContactNumbersID: CustContactnumID } });
         },
         resendMobileCode: function(obj) {
-            console.log(obj);
+
             return http.get(app.apiroot + 'StaticPages/getResendmobile', { params: { iCountryID: obj.iCountryID, iCCode: obj.iCCode, MobileNumber: obj.MobileNumber, CustContactNumbersID: obj.CustContactNumbersID } });
         },
         resendEmailLink: function(obj) {

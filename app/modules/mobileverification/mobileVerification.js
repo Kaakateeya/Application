@@ -8,7 +8,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     scope.pageLoad = function(custid) {
 
         mobileVerificationService.getmobileverificationData(custid).then(function(res) {
-            console.log(res);
+
             scope.pageloadSelect = res.data;
             scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
             scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
@@ -25,7 +25,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     scope.verifyMobileCode = function() {
         if (scope.pageloadSelect.NumberVerificationcode === scope.txtEnteryourpin) {
             mobileVerificationService.verifyMobile(scope.txtEnteryourpin, 2, scope.pageloadSelect.Cust_ContactNumbers_ID).then(function(res) {
-                console.log(res);
+
                 scope.pageloadSelect = scope.pageLoad(scope.custid);
                 scope.pageloadSelect.ismobileverf = true;
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
@@ -48,17 +48,13 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
             CustContactNumbersID: scope.pageloadSelect.Cust_ContactNumbers_ID
         };
         mobileVerificationService.resendMobileCode(inputOBj).then(function(res) {
-            console.log(res);
             scope.pageLoad(scope.custid);
-
-
             alert('Valid Mobile Verify code sent successfully');
         });
     };
 
     scope.resendMailLink = function() {
         mobileVerificationService.resendEmailLink(scope.custid).then(function(res) {
-            console.log(res);
             alert('We have re-sent a mail to the provided Email');
         });
     };

@@ -14,10 +14,10 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             };
             customerProfilesettings.getmysupporttickets(obj).then(function(response) {
                 scope.supporttickets = [];
-                console.log(response);
+
                 _.each(response.data, function(item) {
                     scope.supporttickets = JSON.parse(item);
-                    console.log(scope.supporttickets);
+
                 });
             });
         };
@@ -25,16 +25,11 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             scope.submitsupporttickets(1);
         };
         scope.$watch('selectedIndex', function(current, old) {
-            console.log('current', current);
-            console.log('old', old);
             switch (current) {
-
                 case 0:
-
                     scope.submitsupporttickets(1);
                     break;
                 case 1:
-
                     scope.submitsupporttickets(2);
                     break;
                 case 2:
@@ -47,7 +42,6 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
         });
         scope.reopenticket = function(ticketid) {
             customerProfilesettings.getopenticket(6, "", ticketid).then(function(response) {
-                console.log(response);
                 if (response.data == 1) {
                     alerts.open("Your ticket have been reopened successfully", "success");
                     scope.supporttickets = [];

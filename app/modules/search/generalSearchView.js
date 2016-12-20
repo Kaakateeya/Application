@@ -131,7 +131,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
         scope.partnerbindings = function(response) {
-            console.log(response.data);
             scope.casteshow = false;
             scope.gender = (response.data.intGender) === 2 ? 2 : 1;
             scope.AgeFrom = response.data.Ageto;
@@ -152,7 +151,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         };
         scope.generalpageload = function() {
-
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
@@ -307,7 +305,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
-                            console.log(response.data);
                             if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
                                 scope.showcontrols = false;
                                 scope.truepartner = false;
@@ -555,6 +552,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.refinesubmit = function() {
             scope.generalsearchsubmit(scope.typesearch, 1, 8);
+            scope.$broadcast('setslide');
         };
         scope.hightFromrefine = function() {
             scope.HeightFromtext = scope.checkheight(scope.HeightFrom);
@@ -699,7 +697,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case "general":
                     if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                         searches.partnerdetails(scope.custid, "", "").then(function(response) {
-                            console.log(response.data);
                             scope.resetfunctionality();
                             scope.partnerbindings(response);
                         });

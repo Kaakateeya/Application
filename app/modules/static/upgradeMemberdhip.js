@@ -5,7 +5,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         myAppFactory.getpayment(scope.custid).then(function(response) {
-            console.log(response);
+
             scope.paymentarray = [];
             scope.paymentarray.push({
                 MembershipName: "Services & Features",
@@ -37,7 +37,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
 
         scope.sendsmspayment = function(payment) {
             myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
-                console.log(response);
+
                 alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
             });
         };

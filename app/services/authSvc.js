@@ -21,13 +21,13 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
 
 
     function setUser(value) {
-        console.log(value);
+
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
         setSession('cust.paidstatus', (value.PaidStatus));
         setSession('cust.profilepic', (value.ProfilePic));
-        setSession('cust.GenderID',(value.GenderID));
+        setSession('cust.GenderID', (value.GenderID));
     }
 
     function getSession(key) {
@@ -65,7 +65,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             profileid: getSession('cust.profileid'),
             paidstatus: getSession('cust.paidstatus'),
             profilepic: getSession('cust.profilepic'),
-           GenderID:getSession('cust.GenderID')
+            GenderID: getSession('cust.GenderID')
         };
     }
 
@@ -91,9 +91,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         getprofilepic: function() {
             return getSession('cust.profilepic');
         },
-        getGenderID:function()
-        {
-         return getSession('cust.GenderID');
+        getGenderID: function() {
+            return getSession('cust.GenderID');
         },
         clearUserSessionDetails: function() {
             return clearUserSession();

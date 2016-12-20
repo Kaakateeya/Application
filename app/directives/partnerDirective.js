@@ -91,7 +91,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                             .then(function(response) {
-                               
+
                                 switch (type) {
                                     case "B":
                                         if (response.data == 1) {
@@ -113,7 +113,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                             }
                                         } else {
                                             scope.$emit('successfailer', "upgrade", "warning");
-                                    }
+                                        }
                                         break;
                                     case "I":
                                         if (response.data == 1) {
@@ -186,7 +186,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     return $injector.invoke(function($http) {
                         return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
                             .then(function(response) {
-                             
+
                                 if (response.data === 1) {
                                     scope.$emit('successfailer', "Request sent suceessfully", "success");
                                 } else {
@@ -197,11 +197,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                     
+
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-                           
+
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });
@@ -301,7 +301,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                             }
                         } else {
-                            
+
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
@@ -372,7 +372,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-                  currentslide = parseInt(currentIndex1 - 1);
+                    currentslide = parseInt(currentIndex1 - 1);
                 };
 
                 scope.modalpopupclose = function() {
@@ -381,6 +381,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.$on("photoalbum", function(event, custid, profileid, photocount) {
 
                     scope.photoalbum(custid, profileid, photocount);
+                });
+
+                scope.$on('setslide', function(event) {
+                    scope.listclick();
                 });
             }
         };

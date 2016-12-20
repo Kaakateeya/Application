@@ -22,7 +22,7 @@ app.controller("ourbranches", ["$scope", "ourBranchService", function(scope, our
 
             scope.BranchDetailsArr = [];
             if (scope.ddlbranchaddress !== null && scope.ddlbranchaddress !== undefined) {
-                console.log(scope.ddlbranchaddress);
+
                 scope.BranchDetailsArr = _.where(scope.telanganaArr, { Branch_ID: parseInt(scope.ddlbranchaddress) });
                 _.map(scope.BranchDetailsArr, function(item, index) {
                     item.count = parseInt(index + 1);

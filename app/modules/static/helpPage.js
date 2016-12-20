@@ -14,7 +14,7 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             });
         };
 
-       scope.submit = function() {
+        scope.submit = function() {
 
             if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
                 (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
@@ -37,7 +37,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 };
 
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
-                    console.log(response);
                     scope.CustName = scope.txtname;
                     scope.lblTicketID = response.data.Ticket;
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
@@ -61,27 +60,25 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
             };
 
             helpService.SendMail(scope.SendMailObj).then(function(response) {
-                console.log(response);
                 if (response.data == 1) {
                     alert('mail has sent successfully');
-                      scope.resethelp();
+                    scope.resethelp();
                 }
             });
             scope.modalInstance.close();
-          
+
         };
-   scope.resethelp=function()
-   {  
-scope.txtname="";
-scope.txtemail="";
-scope.txtsubject="";
-scope.ddlcategory=null;
-scope.ddlcountrycode=null;
-scope.txtmsg="";
-scope.ddlpriority=null;
-scope.txtphonecode="";
-scope.txtphnum="";
-  Recaptcha.reload();
-    };
+        scope.resethelp = function() {
+            scope.txtname = "";
+            scope.txtemail = "";
+            scope.txtsubject = "";
+            scope.ddlcategory = null;
+            scope.ddlcountrycode = null;
+            scope.txtmsg = "";
+            scope.ddlpriority = null;
+            scope.txtphonecode = "";
+            scope.txtphnum = "";
+            Recaptcha.reload();
+        };
     }
 ]);

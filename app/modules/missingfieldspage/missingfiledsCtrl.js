@@ -46,7 +46,7 @@ app.controller('missingfieldsctrl', ['$scope', 'arrayConstants', 'SelectBindServ
         });
         scope.starLanguage = arrayConstants.starLanguage;
         scope.stars = (arrayConstants.stars);
-        console.log(scope.height);
+
         scope.showloginpopup();
     }
 ]);

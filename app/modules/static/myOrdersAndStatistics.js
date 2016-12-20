@@ -6,10 +6,10 @@ app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
         scope.pageinit = function() {
             customerProfilesettings.getmyorderspayments(scope.custid).then(function(response) {
                 scope.myorders = [];
-                console.log(response);
+
                 _.each(response.data, function(item) {
                     scope.myorders = JSON.parse(item);
-                    console.log(scope.myorders);
+
                 });
             });
         };

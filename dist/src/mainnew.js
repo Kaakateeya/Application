@@ -12,143 +12,141 @@ app.filter('dateFilter', function() {
         return txt;
     };
 });
-app.constant('arrayConstants',
-    {
-        'MaritalStatus': [
-            { "label": "Unmarried", "title": "Unmarried", "value": 43 },
-            { "label": "Divorce", "title": "Divorce", "value": 44 },
-            { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
-            { "label": "Separated", "title": "Separated", "value": 46 }
-        ],
-        "height": [
-            { "label": "--Select--", "title": "--select--", "value": "0" },
-            { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
-            { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
-            { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
-            { "label": "4'5 in - 135 cms", "title": "4'5 in - 135 cms", "value": 6 }, { "label": "4'6 in - 137 cms", "title": "4'6 in - 137 cms", "value": 7 },
-            { "label": "4'7 in - 140 cms", "title": "4'7 in - 140 cms", "value": 8 },
-            { "label": "4'8 in - 142 cms", "title": "4'8 in - 142 cms", "value": 9 },
-            { "label": "4'9 in - 144 cms", "title": "4'9 in - 144 cms", "value": 10 }, { "label": "4'10 in - 147 cms", "title": "4'10 in - 147 cms", "value": 11 },
-            { "label": "4'11 in - 150 cms", "title": "4'11 in - 150 cms", "value": 12 }, { "label": "5'0 in - 152 cms", "title": "5'0 in - 152 cms", "value": 13 },
-            { "label": "5'1 in - 155 cms", "title": "5'1 in - 155 cms", "value": 14 }, { "label": "5'2 in - 157 cms", "title": "5'2 in - 157 cms", "value": 15 },
-            { "label": "5'3 in - 160 cms", "title": "5'3 in - 160 cms", "value": 16 }, { "label": "5'4 in - 162 cms", "title": "5'4 in - 162 cms", "value": 17 },
-            { "label": "5'5 in - 165 cms", "title": "5'5 in - 165 cms", "value": 18 }, { "label": "5'6 in - 167 cms", "title": "5'6 in - 167 cms", "value": 19 },
-            { "label": "5'7 in - 170 cms", "title": "5'7 in - 170 cms", "value": 20 }, { "label": "5'8 in - 172 cms", "title": "5'8 in - 172 cms", "value": 21 },
-            { "label": "5'9 in - 175 cms", "title": "5'9 in - 175 cms", "value": 22 }, { "label": "5'10 in - 177 cms", "title": "5'10 in - 177 cms", "value": 23 },
-            { "label": "5'11 in - 180 cms", "title": "5'11 in - 180 cms", "value": 24 }, { "label": "6'0 in - 183 cms", "title": "6'0 in - 183 cms", "value": 25 },
-            { "label": "6'1 in - 185 cms", "title": "6'1 in - 185 cms", "value": 26 }, { "label": "6'2 in - 188 cms", "title": "6'2 in - 188 cms", "value": 27 },
-            { "label": "6'3 in - 190 cms", "title": "6'3 in - 190 cms", "value": 28 }, { "label": "6'4 in - 193 cms", "title": "6'4 in - 193 cms", "value": 29 },
-            { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 }, { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
-            { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 }, { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
-            { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 }, { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
-            { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms\t", "title": "7'0 in - 213 cms\t", "value": 37 },
-            { "label": "7'1 in - 215 cms\t", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms\t", "title": "7'2 in - 218 cms\t", "value": 39 }
-        ],
-        "Religion": [
-            { "label": "--Select--", "title": "--select--", "value": "0" },
-            { "label": "Hindu", "title": "Hindu", "value": 1 },
-            { "label": "Christian", "title": "Christian", "value": 2 },
-            { "label": "Muslim", "title": "Muslim", "value": 3 },
-            { "label": "Other", "title": "Other", "value": 6 },
-            { "label": "Catholic", "title": "Catholic", "value": 9 },
-            { "label": "Roma Catholic", "title": "Roma Catholic", "value": 15 },
-            { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
-        ],
-        "Mothertongue": [
-            { "label": "Telugu", "title": "Telugu", "value": 1 },
-            { "label": "Tamil", "title": "Tamil", "value": 2 },
-            { "label": "Kannada", "title": "Kannada", "value": 3 },
-            { "label": "Hindi", "title": "Hindi", "value": 4 },
-            { "label": "Punjabi", "title": "Punjabi", "value": 5 },
-            { "label": "Urdu", "title": "Urdu", "value": 6 },
-            { "label": "Lambadi", "title": "Lambadi", "value": 7 },
-            { "label": "Marati", "title": "Marati", "value": 8 },
-            { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
-            { "label": "English", "title": "English", "value": 10 },
-            { "label": "Malayalam", "title": "Malayalam", "value": 11 },
-            { "label": "Saurashtra", "title": "Saurashtra", "value": 12 }, { "label": "Orea", "title": "Orea", "value": 13 },
-            { "label": "telugu", "title": "telugu", "value": 14 }
-        ],
-        "educationcategory": [
-            { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
-            { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
-            { "label": "Diploma", "title": "Diploma", "value": 3 },
-            { "label": "Doctorate/phd", "title": "Doctorate/phd", "value": 4 },
-            { "label": "Masters in Engineering", "title": "Masters in Engineering", "value": 5 },
-            { "label": "Bachelors in Medicine", "title": "Bachelors in Medicine", "value": 6 },
-            { "label": "Masters in Degree", "title": "Masters in Degree", "value": 7 },
-            { "label": "Finance - ICWAI/CA/CS", "title": "Finance - ICWAI/CA/CS", "value": 10 },
-            { "label": "Union Public Service Commision-Civil Services", "title": "Union Public Service Commision-Civil Services", "value": 11 },
-            { "label": "Masters in Medicine", "title": "Masters in Medicine", "value": 13 },
-            { "label": "Below Graduation", "title": "Below Graduation", "value": 15 },
-            { "label": "Not given", "title": "Not given", "value": 21 },
-            { "label": "Other", "title": "Other", "value": 22 }
-        ],
-        "visastatus": [
-            { "label": "Student Visa", "title": "Student Visa", "value": 284 },
-            { "label": "Work Permit", "title": "Work Permit", "value": 285 },
-            { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
-            { "label": "Citizen", "title": "Citizen", "value": 521 },
-            { "label": "Permanent Resident", "title": "Permanent Resident", "value": 522 },
-            { "label": "Green Card", "title": "Green Card", "value": 553 }
-        ],
-        "stars": [
-            { "label": "Bharani", "title": "Bharani", "value": 2 },
-            { "label": "Krithika", "title": "Krithika", "value": 3 },
-            { "label": "Rohini", "title": "Rohini", "value": 4 },
-            { "label": "Mrigasira", "title": "Mrigasira", "value": 5 },
-            { "label": "Arudra", "title": "Arudra", "value": 6 },
-            { "label": "Punarvasu", "title": "Punarvasu", "value": 7 },
-            { "label": "Pushyami", "title": "Pushyami", "value": 8 },
-            { "label": "Aslesha", "title": "Aslesha", "value": 9 },
-            { "label": "Makha", "title": "Makha", "value": 10 },
-            { "label": "Pubba", "title": "Pubba", "value": 11 },
-            { "label": "Utharapalguni", "title": "Utharapalguni", "value": 12 },
-            { "label": "Hastham", "title": "Hastham", "value": 13 },
-            { "label": "Chitta", "title": "Chitta", "value": 14 },
-            { "label": "Swathi", "title": "Swathi", "value": 15 },
-            { "label": "Vishaka", "title": "Vishaka", "value": 16 },
-            { "label": "Anuradha", "title": "Anuradha", "value": 18 },
-            { "label": "Jesta", "title": "Jesta", "value": 19 },
-            { "label": "Moola", "title": "Moola", "value": 20 },
-            { "label": "Poorvashada", "title": "Poorvashada", "value": 21 },
-            { "label": "Utharashada", "title": "Utharashada", "value": 22 },
-            { "label": "Sravanam", "title": "Sravanam", "value": 23 },
-            { "label": "Dhanishta", "title": "Dhanishta", "value": 24 },
-            { "label": "Sathabisham", "title": "Sathabisham", "value": 25 },
-            { "label": "Poorvabadra", "title": "Poorvabadra", "value": 26 },
-            { "label": "Uthirabadra", "title": "Uthirabadra", "value": 27 },
-            { "label": "Revathi", "title": "Revathi", "value": 28 },
-            { "label": "Anuradha", "title": "Anuradha", "value": 30 },
-            { "label": "Arudra", "title": "Arudra", "value": 31 },
-            { "label": "Ashwini", "title": "Ashwini", "value": 32 },
-            { "label": "Aslesha", "title": "Aslesha", "value": 33 },
-            { "label": "Chitra", "title": "Chitra", "value": 34 },
-            { "label": "Dhanshita", "title": "Dhanshita", "value": 35 },
-            { "label": "Hasta", "title": "Hasta", "value": 36 },
-            { "label": "Jyehsta", "title": "Jyehsta", "value": 37 },
-            { "label": "Kritika", "title": "Kritika", "value": 38 },
-            { "label": "Magha", "title": "Magha", "value": 39 },
-            { "label": "Moola", "title": "Moola", "value": 40 },
-            { "label": "Mrigasira", "title": "Mrigasira", "value": 41 },
-            { "label": "Poorvabhadra", "title": "Poorvabhadra", "value": 42 },
-            { "label": "Poorvashadha", "title": "Poorvashadha", "value": 43 },
-            { "label": "Punarvasu", "title": "Punarvasu", "value": 44 },
-            { "label": "Poorvaphalguni", "title": "Poorvaphalguni", "value": 45 },
-            { "label": "Pushya", "title": "Pushya", "value": 46 },
-            { "label": "Satabisha", "title": "Satabisha", "value": 47 },
-            { "label": "Sravana", "title": "Sravana", "value": 48 },
-            { "label": "Swati", "title": "Swati", "value": 49 },
-            { "label": "Uttarashadha", "title": "Uttarashadha", "value": 50 },
-            { "label": "Uttarabhadrapada", "title": "Uttarabhadrapada", "value": 51 },
-            { "label": "Uttaraphalguni", "title": "Uttaraphalguni", "value": 52 },
-            { "label": "Visakha", "title": "Visakha", "value": 53 },
-            { "label": "Uttara", "title": "Uttara", "value": 54 },
-            { "label": "Uttarabhadra", "title": "Uttarabhadra", "value": 55 }
-        ]
+app.constant('arrayConstants', {
+    'MaritalStatus': [
+        { "label": "Unmarried", "title": "Unmarried", "value": 43 },
+        { "label": "Divorce", "title": "Divorce", "value": 44 },
+        { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
+        { "label": "Separated", "title": "Separated", "value": 46 }
+    ],
+    "height": [
+        { "label": "--Select--", "title": "--select--", "value": "0" },
+        { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
+        { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
+        { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
+        { "label": "4'5 in - 135 cms", "title": "4'5 in - 135 cms", "value": 6 }, { "label": "4'6 in - 137 cms", "title": "4'6 in - 137 cms", "value": 7 },
+        { "label": "4'7 in - 140 cms", "title": "4'7 in - 140 cms", "value": 8 },
+        { "label": "4'8 in - 142 cms", "title": "4'8 in - 142 cms", "value": 9 },
+        { "label": "4'9 in - 144 cms", "title": "4'9 in - 144 cms", "value": 10 }, { "label": "4'10 in - 147 cms", "title": "4'10 in - 147 cms", "value": 11 },
+        { "label": "4'11 in - 150 cms", "title": "4'11 in - 150 cms", "value": 12 }, { "label": "5'0 in - 152 cms", "title": "5'0 in - 152 cms", "value": 13 },
+        { "label": "5'1 in - 155 cms", "title": "5'1 in - 155 cms", "value": 14 }, { "label": "5'2 in - 157 cms", "title": "5'2 in - 157 cms", "value": 15 },
+        { "label": "5'3 in - 160 cms", "title": "5'3 in - 160 cms", "value": 16 }, { "label": "5'4 in - 162 cms", "title": "5'4 in - 162 cms", "value": 17 },
+        { "label": "5'5 in - 165 cms", "title": "5'5 in - 165 cms", "value": 18 }, { "label": "5'6 in - 167 cms", "title": "5'6 in - 167 cms", "value": 19 },
+        { "label": "5'7 in - 170 cms", "title": "5'7 in - 170 cms", "value": 20 }, { "label": "5'8 in - 172 cms", "title": "5'8 in - 172 cms", "value": 21 },
+        { "label": "5'9 in - 175 cms", "title": "5'9 in - 175 cms", "value": 22 }, { "label": "5'10 in - 177 cms", "title": "5'10 in - 177 cms", "value": 23 },
+        { "label": "5'11 in - 180 cms", "title": "5'11 in - 180 cms", "value": 24 }, { "label": "6'0 in - 183 cms", "title": "6'0 in - 183 cms", "value": 25 },
+        { "label": "6'1 in - 185 cms", "title": "6'1 in - 185 cms", "value": 26 }, { "label": "6'2 in - 188 cms", "title": "6'2 in - 188 cms", "value": 27 },
+        { "label": "6'3 in - 190 cms", "title": "6'3 in - 190 cms", "value": 28 }, { "label": "6'4 in - 193 cms", "title": "6'4 in - 193 cms", "value": 29 },
+        { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 }, { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
+        { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 }, { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
+        { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 }, { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
+        { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms\t", "title": "7'0 in - 213 cms\t", "value": 37 },
+        { "label": "7'1 in - 215 cms\t", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms\t", "title": "7'2 in - 218 cms\t", "value": 39 }
+    ],
+    "Religion": [
+        { "label": "--Select--", "title": "--select--", "value": "0" },
+        { "label": "Hindu", "title": "Hindu", "value": 1 },
+        { "label": "Christian", "title": "Christian", "value": 2 },
+        { "label": "Muslim", "title": "Muslim", "value": 3 },
+        { "label": "Other", "title": "Other", "value": 6 },
+        { "label": "Catholic", "title": "Catholic", "value": 9 },
+        { "label": "Roma Catholic", "title": "Roma Catholic", "value": 15 },
+        { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
+    ],
+    "Mothertongue": [
+        { "label": "Telugu", "title": "Telugu", "value": 1 },
+        { "label": "Tamil", "title": "Tamil", "value": 2 },
+        { "label": "Kannada", "title": "Kannada", "value": 3 },
+        { "label": "Hindi", "title": "Hindi", "value": 4 },
+        { "label": "Punjabi", "title": "Punjabi", "value": 5 },
+        { "label": "Urdu", "title": "Urdu", "value": 6 },
+        { "label": "Lambadi", "title": "Lambadi", "value": 7 },
+        { "label": "Marati", "title": "Marati", "value": 8 },
+        { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
+        { "label": "English", "title": "English", "value": 10 },
+        { "label": "Malayalam", "title": "Malayalam", "value": 11 },
+        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 }, { "label": "Orea", "title": "Orea", "value": 13 },
+        { "label": "telugu", "title": "telugu", "value": 14 }
+    ],
+    "educationcategory": [
+        { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
+        { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
+        { "label": "Diploma", "title": "Diploma", "value": 3 },
+        { "label": "Doctorate/phd", "title": "Doctorate/phd", "value": 4 },
+        { "label": "Masters in Engineering", "title": "Masters in Engineering", "value": 5 },
+        { "label": "Bachelors in Medicine", "title": "Bachelors in Medicine", "value": 6 },
+        { "label": "Masters in Degree", "title": "Masters in Degree", "value": 7 },
+        { "label": "Finance - ICWAI/CA/CS", "title": "Finance - ICWAI/CA/CS", "value": 10 },
+        { "label": "Union Public Service Commision-Civil Services", "title": "Union Public Service Commision-Civil Services", "value": 11 },
+        { "label": "Masters in Medicine", "title": "Masters in Medicine", "value": 13 },
+        { "label": "Below Graduation", "title": "Below Graduation", "value": 15 },
+        { "label": "Not given", "title": "Not given", "value": 21 },
+        { "label": "Other", "title": "Other", "value": 22 }
+    ],
+    "visastatus": [
+        { "label": "Student Visa", "title": "Student Visa", "value": 284 },
+        { "label": "Work Permit", "title": "Work Permit", "value": 285 },
+        { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
+        { "label": "Citizen", "title": "Citizen", "value": 521 },
+        { "label": "Permanent Resident", "title": "Permanent Resident", "value": 522 },
+        { "label": "Green Card", "title": "Green Card", "value": 553 }
+    ],
+    "stars": [
+        { "label": "Bharani", "title": "Bharani", "value": 2 },
+        { "label": "Krithika", "title": "Krithika", "value": 3 },
+        { "label": "Rohini", "title": "Rohini", "value": 4 },
+        { "label": "Mrigasira", "title": "Mrigasira", "value": 5 },
+        { "label": "Arudra", "title": "Arudra", "value": 6 },
+        { "label": "Punarvasu", "title": "Punarvasu", "value": 7 },
+        { "label": "Pushyami", "title": "Pushyami", "value": 8 },
+        { "label": "Aslesha", "title": "Aslesha", "value": 9 },
+        { "label": "Makha", "title": "Makha", "value": 10 },
+        { "label": "Pubba", "title": "Pubba", "value": 11 },
+        { "label": "Utharapalguni", "title": "Utharapalguni", "value": 12 },
+        { "label": "Hastham", "title": "Hastham", "value": 13 },
+        { "label": "Chitta", "title": "Chitta", "value": 14 },
+        { "label": "Swathi", "title": "Swathi", "value": 15 },
+        { "label": "Vishaka", "title": "Vishaka", "value": 16 },
+        { "label": "Anuradha", "title": "Anuradha", "value": 18 },
+        { "label": "Jesta", "title": "Jesta", "value": 19 },
+        { "label": "Moola", "title": "Moola", "value": 20 },
+        { "label": "Poorvashada", "title": "Poorvashada", "value": 21 },
+        { "label": "Utharashada", "title": "Utharashada", "value": 22 },
+        { "label": "Sravanam", "title": "Sravanam", "value": 23 },
+        { "label": "Dhanishta", "title": "Dhanishta", "value": 24 },
+        { "label": "Sathabisham", "title": "Sathabisham", "value": 25 },
+        { "label": "Poorvabadra", "title": "Poorvabadra", "value": 26 },
+        { "label": "Uthirabadra", "title": "Uthirabadra", "value": 27 },
+        { "label": "Revathi", "title": "Revathi", "value": 28 },
+        { "label": "Anuradha", "title": "Anuradha", "value": 30 },
+        { "label": "Arudra", "title": "Arudra", "value": 31 },
+        { "label": "Ashwini", "title": "Ashwini", "value": 32 },
+        { "label": "Aslesha", "title": "Aslesha", "value": 33 },
+        { "label": "Chitra", "title": "Chitra", "value": 34 },
+        { "label": "Dhanshita", "title": "Dhanshita", "value": 35 },
+        { "label": "Hasta", "title": "Hasta", "value": 36 },
+        { "label": "Jyehsta", "title": "Jyehsta", "value": 37 },
+        { "label": "Kritika", "title": "Kritika", "value": 38 },
+        { "label": "Magha", "title": "Magha", "value": 39 },
+        { "label": "Moola", "title": "Moola", "value": 40 },
+        { "label": "Mrigasira", "title": "Mrigasira", "value": 41 },
+        { "label": "Poorvabhadra", "title": "Poorvabhadra", "value": 42 },
+        { "label": "Poorvashadha", "title": "Poorvashadha", "value": 43 },
+        { "label": "Punarvasu", "title": "Punarvasu", "value": 44 },
+        { "label": "Poorvaphalguni", "title": "Poorvaphalguni", "value": 45 },
+        { "label": "Pushya", "title": "Pushya", "value": 46 },
+        { "label": "Satabisha", "title": "Satabisha", "value": 47 },
+        { "label": "Sravana", "title": "Sravana", "value": 48 },
+        { "label": "Swati", "title": "Swati", "value": 49 },
+        { "label": "Uttarashadha", "title": "Uttarashadha", "value": 50 },
+        { "label": "Uttarabhadrapada", "title": "Uttarabhadrapada", "value": 51 },
+        { "label": "Uttaraphalguni", "title": "Uttaraphalguni", "value": 52 },
+        { "label": "Visakha", "title": "Visakha", "value": 53 },
+        { "label": "Uttara", "title": "Uttara", "value": 54 },
+        { "label": "Uttarabhadra", "title": "Uttarabhadra", "value": 55 }
+    ]
 
-    }
-);
+});
 app.constant('config', function() {
     return {
         dbPath: '',
@@ -173,7 +171,7 @@ app.constant('config', function() {
 //             }
 
 //             var ModalInstanceCtrl = function($scope, $modalInstance, data) {
-//                 console.log(data);
+
 //                 $scope.data = data;
 //                 $scope.close = function() {
 //                     $modalInstance.close($scope.data);
@@ -481,10 +479,8 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
 
                 if (scope.counts == 1) {
                     scope.bindcounts(response.data.DashBoardCounts);
-                    console.log(response.data.DashBoardCounts);
                     scope.bindallcounts = response.data.DashBoardCounts;
                     scope.PersonalInfo = (response.data.PersonalInfo);
-                    console.log(response.data.PersonalInfo);
                     scope.photopersonal = scope.PersonalInfo.Photo;
                     scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                 }
@@ -587,7 +583,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             yourFilterexpress = yourFilter;
             oppfilterexpress = oppfilter;
         }
-         
+
         scope.startindexexpress = frompage === 1 ? 1 : scope.startindexexpress;
         scope.endindexexpress = frompage === 1 ? 9 : scope.endindexexpress;
         var exp = {
@@ -599,7 +595,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
             pageto: scope.endindexexpress
         };
         customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-            console.log(response.data);
+
             if (parseInt(frompage) === 1) {
                 scope.PartnerProfilesnew = [];
 
@@ -671,7 +667,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
         //  alert("sorry No Records Found");
     };
     scope.loadmorehideshow = function() {
-         
+
         if (scope.PartnerProfilesnew.length > 0) {
             scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
             scope.loadmoreexpress = (scope.totalrows > scope.endindexexpress) ? true : false;
@@ -680,7 +676,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
         }
     };
     scope.allloadmorepaging = function() {
-         
+
         scope.spinexpress = true;
         scope.Norowsendexpress = false;
         switch (scope.typeofdiv) {
@@ -704,7 +700,7 @@ app.controller('Controllerpartner', ['$scope', 'customerDashboardServices', 'aut
     scope.showLoginxxxx = function() {
         //scope.$broadcast('alertzero');
         $("#myModalsss").modal();
-         
+
         // scope.loggingIn = true;
         // $(".alert").removeClass("in").show();
         // $(".alert").delay(2000).addClass("in").fadeOut(2000);
@@ -927,56 +923,54 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     };
 
 }]);
-app.controller('mobileverifyController',function(){
+app.controller('mobileverifyController', function() {
 
 
 });
-app.controller("payment",function()
-{
+app.controller("payment", function() {
 
 });
-app.controller("registration", function () {
+app.controller("registration", function() {
 
 });
-app.controller("registrationReg", function () {
+app.controller("registrationReg", function() {
 
 });
-app.controller('advancesearchCtrl', ['$scope', function (scope) {
+app.controller('advancesearchCtrl', ['$scope', function(scope) {
     scope.data = [];
 }]);
-app.controller('Generalsearch',['$scope',function(scope){
-    scope.data=[];
-}]);
-app.controller('profileidsrch',['$scope',function(scope){
-    scope.data=[];
-}]);
-app.controller('savedsearchCtrl', ['$scope', function (scope) {
+app.controller('Generalsearch', ['$scope', function(scope) {
     scope.data = [];
 }]);
-app.controller('aboutus', ['$scope', function (scope) {
+app.controller('profileidsrch', ['$scope', function(scope) {
+    scope.data = [];
 }]);
- app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
-     scope.groups = [{
-             title: "Dynamic Group Header - 1",
-             content: "Dynamic Group Body - 1",
-             open: false
-         },
-         {
-             title: "Dynamic Group Header - 2",
-             content: "Dynamic Group Body - 2",
-             open: false
-         }
-     ];
+app.controller('savedsearchCtrl', ['$scope', function(scope) {
+    scope.data = [];
+}]);
+app.controller('aboutus', ['$scope', function(scope) {}]);
+app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
+    scope.groups = [{
+            title: "Dynamic Group Header - 1",
+            content: "Dynamic Group Body - 1",
+            open: false
+        },
+        {
+            title: "Dynamic Group Header - 2",
+            content: "Dynamic Group Body - 2",
+            open: false
+        }
+    ];
 
-     scope.addNew = function() {
-         scope.groups.push({
-             title: "New One Created",
-             content: "Dynamically added new one",
-             open: false
-         });
-     };
+    scope.addNew = function() {
+        scope.groups.push({
+            title: "New One Created",
+            content: "Dynamically added new one",
+            open: false
+        });
+    };
 
- }]);
+}]);
 app.controller('ModalDemoCtrl', function($uibModal, $log, $scope) {
     $scope.ddlvals = "aaaa";
     var $ctrl = this;
@@ -1246,23 +1240,23 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', function(uibModal,
 
 
 }]);
-app.controller("blockerController",function(){
+app.controller("blockerController", function() {
 
 
 });
-app.controller("myorders",function(){
+app.controller("myorders", function() {
 
 
 });
-app.controller("ourbranches", function () {
+app.controller("ourbranches", function() {
 
 });
-app.controller('privacypolicy', ['$scope', function (scope) {
+app.controller('privacypolicy', ['$scope', function(scope) {
     //hide #back-top first
     $(".back-to-top").hide();
-    scope.initprivacy = function () {
+    scope.initprivacy = function() {
         // fade in #back-top    
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             if ($(this).scrollTop() > 100) {
                 $('.back-to-top').fadeIn();
             } else {
@@ -1270,7 +1264,7 @@ app.controller('privacypolicy', ['$scope', function (scope) {
             }
         });
         // scroll body to 0px on click
-        $('.back-to-top').click(function () {
+        $('.back-to-top').click(function() {
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
@@ -1279,43 +1273,41 @@ app.controller('privacypolicy', ['$scope', function (scope) {
     };
 
 }]);
-app.controller("profilesettings", function () {
+app.controller("profilesettings", function() {
 
 });
-app.controller('suceesstories', ['$scope', 'successstoriesdata', function (scope, suceessdata) {
+app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope, suceessdata) {
     scope.success = [];
 
     scope.flag = 8;
     scope.fromge = 1;
     scope.topage = 8;
-    scope.init = function () {
-        suceessdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
-            console.log(response.data);
+    scope.init = function() {
+        suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
             scope.success = response.data;
         });
     };
-    $(window).scroll(function () {
+    $(window).scroll(function() {
 
         if ($(window).scrollTop() == $(document).height() - $(window).height()) {
             scope.flag += 8;
             scope.fromge = scope.flag - 7;
             scope.topage = scope.flag;
-            suceessdata.suceessdataget(scope.fromge, scope.topage).then(function (response) {
+            suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
                 scope.success = $.unique((scope.success).concat(response.data));
             });
         }
     });
 }]);
-app.controller("supporttickets",function()
-{
+app.controller("supporttickets", function() {
 
 });
-app.controller('termsandconditions', ['$scope', function (scope) {
+app.controller('termsandconditions', ['$scope', function(scope) {
     //hide #back-top first
     $(".back-to-top").hide();
-    scope.initconditions = function () {
+    scope.initconditions = function() {
         // fade in #back-top    
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             if ($(this).scrollTop() > 100) {
                 $('.back-to-top').fadeIn();
             } else {
@@ -1323,7 +1315,7 @@ app.controller('termsandconditions', ['$scope', function (scope) {
             }
         });
         // scroll body to 0px on click
-        $('.back-to-top').click(function () {
+        $('.back-to-top').click(function() {
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
@@ -1332,16 +1324,13 @@ app.controller('termsandconditions', ['$scope', function (scope) {
     };
 
 }]);
-app.controller("upgrademembership",function()
-{
+app.controller("upgrademembership", function() {
 
 });
-app.controller("viewmyprofile",function()
-{
+app.controller("viewmyprofile", function() {
 
 });
-app.controller("viewFullProfileCustomer",function()
-{
+app.controller("viewFullProfileCustomer", function() {
 
 });
 //  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {
@@ -1366,7 +1355,6 @@ app.controller("viewFullProfileCustomer",function()
 app.factory('authSvc', ['$injector', function($injector) {
 
     function setUser(value) {
-        //console.log(value);
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
@@ -1431,7 +1419,7 @@ app.factory('authSvc', ['$injector', function($injector) {
             clearUserSession();
         },
         login: function(username, password) {
-             
+
             var body = {
                 Username: username,
                 Password: password
@@ -1461,7 +1449,7 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid } });
         },
         getexpressintersetdata: function(object) {
-             
+
             return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object)
 
         }
