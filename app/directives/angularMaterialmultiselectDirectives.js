@@ -19,8 +19,10 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
                 scope.Castehide = scope.castehideval === 'castehid' ? true : false;
                 scope.selectall = function() {
+
                     timeout(function() {
                         scope.checkVal = !scope.checkVal;
+
                         if (scope.model === undefined)
                             scope.model = [];
                         if (scope.model.length === parseInt(scope.Caste.length)) {
@@ -30,11 +32,18 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                                 scope.model.push(item.value);
                             });
                         }
+                        console.log("Model" + scope.model);
+                        console.log("array" + scope.array.length);
                     }, 50);
+
                 };
-                // scope.isChecked = function() {
-                //     return scope.model.length === scope.Caste.length;
-                // };
+                scope.selectoption = function(checkedvalue) {
+                    console.log(scope.model.length);
+                    console.log(scope.array.length);
+                    if (checkedvalue) {
+
+                    }
+                };
                 scope.exists = function(item) {
                     return scope.Caste.indexOf(item) > -1;
                 };

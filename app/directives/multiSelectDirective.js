@@ -37,7 +37,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'Mothertongue':
                         scope.databind(cons.Mothertongue);
                         break;
-
+                    case 'Mothertongueselect':
+                        scope.databind(cons.Mothertongueselect);
+                        break;
                     case 'educationcategory':
                         scope.databind(cons.educationcategory);
                         break;
@@ -87,6 +89,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         break;
 
                     case 'RelationshipType':
+
                         scope.databind(cons.RelationshipType);
                         break;
 
@@ -219,6 +222,40 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         }
                         scope.databind(test);
                         break;
+                        // case 'Days':
+
+                        //     var Arr = [];
+                        //     Arr.push({ label: "--select--", title: "--select--", value: "0" });
+                        //     for (var i = 1; i <= 31; i++) {
+                        //         var strValue = null;
+                        //         if (i <= 9) {
+                        //             strValue = "0" + i;
+                        //         } else {
+                        //             strValue = i;
+                        //         }
+                        //         Arr.push({ "label": strValue, "title": strValue, "value": strValue });
+                        //     }
+                        //     scope.databind(Arr);
+
+                        //     break;
+
+                        // case 'Months':
+                        //     var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        //     var option = [];
+                        //     option.push({ label: "--select--", title: "--select--", value: "0" });
+                        //     _.each(monthArr, function(item) {
+                        //         option.push({ "label": item, "title": item, "value": item });
+                        //     });
+                        //     scope.databind(option);
+                        //     break;
+                        // case "Years":
+                        //     var Arr = [];
+                        //     Arr.push({ label: "--select--", title: "--select--", value: "0" });
+                        //     for (var i = 1998; i >= 1936; i--) {
+                        //         Arr.push({ "label": i, "title": i, "value": i });
+                        //     }
+                        //     scope.databind(Arr);
+                        //     break;
                 }
             }, 1000);
             element.multiselect({

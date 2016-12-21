@@ -58,6 +58,23 @@ app.constant('arrayConstants', {
         { "label": "Orea", "title": "Orea", "value": 13 },
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
+    "Mothertongueselect": [
+        { "label": "--select--", "title": "--select--", "value": 0 },
+        { "label": "Telugu", "title": "Telugu", "value": 1 },
+        { "label": "Tamil", "title": "Tamil", "value": 2 },
+        { "label": "Kannada", "title": "Kannada", "value": 3 },
+        { "label": "Hindi", "title": "Hindi", "value": 4 },
+        { "label": "Punjabi", "title": "Punjabi", "value": 5 },
+        { "label": "Urdu", "title": "Urdu", "value": 6 },
+        { "label": "Lambadi", "title": "Lambadi", "value": 7 },
+        { "label": "Marati", "title": "Marati", "value": 8 },
+        { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
+        { "label": "English", "title": "English", "value": 10 },
+        { "label": "Malayalam", "title": "Malayalam", "value": 11 },
+        { "label": "Saurashtra", "title": "Saurashtra", "value": 12 },
+        { "label": "Orea", "title": "Orea", "value": 13 },
+        { "label": "telugu", "title": "telugu", "value": 14 }
+    ],
     "educationcategory": [
 
         { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },

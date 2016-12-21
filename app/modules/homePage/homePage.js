@@ -5,16 +5,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
-            successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-                scope.successstoriesarray = response.data;
+            timeout(function() {
+                successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
+                    scope.successstoriesarray = response.data;
+                });
                 scope.gender = "2";
-                scope.selectAgefrom = {};
-                timeout(function() {
-                    scope.Agefrom = 18;
-                    scope.Ageto = 30;
-                    scope.religion = 1;
-                }, 1000);
-            });
+                scope.Agefrom = 18;
+                scope.Ageto = 30;
+                scope.religion = 1;
+            }, 1000);
         };
         scope.divloginblock = function() {
             $('.login_block_header').toggle();
