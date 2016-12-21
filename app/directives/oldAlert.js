@@ -16,9 +16,13 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout',
                         templateUrl: 'oldAlert.html',
                         scope: scope
                     });
-                    timeout(function() {
-                        scope.close();
-                    }, time || 4500);
+                    if (scope.msgs === "upgrade") {
+
+                    } else {
+                        timeout(function() {
+                            scope.close();
+                        }, time || 4500);
+                    }
                 });
                 scope.close = function() {
                     modalinstance.close();

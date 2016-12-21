@@ -1048,9 +1048,13 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout',
                         templateUrl: 'oldAlert.html',
                         scope: scope
                     });
-                    timeout(function() {
-                        scope.close();
-                    }, time || 4500);
+                    if (scope.msgs === "upgrade") {
+
+                    } else {
+                        timeout(function() {
+                            scope.close();
+                        }, time || 4500);
+                    }
                 });
                 scope.close = function() {
                     modalinstance.close();
@@ -1200,6 +1204,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1211,12 +1216,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             EncriptedTextrvr: null,
                             EncryptedRejectFlagTextrvr: null,
                             StrHtmlText: form !== undefined ? form.message : null,
-                            MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                            MessageLinkId: typeofactionflag !== undefined && typeofactionflag !== false ? typeofactionflag : null,
                             MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
                             Logid: logid !== undefined ? logid : null,
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
+
                         scope.servicehttp(type, object);
                     } else {
                         scope.$emit('showloginpopup');
@@ -2845,6 +2851,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         };
         scope.generalpageload = function() {
+            $("#slider_range").slider({
+                range: true,
+                min: 18,
+                max: 75,
+                values: [21, 24],
+                slide: function(event, ui) {
+                    $("#amount").val((ui.values[0]));
+                    $("#amountto").val((ui.values[1]));
+                }
+            });
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();

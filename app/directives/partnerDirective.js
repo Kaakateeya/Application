@@ -139,6 +139,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -150,12 +151,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             EncriptedTextrvr: null,
                             EncryptedRejectFlagTextrvr: null,
                             StrHtmlText: form !== undefined ? form.message : null,
-                            MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                            MessageLinkId: typeofactionflag !== undefined && typeofactionflag !== false ? typeofactionflag : null,
                             MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
                             Logid: logid !== undefined ? logid : null,
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
+
                         scope.servicehttp(type, object);
                     } else {
                         scope.$emit('showloginpopup');
