@@ -2851,16 +2851,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
         };
         scope.generalpageload = function() {
-            $("#slider_range").slider({
-                range: true,
-                min: 18,
-                max: 75,
-                values: [21, 24],
-                slide: function(event, ui) {
-                    $("#amount").val((ui.values[0]));
-                    $("#amountto").val((ui.values[1]));
-                }
-            });
+
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
