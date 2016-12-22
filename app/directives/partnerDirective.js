@@ -150,25 +150,50 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             EncryptedRejectFlagText: null,
                             EncriptedTextrvr: null,
                             EncryptedRejectFlagTextrvr: null,
-                            StrHtmlText: form !== undefined ? form.message : null,
-                            MessageLinkId: typeofactionflag !== undefined && typeofactionflag !== false ? typeofactionflag : null,
-                            MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
+                            StrHtmlText: null,
+                            MessageLinkId: null,
+                            MessageHistoryId: null,
                             Logid: logid !== undefined ? logid : null,
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-
-
-                        console.log(object);
-                        scope.servicehttp(type, object);
+                        if (type === "E") {
+                            if (loginpaidstatus === "1") {
+                                scope.servicehttp(type, object);
+                            } else {
+                                scope.$emit('successfailer', "upgrade", "warning");
+                            }
+                        } else {
+                            scope.servicehttp(type, object);
+                        }
                     } else {
                         scope.$emit('showloginpopup');
-
                     }
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-                    scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
+                    //scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
+                    if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                        var indexvalue = scope.indexvalues;
+                        var object = {
+                            IFromCustID: logincustid,
+                            IToCustID: tocustid,
+                            TypeofInsert: type,
+                            EncriptedText: null,
+                            EncryptedRejectFlagText: null,
+                            EncriptedTextrvr: null,
+                            EncryptedRejectFlagTextrvr: null,
+                            StrHtmlText: form !== undefined ? form.message : null,
+                            MessageLinkId: typeofactionflag !== undefined && typeofactionflag !== "" && typeofactionflag !== null ? typeofactionflag : null,
+                            MessageHistoryId: MessageHistoryId !== undefined && MessageHistoryId !== null && MessageHistoryId !== "" ? MessageHistoryId : null,
+                            Logid: logid !== undefined ? logid : null,
+                            FromProfileID: loginprofileid,
+                            ToProfileID: null
+                        };
+                        scope.servicehttp(type, object);
+                    } else {
+                        scope.$emit('showloginpopup');
+                    }
                     scope.$emit("modalpopupclose", event);
                 });
                 scope.sendmessegescommon = function(type, tocustid) {

@@ -44,7 +44,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                             console.log(scope.array);
                         }
                         //else if (scope.selectallMdl && _.where(scope.model, function(item) { item !== 0 }).length === 0) {
-                        //
                         else if (scope.selectallMdl && scope.model.length <= scope.array.length) {
                             console.log(scope.model.length);
                             console.log(scope.array.length);
