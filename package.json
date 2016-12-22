@@ -76,7 +76,8 @@
             "node_modules/angular-password/angular-password.min.js",
             "node_modules/angular-material-icons/angular-material-icons.min.js",
             "node_modules/moment/min/moment.min.js",
-            "node_modules/registration/dist/js/main.min.js"
+            "node_modules/registration/dist/js/main.min.js",
+            "bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"
 
         ],
         "css": [
