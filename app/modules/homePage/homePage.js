@@ -1,7 +1,7 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout', 'missingFieldService',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.homeinit = function() {
@@ -50,15 +50,40 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-
+                        console.log(response);
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
-                        if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
-                            window.location = "#/home";
-                        } else {
-                            window.location = "#/mobileverf";
-                        }
+                        var responsemiss = response;
+                        missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
+                            console.log('custStatus');
+                            console.log(innerresponse.data);
+
+
+                            var missingStatus = null,
+                                custProfileStatus = null;
+                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                            if (datav !== null) {
+                                missingStatus = parseInt((datav[0].split(':'))[1]);
+                                custProfileStatus = parseInt((datav[1].split(':'))[1]);
+                            }
+
+                            if (custProfileStatus === 439) {
+                                if (missingStatus === 0) {
+                                    if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
+                                        window.location = "#/home";
+                                    } else {
+                                        window.location = "#/mobileverf";
+                                    }
+                                } else {
+                                    window.location = "#/missingfields/" + missingStatus;
+                                }
+                            } else {
+                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                            }
+
+                        });
+
                     });
                 }
             }

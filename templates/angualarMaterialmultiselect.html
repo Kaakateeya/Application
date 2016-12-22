@@ -4,7 +4,7 @@
         <input ng-model="caste" type="search" class="demo-header-searchbox md-text">
     </md-select-header>
     <md-optgroup label="Caste">
-        <md-option ng-click="selectall()" ng-hide="Castehide">selectall</md-option>
+        <md-option ng-click="selectall()" ng-model="selectallMdl" ng-value="0" ng-hide="Castehide">selectall</md-option>
         <md-option ng-value="caste.value" ng-click="selectoption()" ng-repeat="caste in Caste |
         filter:caste">{{caste.label}}</md-option>
     </md-optgroup>

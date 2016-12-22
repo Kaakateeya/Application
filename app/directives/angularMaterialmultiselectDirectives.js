@@ -15,6 +15,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
 
             templateUrl: "templates/angualarMaterialmultiselect.html",
             link: function(scope, element, attrs) {
+                scope.selectallMdl = false;
                 scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
                 scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
                 scope.Castehide = scope.castehideval === 'castehid' ? true : false;
@@ -22,27 +23,37 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
 
                     timeout(function() {
                         scope.checkVal = !scope.checkVal;
-
-                        if (scope.model === undefined)
-                            scope.model = [];
-                        if (scope.model.length === parseInt(scope.Caste.length)) {
-                            scope.model = [];
-                        } else if (scope.model.length === 1 || scope.model.length !== parseInt(scope.Caste.length)) {
+                        scope.selectallMdl = scope.selectallMdl ? false : true;
+                        if (scope.selectallMdl) {
                             _.each(scope.Caste, function(item) {
                                 scope.model.push(item.value);
                             });
+                        } else {
+                            scope.model = [];
                         }
-                        console.log("Model" + scope.model);
-                        console.log("array" + scope.array.length);
                     }, 50);
 
                 };
                 scope.selectoption = function(checkedvalue) {
-                    console.log(scope.model.length);
-                    console.log(scope.array.length);
-                    if (checkedvalue) {
+                    timeout(function() {
 
-                    }
+                        if (!scope.selectallMdl && scope.model.length === scope.array.length) {
+                            scope.selectallMdl = true;
+                            scope.model.push(0);
+                            console.log(scope.model);
+                            console.log(scope.array);
+                        }
+                        //else if (scope.selectallMdl && _.where(scope.model, function(item) { item !== 0 }).length === 0) {
+                        //
+                        else if (scope.selectallMdl && scope.model.length <= scope.array.length) {
+                            console.log(scope.model.length);
+                            console.log(scope.array.length);
+
+                            scope.selectallMdl = false;
+                            scope.model = [];
+                            //scope.model.pop(0);
+                        }
+                    }, 50);
                 };
                 scope.exists = function(item) {
                     return scope.Caste.indexOf(item) > -1;

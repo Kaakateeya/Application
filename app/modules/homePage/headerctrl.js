@@ -1,5 +1,5 @@
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window', '$state',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window', '$state', 'missingFieldService',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state, missingFieldService) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -86,18 +86,43 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
+                        console.log(response);
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
-                        if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
-                            window.location = "#/home";
-                        } else {
-                            window.location = "#/mobileverf";
-                        }
+                        var responsemiss = response;
+                        missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
+                            console.log('custStatus');
+                            console.log(innerresponse.data);
+
+                            var missingStatus = null,
+                                custProfileStatus = null;
+                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                            if (datav !== null) {
+                                missingStatus = parseInt((datav[0].split(':'))[1]);
+                                custProfileStatus = parseInt((datav[1].split(':'))[1]);
+                            }
+
+                            if (custProfileStatus === 439) {
+                                if (missingStatus === 0) {
+                                    if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
+                                        window.location = "#/home";
+                                    } else {
+                                        window.location = "#/mobileverf";
+                                    }
+                                } else {
+                                    window.location = "#/missingfields/" + missingStatus;
+                                }
+                            } else {
+                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                            }
+
+                        });
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
+
                 }
             }
         };

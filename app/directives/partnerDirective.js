@@ -158,6 +158,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
 
+
+                        console.log(object);
                         scope.servicehttp(type, object);
                     } else {
                         scope.$emit('showloginpopup');

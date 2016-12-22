@@ -687,7 +687,7 @@
     <div ng-controller="searchregistration">
         <form name="regForm" novalidate role="form" >
            <div class="modal-header" style="min-height: 2.43px;padding: 9px;border-bottom: 1px solid #e5e5e5;">
-            <h3 class="modal-title text-center" id="modal-title">Register Free
+            <h3 class="modal-title text-center" id="modal-title" style="color: #b11212;font-weight: 600;">Register Free
                     <button type="button" class="close" ng-click="cancelpopup()">×</button>
                     </h3>
                         </div>
@@ -695,7 +695,7 @@
                             <ul id="ulregistration" class="modal-body clearfix">
                                 <li class="row clearfix" style="margin-top: -20px;">
                                     <label  class="pop_label_left col-lg-4">Gender<span style="color: red; margin-left: 3px;">*</span></label>
-                                    <md-input-container class="col-lg-6" style="margin-top: 0px !important;">
+                                    <md-input-container class="col-lg-8" style="margin-top: 0px !important;">
                                         <md-radio-group ng-required="true" name="rbtngender" layout="row" ng-model="reg.rbtngender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                             <md-radio-button value="1" class="md-primary">Male</md-radio-button>
                                             <md-radio-button value="2"> Female </md-radio-button>
@@ -715,23 +715,17 @@
                                 </li>
                                <br/>
                                 <li class="row clearfix" >
-                                    <label  class="pop_label_left col-lg-4">Email<span style="color: red; margin-left: 3px;">*</span></label>
-                                    <div class="pop_controls_right select-box-my  col-lg-8">
-                                        <input required="" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control" name="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;" ng-pattern="/^.+@.+\..+$/" ng-blur="valueExists('email',0,reg.txtEmail);">
+                                    <label  class="pop_label_left col-lg-4">Email&Password<span style="color: red; margin-left: 3px;">*</span></label>
+                                    <div class="pop_controls_right select-box-my  select-box-my-double col-lg-8">
+                                        <input required="" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control col-lg-4" name="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;width:59%;" ng-pattern="/^.+@.+\..+$/" ng-blur="valueExists('email',0,reg.txtEmail);">
+                                          <input maxlength="15" placeholder="Password" class="form-control col-lg-4" style="border: 1px solid #cac3c3 !important;border-radius: 3px !important;width:40%;margin-left: 3px;height: 33px !important;" required="" md-asterisk="" name="txtpassword" ng-model="reg.txtpassword" type="password">  
                                     </div>
-                                 </li>
-                                 <br/>
-                                <li class="row clearfix">
-                                    <label  class="pop_label_left col-lg-4">Password<span style="color: red; margin-left: 3px;">*</span></label>
-                                        <div class="pop_controls_right select-box-my  col-lg-8">
-                                        <input maxlength="15" placeholder="Password" class="form-control" style="border: 1px solid #cac3c3 !important;border-radius: 2px !important;" required="" md-asterisk="" name="txtpassword" ng-model="reg.txtpassword" type="password">                     
-                                    </div>
-                                </li>
-                                 <br/>
+                                 </li>                     
+                               
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Posted by<span style="color: red; margin-left: 3px;">*</span></label>
                                       <div class="pop_controls_right select-box-my col-lg-8">
-                                        <select multiselectdropdown  ng-model="reg.ddlpostedby" required="" typeofdata="'RelationshipType'">
+                                        <select multiselectdropdown  ng-model="reg.ddlpostedby" required="" typeofdata="'childStayingWith'">
                                            </select>
                                    </div>
                                 </li>
@@ -750,23 +744,16 @@
                                 </li>
                                   <br/>
                                 <li class="row">
-                                    <label  class="pop_label_left col-lg-4">Religion<span style="color: red; margin-left: 3px;">*</span></label>
-                                    <div class="pop_controls_right select-box-my col-lg-8">
-                                        <select multiselectdropdown   typeofdata="'Religion'"  name="ddlreligion" ng-model="reg.ddlreligion" required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
+                                    <label  class="pop_label_left col-lg-4">Religion&MotherTongue<span style="color: red; margin-left: 3px;">*</span></label>
+                                    <div class="pop_controls_right select-box-my select-box-my-double col-lg-8">
+                                        <select multiselectdropdown  style="width:50%;"  typeofdata="'Religion'"  name="ddlreligion" ng-model="reg.ddlreligion"   required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
                                         </select>
-                                    </div>
-                                </li>
-                                 <br/>
-                                <li class="row">
-                                    <label  class="pop_label_left col-lg-4">Mother Tongue<span style="color: red; margin-left: 3px;">*</span></label>
-                                   <div class="pop_controls_right select-box-my col-lg-8">
-                                        <select multiselectdropdown  typeofdata="'Mothertongueselect'" name="ddlmothertongue" ng-model="reg.ddlmothertongue" required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
+                                           <select multiselectdropdown  style="width:50%;" typeofdata="'Mothertongueselect'" name="ddlmothertongue" ng-model="reg.ddlmothertongue" required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
                                        </select>
-                                       
                                     </div>
                                 </li>
                                  <br/>
-                                <li class="row">
+                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Caste<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  col-lg-8">
                                         <select name="ddlcaste"  multiselectdropdown typeofdata="" ng-options="item.value as item.label for item in casteArr"  ng-model="reg.ddlcaste" required="">
@@ -792,7 +779,7 @@
                                     </div>
                                 </li>
                                   <br/>
-                                <li class="row">
+                                <li class="row" ng-hide="true">
                                     <label  class="pop_label_left col-lg-4">Land Number<span style="color: red; margin-left: 3px;">*</span></label>
                                      <div class="pop_controls_right select-box-my select-box-my-trible col-lg-8">
                                              <select  multiselectdropdown  typeofdata="'countryCode'" name="ddllandcountry" ng-model="reg.ddllandcountry" ng-required="((regForm.txtMobileNo.$valid && regForm.ddlmobilecountry.$valid) || regForm.ddllandcountry.$valid)?false:true" >
@@ -801,9 +788,8 @@
                                           <input maxlength="8" class="form-control" ng-required="((regForm.txtMobileNo.$valid && regForm.ddlmobilecountry.$valid) || regForm.txtlandNum.$valid)?false:true" md-no-asterisk="" name="txtlandNum" ng-model="reg.txtlandNum" ng-pattern="/^[0-9]+$/" style="border: 1px solid #a29b9b;width:32%;;margin-top:0px;">
                                     </div>
                                 </li>
-                            </ul>
-                        <div layout="row">
-                                <md-input-container class="col-lg-8">
+                                <li class="row">
+                                     <md-input-container class="col-lg-8">
                                     <md-checkbox ng-model="reg.Chkprivacy" name="Chkprivacy" aria-label="Checkbox 1" ng-required="true" md-asterisk="">
                                         I agree to the
                                         <a ng-model="reg.lnkprivacyPolicy" Font-Size="12px" ng-click="redirectprivacy()">Privacy Policy and T&C.</a>
@@ -815,8 +801,48 @@
                             <div class="reg_submit clearfix" class="col-lg-4">
                                 <md-button class="md-raised md-warn" ng-click="regForm.$valid && regSubmit(reg);" ng-disabled="regForm.$invalid">SUBMIT</md-button>
                             </div>
+                            </li>
+                            <li class="row">
+                                <a href="javascript:void(0)" style="color: #d61c1c;font-weight: 600;margin-top:-10px;" ng-click="showloginpopupnew()">Existing User Login</a>
+                            </li>
+                            </ul>
                         </div>
+                        </form>
                     </div>
-                    </form>
-                </div>
-                </script>
+                    </script>
+
+
+                    <script type="text/ng-template" id="loginpopup.html">
+                        <form name="myFormlogin">
+                            <div class="modal-header">
+                                <h4>Existing User Login <i class="material-icons pull-right" ng-click="cancelpopup()">close</i></a>
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>To login into your account, please provide your username and password</p>
+                                <br />
+                                <div layout="row">
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>UserName</label>
+                                        <input type="text" id="txtusername" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.username" required style="border: 1px solid #a59898 !important;
+                                border-radius: 3px !important;">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Password</label>
+                                        <input type="password" id="txtPassword" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
+       border-radius: 3px !important;">
+                                    </md-input-container>
+                                </div>
+                                <p class="col-lg-offset-1">To create your kaakateeya matrimonial account Click <a href="#/registration" style="color: maroon;">Register Now</a></p>
+                            </div>
+                            <div class="modal-footer">
+                                <md-button ng-click="loginsubmit(formloagin)" class="md-raised md-warn" ng-disabled="myFormlogin.$invalid">
+                                    Login
+                                </md-button>
+                                <md-button ng-click="cancelpopup()" type="button">
+                                    Cancel
+                                </md-button>
+
+                            </div>
+                        </form>
+                    </script>

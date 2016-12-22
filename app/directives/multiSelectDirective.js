@@ -92,7 +92,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
 
                         scope.databind(cons.RelationshipType);
                         break;
-
+                    case "childStayingWith":
+                        scope.databind(cons.childStayingWith);
+                        break;
                     case 'hereabout':
                         scope.databind(cons.hereabout);
                         break;

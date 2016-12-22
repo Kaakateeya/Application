@@ -50,7 +50,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'aboutUs', url: '/aboutUs', templateUrl: 'app/modules/static/aboutUs.html', isloginrequired: false },
         { name: 'homedummy', url: '/homedummy', templateUrl: 'app/modules/homePage/homepagedummy.html', isloginrequired: false },
         { name: 'paymentresponse', url: '/paymentresponse', templateUrl: 'app/modules/payments/views/paymentResponse.html', isloginrequired: false },
-        { name: 'missingfields', url: '/missingfields', templateUrl: 'app/modules/missingfieldspage/missingfields.html', controller: "missingfieldsctrl", isloginrequired: false }
+        { name: 'missingfields', url: '/missingfields/:id', templateUrl: 'app/modules/missingfieldspage/missingfields.html', controller: "missingfieldsctrl", isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');

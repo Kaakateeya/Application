@@ -1,6 +1,6 @@
-app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout',
+app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce',
 
-    function(commonFactory, uibModal, timeout) {
+    function(commonFactory, uibModal, timeout, $sce) {
         var modalinstance;
         return {
             restrict: "E",
@@ -19,6 +19,7 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout',
                     if (scope.msgs === "upgrade") {
 
                     } else {
+                        scope.msgs = $sce.trustAsHtml(msg);
                         timeout(function() {
                             scope.close();
                         }, time || 4500);

@@ -330,6 +330,34 @@ app.constant('arrayConstants', {
         { label: 'Yes', title: 'Yes', value: 511 },
         { label: 'No', title: 'No', value: 512 },
         { label: 'No Answer', title: 'No Answer', value: 513 },
+    ],
+    'childStayingWith': [
+        { "label": "--select-- ", "title": "--select--", "value": 0 },
+        { "label": "Father", "title": "Father", "value": 39 },
+        { "label": "Mother", "title": "Mother", "value": 40 },
+        { "label": "YoungerBrother", "title": "YoungerBrother", "value": 41 },
+        { "label": "ElderBrother", "title": "ElderBrother", "value": 42 },
+        { "label": "Self", "title": "Self", "value": 283 },
+        { "label": "YoungerSister", "title": "YoungerSister", "value": 321 },
+        { "label": "ElderSister", "title": "ElderSister", "value": 322 },
+        { "label": "FatherYoungerBrother", "title": "FatherYoungerBrother", "value": 323 },
+        { "label": "FatherElderBrother", "title": "FatherElderBrother", "value": 324 },
+        { "label": "FatherYoungerSister", "title": "FatherYoungerSister", "value": 325 },
+        { "label": "FatherElderSister", "title": "FatherElderSister", "value": 326 },
+        { "label": "MotherYoungerBrother", "title": "MotherYoungerBrother", "value": 327 },
+        { "label": "MotherElderBrother", "title": "MotherElderBrother", "value": 328 },
+        { "label": "MotherYoungerSister", "title": "MotherYoungerSister", "value": 329 },
+        { "label": "MotherElderSister", "title": "MotherElderSister", "value": 320 },
+        { "label": "Spouse", "title": "Spouse", "value": 334 },
+        { "label": "XRelation", "title": "XRelation", "value": 554 },
+        { "label": "GrandFather", "title": "GrandFather", "value": 556 },
+        { "label": "GrandMother", "title": "GrandMother", "value": 557 },
+        { "label": "SisterHusband", "title": "SisterHusband", "value": 558 },
+        { "label": "Friend", "title": "Friend", "value": 559 },
+        { "label": "Relative", "title": "Relative", "value": 560 },
+        { "label": "Uncle", "title": "Uncle", "value": 561 },
+        { "label": "Aunt", "title": "Aunt", "value": 562 }
+
     ]
 
 });

@@ -11,8 +11,10 @@
         </div>
     </div>
     <div class="modal-body" id="modalbodyID">
+
         <p>
-            <label style="color:blue;" ng-show="msgs==='upgrade'?false:true">{{msgs}}</label>
+            <label style="color:rgb(82, 24, 185);" ng-bind-html="msgs" ng-show="msgs==='upgrade'?false:true">
+            </label>
             <label ng-show="msgs==='upgrade'?true:false">please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a></label>
         </p>
     </div>
@@ -20,3 +22,6 @@
         <button type="button" class="btn btn-default" ng-click="close();">Close</button>
     </div>
 </script>
+<!--<label ng-show="msgs==='upgrade'?true:false">please <a style="color:green;" href="#/UpgradeMembership"> Upgrade online membership</a></label>-->
+
+<!--<label style="color:blue;" ng-show="msgs==='upgrade'?false:true">{{msgs}}</label>-->
