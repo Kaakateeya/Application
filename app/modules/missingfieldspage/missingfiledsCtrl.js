@@ -170,7 +170,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         break;
                 }
                 //window.location = "#/mobileverf";
-            }, 2000);
+            }, 50);
 
         };
         scope.pagerload(scope.dataqr);
