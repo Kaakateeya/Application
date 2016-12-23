@@ -61,9 +61,25 @@ app.factory('alert', ['$mdDialog', function($mdDialog) {
         },
         mddiologcancel: function() {
             $mdDialog.hide();
+        },
+        timeoutoldalerts: function(event, cls, msg, time) {
+            scope.typecls = cls;
+            scope.msgs = msg;
+            modalinstance = uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                // template: '<div class="{{typecls}}"><div class="modal-header"><a href="javascript:void(0);" ng-click="close();"><ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>' +
+                //     '</a><h4 class="modal-title"><center>Alert</center></h4></div></div><div class="modal-body" id="modalbodyID">'
+
+                //     +
+                //     '<p><label style="color:rgb(82, 24, 185);" ng-bind-html="msgs" ng-show="msgs==="upgrade"?false:true"></label>' +
+                //     '</p>' +
+                //     '</div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close();">Close</button></div>',
+                scope: scope
+            });
+            timeout(function() {
+                scope.dynamicpopupclose();
+            }, time || 4500);
         }
-
-
-
     };
 }]);
