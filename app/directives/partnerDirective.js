@@ -157,14 +157,40 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-                        if (type === "E") {
-                            if (loginpaidstatus === "1") {
+
+                        console.log(typeofactionflag);
+                        switch (type) {
+
+                            case "B":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    scope.servicehttp(type, object);
+                                } else {
+                                    scope.$emit('successfailer', "You have already Bookmark This ProfileID", "warning");
+                                }
+                                break;
+                            case "E":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    if (loginpaidstatus === "1") {
+                                        scope.servicehttp(type, object);
+                                    } else {
+                                        scope.$emit('successfailer', "upgrade", "warning");
+                                    }
+                                } else {
+                                    scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
+                                }
+                                break;
+                            case "I":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    scope.servicehttp(type, object);
+                                } else {
+                                    scope.$emit('successfailer', "You have already Ignore This ProfileID", "warning");
+                                }
+                                break;
+                            case "M":
+                            case "TH":
+                            case "RP":
                                 scope.servicehttp(type, object);
-                            } else {
-                                scope.$emit('successfailer', "upgrade", "warning");
-                            }
-                        } else {
-                            scope.servicehttp(type, object);
+                                break;
                         }
                     } else {
                         scope.$emit('showloginpopup');

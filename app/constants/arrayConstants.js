@@ -8,7 +8,7 @@ app.constant('arrayConstants', {
     ],
     "height": [
 
-
+        { "label": "--select--", "title": "--select--", "value": 0 },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
         { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },

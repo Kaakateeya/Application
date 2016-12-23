@@ -48,7 +48,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             return storeValue;
         };
+
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
             scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
@@ -79,14 +81,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
                 return false;
             }
-
         };
         scope.controlsbinding = function() {
             scope.height = arrayConstants.height;
             scope.educationcategory = arrayConstants.educationcategory;
-            scope.arrayAge = scope.Age();
             scope.MaritalStatus = arrayConstants.MaritalStatus;
-            scope.Religion = arrayConstants.Religion;
             scope.Mothertongue = arrayConstants.Mothertongue;
             scope.visastatus = arrayConstants.visastatus;
             scope.stars = arrayConstants.stars;
@@ -97,24 +96,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }, 1000);
         };
 
-        scope.applycolors = function(value) {
+        scope.applycolors = function(value, id) {
             var colors = "selectborderclass";
             if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
                 colors = "selectborderclasscolor";
+                $('#' + id).next().find('button').addClass("bacg");
             } else {
                 colors = "selectborderclass";
+                $('#' + id).next().find('button').removeClass("bacg");
             }
             return colors;
         };
-        scope.Age = function() {
-            scope.test = [];
-            scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
-            for (var i = 18; i < 78; i++) {
-                scope.test.push({ label: i + ' years', title: i + ' years', value: i });
-            }
-            return scope.test;
-        };
-
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
                 _.each(response.data, function(item) {
@@ -129,7 +121,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
             }
         };
-
+        scope.arrayToString = function(string) {
+            return (string.split(',')).map(Number);
+        };
         scope.partnerbindings = function(response) {
             scope.casteshow = false;
             scope.gender = (response.data.intGender) === 2 ? 2 : 1;
@@ -137,18 +131,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.Ageto = response.data.Agefrom;
             scope.HeightFrom = response.data.Heightto;
             scope.Heightto = response.data.Heightfrom;
-            scope.maritalstatus = response.data.Maritalstatus.split(',');
-            scope.educationcat = response.data.Educationcategory.split(',');
-            scope.country = response.data.Country.split(',');
+            scope.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
+            scope.educationcat = scope.arrayToString(response.data.Educationcategory);
+            scope.country = scope.arrayToString(response.data.Country);
             scope.religion = response.data.Religion;
-            scope.mothertongue = response.data.MotherTongue.split(',');
-            scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
+            scope.mothertongue = scope.arrayToString(response.data.MotherTongue);
+            scope.caste = response.data.Caste !== null ? scope.arrayToString(response.data.Caste) : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
             scope.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
-            scope.stateadvance = response.data.State !== null ? response.data.State.split(',') : "0";
+            scope.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
-
         };
         scope.generalpageload = function() {
 
@@ -797,5 +790,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alert('please select mothertongue and religion');
             }
         };
+
+
     }
 ]);

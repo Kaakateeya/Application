@@ -38,7 +38,7 @@ app.constant('arrayConstants', {
     ],
     "height": [
 
-
+        { "label": "--select--", "title": "--select--", "value": 0 },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
         { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
@@ -410,70 +410,40 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 array: '=',
                 type: '=',
                 model: '=',
-                castehideval: '@'
+                castehideval: '@',
+                id: '='
             },
 
             templateUrl: "templates/angualarMaterialmultiselect.html",
             link: function(scope, element, attrs) {
                 scope.selectallMdl = false;
+                scope.IDs = scope.id;
                 scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
                 scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
                 scope.Castehide = scope.castehideval === 'castehid' ? true : false;
-                scope.selectall = function() {
-
-                    timeout(function() {
-                        scope.checkVal = !scope.checkVal;
-                        scope.selectallMdl = scope.selectallMdl ? false : true;
-                        if (scope.selectallMdl) {
-                            _.each(scope.Caste, function(item) {
-                                scope.model.push(item.value);
-                            });
-                        } else {
-                            scope.model = [];
-                        }
-                    }, 50);
-
-                };
-                scope.selectoption = function(checkedvalue) {
-                    timeout(function() {
-
-                        if (!scope.selectallMdl && scope.model.length === scope.array.length) {
-                            scope.selectallMdl = true;
-                            scope.model.push(0);
-                            console.log(scope.model);
-                            console.log(scope.array);
-                        }
-                        //else if (scope.selectallMdl && _.where(scope.model, function(item) { item !== 0 }).length === 0) {
-                        else if (scope.selectallMdl && scope.model.length <= scope.array.length) {
-                            console.log(scope.model.length);
-                            console.log(scope.array.length);
-
-                            scope.selectallMdl = false;
-                            scope.model = [];
-                            //scope.model.pop(0);
-                        }
-                    }, 50);
-                };
-                scope.exists = function(item) {
-                    return scope.Caste.indexOf(item) > -1;
-                };
-
-                element.find('input').on('keydown', function(ev) {
-                    ev.stopPropagation();
-                });
                 scope.$watch('array', function() {
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
+                });
+                scope.$watch('model', function() {
+
+                    if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
+                        if (scope.model.length === scope.array.length) {
+                            scope.model = null;
+                        }
+                    }
                 });
                 scope.directivechangeevent = function(model) {
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
 
-                scope.applycolorsdirecive = function(value) {
+                scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
-                    if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+                    if (value !== 0 && value !== "0" && value !== "" && value !== undefined && value.length > 0) {
                         colors = "selectborderclasscolor";
+                        $('#' + id).next().find('button').addClass("bacg");
                     } else {
                         colors = "selectborderclass";
+                        $('#' + id).next().find('button').removeClass("bacg");
                     }
                     return colors;
                 };
@@ -719,6 +689,7 @@ app.factory('alert', ['$mdDialog', function($mdDialog) {
         mddiologcancel: function() {
             $mdDialog.hide();
         }
+
 
 
     };
@@ -992,10 +963,16 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         break;
 
                     case 'Age':
+                    case 'Ageselect':
                         var test = [];
+
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
-                            test.push({ label: i, title: i, value: i });
+                            if (scope.typeofdata === "Ageselect") {
+                                test.push({ label: i + ' years', title: i + ' years', value: i });
+                            } else {
+                                test.push({ label: i, title: i, value: i });
+                            }
                         }
                         scope.databind(test);
                         break;
@@ -1263,14 +1240,40 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-                        if (type === "E") {
-                            if (loginpaidstatus === "1") {
+
+                        console.log(typeofactionflag);
+                        switch (type) {
+
+                            case "B":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    scope.servicehttp(type, object);
+                                } else {
+                                    scope.$emit('successfailer', "You have already Bookmark This ProfileID", "warning");
+                                }
+                                break;
+                            case "E":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    if (loginpaidstatus === "1") {
+                                        scope.servicehttp(type, object);
+                                    } else {
+                                        scope.$emit('successfailer', "upgrade", "warning");
+                                    }
+                                } else {
+                                    scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
+                                }
+                                break;
+                            case "I":
+                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                    scope.servicehttp(type, object);
+                                } else {
+                                    scope.$emit('successfailer', "You have already Ignore This ProfileID", "warning");
+                                }
+                                break;
+                            case "M":
+                            case "TH":
+                            case "RP":
                                 scope.servicehttp(type, object);
-                            } else {
-                                scope.$emit('successfailer', "upgrade", "warning");
-                            }
-                        } else {
-                            scope.servicehttp(type, object);
+                                break;
                         }
                     } else {
                         scope.$emit('showloginpopup');
@@ -2992,7 +2995,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             return storeValue;
         };
+
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
             scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
@@ -3023,14 +3028,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
                 return false;
             }
-
         };
         scope.controlsbinding = function() {
             scope.height = arrayConstants.height;
             scope.educationcategory = arrayConstants.educationcategory;
-            scope.arrayAge = scope.Age();
             scope.MaritalStatus = arrayConstants.MaritalStatus;
-            scope.Religion = arrayConstants.Religion;
             scope.Mothertongue = arrayConstants.Mothertongue;
             scope.visastatus = arrayConstants.visastatus;
             scope.stars = arrayConstants.stars;
@@ -3041,24 +3043,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }, 1000);
         };
 
-        scope.applycolors = function(value) {
+        scope.applycolors = function(value, id) {
             var colors = "selectborderclass";
             if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
                 colors = "selectborderclasscolor";
+                $('#' + id).next().find('button').addClass("bacg");
             } else {
                 colors = "selectborderclass";
+                $('#' + id).next().find('button').removeClass("bacg");
             }
             return colors;
         };
-        scope.Age = function() {
-            scope.test = [];
-            scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
-            for (var i = 18; i < 78; i++) {
-                scope.test.push({ label: i + ' years', title: i + ' years', value: i });
-            }
-            return scope.test;
-        };
-
         scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
                 _.each(response.data, function(item) {
@@ -3073,7 +3068,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 });
             }
         };
-
+        scope.arrayToString = function(string) {
+            return (string.split(',')).map(Number);
+        };
         scope.partnerbindings = function(response) {
             scope.casteshow = false;
             scope.gender = (response.data.intGender) === 2 ? 2 : 1;
@@ -3081,18 +3078,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.Ageto = response.data.Agefrom;
             scope.HeightFrom = response.data.Heightto;
             scope.Heightto = response.data.Heightfrom;
-            scope.maritalstatus = response.data.Maritalstatus.split(',');
-            scope.educationcat = response.data.Educationcategory.split(',');
-            scope.country = response.data.Country.split(',');
+            scope.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
+            scope.educationcat = scope.arrayToString(response.data.Educationcategory);
+            scope.country = scope.arrayToString(response.data.Country);
             scope.religion = response.data.Religion;
-            scope.mothertongue = response.data.MotherTongue.split(',');
-            scope.caste = response.data.Caste !== null ? response.data.Caste.split(',') : "0";
+            scope.mothertongue = scope.arrayToString(response.data.MotherTongue);
+            scope.caste = response.data.Caste !== null ? scope.arrayToString(response.data.Caste) : "0";
             scope.castetext = response.data.CasteText;
             scope.physicalstatusadvance = response.data.PhysicalStatusstring;
             scope.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
-            scope.stateadvance = response.data.State !== null ? response.data.State.split(',') : "0";
+            scope.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
-
         };
         scope.generalpageload = function() {
 
@@ -3741,6 +3737,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alert('please select mothertongue and religion');
             }
         };
+
+
     }
 ]);
 app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
@@ -3921,6 +3919,49 @@ app.controller('aboutus', ['$scope', function (scope) {
          });
      };
 
+ }]);
+ app.controller("ccAvenueCtrl", ['$scope', '$http', function(scope, http) {
+
+     //  scope.submitCCAvenue = function() {
+     //      var data = {
+     //          merchant_id: 'M_151047_9927',
+     //          order_id: 'Ord_91035_7865',
+     //          currency: 'INR',
+     //          amount: '10000',
+     //          redirect_url: 'http://127.0.0.1:3001/ccavResponseHandler',
+     //          cancel_url: 'http://127.0.0.1:3001/ccavResponseHandler',
+     //          language: 'EN',
+     //          billing_name: 'Peter',
+     //          billing_address: 'Santacruz',
+     //          billing_city: 'Mumbai',
+     //          billing_state: 'MH',
+     //          billing_zip: '400054',
+     //          billing_country: 'India',
+     //          billing_tel: '8985201371',
+     //          billing_email: 'kusumavishwaneni@gmail.com',
+     //          delivery_name: 'Sam',
+     //          delivery_address: 'Vile Parle',
+     //          delivery_city: 'Mumbai',
+     //          delivery_state: 'Maharashtra',
+     //          delivery_zip: '400038',
+     //          delivery_country: 'India',
+     //          delivery_tel: '0123456789',
+     //          merchant_param1: 'additional Info.',
+     //          merchant_param2: 'additional Info.',
+     //          merchant_param3: 'additional Info.',
+     //          merchant_param4: 'additional Info.',
+     //          merchant_param5: 'additional Info.',
+     //          promo_code: '',
+     //          customer_identifier: ''
+     //      };
+
+
+     //      http.post('/postCCAvenue', JSON.stringify(data)).then(function(response) {
+     //          console.log(response.data);
+     //          $('#responseDiv').html(response.data);
+     //      });
+
+     //};
  }]);
 app.controller('ModalDemoCtrl', function($uibModal, $log, $scope) {
     $scope.ddlvals = "aaaa";
