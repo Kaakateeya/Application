@@ -78,7 +78,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
+                //scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
+                alerts.timeoutoldalerts('alert-danger', 'pls enter atleast one fileld', 2500, scope)
                 return false;
             }
         };
