@@ -358,6 +358,7 @@ app.constant('arrayConstants', {
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
 
-    ]
+    ],
+    'Upgrade': "Upgrade Membership"
 
 });
