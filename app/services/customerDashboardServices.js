@@ -19,19 +19,18 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         Tickethistory: function(Ticketid, Type) {
             return http.get(app.apiroot + 'DashboardRequest/GetTicketinformation', { params: { Ticketid: Ticketid, Type: Type } });
         },
-        Viewprofile: function(logcustid, tocustid) {
-             
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid } });
+        Viewprofile: function(logcustid, tocustid, selfflag) {
+
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid, RelationshipID: selfflag } });
         },
         Viewprofileflags: function(logcustid, tocustid) {
-             
             return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: logcustid, ToCustID: tocustid } });
         },
         communicationhistorychats: function(obj) {
             return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);
         },
         acceptrejectexpressinterest: function(fromid, toid, logid, type, empid) {
-             
+
             return http.get(app.apiroot + 'DashboardRequest/getInsertCustomerExpressinterest', { params: { fromcustid: fromid, tocustid: toid, logID: logid, interstTYpe: type, empid: "" } });
         },
         photopasswordactioninsert: function(fromcustid, tocustid, type) {

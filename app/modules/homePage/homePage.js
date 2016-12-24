@@ -4,6 +4,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         arrayConstants, service, $rootscope, alerts, timeout, missingFieldService) {
         scope.fromge = 1;
         scope.topage = 5;
+        scope.loginpopup = false;
         scope.homeinit = function() {
             timeout(function() {
                 successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
@@ -16,7 +17,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 1000);
         };
         scope.divloginblock = function() {
-            $('.login_block_header').toggle();
+            scope.loginpopup = scope.loginpopup ? false : true;
         };
         scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
@@ -136,14 +137,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
-            // sessionStorage.removeItem("homepageobject");
+
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
-            //$rootscope.$broadcast("profile", 2);
+
         };
 
         scope.showforgetpasswordpopup = function() {
+            scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
 
         };

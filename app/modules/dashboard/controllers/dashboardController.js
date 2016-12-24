@@ -218,13 +218,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
         });
         scope.zerorecorsalert = function() {
-            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Sorry No Records Found', 2500);
+            alerts.timeoutoldalerts(scope, 'alert-danger', 'Sorry No Records Found', 2500);
         };
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 3000);
+                alerts.timeoutoldalerts(scope, 'alert-success', msg, 3000);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 3000);
+                alerts.timeoutoldalerts(scope, 'alert-danger', msg, 3000);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -245,11 +245,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (response.data !== null && response.data !== undefined) {
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', mobilenumbers, 3000);
+                        alerts.timeoutoldalerts(scope, 'alert-success', mobilenumbers, 3000);
 
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', mobilenumber, 3000);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', mobilenumber, 3000);
                     }
                 }
 
@@ -407,9 +407,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            //  var realpath = $location.path() + '#/viewprofile';
             var realpath = '#/viewFullProfileCustomer';
-            //var url = $location.absUrl().split('?')[0];
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -447,19 +445,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                 if (response.data === 1) {
                     if (type === 1) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Accepted successfully', 2500);
 
                     } else {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully', 2500);
-
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Rejected successfully', 2500);
                     }
                 } else {
                     if (type === 1) {
 
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
-
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
 
                 }
@@ -468,21 +464,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
                 if (response.data === 1) {
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
-
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
-
                 if (response.data === 1) {
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -513,11 +507,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
 
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
-            if (loginpaidstatus === "1") {
-                scope.gettingpartnerdata(type, frompage, topage, headertext);
-            } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade', 3000);
-            }
+            authSvc.paymentstaus(scope.custid, scope).then(function(response) {
+                console.log(response);
+                if (response === true)
+                    scope.gettingpartnerdata(type, frompage, topage, headertext);
+            });
         };
 
         scope.photoalbumdashboard = function(custid, profileid, photocount) {

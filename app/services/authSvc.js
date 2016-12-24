@@ -17,7 +17,7 @@
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, alerts) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injector, Idle, alerts, $http) {
 
 
     function setUser(value) {
@@ -28,6 +28,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         setSession('cust.paidstatus', (value.PaidStatus));
         setSession('cust.profilepic', (value.ProfilePic));
         setSession('cust.GenderID', (value.GenderID));
+        setSession('cust.isemailverified', (value.isemailverified));
+        setSession('cust.isnumberverifed', (value.isnumberverifed));
     }
 
     function getSession(key) {
@@ -54,6 +56,9 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
         clearSession('cust.GenderID');
+        clearSession('cust.isemailverified');
+        clearSession('cust.isnumberverifed');
+
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
     }
@@ -65,7 +70,9 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             profileid: getSession('cust.profileid'),
             paidstatus: getSession('cust.paidstatus'),
             profilepic: getSession('cust.profilepic'),
-            GenderID: getSession('cust.GenderID')
+            GenderID: getSession('cust.GenderID'),
+            isemailverified: getSession('cust.isemailverified'),
+            isnumberverifed: getSession('cust.isnumberverifed')
         };
     }
 
@@ -102,30 +109,39 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             window.location = "#/";
         },
         login: function(username, password) {
-
             var body = {
                 Username: username,
                 Password: password
             };
-            return $injector.invoke(function($http) {
-                return $http.post(app.apiroot + 'DB/userLogin/person', body)
-                    .then(function(response) {
 
-                        if (response.status === 200) {
-                            if (response.data !== null) {
-                                Idle.watch();
-                                return { success: true, response: response.data };
-                            } else {
-                                alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
-                            }
+            return $http.post(app.apiroot + 'DB/userLogin/person', body)
+                .then(function(response) {
+                    if (response.status === 200) {
+                        if (response.data !== null) {
+                            Idle.watch();
+                            return { success: true, response: response.data };
+                        } else {
+                            alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
                         }
-                        return { success: false, response: response.data };
-                    });
-            });
+                    }
+                    return { success: false, response: response.data };
+                });
+        },
+        paymentstaus: function(custid, scope) {
+
+            return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
+                .then(function(response) {
+                    if (response.status === 200 && response.data !== null && response.data !== undefined) {
+                        console.log(response);
+                        if (response.data === "Paid") {
+                            return true;
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);
+                            return false;
+                        }
+                    }
+
+                });
         }
     };
 }]);
-
-//   app.ng.config(['$httpProvider', function ($httpProvider) {
-//     $httpProvider.interceptors.push('authInterceptor');
-//   }]);

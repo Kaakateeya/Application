@@ -19,7 +19,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var currentslide = 1;
                 var photoclass = "";
                 scope.searchestype = scope.typeofsearch;
-                scope.typeofdiv = "List";
+                scope.typeofdiv = scope.pagging === false ? "List" : "Grid";
                 scope.slideshowsearches = false;
                 scope.playpausebuttons = true;
                 scope.pauseplaybuttons = true;
@@ -77,7 +77,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.gridclick = function() {
-
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
@@ -94,7 +93,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                                 switch (type) {
                                     case "B":
-                                        if (response.data == 1) {
+
+                                        if (response.data === 1) {
+
                                             scope.array.splice(scope.indexvalues, 1);
                                             scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "bookmarked suceessfully", "success");
@@ -103,6 +104,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         }
                                         break;
                                     case "E":
+
                                         if (loginpaidstatus === "1") {
                                             if (response.data == 1) {
                                                 scope.array.splice(scope.indexvalues, 1);
@@ -116,7 +118,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         }
                                         break;
                                     case "I":
-                                        if (response.data == 1) {
+                                        if (response.data === 1) {
                                             scope.array.splice(scope.indexvalues, 1);
                                             scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "Ignore SuccessFully", "success");
@@ -127,7 +129,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                     case "M":
                                     case "TH":
                                     case "RP":
-                                        if (response.data == 1) {
+
+                                        if (response.data === 1) {
+
                                             scope.$emit('successfailer', "Message sent SuccessFully", "success");
                                         } else {
                                             scope.$emit('successfailer', "Message sending Fail", "warning");
@@ -170,11 +174,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 break;
                             case "E":
                                 if (typeofactionflag !== true && typeofactionflag !== 1) {
-                                    if (loginpaidstatus === "1") {
-                                        scope.servicehttp(type, object);
-                                    } else {
-                                        scope.$emit('successfailer', "upgrade", "warning");
-                                    }
+                                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                                        console.log(responsepaid);
+                                        if (responsepaid === true)
+                                            scope.servicehttp(type, object);
+                                    });
                                 } else {
                                     scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
                                 }

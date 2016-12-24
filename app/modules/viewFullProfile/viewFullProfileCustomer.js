@@ -11,35 +11,47 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        scope.pageload = function() {
-            customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
-                console.log(JSON.stringify(response));
-                scope.arr = [];
-                scope.personalinfo = {};
-                scope.aboutmyself = {};
-                _.each(response.data, function(item) {
-                    var testArr = JSON.parse(item);
-                    if (testArr[0].TableName!==undefined && testArr[0].TableName === "About") {
-                        scope.aboutmyself = testArr;
-                    } else if (testArr[0].TableName!==undefined && testArr[0].TableName === "Primary") {
-                        scope.personalinfo = testArr;
-                        scope.divclassmask = function(logphotostatus) {
-                            var photo = scope.slides[0].ApplicationPhotoPath;
-                            var photocount = scope.personalinfo[0].PhotoName_Cust;
-                            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-                            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
-                            } else {
-                                return "";
-                            }
-                        };
+        scope.partnerinformation = function(response) {
+            console.log(JSON.stringify(response));
+            scope.arr = [];
+            scope.personalinfo = {};
+            scope.aboutmyself = {};
+            _.each(response.data, function(item) {
+                var testArr = JSON.parse(item);
+                debugger;
+                console.log(testArr);
+                if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
+                    scope.aboutmyself = testArr;
+                } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
+                    scope.personalinfo = testArr;
+                    scope.divclassmask = function(logphotostatus) {
+                        var photo = scope.slides[0].ApplicationPhotoPath;
+                        var photocount = scope.personalinfo[0].PhotoName_Cust;
+                        logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                        if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                        } else {
+                            return "";
+                        }
+                    };
 
-                    } else {
+                } else {
+                    if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
-                });
-
+                }
             });
+        };
+        scope.pageload = function() {
+            if (scope.custid === localcustid) {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            } else {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            }
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 console.log(response);
                 _.each(response.data, function(item) {
@@ -87,29 +99,29 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         console.log(response);
                         switch (type) {
                             case "B":
-                                if (response.data == 1) {
-                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
                                 }
                                 break;
                             case "E":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
                                 }
                                 break;
                             case "I":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
                                 }
                                 break;
                             case "M":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
@@ -137,7 +149,21 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 FromProfileID: loginprofileid,
                 ToProfileID: profileid !== undefined ? profileid : null
             };
-            scope.servicehttp(type, object);
+
+            switch (type) {
+                case "E":
+                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true)
+                            scope.servicehttp(type, object);
+                    });
+                    break;
+
+                default:
+                    scope.servicehttp(type, object);
+                    break;
+            }
+
         };
         scope.sendmessages = function(form) {
 

@@ -48,8 +48,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.withoutlogin = true;
         scope.showhidetestbuttons();
         scope.divloginblock = function() {
-            scope.loginpopup = true;
-            $('.login_block_header').toggle();
+            scope.loginpopup = scope.loginpopup ? false : true;
+
         };
         scope.validate = function() {
 
@@ -270,6 +270,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             }
         };
         scope.showforgetpasswordpopup = function() {
+            scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
 
         };

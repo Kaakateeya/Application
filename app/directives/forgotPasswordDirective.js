@@ -12,20 +12,50 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
                     $mdDialog.show({
-                        controller: forgetcontroller,
+
                         templateUrl: 'forgetpassword.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
-
+                        scope: scope
                     });
                 };
 
+                scope.ValidateEmail = function(email) {
+                    var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    return expr.test(email);
+                };
+                scope.Validatnumber = function(num) {
+                    var expr1 = /[0-9 -()+]+$/;
+                    return expr1.test(num);
+                };
+                scope.validate = function(form) {
 
-                function forgetcontroller($scope, $mdDialog) {
-                    $scope.cancel = function() {
-                        $mdDialog.cancel();
-                    };
-                    $scope.forgotpasswordsubmit = function(form) {
+                    if ((form.txtforgetemail).indexOf("@") != -1) {
+
+                        if (!scope.ValidateEmail(form.txtforgetemail)) {
+                            form.txtforgetemail = '';
+                            alert(" Please enter valid ProfileID/Email");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        if (!scope.Validatnumber(form.txtforgetemail) || (form.txtforgetemail).length != 9) {
+                            alert("Please enter valid ProfileID/Email");
+                            form.txtforgetemail = '';
+                            return false;
+
+                        } else {
+                            return true;
+                        }
+
+                    }
+                };
+                scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                scope.forgotpasswordsubmit = function(form) {
+                    if (scope.validate(form)) {
                         customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
                             if (response.data == 1) {
                                 alerts.open('Mail sent to your email, To reset your password check your mail.', "success");
@@ -36,14 +66,12 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                                 alerts.open("Invalid Matrimony ID OR  E-mail-ID.", "warning");
                             }
                         });
-                    };
-                }
+                    }
+                };
 
                 scope.$on('showforgetpassword', function(event) {
                     scope.showforgetpassword();
                 });
-
-
             }
         };
     }

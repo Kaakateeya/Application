@@ -70,7 +70,7 @@
 
             </div>
         </div>
-        <div class="login_block_header" style="display: none;" id="divLogin">
+        <div class="login_block_header" ng-style="loginpopup===true?{'display':'block'}:{'display':'none'}" id="divLogin">
             <form name="myFormss">
                 <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="username" required/>
                 <input type="password" id="txtPassword" placeholder="Password" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="password" required/>

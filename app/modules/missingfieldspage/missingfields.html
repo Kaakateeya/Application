@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="missingfieldspopup.html">
-    <div class="">
+    <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" ng-click="cancel()">×</button>
             <h4 class="modal-title text-center" style="margin-top: -13px; color: maroon;">More About You..</h4>
@@ -15,21 +15,21 @@
                                 <label class="control-label">Height</label>
                             </div>
                             <div class="col-lg-8" id="ddlFromheightdiv">
-                                <select multiselectdropdown ng-model="ddlFromheight" typeofdata="'height'"></select>
+                                <select multiselectdropdown ng-model="misObj.ddlFromheight" typeofdata="'height'"></select>
                             </div>
                             <div class="col-lg-8" id="lblheightdiv">
                                 <label id="lblheight"></label>
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divMaritalstatus">
                             <div class="col-lg-4">
                                 <label class="control-label">Marital status</label>
                             </div>
                             <div class="col-lg-8" id="lstMaritalstatusdiv">
 
-                                <select multiselectdropdown ng-model="lstMaritalstatus" typeofdata="'MaritalStatus'"></select>
+                                <select multiselectdropdown ng-model="misObj.lstMaritalstatus" typeofdata="'MaritalStatus'"></select>
                             </div>
 
                             <div class="col-lg-8" id="lbllstMaritalstatusdiv">
@@ -37,14 +37,14 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divComplexion">
                             <div class="col-lg-4">
                                 <label class="control-label">Complexion</label>
                             </div>
                             <div class="col-lg-8" id="lstComplexiondiv">
 
-                                <select multiselectdropdown ng-model="lstComplexion" typeofdata="'Complexion'"></select>
+                                <select multiselectdropdown ng-model="misObj.lstComplexion" typeofdata="'Complexion'"></select>
 
                             </div>
                             <div class="col-lg-8" id="lbllstComplexiondiv">
@@ -54,14 +54,14 @@
                         </div>
                         <div ng-hide="divProfession">
                             <div class="clearfix"></div>
-                            <br />
+
                             <div class="control-group  col-lg-12" ng-hide="divJobLocCountry">
                                 <div class="col-lg-4">
                                     <label class="control-label">JobLoc Country</label>
                                 </div>
                                 <div class="col-lg-8" id="lstJoblocCountrydiv">
 
-                                    <select multiselectdropdown ng-model="lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
+                                    <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
 
                                 </div>
                                 <div class="col-lg-8" id="lbllstJoblocCountrydiv">
@@ -70,27 +70,27 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <br />
+
                             <div class="control-group  col-lg-12" ng-hide="divJobLocState">
                                 <div class="col-lg-4">
                                     <label class="control-label">JobLoc State</label>
                                 </div>
                                 <div class="col-lg-8" id="lstjoblocstatediv">
-                                    <select multiselectdropdown ng-model="lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',lstjoblocstate,lstJoblocCountry);"></select>
+                                    <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',lstjoblocstate,lstJoblocCountry);"></select>
                                 </div>
                                 <div class="col-lg-8" id="lbllstjoblocstatediv">
                                     <label id="lbllstjoblocstate"></label>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <br />
+
                             <div class="control-group  col-lg-12" ng-hide="JobLocDistrict">
                                 <div class="col-lg-4">
                                     <label class="control-label">JobLoc District</label>
                                 </div>
                                 <div class="col-lg-8" id="lstjoblocdistrictdiv">
 
-                                    <select multiselectdropdown ng-model="lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
+                                    <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
                                 </div>
                                 <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
                                     <label id="lbllstjoblocdistrict"></label>
@@ -98,13 +98,13 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <br />
+
                             <div class="control-group  col-lg-12" ng-hide="JobLoc">
                                 <div class="col-lg-4">
                                     <label class="control-label">Job Location</label>
                                 </div>
                                 <div class="col-lg-8" id="lstjoblocationdiv">
-                                    <select multiselectdropdown ng-model="lstjoblocation" ng-options="item.value as item.label for item in cityeArr"></select>
+                                    <select multiselectdropdown ng-model="misObj.lstjoblocation" ng-options="item.value as item.label for item in cityeArr"></select>
                                 </div>
                                 <div class="col-lg-8" id="lbllstjoblocationdiv">
                                     <label id="lbllstjoblocation"></label>
@@ -121,7 +121,7 @@
                                     Father Native</label>
                             </div>
                             <div class="col-lg-8" id="txtfathernativediv">
-                                <input type="text" class="form-control textboxclear" ng-model="txtfathernative" />
+                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtfathernative" />
                             </div>
                             <div class="col-lg-8" id="lblfathernativediv">
                                 <label id="lblfathernative"></label>
@@ -129,43 +129,45 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divMotherNative">
                             <div class="col-lg-4">
                                 <label class="control-label">
                                     Mother Native</label>
                             </div>
                             <div class="col-lg-8" id="txtmothernativediv">
-                                <input type="text" class="form-control textboxclear" ng-model="txtMothernative" />
+                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtMothernative" />
                             </div>
                         </div>
 
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divSalary">
                             <div class="col-lg-4">
                                 <label class="control-label">Salary</label>
                             </div>
-                            <div class="col-lg-8">
-                                <div class="pop_controls_right select-box-my-double" id="ddlAnnualincomediv">
-                                    <select multiselectdropdown ng-model="ddlAnnualincome" typeofdata="'currency'"></select>
-                                    <input type="text" class="form-control" ng-model="txtSalary" onchange="currency();" MaxLength="7" />
+
+
+                            <div class="col-lg-8 doubleselect" id="ddlAnnualincomediv" style="padding-left: 0px;">
+                                <div class="col-lg-6 pull-left">
+                                    <select multiselectdropdown ng-model="misObj.ddlAnnualincome" typeofdata="'currency'"></select>
                                 </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtSalary" ng-blur="currencyChange();" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                                        MaxLength="7" />
+                                </div>
+
                             </div>
-
-
                         </div>
-
-
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divIssharedproperty">
                             <div class="col-lg-4">
                                 <label class="control-label">
                                     Shared property</label>
                             </div>
                             <div class="col-lg-8">
-                                <md-radio-group layout="row" ng-model="rdlSharedProperty" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
+                                <md-radio-group layout="row" ng-model="misObj.rdlSharedProperty" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
                                     <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
                                     <md-radio-button value="0"> No </md-radio-button>
                                 </md-radio-group>
@@ -173,31 +175,31 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divProperty">
                             <div class="col-lg-4">
                                 <label class="control-label">
                                     Property lakhs</label>
                             </div>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control textboxclear" ng-model="txtProperty" />
+                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" />
 
                             </div>
                         </div>
 
                         <div class="clearfix"></div>
-                        <br />
+
                         <div class="control-group  col-lg-12" ng-hide="divStarlanguage">
                             <div class="col-lg-4">
                                 <label class="control-label">Star language</label>
                             </div>
                             <div class="col-lg-8" id="ddlstarlanguagesdiv">
 
-                                <select multiselectdropdown ng-model="ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',ddlstarlanguages);"></select>
+                                <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',ddlstarlanguages);"></select>
 
                             </div>
                             <div class="clearfix"></div>
-                            <br />
+
                             <div class="col-lg-8" id="lblddlstarlanguagesdiv">
                                 <label id="lblddlstarlanguages"></label>
 
@@ -208,12 +210,12 @@
                                 <label class="control-label">Star</label>
                             </div>
                             <div class="col-lg-8" id="lststardiv">
-                                <select multiselectdropdown ng-model="lststar" ng-options="item.value as item.label for item in starArr"></select>
+                                <select multiselectdropdown ng-model="misObj.lststar" ng-options="item.value as item.label for item in starArr"></select>
 
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
 
                         <div class="control-group  col-lg-12" ng-hide="divGothram">
                             <div class="col-lg-4">
@@ -221,19 +223,27 @@
                                     Gothram/Gotra</label>
                             </div>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control textboxclear" ng-model="txtgothram" />
+                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtgothram" />
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <br />
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="misFieldsSubmit();">Submit</button>
-                    <button type="button" class="btn btn-default" ng-hide="divSkip" ng-click="redirectToMobVerification();">Skip this page</button>
+
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <input type="button" ng-click="misFieldsSubmit(misObj);" value="Submit" class="button_custom  pull-right">
+                        </div>
+                        <div class="col-lg-3">
+                            <input value="Skip this page" ng-hide="divSkip" ng-click="redirectToMobVerification();" class="button_custom button_custom_reset  pull-left" ng-click="cancel();" type="button">
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>
+    </div>
 </script>
 
 
@@ -608,8 +618,7 @@
                                 </li>
                             </div>
 
-
-                            <li class="row">
+                            <li class="row ">
                                 <div class="col-lg-12">
                                     <button type="submit" class="button_custom pull-right">Submit</button>
                                 </div>
@@ -618,7 +627,6 @@
                         </ul>
                         </div>
                     </div>
-
             </form>
         </script>
         </div>
@@ -732,9 +740,9 @@
                                 <input type="checkbox" ng-model="atroObj.Chkgenertehoro" value="Generate HoroScope" />
                             </div>
                         </li>
-                        <li class="row">
+                        <li class="row ">
                             <div class="col-lg-12">
-                                <button type="submit" class="button_custom pull-right">Submit</button>
+                                <input value="Submit" class="button_custom pull-right" type="submit">
                             </div>
 
                         </li>
@@ -744,19 +752,25 @@
             </form>
         </script>
     </div>
-    <style>
-        .multiselect.dropdown-toggle {
-            margin: 0 !important;
-            width: 198px !important;
-        }
-        
+    <style type="text/css">
         md-dialog.md-transition-in {
             max-width: 950px;
             width: 100%;
         }
         
-        .multiselect.dropdown-toggle {
+        .modal-lg {
+            max-width: 900px !important;
+            width: 100% !important;
+        }
+        
+        .modal-lg .multiselect.dropdown-toggle {
             margin: 0 !important;
-            width: 305px !important;
+            width: 227px !important;
+        }
+        
+        .modal-lg .doubleselect .multiselect.dropdown-toggle {
+            margin: 0 !important;
+            max-width: 100px;
+            width: 100%;
         }
     </style>

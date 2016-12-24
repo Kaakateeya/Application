@@ -114,7 +114,7 @@
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>
                                              New Password</label>
-                                            <input name="NewPassword" ng-type="password" ng-model="NewPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <input name="NewPassword" type="password" ng-model="NewPassword" ng-disabled="passwordsisable" required md-no-asterisk>
                                             <div ng-messages="projectForm.NewPassword.$error">
                                                 <div ng-message="required">This is required.</div>
                                             </div>
@@ -123,7 +123,7 @@
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>
                                             Confirm New Password</label>
-                                            <input name="ConfirmPassword" match-password="NewPassword" ng-type="password" ng-model="ConfirmPassword" ng-disabled="passwordsisable" required md-no-asterisk>
+                                            <input name="ConfirmPassword" match-password="NewPassword" type="password" ng-model="ConfirmPassword" ng-disabled="passwordsisable" required md-no-asterisk>
                                             <div ng-messages="projectForm.ConfirmPassword.$error">
                                                 <div ng-message="required">This is required.</div>
                                                 <div ng-message="passwordMatch" class="message slide-left">Your Password did not match</div>

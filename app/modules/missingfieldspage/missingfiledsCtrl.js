@@ -1,25 +1,29 @@
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
-    'missingFieldService', '$timeout', '$stateParams',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal',
+
     function(scope, commonFactory,
-        authSvc, $mdDialog, missingFieldService, timeout, stateParams) {
+        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
 
+        scope.misObj = {};
+
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         scope.showpopup = function() {
-            $mdDialog.show({
-                templateUrl: 'missingfieldspopup.html',
-                parent: angular.element(document.body),
-                scope: scope,
-                size: 'md',
-                clickOutsideToClose: true,
-                height: '50 %',
-                backdrop: 'static',
-                keyboard: false
 
+            var modalpopupopen = uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'missingfieldspopup.html',
+                scope: scope,
+                size: 'lg',
+                backdrop: 'static',
+                keyboard: false,
+                windowClass: 'full'
             });
+
             scope.starArr = commonFactory.starBind(1);
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
 
@@ -27,7 +31,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 console.log('test');
                 console.log(scope.MFSelectArray);
                 scope.divSkip = true;
-
+                debugger;
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
                     scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
@@ -36,7 +40,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.divSkip = false;
                     }
                 }
-
+                debugger;
                 if (scope.MFSelectArray.Professionflag === 1) {
                     scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
                     scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
@@ -109,32 +113,32 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
 
         };
 
-        scope.misFieldsSubmit = function() {
+        scope.misFieldsSubmit = function(obj) {
             var misInputobj = {
-                Starlanguage: scope.ddlstarlanguages,
+                Starlanguage: obj.ddlstarlanguages,
                 i_updateflag: 1,
-                iJoblocationCountry: scope.lstJoblocCountry,
-                iJoblocationDistrict: scope.lstjoblocdistrict,
-                iJoblocationState: scope.lstjoblocstate,
-                iJobLocation: scope.lstjoblocation,
-                IsSharedProperty: scope.rdlSharedProperty,
+                iJoblocationCountry: obj.lstJoblocCountry,
+                iJoblocationDistrict: obj.lstjoblocdistrict,
+                iJoblocationState: obj.lstjoblocstate,
+                iJobLocation: obj.lstjoblocation,
+                IsSharedProperty: obj.rdlSharedProperty,
                 AstroFlag: scope.MFSelectArray.AstroFlag,
                 ParentsFlag: (scope.MFSelectArray.ParentsFatherFlag || scope.MFSelectArray.ParentsFatherFlag) ? 1 : 0,
                 MFCustFamilyID: scope.MFSelectArray.MFCustFamilyID,
                 FFCustFamilyID: scope.MFSelectArray.FFCustFamilyID,
-                Gothram: scope.txtgothram,
-                MotherNative: scope.txtMothernative,
-                Salarycurrency: scope.ddlAnnualincome,
-                Salary: scope.txtSalary,
-                Complexion: scope.lstComplexion,
-                Star: scope.lststar,
-                FatherNative: scope.txtfathernative,
-                Propertylakhs: scope.txtProperty,
-                Maritalstatus: scope.lstMaritalstatus,
-                Height: scope.ddlFromheight,
+                Gothram: obj.txtgothram,
+                MotherNative: obj.txtMothernative,
+                Salarycurrency: obj.ddlAnnualincome,
+                Salary: obj.txtSalary,
+                Complexion: obj.lstComplexion,
+                Star: obj.lststar,
+                FatherNative: obj.txtfathernative,
+                Propertylakhs: obj.txtProperty,
+                Maritalstatus: obj.lstMaritalstatus,
+                Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-
+            debugger;
             console.log(JSON.stringify(misInputobj));
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
                 console.log(response);
@@ -148,7 +152,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         scope.pagerload = function(type) {
 
             timeout(function() {
-
+                debugger;
 
                 switch (scope.dataqr) {
                     case 1:
@@ -174,5 +178,15 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
 
         };
         scope.pagerload(scope.dataqr);
+
+        scope.currencyChange = function() {
+            debugger;
+            // if (!commonFactory.checkvals(scope.ddlAnnualincome)) {
+            //     alert("Please select Curency");
+            // }
+        };
+
+
+
     }
 ]);

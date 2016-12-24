@@ -62,14 +62,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if ((textboxprofileid.value !== "" && textboxprofileid.value !== null) || (textbox.value !== "" && textbox.value !== null) || (textboxlastname.value !== "" && textboxlastname.value !== null)) {
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
                         return false;
                     } else {
                         return true;
                     }
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
                         return false;
                     } else {
                         return true;
@@ -78,8 +78,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
-                //alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 2500);
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please enter atleast one fileld', 2500);
                 return false;
             }
         };
@@ -310,7 +309,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                             }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -336,7 +335,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                         }
                         scope.loadinging = true;
                     });
@@ -366,7 +365,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
                             } else {
                                 _.each(response.data, function(item) {
@@ -749,9 +748,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 2500);
+                alerts.timeoutoldalerts(scope, 'alert-success', msg, 2500);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 2500);
+                alerts.timeoutoldalerts(scope, 'alert-danger', msg, 2500);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -770,8 +769,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.sendmessages = function(form) {
             if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+
             } else {
-                alert('please enter Message');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please enter Message', 2500);
             }
         };
         scope.$on("modalpopupclose", function(event) {
@@ -788,7 +788,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
 
             } else {
-                alert('please select mothertongue and religion');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
 

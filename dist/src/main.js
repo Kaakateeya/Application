@@ -388,7 +388,8 @@ app.constant('arrayConstants', {
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
 
-    ]
+    ],
+    'Upgrade': "Upgrade online Membership"
 
 });
 app.constant('config', function() {
@@ -625,7 +626,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
     };
 
 }]);
-app.factory('alert', ['$mdDialog', function($mdDialog) {
+app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', function($mdDialog, uibModal, timeout, arrayConstants) {
     var modalinstance;
     return {
         open: function(msg, classname) {
@@ -688,10 +689,27 @@ app.factory('alert', ['$mdDialog', function($mdDialog) {
         },
         mddiologcancel: function() {
             $mdDialog.hide();
+        },
+        timeoutoldalerts: function(scope, cls, msg, time) {
+            scope.typecls = cls;
+            scope.msgs = msg === "upgrade" ? "<label style='color:maroon;'>Please Click Here To</label><a href='#/UpgradeMembership'>" + "  " + arrayConstants.Upgrade + "</a>" : "<label>" + msg + "</label>";
+            modalinstance = uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                template: '<div class="{{typecls}}"><div class="modal-header"><a href="javascript:void(0);" ng-click="close();"><ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon></a><h4 class="modal-title"><center>Alert</center></h4></div></div><div class="modal-body" id="modalbodyID"><p ng-bind-html="msgs"></p></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close();">Close</button></div>',
+                scope: scope
+            });
+            if (msg === "upgrade") {
+
+            } else {
+                timeout(function() {
+                    modalinstance.close();
+                }, time || 4500);
+            }
+            scope.close = function() {
+                modalinstance.close();
+            };
         }
-
-
-
     };
 }]);
 app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
@@ -708,20 +726,50 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
                     $mdDialog.show({
-                        controller: forgetcontroller,
+
                         templateUrl: 'forgetpassword.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
-
+                        scope: scope
                     });
                 };
 
+                scope.ValidateEmail = function(email) {
+                    var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    return expr.test(email);
+                };
+                scope.Validatnumber = function(num) {
+                    var expr1 = /[0-9 -()+]+$/;
+                    return expr1.test(num);
+                };
+                scope.validate = function(form) {
 
-                function forgetcontroller($scope, $mdDialog) {
-                    $scope.cancel = function() {
-                        $mdDialog.cancel();
-                    };
-                    $scope.forgotpasswordsubmit = function(form) {
+                    if ((form.txtforgetemail).indexOf("@") != -1) {
+
+                        if (!scope.ValidateEmail(form.txtforgetemail)) {
+                            form.txtforgetemail = '';
+                            alert(" Please enter valid ProfileID/Email");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        if (!scope.Validatnumber(form.txtforgetemail) || (form.txtforgetemail).length != 9) {
+                            alert("Please enter valid ProfileID/Email");
+                            form.txtforgetemail = '';
+                            return false;
+
+                        } else {
+                            return true;
+                        }
+
+                    }
+                };
+                scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                scope.forgotpasswordsubmit = function(form) {
+                    if (scope.validate(form)) {
                         customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
                             if (response.data == 1) {
                                 alerts.open('Mail sent to your email, To reset your password check your mail.', "success");
@@ -732,14 +780,12 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                                 alerts.open("Invalid Matrimony ID OR  E-mail-ID.", "warning");
                             }
                         });
-                    };
-                }
+                    }
+                };
 
                 scope.$on('showforgetpassword', function(event) {
                     scope.showforgetpassword();
                 });
-
-
             }
         };
     }
@@ -1102,7 +1148,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var currentslide = 1;
                 var photoclass = "";
                 scope.searchestype = scope.typeofsearch;
-                scope.typeofdiv = "List";
+                scope.typeofdiv = scope.pagging === false ? "List" : "Grid";
                 scope.slideshowsearches = false;
                 scope.playpausebuttons = true;
                 scope.pauseplaybuttons = true;
@@ -1160,7 +1206,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.gridclick = function() {
-
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
@@ -1177,7 +1222,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                                 switch (type) {
                                     case "B":
-                                        if (response.data == 1) {
+
+                                        if (response.data === 1) {
+
                                             scope.array.splice(scope.indexvalues, 1);
                                             scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "bookmarked suceessfully", "success");
@@ -1186,6 +1233,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         }
                                         break;
                                     case "E":
+
                                         if (loginpaidstatus === "1") {
                                             if (response.data == 1) {
                                                 scope.array.splice(scope.indexvalues, 1);
@@ -1199,7 +1247,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         }
                                         break;
                                     case "I":
-                                        if (response.data == 1) {
+                                        if (response.data === 1) {
                                             scope.array.splice(scope.indexvalues, 1);
                                             scope.$emit('incrementcounts');
                                             scope.$emit('successfailer', "Ignore SuccessFully", "success");
@@ -1210,7 +1258,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                     case "M":
                                     case "TH":
                                     case "RP":
-                                        if (response.data == 1) {
+
+                                        if (response.data === 1) {
+
                                             scope.$emit('successfailer', "Message sent SuccessFully", "success");
                                         } else {
                                             scope.$emit('successfailer', "Message sending Fail", "warning");
@@ -1253,11 +1303,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 break;
                             case "E":
                                 if (typeofactionflag !== true && typeofactionflag !== 1) {
-                                    if (loginpaidstatus === "1") {
-                                        scope.servicehttp(type, object);
-                                    } else {
-                                        scope.$emit('successfailer', "upgrade", "warning");
-                                    }
+                                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                                        console.log(responsepaid);
+                                        if (responsepaid === true)
+                                            scope.servicehttp(type, object);
+                                    });
                                 } else {
                                     scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
                                 }
@@ -1818,13 +1868,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
         });
         scope.zerorecorsalert = function() {
-            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Sorry No Records Found', 2500);
+            alerts.timeoutoldalerts(scope, 'alert-danger', 'Sorry No Records Found', 2500);
         };
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 3000);
+                alerts.timeoutoldalerts(scope, 'alert-success', msg, 3000);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 3000);
+                alerts.timeoutoldalerts(scope, 'alert-danger', msg, 3000);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -1845,11 +1895,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (response.data !== null && response.data !== undefined) {
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', mobilenumbers, 3000);
+                        alerts.timeoutoldalerts(scope, 'alert-success', mobilenumbers, 3000);
 
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', mobilenumber, 3000);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', mobilenumber, 3000);
                     }
                 }
 
@@ -2007,9 +2057,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            //  var realpath = $location.path() + '#/viewprofile';
             var realpath = '#/viewFullProfileCustomer';
-            //var url = $location.absUrl().split('?')[0];
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -2047,19 +2095,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                 if (response.data === 1) {
                     if (type === 1) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Accepted successfully', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Accepted successfully', 2500);
 
                     } else {
-                        scope.$broadcast("showAlertPopupccc", 'alert-success', 'Rejected successfully', 2500);
-
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Rejected successfully', 2500);
                     }
                 } else {
                     if (type === 1) {
 
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Accepted Fail', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
-
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Rejected Fail', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
 
                 }
@@ -2068,21 +2114,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
                 if (response.data === 1) {
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
-
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
-
                 if (response.data === 1) {
-                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Proceed successfully', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
-                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'sorry Proceed Fail', 2500);
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
                 alerts.dynamicpopupclose();
             });
@@ -2113,11 +2157,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
 
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
-            if (loginpaidstatus === "1") {
-                scope.gettingpartnerdata(type, frompage, topage, headertext);
-            } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'upgrade', 3000);
-            }
+            authSvc.paymentstaus(scope.custid, scope).then(function(response) {
+                console.log(response);
+                if (response === true)
+                    scope.gettingpartnerdata(type, frompage, topage, headertext);
+            });
         };
 
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
@@ -2297,8 +2341,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.withoutlogin = true;
         scope.showhidetestbuttons();
         scope.divloginblock = function() {
-            scope.loginpopup = true;
-            $('.login_block_header').toggle();
+            scope.loginpopup = scope.loginpopup ? false : true;
+
         };
         scope.validate = function() {
 
@@ -2519,6 +2563,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             }
         };
         scope.showforgetpasswordpopup = function() {
+            scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
 
         };
@@ -2531,6 +2576,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         arrayConstants, service, $rootscope, alerts, timeout, missingFieldService) {
         scope.fromge = 1;
         scope.topage = 5;
+        scope.loginpopup = false;
         scope.homeinit = function() {
             timeout(function() {
                 successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
@@ -2543,7 +2589,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 1000);
         };
         scope.divloginblock = function() {
-            $('.login_block_header').toggle();
+            scope.loginpopup = scope.loginpopup ? false : true;
         };
         scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
@@ -2663,14 +2709,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
-            // sessionStorage.removeItem("homepageobject");
+
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             var realpath = '#/General?selectedIndex=2';
             window.open(realpath, "_self");
-            //$rootscope.$broadcast("profile", 2);
+
         };
 
         scope.showforgetpasswordpopup = function() {
+            scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
 
         };
@@ -3009,14 +3056,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if ((textboxprofileid.value !== "" && textboxprofileid.value !== null) || (textbox.value !== "" && textbox.value !== null) || (textboxlastname.value !== "" && textboxlastname.value !== null)) {
                 if (textbox.value !== "" && textbox.value !== null) {
                     if (textbox.value.length < 3) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Mininum 3 charactes required For Name', 2500);
                         return false;
                     } else {
                         return true;
                     }
                 } else if (textboxlastname.value !== "" && textboxlastname.value !== null) {
                     if (textboxlastname.value.length < 3) {
-                        scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Mininum 3 charactes required For LastName', 2500);
                         return false;
                     } else {
                         return true;
@@ -3025,7 +3072,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     return true;
                 }
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'pls enter atleast one fileld', 2500);
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please enter atleast one fileld', 2500);
                 return false;
             }
         };
@@ -3256,7 +3303,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.showcontrols = true;
                                 scope.truepartner = true;
                                 scope.truepartnerrefine = true;
-                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                             }
                         } else {
                             if (scope.custid !== null && scope.custid !== "" && scope.custid !== undefined) {
@@ -3282,7 +3329,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 scope.PartnerProfilesnew.push(item);
                             });
                         } else {
-                            scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                         }
                         scope.loadinging = true;
                     });
@@ -3312,7 +3359,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.showcontrols = true;
                                     scope.truepartner = true;
                                     scope.truepartnerrefine = true;
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
                             } else {
                                 _.each(response.data, function(item) {
@@ -3695,9 +3742,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.successfaileralert = function(msg, typewarning) {
             if (typewarning === "success") {
-                scope.$broadcast("showAlertPopupccc", 'alert-success', msg, 2500);
+                alerts.timeoutoldalerts(scope, 'alert-success', msg, 2500);
             } else {
-                scope.$broadcast("showAlertPopupccc", 'alert-danger', msg, 2500);
+                alerts.timeoutoldalerts(scope, 'alert-danger', msg, 2500);
             }
         };
         scope.$on('successfailer', function(event, msg, typewarning) {
@@ -3716,8 +3763,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.sendmessages = function(form) {
             if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
+
             } else {
-                alert('please enter Message');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please enter Message', 2500);
             }
         };
         scope.$on("modalpopupclose", function(event) {
@@ -3734,7 +3782,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if (commonpopup.checkvals(scope.mothertongue) && commonpopup.checkvals(scope.religion)) {
 
             } else {
-                alert('please select mothertongue and religion');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
 
@@ -4497,6 +4545,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
 
                     if (response.data == 1) {
+                        scope.Resetallfields('email');
                         alerts.open('Email Upadated successfully', 'success');
                     } else {
                         alerts.open('Email Updated failed', 'warning');
@@ -4510,6 +4559,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                 customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
 
                     if (response.data == 1) {
+                        scope.Resetallfields('mobile');
                         alerts.open('Mobile Upadated successfully', 'success');
                     } else {
                         alerts.open('Mobile Updated failed', 'warning');
@@ -4527,6 +4577,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
 
             if (response.data == 1) {
+                scope.Resetallfields('password');
                 alerts.open('Passsword updated successfully', 'success');
             } else {
                 alerts.open('Passsword updated failed', 'warning');
@@ -4539,8 +4590,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var iflag = 1;
         var Narration = scope.hiddennarration;
         customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-
             if (response.data == 1) {
+                scope.Resetallfields('hide');
                 alerts.open('Hide Profile successfully', 'success');
             } else {
                 alerts.open('Hide Profile failed', 'warning');
@@ -4551,8 +4602,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var ProfileID = scope.ProfileID;
         var Narrtion = scope.Narrtion;
         customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
-
             if (response.data == 1) {
+                scope.Resetallfields('deleteprofiles');
                 alerts.open('Delete Profile successfully', 'success');
             } else {
                 alerts.open('Delete Profile failed', 'warning');
@@ -4564,8 +4615,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         var AllowEmail = scope.mailyes === 0 ? 0 : 1;
         var AllowSMS = scope.smsyes === 0 ? 0 : 1;
         customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
-
             if (response.data == 1) {
+                scope.Resetallfields('alerts');
                 alerts.open('Submit successfully', 'success');
             } else {
                 alerts.open('submit failed', 'warning');
@@ -4573,11 +4624,10 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         });
     };
     scope.unhideprofile = function() {
-        var Expirydate = null;
+        var Expirydate = "";
         var CustID = scope.custid;
         var iflag = 0;
         customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-
             if (response.data == 1) {
                 alerts.open('Unhide your Profile successfully', 'success');
             } else {
@@ -4887,9 +4937,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 scope.aboutmyself = {};
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    if (testArr[0].TableName!==undefined && testArr[0].TableName === "About") {
+                    if (testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                         scope.aboutmyself = testArr;
-                    } else if (testArr[0].TableName!==undefined && testArr[0].TableName === "Primary") {
+                    } else if (testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                         scope.personalinfo = testArr;
                         scope.divclassmask = function(logphotostatus) {
                             var photo = scope.slides[0].ApplicationPhotoPath;
@@ -4955,29 +5005,29 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         console.log(response);
                         switch (type) {
                             case "B":
-                                if (response.data == 1) {
-                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
                                 }
                                 break;
                             case "E":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
                                 }
                                 break;
                             case "I":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
                                 }
                                 break;
                             case "M":
-                                if (response.data == 1) {
+                                if (response.data === 1) {
                                     scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
                                 } else {
                                     scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
@@ -5005,7 +5055,21 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 FromProfileID: loginprofileid,
                 ToProfileID: profileid !== undefined ? profileid : null
             };
-            scope.servicehttp(type, object);
+
+            switch (type) {
+                case "E":
+                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true)
+                            scope.servicehttp(type, object);
+                    });
+                    break;
+
+                default:
+                    scope.servicehttp(type, object);
+                    break;
+            }
+
         };
         scope.sendmessages = function(form) {
 
@@ -5075,7 +5139,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, alerts) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injector, Idle, alerts, $http) {
 
 
     function setUser(value) {
@@ -5160,26 +5224,39 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', function($injector, Idle, 
             window.location = "#/";
         },
         login: function(username, password) {
-
             var body = {
                 Username: username,
                 Password: password
             };
-            return $injector.invoke(function($http) {
-                return $http.post(app.apiroot + 'DB/userLogin/person', body)
-                    .then(function(response) {
 
-                        if (response.status === 200) {
-                            if (response.data !== null) {
-                                Idle.watch();
-                                return { success: true, response: response.data };
-                            } else {
-                                alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
-                            }
+            return $http.post(app.apiroot + 'DB/userLogin/person', body)
+                .then(function(response) {
+                    if (response.status === 200) {
+                        if (response.data !== null) {
+                            Idle.watch();
+                            return { success: true, response: response.data };
+                        } else {
+                            alert("Invalid Matrimony ID / E-mail OR Incorrect Password");
                         }
-                        return { success: false, response: response.data };
-                    });
-            });
+                    }
+                    return { success: false, response: response.data };
+                });
+        },
+        paymentstaus: function(custid, scope) {
+
+            return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
+                .then(function(response) {
+                    if (response.status === 200 && response.data !== null && response.data !== undefined) {
+                        console.log(response);
+                        if (response.data === "Paid") {
+                            return true;
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);
+                            return false;
+                        }
+                    }
+
+                });
         }
     };
 }]);
