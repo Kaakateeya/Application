@@ -166,7 +166,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     Maritalstatus: null,
                     intReligionID: scope.object.intReligionID,
                     MotherTongue: null,
-                    Caste: scope.object.Caste !== null ? scope.object.Caste : 0,
+                    Caste: scope.object.Caste !== null ? scope.object.Caste : null,
                     iPhysicalstatus: null,
                     Complexion: null,
                     Country: scope.object.Country,
@@ -239,7 +239,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.lastname = "";
         };
         scope.returnnullvalue = function(value) {
-            var obj = value !== null && value !== undefined && value !== "" ? (value.toString()) : null;
+
+            var obj = value !== null && value !== undefined && value !== "" && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
             return obj;
         };
         scope.submitobjectcommongenad = function(frompage, topage) {
