@@ -16,7 +16,7 @@ app.global = {
 }
 
 
-app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
     IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
@@ -81,14 +81,14 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             }
         };
         $stateProvider.state(item.name, {
-            url: item.url,
-            views: (item.ishomepage ? outerView : innerView),
-            data: {
-                requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
-                //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
-            }
-        })
-        $locationProvider.html5Mode(true);
+                url: item.url,
+                views: (item.ishomepage ? outerView : innerView),
+                data: {
+                    requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
+                    //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
+                }
+            })
+            // $locationProvider.html5Mode(true);
     });
 }]);
 app.config(function(reCAPTCHAProvider) {

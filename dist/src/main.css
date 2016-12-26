@@ -24653,7 +24653,7 @@ footer                                      { padding:0 1%; }
 .up-arrrow,
 .play-button,
 .drag-icon,
-.slider,
+.sliderimg,
 .icon-email,
 .bookmark-icon,
 .close-icon,
@@ -24901,7 +24901,7 @@ footer                                      { padding:0 1%; }
     height: 41px;
 }
 
-.slider {
+.sliderimg {
     background-position: -270px -820px;
     width: 40px;
     height: 32px;
