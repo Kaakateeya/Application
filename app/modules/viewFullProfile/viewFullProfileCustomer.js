@@ -18,7 +18,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             scope.aboutmyself = {};
             _.each(response.data, function(item) {
                 var testArr = JSON.parse(item);
-                debugger;
+
                 console.log(testArr);
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;

@@ -2731,27 +2731,31 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     }
 ]);
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
-    'missingFieldService', '$timeout', '$stateParams',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal',
+
     function(scope, commonFactory,
-        authSvc, $mdDialog, missingFieldService, timeout, stateParams) {
+        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
 
+        scope.misObj = {};
+
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         scope.showpopup = function() {
-            $mdDialog.show({
-                templateUrl: 'missingfieldspopup.html',
-                parent: angular.element(document.body),
-                scope: scope,
-                size: 'md',
-                clickOutsideToClose: true,
-                height: '50 %',
-                backdrop: 'static',
-                keyboard: false
 
+            var modalpopupopen = uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'missingfieldspopup.html',
+                scope: scope,
+                size: 'lg',
+                backdrop: 'static',
+                keyboard: false,
+                windowClass: 'full'
             });
+
             scope.starArr = commonFactory.starBind(1);
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
 
@@ -2841,29 +2845,29 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
 
         };
 
-        scope.misFieldsSubmit = function() {
+        scope.misFieldsSubmit = function(obj) {
             var misInputobj = {
-                Starlanguage: scope.ddlstarlanguages,
+                Starlanguage: obj.ddlstarlanguages,
                 i_updateflag: 1,
-                iJoblocationCountry: scope.lstJoblocCountry,
-                iJoblocationDistrict: scope.lstjoblocdistrict,
-                iJoblocationState: scope.lstjoblocstate,
-                iJobLocation: scope.lstjoblocation,
-                IsSharedProperty: scope.rdlSharedProperty,
+                iJoblocationCountry: obj.lstJoblocCountry,
+                iJoblocationDistrict: obj.lstjoblocdistrict,
+                iJoblocationState: obj.lstjoblocstate,
+                iJobLocation: obj.lstjoblocation,
+                IsSharedProperty: obj.rdlSharedProperty,
                 AstroFlag: scope.MFSelectArray.AstroFlag,
                 ParentsFlag: (scope.MFSelectArray.ParentsFatherFlag || scope.MFSelectArray.ParentsFatherFlag) ? 1 : 0,
                 MFCustFamilyID: scope.MFSelectArray.MFCustFamilyID,
                 FFCustFamilyID: scope.MFSelectArray.FFCustFamilyID,
-                Gothram: scope.txtgothram,
-                MotherNative: scope.txtMothernative,
-                Salarycurrency: scope.ddlAnnualincome,
-                Salary: scope.txtSalary,
-                Complexion: scope.lstComplexion,
-                Star: scope.lststar,
-                FatherNative: scope.txtfathernative,
-                Propertylakhs: scope.txtProperty,
-                Maritalstatus: scope.lstMaritalstatus,
-                Height: scope.ddlFromheight,
+                Gothram: obj.txtgothram,
+                MotherNative: obj.txtMothernative,
+                Salarycurrency: obj.ddlAnnualincome,
+                Salary: obj.txtSalary,
+                Complexion: obj.lstComplexion,
+                Star: obj.lststar,
+                FatherNative: obj.txtfathernative,
+                Propertylakhs: obj.txtProperty,
+                Maritalstatus: obj.lstMaritalstatus,
+                Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
 
@@ -2906,6 +2910,16 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
 
         };
         scope.pagerload(scope.dataqr);
+
+        scope.currencyChange = function() {
+
+            // if (!commonFactory.checkvals(scope.ddlAnnualincome)) {
+            //     alert("Please select Curency");
+            // }
+        };
+
+
+
     }
 ]);
 app.controller('mobileverifyController', ['$scope', 'mobileVerificationService', 'authSvc', function(scope, mobileVerificationService, authSvc) {
@@ -4929,35 +4943,47 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        scope.pageload = function() {
-            customerDashboardServices.Viewprofile(scope.custid, localcustid).then(function(response) {
-                console.log(JSON.stringify(response));
-                scope.arr = [];
-                scope.personalinfo = {};
-                scope.aboutmyself = {};
-                _.each(response.data, function(item) {
-                    var testArr = JSON.parse(item);
-                    if (testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
-                        scope.aboutmyself = testArr;
-                    } else if (testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
-                        scope.personalinfo = testArr;
-                        scope.divclassmask = function(logphotostatus) {
-                            var photo = scope.slides[0].ApplicationPhotoPath;
-                            var photocount = scope.personalinfo[0].PhotoName_Cust;
-                            logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-                            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                                return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
-                            } else {
-                                return "";
-                            }
-                        };
+        scope.partnerinformation = function(response) {
+            console.log(JSON.stringify(response));
+            scope.arr = [];
+            scope.personalinfo = {};
+            scope.aboutmyself = {};
+            _.each(response.data, function(item) {
+                var testArr = JSON.parse(item);
 
-                    } else {
+                console.log(testArr);
+                if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
+                    scope.aboutmyself = testArr;
+                } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
+                    scope.personalinfo = testArr;
+                    scope.divclassmask = function(logphotostatus) {
+                        var photo = scope.slides[0].ApplicationPhotoPath;
+                        var photocount = scope.personalinfo[0].PhotoName_Cust;
+                        logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                        if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                        } else {
+                            return "";
+                        }
+                    };
+
+                } else {
+                    if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
-                });
-
+                }
             });
+        };
+        scope.pageload = function() {
+            if (scope.custid === localcustid) {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            } else {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            }
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 console.log(response);
                 _.each(response.data, function(item) {
@@ -5150,6 +5176,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         setSession('cust.paidstatus', (value.PaidStatus));
         setSession('cust.profilepic', (value.ProfilePic));
         setSession('cust.GenderID', (value.GenderID));
+        setSession('cust.isemailverified', (value.isemailverified));
+        setSession('cust.isnumberverifed', (value.isnumberverifed));
     }
 
     function getSession(key) {
@@ -5176,6 +5204,9 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         clearSession('cust.paidstatus');
         clearSession('cust.profilepic');
         clearSession('cust.GenderID');
+        clearSession('cust.isemailverified');
+        clearSession('cust.isnumberverifed');
+
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
     }
@@ -5187,7 +5218,9 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
             profileid: getSession('cust.profileid'),
             paidstatus: getSession('cust.paidstatus'),
             profilepic: getSession('cust.profilepic'),
-            GenderID: getSession('cust.GenderID')
+            GenderID: getSession('cust.GenderID'),
+            isemailverified: getSession('cust.isemailverified'),
+            isnumberverifed: getSession('cust.isnumberverifed')
         };
     }
 
@@ -5260,10 +5293,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         }
     };
 }]);
-
-//   app.ng.config(['$httpProvider', function ($httpProvider) {
-//     $httpProvider.interceptors.push('authInterceptor');
-//   }]);
 app.factory('customerDashboardServices', ['$http', function(http) {
     return {
         getCustomercounts: function(custid, typeofaction, frompage, topage) {
@@ -5285,19 +5314,18 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         Tickethistory: function(Ticketid, Type) {
             return http.get(app.apiroot + 'DashboardRequest/GetTicketinformation', { params: { Ticketid: Ticketid, Type: Type } });
         },
-        Viewprofile: function(logcustid, tocustid) {
-             
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid } });
+        Viewprofile: function(logcustid, tocustid, selfflag) {
+
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid, RelationshipID: selfflag } });
         },
         Viewprofileflags: function(logcustid, tocustid) {
-             
             return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: logcustid, ToCustID: tocustid } });
         },
         communicationhistorychats: function(obj) {
             return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);
         },
         acceptrejectexpressinterest: function(fromid, toid, logid, type, empid) {
-             
+
             return http.get(app.apiroot + 'DashboardRequest/getInsertCustomerExpressinterest', { params: { fromcustid: fromid, tocustid: toid, logID: logid, interstTYpe: type, empid: "" } });
         },
         photopasswordactioninsert: function(fromcustid, tocustid, type) {

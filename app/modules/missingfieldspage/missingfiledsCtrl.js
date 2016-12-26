@@ -31,7 +31,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 console.log('test');
                 console.log(scope.MFSelectArray);
                 scope.divSkip = true;
-                debugger;
+
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
                     scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
@@ -40,7 +40,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.divSkip = false;
                     }
                 }
-                debugger;
+
                 if (scope.MFSelectArray.Professionflag === 1) {
                     scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
                     scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
@@ -138,7 +138,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-            debugger;
+
             console.log(JSON.stringify(misInputobj));
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
                 console.log(response);
@@ -152,7 +152,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         scope.pagerload = function(type) {
 
             timeout(function() {
-                debugger;
+
 
                 switch (scope.dataqr) {
                     case 1:
@@ -180,7 +180,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         scope.pagerload(scope.dataqr);
 
         scope.currencyChange = function() {
-            debugger;
+
             // if (!commonFactory.checkvals(scope.ddlAnnualincome)) {
             //     alert("Please select Curency");
             // }
