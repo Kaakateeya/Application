@@ -1,6 +1,6 @@
 <div>
     <br />
-    <div class="row col-lg-offset-2" id="divtextinput">
+    <div class="row col-lg-offset-2" id="divtextinput" ng-hide="true">
         <div class="col-lg-6">
             <div class="col-lg-3" id="divLProfileid">
                 <label id="lblpto" Text="Profileid" ForeColor="Black" Font-Size="16px" Font-Bold="true"></label>
@@ -22,18 +22,18 @@
         </div>
     </div>
 </div>
-<div id="printablediv">
+<div id="printablediv" ng-init="pageload()">
     <div id="PageDiv" class="profile_full_main">
         <div id="divacceptreject" style="border: solid 1px #fff;">
             <div id="upAll">
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
                     </div>
                     <div id="updateContentssa">
 
-                        <div id="liproceed" class="profile_full_header_in_ui clearfix" style="display:none;">
+                        <div id="liproceed" class="profile_full_header_in_ui clearfix" ng-hide="true">
 
                             <a id="btnProceed" href="javascript:void(0)">Proceed</a>
 
@@ -41,25 +41,25 @@
                         </div>
 
                     </div>
-                    <div id="liaccept" class="profile_full_header_in_ui clearfix" style="display: none;">
+                    <div id="liaccept" class="profile_full_header_in_ui clearfix" ng-hide="true">
                         <div id="UpdatePanel6">
 
                             <a id="btnaccept" href="javascript:void(0)">Accept</a>
                             <a id="btnreject" href="javascript:void(0)">Reject</a>
-                            <span id="lblpaid" style="display: none;">Paid</span>
+                            <span id="lblpaid" ng-hide="true">UnPaid</span>
 
                         </div>
-                        <span id="hdnexpressinterstfiled" style="display: none;">1549574</span>
+                        <span id="hdnexpressinterstfiled" ng-hide="true">208611</span>
 
                     </div>
-                    <div id="liticket" class="profile_full_header_in_ui clearfix" style="display:block;">
-                        <a id="btnticket" class="aspNetDisabled">KAKHD932611</a>
+                    <div id="liticket" class="profile_full_header_in_ui clearfix" ng-hide="true">
+                        <a id="btnticket" class="aspNetDisabled">KAKHD920868</a>
                     </div>
-                    <div id="logidliproceed" class="profile_full_header_in_ui clearfix" style="display: none;">
+                    <div id="logidliproceed" class="profile_full_header_in_ui clearfix" ng-hide="true">
 
-                        <a id="lnklogaccept" href="javascript:void(0);">Proceed</a>
+                        <a id="lnklogaccept" href="javascript:void(0);" onclick="return acceptlink('I');">Proceed</a>
 
-                        <a id="lnklogSkipped" href="javascript:void(0);">Skip This Profile</a>
+                        <a id="lnklogSkipped" href="javascript:void(0);" onclick="return acceptlink('NI');">Skip This Profile</a>
 
                     </div>
                 </div>
@@ -69,97 +69,62 @@
 
         <div class="clearfix"></div>
         <div id="divProfile" class="profile_full_header clearfix">
-
-
-
             <div class="row">
                 <div class="col-lg-2">
                     <div id="UpdateImagesContent">
-
                         <div id="divmask" class="profile_full_header_pic">
-                            <input type="image" name="piProfilePic" id="iProfilePic" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/ProfilePics/KMPL_71891_Images/Img1_Images/110718915_ApplicationPhoto.jpg" style="height:150px;width:150px;">
+                            <input type="image" name="CommonViewFullProfileUserControl$iProfilePic" id="iProfilePic" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/customernoimages/ppm_p_request_rev.png" style="height:150px;width:150px;">
                         </div>
 
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="profile_full_header_in">
+
                         <h6>
-                            <span id="lblName">C SARAVANAN</span>
+                            <span id="lblName">{{personalinfo[0].NAME}}</span>
                             <span>
-                                <span id="lblonlychild" style="font-weight:bold;">-  Only Child  </span>
-                            <span id="lblProfileids">  (Profile id:110718915)</span>
-
-
+                                <span id="lblonlychild" style="font-weight:bold;"></span>
+                            <span id="lblProfileIDs"> (Profile ID:{{personalinfo[0].ProfileID}})</span>
                             </span>
                         </h6>
-
-
                         <p>
-
+                            <span id="lblAboutMyself" class="lblAboutMyself" style="color:Black;font-weight:bold;color: #000">About Myself :</span>
                         </p>
                         <p>
-                            <span id="lblDescMy" class="fontsize" style="width: 750px;"></span>
+                            <span id="lblDescMy" class="fontsize" style="width: 750px;">{{aboutmyself[0].Aboutyourself}}</span>
                         </p>
-
-
                     </div>
                 </div>
                 <div class="col-lg-2">
 
-                    <input type="image" name="imghoroscope" id="imghoroscope" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/71891_HaroscopeImage/71891_HaroscopeImage.jpg" style="height:160px;width:150px;">
+                    <input type="image" name="CommonViewFullProfileUserControl$imghoroscope" id="imghoroscope" src="../images/view%20horoscope%20image.jpg" style="height:160px;width:150px;">
 
                 </div>
             </div>
         </div>
-        <div id="bighoro" class="modal fade" role="dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h4 class="modal-title">Horoscope</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="bs-example">
-                            <div id="UpdatePanel5">
-
-                                <img id="imghorobigimage" src="http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/71891_HaroscopeImage/71891_HaroscopeImage.jpg" style="height: 500px; width: 500px;">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" name="btncancel" value="Cancel" id="btncancel" class="button_custom button_custom_reset" data-dismiss="modal">
-                    </div>
-                </div>
-
-            </div>
-        </div>
         <div id="printdiv">
             <div class="personal_inform_main">
-                <div id="Div1" class="personal_inform_main_in">
-                    <h4>about my
-                        <label id="lblRelation">daughter</label>
-                    </h4>
-                    <p>
-                        <label id="lblDesc"></label>
-                    </p>
-                </div>
-                <div id="outRepeater_ctl00_divmain" class="personal_inform_head clearfix" style="background-color: rgb(244, 182, 36); padding: 6px 10px; border-bottom: solid 1px #ccc;" ng-if="item.header=='Headings' || item.header=='About' || item.header=='Primary'?'':item.header">
-                    <h6>
-                        <span id="outRepeater_ctl00_lblHeadings" class="lblHeadings" style="color: black;">{{item.header}}</span></h6>
-                </div>
-                <div id="outRepeater_ctl00_divsub" class="personal_inform_main_in">
-                    <div id="outRepeater_ctl00_divStyle" class="personal_inform_main_in_list clearfix">
-                        <p ng-repeat="itm in item.value">
-                            <span id="outRepeater_ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;">NAME</span>
-                            <span>
-                           <span id="lblTextName" style="color:DarkBlue;"> <span ng-if="itm.columnname!='' && itm.columnname!=null">:</span>
-                            <span ng-bind-html="itm.value || itm.Value"></span>
-                            </span>
-                        </p>
+
+                <div ng-repeat="item in arr" ng-if="item.header=='Headings' || item.header=='About'?'':item.header">
+                    <div id="ctl00_divmain" class="personal_inform_head clearfix" style="background-color: rgb(244, 182, 36); padding: 6px 10px; border-bottom: solid 1px #ccc;">
+                        <h6>
+                            <span id="ctl00_lblHeadings" class="lblHeadings" style="color: black;font-weight: 700;">{{item.header}}</span></h6>
+                    </div>
+
+                    <div id="ctl00_divsub" class="personal_inform_main_in">
+                        <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details'|| item.header=='My Location Information'?'personal_inform_main_in_list clearfix': ''">
+                            <p ng-repeat="itm in item.value">
+                                <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;">{{itm.columnname || itm.ColumnName}}</span>
+                                <span>
+                              <span  style="color:DarkBlue;"> 
+                                <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null) " style="color:DarkBlue;">:</span>
+                                <span ng-bind-html="itm.value || itm.Value" style="color:DarkBlue;"></span>
+
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,3 +132,20 @@
     </div>
 
 </div>
+
+
+
+<style type="text/css">
+    .profile_full_header_in_ui a {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: rgb(102, 204, 255);
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+</style>

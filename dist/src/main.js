@@ -4970,31 +4970,21 @@ app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function
     });
 }]);
 app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams', '$location',
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams',
+    '$location', 'customerviewfullprofileservices',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
-        $mdDialog, $stateParams, $location) {
-        var logincustid = authSvc.getCustId();
-        var loginprofileid = authSvc.getProfileid();
-        var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
-        scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
-        var locallogid = sessionStorage.getItem("locallogid");
-        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        $mdDialog, $stateParams, $location, customerviewfullprofileservices) {
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
-        scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        console.log($stateParams.MyProfileQSAccept);
         var searchObjectquery = $location.search();
-        scope.MyProfileQSAccept = searchObjectquery.MyProfileQSAccept;
+        scope.MyProfileQSAccept = "?" + searchObjectquery.MyProfileQSAccept;
         console.log(scope.MyProfileQSAccept);
-
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
             scope.aboutmyself = {};
             _.each(response.data, function(item) {
                 var testArr = JSON.parse(item);
-
-
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
@@ -5002,12 +4992,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.divclassmask = function(logphotostatus) {
                         var photo = scope.slides[0].ApplicationPhotoPath;
                         var photocount = scope.personalinfo[0].PhotoName_Cust;
-                        logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-                        if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
-                        } else {
-                            return "";
-                        }
                     };
 
                 } else {
@@ -5018,53 +5002,58 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.pageload = function() {
-            if (scope.custid === localcustid) {
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
-                    scope.partnerinformation(response);
-                });
-            } else {
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
-                    scope.partnerinformation(response);
-                });
-            }
-            customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
 
-                _.each(response.data, function(item) {
-                    var testArr = JSON.parse(item);
-                    if (testArr[0] !== undefined) {
-                        switch (testArr[0].TableName) {
-                            case "Bookmark":
-                                scope.Bookmark = testArr;
-
-                                break;
-                            case "Viewed":
-                                scope.Viewed = testArr;
-
-                                break;
-                            case "Express":
-                                scope.Express = testArr;
-
-                                break;
-                            case "Paidstatus":
-                                scope.Paidstatus = testArr;
-
-                                break;
-                            case "Ignore":
-                                scope.Ignore = testArr;
-
-                                break;
-                        }
-                    }
-                });
+            customerviewfullprofileservices.getExpressIntrstfullprofile(210910352, "").then(function(response) {
+                console.log(response);
+                scope.partnerinformation(response.data);
             });
+            // customerviewfullprofileservices.getViewFullProfileMail("?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8GfaMliVJjDiPnJu7cnUEbqe52KZug7tSQ43a4f6MUNR/KEnUaTqYxx2g0iamxuz8xZVwyLCiLSu5ZYao8D/h1FeyRs15TeVOVD6opnnmw22VnBSTmP/YNFIOY1n9n+6SpQ==").then(function(response) {
+            //     console.log(response);
+            //     debugger;
+            //     scope.fromcustid = response.data.FromCustID;
+            //     scope.tocustid = response.data.ToCustID;
+            //     scope.ToProfileID = response.data.ToProfileID;
+            //     scope.FromProfileID = response.data.FromProfileID;
+            //     customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(response) {
+            //         // _.each(response.data, function(item) {
+            //         //     var testArr = JSON.parse(item);
+            //         //     if (testArr[0] !== undefined) {
+            //         //         switch (testArr[0].TableName) {
+            //         //             case "Bookmark":
+            //         //                 scope.Bookmark = testArr;
 
-            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
-                scope.slides = [];
+            //         //                 break;
+            //         //             case "Viewed":
+            //         //                 scope.Viewed = testArr;
 
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
-                });
-            });
+            //         //                 break;
+            //         //             case "Express":
+            //         //                 scope.Express = testArr;
+
+            //         //                 break;
+            //         //             case "Paidstatus":
+            //         //                 scope.Paidstatus = testArr;
+
+            //         //                 break;
+            //         //             case "Ignore":
+            //         //                 scope.Ignore = testArr;
+
+            //         //                 break;
+            //         //         }
+            //         //     }
+            //         // });
+            //         console.log(response);
+            //     });
+
+            //     customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
+            //         scope.slides = [];
+            //         _.each(response.data, function(item) {
+            //             scope.slides.push(item);
+            //         });
+            //     });
+
+            // });
+
         };
 
         scope.servicehttp = function(type, object) {
@@ -5187,6 +5176,67 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 }
             }
         };
+
+        scope.disableEnableButtons = function(obj) {
+            // switch (dsland.Tables[count].Rows[0]["TableName"].ToString()) {
+
+            //     case "Express":
+
+            //         //popup alerts
+            //         if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString() == "Accept" && hdnAccRejFlag.Value != "MailReject") {
+
+            //             modalbodyID1.InnerText = "You have proceeded this profile";
+            //             Masterdropdownbind.ShowModalPopup(CommonClass.pageload, strTabClosePopup);
+            //         } else if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString() == "Reject" && hdnAccRejFlag.Value != "MailAccept") {
+            //             modalbodyID1.InnerText = "You have Skipped this profile";
+            //             Masterdropdownbind.ShowModalPopup(CommonClass.Show, strTabClosePopup);
+            //         }
+            //         //end popup alerts
+
+
+            //         if (dsland.Tables[count].Columns.Contains("MatchFollowUpStatus")) {
+            //             if (dsland.Tables[count].Rows[0]["MatchFollowUpStatus"].ToString().Trim() == "1") {
+            //                 if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString().Trim() == "Accept" || dsland.Tables[count].Rows[0]["SeenStatus"].ToString().Trim() == "Reject") {
+            //                     divacceptreject.Visible = true;
+            //                     btnticket.Text = dsland.Tables[count].Rows[0]["ViewTicket"].ToString();
+            //                     Masterdropdownbind.showhidediv(liproceed, false);
+            //                     Masterdropdownbind.showhidediv(liticket, true);
+            //                 } else {
+            //                     divacceptreject.Visible = true;
+            //                     Masterdropdownbind.showhidediv(liproceed, true);
+            //                 }
+            //             } else if (dsland.Tables[count].Columns.Contains("Acceptflag")) {
+            //                 if (dsland.Tables[count].Rows[0]["Acceptflag"].ToString().Trim() == "1") {
+            //                     divacceptreject.Visible = true;
+            //                     Masterdropdownbind.showhidediv(liproceed, true);
+            //                 } else if (dsland.Tables[count].Rows[0]["ExpressFlag"].ToString().Trim() == "1") {
+            //                     divacceptreject.Visible = true;
+            //                     Masterdropdownbind.showhidediv(liaccept, true);
+
+            //                 } else {
+            //                     divacceptreject.Visible = false;
+            //                     Masterdropdownbind.showhidediv(liaccept, false);
+
+            //                 }
+            //             }
+
+
+            //         }
+            //         if (dsland.Tables[count].Columns.Contains("ExpressInterstId")) {
+            //             if (dsland.Tables[count].Rows[0]["ExpressInterstId"].ToString().Trim() != "") {
+            //                 hdnexpressinterstfiled.Text = dsland.Tables[count].Rows[0]["ExpressInterstId"].ToString();
+            //             }
+            //         }
+
+            //         break;
+            //     case "Viewed":
+            //         break;
+            //     case "Paidstatus":
+            //         lblpaid.Text = dsland.Tables[count].Rows[0]["Paidstatus"].ToString().Trim();
+            //         break;
+            // }
+        };
+
     }
 ]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
@@ -5951,8 +6001,19 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getInsertUnpaidStatus', { params: { fromCustID: custid, ToCustID: tocustid, Empid: empid, typeofAction: typeofaction } });
         },
         getInsertExpressViewTicket: function(fromcustid, tocustid, decryptedtext, strtypeofreport) {
-            return http.get(app.apiroot + 'StaticPages/getInsertUnpaidStatus', { params: { FromCustID: fromcustid, ToCustID: tocustid, DecriptedText: decryptedtext, strtypeOfReport: strtypeofreport } });
+            return http.get(app.apiroot + 'StaticPages/getInsertExpressViewTicket', { params: { FromCustID: fromcustid, ToCustID: tocustid, DecriptedText: decryptedtext, strtypeOfReport: strtypeofreport } });
+        },
+        getExpressIntrstfullprofile: function(fromprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { FromProfileID: fromprofileid, EmpID: empid } });
+        },
+        getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
+            return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
+        },
+
+        getViewFullProfileMail: function(OriginalString) {
+            return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
         }
+
 
     };
 }]);
