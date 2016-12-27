@@ -54,6 +54,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccAvenue', url: '/ccAvenue', templateUrl: 'app/modules/static/ccAvenue.Html', controller: "ccAvenueCtrl", isloginrequired: false },
         { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/viewFullProfileCustomer.html', controller: 'viewFullProfileCustomer', isloginrequired: true },
 
+        { name: 'commonviewfull', url: '/commonviewfull', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: true },
 
     ];
 

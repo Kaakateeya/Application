@@ -147,7 +147,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
 
-        scope.redirectToMobVerification = function() { window.location = "#/mobileverf"; };
+        scope.redirectToMobVerification = function() { window.location = "mobileverf"; };
 
         scope.pagerload = function(type) {
 
@@ -173,7 +173,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.showpopup();
                         break;
                 }
-                //window.location = "#/mobileverf";
+
             }, 50);
 
         };

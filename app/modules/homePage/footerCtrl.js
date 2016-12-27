@@ -8,17 +8,17 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         sessionStorage.removeItem("homepageobject");
         switch (typeurl) {
             case "profile":
-                var realpath = '#/General?selectedIndex=2';
+                var realpath = 'General?selectedIndex=2';
                 window.open(realpath, "_self");
                 $rootscope.$broadcast("profile", 2);
                 break;
             case "general":
-                var realpathgen = '#/General?selectedIndex=0';
+                var realpathgen = 'General?selectedIndex=0';
                 window.open(realpathgen, "_self");
                 $rootscope.$broadcast("profile", 0);
                 break;
             case "advanced":
-                var realpathadvan = '#/General?selectedIndex=1';
+                var realpathadvan = 'General?selectedIndex=1';
                 window.open(realpathadvan, "_self");
                 $rootscope.$broadcast("profile", 1);
                 break;

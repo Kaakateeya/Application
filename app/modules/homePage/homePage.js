@@ -72,15 +72,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "#/home";
+                                        window.location = "home";
                                     } else {
-                                        window.location = "#/mobileverf";
+                                        window.location = "mobileverf";
                                     }
                                 } else {
-                                    window.location = "#/missingfields/" + missingStatus;
+                                    window.location = "missingfields/" + missingStatus;
                                 }
                             } else {
-                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
 
                         });
@@ -139,7 +139,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.Searchresult = null;
 
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
-            var realpath = '#/General?selectedIndex=2';
+            var realpath = 'General?selectedIndex=2';
             window.open(realpath, "_self");
 
         };
@@ -151,7 +151,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
-            var realpath = '#/General?selectedIndex=2';
+            var realpath = 'General?selectedIndex=2';
             window.open(realpath, "_self");
             $rootscope.$broadcast("profile", 2);
         };

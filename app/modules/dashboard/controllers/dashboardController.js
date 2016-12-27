@@ -95,17 +95,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.bindcounts = function(array) {
 
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
-                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
-                { value: 'manage photo', bindvalue: 'profile', hrefs: '#/editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home?type=MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home?type=WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home?type=RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home?type=WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home?type=I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: '#/General?selectedIndex=3' },
-                { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
-                { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
+                { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
+                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
+                { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'home?type=MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'home?type=WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'home?type=RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'home?type=WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'home?type=I' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
+                { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
+                { value: 'help', bindvalue: 'profile', hrefs: 'help' },
             ];
         };
         var TypeOfReportexpress = null;
@@ -407,7 +407,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            var realpath = '#/viewFullProfileCustomer';
+            var realpath = '/viewFullProfileCustomer';
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {

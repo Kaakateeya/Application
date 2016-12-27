@@ -106,7 +106,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         },
         logout: function() {
             clearUserSession();
-            window.location = "#/";
+            window.location = "/";
         },
         login: function(username, password) {
             var body = {

@@ -64,7 +64,7 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
         },
         timeoutoldalerts: function(scope, cls, msg, time) {
             scope.typecls = cls;
-            scope.msgs = msg === "upgrade" ? "<label style='color:maroon;'>Please Click Here To</label><a href='#/UpgradeMembership'>" + "  " + arrayConstants.Upgrade + "</a>" : "<label>" + msg + "</label>";
+            scope.msgs = msg === "upgrade" ? "<label style='color:maroon;'>Please Click Here To</label><a href='/UpgradeMembership'>" + "  " + arrayConstants.Upgrade + "</a>" : "<label>" + msg + "</label>";
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',

@@ -673,15 +673,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "#/home";
+                                        window.location = "home";
                                     } else {
-                                        window.location = "#/mobileverf";
+                                        window.location = "mobileverf";
                                     }
                                 } else {
-                                    window.location = "#/missingfields/" + missingStatus;
+                                    window.location = "missingfields/" + missingStatus;
                                 }
                             } else {
-                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
 
                         });
@@ -769,7 +769,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            var realpath = '#/viewFullProfileCustomer';
+            var realpath = 'viewFullProfileCustomer';
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {

@@ -13,7 +13,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
             scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
             scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
             if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                window.location = "#/home?type=C";
+                window.location = "home?type=C";
             }
         });
 
@@ -29,7 +29,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
                 scope.pageloadSelect = scope.pageLoad(scope.custid);
                 scope.pageloadSelect.ismobileverf = true;
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                    window.location = "#/home?type=C";
+                    window.location = "home?type=C";
                 }
                 return false;
             });

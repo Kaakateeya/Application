@@ -778,7 +778,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
                 authSvc.login(scope.username, scope.password).then(function(response) {
                     authSvc.user(response.response !== null ? response.response[0] : null);
                     var custidlogin = authSvc.getCustId();
-                    window.location = "#/home";
+                    window.location = "home";
                     scope.loginpopup = false;
                     scope.showhidetestbuttons();
                 });
@@ -796,7 +796,7 @@ app.controller('headctrl', ['$scope', 'authSvc', function(scope, authSvc) {
     };
     scope.ClearlocalStorage = function() {
         authSvc.logout();
-        window.location = "#/";
+        window.location = "/";
 
     };
 }]);
@@ -866,7 +866,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                     authSvc.user(response.response !== null ? response.response[0] : null);
                     // var d = authSvc.getCustId();
                     // var dd = authSvc.user();
-                    window.location = "#/home";
+                    window.location = "home";
                 });
             }
         }

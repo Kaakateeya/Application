@@ -692,7 +692,7 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
         },
         timeoutoldalerts: function(scope, cls, msg, time) {
             scope.typecls = cls;
-            scope.msgs = msg === "upgrade" ? "<label style='color:maroon;'>Please Click Here To</label><a href='#/UpgradeMembership'>" + "  " + arrayConstants.Upgrade + "</a>" : "<label>" + msg + "</label>";
+            scope.msgs = msg === "upgrade" ? "<label style='color:maroon;'>Please Click Here To</label><a href='/UpgradeMembership'>" + "  " + arrayConstants.Upgrade + "</a>" : "<label>" + msg + "</label>";
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
@@ -1751,17 +1751,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.bindcounts = function(array) {
 
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: 'profile', hrefs: '#/editview' },
-                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: '/#UpgradeMembership' },
-                { value: 'manage photo', bindvalue: 'profile', hrefs: '#/editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: '/#home?type=MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: '/#home?type=WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: '/#home?type=RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: '/#home?type=WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: '/#home?type=I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: '#/General?selectedIndex=3' },
-                { value: 'Profile Settings', bindvalue: 'profile', hrefs: '/#profilesettings' },
-                { value: 'help', bindvalue: 'profile', hrefs: '/#help' },
+                { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
+                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
+                { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'home?type=MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'home?type=WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'home?type=RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'home?type=WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'home?type=I' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
+                { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
+                { value: 'help', bindvalue: 'profile', hrefs: 'help' },
             ];
         };
         var TypeOfReportexpress = null;
@@ -2063,7 +2063,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            var realpath = '#/viewFullProfileCustomer';
+            var realpath = '/viewFullProfileCustomer';
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -2280,17 +2280,17 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         sessionStorage.removeItem("homepageobject");
         switch (typeurl) {
             case "profile":
-                var realpath = '#/General?selectedIndex=2';
+                var realpath = 'General?selectedIndex=2';
                 window.open(realpath, "_self");
                 $rootscope.$broadcast("profile", 2);
                 break;
             case "general":
-                var realpathgen = '#/General?selectedIndex=0';
+                var realpathgen = 'General?selectedIndex=0';
                 window.open(realpathgen, "_self");
                 $rootscope.$broadcast("profile", 0);
                 break;
             case "advanced":
-                var realpathadvan = '#/General?selectedIndex=1';
+                var realpathadvan = 'General?selectedIndex=1';
                 window.open(realpathadvan, "_self");
                 $rootscope.$broadcast("profile", 1);
                 break;
@@ -2309,7 +2309,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.profileid = datatinfo.profileid;
                 scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
                 //scope.javascript = "javascript:void(0)";
-                scope.hrefpaid = datatinfo.paidstatus == 1 ? "#/UpgradeMembership" : "#/UpgradeMembership";
+                scope.hrefpaid = datatinfo.paidstatus == 1 ? "UpgradeMembership" : "UpgradeMembership";
                 scope.profilepic = datatinfo.profilepic;
                 scope.withlogin = true;
                 scope.withoutlogin = false;
@@ -2406,15 +2406,15 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "#/home";
+                                        window.location = "home";
                                     } else {
-                                        window.location = "#/mobileverf";
+                                        window.location = "mobileverf";
                                     }
                                 } else {
-                                    window.location = "#/missingfields/" + missingStatus;
+                                    window.location = "missingfields/" + missingStatus;
                                 }
                             } else {
-                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
 
                         });
@@ -2444,18 +2444,18 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("localcustid");
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custidlogin);
-            var realpath = '#/viewFullProfileCustomer';
+            var realpath = 'viewFullProfileCustomer';
             window.open(realpath, '_self');
         };
         scope.redirecthomeordashboard = function() {
             sessionStorage.removeItem("LoginPhotoIsActive");
             var custidlogin = authSvc.getCustId();
             if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
-                var realpaths = '#/home';
+                var realpaths = 'home';
                 window.open(realpaths, "_self");
 
             } else {
-                var realpath = '#/';
+                var realpath = '/';
                 window.open(realpath, "_self");
             }
 
@@ -2465,17 +2465,17 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
-                    var realpath = '#/General?selectedIndex=2';
+                    var realpath = 'General?selectedIndex=2';
                     window.open(realpath, "_self");
                     $rootscope.$broadcast("profile", 2);
                     break;
                 case "general":
-                    var realpathgen = '#/General?selectedIndex=0';
+                    var realpathgen = 'General?selectedIndex=0';
                     window.open(realpathgen, "_self");
                     $rootscope.$broadcast("profile", 0);
                     break;
                 case "advanced":
-                    var realpathadvan = '#/General?selectedIndex=1';
+                    var realpathadvan = 'General?selectedIndex=1';
                     window.open(realpathadvan, "_self");
                     $rootscope.$broadcast("profile", 1);
                     break;
@@ -2487,40 +2487,40 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             switch (typeurl) {
                 case "BookMarked":
                     if (currentstatte.name === "dashboardnew") {
-                        var realpath = '#/home?type=MB';
+                        var realpath = 'home?type=MB';
                         window.open(realpath, "_self");
                     } else {
-                        var realpathb = '#/Dashboard?type=MB';
+                        var realpathb = 'Dashboard?type=MB';
                         window.open(realpathb, "_self");
                     }
                     break;
                 case "BookMarkedme":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var BookMarkedme = '#/home?type=WB';
+                        var BookMarkedme = 'home?type=WB';
                         window.open(BookMarkedme, "_self");
                     } else {
-                        var BookMarkedmes = '#/Dashboard?type=WB';
+                        var BookMarkedmes = 'Dashboard?type=WB';
                         window.open(BookMarkedmes, "_self");
                     }
                     break;
                 case "Ignored":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Ignored = '#/home?type=I';
+                        var Ignored = 'home?type=I';
                         window.open(Ignored, "_self");
                     } else {
-                        var Ignoreds = '#/Dashboard?type=I';
+                        var Ignoreds = 'Dashboard?type=I';
                         window.open(Ignoreds, "_self");
                     }
                     break;
                 case "myprofile":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var myprofile = '#/home?type=WV';
+                        var myprofile = 'home?type=WV';
                         window.open(myprofile, "_self");
                     } else {
-                        var myprofiledd = '#/Dashboard?type=WV';
+                        var myprofiledd = 'Dashboard?type=WV';
                         window.open(myprofiledd, "_self");
                     }
                     break;
@@ -2528,10 +2528,10 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     sessionStorage.removeItem("LoginPhotoIsActive");
 
                     if (currentstatte.name === "dashboardnew") {
-                        var myhome = '#/home?type=C';
+                        var myhome = 'home?type=C';
                         window.open(myhome, "_self");
                     } else {
-                        var ddddd = '#/Dashboard?type=C';
+                        var ddddd = 'Dashboard?type=C';
                         window.open(ddddd, "_self");
                     }
 
@@ -2539,30 +2539,30 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 case "Chats":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Chatsss = '#/home?type=Chats';
+                        var Chatsss = 'home?type=Chats';
                         window.open(Chatsss, "_self");
                     } else {
-                        var Chats = '#/Dashboard?type=Chats';
+                        var Chats = 'Dashboard?type=Chats';
                         window.open(Chats, "_self");
                     }
                     break;
                 case "Requests":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Requests = '#/home?type=Requests';
+                        var Requests = 'home?type=Requests';
                         window.open(Requests, "_self");
                     } else {
-                        var Requestsss = '#/Dashboard?type=Requests';
+                        var Requestsss = 'Dashboard?type=Requests';
                         window.open(Requestsss, "_self");
                     }
                     break;
                 case "Express":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Express = '#/home?type=Express';
+                        var Express = 'home?type=Express';
                         window.open(Express, "_self");
                     } else {
-                        var Expressdd = '#/Dashboard?type=Express';
+                        var Expressdd = 'Dashboard?type=Express';
                         window.open(Expressdd, "_self");
                     }
                     break;
@@ -2650,15 +2650,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "#/home";
+                                        window.location = "home";
                                     } else {
-                                        window.location = "#/mobileverf";
+                                        window.location = "mobileverf";
                                     }
                                 } else {
-                                    window.location = "#/missingfields/" + missingStatus;
+                                    window.location = "missingfields/" + missingStatus;
                                 }
                             } else {
-                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
 
                         });
@@ -2717,7 +2717,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.Searchresult = null;
 
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
-            var realpath = '#/General?selectedIndex=2';
+            var realpath = 'General?selectedIndex=2';
             window.open(realpath, "_self");
 
         };
@@ -2729,7 +2729,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
-            var realpath = '#/General?selectedIndex=2';
+            var realpath = 'General?selectedIndex=2';
             window.open(realpath, "_self");
             $rootscope.$broadcast("profile", 2);
         };
@@ -2885,7 +2885,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
 
-        scope.redirectToMobVerification = function() { window.location = "#/mobileverf"; };
+        scope.redirectToMobVerification = function() { window.location = "mobileverf"; };
 
         scope.pagerload = function(type) {
 
@@ -2911,7 +2911,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.showpopup();
                         break;
                 }
-                //window.location = "#/mobileverf";
+
             }, 50);
 
         };
@@ -2943,7 +2943,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
             scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
             scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
             if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                window.location = "#/home?type=C";
+                window.location = "home?type=C";
             }
         });
 
@@ -2959,7 +2959,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
                 scope.pageloadSelect = scope.pageLoad(scope.custid);
                 scope.pageloadSelect.ismobileverf = true;
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                    window.location = "#/home?type=C";
+                    window.location = "home?type=C";
                 }
                 return false;
             });
@@ -3000,7 +3000,7 @@ app.controller('paymentresponse', ['$scope',
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         };
         scope.backtopayment = function() {
-            var realpath = '#/UpgradeMembership';
+            var realpath = 'UpgradeMembership';
             window.open(realpath, "_self");
         };
 
@@ -3687,15 +3687,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "#/home";
+                                        window.location = "home";
                                     } else {
-                                        window.location = "#/mobileverf";
+                                        window.location = "mobileverf";
                                     }
                                 } else {
-                                    window.location = "#/missingfields/" + missingStatus;
+                                    window.location = "missingfields/" + missingStatus;
                                 }
                             } else {
-                                window.location = "#/blockerController/" + responsemiss.response[0].VerificationCode;
+                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
 
                         });
@@ -3783,7 +3783,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            var realpath = '#/viewFullProfileCustomer';
+            var realpath = 'viewFullProfileCustomer';
             window.open(realpath, '_blank');
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -3960,7 +3960,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 
                 console.log(response);
                 authSvc.user(response.response !== null ? response.response[0] : null);
                 scope.genderID = response.response[0].GenderID;
-                window.location = "#/registration/seconadryRegistration/" + obj.txtfirstname + "/" + obj.txtlastname + "/" + obj.ddlcountry + "/" + response.response[0].GenderID;
+                window.location = "registration/seconadryRegistration/" + obj.txtfirstname + "/" + obj.txtlastname + "/" + obj.ddlcountry + "/" + response.response[0].GenderID;
                 return false;
             });
         });
@@ -3991,7 +3991,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 
 
 
     scope.redirectprivacy = function(type) {
-        window.open('#/privacyPolicy', '_blank');
+        window.open('privacyPolicy', '_blank');
     };
 
 
@@ -4924,7 +4924,7 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
                 Duration: year
             };
             sessionStorage.setItem("paymentobject", JSON.stringify(paymentobject));
-            var realpath = '#/paymentresponse';
+            var realpath = 'paymentresponse';
             window.open(realpath, "_self");
         };
 
@@ -4969,6 +4969,226 @@ app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function
 
     });
 }]);
+app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams', '$location',
+    function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
+        $mdDialog, $stateParams, $location) {
+        var logincustid = authSvc.getCustId();
+        var loginprofileid = authSvc.getProfileid();
+        var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
+        scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
+        var locallogid = sessionStorage.getItem("locallogid");
+        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.headerpopup = "Slide show";
+        scope.popupmodalbody = false;
+        scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
+        console.log($stateParams.MyProfileQSAccept);
+        var searchObjectquery = $location.search();
+        scope.MyProfileQSAccept = searchObjectquery.MyProfileQSAccept;
+        console.log(scope.MyProfileQSAccept);
+
+        scope.partnerinformation = function(response) {
+            scope.arr = [];
+            scope.personalinfo = {};
+            scope.aboutmyself = {};
+            _.each(response.data, function(item) {
+                var testArr = JSON.parse(item);
+
+
+                if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
+                    scope.aboutmyself = testArr;
+                } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
+                    scope.personalinfo = testArr;
+                    scope.divclassmask = function(logphotostatus) {
+                        var photo = scope.slides[0].ApplicationPhotoPath;
+                        var photocount = scope.personalinfo[0].PhotoName_Cust;
+                        logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                        if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                        } else {
+                            return "";
+                        }
+                    };
+
+                } else {
+                    if (testArr.length > 0 && testArr[0].TableName !== undefined) {
+                        scope.arr.push({ header: testArr[0].TableName, value: testArr });
+                    }
+                }
+            });
+        };
+        scope.pageload = function() {
+            if (scope.custid === localcustid) {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            } else {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                    scope.partnerinformation(response);
+                });
+            }
+            customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
+
+                _.each(response.data, function(item) {
+                    var testArr = JSON.parse(item);
+                    if (testArr[0] !== undefined) {
+                        switch (testArr[0].TableName) {
+                            case "Bookmark":
+                                scope.Bookmark = testArr;
+
+                                break;
+                            case "Viewed":
+                                scope.Viewed = testArr;
+
+                                break;
+                            case "Express":
+                                scope.Express = testArr;
+
+                                break;
+                            case "Paidstatus":
+                                scope.Paidstatus = testArr;
+
+                                break;
+                            case "Ignore":
+                                scope.Ignore = testArr;
+
+                                break;
+                        }
+                    }
+                });
+            });
+
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+        };
+
+        scope.servicehttp = function(type, object) {
+            return $injector.invoke(function($http) {
+                return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
+                    .then(function(response) {
+
+                        switch (type) {
+                            case "B":
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
+
+                                } else {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
+                                }
+                                break;
+                            case "E":
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
+                                } else {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
+                                }
+                                break;
+                            case "I":
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
+                                } else {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
+                                }
+                                break;
+                            case "M":
+                                if (response.data === 1) {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
+                                } else {
+                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
+                                }
+                                break;
+                        }
+                    });
+            });
+        };
+        scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+            var logincustid = authSvc.getCustId();
+            var loginprofileid = authSvc.getProfileid();
+            var object = {
+                IFromCustID: logincustid,
+                IToCustID: tocustid,
+                TypeofInsert: type,
+                EncriptedText: null,
+                EncryptedRejectFlagText: null,
+                EncriptedTextrvr: null,
+                EncryptedRejectFlagTextrvr: null,
+                StrHtmlText: form !== undefined ? form.message : null,
+                MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
+                MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
+                Logid: logid !== undefined ? logid : null,
+                FromProfileID: loginprofileid,
+                ToProfileID: profileid !== undefined ? profileid : null
+            };
+
+            switch (type) {
+                case "E":
+                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+
+                        if (responsepaid === true)
+                            scope.servicehttp(type, object);
+                    });
+                    break;
+
+                default:
+                    scope.servicehttp(type, object);
+                    break;
+            }
+
+        };
+        scope.sendmessages = function(form) {
+
+            scope.serviceactions("M", scope.messagecustid, undefined, undefined, form, undefined, undefined);
+            alerts.dynamicpopupclose();
+        };
+        scope.sendmessegescommon = function(type, tocustid) {
+            scope.modalpopupheadertext = "Enter your message here";
+            scope.messagecustid = tocustid;
+            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
+
+        };
+
+        scope.acceptlinkexp = function(type, custid) {
+            var locallogid = sessionStorage.getItem("locallogid");
+            customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
+
+                if (response.data === 1) {
+                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Proceed successfully", 2500);
+                } else {
+                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "sorry Proceed Fail", 2500);
+                }
+                alerts.dynamicpopupclose();
+            });
+        };
+
+        scope.photoalbum = function() {
+            scope.headerpopup = "Slide show";
+            scope.popupmodalbody = false;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                alerts.dynamicpopup("photopopup.html", scope, uibModal);
+            }
+        };
+        scope.modalpopupclose = function() {
+            alerts.dynamicpopupclose();
+        };
+        scope.viewhoroscopeimage = function() {
+            scope.headerpopup = "Horoscope";
+            scope.popupmodalbody = true;
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
+                    scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
+                    window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
+                } else {
+                    alerts.dynamicpopup("photopopup.html", scope, uibModal);
+                }
+            }
+        };
+    }
+]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
     'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams', '$location',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
@@ -5298,7 +5518,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         },
         logout: function() {
             clearUserSession();
-            window.location = "#/";
+            window.location = "/";
         },
         login: function(username, password) {
             var body = {
@@ -5721,6 +5941,17 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         sendsms: function(CategoryID, Cust_ID, SendPhonenumber) {
             return http.get(app.apiroot + 'StaticPages/getUnpaidMembersOwnerNotification', { params: { CategoryID: CategoryID, Cust_ID: Cust_ID, SendPhonenumber: SendPhonenumber } });
+        }
+
+    };
+}]);
+app.factory('customerviewfullprofileservices', ['$http', function(http) {
+    return {
+        getInsertUnpaidStatus: function(custid, tocustid, empid, typeofaction) {
+            return http.get(app.apiroot + 'StaticPages/getInsertUnpaidStatus', { params: { fromCustID: custid, ToCustID: tocustid, Empid: empid, typeofAction: typeofaction } });
+        },
+        getInsertExpressViewTicket: function(fromcustid, tocustid, decryptedtext, strtypeofreport) {
+            return http.get(app.apiroot + 'StaticPages/getInsertUnpaidStatus', { params: { FromCustID: fromcustid, ToCustID: tocustid, DecriptedText: decryptedtext, strtypeOfReport: strtypeofreport } });
         }
 
     };

@@ -4,7 +4,7 @@ app.controller('paymentresponse', ['$scope',
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         };
         scope.backtopayment = function() {
-            var realpath = '#/UpgradeMembership';
+            var realpath = 'UpgradeMembership';
             window.open(realpath, "_self");
         };
 
