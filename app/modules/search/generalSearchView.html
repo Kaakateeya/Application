@@ -532,13 +532,17 @@
                             <h6><span>Age</span></h6>
                             <md-slider-container flex-gt-xs>
                                 <p>{{AgeFrom}}</p>
+
                                 <md-slider flex md-discrete min="18" max="77" ng-model="AgeFrom" aria-label="Slider"></md-slider>
                                 <md-slider flex md-discrete min="18" max="77" ng-model="Ageto" aria-label="Slider"></md-slider>
+
+                                <!--<div id="slider_range">
+                            </div>-->
                                 <p>{{Ageto}}</p>
+
                             </md-slider-container>
 
-                            <!--<div id="slider_range">
-                            </div>-->
+
 
                         </div>
                         <div class="col-lg-4">
@@ -548,6 +552,8 @@
                                 <p>{{HeightFromtext}}</p>
                                 <md-slider flex md-discrete min="0" max="40" ng-model="HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
                                 <md-slider flex md-discrete min="0" max="40" ng-model="Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
+                                <!--<div id="slider_range2">
+                                </div>-->
                                 <p>{{Heighttotext}}</p>
                             </md-slider-container>
                         </div>

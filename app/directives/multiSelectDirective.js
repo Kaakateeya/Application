@@ -13,7 +13,13 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             scope.options = [];
 
             scope.databind = function(data) {
-                element.multiselect('dataprovider', data);
+                timeout(function() {
+                    scope.status = 'multiple' in attrs;
+                    if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
+                        data.splice(0, 1);
+                    }
+                    element.multiselect('dataprovider', data);
+                }, 500);
             };
             timeout(function() {
                 element.multiselect('select', scope.ngModel);

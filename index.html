@@ -14,7 +14,7 @@
     <title>Kaakateeya Marriages</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!--<base href="/">-->
+    <base href="/">
     <meta name="description" content="ACME Inc.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="dist/css/main.min.css" rel="stylesheet"></link>
@@ -30,20 +30,6 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <style type="text/css">
-        .multiselect.dropdown-toggle {
-            margin: 0 !important;
-            width: 305px !important;
-        }
-        
-        .select-box-my-double>.btn-group>.btn {
-            float: left;
-            width: 146px !important;
-        }
-        
-        .select-box-my-trible>.btn-group>.btn {
-            width: 98px !important;
-        }
-        
         .select-box-my-trible>input {
             height: auto !important;
         }
@@ -121,6 +107,110 @@
             background-image: url(src/images/img_kaaka_Seal_b.png);
             background-repeat: no-repeat;
         }
+        
+        .multiselect-container {
+            position: absolute;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 95% !important;
+            max-height: 200px;
+            overflow-y: scroll;
+        }
+        
+        .multiselect-container .input-group {
+            margin: 5px;
+        }
+        
+        .multiselect-container>li {
+            margin: -4px 0 0 0 !important;
+            padding: 0 !important;
+        }
+        
+        .multiselect-container>li.active,
+        .multiselect-container>li:hover {
+            background: #d42e02 !important;
+        }
+        
+        .multiselect-container>li>a {
+            display: block;
+            padding: 0 !important;
+            background: none !important;
+        }
+        
+        .multiselect-container>li>a label {
+            padding: 8px 14px !important;
+            color: #717171 !important;
+            font-size: 12px !important;
+            text-transform: uppercase;
+            font-weight: 400 !important;
+        }
+        
+        .multiselect-container>li>a label.checkbox input[type="checkbox"] {
+            margin: 4px 10px 0 0 !important;
+            width: auto !important;
+        }
+        
+        .multiselect-container>li:hover a label,
+        .multiselect-container>li.active a label {
+            color: #fff !important;
+        }
+        
+        .lblCastIDsdisplay {
+            display: inline-block;
+            padding: 8px 14px 0 0 !important;
+            color: #717171 !important;
+            font-size: 12px !important;
+            text-transform: uppercase;
+            font-weight: 700 !important;
+        }
+        
+        .multiselect {
+            margin: 4px 0 0 0;
+            border-radius: 3px !important;
+            height: 34px;
+            background: none !important;
+            text-align: left;
+            box-shadow: none !important;
+            display: block;
+            width: 96% !important;
+            border: solid 1px #ccc !important;
+        }
+        
+        .btn-group {
+            display: block;
+        }
+        
+        .caret {
+            position: absolute;
+            right: 8px;
+            top: 44%;
+        }
+        
+        .select-box-my-trible {}
+        
+        .select-box-my-trible .chzn-container {
+            width: 34% !important;
+            float: left;
+        }
+        
+        .select-box-my-trible input {
+            width: 18%;
+            float: left;
+            box-shadow: none;
+            margin: 3px 0 0 4px;
+            font-size: 14px;
+            padding: 7px 8px;
+            font-weight: 700;
+            border-radius: 3px !important;
+        }
+        
+        .select-box-my-trible input+span {
+            float: left;
+            font-size: 14px;
+            padding: 10px 0 0 4px;
+            font-weight: 700;
+        }
     </style>
 
 </head>
@@ -131,7 +221,7 @@
     <div ui-view="bottompanel"></div>
 
 
-    <!-- SCRIPTS DATA --#>
+    <!-- SCRIPTS DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="src/js/bootstrap-multiselect.js"></script>
     <script src="src/js/lhnchatbutton-current.min.cache"></script>
@@ -223,15 +313,17 @@
 
     <script src="app/directives/oldAlert.js"></script>
     <script src="app\modules\search\registrationCtrlsearch.js"></script>
-    <script src="src\js\bootstrap-slider.js"></script>
 
     <script src="app/services/missingFieldService.js"></script>
     <script src="bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
     <script src="app/modules/static/ccAvenue.js"></script>
+
+    <script src="src\js\jquery-ui.js"></script>
+
     <!--SCRIPTS END-->
 
 
-    <!-- SCRIPTSP DATA -->
+    <!-- SCRIPTSP DATA --#>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>

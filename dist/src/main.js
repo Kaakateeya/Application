@@ -805,7 +805,13 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             scope.options = [];
 
             scope.databind = function(data) {
-                element.multiselect('dataprovider', data);
+                timeout(function() {
+                    scope.status = 'multiple' in attrs;
+                    if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
+                        data.splice(0, 1);
+                    }
+                    element.multiselect('dataprovider', data);
+                }, 500);
             };
             timeout(function() {
                 element.multiselect('select', scope.ngModel);
@@ -3151,17 +3157,36 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
         };
+
+
+        // $("#slider_range").slider({
+        //     range: true,
+        //     min: 18,
+        //     max: 75,
+        //     values: [21, 24],
+        //     slide: function(event, ui) {
+
+        //         console.log(ui.values[0]);
+        //         console.log(ui.values[1]);
+        //         scope.AgeFrom = ui.values[0];
+        //         scope.Ageto = ui.values[1];
+
+        //     }
+        // });
+        // $("#slider_range2").slider({
+        //     range: true,
+        //     min: 0,
+        //     max: 40,
+        //     values: [1, 40],
+        //     slide: function(event, ui) {
+
+        //         // $("#heightfrom").val((checkheight(ui.values))[0]);
+        //         // $("#heightto").val((checkheight(ui.values))[1]);
+        //         // $("#amount2").html(((ui.values[0]) + 1));
+        //         // $("#amount2to").html(((ui.values[1]) + 1));
+        //     }
+        // });
         scope.generalpageload = function() {
-            // $("#slider_range").slider({
-            //     range: true,
-            //     min: 18,
-            //     max: 75,
-            //     values: [21, 24],
-            //     slide: function(event, ui) {
-            //         $("#amount").val((ui.values[0]));
-            //         $("#amountto").val((ui.values[1]));
-            //     }
-            // });
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
@@ -3809,8 +3834,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-
-
+        scope.$watch("AgeFrom", function(current, original) {
+            scope.AgeFrom = current;
+        });
+        scope.$watch("Ageto", function(current, original) {
+            scope.Ageto = current;
+        });
     }
 ]);
 app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {

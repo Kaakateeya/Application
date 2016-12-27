@@ -90,9 +90,9 @@
             "style_responsive.css",
             "src/css/chosen.css",
             "src/css/jquery-css.css",
-            "src/css/custom_styles.css",
+            "src/css/zcustom_styles.css",
             "src/css/custom_responsive.css",
-            "src/css/CustomerSearchResult_New.css",
+            "src/css/zCustomerSearchResult_New.css",
             "src/css/dashBoard.css",
             "src/css/allimagesClasses.css",
             "node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css",
@@ -100,8 +100,7 @@
             "bower_components/angular-loading-bar/build/loading-bar.min.css",
             "node_modules/angular-material/angular-material.min.css",
             "bower_components/toastr/toastr.min.css",
-            "src/css/glyphonicicon.css",
-            "/src/css/jquery-css.css"
+            "src/css/glyphonicicon.css"
         ]
     }
 }
