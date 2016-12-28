@@ -6,22 +6,25 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         var searchObjectquery = $location.search();
-        scope.MyProfileQSAccept = "?" + searchObjectquery.MyProfileQSAccept;
-        console.log(scope.MyProfileQSAccept);
+        scope.MyProfileQSAccept = "?" + searchObjectquery;
+        console.log(JSON.stringify(searchObjectquery));
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
             scope.aboutmyself = {};
-            _.each(response.data, function(item) {
+            _.each(response, function(item) {
                 var testArr = JSON.parse(item);
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
+
                     scope.personalinfo = testArr;
-                    scope.divclassmask = function(logphotostatus) {
-                        var photo = scope.slides[0].ApplicationPhotoPath;
-                        var photocount = scope.personalinfo[0].PhotoName_Cust;
-                    };
+                    var photocount = scope.personalinfo[0].PhotoName_Cust;
+                    var horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
+                        scope.personalinfo[0].HoroscopeImage === null ||
+                        scope.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
+
+                    var horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? '../images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
 
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
@@ -32,56 +35,99 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         };
         scope.pageload = function() {
 
-            customerviewfullprofileservices.getExpressIntrstfullprofile(210910352, "").then(function(response) {
+
+            customerviewfullprofileservices.getViewFullProfileMail("?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8Gcizbtqmd119aeqlYhed2ZpYc1Lf5r741EXVskSmBKGqJeQ4BeHAJvEGTxNV5kCFcurc1q92RIA/FelclmQRYaqDYzAX0ZsOSf3VwqjjMNE5kUGQDHx1ZVYLGSrmzvpsVw==").then(function(response) {
                 console.log(response);
-                scope.partnerinformation(response.data);
+                scope.fromcustid = response.data.FromCustID;
+                scope.tocustid = response.data.ToCustID;
+                scope.ToProfileID = response.data.ToProfileID;
+                scope.FromProfileID = response.data.FromProfileID;
+
+                customerviewfullprofileservices.getExpressIntrstfullprofile(scope.ToProfileID, "").then(function(responsedata) {
+                    scope.partnerinformation(responsedata.data);
+                });
+
+                customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(responsebook) {
+
+                    console.log('disablefileds');
+                    console.log(responsebook);
+                    _.each(responsebook.data, function(item) {
+                        // var testArr = JSON.parse(item);
+                        var testArr = [];
+                        if (testArr[0] !== undefined) {
+
+                            switch (testArr[0].TableName) {
+                                case "Bookmark":
+                                    scope.Bookmark = testArr;
+
+                                    break;
+                                case "Viewed":
+                                    scope.Viewed = testArr;
+
+                                    break;
+                                case "Express":
+                                    scope.Express = testArr;
+                                    if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
+                                        scope.modalbodyID1 = "You have proceeded this profile";
+                                        alerts.dynamicpopup("TabClosePopup.html.html", scope, uibModal);
+                                    } else if (testArr[0].SeenStatus === "Reject" && scope.hdnAccRejFlag !== "MailAccept") {
+                                        scope.modalbodyID1 = "You have Skipped this profile";
+                                        alerts.dynamicpopup("TabClosePopup.html.html", scope, uibModal);
+                                    }
+                                    //
+                                    if (testArr[0].MatchFollowUpStatus === 1) {
+                                        if (testArr[0].SeenStatus === "Accept" || testArr[0].SeenStatus === "Reject") {
+                                            scope.divacceptreject = true;
+                                            scope.btnticket = testArr[0].ViewTicket;
+                                            scope.liproceed = false;
+                                            scope.liticket = true;
+                                        } else {
+                                            scope.divacceptreject = true;
+                                            scope.liproceed = true;
+                                        }
+                                    } else if (testArr[0].Acceptflag === 1) {
+                                        scope.divacceptreject = true;
+                                        scope.liproceed = true;
+
+                                    } else if (testArr[0].ExpressFlag === 1) {
+                                        scope.divacceptreject = true;
+                                        scope.liaccept = true;
+
+                                    } else {
+                                        scope.divacceptreject = false;
+                                        scope.liaccept = false;
+
+                                    }
+
+                                    if (testArr[0].ExpressInterstId !== null) {
+                                        scope.hdnexpressinterstfiled = testArr[0].ExpressInterstId;
+                                    }
+
+                                    break;
+                                case "Paidstatus":
+                                    scope.Paidstatus = testArr;
+                                    scope.lblpaid = testArr[0].Paidstatus;
+                                    break;
+                                case "Ignore":
+                                    scope.Ignore = testArr;
+
+                                    break;
+                            }
+                        }
+                    });
+                    console.log(response);
+                });
+
+                customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
+                    console.log(response);
+                    scope.slides = [];
+                    _.each(response.data, function(item) {
+                        scope.slides.push(item);
+                    });
+                });
+
             });
-            // customerviewfullprofileservices.getViewFullProfileMail("?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8GfaMliVJjDiPnJu7cnUEbqe52KZug7tSQ43a4f6MUNR/KEnUaTqYxx2g0iamxuz8xZVwyLCiLSu5ZYao8D/h1FeyRs15TeVOVD6opnnmw22VnBSTmP/YNFIOY1n9n+6SpQ==").then(function(response) {
-            //     console.log(response);
-            //     debugger;
-            //     scope.fromcustid = response.data.FromCustID;
-            //     scope.tocustid = response.data.ToCustID;
-            //     scope.ToProfileID = response.data.ToProfileID;
-            //     scope.FromProfileID = response.data.FromProfileID;
-            //     customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(response) {
-            //         // _.each(response.data, function(item) {
-            //         //     var testArr = JSON.parse(item);
-            //         //     if (testArr[0] !== undefined) {
-            //         //         switch (testArr[0].TableName) {
-            //         //             case "Bookmark":
-            //         //                 scope.Bookmark = testArr;
 
-            //         //                 break;
-            //         //             case "Viewed":
-            //         //                 scope.Viewed = testArr;
-
-            //         //                 break;
-            //         //             case "Express":
-            //         //                 scope.Express = testArr;
-
-            //         //                 break;
-            //         //             case "Paidstatus":
-            //         //                 scope.Paidstatus = testArr;
-
-            //         //                 break;
-            //         //             case "Ignore":
-            //         //                 scope.Ignore = testArr;
-
-            //         //                 break;
-            //         //         }
-            //         //     }
-            //         // });
-            //         console.log(response);
-            //     });
-
-            //     customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
-            //         scope.slides = [];
-            //         _.each(response.data, function(item) {
-            //             scope.slides.push(item);
-            //         });
-            //     });
-
-            // });
 
         };
 
@@ -186,9 +232,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.photoalbum = function() {
             scope.headerpopup = "Slide show";
             scope.popupmodalbody = false;
-            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                alerts.dynamicpopup("photopopup.html", scope, uibModal);
-            }
+
+            alerts.dynamicpopup("photopopup.html", scope, uibModal);
+
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -196,75 +242,15 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
             scope.popupmodalbody = true;
-            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
-                    scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
-                    window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
-                } else {
-                    alerts.dynamicpopup("photopopup.html", scope, uibModal);
-                }
+            if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
+                scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
+                window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
+            } else {
+                alerts.dynamicpopup("photopopup.html", scope, uibModal);
             }
         };
 
-        scope.disableEnableButtons = function(obj) {
-            // switch (dsland.Tables[count].Rows[0]["TableName"].ToString()) {
 
-            //     case "Express":
-
-            //         //popup alerts
-            //         if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString() == "Accept" && hdnAccRejFlag.Value != "MailReject") {
-
-            //             modalbodyID1.InnerText = "You have proceeded this profile";
-            //             Masterdropdownbind.ShowModalPopup(CommonClass.pageload, strTabClosePopup);
-            //         } else if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString() == "Reject" && hdnAccRejFlag.Value != "MailAccept") {
-            //             modalbodyID1.InnerText = "You have Skipped this profile";
-            //             Masterdropdownbind.ShowModalPopup(CommonClass.Show, strTabClosePopup);
-            //         }
-            //         //end popup alerts
-
-
-            //         if (dsland.Tables[count].Columns.Contains("MatchFollowUpStatus")) {
-            //             if (dsland.Tables[count].Rows[0]["MatchFollowUpStatus"].ToString().Trim() == "1") {
-            //                 if (dsland.Tables[count].Rows[0]["SeenStatus"].ToString().Trim() == "Accept" || dsland.Tables[count].Rows[0]["SeenStatus"].ToString().Trim() == "Reject") {
-            //                     divacceptreject.Visible = true;
-            //                     btnticket.Text = dsland.Tables[count].Rows[0]["ViewTicket"].ToString();
-            //                     Masterdropdownbind.showhidediv(liproceed, false);
-            //                     Masterdropdownbind.showhidediv(liticket, true);
-            //                 } else {
-            //                     divacceptreject.Visible = true;
-            //                     Masterdropdownbind.showhidediv(liproceed, true);
-            //                 }
-            //             } else if (dsland.Tables[count].Columns.Contains("Acceptflag")) {
-            //                 if (dsland.Tables[count].Rows[0]["Acceptflag"].ToString().Trim() == "1") {
-            //                     divacceptreject.Visible = true;
-            //                     Masterdropdownbind.showhidediv(liproceed, true);
-            //                 } else if (dsland.Tables[count].Rows[0]["ExpressFlag"].ToString().Trim() == "1") {
-            //                     divacceptreject.Visible = true;
-            //                     Masterdropdownbind.showhidediv(liaccept, true);
-
-            //                 } else {
-            //                     divacceptreject.Visible = false;
-            //                     Masterdropdownbind.showhidediv(liaccept, false);
-
-            //                 }
-            //             }
-
-
-            //         }
-            //         if (dsland.Tables[count].Columns.Contains("ExpressInterstId")) {
-            //             if (dsland.Tables[count].Rows[0]["ExpressInterstId"].ToString().Trim() != "") {
-            //                 hdnexpressinterstfiled.Text = dsland.Tables[count].Rows[0]["ExpressInterstId"].ToString();
-            //             }
-            //         }
-
-            //         break;
-            //     case "Viewed":
-            //         break;
-            //     case "Paidstatus":
-            //         lblpaid.Text = dsland.Tables[count].Rows[0]["Paidstatus"].ToString().Trim();
-            //         break;
-            // }
-        };
 
     }
 ]);
