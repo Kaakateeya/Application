@@ -61,6 +61,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
 
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
+        sessionStorage.removeItem("httperrorpopupstatus");
     }
 
     function getUser() {

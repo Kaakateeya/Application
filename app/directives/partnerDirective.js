@@ -91,6 +91,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                             .then(function(response) {
 
+                                console.log(response);
                                 switch (type) {
                                     case "B":
 
@@ -193,6 +194,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             case "RP":
                                 scope.servicehttp(type, object);
                                 break;
+                            case "V":
+
+                                scope.servicehttp(type, object);
+                                break;
                         }
                     } else {
                         scope.$emit('showloginpopup');
@@ -231,8 +236,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         scope.$emit('showloginpopup');
                     }
                 };
-                scope.redirectToviewfullprofile = function(custid, logid) {
+                scope.redirectToviewfullprofile = function(custid, logid, recentlyviewes) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+
                         scope.$emit('redirectToviewfullprofiles', custid, logid);
                     } else {
                         scope.$emit('showloginpopup');
@@ -442,6 +448,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 scope.$on('setslide', function(event) {
                     scope.listclick();
+                });
+                scope.$on('viewprofileinsert', function(event, custid) {
+                    scope.serviceactions('V', custid);
                 });
             }
         };

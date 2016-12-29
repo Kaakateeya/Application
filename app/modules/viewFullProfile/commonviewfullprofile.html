@@ -19,7 +19,7 @@
                                 <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
                             </div>
                         </div>
-                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-4">
+                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-1">
                             <a class="aspNetDisabled">{{btnticket}}</a>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/ng-template" class="modal modal-message modal-danger fade" id="TabClosePopup.html" style="z-index: 999999999999 !important;">
+        <script type="text/ng-template" id="TabClosePopup.html">
             <div class="modal-message modal-danger">
                 <div class="modal-header" id="divhead1">
                     <i class="glyphicon glyphicon-fire"></i>
@@ -95,11 +95,11 @@
                     {{modalbodyID1}}
                 </div>
                 <div class="modal-footer">
-                    <button id="btnclose" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+                    <button id="btnclose" class="btn btn-default" ng-click="modalpopupclose1()">Close</button>
                 </div>
             </div>
         </script>
-        <script type="text/ng-template" class="modal modal-message modal-danger fade" id="PopupDivToclose.html" style="z-index: 999999999999 !important;">
+        <script type="text/ng-template" id="PopupDivToclose.html">
             <div class="modal-message modal-danger" id="PopupDivToclosedialog" ng-style="PopupDivToclosedialog===true?{'width':'541px'}:''">
                 <div class="modal-header" id="div5">
                     <i class="glyphicon glyphicon-fire"></i>
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </script>
-        <script type="text/ng-template" class="modal modal-message modal-danger fade" id="PageloadAcceptRejectpopup.html" style="z-index: 999999999999 !important;">
+        <script type="text/ng-template" id="PageloadAcceptRejectpopup.html">
             <div class="modal-message modal-danger">
                 <div class="modal-header" id="div6">
                     <i class="glyphicon glyphicon-fire"></i>
@@ -126,7 +126,7 @@
                 </div>
             </div>
         </script>
-        <script type="text/ng-template" id="photopopup.html" style="z-index: 99999999999999 !important;">
+        <script type="text/ng-template" id="photopopup.html">
             <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
             <div class="modal-content">
                 <div class="modal-header">
@@ -170,5 +170,9 @@
         background-color: rgb(102, 204, 255);
         border: solid 1px #ccc;
         transition: all 0.4s ease-in-out;
+    }
+    
+    .modal-backdrop {
+        z-index: 1040 !important;
     }
 </style>

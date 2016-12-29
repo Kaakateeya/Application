@@ -1,5 +1,6 @@
-app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window', '$state', 'missingFieldService',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state, missingFieldService) {
+app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
+    '$state', 'missingFieldService', 'customerviewfullprofileservices',
+    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state, missingFieldService, customerviewfullprofileservices) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -9,7 +10,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.usernamepersonal = datatinfo.username;
                 scope.profileid = datatinfo.profileid;
                 scope.paidstatus = datatinfo.paidstatus == 1 ? "Paid" : "unpaid";
-                //scope.javascript = "javascript:void(0)";
                 scope.hrefpaid = datatinfo.paidstatus == 1 ? "UpgradeMembership" : "UpgradeMembership";
                 scope.profilepic = datatinfo.profilepic;
                 scope.withlogin = true;
@@ -27,7 +27,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
 
         scope.$on('IdleTimeout', function() {
-
             //show pop up with two choices,wherther enduser needs to continue session or logout of application
             //Idle.setIdle(5);
             //redirect to home page
@@ -276,13 +275,27 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.$on("notify-error", function(event, value) {
             console.log(value);
-            alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
+            var logincustid = authSvc.getCustId();
+            var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
+            console.log(httperrorpopupstatus);
+
+            if (httperrorpopupstatus !== "1") {
+                alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
+            }
+            customerviewfullprofileservices.getCustomerApplicationErroLog(value.statusText, logincustid, value.data.Message, value.status).then(function(response) {
+                console.log(response);
+            });
+
         });
 
         scope.modalpopupclosehttp = function() {
+            var httperrorpopupstatus = 1;
+            sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
             alertpopup.dynamicpopupclose();
         };
         scope.feedbackpage = function() {
+            var httperrorpopupstatus = 1;
+            sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
             window.open("feedback", "_self");
         };
     }

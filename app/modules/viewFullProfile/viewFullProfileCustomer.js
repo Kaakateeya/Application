@@ -11,20 +11,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        //  scope.querystringparams =
-        console.log($stateParams.MyProfileQSAccept);
-        var searchObjectquery = $location.search();
-        scope.MyProfileQSAccept = searchObjectquery.MyProfileQSAccept;
-        console.log(scope.MyProfileQSAccept);
-
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
             scope.aboutmyself = {};
             _.each(response.data, function(item) {
                 var testArr = JSON.parse(item);
-
-
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {

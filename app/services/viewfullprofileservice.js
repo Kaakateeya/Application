@@ -19,6 +19,9 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         UpdateExpressIntrestViewfullprofile: function(obj) {
             return http.post(app.apiroot + 'StaticPages/UpdateExpressIntrestViewfullprofile', obj);
+        },
+        getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
+            return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: ErrorMessage, CustID: CustID, PageName: PageName, Type: Type } });
         }
 
 

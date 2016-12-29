@@ -405,12 +405,25 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             alerts.dynamicpopupclose();
         });
         scope.redirectToviewfull = function(custid, logid) {
+            var realpath = '/viewFullProfileCustomer';
+            scope.$broadcast('viewprofileinsert', custid);
             sessionStorage.removeItem("localcustid");
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            var realpath = '/viewFullProfileCustomer';
-            window.open(realpath, '_blank');
+            if (logid !== undefined && logid !== "" && logid !== null) {
+                authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
+                    console.log(responsepaid);
+                    if (responsepaid === true) {
+                        window.open(realpath, '_blank');
+                    } else {
+                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
+                    }
+                });
+            } else {
+                window.open(realpath, '_blank');
+            }
+
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
