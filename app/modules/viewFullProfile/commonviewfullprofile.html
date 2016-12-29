@@ -1,49 +1,30 @@
 <div ng-init="pageload()">
     <div id="printablediv">
-        <div id="PageDiv" class="profile_full_main">
+        <div class="profile_full_main" ng-show="PageDiv">
             <div ng-show="divacceptreject" style="border: solid 1px #fff;">
                 <div id="upAll">
-
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-8">
                             <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
                         </div>
-                        <div id="updateContentssa">
-
-                            <div class="profile_full_header_in_ui clearfix" ng-show="liproceed">
-
-                                <a id="btnProceed" href="javascript:void(0)">Proceed</a>
-
-                                <a id="btnDontProceed" href="javascript:void(0)">Don't Proceed</a>
+                        <div id="updateContentssa" class="">
+                            <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
+                                <a id="btnProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <a id="btnDontProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
                             </div>
-
                         </div>
-                        <div ng-show="liaccept" class="profile_full_header_in_ui clearfix">
+                        <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-4">
                             <div id="UpdatePanel6">
-
-                                <a id="btnaccept" href="javascript:void(0)">Accept</a>
-                                <a id="btnreject" href="javascript:void(0)">Reject</a>
-                                <span id="lblpaid" ng-hide="true">UnPaid</span>
-
+                                <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
+                                <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
                             </div>
-                            <span id="hdnexpressinterstfiled" ng-hide="true">208611</span>
-
                         </div>
-                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix">
+                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-4">
                             <a class="aspNetDisabled">{{btnticket}}</a>
                         </div>
-                        <div id="logidliproceed" class="profile_full_header_in_ui clearfix" ng-hide="true">
-
-                            <a id="lnklogaccept" href="javascript:void(0);" onclick="return acceptlink('I');">Proceed</a>
-
-                            <a id="lnklogSkipped" href="javascript:void(0);" onclick="return acceptlink('NI');">Skip This Profile</a>
-
-                        </div>
                     </div>
-
                 </div>
             </div>
-
             <div class="clearfix"></div>
             <div id="divProfile" class="profile_full_header clearfix">
                 <div class="row">
@@ -75,11 +56,10 @@
                     </div>
                     <div class="col-lg-2">
 
-                        <img name="iProfilePic" ng-click="viewhoroscopeimage()" ng-src="horoimagesrc" style="height:160px;width:150px;cursor:pointer;" ng-show="horoscopeimage" />
+                        <img name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" ng-src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
                     </div>
                 </div>
             </div>
-
             <div id="printdiv">
                 <div class="personal_inform_main">
 
@@ -107,105 +87,77 @@
             </div>
         </div>
         <script type="text/ng-template" class="modal modal-message modal-danger fade" id="TabClosePopup.html" style="z-index: 999999999999 !important;">
-
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header" id="divhead1">
-                        <i class="glyphicon glyphicon-fire"></i>
-                    </div>
-
-                    <div class="modal-body" id="modalbodyID1">
-                        {{modalbodyID1}}
-                    </div>
-
-                    <div class="modal-footer">
-                        <button id="btnclose" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-
-                    </div>
+            <div class="modal-message modal-danger">
+                <div class="modal-header" id="divhead1">
+                    <i class="glyphicon glyphicon-fire"></i>
                 </div>
-
+                <div class="modal-body" id="modalbodyID1">
+                    {{modalbodyID1}}
+                </div>
+                <div class="modal-footer">
+                    <button id="btnclose" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
+                </div>
             </div>
         </script>
         <script type="text/ng-template" class="modal modal-message modal-danger fade" id="PopupDivToclose.html" style="z-index: 999999999999 !important;">
-            <div class="modal-dialog" id="PopupDivToclosedialog">
-
-                <div class="modal-content">
-                    <div class="modal-header" id="div5">
-                        <i class="glyphicon glyphicon-fire"></i>
-                    </div>
-
-                    <div class="modal-body" id="divmodalbodytoClose">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="Button3" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-
-                    </div>
+            <div class="modal-message modal-danger" id="PopupDivToclosedialog" ng-style="PopupDivToclosedialog===true?{'width':'541px'}:''">
+                <div class="modal-header" id="div5">
+                    <i class="glyphicon glyphicon-fire"></i>
                 </div>
-
+                <div class="modal-body">
+                    {{divmodalbodytoClose}}
+                </div>
+                <div class="modal-footer">
+                    <button id="Button3" class="btn btn-default" ng-click="modalpopupclosetab()">Close</button>
+                </div>
             </div>
         </script>
-
-
-        <div type="text/ng-template" class="modal modal-message modal-danger fade" id="PageloadAcceptRejectpopup.html" style="z-index: 999999999999 !important;" <div class="modal-dialog">
-
-            <div class="modal-content">
+        <script type="text/ng-template" class="modal modal-message modal-danger fade" id="PageloadAcceptRejectpopup.html" style="z-index: 999999999999 !important;">
+            <div class="modal-message modal-danger">
                 <div class="modal-header" id="div6">
                     <i class="glyphicon glyphicon-fire"></i>
                 </div>
-
-                <div class="modal-body" id="modalbodydivContent">
-                    <p>
-                    </p>
+                <div class="modal-body">
+                    {{modalbodydivContent}}
                 </div>
                 <div class="modal-footer">
-
-                    <button id="btnOk" class="btn btn-default">Ok</button>
-                    <button id="Button2" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
-
+                    <button id="btnOk" class="btn btn-default" ng-click="btnoksubmit()">Ok</button>
+                    <button id="Button2" class="btn btn-default" ng-click="modalpopupclosetab()">Close</button>
                 </div>
             </div>
-
-        </div>
-    </div>
-    <script type="text/ng-template" id="photopopup.html" style="z-index: 999999999999 !important;">
-        <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" ng-click="modalpopupclose()">×</button>
-                <h4 class="modal-title">{{scope.headerpopup}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="bs-example">
-                    <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel" ng-hide="popupmodalbody">
-                        <ol class="carousel-indicators">
-                            <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
+        </script>
+        <script type="text/ng-template" id="photopopup.html" style="z-index: 99999999999999 !important;">
+            <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                    <h4 class="modal-title">{{scope.headerpopup}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="bs-example">
+                        <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel" ng-hide="popupmodalbody">
+                            <ol class="carousel-indicators">
+                                <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
+                            </div>
+                            <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
                         </div>
-                        <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
-
-                    <div ng-hide="!popupmodalbody">
-                        <img ng-src="{{personalinfo[0].HoroscopeImage}}" style="height: 500px; width: 500px;">
+                        <div ng-hide="!popupmodalbody">
+                            <img ng-src="{{personalinfo[0].HoroscopeImage}}" style="height: 500px; width: 500px;">
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </script>
+        </script>
+    </div>
 </div>
-
-</div>
-
 <style type="text/css">
     .profile_full_header_in_ui a {
         border-radius: 3px;

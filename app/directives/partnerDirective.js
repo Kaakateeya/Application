@@ -105,17 +105,15 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                         break;
                                     case "E":
 
-                                        if (loginpaidstatus === "1") {
-                                            if (response.data == 1) {
-                                                scope.array.splice(scope.indexvalues, 1);
-                                                scope.$emit('incrementcounts');
-                                                scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
-                                            } else {
-                                                scope.$emit('successfailer', "EXpressInterest Fail", "warning");
-                                            }
+
+                                        if (response.data == 1) {
+                                            scope.array.splice(scope.indexvalues, 1);
+                                            scope.$emit('incrementcounts');
+                                            scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
                                         } else {
-                                            scope.$emit('successfailer', "upgrade", "warning");
+                                            scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                         }
+
                                         break;
                                     case "I":
                                         if (response.data === 1) {
@@ -166,14 +164,14 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         switch (type) {
 
                             case "B":
-                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                if (typeofactionflag !== true || typeofactionflag !== 1) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Bookmark This ProfileID", "warning");
                                 }
                                 break;
                             case "E":
-                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                if (typeofactionflag !== true || typeofactionflag !== 1) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
                                         console.log(responsepaid);
                                         if (responsepaid === true)
@@ -184,7 +182,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                                 break;
                             case "I":
-                                if (typeofactionflag !== true && typeofactionflag !== 1) {
+                                if (typeofactionflag !== true || typeofactionflag !== 1) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Ignore This ProfileID", "warning");

@@ -38,7 +38,7 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
                     break;
             }
         },
-        dynamicpopup: function(url, scope, uibModal, custid, size) {
+        dynamicpopup: function(url, scope, uibModal, size) {
             modalinstance = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',

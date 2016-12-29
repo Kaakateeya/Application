@@ -1,13 +1,17 @@
 app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
     'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams',
-    '$location', 'customerviewfullprofileservices',
+    '$location', 'customerviewfullprofileservices', '$window', '$state',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
-        $mdDialog, $stateParams, $location, customerviewfullprofileservices) {
+        $mdDialog, $stateParams, $location, customerviewfullprofileservices, $window, $state) {
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
-        var searchObjectquery = $location.search();
-        scope.MyProfileQSAccept = "?" + searchObjectquery;
-        console.log(JSON.stringify(searchObjectquery));
+        scope.PageDiv = true;
+        scope.searchObjectquery = $location.search();
+        var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
+        var meValue = scope.searchObjectquery[meKey];
+        console.log(JSON.stringify(meKey));
+        scope.MyProfileQSAccept = "?" + meKey + "=" + meValue;
+        console.log(scope.MyProfileQSAccept);
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -20,11 +24,11 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                     scope.personalinfo = testArr;
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
-                    var horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
+                    scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
                         scope.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
 
-                    var horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? '../images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
+                    scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
 
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
@@ -33,46 +37,133 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 }
             });
         };
+        scope.pagerefersh = function(ToProfileID) {
+            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                scope.partnerinformation(responsedata.data);
+            });
+        };
+        scope.Searchfunctionality = function(type, object) {
+            switch (type) {
+                case "DontProceed":
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(object).then(function(response) {
+                        console.log("secrchfun");
+                        console.log(response);
+                        if (response.data == 1) {
+                            scope.divmodalbodytoClose = "This profile was Skipped successfully";
+                            alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal);
+                        } else if (response.data == 2 || response.data == 3) {
+                            scope.divmodalbodytoClose = "Please upgrade your membership";
+                            alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal);
+                        }
+                    });
+                    break;
+            }
+        };
+        scope.Reject_paeload = function() {
+            scope.pagerefresh();
+            scope.PageDiv = false;
+            var MobjViewprofile = {
+                ExpressInrestID: scope.hdnexpressinterstfiled,
+                CustID: scope.fromcustid,
+                AcceptStatus: 2,
+                MatchFollwupStatus: 2
+            };
+            scope.Searchfunctionality("DontProceed", MobjViewprofile);
+        };
+        scope.statusalert = function(status) {
+            switch (status) {
+                case 0:
+                case 3:
+                    scope.divmodalbodytoClose = "Unfortunately,we are not able to get data,sorry for the inconvenience";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 4:
+                    scope.divmodalbodytoClose = "Please upgrade your membership";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 5:
+                    scope.divmodalbodytoClose = "Please upgrade your membership(No points)";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+
+                    break;
+                case 6:
+                    scope.divmodalbodytoClose = "You have already Skipped this profile";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal);
+                    break;
+                case 7:
+                    scope.modalbodyID1 = "You cannot Skip Accepted Profile";
+                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                    scope.pagerefersh(scope.ToProfileID);
+                    break;
+                case 8:
+                    scope.Reject_paeload();
+                    break;
+                case 9:
+                    scope.pagerefersh(scope.ToProfileID);
+                    break;
+
+                case 10:
+                    scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
+                    alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
+                    scope.pagerefersh(scope.ToProfileID);
+                    break;
+                case 11:
+                    scope.divmodalbodytoClose = "This ProfileID not in active";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 12:
+                    scope.divmodalbodytoClose = "This ProfileID not in active";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 13:
+                    scope.PopupDivToclosedialog = true;
+                    scope.divmodalbodytoClose = "Please verify your primary email id (" + scope.PrimaryEmail + ") Inorder to view the complete profile sent ...check for verification email sent to your mail box";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 14:
+                    scope.divmodalbodytoClose = "Unfortunately,we are not able to get data,sorry for the inconvenience";
+                    alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    break;
+                case 15:
+                    scope.modalbodyID1 = "Unfortunately,we are not able to get data,sorry for the inconvenience";
+                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                    break;
+            }
+        };
+
         scope.pageload = function() {
-
-
-            customerviewfullprofileservices.getViewFullProfileMail("?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8Gcizbtqmd119aeqlYhed2ZpYc1Lf5r741EXVskSmBKGqJeQ4BeHAJvEGTxNV5kCFcurc1q92RIA/FelclmQRYaqDYzAX0ZsOSf3VwqjjMNE5kUGQDHx1ZVYLGSrmzvpsVw==").then(function(response) {
+            customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
                 console.log(response);
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
                 scope.FromProfileID = response.data.FromProfileID;
-
-                customerviewfullprofileservices.getExpressIntrstfullprofile(scope.ToProfileID, "").then(function(responsedata) {
-                    scope.partnerinformation(responsedata.data);
-                });
-
+                scope.PrimaryEmail = response.data.PrimaryEmail;
+                scope.AccRejFlag = response.data.AccRejFlag;
+                scope.statusalert(response.data.status);
+                scope.pagerefersh(scope.ToProfileID);
                 customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(responsebook) {
-
                     console.log('disablefileds');
                     console.log(responsebook);
                     _.each(responsebook.data, function(item) {
-                        // var testArr = JSON.parse(item);
-                        var testArr = [];
+                        var testArr = JSON.parse(item);
+                        //var testArr = [];
                         if (testArr[0] !== undefined) {
-
                             switch (testArr[0].TableName) {
                                 case "Bookmark":
                                     scope.Bookmark = testArr;
-
                                     break;
                                 case "Viewed":
                                     scope.Viewed = testArr;
-
                                     break;
                                 case "Express":
                                     scope.Express = testArr;
                                     if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                         scope.modalbodyID1 = "You have proceeded this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html.html", scope, uibModal);
+                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     } else if (testArr[0].SeenStatus === "Reject" && scope.hdnAccRejFlag !== "MailAccept") {
                                         scope.modalbodyID1 = "You have Skipped this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html.html", scope, uibModal);
+                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     }
                                     //
                                     if (testArr[0].MatchFollowUpStatus === 1) {
@@ -105,7 +196,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                                     break;
                                 case "Paidstatus":
-                                    scope.Paidstatus = testArr;
                                     scope.lblpaid = testArr[0].Paidstatus;
                                     break;
                                 case "Ignore":
@@ -115,9 +205,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             }
                         }
                     });
-                    console.log(response);
-                });
 
+                });
                 customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
                     console.log(response);
                     scope.slides = [];
@@ -127,95 +216,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 });
 
             });
-
-
         };
-
-        scope.servicehttp = function(type, object) {
-            return $injector.invoke(function($http) {
-                return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
-                    .then(function(response) {
-
-                        switch (type) {
-                            case "B":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
-
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
-                                }
-                                break;
-                            case "E":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
-                                }
-                                break;
-                            case "I":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
-                                }
-                                break;
-                            case "M":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
-                                }
-                                break;
-                        }
-                    });
-            });
-        };
-        scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-            var logincustid = authSvc.getCustId();
-            var loginprofileid = authSvc.getProfileid();
-            var object = {
-                IFromCustID: logincustid,
-                IToCustID: tocustid,
-                TypeofInsert: type,
-                EncriptedText: null,
-                EncryptedRejectFlagText: null,
-                EncriptedTextrvr: null,
-                EncryptedRejectFlagTextrvr: null,
-                StrHtmlText: form !== undefined ? form.message : null,
-                MessageLinkId: typeofactionflag !== undefined ? typeofactionflag : null,
-                MessageHistoryId: MessageHistoryId !== undefined ? MessageHistoryId : null,
-                Logid: logid !== undefined ? logid : null,
-                FromProfileID: loginprofileid,
-                ToProfileID: profileid !== undefined ? profileid : null
-            };
-
-            switch (type) {
-                case "E":
-                    authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-
-                        if (responsepaid === true)
-                            scope.servicehttp(type, object);
-                    });
-                    break;
-
-                default:
-                    scope.servicehttp(type, object);
-                    break;
-            }
-
-        };
-        scope.sendmessages = function(form) {
-
-            scope.serviceactions("M", scope.messagecustid, undefined, undefined, form, undefined, undefined);
-            alerts.dynamicpopupclose();
-        };
-        scope.sendmessegescommon = function(type, tocustid) {
-            scope.modalpopupheadertext = "Enter your message here";
-            scope.messagecustid = tocustid;
-            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
-
-        };
-
         scope.acceptlinkexp = function(type, custid) {
             var locallogid = sessionStorage.getItem("locallogid");
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
@@ -239,18 +240,134 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
         };
+        scope.modalpopupclosetab = function() {
+
+            $window.close();
+        };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
             scope.popupmodalbody = true;
             if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
-                scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + logincustid + "_HaroscopeImage/" + logincustid + "_HaroscopeImage.html";
+                scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + scope.tocustid + "_HaroscopeImage/" + scope.tocustid + "_HaroscopeImage.html";
                 window.open(scope.personalinfo[0].HoroscopeImage, '_blank');
             } else {
                 alerts.dynamicpopup("photopopup.html", scope, uibModal);
             }
         };
 
+        scope.btnoksubmit = function() {
+            switch (scope.AccRejFlag) {
+                case "MailAccept":
+                    scope.Reject_paeload();
+                    break;
+                case "MailReject":
+                    alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
+                    scope.pagerefresh();
+                    scope.liticket = false;
+                    scope.liproceed = true;
+                    btnDontProceed.Visible = false;
+                    btnProceed.Visible = true;
+                    break;
+            }
+        };
+        scope.btnProceed_Click = function(typeofbtn) {
 
+            switch (typeofbtn) {
+                case "btnProceed":
 
+                    var MobjViewprofile = {
+                        ExpressInrestID: scope.hdnexpressinterstfiled,
+                        CustID: scope.fromcustid,
+                        FromCustID: scope.fromcustid,
+                        ToCustID: scope.tocustid,
+                        AcceptStatus: 1,
+                        MatchFollwupStatus: 1
+                    };
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
+                        console.log(response);
+                        switch (response.data) {
+                            case 1:
+                                scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                break;
+                            case 2:
+                            case 3:
+                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                break;
+                            default:
+                                scope.modalbodyID1 = "Updation failed please contact admin";
+                                break;
+                        }
+                    });
+                    break;
+                case "btnDontProceed":
+
+                    var MobjViewprofiledont = {
+                        ExpressInrestID: scope.hdnexpressinterstfiled,
+                        CustID: scope.fromcustid,
+                        FromCustID: scope.fromcustid,
+                        ToCustID: scope.tocustid,
+                        AcceptStatus: 2,
+                        MatchFollwupStatus: 2
+                    };
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofiledont).then(function(response) {
+                        console.log(response);
+                        switch (response.data) {
+                            case 1:
+                                scope.modalbodyID1 = "Oops go through your search";
+                                break;
+                            case 2:
+                            case 3:
+                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                break;
+                            default:
+                                scope.modalbodyID1 = "Updation failed please contact admin";
+                                break;
+                        }
+                    });
+                    break;
+            }
+            scope.divacceptreject = true;
+            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+            scope.pagerefersh(scope.ToProfileID);
+
+        };
+        scope.acceptreject = function(typeofaction) {
+
+            if (scope.tocustid !== null && scope.tocustid !== null) {
+                var MobjViewprofile = {
+                    FromCustID: scope.fromcustid,
+                    ToCustID: scope.tocustid
+                };
+                switch (typeofaction) {
+                    case "btnaccept":
+                        authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                            console.log(responsepaid);
+                            if (responsepaid === true) {
+                                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal({ backdrop: 'static', keyboard: false});", true);
+                            } else {
+                                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                            }
+                        });
+                        break;
+                    case "btnreject":
+                        if (scope.lblpaid == "UnPaid") {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade');
+                        } else {
+                            var MobjViewprofilerej = {
+                                ExpressInrestID: scope.hdnexpressinterstfiled,
+                                CustID: scope.fromcustid,
+                                AcceptStatus: 2,
+                                MatchFollwupStatus: 2
+                            };
+                            scope.Searchfunctionality("DontProceed", MobjViewprofilerej);
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Your action send sucessfully', 3000);
+                        }
+                        break;
+                }
+            } else {
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'ExpressInterest failed please contact Admin', 3000);
+            }
+            //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal('hide');", true);
+        };
     }
 ]);

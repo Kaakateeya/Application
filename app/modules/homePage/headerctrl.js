@@ -274,6 +274,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             scope.$broadcast('showforgetpassword');
 
         };
+        scope.$on("notify-error", function(event, value) {
+            console.log(value);
+            alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
+        });
 
+        scope.modalpopupclosehttp = function() {
+            alertpopup.dynamicpopupclose();
+        };
+        scope.feedbackpage = function() {
+            window.open("feedback", "_self");
+        };
     }
 ]);

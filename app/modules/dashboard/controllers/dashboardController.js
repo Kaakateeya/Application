@@ -15,15 +15,17 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        // scope.slides = [];
+        scope.exactshow = false;
+        scope.normaldata = true;
         var searchObjectquery = $location.search();
         scope.Typeofdatabind = searchObjectquery.type;
-        scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue) {
+        scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
+            scope.exactflagstorage = exactflag;
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
                 if (type === 'C') {
-                    customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
 
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
@@ -56,7 +58,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                     });
                 } else {
-                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage).then(function(response) {
+                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
@@ -86,7 +88,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
-            scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd, 1);
+            scope.gettingpartnerdata(typeodbind, frompage, topage, scope.lblUHaveviewd, 1, scope.exactflagstorage);
         };
         scope.$on('directivecallingpaging', function(event, frompage, topage) {
 
@@ -497,7 +499,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.incrementsdashboardcounts = function() {
-            customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9).then(function(response) {
+            customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9, "UnPaid").then(function(response) {
                 scope.bindcounts(response.data.DashBoardCounts);
                 scope.bindallcounts = response.data.DashBoardCounts;
             });
@@ -510,7 +512,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
                 console.log(response);
                 if (response === true)
-                    scope.gettingpartnerdata(type, frompage, topage, headertext);
+                    scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
             });
         };
 
@@ -535,52 +537,52 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.PartnerProfilesnew = [];
             switch (scope.Typeofdatabind) {
                 case "MB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1);
+                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1, "UnPaid");
                     });
                     break;
                 case "WB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1);
+                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1, "UnPaid");
                     });
                     break;
                 case "I":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1);
+                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1, "UnPaid");
                     });
                     break;
                 case "WV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1);
+                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1, "UnPaid");
                     });
                     break;
                 case "RV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1);
+                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1, "UnPaid");
                     });
                     break;
                 case "Chats":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
@@ -589,7 +591,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     });
                     break;
                 case "Requests":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
@@ -598,7 +600,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     });
                     break;
                 case "Express":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9).then(function(response) {
+                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
@@ -607,8 +609,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     });
                     break;
                 default:
-                    scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1);
+                    scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1, "UnPaid");
                     break;
+            }
+        };
+        scope.exactandnormal = function(typebutton) {
+            if (typebutton === "exact") {
+                scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1, 'Paid');
+                scope.exactshow = true;
+                scope.normaldata = false;
+            } else {
+                scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1, 'UnPaid');
+                scope.exactshow = false;
+                scope.normaldata = true;
             }
         };
 

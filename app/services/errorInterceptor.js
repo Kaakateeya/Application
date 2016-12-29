@@ -4,7 +4,7 @@
     app.factory('errorInterceptor', ['$rootScope', '$q', function($rootScope, $q) {
         return {
             responseError: function(rejection) {
-                $rootScope.$broadcast('notify-error', rejection.data);
+                $rootScope.$broadcast('notify-error', rejection);
                 return $q.reject(rejection);
             }
         };

@@ -117,18 +117,37 @@ module.exports = function(grunt) {
                 src: css,
                 dest: 'dist/src/main.css'
             }
+        },
+        copy: {
+            images: {
+                expand: true,
+                cwd: 'src/images/',
+                src: ['**/*'],
+                dest: 'dist/images/',
+                filter: 'isFile',
+                flatten: true
+            }
+        },
+
+        imagemin: { // Task            
+            dynamic: { // Another target
+                files: [{
+                    expand: true, // Enable dynamic expansion
+                    cwd: 'src/images', // Src matches are relative to this path
+                    src: ['**/*.{png,jpg,gif}'], // Actual patterns to match
+                    dest: 'dist/images' // Destination path prefix
+                }]
+            }
         }
 
-
-
     });
-    grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev']);
+    grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
 
     // this task will only run the dev configuration 
-    grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev']);
+    grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
 
     // only run production configuration 
-    grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod']);
+    grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
 
     // ===========================================================================
     // LOAD GRUNT PLUGINS ========================================================
@@ -143,5 +162,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-dev-prod-switch');
     grunt.loadNpmTasks('grunt-scriptlinker');
     grunt.loadNpmTasks('grunt-contrib-concat');
-
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 };

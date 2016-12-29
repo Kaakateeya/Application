@@ -14,7 +14,11 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
 
         getViewFullProfileMail: function(OriginalString) {
+            console.log(OriginalString);
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
+        },
+        UpdateExpressIntrestViewfullprofile: function(obj) {
+            return http.post(app.apiroot + 'StaticPages/UpdateExpressIntrestViewfullprofile', obj);
         }
 
 

@@ -42,8 +42,6 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'viewmyprofile', url: '/viewmyprofile', templateUrl: 'app/modules/static/viewMyProfile.html', controller: 'viewmyprofile', isloginrequired: true },
         { name: 'viewFullProfileCustomer', url: '/viewFullProfileCustomer', templateUrl: 'app/modules/viewFullProfile/viewFullProfileCustomer.html', controller: 'viewFullProfileCustomer', isloginrequired: true },
         { name: 'termsAndConditions', url: '/termsAndConditions', templateUrl: 'app/modules/static/termsAndConditions.html', isloginrequired: false },
-        // { name: 'Registration', url: '/Registration', templateUrl: 'app/modules/registration/views/registrationView.html', controller: "registration", isloginrequired: false },
-        // { name: 'regprofiles', url: '/regprofiles', templateUrl: 'app/modules/registration/views/registrationRegProfiles.html', controller: "registrationReg", isloginrequired: false },
         { name: 'ourbranches', url: '/ourbranches', templateUrl: 'app/modules/static/ourBranches.html', controller: 'ourbranches', isloginrequired: false },
         { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: false },
@@ -52,10 +50,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'paymentresponse', url: '/paymentresponse', templateUrl: 'app/modules/payments/views/paymentResponse.html', isloginrequired: false },
         { name: 'missingfields', url: '/missingfields/:id', templateUrl: 'app/modules/missingfieldspage/missingfields.html', controller: "missingfieldsctrl", isloginrequired: true },
         { name: 'ccAvenue', url: '/ccAvenue', templateUrl: 'app/modules/static/ccAvenue.Html', controller: "ccAvenueCtrl", isloginrequired: false },
-        { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/viewFullProfileCustomer.html', controller: 'viewFullProfileCustomer', isloginrequired: true },
-
+        { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
         { name: 'commonviewfull', url: '/commonviewfull', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
-
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -68,19 +64,31 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             templateUrl: "templates/footer.html"
         }
     };
+
     _.each(states, function(item) {
-        var innerView = {
-            "topbar@": {
-                templateUrl: "templates/header.html"
-            },
-            "content@": {
-                templateUrl: item.templateUrl,
-                controller: item.controller
-            },
-            "bottompanel@": {
-                templateUrl: "templates/footer.html"
-            }
-        };
+
+        var innerView = {};
+        if (item.name === "viewFull" || item.name === "commonviewfull") {
+            innerView = {
+                "content@": {
+                    templateUrl: item.templateUrl,
+                    controller: item.controller
+                }
+            };
+        } else {
+            innerView = {
+                "topbar@": {
+                    templateUrl: "templates/header.html"
+                },
+                "content@": {
+                    templateUrl: item.templateUrl,
+                    controller: item.controller
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
+                }
+            };
+        }
         $stateProvider.state(item.name, {
             url: item.url,
             views: (item.ishomepage ? outerView : innerView),

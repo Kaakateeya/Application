@@ -34,7 +34,7 @@
                 <h4>personalised services</h4>
                 <ul>
                     <li>
-                        <a ng-repeat="item in leftMenuArr" ng-click="gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind,item.bindvalue)" ng-show="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null || item.bindvalue=='profile'"> ({{item.bindvalue}})</span></a>
+                        <a ng-repeat="item in leftMenuArr" ng-click="gettingpartnerdata(item.clickvalues,1,9,item.clickvaluesbind,item.bindvalue,'UnPaid')" ng-show="item.bindvalue != 0" href={{item.hrefs}}>{{item.value}}<span ng-hide="item.bindvalue==null || item.bindvalue=='profile'"> ({{item.bindvalue}})</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -273,6 +273,9 @@
                                     <label id="lblSearchresultCount" style="color: #d42e02;font-size:22px;">{{PartnerProfilesnewTotalrows}}</label>
                                 </b></h1>
                             <label id="lblUHaveviewd" class="control-label span5">{{lblUHaveviewd}}</label>
+
+                            <button ng-hide="exactshow" style="background: #ff5722; border-radius: 2px;width: 70px;color: white;" class="md-raised md-warn" ng-click="exactandnormal('exact')">Exact</button>
+                            <button ng-hide="normaldata" style="background: Green; border-radius: 2px;width: 70px;color: white;" class="md-raised md-warn" ng-click="exactandnormal('normal')">Normal</button>
                         </div>
 
                         <div class="clear"></div>
