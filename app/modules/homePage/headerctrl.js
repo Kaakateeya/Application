@@ -278,8 +278,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             console.log(httperrorpopupstatus);
-
             if (httperrorpopupstatus !== "1") {
+                httperrorpopupstatus = 1;
                 alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
             }
             customerviewfullprofileservices.getCustomerApplicationErroLog(value.statusText, logincustid, value.data.Message, value.status).then(function(response) {

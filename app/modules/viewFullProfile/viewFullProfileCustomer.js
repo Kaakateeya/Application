@@ -10,7 +10,15 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
+        scope.lnkViewHoro = true;
+        scope.BookmarkFlag = false;
+        scope.ViewedFlag = false;
+        scope.msgflag = false;
+        scope.IgnoreFlaghide = false;
+        scope.liproceed = false;
+        scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
+        scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -50,36 +58,78 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 });
             }
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-
+                console.log(response);
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
                                 scope.Bookmark = testArr;
-
+                                scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
                                 break;
                             case "Viewed":
                                 scope.Viewed = testArr;
-
+                                scope.BookmarkFlag = true;
+                                scope.IgnoreFlaghide = true;
+                                scope.ViewedFlag = true;
+                                scope.msgflag = true;
+                                scope.ViewedFlag = true;
+                                scope.liproceed = false;
+                                scope.logidliproceed = false;
+                                scope.lnkViewHoro = true;
                                 break;
                             case "Express":
-                                scope.Express = testArr;
 
+                                scope.Express = testArr;
+                                if (scope.Express[0].MatchFollowUpStatus === 1) {
+                                    if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
+                                        scope.liticket = true;
+                                        scope.lnkViewHoro = false;
+                                        scope.logidliproceed = false;
+                                        scope.BookmarkFlag = false;
+                                        scope.IgnoreFlaghide = false;
+                                        scope.ViewedFlag = false;
+                                        scope.msgflag = false;
+                                        scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
+                                    } else {
+                                        scope.logidliproceed = true;
+                                    }
+                                } else if (scope.Express[0].Acceptflag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.liproceed = false;
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.liproceed = true;
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else if (scope.Express[0].ExpressFlag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else {
+                                    scope.logidliproceed = true;
+                                }
                                 break;
                             case "Paidstatus":
                                 scope.Paidstatus = testArr;
-
                                 break;
                             case "Ignore":
                                 scope.Ignore = testArr;
-
                                 break;
                         }
                     }
                 });
             });
-
             customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
                 scope.slides = [];
 
@@ -209,5 +259,79 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
             }
         };
+        scope.proceeddont = function(typeofbtn, obj) {
+            switch (typeofbtn) {
+                case "Proceed":
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
+                        console.log(response);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
+                        scope.pageload();
+                    });
+                    break;
+                case "btnDontProceed":
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
+                        console.log(response);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
+                        scope.pageload();
+                    });
+                    break;
+            }
+            scope.divacceptreject = true;
+            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+            scope.pagerefersh(scope.ToProfileID);
+        };
+        scope.procceddontproceedwilltell = function(type) {
+            switch (type) {
+                case "Proceed":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            var MobjViewprofile = {
+                                ExpressInrestID: scope.Express[0].ExpressInterstId,
+                                CustID: scope.custid,
+                                FromCustID: scope.custid,
+                                ToCustID: localcustid,
+                                AcceptStatus: 1,
+                                MatchFollwupStatus: 1
+                            };
+                            scope.proceeddont("Proceed", MobjViewprofile);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+                case "dont":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            var MobjViewprofile = {
+                                ExpressInrestID: scope.Express[0].ExpressInterstId,
+                                CustID: scope.custid,
+                                FromCustID: scope.custid,
+                                ToCustID: localcustid,
+                                AcceptStatus: 2,
+                                MatchFollwupStatus: 2
+                            };
+                            scope.proceeddont("DontProceed", MobjViewprofile);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+                case "tell":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            alerts.timeoutoldalerts(scope, 'alert-sucess', 'Your action send sucessfully', 3000);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+            }
+        };
+
+
+
     }
 ]);

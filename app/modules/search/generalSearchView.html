@@ -202,11 +202,10 @@
                                         <br>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general',1,8)">Search</md-button>
                                         <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('general')">Save&Search</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('general')">{{generalsavedsearchbtn}}</md-button>
                                         <br>
                                         <br>
                                         <br>
-
                                     </div>
                                 </div>
                             </form>
@@ -417,6 +416,7 @@
                                                 <md-radio-button value="2"> Non Veg </md-radio-button>
                                                 <md-radio-button value="">Both </md-radio-button>
                                             </md-radio-group>
+                                            <br>
                                             <md-radio-group ng-show="getpaidstatus==='1'?true:false" layout="row" ng-model="regdays" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
@@ -430,7 +430,7 @@
                                     <p ng-show="custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,8)">Search</md-button>
                                     <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">Save&Search</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
                                 </div>
                             </form>
                         </div>
@@ -489,7 +489,7 @@
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Search by ID</label>
                                                 <input ng-model="txtsavesearchname" flex="50">
-                                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethod(custid,txtsavesearchname,1);">Search</md-button>
+                                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethods(custid,txtsavesearchname,1);">Search</md-button>
                                             </md-input-container>
                                         </div>
 
@@ -500,7 +500,7 @@
                                             <div class="saved_search_list_ui clearfix">
                                                 <a href="javascript:void(0)" ng-click="gettingsavedsearcheditsearch('search',saved.SearchResult_ID,saved.SearchpageID)">Search<span class="material-icons">search</span></a>
                                                 <a href="javascript:void(0)" ng-click="gettingsavedsearcheditsearch('edit',saved.SearchResult_ID,saved.SearchpageID)">Edit<i class="material-icons">mode_edit</i></a>
-                                                <a href="javascript:void(0)" ng-click="savedsearchselectmethod(saved.SearchResult_ID,'',0)">Delete<i class="material-icons" >delete</i></a>
+                                                <a href="javascript:void(0)" ng-click="savedsearchselectmethods(saved.SearchResult_ID,'',0)">Delete<i class="material-icons" >delete</i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -513,7 +513,6 @@
         </div>
     </div>
 </div>
-
 <div class="register_page_main clearfix" ng-hide="truepartnerrefine">
     <div class="clearfix">
         <div class="refine_search_new clearfix">

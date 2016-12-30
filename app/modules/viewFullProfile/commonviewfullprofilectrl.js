@@ -51,7 +51,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 scope.Viewed = testArr;
                                 break;
                             case "Express":
-
                                 scope.Express = testArr;
                                 if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                     if (scope.flagopen !== 1) {
@@ -250,7 +249,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-            $window.close();
+
+            window.close();
+
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";

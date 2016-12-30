@@ -2610,8 +2610,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             console.log(httperrorpopupstatus);
-
             if (httperrorpopupstatus !== "1") {
+                httperrorpopupstatus = 1;
                 alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
             }
             customerviewfullprofileservices.getCustomerApplicationErroLog(value.statusText, logincustid, value.data.Message, value.status).then(function(response) {
@@ -3098,6 +3098,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.casteshow = true;
         scope.slideshow = "";
         scope.mesagesend = "";
+        scope.generalsavedsearchbtn = "Save&Search";
+        scope.advancedsavedsearchbtn = "Save&Search";
+        scope.SearchResult_IDflag = null;
         scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
             if (whereValue.indexOf(',') === -1) {
@@ -3177,20 +3180,28 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             return colors;
         };
-        scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
+        scope.savedsearchselectmethods = function(custid, SaveSearchName, iEditDelete) {
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
+                scope.savedsearchselect = [];
                 _.each(response.data, function(item) {
                     scope.savedsearchselect.push(item);
                 });
             });
             if (iEditDelete === 0) {
-                searches.savedsearchselectmethod(custid, "", 1).then(function(response) {
+                searches.savedsearchselectmethod(scope.custid, "", 1).then(function(response) {
+                    scope.savedsearchselect = [];
+                    console.log(response);
                     _.each(response.data, function(item) {
+
                         scope.savedsearchselect.push(item);
                     });
                 });
             }
         };
+        scope.$watch("savedsearchselect", function(current, old) {
+
+            scope.savedsearchselect = current;
+        });
         scope.arrayToString = function(string) {
             return (string.split(',')).map(Number);
         };
@@ -3249,7 +3260,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                 });
-                scope.savedsearchselectmethod(scope.custid, "", 1);
+                scope.savedsearchselectmethods(scope.custid, "", 1);
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
                 scope.truepartner = true;
                 scope.truepartnerrefine = true;
@@ -3382,7 +3393,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             };
             return SearchRequest;
         };
-        scope.generalsearchsubmit = function(type, frompage, topage, form) {
+        scope.generalsearchsubmit = function(type, frompage, topage, form, searchsavedidupdate) {
             scope.loadinging = frompage === 1 ? false : true;
             scope.showcontrols = false;
             scope.truepartner = false;
@@ -3522,7 +3533,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             CustSavedSearchName: form.savesearchNames !== null && form.savesearchNames !== undefined && form.savesearchNames !== "" ? form.savesearchNames : null,
                             searchPageName: type === "advanced" ? "Advancesearch" : "Generalsearch",
                             searchPageID: type === "advanced" ? "3" : "2",
-                            SearchResult_ID: null
+                            SearchResult_ID: searchsavedidupdate !== null && searchsavedidupdate !== "" && searchsavedidupdate !== undefined ? searchsavedidupdate : null
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
@@ -3542,6 +3553,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     if (scope.slideshow !== "slideshow") {
                         scope.$broadcast('loadmore');
                     }
+                    scope.modalpopupclose();
+                    scope.savedsearchselectmethods(scope.custid, "", 1);
                     break;
                 case "profileidsavedsearch":
                     SearchRequest = {
@@ -3591,7 +3604,22 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.savedseapopup = function(type) {
             scope.typesearch = type;
-            alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+            switch (type) {
+                case "general":
+                    if (scope.generalsavedsearchbtn === "Update") {
+                        scope.generalsearchsubmit('savedsearch', 1, 8, "", scope.SearchResult_IDflag);
+                    } else {
+                        alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+                    }
+                    break;
+                case "advanced":
+                    if (scope.generalsavedsearchbtn === "Update") {
+                        scope.generalsearchsubmit('savedsearch', 1, 8, "", scope.SearchResult_IDflag);
+                    } else {
+                        alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+                    }
+                    break;
+            }
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -3778,13 +3806,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
-
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                         } else if (SearchpageID === "2") {
                             typeofsearch = "general";
+                            scope.generalsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         } else {
                             typeofsearch = "advanced";
+                            scope.advancedsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         }
                         scope.generalsearchsubmit(typeofsearch, 1, 8, "");
                     });
@@ -3801,9 +3832,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         } else if (SearchpageID === "2") {
                             typeofsearch = "general";
                             scope.selectedIndex = 0;
+                            scope.generalsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         } else {
                             typeofsearch = "advanced";
                             scope.selectedIndex = 1;
+                            scope.advancedsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         }
                     });
                     break;
@@ -5007,36 +5042,6 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
         };
     }
 ]);
-app.controller("viewmyprofile", ['customerDashboardServices', '$scope', function(customerDashboardServices, scope) {
-    var logincustid = authSvc.getCustId();
-    var loginprofileid = authSvc.getProfileid();
-    var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
-    var locallogid = sessionStorage.getItem("locallogid");
-
-    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-    customerDashboardServices.Viewprofile().then(function(response) {
-        scope.arr = [];
-        scope.personalinfo = {};
-        scope.aboutmyself = {};
-        _.each(response.data, function(item) {
-            var testArr = JSON.parse(item);
-            if (testArr[0].TableName === "About") {
-                scope.aboutmyself = testArr;
-
-            } else if (testArr[0].TableName === "Primary") {
-                scope.personalinfo = testArr;
-
-            } else {
-                scope.arr.push({ header: testArr[0].TableName, value: testArr });
-            }
-        });
-
-    });
-
-    customerDashboardServices.Viewprofileflags().then(function(response) {
-
-    });
-}]);
 app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
     'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams',
     '$location', 'customerviewfullprofileservices', '$window', '$state',
@@ -5090,7 +5095,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 scope.Viewed = testArr;
                                 break;
                             case "Express":
-
                                 scope.Express = testArr;
                                 if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                     if (scope.flagopen !== 1) {
@@ -5289,7 +5293,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-            $window.close();
+
+            window.close();
+
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
@@ -5426,7 +5432,15 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
+        scope.lnkViewHoro = true;
+        scope.BookmarkFlag = false;
+        scope.ViewedFlag = false;
+        scope.msgflag = false;
+        scope.IgnoreFlaghide = false;
+        scope.liproceed = false;
+        scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
+        scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -5466,36 +5480,78 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 });
             }
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-
+                console.log(response);
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
                                 scope.Bookmark = testArr;
-
+                                scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
                                 break;
                             case "Viewed":
                                 scope.Viewed = testArr;
-
+                                scope.BookmarkFlag = true;
+                                scope.IgnoreFlaghide = true;
+                                scope.ViewedFlag = true;
+                                scope.msgflag = true;
+                                scope.ViewedFlag = true;
+                                scope.liproceed = false;
+                                scope.logidliproceed = false;
+                                scope.lnkViewHoro = true;
                                 break;
                             case "Express":
-                                scope.Express = testArr;
 
+                                scope.Express = testArr;
+                                if (scope.Express[0].MatchFollowUpStatus === 1) {
+                                    if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
+                                        scope.liticket = true;
+                                        scope.lnkViewHoro = false;
+                                        scope.logidliproceed = false;
+                                        scope.BookmarkFlag = false;
+                                        scope.IgnoreFlaghide = false;
+                                        scope.ViewedFlag = false;
+                                        scope.msgflag = false;
+                                        scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
+                                    } else {
+                                        scope.logidliproceed = true;
+                                    }
+                                } else if (scope.Express[0].Acceptflag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.liproceed = false;
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.liproceed = true;
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else if (scope.Express[0].ExpressFlag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else {
+                                    scope.logidliproceed = true;
+                                }
                                 break;
                             case "Paidstatus":
                                 scope.Paidstatus = testArr;
-
                                 break;
                             case "Ignore":
                                 scope.Ignore = testArr;
-
                                 break;
                         }
                     }
                 });
             });
-
             customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
                 scope.slides = [];
 
@@ -5625,6 +5681,80 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
             }
         };
+        scope.proceeddont = function(typeofbtn, obj) {
+            switch (typeofbtn) {
+                case "Proceed":
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
+                        console.log(response);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
+                        scope.pageload();
+                    });
+                    break;
+                case "btnDontProceed":
+                    customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
+                        console.log(response);
+                        alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
+                        scope.pageload();
+                    });
+                    break;
+            }
+            scope.divacceptreject = true;
+            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+            scope.pagerefersh(scope.ToProfileID);
+        };
+        scope.procceddontproceedwilltell = function(type) {
+            switch (type) {
+                case "Proceed":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            var MobjViewprofile = {
+                                ExpressInrestID: scope.Express[0].ExpressInterstId,
+                                CustID: scope.custid,
+                                FromCustID: scope.custid,
+                                ToCustID: localcustid,
+                                AcceptStatus: 1,
+                                MatchFollwupStatus: 1
+                            };
+                            scope.proceeddont("Proceed", MobjViewprofile);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+                case "dont":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            var MobjViewprofile = {
+                                ExpressInrestID: scope.Express[0].ExpressInterstId,
+                                CustID: scope.custid,
+                                FromCustID: scope.custid,
+                                ToCustID: localcustid,
+                                AcceptStatus: 2,
+                                MatchFollwupStatus: 2
+                            };
+                            scope.proceeddont("DontProceed", MobjViewprofile);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+                case "tell":
+                    authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
+                        if (responsepaid === true) {
+                            alerts.timeoutoldalerts(scope, 'alert-sucess', 'Your action send sucessfully', 3000);
+                        } else {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
+                        }
+                    });
+                    break;
+            }
+        };
+
+
+
     }
 ]);
 //  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {

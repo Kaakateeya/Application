@@ -28,6 +28,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.casteshow = true;
         scope.slideshow = "";
         scope.mesagesend = "";
+        scope.generalsavedsearchbtn = "Save&Search";
+        scope.advancedsavedsearchbtn = "Save&Search";
+        scope.SearchResult_IDflag = null;
         scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
             if (whereValue.indexOf(',') === -1) {
@@ -107,20 +110,28 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             return colors;
         };
-        scope.savedsearchselectmethod = function(custid, SaveSearchName, iEditDelete) {
+        scope.savedsearchselectmethods = function(custid, SaveSearchName, iEditDelete) {
             searches.savedsearchselectmethod(custid, SaveSearchName, iEditDelete).then(function(response) {
+                scope.savedsearchselect = [];
                 _.each(response.data, function(item) {
                     scope.savedsearchselect.push(item);
                 });
             });
             if (iEditDelete === 0) {
-                searches.savedsearchselectmethod(custid, "", 1).then(function(response) {
+                searches.savedsearchselectmethod(scope.custid, "", 1).then(function(response) {
+                    scope.savedsearchselect = [];
+                    console.log(response);
                     _.each(response.data, function(item) {
+
                         scope.savedsearchselect.push(item);
                     });
                 });
             }
         };
+        scope.$watch("savedsearchselect", function(current, old) {
+
+            scope.savedsearchselect = current;
+        });
         scope.arrayToString = function(string) {
             return (string.split(',')).map(Number);
         };
@@ -179,7 +190,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 searches.partnerdetails(scope.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                 });
-                scope.savedsearchselectmethod(scope.custid, "", 1);
+                scope.savedsearchselectmethods(scope.custid, "", 1);
             } else if (scope.object !== undefined && scope.object !== null && scope.object !== null) {
                 scope.truepartner = true;
                 scope.truepartnerrefine = true;
@@ -312,7 +323,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             };
             return SearchRequest;
         };
-        scope.generalsearchsubmit = function(type, frompage, topage, form) {
+        scope.generalsearchsubmit = function(type, frompage, topage, form, searchsavedidupdate) {
             scope.loadinging = frompage === 1 ? false : true;
             scope.showcontrols = false;
             scope.truepartner = false;
@@ -452,7 +463,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             CustSavedSearchName: form.savesearchNames !== null && form.savesearchNames !== undefined && form.savesearchNames !== "" ? form.savesearchNames : null,
                             searchPageName: type === "advanced" ? "Advancesearch" : "Generalsearch",
                             searchPageID: type === "advanced" ? "3" : "2",
-                            SearchResult_ID: null
+                            SearchResult_ID: searchsavedidupdate !== null && searchsavedidupdate !== "" && searchsavedidupdate !== undefined ? searchsavedidupdate : null
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
@@ -472,6 +483,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     if (scope.slideshow !== "slideshow") {
                         scope.$broadcast('loadmore');
                     }
+                    scope.modalpopupclose();
+                    scope.savedsearchselectmethods(scope.custid, "", 1);
                     break;
                 case "profileidsavedsearch":
                     SearchRequest = {
@@ -521,7 +534,22 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.savedseapopup = function(type) {
             scope.typesearch = type;
-            alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+            switch (type) {
+                case "general":
+                    if (scope.generalsavedsearchbtn === "Update") {
+                        scope.generalsearchsubmit('savedsearch', 1, 8, "", scope.SearchResult_IDflag);
+                    } else {
+                        alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+                    }
+                    break;
+                case "advanced":
+                    if (scope.generalsavedsearchbtn === "Update") {
+                        scope.generalsearchsubmit('savedsearch', 1, 8, "", scope.SearchResult_IDflag);
+                    } else {
+                        alerts.dynamicpopup("savedsearch.html", scope, uibModal);
+                    }
+                    break;
+            }
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -708,13 +736,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     var typeofsearch;
                     searches.partnerdetails(scope.custid, "", SearchResult_ID).then(function(response) {
                         scope.partnerbindings(response);
-
                         if (SearchpageID === "1") {
                             typeofsearch = "profileid";
                         } else if (SearchpageID === "2") {
                             typeofsearch = "general";
+                            scope.generalsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         } else {
                             typeofsearch = "advanced";
+                            scope.advancedsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         }
                         scope.generalsearchsubmit(typeofsearch, 1, 8, "");
                     });
@@ -731,9 +762,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         } else if (SearchpageID === "2") {
                             typeofsearch = "general";
                             scope.selectedIndex = 0;
+                            scope.generalsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         } else {
                             typeofsearch = "advanced";
                             scope.selectedIndex = 1;
+                            scope.advancedsavedsearchbtn = "Update";
+                            scope.SearchResult_IDflag = SearchResult_ID;
                         }
                     });
                     break;

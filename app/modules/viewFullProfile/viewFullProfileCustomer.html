@@ -25,19 +25,19 @@
                 </p>
                 <div class="search_result_item_ui_exprsns" ng-hide="custid===localcustidhide">
                     <ul>
-                        <li id="libookmark" ng-if="Bookmark[0].BookmarkFlag!== 1">
+                        <li id="libookmark" ng-show="BookmarkFlag">
                             <div class="bookmark-icon" ng-click="serviceactions('B',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkBookMark" href="javascript:void(0);" style="color: black;" title="BookMark" ng-click="serviceactions('B',personalinfo[0].Cust_ID,data.mybookmarked)">BookMark</a>
                         </li>
-                        <li id="liexpress" ng-if="Viewed[0].Viewedflag!== 1">
+                        <li id="liexpress" ng-show="ViewedFlag">
                             <div class="interest-icon" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkEXpressInterest" href="javascript:void(0);" style="color: black;" title="Express Interest" ng-click="serviceactions('E',personalinfo[0].Cust_ID,data.ExpressFlag,personalinfo[0].ProfileID)">Express Interest</a>
                         </li>
-                        <li id="limsg" ng-if="Express[0].ExpressFlag!== 1">
+                        <li id="limsg" ng-show="msgflag">
                             <div class="message-icon2" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkMessage" href="javascript:void(0);" style="color: black;" title="Message" ng-click="sendmessegescommon('M',personalinfo[0].Cust_ID)">Message</a>
                         </li>
-                        <li id="liignore" ng-if="Ignore[0].IgnoreFlag!== 1">
+                        <li id="liignore" ng-show="IgnoreFlaghide">
                             <div class="close-icon" ng-click="serviceactions('I',personalinfo[0].Cust_ID)" style="color: Black;float:left;cursor:pointer;" />
                             <a id="lnkNotInterest" href="javascript:void(0);" style="color: black;" title="Not Interest" ng-click="serviceactions('I',personalinfo[0].Cust_ID)">Ignore</a>
                         </li>
@@ -48,19 +48,26 @@
                     <span id="lblNames"></span> is: Family oriented, well educated, attractive
                 </p>
             </div>
-            <div class="profile_full_header_in_ui clearfix" id="logidliproceed" ng-if="locallogid!=null && locallogid!=undefined && Express[0].MatchFollowUpStatus!=1 && Express[0].SeenStatus!='Accept' && Express[0].SeenStatus!='Reject'">
+            <div ng-hide="custid===localcustidhide">
+                <div class="profile_full_header_in_ui clearfix" ng-show="liproceed">
+                    <a id="btnProceed" href="javascript:void(0);" ng-click="procceddontproceedwilltell('Proceed')">Proceed</a>
+                    <a id="btnDontProceed" href="javascript:void(0);" ng-click="procceddontproceedwilltell('dont')">Don't Proceed</a>
+                    <a id="btnWilltellater" href="javascript:void(0);" ng-click="procceddontproceedwilltell('tell')">Tell you later</a>
+                </div>
+                <div class="profile_full_header_in_ui clearfix" ng-show="logidliproceed">
 
-                <a id="lnklogaccept" href="javascript:void(0);" ng-click="acceptlinkexp('I',personalinfo[0].Cust_ID);">Proceed</a>
+                    <a id="lnklogaccept" href="javascript:void(0);" ng-click="acceptlinkexp('I',personalinfo[0].Cust_ID);">Proceed</a>
 
-                <a id="lnklogSkipped" href="javascript:void(0);" ng-click="acceptlinkexp('NI',personalinfo[0].Cust_ID);">Skip This Profile</a>
+                    <a id="lnklogSkipped" href="javascript:void(0);" ng-click="acceptlinkexp('NI',personalinfo[0].Cust_ID);">Skip This Profile</a>
 
-            </div>
-            <div class="profile_full_header_in_ui clearfix" id="liticket" ng-if="locallogid!=null && locallogid!=undefined && Express[0].MatchFollowUpStatus==1 && (Express[0].SeenStatus=='Accept' || Express[0].SeenStatus=='Reject')">
-                <a id="btnticket">{{Express[0].ViewTicket}}</a>
+                </div>
+                <div class="profile_full_header_in_ui clearfix" ng-show="liticket">
+                    <a href="javascript:void(0);">{{ViewTickettext}}</a>
+                </div>
             </div>
             <div class="profile_full_header_in_ui clearfix">
-                <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!='' && personalinfo[0].HoroscopeImage!=null && personalinfo[0].HoroscopeImage!='Not given'">
-                    <a id="lnkViewHoro" href="javascript:void(0);" ng-click="viewhoroscopeimage()">View Horo</a>
+                <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!=='' && personalinfo[0].HoroscopeImage!==null && personalinfo[0].HoroscopeImage!=='Not given'">
+                    <a ng-show="lnkViewHoro" href="javascript:void(0);" ng-click="viewhoroscopeimage()">View Horo</a>
                 </div>
             </div>
         </div>
@@ -71,7 +78,7 @@
             </div>
             <div class="personal_inform_main_in">
                 <h4>about my
-                    <span id="lblRelation">{{personalinfo[0].GenderID===2?"Daughter":"Son"}}</span></h4>
+                    <span id="lblRelation">{{personalinfo[0].Genderid===2?"Daughter":"Son"}}</span></h4>
                 <p>
                     <span id="lblDesc">{{aboutmyself[0].Aboutyourself}}</span>
                 </p>
