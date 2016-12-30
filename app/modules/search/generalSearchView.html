@@ -633,11 +633,11 @@
       <button type="button" class="close" ng-click="modalpopupclose()">×</button>
         <h4 class="modal-title" id="commontitle" style="color: black;">Send Message</h4>
      </div>
-  <div class="modal-body">
+       <div class="modal-body">
       <div class="row col-lg-offset-1">
          <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" class="col-lg-10"></textarea>
      </div>
- </div>
+     </div>
       <div class="modal-footer">
      <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
      <button type="button" class="btn btn-primary" ng-click="sendmessages(form)">Send Message</button>
@@ -665,7 +665,6 @@
                                             <div ng-if="regForm.rbtngender.$invalid && (regForm.$submitted)">This is required.</div>
                                         </div>
                                     </md-input-container>
-
                                 </li>
                                 <li class="row clearfix">
                                     <label  class="pop_label_left col-lg-4">Name<span style="color: red; margin-left: 3px;">*</span></label>
@@ -682,8 +681,7 @@
                                           <input maxlength="15" placeholder="Password" class="form-control col-lg-4" style="border: 1px solid #cac3c3 !important;border-radius: 3px !important;width:40%;margin-left: 3px;height: 33px !important;" required="" md-asterisk="" name="txtpassword" ng-model="reg.txtpassword" type="password">  
                                     </div>
                                  </li>                     
-                               
-                                <li class="row">
+                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Posted by<span style="color: red; margin-left: 3px;">*</span></label>
                                       <div class="pop_controls_right select-box-my col-lg-8">
                                         <select multiselectdropdown  ng-model="reg.ddlpostedby" required="" typeofdata="'childStayingWith'">
@@ -695,7 +693,6 @@
                                     <label  class="pop_label_left col-lg-4">DOB<span style="color: red; margin-left: 3px;">*</span></label>
                                        <div class="pop_controls_right select-box-my select-box-my-trible col-lg-8">                             
                                         <select  multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in dateArr" style="border-radius: 3px !important;width:30%;" name="ddlDD" placeholder="Day" ng-model="reg.ddlDD" required="" ng-change="dayChange(reg,'day');" >
-
                                         </select>
                                             <select name="ddlMM" multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in monthArr" style="border-radius: 3px !important;width:30%;" ng-model="reg.ddlMM" required="" ng-change="dayChange(reg,'month');" >
                                             </select>
@@ -720,7 +717,6 @@
                                         <select name="ddlcaste"  multiselectdropdown typeofdata="" ng-options="item.value as item.label for item in casteArr"  ng-model="reg.ddlcaste" required="">
                                         </select>
                                     </div>
-                                
                                 </li>
                                  <br/>
                                 <li class="row">
@@ -750,7 +746,7 @@
                                     </div>
                                 </li>
                                 <li class="row">
-                                     <md-input-container class="col-lg-8">
+                               <md-input-container class="col-lg-8">
                                     <md-checkbox ng-model="reg.Chkprivacy" name="Chkprivacy" aria-label="Checkbox 1" ng-required="true" md-asterisk="">
                                         I agree to the
                                         <a ng-model="reg.lnkprivacyPolicy" Font-Size="12px" ng-click="redirectprivacy()">Privacy Policy and T&C.</a>
@@ -771,8 +767,6 @@
                         </form>
                     </div>
                     </script>
-
-
                     <script type="text/ng-template" id="loginpopup.html">
                         <form name="myFormlogin">
                             <div class="modal-header">
@@ -790,8 +784,7 @@
                                     </md-input-container>
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>Password</label>
-                                        <input type="password" id="txtPassword" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;
-       border-radius: 3px !important;">
+                                        <input type="password" id="txtPassword" ng-keyup="myFormlogin.$valid && $event.keyCode == 13 && loginsubmit(formloagin)" ng-model="formloagin.password" required style="border: 1px solid #a59898 !important;border-radius: 3px !important;">
                                     </md-input-container>
                                 </div>
                                 <p class="col-lg-offset-1">To create your kaakateeya matrimonial account Click <a href="registration" style="color: maroon;">Register Now</a></p>
@@ -803,7 +796,6 @@
                                 <md-button ng-click="cancelpopup()" type="button">
                                     Cancel
                                 </md-button>
-
                             </div>
                         </form>
                     </script>

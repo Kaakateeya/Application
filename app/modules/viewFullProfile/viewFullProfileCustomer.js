@@ -56,87 +56,88 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
                     scope.partnerinformation(response);
                 });
-            }
-            customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-                console.log(response);
-                _.each(response.data, function(item) {
-                    var testArr = JSON.parse(item);
-                    if (testArr[0] !== undefined) {
-                        switch (testArr[0].TableName) {
-                            case "Bookmark":
-                                scope.Bookmark = testArr;
-                                scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
-                                break;
-                            case "Viewed":
-                                scope.Viewed = testArr;
-                                scope.BookmarkFlag = true;
-                                scope.IgnoreFlaghide = true;
-                                scope.ViewedFlag = true;
-                                scope.msgflag = true;
-                                scope.ViewedFlag = true;
-                                scope.liproceed = false;
-                                scope.logidliproceed = false;
-                                scope.lnkViewHoro = true;
-                                break;
-                            case "Express":
+                customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
+                    console.log(response);
+                    _.each(response.data, function(item) {
+                        var testArr = JSON.parse(item);
+                        if (testArr[0] !== undefined) {
+                            switch (testArr[0].TableName) {
+                                case "Bookmark":
+                                    scope.Bookmark = testArr;
+                                    scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
+                                    break;
+                                case "Viewed":
+                                    scope.Viewed = testArr;
+                                    scope.BookmarkFlag = true;
+                                    scope.IgnoreFlaghide = true;
+                                    scope.ViewedFlag = true;
+                                    scope.msgflag = true;
+                                    scope.ViewedFlag = true;
+                                    scope.liproceed = false;
+                                    scope.logidliproceed = false;
+                                    scope.lnkViewHoro = true;
+                                    break;
+                                case "Express":
 
-                                scope.Express = testArr;
-                                if (scope.Express[0].MatchFollowUpStatus === 1) {
-                                    if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
-                                        scope.liticket = true;
-                                        scope.lnkViewHoro = false;
-                                        scope.logidliproceed = false;
+                                    scope.Express = testArr;
+                                    if (scope.Express[0].MatchFollowUpStatus === 1) {
+                                        if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
+                                            scope.liticket = true;
+                                            scope.lnkViewHoro = false;
+                                            scope.logidliproceed = false;
+                                            scope.BookmarkFlag = false;
+                                            scope.IgnoreFlaghide = false;
+                                            scope.ViewedFlag = false;
+                                            scope.msgflag = false;
+                                            scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
+                                        } else {
+                                            scope.logidliproceed = true;
+                                        }
+                                    } else if (scope.Express[0].Acceptflag === 1) {
+                                        if (scope.custid !== null) {
+                                            scope.liproceed = false;
+                                            scope.logidliproceed = true;
+                                        } else {
+                                            scope.liproceed = true;
+                                            scope.logidliproceed = false;
+                                        }
                                         scope.BookmarkFlag = false;
                                         scope.IgnoreFlaghide = false;
                                         scope.ViewedFlag = false;
                                         scope.msgflag = false;
-                                        scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
+                                    } else if (scope.Express[0].ExpressFlag === 1) {
+                                        if (scope.custid !== null) {
+                                            scope.logidliproceed = true;
+                                        } else {
+                                            scope.logidliproceed = false;
+                                        }
+                                        scope.BookmarkFlag = false;
+                                        scope.IgnoreFlaghide = false;
+                                        scope.ViewedFlag = false;
+                                        scope.msgflag = false;
                                     } else {
                                         scope.logidliproceed = true;
                                     }
-                                } else if (scope.Express[0].Acceptflag === 1) {
-                                    if (scope.custid !== null) {
-                                        scope.liproceed = false;
-                                        scope.logidliproceed = true;
-                                    } else {
-                                        scope.liproceed = true;
-                                        scope.logidliproceed = false;
-                                    }
-                                    scope.BookmarkFlag = false;
-                                    scope.IgnoreFlaghide = false;
-                                    scope.ViewedFlag = false;
-                                    scope.msgflag = false;
-                                } else if (scope.Express[0].ExpressFlag === 1) {
-                                    if (scope.custid !== null) {
-                                        scope.logidliproceed = true;
-                                    } else {
-                                        scope.logidliproceed = false;
-                                    }
-                                    scope.BookmarkFlag = false;
-                                    scope.IgnoreFlaghide = false;
-                                    scope.ViewedFlag = false;
-                                    scope.msgflag = false;
-                                } else {
-                                    scope.logidliproceed = true;
-                                }
-                                break;
-                            case "Paidstatus":
-                                scope.Paidstatus = testArr;
-                                break;
-                            case "Ignore":
-                                scope.Ignore = testArr;
-                                break;
+                                    break;
+                                case "Paidstatus":
+                                    scope.Paidstatus = testArr;
+                                    break;
+                                case "Ignore":
+                                    scope.Ignore = testArr;
+                                    break;
+                            }
                         }
-                    }
+                    });
                 });
-            });
-            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
-                scope.slides = [];
+                customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                    scope.slides = [];
 
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
+                    _.each(response.data, function(item) {
+                        scope.slides.push(item);
+                    });
                 });
-            });
+            }
+
         };
 
         scope.servicehttp = function(type, object) {
@@ -227,7 +228,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.acceptlinkexp = function(type, custid) {
             var locallogid = sessionStorage.getItem("locallogid");
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
-
                 if (response.data === 1) {
                     scope.$broadcast("showAlertPopupccc", 'alert-success', "Proceed successfully", 2500);
                 } else {

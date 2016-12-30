@@ -211,14 +211,15 @@
             </div>
         </div>
     </div>
+    </br>
     <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
-        <div class="col-lg-offset-5" ng-show=loadmore>
+        <div class="col-lg-offset-5" ng-show="loadmore">
             <a href="javascript:void(0)" ng-click="directivepaging()"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
         </div>
-        <div class="col-lg-offset-5" ng-show=loaderspin>
+        <div class="col-lg-offset-5" ng-show="loaderspin">
             <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
         </div>
-        <div class="col-lg-offset-5 text-center" ng-show=Norowsend>
+        <div class="col-lg-offset-5 text-center" ng-show="Norowsend">
             <h3 style="color: maroon;">End</h3>
         </div>
     </div>

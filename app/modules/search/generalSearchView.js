@@ -278,7 +278,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.lastname = "";
         };
         scope.returnnullvalue = function(value) {
-
             var obj = value !== null && value !== undefined && value !== "" && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
             return obj;
         };
@@ -467,6 +466,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         }
                     };
                     searches.CustomerGeneralandAdvancedSavedSearch(scope.submitsavedsearchobject).then(function(response) {
+                        scope.savedsearchselectmethods(scope.custid, "", 1);
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             _.each(response.data, function(item) {
@@ -484,50 +484,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         scope.$broadcast('loadmore');
                     }
                     scope.modalpopupclose();
-                    scope.savedsearchselectmethods(scope.custid, "", 1);
-                    break;
-                case "profileidsavedsearch":
-                    SearchRequest = {
-                        intCusID: scope.custid,
-                        intGender: scope.gender,
-                        strLastName: scope.lastname,
-                        strFirstName: scope.firstname,
-                        strProfileID: scope.profileid,
-                        intCasteID: null,
-                        StartIndex: frompage,
-                        EndIndex: topage,
-                    };
-                    scope.submitprofileidsavedsearchobject = {
-                        customerpersonaldetails: SearchRequest,
-                        GetDetails: {
-                            CustID: scope.custid !== null ? scope.custid : "",
-                            Lookingfor: scope.gender,
-                            ProfileID: scope.profileid,
-                            FirstName: scope.firstname,
-                            LastName: scope.lastname,
-                            CustSavedSearchName: form.savesearchNames !== null && form.savesearchNames !== undefined && form.savesearchNames !== "" ? form.savesearchNames : null,
-                            searchPageName: "ProfileIDsearch",
-                            searchPageID: "1",
-                            SearchResult_ID: null
-                        }
-                    };
-                    searches.CustomerProfileIDSavedSearch(scope.submitprofileidsavedsearchobject).then(function(response) {
-                        if (parseInt(frompage) === 1) {
-                            scope.PartnerProfilesnew = [];
-                            _.each(response.data, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
-                        } else {
-                            _.each(response.data, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
-                        }
-                        scope.loadinging = true;
-                    });
-                    if (scope.slideshow !== "slideshow") {
-                        scope.$broadcast('loadmore');
-                    }
-                    alerts.dynamicpopupclose();
                     break;
             }
 
@@ -687,9 +643,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            console.log('custStatus');
-                            console.log(innerresponse.data);
-
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -697,7 +650,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
-
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
@@ -711,15 +663,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             } else {
                                 window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
                             }
-
                         });
                         commonpopup.closepopup();
                     });
-
                 }
             }
         };
-
         scope.ValidateEmail = function(email) {
             var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return expr.test(email);
@@ -728,7 +677,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             var expr1 = /[0-9 -()+]+$/;
             return expr1.test(num);
         };
-
         scope.gettingsavedsearcheditsearch = function(type, SearchResult_ID, SearchpageID) {
             switch (type) {
                 case "search":
