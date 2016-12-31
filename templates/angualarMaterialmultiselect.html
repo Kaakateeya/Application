@@ -1,14 +1,2 @@
-<!--md-on-open="alertopen(model)"-->
-<!--<md-select ng-model="model" placeholder="Any" ng-class="applycolorsdirecive(model)" ng-change="directivechangeevent(model)" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple>
-    <md-select-header class="demo-select-header">
-        <input ng-model="caste" type="search" class="demo-header-searchbox md-text">
-    </md-select-header>
-    <md-optgroup label="Caste">
-        <md-option ng-click="selectall()" ng-model="selectallMdl" ng-value="0" ng-hide="Castehide">selectall</md-option>
-        <md-option ng-value="caste.value" ng-click="selectoption()" ng-repeat="caste in Caste |
-        filter:caste">{{caste.label}}</md-option>
-    </md-optgroup>
-</md-select>-->
-
 <select multiple ng-model="model" ng-attr-id="{{IDs}}" multiselectdropdown typeofdata="" ng-class="applycolorsdirecive(model,IDs)" ng-options="caste.value as caste.label for caste in Caste" ng-change="directivechangeevent(model)">
  </select>

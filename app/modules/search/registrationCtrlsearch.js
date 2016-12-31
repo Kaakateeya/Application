@@ -1,4 +1,4 @@
-app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
+app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
 
     scope.month = 'month';
     scope.reg = {};
@@ -78,7 +78,8 @@ app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 
     };
 
     scope.changeBind = function(parentval, parentval2) {
-        scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2));
+
+        scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2) !== undefined && commondependency.listSelectedVal(parentval2) !== null && commondependency.listSelectedVal(parentval2) !== "" ? commondependency.listSelectedVal(parentval2) : 0);
     };
 
     scope.regSubmit = function(obj) {

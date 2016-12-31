@@ -2785,12 +2785,12 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.$broadcast('showforgetpassword');
 
         };
-        scope.searchpage = function() {
-            sessionStorage.removeItem("homepageobject");
-            var realpath = 'General?selectedIndex=2';
-            window.open(realpath, "_self");
-            $rootscope.$broadcast("profile", 2);
-        };
+        // scope.searchpage = function() {
+        //     sessionStorage.removeItem("homepageobject");
+        //     var realpath = 'General?selectedIndex=2';
+        //     window.open(realpath, "_self");
+        //     //  $rootscope.$broadcast("profile", 2);
+        // };
 
     }
 ]);
@@ -3125,7 +3125,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
         scope.textlabels = function(fromheight, toheight, caste, education) {
-
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
             scope.educationcategorytxt = scope.filtervalues(scope.educationcategory, education) !== '' ? (scope.filtervalues(scope.educationcategory, education)) : '';
@@ -3228,33 +3227,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
 
 
-        // $("#slider_range").slider({
-        //     range: true,
-        //     min: 18,
-        //     max: 75,
-        //     values: [21, 24],
-        //     slide: function(event, ui) {
 
-        //         console.log(ui.values[0]);
-        //         console.log(ui.values[1]);
-        //         scope.AgeFrom = ui.values[0];
-        //         scope.Ageto = ui.values[1];
-
-        //     }
-        // });
-        // $("#slider_range2").slider({
-        //     range: true,
-        //     min: 0,
-        //     max: 40,
-        //     values: [1, 40],
-        //     slide: function(event, ui) {
-
-        //         // $("#heightfrom").val((checkheight(ui.values))[0]);
-        //         // $("#heightto").val((checkheight(ui.values))[1]);
-        //         // $("#amount2").html(((ui.values[0]) + 1));
-        //         // $("#amount2to").html(((ui.values[1]) + 1));
-        //     }
-        // });
         scope.generalpageload = function() {
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
@@ -3887,15 +3860,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-        scope.$watch("AgeFrom", function(current, original) {
-            scope.AgeFrom = current;
-        });
-        scope.$watch("Ageto", function(current, original) {
-            scope.Ageto = current;
-        });
+        // scope.$watch("AgeFrom", function(current, original) {
+        //     scope.AgeFrom = current;
+        // });
+        // scope.$watch("Ageto", function(current, original) {
+        //     scope.Ageto = current;
+        // });
     }
 ]);
-app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
+app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
 
     scope.month = 'month';
     scope.reg = {};
@@ -3975,7 +3948,8 @@ app.controller('searchregistration', ['$scope', 'getArray', 'Commondependency', 
     };
 
     scope.changeBind = function(parentval, parentval2) {
-        scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2));
+
+        scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2) !== undefined && commondependency.listSelectedVal(parentval2) !== null && commondependency.listSelectedVal(parentval2) !== "" ? commondependency.listSelectedVal(parentval2) : 0);
     };
 
     scope.regSubmit = function(obj) {
