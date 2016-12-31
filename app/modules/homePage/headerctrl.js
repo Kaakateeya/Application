@@ -1,6 +1,8 @@
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state, missingFieldService, customerviewfullprofileservices) {
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route',
+
+    function(scope, authSvc, ngIdle, alertpopup, uibModal,
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -106,15 +108,15 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+                                        route.go('dashboard', { type: 'C' });
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
 
                         });
@@ -145,18 +147,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custidlogin);
             var realpath = 'viewFullProfileCustomer';
-            window.open(realpath, '_self');
+            route.go(realpath, {});
         };
         scope.redirecthomeordashboard = function() {
             sessionStorage.removeItem("LoginPhotoIsActive");
             var custidlogin = authSvc.getCustId();
             if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
-                var realpaths = 'home';
-                window.open(realpaths, "_self");
-
+                route.go("dashboard", { type: 'C' });
             } else {
                 var realpath = '/';
-                window.open(realpath, "_self");
+                route.go('home', {});
             }
 
         };
@@ -165,19 +165,13 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
-                    var realpath = 'General?selectedIndex=2';
-                    window.open(realpath, "_self");
-                    $rootscope.$broadcast("profile", 2);
+                    route.go('General', { id: 2 });
                     break;
                 case "general":
-                    var realpathgen = 'General?selectedIndex=0';
-                    window.open(realpathgen, "_self");
-                    $rootscope.$broadcast("profile", 0);
+                    route.go('General', { id: 0 });
                     break;
                 case "advanced":
-                    var realpathadvan = 'General?selectedIndex=1';
-                    window.open(realpathadvan, "_self");
-                    $rootscope.$broadcast("profile", 1);
+                    route.go('General', { id: 1 });
                     break;
             }
         };
@@ -187,83 +181,75 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             switch (typeurl) {
                 case "BookMarked":
                     if (currentstatte.name === "dashboardnew") {
-                        var realpath = 'home?type=MB';
-                        window.open(realpath, "_self");
+                        route.go('dashboard', { type: 'MB' });
                     } else {
-                        var realpathb = 'Dashboard?type=MB';
-                        window.open(realpathb, "_self");
+                        route.go('dashboardnew', { type: 'MB' });
                     }
                     break;
                 case "BookMarkedme":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var BookMarkedme = 'home?type=WB';
-                        window.open(BookMarkedme, "_self");
+
+                        route.go('dashboard', { type: 'WB' });
                     } else {
-                        var BookMarkedmes = 'Dashboard?type=WB';
-                        window.open(BookMarkedmes, "_self");
+
+                        route.go('dashboardnew', { type: 'WB' });
                     }
                     break;
                 case "Ignored":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Ignored = 'home?type=I';
-                        window.open(Ignored, "_self");
+
+                        route.go('dashboard', { type: 'I' });
                     } else {
-                        var Ignoreds = 'Dashboard?type=I';
-                        window.open(Ignoreds, "_self");
+
+                        route.go('dashboardnew', { type: 'I' });
                     }
                     break;
                 case "myprofile":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var myprofile = 'home?type=WV';
-                        window.open(myprofile, "_self");
+
+                        route.go('dashboard', { type: 'WV' });
                     } else {
-                        var myprofiledd = 'Dashboard?type=WV';
-                        window.open(myprofiledd, "_self");
+                        route.go('dashboardnew', { type: 'WV' });
                     }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-
                     if (currentstatte.name === "dashboardnew") {
-                        var myhome = 'home?type=C';
-                        window.open(myhome, "_self");
+                        route.go('dashboard', { type: 'C' });
                     } else {
-                        var ddddd = 'Dashboard?type=C';
-                        window.open(ddddd, "_self");
+                        route.go('dashboardnew', { type: 'C' });
                     }
 
                     break;
                 case "Chats":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Chatsss = 'home?type=Chats';
-                        window.open(Chatsss, "_self");
+                        route.go('dashboard', { type: 'Chats' });
                     } else {
-                        var Chats = 'Dashboard?type=Chats';
-                        window.open(Chats, "_self");
+                        route.go('dashboardnew', { type: 'Chats' });
                     }
                     break;
                 case "Requests":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Requests = 'home?type=Requests';
-                        window.open(Requests, "_self");
+
+                        route.go('dashboard', { type: 'Requests' });
                     } else {
-                        var Requestsss = 'Dashboard?type=Requests';
-                        window.open(Requestsss, "_self");
+
+                        route.go('dashboardnew', { type: 'Requests' });
                     }
                     break;
                 case "Express":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Express = 'home?type=Express';
-                        window.open(Express, "_self");
+
+                        route.go('dashboard', { type: 'Express' });
                     } else {
-                        var Expressdd = 'Dashboard?type=Express';
-                        window.open(Expressdd, "_self");
+
+                        route.go('dashboardnew', { type: 'Express' });
                     }
                     break;
             }
@@ -296,7 +282,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.feedbackpage = function() {
             var httperrorpopupstatus = 1;
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
-            window.open("feedback", "_self");
+            route.go('feedback', {});
         };
     }
 ]);

@@ -1,11 +1,10 @@
-app.controller('paymentresponse', ['$scope',
-    function(scope) {
+app.controller('paymentresponse', ['$scope', 'route',
+    function(scope, route) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         };
         scope.backtopayment = function() {
-            var realpath = 'UpgradeMembership';
-            window.open(realpath, "_self");
+            route.go('UpgradeMembership', {});
         };
 
     }

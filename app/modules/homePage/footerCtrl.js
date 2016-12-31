@@ -1,4 +1,4 @@
-app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
+app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
 
     scope.showforgetpasswordpopup = function() {
         scope.$broadcast('showforgetpassword');
@@ -8,19 +8,13 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         sessionStorage.removeItem("homepageobject");
         switch (typeurl) {
             case "profile":
-                var realpath = 'General?selectedIndex=2';
-                window.open(realpath, "_self");
-                $rootscope.$broadcast("profile", 2);
+                route.go('General', { id: 2 });
                 break;
             case "general":
-                var realpathgen = 'General?selectedIndex=0';
-                window.open(realpathgen, "_self");
-                $rootscope.$broadcast("profile", 0);
+                route.go('General', { id: 0 });
                 break;
             case "advanced":
-                var realpathadvan = 'General?selectedIndex=1';
-                window.open(realpathadvan, "_self");
-                $rootscope.$broadcast("profile", 1);
+                route.go('General', { id: 1 });
                 break;
         }
     };

@@ -1,8 +1,9 @@
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService', '$stateParams', 'route',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup, missingFieldService) {
+        customerDashboardServices, authSvc, $mdDialog, $location, getArray,
+        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route) {
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -21,8 +22,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.genderdiabled = scope.custid !== null ? true : false;
-        var searchObjectquery = $location.search();
-        scope.selectedIndex = searchObjectquery.selectedIndex;
+        scope.selectedIndex = $stateParams.id;
         scope.loadinging = true;
         scope.activated = true;
         scope.casteshow = true;
@@ -626,15 +626,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+                                        route.go('dashboard', { type: 'C' });
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
                         });
                         commonpopup.closepopup();

@@ -1665,9 +1665,9 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout',
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1683,8 +1683,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.form = {};
         scope.exactshow = false;
         scope.normaldata = true;
-        var searchObjectquery = $location.search();
-        scope.Typeofdatabind = searchObjectquery.type;
+        // var searchObjectquery = $location.search();
+        scope.Typeofdatabind = $stateParams.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
             scope.exactflagstorage = exactflag;
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
@@ -2305,7 +2305,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
     }
 ]);
-app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(scope, authSvc, $rootscope) {
+app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
 
     scope.showforgetpasswordpopup = function() {
         scope.$broadcast('showforgetpassword');
@@ -2315,26 +2315,22 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', function(sco
         sessionStorage.removeItem("homepageobject");
         switch (typeurl) {
             case "profile":
-                var realpath = 'General?selectedIndex=2';
-                window.open(realpath, "_self");
-                $rootscope.$broadcast("profile", 2);
+                route.go('General', { id: 2 });
                 break;
             case "general":
-                var realpathgen = 'General?selectedIndex=0';
-                window.open(realpathgen, "_self");
-                $rootscope.$broadcast("profile", 0);
+                route.go('General', { id: 0 });
                 break;
             case "advanced":
-                var realpathadvan = 'General?selectedIndex=1';
-                window.open(realpathadvan, "_self");
-                $rootscope.$broadcast("profile", 1);
+                route.go('General', { id: 1 });
                 break;
         }
     };
 }]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices',
-    function(scope, authSvc, ngIdle, alertpopup, uibModal, $rootscope, window, $state, missingFieldService, customerviewfullprofileservices) {
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route',
+
+    function(scope, authSvc, ngIdle, alertpopup, uibModal,
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
@@ -2440,15 +2436,15 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+                                        route.go('dashboard', { type: 'C' });
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
 
                         });
@@ -2479,18 +2475,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custidlogin);
             var realpath = 'viewFullProfileCustomer';
-            window.open(realpath, '_self');
+            route.go(realpath, {});
         };
         scope.redirecthomeordashboard = function() {
             sessionStorage.removeItem("LoginPhotoIsActive");
             var custidlogin = authSvc.getCustId();
             if (custidlogin !== null && custidlogin !== "" && custidlogin !== undefined) {
-                var realpaths = 'home';
-                window.open(realpaths, "_self");
-
+                route.go("dashboard", { type: 'C' });
             } else {
                 var realpath = '/';
-                window.open(realpath, "_self");
+                route.go('home', {});
             }
 
         };
@@ -2499,19 +2493,13 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
-                    var realpath = 'General?selectedIndex=2';
-                    window.open(realpath, "_self");
-                    $rootscope.$broadcast("profile", 2);
+                    route.go('General', { id: 2 });
                     break;
                 case "general":
-                    var realpathgen = 'General?selectedIndex=0';
-                    window.open(realpathgen, "_self");
-                    $rootscope.$broadcast("profile", 0);
+                    route.go('General', { id: 0 });
                     break;
                 case "advanced":
-                    var realpathadvan = 'General?selectedIndex=1';
-                    window.open(realpathadvan, "_self");
-                    $rootscope.$broadcast("profile", 1);
+                    route.go('General', { id: 1 });
                     break;
             }
         };
@@ -2521,83 +2509,75 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             switch (typeurl) {
                 case "BookMarked":
                     if (currentstatte.name === "dashboardnew") {
-                        var realpath = 'home?type=MB';
-                        window.open(realpath, "_self");
+                        route.go('dashboard', { type: 'MB' });
                     } else {
-                        var realpathb = 'Dashboard?type=MB';
-                        window.open(realpathb, "_self");
+                        route.go('dashboardnew', { type: 'MB' });
                     }
                     break;
                 case "BookMarkedme":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var BookMarkedme = 'home?type=WB';
-                        window.open(BookMarkedme, "_self");
+
+                        route.go('dashboard', { type: 'WB' });
                     } else {
-                        var BookMarkedmes = 'Dashboard?type=WB';
-                        window.open(BookMarkedmes, "_self");
+
+                        route.go('dashboardnew', { type: 'WB' });
                     }
                     break;
                 case "Ignored":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Ignored = 'home?type=I';
-                        window.open(Ignored, "_self");
+
+                        route.go('dashboard', { type: 'I' });
                     } else {
-                        var Ignoreds = 'Dashboard?type=I';
-                        window.open(Ignoreds, "_self");
+
+                        route.go('dashboardnew', { type: 'I' });
                     }
                     break;
                 case "myprofile":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var myprofile = 'home?type=WV';
-                        window.open(myprofile, "_self");
+
+                        route.go('dashboard', { type: 'WV' });
                     } else {
-                        var myprofiledd = 'Dashboard?type=WV';
-                        window.open(myprofiledd, "_self");
+                        route.go('dashboardnew', { type: 'WV' });
                     }
                     break;
                 case "myhome":
                     sessionStorage.removeItem("LoginPhotoIsActive");
-
                     if (currentstatte.name === "dashboardnew") {
-                        var myhome = 'home?type=C';
-                        window.open(myhome, "_self");
+                        route.go('dashboard', { type: 'C' });
                     } else {
-                        var ddddd = 'Dashboard?type=C';
-                        window.open(ddddd, "_self");
+                        route.go('dashboardnew', { type: 'C' });
                     }
 
                     break;
                 case "Chats":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Chatsss = 'home?type=Chats';
-                        window.open(Chatsss, "_self");
+                        route.go('dashboard', { type: 'Chats' });
                     } else {
-                        var Chats = 'Dashboard?type=Chats';
-                        window.open(Chats, "_self");
+                        route.go('dashboardnew', { type: 'Chats' });
                     }
                     break;
                 case "Requests":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Requests = 'home?type=Requests';
-                        window.open(Requests, "_self");
+
+                        route.go('dashboard', { type: 'Requests' });
                     } else {
-                        var Requestsss = 'Dashboard?type=Requests';
-                        window.open(Requestsss, "_self");
+
+                        route.go('dashboardnew', { type: 'Requests' });
                     }
                     break;
                 case "Express":
 
                     if (currentstatte.name === "dashboardnew") {
-                        var Express = 'home?type=Express';
-                        window.open(Express, "_self");
+
+                        route.go('dashboard', { type: 'Express' });
                     } else {
-                        var Expressdd = 'Dashboard?type=Express';
-                        window.open(Expressdd, "_self");
+
+                        route.go('dashboardnew', { type: 'Express' });
                     }
                     break;
             }
@@ -2630,14 +2610,15 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.feedbackpage = function() {
             var httperrorpopupstatus = 1;
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
-            window.open("feedback", "_self");
+            route.go('feedback', {});
         };
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout', 'missingFieldService',
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
+    'missingFieldService', '$state', 'route',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.loginpopup = false;
@@ -2708,15 +2689,17 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+
+                                        route.go('dashboard', { type: 'C' });
+
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
 
                         });
@@ -2773,10 +2756,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
-
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
-            var realpath = 'General?selectedIndex=2';
-            window.open(realpath, "_self");
+            route.go('General', { id: 2 });
 
         };
 
@@ -2785,20 +2766,19 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.$broadcast('showforgetpassword');
 
         };
-        // scope.searchpage = function() {
-        //     sessionStorage.removeItem("homepageobject");
-        //     var realpath = 'General?selectedIndex=2';
-        //     window.open(realpath, "_self");
-        //     //  $rootscope.$broadcast("profile", 2);
-        // };
+        scope.searchpage = function() {
+            sessionStorage.removeItem("homepageobject");
+            // $rootscope.$broadcast("profile", 2);
+            route.go('General', { id: 2 });
+        };
 
     }
 ]);
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
-    'missingFieldService', '$timeout', '$stateParams', '$uibModal',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
 
     function(scope, commonFactory,
-        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal) {
+        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
@@ -2943,7 +2923,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
 
-        scope.redirectToMobVerification = function() { window.location = "mobileverf"; };
+        scope.redirectToMobVerification = function() {
+            route.go('mobileverf', {});
+        };
 
         scope.pagerload = function(type) {
 
@@ -2986,80 +2968,70 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
 
     }
 ]);
-app.controller('mobileverifyController', ['$scope', 'mobileVerificationService', 'authSvc', function(scope, mobileVerificationService, authSvc) {
-
-    scope.pageloadSelect = {};
-
-    var logincustid = authSvc.getCustId();
-    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
-    scope.pageLoad = function(custid) {
-
-        mobileVerificationService.getmobileverificationData(custid).then(function(res) {
-
-            scope.pageloadSelect = res.data;
-            scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
-            scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
-            if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                window.location = "home?type=C";
-            }
-        });
-
-    };
-
-    scope.pageLoad(scope.custid);
-
-
-    scope.verifyMobileCode = function() {
-        if (scope.pageloadSelect.NumberVerificationcode === scope.txtEnteryourpin) {
-            mobileVerificationService.verifyMobile(scope.txtEnteryourpin, 2, scope.pageloadSelect.Cust_ContactNumbers_ID).then(function(res) {
-
-                scope.pageloadSelect = scope.pageLoad(scope.custid);
-                scope.pageloadSelect.ismobileverf = true;
+app.controller('mobileverifyController', ['$scope', 'mobileVerificationService', 'authSvc', 'route',
+    function(scope, mobileVerificationService, authSvc, route) {
+        scope.pageloadSelect = {};
+        var logincustid = authSvc.getCustId();
+        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.pageLoad = function(custid) {
+            mobileVerificationService.getmobileverificationData(custid).then(function(res) {
+                scope.pageloadSelect = res.data;
+                scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
+                scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
-                    window.location = "home?type=C";
+                    route.go('dashboard', { type: 'C' });
                 }
-                return false;
             });
 
-        } else {
-            alert('Please enter valid mobile verify code');
-        }
-
-
-    };
-    scope.resendMobCode = function() {
-        var inputOBj = {
-            iCountryID: scope.pageloadSelect.CountryCodeID,
-            iCCode: scope.pageloadSelect.CountryCodes,
-            MobileNumber: scope.pageloadSelect.Number,
-            CustContactNumbersID: scope.pageloadSelect.Cust_ContactNumbers_ID
         };
-        mobileVerificationService.resendMobileCode(inputOBj).then(function(res) {
-            scope.pageLoad(scope.custid);
-            alert('Valid Mobile Verify code sent successfully');
-        });
-    };
+        scope.pageLoad(scope.custid);
+        scope.verifyMobileCode = function() {
+            if (scope.pageloadSelect.NumberVerificationcode === scope.txtEnteryourpin) {
+                mobileVerificationService.verifyMobile(scope.txtEnteryourpin, 2, scope.pageloadSelect.Cust_ContactNumbers_ID).then(function(res) {
 
-    scope.resendMailLink = function() {
-        mobileVerificationService.resendEmailLink(scope.custid).then(function(res) {
-            alert('We have re-sent a mail to the provided Email');
-        });
-    };
+                    scope.pageloadSelect = scope.pageLoad(scope.custid);
+                    scope.pageloadSelect.ismobileverf = true;
+                    if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
+                        route.go('dashboard', { type: 'C' });
+                    }
+                    return false;
+                });
 
-}]);
+            } else {
+                alert('Please enter valid mobile verify code');
+            }
+        };
+        scope.resendMobCode = function() {
+            var inputOBj = {
+                iCountryID: scope.pageloadSelect.CountryCodeID,
+                iCCode: scope.pageloadSelect.CountryCodes,
+                MobileNumber: scope.pageloadSelect.Number,
+                CustContactNumbersID: scope.pageloadSelect.Cust_ContactNumbers_ID
+            };
+            mobileVerificationService.resendMobileCode(inputOBj).then(function(res) {
+                scope.pageLoad(scope.custid);
+                alert('Valid Mobile Verify code sent successfully');
+            });
+        };
+        scope.resendMailLink = function() {
+            mobileVerificationService.resendEmailLink(scope.custid).then(function(res) {
+                alert('We have re-sent a mail to the provided Email');
+            });
+        };
+
+    }
+]);
 app.controller("payment",function()
 {
 
 });
-app.controller('paymentresponse', ['$scope',
-    function(scope) {
+app.controller('paymentresponse', ['$scope', 'route',
+    function(scope, route) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         };
         scope.backtopayment = function() {
-            var realpath = 'UpgradeMembership';
-            window.open(realpath, "_self");
+            route.go('UpgradeMembership', {});
         };
 
     }
@@ -3072,9 +3044,10 @@ app.controller("registrationReg", function () {
 });
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService', '$stateParams', 'route',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
-        customerDashboardServices, authSvc, $mdDialog, $location, getArray, timeout, $rootscope, commonpopup, missingFieldService) {
+        customerDashboardServices, authSvc, $mdDialog, $location, getArray,
+        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route) {
         scope.searchTerm = 0;
         scope.selectcaste = 0;
         scope.PartnerProfilesnew = [];
@@ -3093,8 +3066,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.savedclass = scope.getpaidstatus === '1' ? true : false;
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.genderdiabled = scope.custid !== null ? true : false;
-        var searchObjectquery = $location.search();
-        scope.selectedIndex = searchObjectquery.selectedIndex;
+        scope.selectedIndex = $stateParams.id;
         scope.loadinging = true;
         scope.activated = true;
         scope.casteshow = true;
@@ -3698,15 +3670,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+                                        route.go('dashboard', { type: 'C' });
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
                         });
                         commonpopup.closepopup();
@@ -3987,7 +3959,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 console.log(response);
                 authSvc.user(response.response !== null ? response.response[0] : null);
                 scope.genderID = response.response[0].GenderID;
-                window.location = "registration/seconadryRegistration/" + obj.txtfirstname + "/" + obj.txtlastname + "/" + obj.ddlcountry + "/" + response.response[0].GenderID;
+                route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
                 return false;
             });
         });
@@ -4014,15 +3986,9 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
     }, function(current, original) {
         scope.reg.ddllandcountry = scope.reg.ddlmobilecountry = current;
     });
-
-
-
     scope.redirectprivacy = function(type) {
         window.open('privacyPolicy', '_blank');
     };
-
-
-
 }]);
 app.controller('aboutus', ['$scope', function (scope) {
 }]);
@@ -4919,8 +4885,8 @@ app.controller('termsandconditions', ['$scope', function (scope) {
 
 }]);
 app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
-    'authSvc', 'alert',
-    function(scope, $interval, myAppFactory, authSvc, alerts) {
+    'authSvc', 'alert', 'route',
+    function(scope, $interval, myAppFactory, authSvc, alerts, route) {
         scope.paymentarray = [];
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -4951,18 +4917,16 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
                 Duration: year
             };
             sessionStorage.setItem("paymentobject", JSON.stringify(paymentobject));
-            var realpath = 'paymentresponse';
-            window.open(realpath, "_self");
+            route.go("paymentresponse", {});
         };
-
         scope.sendsmspayment = function(payment) {
             myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
-
                 alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
             });
         };
         scope.ccavenuepage = function() {
             window.open("https://secure.ccavenue.com/transaction/TransactionInitiator", "_self");
+
         };
     }
 ]);
@@ -5700,7 +5664,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injector, Idle, alerts, $http) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
 
 
     function setUser(value) {
@@ -5790,7 +5754,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         },
         logout: function() {
             clearUserSession();
-            window.location = "/";
+            route.go('home', {});
         },
         login: function(username, password) {
             var body = {
@@ -6043,6 +6007,11 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         forgotpassword: function(emailorprofileid) {
             return http.get(app.apiroot + 'StaticPages/getForgotPassword', { params: { Username: emailorprofileid } });
         }
+    };
+}]);
+app.service('route', ['$state', function($state) {
+    this.go = function(stateName, param) {
+        $state.go(stateName, param);
     };
 }]);
 app.factory('searches', ["$http", function(http) {

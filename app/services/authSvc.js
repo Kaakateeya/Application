@@ -17,7 +17,7 @@
 //     };
 //   }]);
 
-app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injector, Idle, alerts, $http) {
+app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
 
 
     function setUser(value) {
@@ -107,7 +107,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', function($injecto
         },
         logout: function() {
             clearUserSession();
-            window.location = "/";
+            route.go('home', {});
         },
         login: function(username, password) {
             var body = {

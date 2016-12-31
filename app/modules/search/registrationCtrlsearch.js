@@ -117,7 +117,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 console.log(response);
                 authSvc.user(response.response !== null ? response.response[0] : null);
                 scope.genderID = response.response[0].GenderID;
-                window.location = "registration/seconadryRegistration/" + obj.txtfirstname + "/" + obj.txtlastname + "/" + obj.ddlcountry + "/" + response.response[0].GenderID;
+                route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
                 return false;
             });
         });
@@ -144,13 +144,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
     }, function(current, original) {
         scope.reg.ddllandcountry = scope.reg.ddlmobilecountry = current;
     });
-
-
-
     scope.redirectprivacy = function(type) {
         window.open('privacyPolicy', '_blank');
     };
-
-
-
 }]);

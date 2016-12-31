@@ -1,7 +1,7 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout',
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -17,8 +17,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.form = {};
         scope.exactshow = false;
         scope.normaldata = true;
-        var searchObjectquery = $location.search();
-        scope.Typeofdatabind = searchObjectquery.type;
+        // var searchObjectquery = $location.search();
+        scope.Typeofdatabind = $stateParams.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
             scope.exactflagstorage = exactflag;
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {

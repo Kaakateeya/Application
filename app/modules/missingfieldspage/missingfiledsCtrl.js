@@ -1,8 +1,8 @@
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
-    'missingFieldService', '$timeout', '$stateParams', '$uibModal',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
 
     function(scope, commonFactory,
-        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal) {
+        authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
@@ -147,7 +147,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
 
-        scope.redirectToMobVerification = function() { window.location = "mobileverf"; };
+        scope.redirectToMobVerification = function() {
+            route.go('mobileverf', {});
+        };
 
         scope.pagerload = function(type) {
 

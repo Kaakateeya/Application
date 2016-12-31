@@ -1,6 +1,6 @@
 app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
-    'authSvc', 'alert',
-    function(scope, $interval, myAppFactory, authSvc, alerts) {
+    'authSvc', 'alert', 'route',
+    function(scope, $interval, myAppFactory, authSvc, alerts, route) {
         scope.paymentarray = [];
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -31,18 +31,16 @@ app.controller("upgrademembership", ['$scope', '$interval', 'myAppFactory',
                 Duration: year
             };
             sessionStorage.setItem("paymentobject", JSON.stringify(paymentobject));
-            var realpath = 'paymentresponse';
-            window.open(realpath, "_self");
+            route.go("paymentresponse", {});
         };
-
         scope.sendsmspayment = function(payment) {
             myAppFactory.sendsms(15, scope.custid, payment.mobilenumber).then(function(response) {
-
                 alerts.open("Thanks ! You shall be contacted soon by our priority manager", 'success');
             });
         };
         scope.ccavenuepage = function() {
             window.open("https://secure.ccavenue.com/transaction/TransactionInitiator", "_self");
+
         };
     }
 ]);

@@ -1,7 +1,8 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout', 'missingFieldService',
+    '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
+    'missingFieldService', '$state', 'route',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
         scope.fromge = 1;
         scope.topage = 5;
         scope.loginpopup = false;
@@ -72,15 +73,17 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                             if (custProfileStatus === 439) {
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        window.location = "home";
+
+                                        route.go('dashboard', { type: 'C' });
+
                                     } else {
-                                        window.location = "mobileverf";
+                                        route.go('mobileverf', {});
                                     }
                                 } else {
-                                    window.location = "missingfields/" + missingStatus;
+                                    route.go('missingfields', { id: missingStatus });
                                 }
                             } else {
-                                window.location = "blockerController/" + responsemiss.response[0].VerificationCode;
+                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
 
                         });
@@ -137,10 +140,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
-
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
-            var realpath = 'General?selectedIndex=2';
-            window.open(realpath, "_self");
+            route.go('General', { id: 2 });
 
         };
 
@@ -149,12 +150,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.$broadcast('showforgetpassword');
 
         };
-        // scope.searchpage = function() {
-        //     sessionStorage.removeItem("homepageobject");
-        //     var realpath = 'General?selectedIndex=2';
-        //     window.open(realpath, "_self");
-        //     //  $rootscope.$broadcast("profile", 2);
-        // };
+        scope.searchpage = function() {
+            sessionStorage.removeItem("homepageobject");
+            // $rootscope.$broadcast("profile", 2);
+            route.go('General', { id: 2 });
+        };
 
     }
 ]);
