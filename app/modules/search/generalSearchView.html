@@ -381,8 +381,8 @@
                                                 <div layout-gt-sm="row" class="generalane">
                                                     <select ng-model="monthsalcurrency" id="annualsalary" multiselectdropdown typeofdata="'currency'" ng-class="applycolors(monthsalcurrency,'annualsalary')">
                                                       </select>
-                                                    <input ng-model="fromcurrency" style="height: 33px;" placeholder="From" type="text">
-                                                    <input name="postalCode" placeholder="To" ng-model="tocurrency" type="text" style="height: 33px;">
+                                                    <input ng-model="fromcurrency" style="height: 33px;width: 100px !important;" placeholder="From" type="text">
+                                                    <input name="postalCode" placeholder="To" ng-model="tocurrency" type="text" style="height: 33px;width: 100px !important;">
                                                 </div>
                                             </div>
                                         </div>
@@ -552,26 +552,26 @@
                                 <md-slider flex md-discrete min="18" max="77" ng-model="AgeFrom" aria-label="Slider"></md-slider>
                                 <md-slider flex md-discrete min="18" max="77" ng-model="Ageto" aria-label="Slider"></md-slider>
 
-                                <!--<div id="slider_range">
-                            </div>-->
                                 <p>{{Ageto}}</p>
 
                             </md-slider-container>
 
 
+                            <!--<rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>-->
+
 
                         </div>
                         <div class="col-lg-4">
                             <h6><span>Height</span></h6>
-
                             <md-slider-container flex-gt-xs>
                                 <p>{{HeightFromtext}}</p>
                                 <md-slider flex md-discrete min="0" max="40" ng-model="HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
                                 <md-slider flex md-discrete min="0" max="40" ng-model="Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
-                                <!--<div id="slider_range2">
-                                </div>-->
                                 <p>{{Heighttotext}}</p>
                             </md-slider-container>
+
+                            <!--<rzslider rz-slider-model="sliders.minValue" rz-slider-high="sliders.maxValue" rz-slider-options="sliders.options"></rzslider>-->
+
                         </div>
                         <div class="col-lg-2">
                             <h6><span style="display:none;">Height</span></h6>
@@ -663,7 +663,7 @@
  </script>
  <script type="text/ng-template" id="login.html">
     <div ng-controller="searchregistration">
-        <form name="regForm" novalidate role="form" >
+        <form name="regForm" novalidate role="form">
            <div class="modal-header" style="min-height: 2.43px;padding: 9px;border-bottom: 1px solid #e5e5e5;">
             <h3 class="modal-title text-center" id="modal-title" style="color: #b11212;font-weight: 600;">Register Free
                     <button type="button" class="close" ng-click="cancelpopup()">×</button>

@@ -1,7 +1,8 @@
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams',
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams', 'commonFactory',
+
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -17,6 +18,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.form = {};
         scope.exactshow = false;
         scope.normaldata = true;
+        scope.notificationtxt = [];
+        scope.notifytype = 'page';
+        scope.notificationpopup = [];
         // var searchObjectquery = $location.search();
         scope.Typeofdatabind = $stateParams.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
@@ -99,11 +103,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
                 { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'home?type=MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'home?type=WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'home?type=RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'home?type=WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'home?type=I' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'dashboard/MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'dashboard/WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
                 { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: 'help' },
@@ -636,6 +640,116 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.normaldata = true;
             }
         };
+
+        scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
+            notifyID = notifyID === undefined ? '' : notifyID;
+            var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
+            customerDashboardServices.getNotifications(inobj).then(function(response) {
+                var dddddd = JSON.parse(response.data);
+                _.each(dddddd, function(item, index) {
+
+                    if ((index % 2 === 0) || index === 0) {
+                        item.bakcolor = { "background-color": "#f47370" };
+                        item.linkcolor = { "color": "maroon" };
+                    } else {
+                        item.bakcolor = { "background-color": "#c3a332" };
+                        item.linkcolor = { "color": "#66643e" };
+                    }
+                });
+
+                console.log(scope.notificationtxt);
+
+                if (scope.notifytype === 'page') {
+                    scope.notificationtxt = dddddd;
+                } else {
+                    if (from === 1) {
+                        scope.notificationpopup = dddddd;
+                    } else {
+                        if (insertType !== undefined && insertType === 'Action') {
+                            insertType = undefined;
+                        } else {
+                            scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
+
+                        }
+
+                    }
+
+                }
+            });
+        };
+
+        scope.getNotify = function() {
+            scope.getNotifyArray(1, 5);
+        };
+
+        scope.getNotify();
+
+        scope.moreNotification = function() {
+            from = 1;
+            scope.disClass = '';
+            scope.loadMore();
+        };
+
+        scope.cancel = function() {
+            commonFactory.closepopup();
+        };
+        $(function() {
+            $('.marquee').marquee({
+                direction: 'up',
+                pauseOnHover: true
+            });
+
+            $('#modalbody').bind('scroll', function(e) {
+                alert(1);
+                var elem = $(e.currentTarget);
+                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+                    console.log("bottom");
+                }
+            });
+
+
+        });
+        scope.readNotify = function(notifyID, type, index) {
+            scope.disClass = index;
+            scope.notifytype = type;
+            if (type === 'page') {
+                scope.getNotifyArray(1, 5, notifyID);
+            } else {
+                scope.getNotifyArray(1, 10, notifyID, 'Action');
+            }
+        };
+        var from = 1,
+            to = 10;
+        scope.loadMore = function(e) {
+            scope.notifytype = 'popup';
+
+            if (from === 1) {
+                scope.notificationpopup = [];
+                scope.getNotifyArray(1, 10);
+                from = to;
+                commonFactory.open('notifyPopup.html', scope, uibModal);
+            } else {
+
+                scope.getNotifyArray(to + 1, to + 10);
+                to = to + 10;
+                $("#modalbody").animate({ scrollTop: 800 }, 1000);
+
+            }
+        };
+
+        scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {
+            if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
+                scope.readNotify(notifyID, type, index);
+                scope.redirectToviewfull(ToCust_Id);
+            }
+        };
+
+
+
+
+
+
+
 
     }
 ]);

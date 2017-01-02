@@ -21,7 +21,6 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
             return http.get(app.apiroot + 'Dependency/getEducationDependency', { params: { dependencyName: "", dependencyValue: "" } });
         },
         EducationGroup: function(dependencyVal2) {
-
             return http.get(app.apiroot + 'Dependency/getEducationDependency', { params: { dependencyName: "educationGroup", dependencyValue: dependencyVal2 } });
         },
         EducationSpecialisation: function(dependencyVal2) {

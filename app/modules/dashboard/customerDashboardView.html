@@ -1,5 +1,5 @@
 <div class="landing_page_main" ng-init="init()">
-    <div class="landing_page_head clearfix">
+    <!--<div class="landing_page_head clearfix">
         <div class="landing_page_head_lt clearfix">
             <div class="landing_page_head_lt_pic">
                 <div id="divMask">
@@ -27,7 +27,49 @@
             </p>
             <a href="editview" id="lnkpaymentpage">Please update your profile completely</a>
         </div>
+    </div>-->
+
+    <div class="landing_page_head clearfix">
+
+
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div id="divMask">
+                            <img id="imgprofile" ng-src="{{PersonalInfo.Photo}}" width="116" height="116" class="img-circle" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 ">
+                        <h5>Welcome <span>
+                        <label id="lblCustName" style="font-size: 20px;">{{PersonalInfo.NAME}}</label>
+                    </span></h5>
+                        <div class="landing_page_head_lt_in_cont">
+                            <div id="notifyDivc">
+                                <p ng-repeat="item in staticNotification" class="clearfix"> <span id="lblRepeateContains">{{item}}</span>
+                                    <a id="lnkViewNotificationsbind" href="javascript:void(0);" ng-click="item=='New profiles waiting for you from last month'?newprofileawaiting('LMP',1,9,'New profiles waiting for you from last month'):newprofileawaiting('CVP',1,9,'Members who viewed your photograph')">View details</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5">
+
+                <!--<marquee direction="up" behavior="scroll" style="overflow: hidden;height:116px;">-->
+                <div class="marquee">
+                    <div class="maquicls" ng-repeat="item in notificationtxt track by $index" ng-style="item.bakcolor">
+                        <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
+                        <div> {{item.ActionType}} on {{item.ActionDate}}</div>
+                        <div class="span3"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'page',$index);">View profile</a></div>
+                        <a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="readNotify(item.Cust_NotificationID,'page',$index);">Read</a>
+                    </div>
+                </div>
+                <!--</marquee>-->
+                <a href="javascript:void(0);" class="pull-right" ng-click="moreNotification();">more</a>
+            </div>
+        </div>
     </div>
+
     <div class="landing_page_content clearfix">
         <div class="landing_page_sidebar_lt">
             <div class="landing_page_sidebar_lt_in clearfix">
@@ -658,7 +700,33 @@
            </div>
         </div>
     </script>
-   
+    <script type="text/ng-template" id="notifyPopup.html">
+            <form name="aboutForm" novalidate role="form">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="modal-title">Notifications
+                        <a href="javascript:void(0);" ng-click="cancel();">
+                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                        </a>
+                    </h3>
+                </div>
+                <div class="modal-body clearfix pop_content_my" id="modalbody" >
+                   <ul id="modalbody11">
+                 <li>
+                    <div class="maquicls" ng-repeat="item in notificationpopup track by $index" ng-style="item.bakcolor">
+                        <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
+                        <div> {{item.ActionType}} on {{item.ActionDate}}</div>
+                        <div class="span4"><a ng-style="item.linkcolor" ng-class="disClass===$index ? 'linkdis': ''" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);">View profile</a></div>
+                        <a ng-style="item.linkcolor" href="javascript:void(0);" ng-class="disClass===$index ? 'linkdis': ''" ng-click="readNotify(item.Cust_NotificationID,'popup',$index);">Read</a>
+                    </div> 
+                    
+                    <div class="text-center">
+                    <a href="javascript:void(0);" style="font-weight:bold;" ng-click="loadMore(this);">load more</a>                                     
+                    </div>
+                   </li>
+                </ul>  
+                </div>
+                </form>
+    </script>
 	<style type="text/css">
 		.activeclassdiv {
 			background-color: maroon !important;

@@ -1,18 +1,13 @@
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
     'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
-
     function(scope, commonFactory,
         authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
-
         scope.misObj = {};
-
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
         scope.showpopup = function() {
-
             var modalpopupopen = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
@@ -23,15 +18,13 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 keyboard: false,
                 windowClass: 'full'
             });
-
             scope.starArr = commonFactory.starBind(1);
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
-
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
+                // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
                 console.log('test');
                 console.log(scope.MFSelectArray);
                 scope.divSkip = true;
-
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
                     scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
@@ -40,7 +33,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.divSkip = false;
                     }
                 }
-
                 if (scope.MFSelectArray.Professionflag === 1) {
                     scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
                     scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
@@ -48,7 +40,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 if (scope.divProfession === true && scope.divSkip === false) {
                     scope.divCol = 'none';
                 }
-
                 if (scope.MFSelectArray.AstroFlag === 1) {
                     scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
                     scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
@@ -73,10 +64,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 scope.divProperty = commonFactory.checkvals(scope.MFSelectArray.Property) ? true : false;
                 scope.divIssharedproperty = commonFactory.checkvals(scope.MFSelectArray.IsSharedProperty) ? true : false;
                 //}
-
             });
-
-
         };
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
             console.log('custStatus');
@@ -148,6 +136,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         };
 
         scope.redirectToMobVerification = function() {
+            sessionStorage.removeItem('missingStatus');
             route.go('mobileverf', {});
         };
 

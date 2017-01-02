@@ -1665,9 +1665,10 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams',
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams', 'commonFactory',
+
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1683,6 +1684,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.form = {};
         scope.exactshow = false;
         scope.normaldata = true;
+        scope.notificationtxt = [];
+        scope.notifytype = 'page';
+        scope.notificationpopup = [];
         // var searchObjectquery = $location.search();
         scope.Typeofdatabind = $stateParams.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
@@ -1765,11 +1769,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
                 { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'home?type=MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'home?type=WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'home?type=RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'home?type=WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'home?type=I' },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'dashboard/MB' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'dashboard/WB' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
                 { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: 'help' },
@@ -2303,6 +2307,116 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
 
+        scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
+            notifyID = notifyID === undefined ? '' : notifyID;
+            var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
+            customerDashboardServices.getNotifications(inobj).then(function(response) {
+                var dddddd = JSON.parse(response.data);
+                _.each(dddddd, function(item, index) {
+
+                    if ((index % 2 === 0) || index === 0) {
+                        item.bakcolor = { "background-color": "#f47370" };
+                        item.linkcolor = { "color": "maroon" };
+                    } else {
+                        item.bakcolor = { "background-color": "#c3a332" };
+                        item.linkcolor = { "color": "#66643e" };
+                    }
+                });
+
+                console.log(scope.notificationtxt);
+
+                if (scope.notifytype === 'page') {
+                    scope.notificationtxt = dddddd;
+                } else {
+                    if (from === 1) {
+                        scope.notificationpopup = dddddd;
+                    } else {
+                        if (insertType !== undefined && insertType === 'Action') {
+                            insertType = undefined;
+                        } else {
+                            scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
+
+                        }
+
+                    }
+
+                }
+            });
+        };
+
+        scope.getNotify = function() {
+            scope.getNotifyArray(1, 5);
+        };
+
+        scope.getNotify();
+
+        scope.moreNotification = function() {
+            from = 1;
+            scope.disClass = '';
+            scope.loadMore();
+        };
+
+        scope.cancel = function() {
+            commonFactory.closepopup();
+        };
+        $(function() {
+            $('.marquee').marquee({
+                direction: 'up',
+                pauseOnHover: true
+            });
+
+            $('#modalbody').bind('scroll', function(e) {
+                alert(1);
+                var elem = $(e.currentTarget);
+                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+                    console.log("bottom");
+                }
+            });
+
+
+        });
+        scope.readNotify = function(notifyID, type, index) {
+            scope.disClass = index;
+            scope.notifytype = type;
+            if (type === 'page') {
+                scope.getNotifyArray(1, 5, notifyID);
+            } else {
+                scope.getNotifyArray(1, 10, notifyID, 'Action');
+            }
+        };
+        var from = 1,
+            to = 10;
+        scope.loadMore = function(e) {
+            scope.notifytype = 'popup';
+
+            if (from === 1) {
+                scope.notificationpopup = [];
+                scope.getNotifyArray(1, 10);
+                from = to;
+                commonFactory.open('notifyPopup.html', scope, uibModal);
+            } else {
+
+                scope.getNotifyArray(to + 1, to + 10);
+                to = to + 10;
+                $("#modalbody").animate({ scrollTop: 800 }, 1000);
+
+            }
+        };
+
+        scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {
+            if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
+                scope.readNotify(notifyID, type, index);
+                scope.redirectToviewfull(ToCust_Id);
+            }
+        };
+
+
+
+
+
+
+
+
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
@@ -2434,6 +2548,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             }
 
                             if (custProfileStatus === 439) {
+                                sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
                                         route.go('dashboard', { type: 'C' });
@@ -2489,17 +2604,26 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 
         };
         scope.searchpage = function(typeurl) {
-
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
+
                     route.go('General', { id: 2 });
+                    $rootscope.$broadcast("profile", 2);
                     break;
                 case "general":
                     route.go('General', { id: 0 });
+                    $rootscope.$broadcast("profile", 0);
+
                     break;
                 case "advanced":
                     route.go('General', { id: 1 });
+                    $rootscope.$broadcast("profile", 1);
+                    break;
+                case "profilesearch":
+
+                    route.go('General', { id: 2 });
+                    $rootscope.$broadcast("profile", 2);
                     break;
             }
         };
@@ -2619,24 +2743,38 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     'missingFieldService', '$state', 'route',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
         arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
-        scope.fromge = 1;
-        scope.topage = 5;
-        scope.loginpopup = false;
+
         scope.homeinit = function() {
+            scope.loginpopup = false;
+            scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+            scope.username = '';
+            scope.password = "";
+
             timeout(function() {
-                successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
+                successstoriesdata.suceessdataget(1, 5).then(function(response) {
                     scope.successstoriesarray = response.data;
                 });
                 scope.gender = "2";
                 scope.Agefrom = 18;
                 scope.Ageto = 30;
                 scope.religion = 1;
-            }, 1000);
+            }, 500);
+            scope.$on("$destroy", scope.destroy());
+        };
+        scope.destroy = function() {
+
+            scope.loginpopup = false;
+            scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+            scope.username = '';
+            scope.password = "";
+            scope.gender = "";
+            scope.Agefrom = "";
+            scope.Ageto = "";
+            scope.religion = "";
         };
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
         };
-        scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
             if ((scope.username).indexOf("@") != -1) {
                 if (!scope.ValidateEmail(scope.username)) {
@@ -2674,10 +2812,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            console.log('custStatus');
-                            console.log(innerresponse.data);
-
-
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -2685,13 +2819,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
-
                             if (custProfileStatus === 439) {
+                                sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-
                                         route.go('dashboard', { type: 'C' });
-
                                     } else {
                                         route.go('mobileverf', {});
                                     }
@@ -2716,8 +2848,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             var expr1 = /[0-9 -()+]+$/;
             return expr1.test(num);
         };
-
-
         scope.ValidatequickRegister = function() {
             var srchobject = {};
             srchobject.intCusID = null;
@@ -2758,37 +2888,27 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.Searchresult = null;
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             route.go('General', { id: 2 });
-
         };
-
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
-
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
-            // $rootscope.$broadcast("profile", 2);
             route.go('General', { id: 2 });
         };
-
     }
 ]);
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
     'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
-
     function(scope, commonFactory,
         authSvc, $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
         var logincustid = authSvc.getCustId();
         scope.MFSelectArray = [];
         scope.dataqr = parseInt(stateParams.id);
-
         scope.misObj = {};
-
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
         scope.showpopup = function() {
-
             var modalpopupopen = uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
@@ -2799,15 +2919,13 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 keyboard: false,
                 windowClass: 'full'
             });
-
             scope.starArr = commonFactory.starBind(1);
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
-
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
+                // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
                 console.log('test');
                 console.log(scope.MFSelectArray);
                 scope.divSkip = true;
-
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
                     scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
@@ -2816,7 +2934,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.divSkip = false;
                     }
                 }
-
                 if (scope.MFSelectArray.Professionflag === 1) {
                     scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
                     scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
@@ -2824,7 +2941,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 if (scope.divProfession === true && scope.divSkip === false) {
                     scope.divCol = 'none';
                 }
-
                 if (scope.MFSelectArray.AstroFlag === 1) {
                     scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
                     scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
@@ -2849,10 +2965,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 scope.divProperty = commonFactory.checkvals(scope.MFSelectArray.Property) ? true : false;
                 scope.divIssharedproperty = commonFactory.checkvals(scope.MFSelectArray.IsSharedProperty) ? true : false;
                 //}
-
             });
-
-
         };
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
             console.log('custStatus');
@@ -2924,6 +3037,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         };
 
         scope.redirectToMobVerification = function() {
+            sessionStorage.removeItem('missingStatus');
             route.go('mobileverf', {});
         };
 
@@ -3048,33 +3162,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
         customerDashboardServices, authSvc, $mdDialog, $location, getArray,
         timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route) {
-        scope.searchTerm = 0;
-        scope.selectcaste = 0;
-        scope.PartnerProfilesnew = [];
-        scope.truepartner = true;
-        scope.truepartnerrefine = true;
-        scope.showcontrols = true;
-        var SearchRequest = 0;
+        var SearchRequest = {};
         var logincustid = authSvc.getCustId();
-        scope.typesearch = "";
-        scope.savedsearchselect = [];
         var globalheight;
         var globalheightto;
         var refineheightfrom;
         var refineheightto;
-        scope.getpaidstatus = authSvc.getpaidstatus();
-        scope.savedclass = scope.getpaidstatus === '1' ? true : false;
-        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-        scope.genderdiabled = scope.custid !== null ? true : false;
-        scope.selectedIndex = $stateParams.id;
-        scope.loadinging = true;
-        scope.activated = true;
-        scope.casteshow = true;
-        scope.slideshow = "";
-        scope.mesagesend = "";
-        scope.generalsavedsearchbtn = "Save&Search";
-        scope.advancedsavedsearchbtn = "Save&Search";
-        scope.SearchResult_IDflag = null;
         scope.filtervalues = function(arr, whereValue) {
             var storeValue = "";
             if (whereValue.indexOf(',') === -1) {
@@ -3095,7 +3188,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
             return storeValue;
         };
-
         scope.textlabels = function(fromheight, toheight, caste, education) {
             scope.HeightFromtext = scope.filtervalues(scope.height, fromheight) !== '' ? ((scope.filtervalues(scope.height, fromheight)).split('-'))[0] : '';
             scope.Heighttotext = scope.filtervalues(scope.height, toheight) !== '' ? ((scope.filtervalues(scope.height, toheight)).split('-'))[0] : '';
@@ -3172,11 +3264,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         };
         scope.$watch("savedsearchselect", function(current, old) {
-
             scope.savedsearchselect = current;
         });
         scope.arrayToString = function(string) {
-            return (string.split(',')).map(Number);
+            return string !== null ? (string.split(',')).map(Number) : null;
         };
         scope.partnerbindings = function(response) {
             scope.casteshow = false;
@@ -3197,10 +3288,98 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
         };
+        var numberInRange = function(number, lower, upper) {
+            return number >= lower && number <= upper;
+        };
+        var checknumber = function(value) {
+            if (numberInRange(value, 0, 11)) {
+                return "4'" + value + " in";
+            } else if (numberInRange(value, 12, 23)) {
 
+                value = (value % 12);
+                return "5'" + value + " in";
 
+            } else if (numberInRange(value, 24, 35)) {
+                value = (value % 24);
+                return "6'" + value + " in";
+            } else if (numberInRange(value, 36, 41)) {
+                value = (value % 36);
+                return "7'" + value + " in";
+            }
+        };
+        scope.checkheight = function(value) {
+            var values;
+            values = (checknumber(value));
+            return values;
+        };
 
         scope.generalpageload = function() {
+            scope.searchTerm = 0;
+            scope.selectcaste = 0;
+            scope.PartnerProfilesnew = [];
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.showcontrols = true;
+            scope.typesearch = "";
+            scope.savedsearchselect = [];
+            scope.getpaidstatus = authSvc.getpaidstatus();
+            scope.savedclass = scope.getpaidstatus === '1' ? true : false;
+            scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+            scope.genderdiabled = scope.custid !== null ? true : false;
+            scope.selectedIndex = $stateParams.id;
+            scope.loadinging = true;
+            scope.activated = true;
+            scope.casteshow = true;
+            scope.slideshow = "";
+            scope.mesagesend = "";
+            scope.generalsavedsearchbtn = "Save&Search";
+            scope.advancedsavedsearchbtn = "Save&Search";
+            scope.HeightFromtext = "";
+            scope.Heighttotext = "";
+            scope.educationcategorytxt = "";
+            scope.educationcategory = [];
+            scope.SearchResult_IDflag = null;
+            scope.height = [];
+            scope.MaritalStatus = [];
+            scope.Mothertongue = [];
+            scope.visastatus = [];
+            scope.stars = [];
+            scope.Country = [];
+            scope.Professiongroup = [];
+            scope.Currency = [];
+            scope.gender = 1;
+            scope.AgeFrom = "";
+            scope.Ageto = "";
+            scope.HeightFrom = "";
+            scope.Heightto = "";
+            scope.maritalstatus = "";
+            scope.educationcat = "";
+            scope.country = "";
+            scope.religion = "";
+            scope.mothertongue = "";
+            scope.caste = "";
+            scope.castetext = "";
+            scope.physicalstatusadvance = "";
+            scope.State = "";
+            scope.stateadvance = "";
+            scope.regdays = "";
+            scope.visastatusadvance = "";
+            scope.Educationadvance = "";
+            scope.Professiongroupadvance = "";
+            scope.monthsalcurrency = "";
+            scope.kujadosham = "";
+            scope.starlanguage = "";
+            scope.starsadvance = "";
+            scope.profileid = "";
+            scope.firstname = "";
+            scope.lastname = "";
+            scope.fromcurrency = "";
+            scope.tocurrency = "";
+            scope.diet = "";
+            scope.isCheckedphoto = false;
+            scope.object = "";
+            scope.Educationgroup = [];
+            scope.Caste = [];
             scope.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (scope.custid !== undefined && scope.custid !== "" && scope.custid !== null) {
                 scope.controlsbinding();
@@ -3262,6 +3441,68 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.Heightto = 38;
 
             }
+            // scope.$on("$destroy", scope.destroy());
+        };
+
+        scope.destroy = function() {
+            //kill all veriable here
+
+            scope.searchTerm = 0;
+            scope.selectcaste = 0;
+            scope.PartnerProfilesnew = [];
+            scope.truepartner = true;
+            scope.truepartnerrefine = true;
+            scope.showcontrols = true;
+            scope.typesearch = "";
+            scope.savedsearchselect = [];
+            scope.getpaidstatus = null;
+            scope.savedclass = null;
+            scope.custid = null;
+            scope.genderdiabled = null;
+            scope.selectedIndex = null;
+            scope.loadinging = true;
+            scope.activated = true;
+            scope.casteshow = true;
+            scope.slideshow = "";
+            scope.mesagesend = "";
+            scope.generalsavedsearchbtn = "Save&Search";
+            scope.advancedsavedsearchbtn = "Save&Search";
+            scope.HeightFromtext = "";
+            scope.Heighttotext = "";
+            scope.educationcategorytxt = "";
+            scope.SearchResult_IDflag = null;
+            scope.gender = 1;
+            scope.AgeFrom = "";
+            scope.Ageto = "";
+            scope.HeightFrom = "";
+            scope.Heightto = "";
+            scope.maritalstatus = "";
+            scope.educationcat = "";
+            scope.country = "";
+            scope.religion = "";
+            scope.mothertongue = "";
+            scope.caste = "";
+            scope.castetext = "";
+            scope.physicalstatusadvance = "";
+            scope.State = "";
+            scope.stateadvance = "";
+            scope.regdays = "";
+            scope.visastatusadvance = "";
+            scope.Educationadvance = "";
+            scope.Professiongroupadvance = "";
+            scope.monthsalcurrency = "";
+            scope.kujadosham = "";
+            scope.starlanguage = "";
+            scope.starsadvance = "";
+            scope.profileid = "";
+            scope.firstname = "";
+            scope.lastname = "";
+            scope.fromcurrency = "";
+            scope.tocurrency = "";
+            scope.diet = "";
+            scope.isCheckedphoto = false;
+            scope.object = {};
+
         };
         scope.clearSearchTerm = function() {
             scope.searchTerm = '';
@@ -3340,6 +3581,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return SearchRequest;
         };
         scope.generalsearchsubmit = function(type, frompage, topage, form, searchsavedidupdate) {
+            // scope.slider.minValue = scope.AgeFrom;
+            // scope.slider.maxValue = scope.Ageto;
             scope.loadinging = frompage === 1 ? false : true;
             scope.showcontrols = false;
             scope.truepartner = false;
@@ -3352,6 +3595,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 case "advanced":
                 case "general":
                     scope.typesearch = type;
+
+                    // scope.sliders.minvalueyext = scope.checkheight(scope.sliders.minvalueyext);
+                    // scope.sliders.maxValuetext = scope.checkheight(scope.sliders.maxValuetext);
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
@@ -3552,17 +3798,17 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
                 case 'Country':
-                    scope.State = commonFactory.StateBind(modal);
+                    scope.State = commonFactory.StateBind(modal !== undefined && modal !== null && modal !== "" ? (modal).toString() : "");
                     break;
                 case 'EducationCatgory':
-                    scope.Educationgroup = commonFactory.educationGroupBind(modal);
+                    scope.Educationgroup = commonFactory.educationGroupBind((modal) !== undefined && modal !== null && modal !== "" ? (modal).toString() : "");
                     break;
                 case 'caste':
                     scope.Caste = [];
-                    scope.Caste = commonFactory.casteDepedency(scope.religion, (modal).toString());
+                    scope.Caste = commonFactory.casteDepedency(scope.religion, ((modal) !== undefined && modal !== null && modal !== "" ? (modal).toString() : ""));
                     break;
                 case 'star':
-                    scope.stars = commonFactory.starBind(modal);
+                    scope.stars = commonFactory.starBind((modal) !== undefined && modal !== null && modal !== "" ? (modal).toString() : "");
                     break;
             }
         });
@@ -3575,6 +3821,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.refinesubmit = function() {
+            // scope.AgeFrom = scope.slider.minValue;
+            // scope.Ageto = scope.slider.maxValue;
+            // scope.HeightFrom = scope.sliders.minValue;
+            // scope.Heightto = scope.sliders.maxValue;
             scope.generalsearchsubmit(scope.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
@@ -3585,30 +3835,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.Heighttotext = scope.checkheight(scope.Heightto);
         };
 
-        scope.checkheight = function(value) {
-            var values;
-            values = (checknumber(value));
-            return values;
-        };
-        var numberInRange = function(number, lower, upper) {
-            return number >= lower && number <= upper;
-        };
-        var checknumber = function(value) {
-            if (numberInRange(value, 0, 11)) {
-                return "4'" + value + " in";
-            } else if (numberInRange(value, 12, 23)) {
 
-                value = (value % 12);
-                return "5'" + value + " in";
-
-            } else if (numberInRange(value, 24, 35)) {
-                value = (value % 24);
-                return "6'" + value + " in";
-            } else if (numberInRange(value, 36, 41)) {
-                value = (value % 36);
-                return "7'" + value + " in";
-            }
-        };
         scope.showloginpopup = function() {
             commonpopup.open('login.html', scope, uibModal, 'sm');
         };
@@ -3668,6 +3895,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
                             if (custProfileStatus === 439) {
+                                sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
                                         route.go('dashboard', { type: 'C' });
@@ -3832,14 +4060,48 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-        // scope.$watch("AgeFrom", function(current, original) {
-        //     scope.AgeFrom = current;
-        // });
-        // scope.$watch("Ageto", function(current, original) {
-        //     scope.Ageto = current;
-        // });
+
     }
 ]);
+
+// scope.slider = {
+//     minValue: 18,
+//     maxValue: 30,
+//     options: {
+//         floor: 18,
+//         ceil: 77,
+//         step: 1,
+//         noSwitching: true
+//     }
+
+// };
+// scope.heightslidermin = 1;
+// scope.heightslidermax = 38;
+// scope.sliders = {
+//     minValue: 4.0,
+//     maxValue: 7.2,
+//     options: {
+//         floor: 4.0,
+//         ceil: 7.2,
+//         step: 0.1,
+//         precision: 1,
+//         noSwitching: true
+//     }
+// };
+
+// scope.sliders = {
+//     minValue: 0,
+//     maxValue: 38,
+//     minvalueyext: 0,
+//     maxValuetext: 38,
+//     options: {
+//         floor: 0,
+//         ceil: 41,
+//         step: 1,
+//         noSwitching: true,
+
+//     }
+// };
 app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
 
     scope.month = 'month';
@@ -5709,6 +5971,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
         sessionStorage.removeItem("httperrorpopupstatus");
+        sessionStorage.removeItem("missingStatus");
+
     }
 
     function getUser() {
@@ -5835,6 +6099,9 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         getphotoslideimages: function(custid) {
             return http.get(app.apiroot + 'StaticPages/GetPhotoSlideImages', { params: { CustID: custid } });
+        },
+        getNotifications: function(obj) {
+            return http.get(app.apiroot + 'StaticPages/getCust_NotificationDetails', { params: { Cust_NotificationID: obj.Cust_NotificationID, CustID: obj.CustID, Startindex: obj.Startindex, EndIndex: obj.EndIndex } });
         }
     };
 }]);
@@ -6062,7 +6329,6 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
             return http.get(app.apiroot + 'Dependency/getEducationDependency', { params: { dependencyName: "", dependencyValue: "" } });
         },
         EducationGroup: function(dependencyVal2) {
-
             return http.get(app.apiroot + 'Dependency/getEducationDependency', { params: { dependencyName: "educationGroup", dependencyValue: dependencyVal2 } });
         },
         EducationSpecialisation: function(dependencyVal2) {

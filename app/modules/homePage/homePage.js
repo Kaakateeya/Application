@@ -3,24 +3,38 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     'missingFieldService', '$state', 'route',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
         arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
-        scope.fromge = 1;
-        scope.topage = 5;
-        scope.loginpopup = false;
+
         scope.homeinit = function() {
+            scope.loginpopup = false;
+            scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+            scope.username = '';
+            scope.password = "";
+
             timeout(function() {
-                successstoriesdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
+                successstoriesdata.suceessdataget(1, 5).then(function(response) {
                     scope.successstoriesarray = response.data;
                 });
                 scope.gender = "2";
                 scope.Agefrom = 18;
                 scope.Ageto = 30;
                 scope.religion = 1;
-            }, 1000);
+            }, 500);
+            scope.$on("$destroy", scope.destroy());
+        };
+        scope.destroy = function() {
+
+            scope.loginpopup = false;
+            scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+            scope.username = '';
+            scope.password = "";
+            scope.gender = "";
+            scope.Agefrom = "";
+            scope.Ageto = "";
+            scope.religion = "";
         };
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
         };
-        scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
         scope.validate = function() {
             if ((scope.username).indexOf("@") != -1) {
                 if (!scope.ValidateEmail(scope.username)) {
@@ -58,10 +72,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            console.log('custStatus');
-                            console.log(innerresponse.data);
-
-
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -69,13 +79,11 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
-
                             if (custProfileStatus === 439) {
+                                sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-
                                         route.go('dashboard', { type: 'C' });
-
                                     } else {
                                         route.go('mobileverf', {});
                                     }
@@ -100,8 +108,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             var expr1 = /[0-9 -()+]+$/;
             return expr1.test(num);
         };
-
-
         scope.ValidatequickRegister = function() {
             var srchobject = {};
             srchobject.intCusID = null;
@@ -142,19 +148,14 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.Searchresult = null;
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             route.go('General', { id: 2 });
-
         };
-
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
-
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
-            // $rootscope.$broadcast("profile", 2);
             route.go('General', { id: 2 });
         };
-
     }
 ]);

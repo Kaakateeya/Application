@@ -8,7 +8,9 @@
  */
 
 
-var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial', 'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate']);
+var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
+    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule'
+]);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
 app.global = {
@@ -24,8 +26,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
-        { name: 'dashboard', url: '/home/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
-        { name: 'dashboardnew', url: '/Dashboard/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
+        { name: 'dashboard', url: '/dashboard/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
+        { name: 'dashboardnew', url: '/dashboardnew/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
         { name: 'General', url: '/General/:id', templateUrl: 'app/modules/search/generalSearchView.html', controller: 'Generalsearch', isloginrequired: false },
         { name: 'datagetin', url: '/datagetin', templateUrl: 'app/modules/static/dataGetin.html', controller: 'ModalDemoCtrl', isloginrequired: true },
@@ -114,10 +116,20 @@ app.run(function($rootScope, $state) {
                 $state.go('home');
             } else {
                 console.log('double success');
-                if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" && (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false')) {
+                var misarray = [1, 2, 3, 4, 5];
+                var misStatus = sessionStorage.getItem('missingStatus');
+
+                if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" &&
+                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false')) {
+
                     e.preventDefault();
                     console.log('success');
-                    $state.go('mobileverf');
+
+                    if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
+                        window.location = "missingfields/" + misStatus;
+                    } else {
+                        $state.go('mobileverf');
+                    }
                 }
             }
         }

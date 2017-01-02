@@ -40,6 +40,9 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         getphotoslideimages: function(custid) {
             return http.get(app.apiroot + 'StaticPages/GetPhotoSlideImages', { params: { CustID: custid } });
+        },
+        getNotifications: function(obj) {
+            return http.get(app.apiroot + 'StaticPages/getCust_NotificationDetails', { params: { Cust_NotificationID: obj.Cust_NotificationID, CustID: obj.CustID, Startindex: obj.Startindex, EndIndex: obj.EndIndex } });
         }
     };
 }]);

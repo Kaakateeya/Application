@@ -235,6 +235,27 @@
         .form-group {
             margin-bottom: 0%;
         }
+        
+        .maquicls {
+            color: white;
+            padding: 7px 7px 7px 7px;
+            margin-top: 5px;
+            font-family: "Helvetica Neue ", Helvetica, Arial, sans-serif;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            min-height: 60px;
+            height: 100%;
+        }
+        
+        .marquee {
+            height: 115px;
+            overflow: hidden;
+        }
+        
+        .linkdis {
+            pointer-events: none;
+            cursor: default;
+        }
     </style>
 
 </head>
@@ -245,7 +266,7 @@
     <div ui-view="bottompanel"></div>
 
 
-    <!-- SCRIPTS DATA --#>
+    <!-- SCRIPTS DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="src/js/bootstrap-multiselect.js"></script>
     <script src="src/js/lhnchatbutton-current.min.cache"></script>
@@ -339,10 +360,13 @@
     <script src="app\services\viewfullprofileservice.js"></script>
     <script src="app\services\route.js"></script>
 
-    <!--SCRIPTS END-->
+    <script src="node_modules\angularjs-slider\dist\rzslider.min.js"></script>
+    <script type='text/javascript' src='//cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js'></script>
+    <srcipt src="http://rawgithub.com/tobia/Pause/master/jquery.pause.js">
+        <!--SCRIPTS END-->
 
 
-    <!-- SCRIPTSP DATA -->
+        <!-- SCRIPTSP DATA --#>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>

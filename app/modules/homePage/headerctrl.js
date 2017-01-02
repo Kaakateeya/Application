@@ -106,6 +106,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             }
 
                             if (custProfileStatus === 439) {
+                                sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
                                     if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
                                         route.go('dashboard', { type: 'C' });
@@ -161,17 +162,26 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 
         };
         scope.searchpage = function(typeurl) {
-
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
+
                     route.go('General', { id: 2 });
+                    $rootscope.$broadcast("profile", 2);
                     break;
                 case "general":
                     route.go('General', { id: 0 });
+                    $rootscope.$broadcast("profile", 0);
+
                     break;
                 case "advanced":
                     route.go('General', { id: 1 });
+                    $rootscope.$broadcast("profile", 1);
+                    break;
+                case "profilesearch":
+
+                    route.go('General', { id: 2 });
+                    $rootscope.$broadcast("profile", 2);
                     break;
             }
         };
