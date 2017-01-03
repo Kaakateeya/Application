@@ -9,7 +9,7 @@
 
 
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule'
+    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate'
 ]);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
@@ -109,6 +109,7 @@ app.config(function(reCAPTCHAProvider) {
 })
 app.run(function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
+        debugger;
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();
@@ -116,11 +117,12 @@ app.run(function($rootScope, $state) {
                 $state.go('home');
             } else {
                 console.log('double success');
-                var misarray = [1, 2, 3, 4, 5];
+
                 var misStatus = sessionStorage.getItem('missingStatus');
 
                 if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" &&
-                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false')) {
+                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') &&
+                    misStatus !== '0' && misStatus !== null) {
 
                     e.preventDefault();
                     console.log('success');
@@ -131,6 +133,25 @@ app.run(function($rootScope, $state) {
                         $state.go('mobileverf');
                     }
                 }
+            }
+        } else {
+            if (sessionStorage.getItem('cust.id') !== null) {
+                var misStatus = sessionStorage.getItem('missingStatus');
+
+                if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" &&
+                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') &&
+                    misStatus !== '0') {
+
+                    e.preventDefault();
+                    console.log('success');
+
+                    if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
+                        window.location = "missingfields/" + misStatus;
+                    } else {
+                        $state.go('mobileverf');
+                    }
+                }
+
             }
         }
     });

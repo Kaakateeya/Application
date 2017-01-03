@@ -98,18 +98,18 @@
     }
 </style>
 
-<div class="search_page_main" ng-show="showcontrols" ng-init="generalpageload()">
+<div class="search_page_main" ng-show="modelsearch.showcontrols" ng-init="generalpageload()">
     <div class="profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
-                <md-tabs md-selected="selectedIndex" md-dynamic-height flex md-border-bottom md-autoselect>
+                <md-tabs md-selected="modelsearch.selectedIndex" md-dynamic-height flex md-border-bottom md-autoselect>
                     <md-tab label="General Search">
                         <div class="tab">
                             <form name="generalsearch" role="form">
                                 <div class="profile_search_main profile_settings_main clearfix">
-                                    <div class="row" ng-hide="genderdiabled">
+                                    <div class="row" ng-hide="modelsearch.genderdiabled">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
+                                            <md-radio-group layout="row" ng-model="modelsearch.gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -121,11 +121,11 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
-                                                    <select id="generalage" multiselectdropdown ng-model="AgeFrom" ng-class="applycolors(AgeFrom,'generalage')" typeofdata="'Ageselect'">   
+                                                    <select id="generalage" multiselectdropdown ng-model="modelsearch.AgeFrom" ng-class="applycolors(modelsearch.AgeFrom,'generalage')" typeofdata="'Ageselect'">   
                                                      </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
-                                                    <select id="generalageto" multiselectdropdown ng-model="Ageto" typeofdata="'Ageselect'" ng-class="applycolors(Ageto,'generalageto')">   
+                                                    <select id="generalageto" multiselectdropdown ng-model="modelsearch.Ageto" typeofdata="'Ageselect'" ng-class="applycolors(modelsearch.Ageto,'generalageto')">   
                                                      </select>
                                                 </div>
                                             </div>
@@ -134,12 +134,12 @@
                                             <label class="control-label">Height</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
-                                                    <select id="generalheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="HeightFrom" ng-class="applycolors(HeightFrom,'generalheightfrom')">
+                                                    <select id="generalheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.HeightFrom" ng-class="applycolors(modelsearch.HeightFrom,'generalheightfrom')">
                                                     
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
-                                                    <select id="generalheightto" multiselectdropdown typeofdata="'height'" ng-model="Heightto" ng-class="applycolors(Heightto,'generalheightto')">
+                                                    <select id="generalheightto" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.Heightto" ng-class="applycolors(modelsearch.Heightto,'generalheightto')">
                                                  </select>
                                                 </div>
                                             </div>
@@ -147,14 +147,14 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'maritalstatusid'" class="general" array="MaritalStatus" change="true" model="maritalstatus">
+                                                <angular-multiselect id="'maritalstatusid'" class="general" array="modelsearch.MaritalStatus" change="true" model="modelsearch.maritalstatus">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Education</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect id="'generaleducation'" class="general" array="educationcategory" change="true" model="educationcat">
+                                                <angular-multiselect id="'generaleducation'" class="general" array="modelsearch.educationcategory" change="true" model="modelsearch.educationcat">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -163,46 +163,46 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'countrygeneral'" class="general" array="Country" change="true" model="country">
+                                                <angular-multiselect id="'countrygeneral'" class="general" array="modelsearch.Country" change="true" model="modelsearch.country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix general" style="margin-right: 16px;">
-                                                <select id="generalreligion" multiselectdropdown typeofdata="'Religion'" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-model="religion" ng-class="applycolors(religion,'generalreligion')">
+                                                <select id="generalreligion" multiselectdropdown typeofdata="'Religion'" ng-change="changeBindsearhes('caste',modelsearch.religion,modelsearch.mothertongue)" ng-model="modelsearch.religion" ng-class="applycolors(modelsearch.religion,'generalreligion')">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'generalmothertongue'" class="general" array="Mothertongue" type="'caste'" model="mothertongue">
+                                                <angular-multiselect id="'generalmothertongue'" class="general" array="modelsearch.Mothertongue" type="'caste'" model="modelsearch.mothertongue">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
+                                        <div class="control-group span3 select-box-my" ng-hide="modelsearch.casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect id="'generalcaste'" class="general" array="Caste" castehideval="castehid" change="true" model="caste" ng-click="checkCasteParents()">
+                                                <angular-multiselect id="'generalcaste'" class="general" array="modelsearch.Caste" castehideval="castehid" change="true" model="modelsearch.caste" ng-click="checkCasteParents()">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3" ng-hide="casteshow">
+                                        <div class="control-group span3" ng-hide="modelsearch.casteshow">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
 
-                                                <label>{{castetext}}</label>
-                                                <label style="font-weight: bold; display: none;">{{caste}}</label>
+                                                <label>{{modelsearch.castetext}}</label>
+                                                <label style="font-weight: bold; display: none;">{{modelsearch.caste}}</label>
 
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <br>
-                                        <div class="control-group" ng-show="getpaidstatus==='1'?true:false">
+                                        <div class="control-group" ng-show="modelsearch.getpaidstatus==='1'?true:false">
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="regdays" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-group layout="row" ng-model="modelsearch.regdays" class="md-block" flex-gt-sm>
                                                         Registration days :&nbsp;&nbsp;&nbsp;
                                                         <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                         <md-radio-button value="15"> 15days </md-radio-button>
@@ -213,13 +213,13 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <p ng-show="custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
+                                        <p ng-show="modelsearch.custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
                                         <br>
                                         <br>
                                         <br>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general',1,8)">Search</md-button>
                                         <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('general')">{{generalsavedsearchbtn}}</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus==='1'?true:false" ng-click="savedseapopup('general')">{{modelsearch.generalsavedsearchbtn}}</md-button>
                                         <br>
                                         <br>
                                         <br>
@@ -232,9 +232,9 @@
                         <div class="tab">
                             <form name="advancedsearch" role="form">
                                 <div class="profile_search_main profile_settings_main clearfix">
-                                    <div class="row" ng-hide="genderdiabled">
+                                    <div class="row" ng-hide="modelsearch.genderdiabled">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
+                                            <md-radio-group layout="row" ng-model="modelsearch.gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -246,11 +246,11 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
-                                                    <select id="advancedage" multiselectdropdown ng-model="AgeFrom" ng-class="applycolors(AgeFrom,'advancedage')" typeofdata="'Ageselect'">   
+                                                    <select id="advancedage" multiselectdropdown ng-model="modelsearch.AgeFrom" ng-class="applycolors(modelsearch.AgeFrom,'advancedage')" typeofdata="'Ageselect'">   
                                                      </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 col-lg-pull-1 generalane">
-                                                    <select id="advancedageto" multiselectdropdown ng-model="Ageto" typeofdata="'Ageselect'" ng-class="applycolors(Ageto,'advancedageto')">   
+                                                    <select id="advancedageto" multiselectdropdown ng-model="modelsearch.Ageto" typeofdata="'Ageselect'" ng-class="applycolors(modelsearch.Ageto,'advancedageto')">   
                                                      </select>
                                                 </div>
                                             </div>
@@ -259,13 +259,13 @@
                                             <label class="control-label">Height</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
-                                                    <select id="advancedheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="HeightFrom" ng-class="applycolors(HeightFrom,'advancedheightfrom')">
+                                                    <select id="advancedheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.HeightFrom" ng-class="applycolors(modelsearch.HeightFrom,'advancedheightfrom')">
                                                     
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
 
-                                                    <select id="advancedheightto" multiselectdropdown typeofdata="'height'" ng-model="Heightto" ng-class="applycolors(Heightto,'advancedheightto')">
+                                                    <select id="advancedheightto" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.Heightto" ng-class="applycolors(modelsearch.Heightto,'advancedheightto')">
                                                     
                                                     </select>
                                                 </div>
@@ -275,7 +275,7 @@
                                             <label class="control-label">Marital status</label>
 
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedmaritalstatusid'" class="general" array="MaritalStatus" change="true" model="maritalstatus">
+                                                <angular-multiselect id="'advancedmaritalstatusid'" class="general" array="modelsearch.MaritalStatus" change="true" model="modelsearch.maritalstatus">
                                                 </angular-multiselect>
                                             </div>
 
@@ -283,7 +283,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
                                             <div class="controls clearfix general" style="margin-right: 16px;">
-                                                <select id="advancedreligion" multiselectdropdown typeofdata="'Religion'" ng-change="changeBindsearhes('caste',religion,mothertongue)" ng-model="religion" ng-class="applycolors(religion,'advancedreligion')">
+                                                <select id="advancedreligion" multiselectdropdown typeofdata="'Religion'" ng-change="changeBindsearhes('caste',modelsearch.religion,modelsearch.mothertongue)" ng-model="modelsearch.religion" ng-class="applycolors(modelsearch.religion,'advancedreligion')">
                                                 </select>
                                             </div>
                                         </div>
@@ -292,22 +292,22 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Mother tongue</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedmothertongue'" class="general" array="Mothertongue" type="'caste'" model="mothertongue">
+                                                <angular-multiselect id="'advancedmothertongue'" class="general" array="modelsearch.Mothertongue" type="'caste'" model="modelsearch.mothertongue">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3 select-box-my" ng-hide="casteshow===true?false:true">
+                                        <div class="control-group span3 select-box-my" ng-hide="modelsearch.casteshow===true?false:true">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect id="'advancedcaste'" class="general" array="Caste" castehideval="castehid" change="true" model="caste" ng-click="checkCasteParents()">
+                                                <angular-multiselect id="'advancedcaste'" class="general" array="modelsearch.Caste" castehideval="castehid" change="true" model="modelsearch.caste" ng-click="checkCasteParents()">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
-                                        <div class="control-group span3" ng-hide="casteshow">
+                                        <div class="control-group span3" ng-hide="modelsearch.casteshow">
                                             <label class="control-label">Caste</label>
                                             <div class="controls clearfix">
-                                                <label>{{castetext}}</label>
-                                                <label style="font-weight: bold; display: none;">{{caste}}</label>
+                                                <label>{{modelsearch.castetext}}</label>
+                                                <label style="font-weight: bold; display: none;">{{modelsearch.caste}}</label>
                                             </div>
                                         </div>
 
@@ -315,7 +315,7 @@
                                             <label class="control-label control-label-marg">Physical status</label>
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="physicalstatusadvance" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-group layout="row" ng-model="modelsearch.physicalstatusadvance" class="md-block" flex-gt-sm>
                                                         <md-radio-button value="25" class="md-primary"> Normal</md-radio-button>
                                                         <md-radio-button value="26"> Physically Challenged </md-radio-button>
                                                     </md-radio-group>
@@ -332,21 +332,21 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedcountryliving'" class="general" array="Country" type="'Country'" model="country">
+                                                <angular-multiselect id="'advancedcountryliving'" class="general" array="modelsearch.Country" type="'Country'" model="modelsearch.country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">State</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect array="State" id="'advancedstateliving'" class="general" change="true" model="stateadvance">
+                                                <angular-multiselect array="modelsearch.State" id="'advancedstateliving'" class="general" change="true" model="modelsearch.stateadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my" id="divVisastatus">
                                             <label class="control-label">Visa status</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect array="visastatus" id="'advancedsvisastatus'" class="general" change="true" model="visastatusadvance">
+                                                <angular-multiselect array="modelsearch.visastatus" id="'advancedsvisastatus'" class="general" change="true" model="modelsearch.visastatusadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -357,21 +357,21 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Education category</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedEducationcat'" class="general" array="educationcategory" type="'EducationCatgory'" model="educationcat">
+                                                <angular-multiselect id="'advancedEducationcat'" class="general" array="modelsearch.educationcategory" type="'EducationCatgory'" model="modelsearch.educationcat">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Education</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedEducationgroup'" class="general" array="Educationgroup" change="true" model="Educationadvance">
+                                                <angular-multiselect id="'advancedEducationgroup'" class="general" array="modelsearch.Educationgroup" change="true" model="modelsearch.Educationadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Profession group</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedprofessiongroup'" class="general" array="Professiongroup" change="true" model="Professiongroupadvance">
+                                                <angular-multiselect id="'advancedprofessiongroup'" class="general" array="modelsearch.Professiongroup" change="true" model="modelsearch.Professiongroupadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -379,10 +379,10 @@
                                             <label class="control-label">Monthly  income</label>
                                             <div class="controls clearfix" style="margin-right: -16px;">
                                                 <div layout-gt-sm="row" class="generalane">
-                                                    <select ng-model="monthsalcurrency" id="annualsalary" multiselectdropdown typeofdata="'currency'" ng-class="applycolors(monthsalcurrency,'annualsalary')">
+                                                    <select ng-model="modelsearch.monthsalcurrency" id="annualsalary" multiselectdropdown typeofdata="'currency'" ng-class="applycolors(modelsearch.monthsalcurrency,'annualsalary')">
                                                       </select>
-                                                    <input ng-model="fromcurrency" style="height: 33px;width: 100px !important;" placeholder="From" type="text">
-                                                    <input name="postalCode" placeholder="To" ng-model="tocurrency" type="text" style="height: 33px;width: 100px !important;">
+                                                    <input ng-model="modelsearch.fromcurrency" style="height: 33px;width: 100px !important;" placeholder="From" type="text">
+                                                    <input name="postalCode" placeholder="To" ng-model="modelsearch.tocurrency" type="text" style="height: 33px;width: 100px !important;">
                                                 </div>
                                             </div>
                                         </div>
@@ -394,7 +394,7 @@
                                             <label class="control-label control-label-marg">Manglink / Kuja dosham&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="kujadosham" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                                    <md-radio-group layout="row" ng-model="modelsearch.kujadosham" class="md-block" flex-gt-sm>
                                                         <md-radio-button value="0" class="md-primary"> Yes</md-radio-button>
                                                         <md-radio-button value="1"> No </md-radio-button>
                                                         <md-radio-button value=""> Doesn't Matter </md-radio-button>
@@ -406,7 +406,7 @@
                                             <label class="control-label control-label-marg"> Star language &nbsp;&nbsp;</label>
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
-                                                    <md-radio-group layout="row" ng-model="starlanguage" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="changeBindsearhes('star',starlanguage)">
+                                                    <md-radio-group layout="row" ng-model="modelsearch.starlanguage" class="md-block" flex-gt-sm ng-change="changeBindsearhes('star',modelsearch.starlanguage)">
                                                         <md-radio-button value="1" class="md-primary"> Telugu</md-radio-button>
                                                         <md-radio-button value="2"> Tamil </md-radio-button>
                                                         <md-radio-button value="3">Kannada </md-radio-button>
@@ -417,7 +417,7 @@
                                         <div class="control-group span3">
                                             <label class="control-label">Star</label>
                                             <div class="controls clearfix">
-                                                <angular-multiselect id="'advancedstars'" array="stars" change="true" model="starsadvance">
+                                                <angular-multiselect id="'advancedstars'" array="modelsearch.stars" change="true" model="modelsearch.starsadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -427,14 +427,14 @@
                                     <div class="search_advance_block1">
                                         <h4>Habits</h4>
                                         <div class="row">
-                                            <md-radio-group layout="row" ng-model="diet" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group layout="row" ng-model="modelsearch.diet" class="md-block" flex-gt-sm>
                                                 Diet : &nbsp;&nbsp;
                                                 <md-radio-button value="1" class="md-primary"> Veg</md-radio-button>
                                                 <md-radio-button value="2"> Non Veg </md-radio-button>
                                                 <md-radio-button value="">Both </md-radio-button>
                                             </md-radio-group>
                                             <br>
-                                            <md-radio-group ng-show="getpaidstatus==='1'?true:false" layout="row" ng-model="regdays" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-group ng-show="modelsearch.getpaidstatus==='1'?true:false" layout="row" ng-model="modelsearch.regdays" class="md-block" flex-gt-sm>
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                 <md-radio-button value="15"> 15days </md-radio-button>
@@ -444,10 +444,10 @@
                                         </div>
                                     </div>
                                     <md-divider ng-if="!$last"></md-divider>
-                                    <p ng-show="custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
+                                    <p ng-show="modelsearch.custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,8)">Search</md-button>
                                     <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-show="getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
                                 </div>
                             </form>
                         </div>
@@ -456,9 +456,9 @@
                         <div class="tab">
                             <div class="profile_search_main profile_settings_main clearfix">
                                 <form name="profileidform">
-                                    <div class="row" ng-hide="genderdiabled">
+                                    <div class="row" ng-hide="modelsearch.genderdiabled">
                                         <div layout-gt-sm="row">
-                                            <md-radio-group layout="row" ng-model="gender" class="md-block" flex-gt-sm>
+                                            <md-radio-group layout="row" ng-model="modelsearch.gender" class="md-block" flex-gt-sm>
                                                 <md-radio-button value="2" class="md-primary"> Bride</md-radio-button>
                                                 <md-radio-button value="1"> Groom </md-radio-button>
                                             </md-radio-group>
@@ -469,19 +469,19 @@
                                         <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Profile id</label>
-                                                <input ng-model="profileid" id="txtProfileid" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="9">
+                                                <input ng-model="modelsearch.profileid" id="txtProfileid" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="9">
                                             </md-input-container>
                                         </div>
                                         <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>First name</label>
-                                                <input ng-model="firstname" ng-keypress="onlyAlphabets(event)" id="txtFirstNameProfileid">
+                                                <input ng-model="modelsearch.firstname" ng-keypress="onlyAlphabets(event)" id="txtFirstNameProfileid">
                                             </md-input-container>
                                         </div>
                                         <div class="span4">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Last name</label>
-                                                <input ng-model="lastname" name="txtLastNameProfileid" ng-keypress="onlyAlphabets(event)" id="txtLastNameProfileid">
+                                                <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" ng-keypress="onlyAlphabets(event)" id="txtLastNameProfileid">
                                             </md-input-container>
                                         </div>
 
@@ -505,14 +505,14 @@
                                         <div layout-gt-sm="row">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Search by ID</label>
-                                                <input ng-model="txtsavesearchname" flex="50">
-                                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethods(custid,txtsavesearchname,1);">Search</md-button>
+                                                <input ng-model="modelsearch.txtsavesearchname" flex="50">
+                                                <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethods(modelsearch.custid,modelsearch.txtsavesearchname,1)">Search</md-button>
                                             </md-input-container>
                                         </div>
 
                                     </div>
                                     <div class="saved_search_list">
-                                        <div class="saved_search_list_item" ng-repeat="saved in savedsearchselect">
+                                        <div class="saved_search_list_item" ng-repeat="saved in modelsearch.savedsearchselect">
                                             <h4><span>{{saved.CustSavedSearchName}}</span></h4>
                                             <div class="saved_search_list_ui clearfix">
                                                 <a href="javascript:void(0)" ng-click="gettingsavedsearcheditsearch('search',saved.SearchResult_ID,saved.SearchpageID)">Search<span class="material-icons">search</span></a>
@@ -530,29 +530,29 @@
         </div>
     </div>
 </div>
-<div class="register_page_main clearfix" ng-hide="truepartnerrefine">
+<div class="register_page_main clearfix" ng-hide="modelsearch.truepartnerrefine">
     <div class="clearfix">
         <div class="refine_search_new clearfix">
             <div class="refine_search_new_sub clearfix">
                 <div class="refine_search_new_sub1 clearfix">
-                    <h4>Refine <span>{{gender===2?'Bride':'Groom'}}</span></h4>
+                    <h4>Refine <span>{{modelsearch.gender===2?'Bride':'Groom'}}</span></h4>
                     <div class="clear">&nbsp;</div>
-                    <h6><span>Age:</span> <span id="refineAge">{{AgeFrom}} years-{{Ageto}} years</span></h6>
-                    <h6><span>caste:</span><span id="refinecaste">{{castetext}}</span></h6>
-                    <h6><span>education:</span> <span id="refineeducation">{{educationcategorytxt}}</span></h6>
-                    <h6><span>height:</span><span id="spanrefineheight">{{HeightFromtext}}-{{Heighttotext}}</span></h6>
+                    <h6><span>Age:</span> <span id="refineAge">{{modelsearch.AgeFrom}} years-{{modelsearch.Ageto}} years</span></h6>
+                    <h6><span>caste:</span><span id="refinecaste">{{modelsearch.castetext}}</span></h6>
+                    <h6><span>education:</span> <span id="refineeducation">{{modelsearch.educationcategorytxt}}</span></h6>
+                    <h6><span>height:</span><span id="spanrefineheight">{{modelsearch.HeightFromtext}}-{{modelsearch.Heighttotext}}</span></h6>
                 </div>
                 <div class="refine_search_new_sub2 clearfix">
                     <div layout="row">
                         <div class="col-lg-4">
                             <h6><span>Age</span></h6>
                             <md-slider-container flex-gt-xs>
-                                <p>{{AgeFrom}}</p>
+                                <p>{{modelsearch.AgeFrom}}</p>
 
-                                <md-slider flex md-discrete min="18" max="77" ng-model="AgeFrom" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="Ageto" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.AgeFrom" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.Ageto" aria-label="Slider"></md-slider>
 
-                                <p>{{Ageto}}</p>
+                                <p>{{modelsearch.Ageto}}</p>
 
                             </md-slider-container>
 
@@ -564,10 +564,10 @@
                         <div class="col-lg-4">
                             <h6><span>Height</span></h6>
                             <md-slider-container flex-gt-xs>
-                                <p>{{HeightFromtext}}</p>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
-                                <p>{{Heighttotext}}</p>
+                                <p>{{modelsearch.HeightFromtext}}</p>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
+                                <p>{{modelsearch.Heighttotext}}</p>
                             </md-slider-container>
 
                             <!--<rzslider rz-slider-model="sliders.minValue" rz-slider-high="sliders.maxValue" rz-slider-options="sliders.options"></rzslider>-->
@@ -595,12 +595,12 @@
         </div>
     </div>
 </div>
-<div class="wrapper register_page_main clearfix" ng-hide="truepartner">
+<div class="wrapper register_page_main clearfix" ng-hide="modelsearch.truepartner">
     <div class="row">
     <div class="col-lg-6">
-         <div id="searchresultprofilesdiv" ng-hide="truepartnerrefine">
+         <div id="searchresultprofilesdiv" ng-hide="modelsearch.truepartnerrefine">
             <h4>search results - <span>
-                  <label id="refinetotalrecords">{{PartnerProfilesnew[0].TotalRows}}</label>
+                  <label id="refinetotalrecords">{{modelsearch.PartnerProfilesnew[0].TotalRows}}</label>
             <small>Profiles found</small></span></h4>
           </div>
         </div>
@@ -611,10 +611,10 @@
             <div class="message-row4">
                 <div id="Div1" class="Maindiv message-row4  wrapper--overflow">
                     <div class="searched_list clearfix">
-                         <div class="row" ng-hide="loadinging">
+                         <div class="row" ng-hide="modelsearch.loadinging">
                            <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" md-diameter="60"></md-progress-circular>
                          </div>
-                        <partner-data array="PartnerProfilesnew" typeofsearch="false" pagging="false"></partner-data>
+                        <partner-data array="modelsearch.PartnerProfilesnew" typeofsearch="false" pagging="false"></partner-data>
                     </div>
                 </div>
             </div>
