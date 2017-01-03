@@ -2010,7 +2010,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert) {
+        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+            scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     scope.flagexpress = 9;
@@ -2018,7 +2019,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.typeofdiv = typeofdiv;
                     scope.chatstatus = type;
                 }
-                customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
+                customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex, scope.exactflagstorage).then(function(response) {
                     scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     if (parseInt(fromindex) === 1) {
                         scope.PartnerProfilesnew = [];
@@ -2759,12 +2760,14 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.Ageto = 30;
                 scope.religion = 1;
             }, 500);
-            scope.$on("$destroy", scope.destroy());
+            scope.$on("$destroy", scope.destroy);
         };
+
+
         scope.destroy = function() {
 
             scope.loginpopup = false;
-            scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
+            scope.emailss = "";
             scope.username = '';
             scope.password = "";
             scope.gender = "";
@@ -3441,7 +3444,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.Heightto = 38;
 
             }
-            // scope.$on("$destroy", scope.destroy());
+            scope.$on("$destroy", scope.destroy);
         };
 
         scope.destroy = function() {
@@ -4060,48 +4063,46 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
+        // scope.slider = {
+        //     minValue: 18,
+        //     maxValue: 30,
+        //     options: {
+        //         floor: 18,
+        //         ceil: 77,
+        //         step: 1,
+        //         noSwitching: true
+        //     }
 
+        // };
+        // scope.heightslidermin = 1;
+        // scope.heightslidermax = 38;
+        // scope.sliders = {
+        //     minValue: 4.0,
+        //     maxValue: 7.2,
+        //     options: {
+        //         floor: 4.0,
+        //         ceil: 7.2,
+        //         step: 0.1,
+        //         precision: 1,
+        //         noSwitching: true
+        //     }
+        // };
+
+        // scope.sliders = {
+        //     minValue: 0,
+        //     maxValue: 38,
+        //     minvalueyext: 0,
+        //     maxValuetext: 38,
+        //     options: {
+        //         floor: 0,
+        //         ceil: 41,
+        //         step: 1,
+        //         noSwitching: true,
+
+        //     }
+        // };
     }
 ]);
-
-// scope.slider = {
-//     minValue: 18,
-//     maxValue: 30,
-//     options: {
-//         floor: 18,
-//         ceil: 77,
-//         step: 1,
-//         noSwitching: true
-//     }
-
-// };
-// scope.heightslidermin = 1;
-// scope.heightslidermax = 38;
-// scope.sliders = {
-//     minValue: 4.0,
-//     maxValue: 7.2,
-//     options: {
-//         floor: 4.0,
-//         ceil: 7.2,
-//         step: 0.1,
-//         precision: 1,
-//         noSwitching: true
-//     }
-// };
-
-// scope.sliders = {
-//     minValue: 0,
-//     maxValue: 38,
-//     minvalueyext: 0,
-//     maxValuetext: 38,
-//     options: {
-//         floor: 0,
-//         ceil: 41,
-//         step: 1,
-//         noSwitching: true,
-
-//     }
-// };
 app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
 
     scope.month = 'month';

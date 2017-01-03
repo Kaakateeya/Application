@@ -344,7 +344,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert) {
+        scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+            scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     scope.flagexpress = 9;
@@ -352,7 +353,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.typeofdiv = typeofdiv;
                     scope.chatstatus = type;
                 }
-                customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex).then(function(response) {
+                customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex, scope.exactflagstorage).then(function(response) {
                     scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     if (parseInt(fromindex) === 1) {
                         scope.PartnerProfilesnew = [];

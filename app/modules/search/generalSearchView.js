@@ -283,7 +283,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.Heightto = 38;
 
             }
-            // scope.$on("$destroy", scope.destroy());
+            scope.$on("$destroy", scope.destroy);
         };
 
         scope.destroy = function() {
@@ -902,45 +902,43 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
+        // scope.slider = {
+        //     minValue: 18,
+        //     maxValue: 30,
+        //     options: {
+        //         floor: 18,
+        //         ceil: 77,
+        //         step: 1,
+        //         noSwitching: true
+        //     }
 
+        // };
+        // scope.heightslidermin = 1;
+        // scope.heightslidermax = 38;
+        // scope.sliders = {
+        //     minValue: 4.0,
+        //     maxValue: 7.2,
+        //     options: {
+        //         floor: 4.0,
+        //         ceil: 7.2,
+        //         step: 0.1,
+        //         precision: 1,
+        //         noSwitching: true
+        //     }
+        // };
+
+        // scope.sliders = {
+        //     minValue: 0,
+        //     maxValue: 38,
+        //     minvalueyext: 0,
+        //     maxValuetext: 38,
+        //     options: {
+        //         floor: 0,
+        //         ceil: 41,
+        //         step: 1,
+        //         noSwitching: true,
+
+        //     }
+        // };
     }
 ]);
-
-// scope.slider = {
-//     minValue: 18,
-//     maxValue: 30,
-//     options: {
-//         floor: 18,
-//         ceil: 77,
-//         step: 1,
-//         noSwitching: true
-//     }
-
-// };
-// scope.heightslidermin = 1;
-// scope.heightslidermax = 38;
-// scope.sliders = {
-//     minValue: 4.0,
-//     maxValue: 7.2,
-//     options: {
-//         floor: 4.0,
-//         ceil: 7.2,
-//         step: 0.1,
-//         precision: 1,
-//         noSwitching: true
-//     }
-// };
-
-// scope.sliders = {
-//     minValue: 0,
-//     maxValue: 38,
-//     minvalueyext: 0,
-//     maxValuetext: 38,
-//     options: {
-//         floor: 0,
-//         ceil: 41,
-//         step: 1,
-//         noSwitching: true,
-
-//     }
-// };

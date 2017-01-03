@@ -172,7 +172,7 @@
                                             <span id="lblSubHeaderReq">Received</span>
                                         </h5>
                                         <div id="uplnknewReq" class="clearfix">
-                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RP','Members are requesting to upload your photo','Requestphotos',bindallcounts.ReceivedPhotoRequestCount)">
+                                            <a id="lnknewReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RP','Members are requesting to upload your photo','Requestphotos',bindallcounts.ReceivedPhotoRequestCount,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimageReq" class="icon-spl-4"></div>
@@ -180,7 +180,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsReceivedReq">RecPhoto({{bindallcounts.ReceivedPhotoRequestCount}})</span></a>
-                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RH','Members are requesting to upload your horoscope','Requestphotos',bindallcounts.ReceivedHoroRequestCount)">
+                                            <a id="lnkAcceptReq" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RH','Members are requesting to upload your horoscope','Requestphotos',bindallcounts.ReceivedHoroRequestCount,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2Req" class="icon-spl-8"></div>
@@ -194,7 +194,7 @@
                                             <span id="lblSubHeader1">Sent</span>
                                         </h5>
                                         <div id="uplnknew1" class="clearfix">
-                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SP','Members photo request is sent by you','Requestphotos',bindallcounts.SentPhotoRequestCount)">
+                                            <a id="lnknew1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SP','Members photo request is sent by you','Requestphotos',bindallcounts.SentPhotoRequestCount,'UnPaid')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimage1" class="icon-spl-1"></div>
@@ -202,7 +202,7 @@
                                                        
                                                     </small>
                                                 <span id="lnkNewIDsSentReq">SentPhoto({{bindallcounts.SentPhotoRequestCount}})</span></a>
-                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SH','Members horoscope request is sent by you','Requestphotos',bindallcounts.SentHoroRequestCount)">
+                                            <a id="lnkAccept1" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SH','Members horoscope request is sent by you','Requestphotos',bindallcounts.SentHoroRequestCount,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image21" class="icon-spl-2"></div>
@@ -230,7 +230,7 @@
                                             <span id="lblSubHeaderpassword">Received</span>
                                         </h5>
                                         <div id="uplnknewpassword" class="clearfix">
-                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RN','Members are awaiting to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedNew)">
+                                            <a id="lnknewpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RN','Members are awaiting to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedNew,'UnPaid')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagepassword" class="icon-spl-1"></div>
@@ -238,7 +238,7 @@
                                                     
                                                     </small>
                                                 <span id="lnkNewIDsReceivedProtec">New({{bindallcounts.ReceivedProtectedNew}})</span></a>
-                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RA','Members request has been accepted to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedAccept)">
+                                            <a id="lnkAcceptpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RA','Members request has been accepted to view your photograph','RequestPassword',bindallcounts.ReceivedProtectedAccept,'UnPaid')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2password" class="icon-spl-2"></div>
@@ -246,7 +246,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkACCEPTEDReceivedProtec">Accepted({{bindallcounts.ReceivedProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RR','Members requests are rejected','RequestPassword',bindallcounts.ReceivedProtectedReject)">
+                                            <a id="lnkRejPathpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'RR','Members requests are rejected','RequestPassword',bindallcounts.ReceivedProtectedReject,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3password" class="icon-spl-9"></div>
@@ -261,7 +261,7 @@
                                             <span id="lblSubHeadersentpassword">Sent</span>
                                         </h5>
                                         <div id="uplnknewsendpassword" class="clearfix">
-                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SN','Members are still waiting to accept your request','RequestPassword',bindallcounts.SentProtectedReply)">
+                                            <a id="lnknewsentpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SN','Members are still waiting to accept your request','RequestPassword',bindallcounts.SentProtectedReply,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="plusimagesentpassword" class="icon-spl-4"></div>
@@ -269,7 +269,7 @@
                                                       
                                                     </small>
                                                 <span id="lnkNewIDsSentProtec">Reply Pending({{bindallcounts.SentProtectedReply}})</span></a>
-                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SA','Members have accepted your request','RequestPassword',bindallcounts.SentProtectedAccept)">
+                                            <a id="lnkAcceptsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SA','Members have accepted your request','RequestPassword',bindallcounts.SentProtectedAccept,'UnPaid')">
                                                 <small>
                                                      <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image2sendpassword" class="icon-spl-5"></div>
@@ -277,7 +277,7 @@
                                                      
                                                     </small>
                                                 <span id="lnkACCEPTEDSentProtec">Accepted({{bindallcounts.SentProtectedAccept}})</span></a>
-                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SR','Members have rejected','RequestPassword',bindallcounts.SentProtectedReject)">
+                                            <a id="lnkRejPathsendpassword" class="clearfix" href="javascript:void(0);" ng-click="receivesrecphotoss(1,9,'SR','Members have rejected','RequestPassword',bindallcounts.SentProtectedReject,'UnPaid')">
                                                 <small>
                                                     <div style="display: block;margin: 0 auto;padding: 1px 4px 1px 4px;border: solid 1px #ccc;border-radius: 3px;">
                                              <div id="Image3sendpassword" class="icon-spl-6"></div>
