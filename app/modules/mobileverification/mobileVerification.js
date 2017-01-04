@@ -6,8 +6,10 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
         scope.pageLoad = function(custid) {
             mobileVerificationService.getmobileverificationData(custid).then(function(res) {
                 scope.pageloadSelect = res.data;
+
                 scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
                 scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
+
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
                     route.go('dashboard', { type: 'C' });
                 }

@@ -38,7 +38,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
                     scope.CustName = scope.txtname;
-                    scope.lblTicketID = response.data.Ticket;
+                    if (response.data !== null) {
+                        scope.lblTicketID = response.data.Ticket !== null ? response.data.Ticket : '';
+                    }
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
                     scope.open();
                 });

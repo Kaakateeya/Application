@@ -27,7 +27,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             }, 500);
             timeout(function() {
                 switch (scope.typeofdata) {
-
                     case 'MaritalStatus':
                         scope.databind(cons.MaritalStatus);
                         break;
@@ -270,6 +269,10 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         //     }
                         //     scope.databind(Arr);
                         //     break;
+
+                    case "Complexion":
+                        scope.databind(cons.Complexion);
+                        break;
                 }
             }, 1000);
             element.multiselect({

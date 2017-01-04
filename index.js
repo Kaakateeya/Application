@@ -116,43 +116,22 @@ app.run(function($rootScope, $state) {
                 console.log('success');
                 $state.go('home');
             } else {
-                console.log('double success');
+                if (sessionStorage.getItem('cust.id') !== null) {
+                    var misStatus = sessionStorage.getItem('missingStatus');
+                    if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
+                        console.log('success');
+                        if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
+                            $state.go('mobileverf');
+                        } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
+                            window.location = "missingfields/" + misStatus;
+                        }
 
-                var misStatus = sessionStorage.getItem('missingStatus');
-
-                if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" &&
-                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') &&
-                    misStatus !== '0' && misStatus !== null) {
-
-                    e.preventDefault();
-                    console.log('success');
-
-                    if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
-                        window.location = "missingfields/" + misStatus;
-                    } else {
-                        $state.go('mobileverf');
-                    }
-                }
-            }
-        } else {
-            if (sessionStorage.getItem('cust.id') !== null) {
-                var misStatus = sessionStorage.getItem('missingStatus');
-
-                if (to.name !== "mobileverf" && to.name !== "missingfields" && to.name !== "missingfields" &&
-                    (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') &&
-                    misStatus !== '0') {
-
-                    e.preventDefault();
-                    console.log('success');
-
-                    if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
-                        window.location = "missingfields/" + misStatus;
-                    } else {
-                        $state.go('mobileverf');
                     }
                 }
 
             }
         }
+
     });
+
 })

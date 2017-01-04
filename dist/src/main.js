@@ -30,7 +30,7 @@ app.animation('.fade123', function() {
 });
 app.constant('arrayConstants', {
     'MaritalStatus': [
-
+        { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "Unmarried", "title": "Unmarried", "value": 43 },
         { "label": "Divorce", "title": "Divorce", "value": 44 },
         { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
@@ -38,7 +38,7 @@ app.constant('arrayConstants', {
     ],
     "height": [
 
-        { "label": "--select--", "title": "--select--", "value": 0 },
+        { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
         { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
@@ -106,7 +106,22 @@ app.constant('arrayConstants', {
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
     "educationcategory": [
-
+        { "label": "--select--", "title": "--select--", "value": "" },
+        { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
+        { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
+        { "label": "Diploma", "title": "Diploma", "value": 3 },
+        { "label": "Doctorate/phd", "title": "Doctorate/phd", "value": 4 },
+        { "label": "Masters in Engineering", "title": "Masters in Engineering", "value": 5 },
+        { "label": "Bachelors in Medicine", "title": "Bachelors in Medicine", "value": 6 },
+        { "label": "Masters in Degree", "title": "Masters in Degree", "value": 7 },
+        { "label": "Finance - ICWAI/CA/CS", "title": "Finance - ICWAI/CA/CS", "value": 10 },
+        { "label": "Union Public Service Commision-Civil Services", "title": "Union Public Service Commision-Civil Services", "value": 11 },
+        { "label": "Masters in Medicine", "title": "Masters in Medicine", "value": 13 },
+        { "label": "Below Graduation", "title": "Below Graduation", "value": 15 },
+        { "label": "Not given", "title": "Not given", "value": 21 },
+        { "label": "Other", "title": "Other", "value": 22 }
+    ],
+    "educationcategorywithoutselect": [
         { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
         { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
         { "label": "Diploma", "title": "Diploma", "value": 3 },
@@ -389,7 +404,15 @@ app.constant('arrayConstants', {
         { "label": "Aunt", "title": "Aunt", "value": 562 }
 
     ],
-    'Upgrade': "Upgrade online Membership"
+    'Upgrade': "Upgrade online Membership",
+    'Complexion': [
+        { "label": "--select-- ", "title": "--select--", "value": "" },
+        { "label": "Very Fair", "title": "Very Fair", "value": 17 },
+        { "label": "Fair", "title": "Fair", "value": 18 },
+        { "label": "Medium", "title": "Medium", "value": 19 },
+        { "label": "Dark", "title": "Dark", "value": 20 },
+        { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
+    ]
 
 });
 app.constant('config', function() {
@@ -819,7 +842,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             }, 500);
             timeout(function() {
                 switch (scope.typeofdata) {
-
                     case 'MaritalStatus':
                         scope.databind(cons.MaritalStatus);
                         break;
@@ -1062,6 +1084,10 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         //     }
                         //     scope.databind(Arr);
                         //     break;
+
+                    case "Complexion":
+                        scope.databind(cons.Complexion);
+                        break;
                 }
             }, 1000);
             element.multiselect({
@@ -2279,7 +2305,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', "UnPaid", scope.bindallcounts.ReceivedPhotoRequestCount);
                     });
                     break;
                 case "Express":
@@ -2342,6 +2368,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
 
                 }
+                scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
             });
         };
 
@@ -3093,8 +3120,10 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
         scope.pageLoad = function(custid) {
             mobileVerificationService.getmobileverificationData(custid).then(function(res) {
                 scope.pageloadSelect = res.data;
+
                 scope.mobVerify = scope.pageloadSelect.ismobileverf === true ? true : false;
                 scope.emailVerify = scope.pageloadSelect.isEmailverf === true ? true : false;
+
                 if (scope.pageloadSelect.ismobileverf === true && scope.pageloadSelect.isEmailverf === true) {
                     route.go('dashboard', { type: 'C' });
                 }
@@ -3161,10 +3190,11 @@ app.controller("registrationReg", function () {
 });
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService', '$stateParams', 'route',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService',
+    '$stateParams', 'route', 'helperservice',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
         customerDashboardServices, authSvc, $mdDialog, $location, getArray,
-        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route) {
+        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route, helperservice) {
         var SearchRequest = {};
         var logincustid = authSvc.getCustId();
         var globalheight;
@@ -3222,7 +3252,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.controlsbinding = function() {
             scope.modelsearch.height = arrayConstants.height;
-            scope.modelsearch.educationcategory = arrayConstants.educationcategory;
+            scope.modelsearch.educationcategory = arrayConstants.educationcategorywithoutselect;
+            if (angular.lowercase(arrayConstants.MaritalStatus[0].title) === '--select--') {
+                arrayConstants.MaritalStatus.splice(0, 1);
+            }
             scope.modelsearch.MaritalStatus = arrayConstants.MaritalStatus;
             scope.modelsearch.Mothertongue = arrayConstants.Mothertongue;
             scope.modelsearch.visastatus = arrayConstants.visastatus;
@@ -3530,7 +3563,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.modelsearch.truepartner = false;
-            if (scope.modelsearch.custid !== null && scope.modelsearch.custid !== "" && scope.modelsearch.custid !== undefined) {
+
+            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.modelsearch.truepartnerrefine = false;
             } else {
                 scope.modelsearch.truepartnerrefine = true;
@@ -3589,6 +3623,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
+
                     if (scope.checkLength()) {
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
@@ -3600,28 +3635,35 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             StartIndex: frompage,
                             EndIndex: topage,
                         };
-                        searches.profileidsearch(SearchRequest).then(function(response) {
-                            if (parseInt(frompage) === 1) {
-                                scope.modelsearch.PartnerProfilesnew = [];
-                                if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                        if (scope.modelsearch.custid !== undefined && scope.modelsearch.custid !== null && scope.modelsearch.custid !== "") {
+                            searches.profileidsearch(SearchRequest).then(function(response) {
+                                if (parseInt(frompage) === 1) {
+                                    scope.modelsearch.PartnerProfilesnew = [];
+                                    if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                                        _.each(response.data, function(item) {
+                                            scope.modelsearch.PartnerProfilesnew.push(item);
+                                        });
+                                    } else {
+                                        scope.modelsearch.showcontrols = true;
+                                        scope.modelsearch.truepartner = true;
+                                        scope.modelsearch.truepartnerrefine = true;
+                                        alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                    }
+                                } else {
                                     _.each(response.data, function(item) {
                                         scope.modelsearch.PartnerProfilesnew.push(item);
                                     });
-                                } else {
-                                    scope.modelsearch.showcontrols = true;
-                                    scope.modelsearch.truepartner = true;
-                                    scope.modelsearch.truepartnerrefine = true;
-                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
-                            } else {
-                                _.each(response.data, function(item) {
-                                    scope.modelsearch.PartnerProfilesnew.push(item);
-                                });
+                                scope.modelsearch.loadinging = true;
+                            });
+                            if (scope.modelsearch.slideshow !== "slideshow") {
+                                scope.$broadcast('loadmore');
                             }
-                            scope.modelsearch.loadinging = true;
-                        });
-                        if (scope.modelsearch.slideshow !== "slideshow") {
-                            scope.$broadcast('loadmore');
+                        } else {
+                            scope.modelsearch.showcontrols = true;
+                            scope.modelsearch.truepartner = true;
+                            scope.modelsearch.truepartnerrefine = true;
+                            alerts.dynamicpopup("login.html", scope, uibModal);
                         }
                     } else {
                         scope.modelsearch.loadinging = true;
@@ -3778,21 +3820,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.hightTorefine = function() {
             scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
         };
-
-
         scope.showloginpopup = function() {
-            commonpopup.open('login.html', scope, uibModal, 'sm');
+            alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
         scope.showloginpopupnew = function() {
-            commonpopup.closepopup();
-            commonpopup.open('loginpopup.html', scope, uibModal, 'sm');
+            alerts.dynamicpopupclose();
+            alerts.dynamicpopup('loginpopup.html', scope, uibModal, 'sm');
         };
 
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });
         scope.cancelpopup = function() {
-            commonpopup.closepopup();
+            alerts.dynamicpopupclose();
         };
         scope.validate = function(formloagin) {
             if ((formloagin.username).indexOf("@") !== -1) {
@@ -3853,7 +3893,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
                         });
-                        commonpopup.closepopup();
+                        alerts.dynamicpopupclose();
                     });
                 }
             }
@@ -4524,7 +4564,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
 
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
                     scope.CustName = scope.txtname;
-                    scope.lblTicketID = response.data.Ticket;
+                    if (response.data !== null) {
+                        scope.lblTicketID = response.data.Ticket !== null ? response.data.Ticket : '';
+                    }
                     scope.lblpopupCategory = (_.where(arrayConstants.catgory, { value: parseInt(scope.ddlcategory) }))[0].title;
                     scope.open();
                 });
@@ -6095,6 +6137,27 @@ app.factory('homepageservices', ['authSvc', function(http) {
         }
     };
 }]);
+app.service('helperservice', function() {
+    this.checkstringvalue = function(value) {
+
+        if (value !== null && value !== "" && value !== undefined) {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
+
+    this.checkarraylength = function(value) {
+
+        if (value !== null && value !== "" && value !== undefined && value.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
+});
 app.factory('missingFieldService', ['$http', function(http) {
     return {
         missingFieldSubmit: function(object) {

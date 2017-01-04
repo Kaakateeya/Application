@@ -1,249 +1,252 @@
 <script type="text/ng-template" id="missingfieldspopup.html">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" ng-click="cancel()">×</button>
-            <h4 class="modal-title text-center" style="margin-top: -13px; color: maroon;">More About You..</h4>
-            <br />
-            <h4><span id="spanText" style="color: rgb(176, 24, 24);">We Want To Know More About You</span></h4>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <div class="row" id="MissingFieldsDiv">
-                    <div class="col-lg-6" ng-style="{display:divCol || 'block'}">
-                        <div class="control-group  col-lg-12" ng-hide="divHeight">
-                            <div class="col-lg-4">
-                                <label class="control-label">Height</label>
-                            </div>
-                            <div class="col-lg-8" id="ddlFromheightdiv">
-                                <select multiselectdropdown ng-model="misObj.ddlFromheight" typeofdata="'height'"></select>
-                            </div>
-                            <div class="col-lg-8" id="lblheightdiv">
-                                <label id="lblheight"></label>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divMaritalstatus">
-                            <div class="col-lg-4">
-                                <label class="control-label">Marital status</label>
-                            </div>
-                            <div class="col-lg-8" id="lstMaritalstatusdiv">
-
-                                <select multiselectdropdown ng-model="misObj.lstMaritalstatus" typeofdata="'MaritalStatus'"></select>
+    <form name="misForm" novalidate role="form" ng-submit="misFieldsSubmit(misObj);">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" style="margin-top: -13px; color: maroon;">More About You..</h4>
+                <br />
+                <h4><span id="spanText" style="color: rgb(176, 24, 24);">We Want To Know More About You</span></h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <div class="row" id="MissingFieldsDiv">
+                        <div class="col-lg-6" ng-style="{display:divCol || 'block'}">
+                            <div class="control-group form-group  col-lg-12" ng-hide="divHeight">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Height<span style="color: red;">*</span></label>
+                                </div>
+                                <div class="col-lg-8 input-group" id="ddlFromheightdiv">
+                                    <select multiselectdropdown ng-model="misObj.ddlFromheight" typeofdata="'height'" ng-required="divHeight==true?false:true"></select>
+                                </div>
+                                <div class="col-lg-8" id="lblheightdiv">
+                                    <label id="lblheight"></label>
+                                </div>
                             </div>
 
-                            <div class="col-lg-8" id="lbllstMaritalstatusdiv">
-                                <label id="lbllstMaritalstatus"></label>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divComplexion">
-                            <div class="col-lg-4">
-                                <label class="control-label">Complexion</label>
-                            </div>
-                            <div class="col-lg-8" id="lstComplexiondiv">
-
-                                <select multiselectdropdown ng-model="misObj.lstComplexion" typeofdata="'Complexion'"></select>
-
-                            </div>
-                            <div class="col-lg-8" id="lbllstComplexiondiv">
-                                <label id="lbllstComplexion"></label>
-
-                            </div>
-                        </div>
-                        <div ng-hide="divProfession">
                             <div class="clearfix"></div>
 
-                            <div class="control-group  col-lg-12" ng-hide="divJobLocCountry">
-                                <div class="col-lg-4">
-                                    <label class="control-label">JobLoc Country</label>
+                            <div class="form-group  col-lg-12" ng-hide="divMaritalstatus">
+
+                                <label class="col-lg-4 control-label">Marital status<span  style="color: red;">*</span></label>
+
+                                <div class="col-lg-8 input-group" id="lstMaritalstatusdiv">
+
+                                    <select multiselectdropdown ng-model="misObj.lstMaritalstatus" typeofdata="'MaritalStatus'" ng-required="divMaritalstatus==true?false:true"> </select>
                                 </div>
-                                <div class="col-lg-8" id="lstJoblocCountrydiv">
 
-                                    <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
-
-                                </div>
-                                <div class="col-lg-8" id="lbllstJoblocCountrydiv">
-                                    <label id="lbllstJoblocCountry"></label>
-
+                                <div class="col-lg-8" id="lbllstMaritalstatusdiv">
+                                    <label id="lbllstMaritalstatus"></label>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
 
-                            <div class="control-group  col-lg-12" ng-hide="divJobLocState">
+                            <div class="control-group form-group  col-lg-12" ng-hide="divComplexion">
                                 <div class="col-lg-4">
-                                    <label class="control-label">JobLoc State</label>
+                                    <label class="control-label">Complexion<span style="color: red;">*</span></label>
                                 </div>
-                                <div class="col-lg-8" id="lstjoblocstatediv">
-                                    <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',lstjoblocstate,lstJoblocCountry);"></select>
-                                </div>
-                                <div class="col-lg-8" id="lbllstjoblocstatediv">
-                                    <label id="lbllstjoblocstate"></label>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
+                                <div class="col-lg-8 input-group" id="lstComplexiondiv">
 
-                            <div class="control-group  col-lg-12" ng-hide="JobLocDistrict">
-                                <div class="col-lg-4">
-                                    <label class="control-label">JobLoc District</label>
-                                </div>
-                                <div class="col-lg-8" id="lstjoblocdistrictdiv">
+                                    <select multiselectdropdown ng-model="misObj.lstComplexion" typeofdata="'Complexion'" ng-required="divComplexion==true?false:true"></select>
 
-                                    <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
                                 </div>
-                                <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
-                                    <label id="lbllstjoblocdistrict"></label>
+                                <div class="col-lg-8" id="lbllstComplexiondiv">
+                                    <label id="lbllstComplexion"></label>
 
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
+                            <div ng-hide="divProfession">
+                                <div class="clearfix"></div>
 
-                            <div class="control-group  col-lg-12" ng-hide="JobLoc">
-                                <div class="col-lg-4">
-                                    <label class="control-label">Job Location</label>
+                                <div class="control-group  col-lg-12" ng-hide="divJobLocCountry">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">JobLoc Country</label>
+                                    </div>
+                                    <div class="col-lg-8" id="lstJoblocCountrydiv">
+
+                                        <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
+
+                                    </div>
+                                    <div class="col-lg-8" id="lbllstJoblocCountrydiv">
+                                        <label id="lbllstJoblocCountry"></label>
+
+                                    </div>
                                 </div>
-                                <div class="col-lg-8" id="lstjoblocationdiv">
-                                    <select multiselectdropdown ng-model="misObj.lstjoblocation" ng-options="item.value as item.label for item in cityeArr"></select>
+                                <div class="clearfix"></div>
+
+                                <div class="control-group  col-lg-12" ng-hide="divJobLocState">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">JobLoc State</label>
+                                    </div>
+                                    <div class="col-lg-8" id="lstjoblocstatediv">
+                                        <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',lstjoblocstate,lstJoblocCountry);"></select>
+                                    </div>
+                                    <div class="col-lg-8" id="lbllstjoblocstatediv">
+                                        <label id="lbllstjoblocstate"></label>
+                                    </div>
                                 </div>
-                                <div class="col-lg-8" id="lbllstjoblocationdiv">
-                                    <label id="lbllstjoblocation"></label>
+                                <div class="clearfix"></div>
+
+                                <div class="control-group  col-lg-12" ng-hide="JobLocDistrict">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">JobLoc District</label>
+                                    </div>
+                                    <div class="col-lg-8" id="lstjoblocdistrictdiv">
+
+                                        <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
+                                    </div>
+                                    <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
+                                        <label id="lbllstjoblocdistrict"></label>
+
+                                    </div>
                                 </div>
+                                <div class="clearfix"></div>
+
+                                <div class="control-group  col-lg-12" ng-hide="JobLoc">
+                                    <div class="col-lg-4">
+                                        <label class="control-label">Job Location</label>
+                                    </div>
+                                    <div class="col-lg-8" id="lstjoblocationdiv">
+                                        <select multiselectdropdown ng-model="misObj.lstjoblocation" ng-options="item.value as item.label for item in cityeArr"></select>
+                                    </div>
+                                    <div class="col-lg-8" id="lbllstjoblocationdiv">
+                                        <label id="lbllstjoblocation"></label>
+                                    </div>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                    <div class="col-lg-6">
+                        <div class="col-lg-6">
 
-                        <div class="control-group  col-lg-12" ng-hide="divFatherNative">
-                            <div class="col-lg-4">
-                                <label class="control-label">
+                            <div class="control-group  col-lg-12" ng-hide="divFatherNative">
+                                <div class="col-lg-4">
+                                    <label class="control-label">
                                     Father Native</label>
-                            </div>
-                            <div class="col-lg-8" id="txtfathernativediv">
-                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtfathernative" />
-                            </div>
-                            <div class="col-lg-8" id="lblfathernativediv">
-                                <label id="lblfathernative"></label>
-
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divMotherNative">
-                            <div class="col-lg-4">
-                                <label class="control-label">
-                                    Mother Native</label>
-                            </div>
-                            <div class="col-lg-8" id="txtmothernativediv">
-                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtMothernative" />
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divSalary">
-                            <div class="col-lg-4">
-                                <label class="control-label">Salary</label>
-                            </div>
-
-
-                            <div class="col-lg-8 doubleselect" id="ddlAnnualincomediv" style="padding-left: 0px;">
-                                <div class="col-lg-6 pull-left">
-                                    <select multiselectdropdown ng-model="misObj.ddlAnnualincome" typeofdata="'currency'"></select>
                                 </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtSalary" ng-blur="currencyChange();" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
-                                        MaxLength="7" />
+                                <div class="col-lg-8" id="txtfathernativediv">
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtfathernative" />
                                 </div>
+                                <div class="col-lg-8" id="lblfathernativediv">
+                                    <label id="lblfathernative"></label>
 
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divIssharedproperty">
-                            <div class="col-lg-4">
-                                <label class="control-label">
-                                    Shared property</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <md-radio-group layout="row" ng-model="misObj.rdlSharedProperty" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
-                                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
-                                    <md-radio-button value="0"> No </md-radio-button>
-                                </md-radio-group>
-
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divProperty">
-                            <div class="col-lg-4">
-                                <label class="control-label">
-                                    Property lakhs</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" />
-
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="control-group  col-lg-12" ng-hide="divStarlanguage">
-                            <div class="col-lg-4">
-                                <label class="control-label">Star language</label>
-                            </div>
-                            <div class="col-lg-8" id="ddlstarlanguagesdiv">
-
-                                <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',ddlstarlanguages);"></select>
-
+                                </div>
                             </div>
                             <div class="clearfix"></div>
 
-                            <div class="col-lg-8" id="lblddlstarlanguagesdiv">
-                                <label id="lblddlstarlanguages"></label>
-
+                            <div class="control-group  col-lg-12" ng-hide="divMotherNative">
+                                <div class="col-lg-4">
+                                    <label class="control-label">
+                                    Mother Native</label>
+                                </div>
+                                <div class="col-lg-8" id="txtmothernativediv">
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtMothernative" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group  col-lg-12" ng-hide="divStar">
-                            <div class="col-lg-4">
-                                <label class="control-label">Star</label>
+
+                            <div class="clearfix"></div>
+
+                            <div class="control-group  col-lg-12" ng-hide="divSalary">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Salary</label>
+                                </div>
+
+
+                                <div class="col-lg-8 doubleselect" id="ddlAnnualincomediv" style="padding-left: 0px;">
+                                    <div class="col-lg-6 pull-left">
+                                        <select multiselectdropdown ng-model="misObj.ddlAnnualincome" typeofdata="'currency'"></select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control textboxclear" ng-model="misObj.txtSalary" ng-blur="currencyChange();" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                                            MaxLength="7" />
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="col-lg-8" id="lststardiv">
-                                <select multiselectdropdown ng-model="misObj.lststar" ng-options="item.value as item.label for item in starArr"></select>
+                            <div class="clearfix"></div>
 
+                            <div class="control-group  col-lg-12" ng-hide="divIssharedproperty">
+                                <div class="col-lg-4">
+                                    <label class="control-label">
+                                    Shared property</label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <md-radio-group layout="row" ng-model="misObj.rdlSharedProperty" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
+                                        <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                        <md-radio-button value="0"> No </md-radio-button>
+                                    </md-radio-group>
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+
+                            <div class="control-group  col-lg-12" ng-hide="divProperty">
+                                <div class="col-lg-4">
+                                    <label class="control-label">
+                                    Property lakhs</label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" />
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="control-group  col-lg-12" ng-hide="divStarlanguage">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Star language</label>
+                                </div>
+                                <div class="col-lg-8" id="ddlstarlanguagesdiv">
+
+                                    <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',ddlstarlanguages);"></select>
+
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-8" id="lblddlstarlanguagesdiv">
+                                    <label id="lblddlstarlanguages"></label>
+
+                                </div>
+                            </div>
+                            <div class="control-group  col-lg-12" ng-hide="divStar">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Star</label>
+                                </div>
+                                <div class="col-lg-8" id="lststardiv">
+                                    <select multiselectdropdown ng-model="misObj.lststar" ng-options="item.value as item.label for item in starArr"></select>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
 
 
-                        <div class="control-group  col-lg-12" ng-hide="divGothram">
-                            <div class="col-lg-4">
-                                <label class="control-label">
+                            <div class="control-group  col-lg-12" ng-hide="divGothram">
+                                <div class="col-lg-4">
+                                    <label class="control-label">
                                     Gothram/Gotra</label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtgothram" />
+                                </div>
                             </div>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control textboxclear" ng-model="misObj.txtgothram" />
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
+                            <div class="clearfix"></div>
 
-                    </div>
-                </div>
-                <div class="modal-footer">
-
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <input type="button" ng-click="misFieldsSubmit(misObj);" value="Submit" class="button_custom  pull-right">
-                        </div>
-                        <div class="col-lg-3">
-                            <input value="Skip this page" ng-hide="divSkip" ng-click="redirectToMobVerification();" class="button_custom button_custom_reset  pull-left" ng-click="cancel();" type="button">
                         </div>
                     </div>
-                </div>
-            </ul>
+                    <div class="modal-footer">
+
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <input type="submit" value="Submit" class="button_custom  pull-right">
+                            </div>
+                            <div class="col-lg-3">
+                                <input value="Skip this page" ng-hide="divSkip" ng-click="redirectToMobVerification();" class="button_custom button_custom_reset  pull-left" ng-click="cancel();" type="button">
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
         </div>
-    </div>
+    </form>
+
 </script>
 
 
@@ -255,9 +258,6 @@
             <form name="eduForm" novalidate role="form" ng-submit="eduSubmit(edoObj);">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Education Details
-                        <a href="javascript:void(0);" ng-click="cancel();">
-                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
-                        </a>
                     </h3>
                 </div>
                 <div class="modal-body" id="modal-body">
@@ -339,9 +339,6 @@
             <form name="profForm" novalidate role="form" ng-submit="ProfSubmit(profObj);">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Profession details
-                        <a href="javascript:void(0);" ng-click="cancel();">
-                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
-                        </a>
                     </h3>
                 </div>
                 <div class="modal-body clearfix pop_content_my" id="modal-body">
@@ -449,9 +446,6 @@
             <form name="parentForm" novalidate role="form" ng-submit="ParentSubmit(parent)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Parent details
-                        <a href="javascript:void(0);" ng-click="cancel();">
-                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
-                        </a>
                     </h3>
                 </div>
                 <div class="modal-body" id="modal-body">
@@ -570,12 +564,12 @@
                             <li class="clearfix form-group">
                                 <label for="lblMotherFname" class="pop_label_left">Mother's Father Name </label>
                                 <div class="pop_controls_right select-box-my">
-                                    <input type=text ng-model="parent.txtMFatherFname" class="form-control" placeholder="FIRST NAME" tabindex="47" maxlength="100" />
+                                    <input type="text" ng-model="parent.txtMFatherFname" class="form-control" placeholder="FIRST NAME" tabindex="47" maxlength="100" />
                             </li>
                             <li class="clearfix form-group">
                                 <label for="lblMotherFname" class="pop_label_left">Mother's Last Name </label>
                                 <div class="pop_controls_right select-box-my">
-                                    <input type=text ng-model="parent.txtMFatherLname" class="form-control" placeholder="LAST NAME" tabindex="48" maxlength="50" />
+                                    <input type="text" ng-model="parent.txtMFatherLname" class="form-control" placeholder="LAST NAME" tabindex="48" maxlength="50" />
 
                                 </div>
                             </li>
@@ -587,7 +581,7 @@
                             <li class="clearfix form-group">
                                 <label for="MNativePlace" class="pop_label_left">Native Place</label>
                                 <div class="pop_controls_right">
-                                    <input type=text ng-model="parent.txtMNativePlace" class="form-control" maxlength="150" tabindex="60" />
+                                    <input type="text" ng-model="parent.txtMNativePlace" class="form-control" maxlength="150" tabindex="60" />
                                 </div>
                             </li>
                             <li class="clearfix form-group">
@@ -640,9 +634,6 @@
             <form name="astroForm" novalidate role="form" ng-submit="astroSubmit(atroObj)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Astro details
-                        <a href="javascript:void(0);" ng-click="cancel();">
-                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
-                        </a>
                     </h3>
                 </div>
                 <div class="modal-body clearfix pop_content_my" id="modal-body">
@@ -776,5 +767,13 @@
             margin: 0 !important;
             max-width: 100px;
             width: 100%;
+        }
+        
+        .input-group[class*="col-"] {
+            float: left;
+        }
+        
+        .help-block {
+            padding-left: 35%;
         }
     </style>

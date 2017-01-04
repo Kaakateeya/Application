@@ -1,6 +1,6 @@
 app.constant('arrayConstants', {
     'MaritalStatus': [
-
+        { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "Unmarried", "title": "Unmarried", "value": 43 },
         { "label": "Divorce", "title": "Divorce", "value": 44 },
         { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
@@ -8,7 +8,7 @@ app.constant('arrayConstants', {
     ],
     "height": [
 
-        { "label": "--select--", "title": "--select--", "value": 0 },
+        { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
         { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
@@ -76,7 +76,22 @@ app.constant('arrayConstants', {
         { "label": "telugu", "title": "telugu", "value": 14 }
     ],
     "educationcategory": [
-
+        { "label": "--select--", "title": "--select--", "value": "" },
+        { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
+        { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
+        { "label": "Diploma", "title": "Diploma", "value": 3 },
+        { "label": "Doctorate/phd", "title": "Doctorate/phd", "value": 4 },
+        { "label": "Masters in Engineering", "title": "Masters in Engineering", "value": 5 },
+        { "label": "Bachelors in Medicine", "title": "Bachelors in Medicine", "value": 6 },
+        { "label": "Masters in Degree", "title": "Masters in Degree", "value": 7 },
+        { "label": "Finance - ICWAI/CA/CS", "title": "Finance - ICWAI/CA/CS", "value": 10 },
+        { "label": "Union Public Service Commision-Civil Services", "title": "Union Public Service Commision-Civil Services", "value": 11 },
+        { "label": "Masters in Medicine", "title": "Masters in Medicine", "value": 13 },
+        { "label": "Below Graduation", "title": "Below Graduation", "value": 15 },
+        { "label": "Not given", "title": "Not given", "value": 21 },
+        { "label": "Other", "title": "Other", "value": 22 }
+    ],
+    "educationcategorywithoutselect": [
         { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
         { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
         { "label": "Diploma", "title": "Diploma", "value": 3 },
@@ -359,6 +374,14 @@ app.constant('arrayConstants', {
         { "label": "Aunt", "title": "Aunt", "value": 562 }
 
     ],
-    'Upgrade': "Upgrade online Membership"
+    'Upgrade': "Upgrade online Membership",
+    'Complexion': [
+        { "label": "--select-- ", "title": "--select--", "value": "" },
+        { "label": "Very Fair", "title": "Very Fair", "value": 17 },
+        { "label": "Fair", "title": "Fair", "value": 18 },
+        { "label": "Medium", "title": "Medium", "value": 19 },
+        { "label": "Dark", "title": "Dark", "value": 20 },
+        { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
+    ]
 
 });

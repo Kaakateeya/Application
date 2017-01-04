@@ -1,9 +1,10 @@
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
-    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService', '$stateParams', 'route',
+    '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService',
+    '$stateParams', 'route', 'helperservice',
     function(scope, arrayConstants, service, searches, alerts, uibModal, commonFactory,
         customerDashboardServices, authSvc, $mdDialog, $location, getArray,
-        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route) {
+        timeout, $rootscope, commonpopup, missingFieldService, $stateParams, route, helperservice) {
         var SearchRequest = {};
         var logincustid = authSvc.getCustId();
         var globalheight;
@@ -61,7 +62,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         };
         scope.controlsbinding = function() {
             scope.modelsearch.height = arrayConstants.height;
-            scope.modelsearch.educationcategory = arrayConstants.educationcategory;
+            scope.modelsearch.educationcategory = arrayConstants.educationcategorywithoutselect;
+            if (angular.lowercase(arrayConstants.MaritalStatus[0].title) === '--select--') {
+                arrayConstants.MaritalStatus.splice(0, 1);
+            }
             scope.modelsearch.MaritalStatus = arrayConstants.MaritalStatus;
             scope.modelsearch.Mothertongue = arrayConstants.Mothertongue;
             scope.modelsearch.visastatus = arrayConstants.visastatus;
@@ -369,7 +373,8 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.modelsearch.truepartner = false;
-            if (scope.modelsearch.custid !== null && scope.modelsearch.custid !== "" && scope.modelsearch.custid !== undefined) {
+
+            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.modelsearch.truepartnerrefine = false;
             } else {
                 scope.modelsearch.truepartnerrefine = true;
@@ -428,6 +433,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
+
                     if (scope.checkLength()) {
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
@@ -439,28 +445,35 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             StartIndex: frompage,
                             EndIndex: topage,
                         };
-                        searches.profileidsearch(SearchRequest).then(function(response) {
-                            if (parseInt(frompage) === 1) {
-                                scope.modelsearch.PartnerProfilesnew = [];
-                                if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                        if (scope.modelsearch.custid !== undefined && scope.modelsearch.custid !== null && scope.modelsearch.custid !== "") {
+                            searches.profileidsearch(SearchRequest).then(function(response) {
+                                if (parseInt(frompage) === 1) {
+                                    scope.modelsearch.PartnerProfilesnew = [];
+                                    if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                                        _.each(response.data, function(item) {
+                                            scope.modelsearch.PartnerProfilesnew.push(item);
+                                        });
+                                    } else {
+                                        scope.modelsearch.showcontrols = true;
+                                        scope.modelsearch.truepartner = true;
+                                        scope.modelsearch.truepartnerrefine = true;
+                                        alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                    }
+                                } else {
                                     _.each(response.data, function(item) {
                                         scope.modelsearch.PartnerProfilesnew.push(item);
                                     });
-                                } else {
-                                    scope.modelsearch.showcontrols = true;
-                                    scope.modelsearch.truepartner = true;
-                                    scope.modelsearch.truepartnerrefine = true;
-                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
                                 }
-                            } else {
-                                _.each(response.data, function(item) {
-                                    scope.modelsearch.PartnerProfilesnew.push(item);
-                                });
+                                scope.modelsearch.loadinging = true;
+                            });
+                            if (scope.modelsearch.slideshow !== "slideshow") {
+                                scope.$broadcast('loadmore');
                             }
-                            scope.modelsearch.loadinging = true;
-                        });
-                        if (scope.modelsearch.slideshow !== "slideshow") {
-                            scope.$broadcast('loadmore');
+                        } else {
+                            scope.modelsearch.showcontrols = true;
+                            scope.modelsearch.truepartner = true;
+                            scope.modelsearch.truepartnerrefine = true;
+                            alerts.dynamicpopup("login.html", scope, uibModal);
                         }
                     } else {
                         scope.modelsearch.loadinging = true;
@@ -617,21 +630,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.hightTorefine = function() {
             scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
         };
-
-
         scope.showloginpopup = function() {
-            commonpopup.open('login.html', scope, uibModal, 'sm');
+            alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
         scope.showloginpopupnew = function() {
-            commonpopup.closepopup();
-            commonpopup.open('loginpopup.html', scope, uibModal, 'sm');
+            alerts.dynamicpopupclose();
+            alerts.dynamicpopup('loginpopup.html', scope, uibModal, 'sm');
         };
 
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });
         scope.cancelpopup = function() {
-            commonpopup.closepopup();
+            alerts.dynamicpopupclose();
         };
         scope.validate = function(formloagin) {
             if ((formloagin.username).indexOf("@") !== -1) {
@@ -692,7 +703,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
                         });
-                        commonpopup.closepopup();
+                        alerts.dynamicpopupclose();
                     });
                 }
             }

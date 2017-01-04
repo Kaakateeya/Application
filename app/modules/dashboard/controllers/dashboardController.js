@@ -613,7 +613,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.pageloadbind(response);
                         }
-                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', scope.bindallcounts.ReceivedPhotoRequestCount);
+                        scope.receivesrecphotoss(1, 9, 'RP', 'Members are requesting to upload your photo', 'Requestphotos', "UnPaid", scope.bindallcounts.ReceivedPhotoRequestCount);
                     });
                     break;
                 case "Express":
@@ -676,6 +676,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
 
                 }
+                scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
             });
         };
 
