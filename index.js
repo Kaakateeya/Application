@@ -122,6 +122,7 @@ app.run(function($rootScope, $state) {
                         console.log('success');
                         if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
                             $state.go('mobileverf');
+                            e.preventDefault();
                         } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
                             window.location = "missingfields/" + misStatus;
                         }
