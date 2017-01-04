@@ -9,7 +9,7 @@
 
 
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate'
+    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule'
 ]);
 app.apiroot = 'http://183.82.0.58:8010/Api/'
 
@@ -125,7 +125,6 @@ app.run(function($rootScope, $state) {
                         } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
                             window.location = "missingfields/" + misStatus;
                         }
-
                     }
                 }
 

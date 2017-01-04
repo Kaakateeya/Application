@@ -2,6 +2,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     function(scope, mobileVerificationService, authSvc, route) {
         scope.pageloadSelect = {};
         var logincustid = authSvc.getCustId();
+
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.pageLoad = function(custid) {
             mobileVerificationService.getmobileverificationData(custid).then(function(res) {

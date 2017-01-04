@@ -3116,6 +3116,7 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     function(scope, mobileVerificationService, authSvc, route) {
         scope.pageloadSelect = {};
         var logincustid = authSvc.getCustId();
+
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.pageLoad = function(custid) {
             mobileVerificationService.getmobileverificationData(custid).then(function(res) {
@@ -4563,6 +4564,7 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 };
 
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
+                    console.log(response);
                     scope.CustName = scope.txtname;
                     if (response.data !== null) {
                         scope.lblTicketID = response.data.Ticket !== null ? response.data.Ticket : '';
