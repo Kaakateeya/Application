@@ -144,7 +144,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return string !== null ? (string.split(',')).map(Number) : null;
         };
         scope.partnerbindings = function(response) {
-            debugger;
+
             scope.modelsearch.casteshow = false;
             scope.modelsearch.gender = (response.data.intGender) === 2 ? 2 : 1;
             scope.modelsearch.AgeFrom = response.data.Ageto;
@@ -337,7 +337,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
 
         scope.resetfunctionality = function() {
-            debugger;
+
             // scope.truepartner= true;
             //  scope.truepartnerrefine = true;
             // scope.modelsearch.gender = 2;

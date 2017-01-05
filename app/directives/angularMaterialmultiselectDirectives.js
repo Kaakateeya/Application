@@ -25,7 +25,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
                 scope.$watch('model', function(current, old) {
-                    debugger;
+
                     if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
                         if (scope.model.length === scope.array.length) {
                             scope.model = null;
