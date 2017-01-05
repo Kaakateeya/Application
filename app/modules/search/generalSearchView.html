@@ -102,7 +102,7 @@
     <div class="profile_settings_tabs">
         <div class="sample" layout="column" ng-cloak>
             <md-content class="md-padding">
-                <md-tabs md-selected="modelsearch.selectedIndex" md-dynamic-height flex md-border-bottom md-autoselect>
+                <md-tabs md-selected="selectedIndex" md-dynamic-height flex md-border-bottom md-autoselect>
                     <md-tab label="General Search">
                         <div class="tab">
                             <form name="generalsearch" role="form">
@@ -147,7 +147,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'maritalstatusid'" class="general" array="modelsearch.MaritalStatus" change="true" model="modelsearch.maritalstatus">
+                                                <angular-multiselect id="'maritalstatusid'" class="general" array="MaritalStatus" change="true" model="modelsearch.maritalstatus">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'countrygeneral'" class="general" array="modelsearch.Country" change="true" model="modelsearch.country">
+                                                <angular-multiselect id="'countrygeneral'" class="general" array="Country" change="true" model="modelsearch.country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -199,7 +199,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <br>
-                                        <div class="control-group" ng-show="modelsearch.getpaidstatus==='1'?true:false">
+                                        <div class="control-group" ng-show="modelsearch.getpaidstatus">
                                             <div class="controls">
                                                 <div layout-gt-sm="row">
                                                     <md-radio-group layout="row" ng-model="modelsearch.regdays" class="md-block" flex-gt-sm>
@@ -218,8 +218,8 @@
                                         <br>
                                         <br>
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('general',1,8)">Search</md-button>
-                                        <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                        <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus==='1'?true:false" ng-click="savedseapopup('general')">{{modelsearch.generalsavedsearchbtn}}</md-button>
+                                        <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')" ng-hide="true">Reset</md-button>
+                                        <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus" ng-click="savedseapopup('general')">{{modelsearch.generalsavedsearchbtn}}</md-button>
                                         <br>
                                         <br>
                                         <br>
@@ -275,7 +275,7 @@
                                             <label class="control-label">Marital status</label>
 
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedmaritalstatusid'" class="general" array="modelsearch.MaritalStatus" change="true" model="modelsearch.maritalstatus">
+                                                <angular-multiselect id="'advancedmaritalstatusid'" class="general" array="MaritalStatus" change="true" model="modelsearch.maritalstatus">
                                                 </angular-multiselect>
                                             </div>
 
@@ -332,7 +332,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Country living in</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedcountryliving'" class="general" array="modelsearch.Country" type="'Country'" model="modelsearch.country">
+                                                <angular-multiselect id="'advancedcountryliving'" class="general" array="Country" type="'Country'" model="modelsearch.country">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -371,7 +371,7 @@
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Profession group</label>
                                             <div class="controls clearfix" style="margin-right: 16px;">
-                                                <angular-multiselect id="'advancedprofessiongroup'" class="general" array="modelsearch.Professiongroup" change="true" model="modelsearch.Professiongroupadvance">
+                                                <angular-multiselect id="'advancedprofessiongroup'" class="general" array="Professiongroup" change="true" model="modelsearch.Professiongroupadvance">
                                                 </angular-multiselect>
                                             </div>
                                         </div>
@@ -434,7 +434,7 @@
                                                 <md-radio-button value="">Both </md-radio-button>
                                             </md-radio-group>
                                             <br>
-                                            <md-radio-group ng-show="modelsearch.getpaidstatus==='1'?true:false" layout="row" ng-model="modelsearch.regdays" class="md-block" flex-gt-sm>
+                                            <md-radio-group ng-show="modelsearch.getpaidstatus" layout="row" ng-model="modelsearch.regdays" class="md-block" flex-gt-sm>
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                 <md-radio-button value="15"> 15days </md-radio-button>
@@ -446,8 +446,8 @@
                                     <md-divider ng-if="!$last"></md-divider>
                                     <p ng-show="modelsearch.custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,8)">Search</md-button>
-                                    <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus==='1'?true:false" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
+                                    <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')" ng-hide="true">Reset</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
                                 </div>
                             </form>
                         </div>
@@ -492,7 +492,7 @@
                                     </div>
 
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid',1,8)">Search</md-button>
-                                    <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')">Reset</md-button>
+                                    <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')" ng-hide="true">Reset</md-button>
                                 </form>
                             </div>
                         </div>
@@ -530,7 +530,7 @@
         </div>
     </div>
 </div>
-<div class="register_page_main clearfix" ng-hide="modelsearch.truepartnerrefine">
+<div class="register_page_main clearfix" ng-hide="truepartnerrefine">
     <div class="clearfix">
         <div class="refine_search_new clearfix">
             <div class="refine_search_new_sub clearfix">
@@ -595,12 +595,12 @@
         </div>
     </div>
 </div>
-<div class="wrapper register_page_main clearfix" ng-hide="modelsearch.truepartner">
+<div class="wrapper register_page_main clearfix" ng-hide="truepartner">
     <div class="row">
     <div class="col-lg-6">
-         <div id="searchresultprofilesdiv" ng-hide="modelsearch.truepartnerrefine">
+         <div id="searchresultprofilesdiv" ng-hide="truepartnerrefine">
             <h4>search results - <span>
-                  <label id="refinetotalrecords">{{modelsearch.PartnerProfilesnew[0].TotalRows}}</label>
+                  <label id="refinetotalrecords">{{PartnerProfilesnew[0].TotalRows}}</label>
             <small>Profiles found</small></span></h4>
           </div>
         </div>
@@ -614,7 +614,7 @@
                          <div class="row" ng-hide="modelsearch.loadinging">
                            <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" md-diameter="60"></md-progress-circular>
                          </div>
-                        <partner-data array="modelsearch.PartnerProfilesnew" typeofsearch="false" pagging="false"></partner-data>
+                        <partner-data array="PartnerProfilesnew" typeofsearch="false" pagging="false"></partner-data>
                     </div>
                 </div>
             </div>

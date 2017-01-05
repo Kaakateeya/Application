@@ -24,12 +24,14 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.$watch('array', function() {
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
-                scope.$watch('model', function() {
-
+                scope.$watch('model', function(current, old) {
+                    debugger;
                     if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
                         if (scope.model.length === scope.array.length) {
                             scope.model = null;
                         }
+                    } else if (scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 0) {
+                        scope.model = current;
                     }
                 });
                 scope.directivechangeevent = function(model) {
@@ -38,7 +40,7 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
 
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
-                    if (value !== 0 && value !== "0" && value !== "" && value !== undefined && value.length > 0) {
+                    if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
                         colors = "selectborderclasscolor";
                         $('#' + id).next().find('button').addClass("bacg");
                     } else {

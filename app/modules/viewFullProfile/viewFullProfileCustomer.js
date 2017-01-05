@@ -49,11 +49,11 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
                     scope.partnerinformation(response);
                 });
             } else {
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
                     scope.partnerinformation(response);
                 });
                 customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
@@ -129,15 +129,13 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         }
                     });
                 });
-                customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
-                    scope.slides = [];
-
-                    _.each(response.data, function(item) {
-                        scope.slides.push(item);
-                    });
-                });
             }
-
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
         };
 
         scope.servicehttp = function(type, object) {

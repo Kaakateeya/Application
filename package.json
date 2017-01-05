@@ -60,6 +60,7 @@
             "node_modules/jquery/dist/jquery.min.js",
             "bower_components/bootstrap/dist/js/bootstrap.min.js",
             "bower_components/angular/angular.min.js",
+            "//cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js",
             "node_modules/angular-ui-router/release/angular-ui-router.min.js",
             "node_modules/underscore/underscore-min.js",
             "bower_components/angular-re-captcha/angular-re-captcha.js",
@@ -82,7 +83,6 @@
             "node_modules/registration/dist/js/main.min.js",
             "bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js",
             "node_modules/angularjs-slider/dist/rzslider.min.js",
-            "//cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js",
             "http://rawgithub.com/tobia/Pause/master/jquery.pause.js"
         ],
         "css": [

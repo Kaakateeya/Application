@@ -50,18 +50,16 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                 };
                 scope.$on('loadmore', function(event, endflag) {
-
                     scope.loaderspin = false;
-                    if (scope.array.length > 0) {
+                    if (scope.array !== undefined && scope.array.length > 0) {
                         scope.endindex = (scope.array[0].TotalRows > scope.endindex === true) ? scope.endindex : scope.array[0].TotalRows;
                         scope.loadmore = (scope.array[0].TotalRows > scope.endindex) ? true : false;
                         scope.Norowsend = (scope.array[0].TotalRows === scope.endindex) ? true : false;
                     }
                 });
                 scope.$watch('array', function(value) {
-
                     scope.PartnerProfilesnew = scope.array;
-                    if (scope.array.length > 0) {
+                    if (scope.array !== undefined && scope.array.length > 0) {
                         scope.loadmore = scope.array[0].TotalRows > (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows > scope.endindex ? true : false;
                         scope.Norowsend = scope.array[0].TotalRows < (scope.paggingflag === false ? 8 : 9) || scope.array[0].TotalRows < scope.endindex ? true : false;
                         scope.startindex = 1;

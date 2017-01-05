@@ -40,10 +40,10 @@
                             <img id="imgprofile" ng-src="{{PersonalInfo.Photo}}" width="116" height="116" class="img-circle" />
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9 ">
-                        <h5>Welcome <span>
-                        <label id="lblCustName" style="font-size: 20px;">{{PersonalInfo.NAME}}</label>
-                    </span></h5>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <h5> <span style="color: #d93036;font-size: 20px;">Welcome</span>
+                            <span><label id="lblCustName" style="font-size: 20px;">{{PersonalInfo.NAME}}</label></span>
+                        </h5>
                         <div class="landing_page_head_lt_in_cont">
                             <div id="notifyDivc">
                                 <p ng-repeat="item in staticNotification" class="clearfix"> <span id="lblRepeateContains">{{item}}</span>
@@ -720,7 +720,7 @@
                     </div> 
                     
                     <div class="text-center">
-                    <a href="javascript:void(0);" style="font-weight:bold;" ng-click="loadMore(this);">load more</a>                                     
+                    <a href="javascript:void(0);" style="font-weight:bold;" ng-click="loadMore(this);" ng-hide="hidemorelnk">load more</a>                                     
                     </div>
                    </li>
                 </ul>  

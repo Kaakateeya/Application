@@ -676,7 +676,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
 
                 }
+                scope.hidemorelnk = false;
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
+                if (scope.notificationpopup.length === (scope.notificationpopup.length > 0 && scope.notificationpopup[0].TotalRows !== undefined) ? scope.notificationpopup[0].TotalRows : null) {
+                    scope.hidemorelnk = true;
+                }
             });
         };
 
