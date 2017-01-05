@@ -465,8 +465,10 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
-                        colors = "selectborderclasscolor";
-                        $('#' + id).next().find('button').addClass("bacg");
+                        if (value.toString() !== "0") {
+                            colors = "selectborderclasscolor";
+                            $('#' + id).next().find('button').addClass("bacg");
+                        }
                     } else {
                         colors = "selectborderclass";
                         $('#' + id).next().find('button').removeClass("bacg");
@@ -3286,7 +3288,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         }
         scope.applycolors = function(value, id) {
             var colors = "selectborderclass";
-            if (value !== 0 && value !== "0" && value !== "" && value !== undefined) {
+            if (value !== 0 && value !== "0" && value !== "" && value !== undefined && value !== null) {
                 colors = "selectborderclasscolor";
                 $('#' + id).next().find('button').addClass("bacg");
             } else {
@@ -3613,12 +3615,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.truepartner = false;
-
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.truepartnerrefine = false;
             } else {
                 scope.truepartnerrefine = true;
             }
+            scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
             switch (type) {
                 case "advanced":
                 case "general":

@@ -109,7 +109,7 @@ app.config(function(reCAPTCHAProvider) {
 })
 app.run(function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
-        debugger;
+
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();

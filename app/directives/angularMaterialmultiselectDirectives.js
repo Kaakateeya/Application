@@ -41,8 +41,10 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
-                        colors = "selectborderclasscolor";
-                        $('#' + id).next().find('button').addClass("bacg");
+                        if (value.toString() !== "0") {
+                            colors = "selectborderclasscolor";
+                            $('#' + id).next().find('button').addClass("bacg");
+                        }
                     } else {
                         colors = "selectborderclass";
                         $('#' + id).next().find('button').removeClass("bacg");
