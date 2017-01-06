@@ -1,8 +1,6 @@
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
-
     scope.showforgetpasswordpopup = function() {
         scope.$broadcast('showforgetpassword');
-
     };
     scope.searchpage = function(typeurl) {
         sessionStorage.removeItem("homepageobject");

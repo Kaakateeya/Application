@@ -1,6 +1,5 @@
 app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindService) {
     var modalpopupopen;
-
     return {
         open: function(url, scope, uibModal) {
             modalpopupopen = uibModal.open({
@@ -26,7 +25,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         },
         StateBind: function(parentval) {
             var stateArr = [];
-
             SelectBindService.stateSelect(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     stateArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -37,7 +35,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         districtBind: function(parentval) {
             var disttrictArr = [];
             disttrictArr.push({ "label": "--select--", "title": "--select--", "value": "" });
-
             SelectBindService.districtSelect(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     disttrictArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -56,7 +53,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             });
             return cityeArr;
         },
-
         professionBind: function(parentval) {
             var professionArr = [];
             professionArr.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -69,7 +65,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return professionArr;
         },
         educationGroupBind: function(parentval) {
-           
             var educationGroupArr = [];
             SelectBindService.EducationGroup(parentval).then(function(response) {
                 _.each(response.data, function(item) {
@@ -88,10 +83,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             });
             return educationSpecialArr;
         },
-
         numbersBind: function(str, from, to) {
             var numArr = [];
-
             numArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             for (var i = from; i <= to; i++) {
                 numArr.push({ "label": i + " " + str, "title": i + " " + str, "value": i });
@@ -121,7 +114,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return starArr;
         },
         casteDepedency: function(parentval1, parentval2) {
-         
             var casteArr = [];
             SelectBindService.castedependency(parentval1, parentval2).then(function(response) {
                 _.each(response.data, function(item) {
@@ -151,7 +143,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return branchArr;
         },
         showConfirm: function(ev, mdDialog, header, okTxt, cancelTxt) {
-
             var status = false;
             var confirm = mdDialog.confirm()
                 .title(header)
@@ -167,7 +158,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         checkvals: function(val) {
             return (val !== undefined && val !== null && val !== '') ? true : false;
         }
-
     };
 
 }]);

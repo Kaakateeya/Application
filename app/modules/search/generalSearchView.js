@@ -19,27 +19,32 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.PartnerProfilesnew = [];
         scope.truepartner = true;
         scope.truepartnerrefine = true;
+        scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
+
             var storeValue = "";
-            if (whereValue.indexOf(',') === -1) {
-                _.filter(arr, function(obj) {
-                    if ((obj.value) == parseInt(whereValue)) {
-                        storeValue = obj.label;
-                    }
-                });
-            } else {
-                var arrvals = whereValue.split(',');
-                _.each(arrvals, function(item, index) {
+            if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
+                if (whereValue.indexOf(',') === -1) {
                     _.filter(arr, function(obj) {
-                        if ((obj.value) == parseInt(arrvals[index])) {
-                            storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
+                        if ((obj.value) == parseInt(whereValue)) {
+                            storeValue = obj.label;
                         }
                     });
-                });
+                } else {
+                    var arrvals = whereValue.split(',');
+                    _.each(arrvals, function(item, index) {
+                        _.filter(arr, function(obj) {
+                            if ((obj.value) == parseInt(arrvals[index])) {
+                                storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
+                            }
+                        });
+                    });
+                }
             }
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -424,10 +429,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 scope.truepartnerrefine = true;
             }
-            scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
+
             switch (type) {
                 case "advanced":
                 case "general":
+                    // scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
                     scope.modelsearch.typesearch = type;
                     // scope.sliders.minvalueyext = scope.checkheight(scope.sliders.minvalueyext);
                     // scope.sliders.maxValuetext = scope.checkheight(scope.sliders.maxValuetext);
@@ -441,10 +447,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.PartnerProfilesnew.push(item);
                                 });
                             } else {
-                                scope.modelsearch.showcontrols = true;
-                                scope.truepartner = true;
-                                scope.truepartnerrefine = true;
-                                alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                if (scope.refinesubmitflag === "refine") {
+                                    scope.refinesubmitflag = "normal";
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change your Refine search cretria', 2500);
+                                } else {
+                                    scope.modelsearch.showcontrols = true;
+                                    scope.truepartner = true;
+                                    scope.truepartnerrefine = true;
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                }
                             }
                         } else {
                             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
@@ -480,6 +491,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
+                    scope.truepartnerrefine = true;
                     if (scope.checkLength()) {
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
@@ -500,10 +512,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                             scope.PartnerProfilesnew.push(item);
                                         });
                                     } else {
-                                        scope.modelsearch.showcontrols = true;
-                                        scope.truepartner = true;
-                                        scope.truepartnerrefine = true;
-                                        alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                        if (scope.refinesubmitflag === "refine") {
+                                            scope.refinesubmitflag = "normal";
+                                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change your Refine search cretria', 2500);
+                                        } else {
+                                            scope.modelsearch.showcontrols = true;
+                                            scope.truepartner = true;
+                                            scope.truepartnerrefine = true;
+                                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                        }
                                     }
                                 } else {
                                     _.each(response.data, function(item) {
@@ -663,10 +680,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.refinesubmit = function() {
+            scope.refinesubmitflag = "refine";
             // scope.modelsearch.AgeFrom = scope.slider.minValue;
             // scope.modelsearch.Ageto = scope.slider.maxValue;
             // scope.modelsearch.HeightFrom = scope.sliders.minValue;
             // scope.modelsearch.Heightto = scope.sliders.maxValue;
+
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };

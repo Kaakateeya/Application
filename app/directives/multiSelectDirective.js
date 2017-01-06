@@ -30,15 +30,12 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'MaritalStatus':
                         scope.databind(cons.MaritalStatus);
                         break;
-
                     case 'height':
                         scope.databind(cons.height);
                         break;
-
                     case 'Religion':
                         scope.databind(cons.Religion);
                         break;
-
                     case 'Mothertongue':
                         scope.databind(cons.Mothertongue);
                         break;
@@ -48,53 +45,40 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'educationcategory':
                         scope.databind(cons.educationcategory);
                         break;
-
                     case 'visastatus':
                         scope.databind(cons.visastatus);
                         break;
-
                     case 'stars':
                         scope.databind(cons.stars);
                         break;
-
                     case 'region':
                         scope.databind(cons.region);
                         break;
-
                     case 'bodyType':
                         scope.databind(cons.bodyType);
                         break;
-
                     case 'bloodGroup':
                         scope.databind(cons.bloodGroup);
                         break;
-
                     case 'healthCondition':
                         scope.databind(cons.healthCondition);
                         break;
-
                     case 'starLanguage':
                         scope.databind(cons.starLanguage);
                         break;
-
                     case 'lagnam':
                         scope.databind(cons.lagnam);
                         break;
-
                     case 'ZodaicSign':
                         scope.databind(cons.ZodaicSign);
                         break;
-
                     case 'paadam':
                         scope.databind(cons.paadam);
                         break;
-
                     case 'familyStatus':
                         scope.databind(cons.familyStatus);
                         break;
-
                     case 'RelationshipType':
-
                         scope.databind(cons.RelationshipType);
                         break;
                     case "childStayingWith":
@@ -103,32 +87,24 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'hereabout':
                         scope.databind(cons.hereabout);
                         break;
-
-
                     case 'improveourwebsite':
                         scope.databind(cons.improveourwebsite);
                         break;
-
                     case 'prices':
                         scope.databind(cons.prices);
                         break;
-
                     case 'downloadtime':
                         scope.databind(cons.downloadtime);
                         break;
-
                     case 'yourratethesearch':
                         scope.databind(cons.yourratethesearch);
                         break;
-
                     case 'comparesites':
                         scope.databind(cons.comparesites);
                         break;
-
                     case 'recomendedtofriends':
                         scope.databind(cons.recomendedtofriends);
                         break;
-
                     case 'Country':
                         service.countrySelect().then(function(response) {
                             var option = [];
@@ -139,9 +115,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'ProfCatgory':
-
                         service.ProfessionCatgory().then(function(response) {
                             var option = [];
                             option.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -151,7 +125,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'ProfGroup':
                         service.ProfessionGroup().then(function(response) {
                             var option = [];
@@ -162,7 +135,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'indiaStates':
                         service.stateSelect('1').then(function(response) {
                             var option = [];
@@ -220,11 +192,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'Priority':
                         scope.databind(cons.Priority);
                         break;
-
                     case 'Age':
                     case 'Ageselect':
                         var test = [];
-
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
                             if (scope.typeofdata === "Ageselect") {
@@ -269,7 +239,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         //     }
                         //     scope.databind(Arr);
                         //     break;
-
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
@@ -299,14 +268,10 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 scope.$applyAsync(element.multiselect('rebuild'));
                 element.multiselect('select', scope.ngModel);
             });
-
             // Watch for any changes from outside the directive and refresh
             scope.$watch(attrs.ngModel, function() {
                 element.multiselect('refresh');
             });
-
-
         }
-
     };
 }]);

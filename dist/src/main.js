@@ -423,13 +423,12 @@ app.constant('config', function() {
     };
 });
 app.directive("angularMultiselect", ["$injector", 'authSvc',
-    'successstoriesdata', 'alert', '$timeout',
-    function($injector, authSvc, successstoriesdata, alerts, timeout) {
+    'successstoriesdata', 'alert', '$timeout', 'helperservice',
+    function($injector, authSvc, successstoriesdata, alerts, timeout, helperservice) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         return {
             restrict: "E",
-
             scope: {
                 array: '=',
                 type: '=',
@@ -437,34 +436,31 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 castehideval: '@',
                 id: '='
             },
-
             templateUrl: "templates/angualarMaterialmultiselect.html",
             link: function(scope, element, attrs) {
                 scope.selectallMdl = false;
                 scope.IDs = scope.id;
-                scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
-                scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
+                scope.Caste = helperservice.checkarraylength(scope.array) ? scope.array : [];
+                scope.Castehide = helperservice.checkstringvalue(scope.array) ? false : true;
                 scope.Castehide = scope.castehideval === 'castehid' ? true : false;
                 scope.$watch('array', function() {
-                    scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
+                    scope.Caste = helperservice.checkarraylength(scope.array) ? scope.array : [];
                 });
                 scope.$watch('model', function(current, old) {
-
-                    if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
+                    if (helperservice.checkstringvalue(scope.array) && scope.array.length > 100 && helperservice.checkstringvalue(scope.model) && scope.model.length > 100) {
                         if (scope.model.length === scope.array.length) {
                             scope.model = null;
                         }
-                    } else if (scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 0) {
+                    } else if (helperservice.checkarraylength(scope.model)) {
                         scope.model = current;
                     }
                 });
                 scope.directivechangeevent = function(model) {
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
-
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
-                    if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
+                    if (value !== 0 && value !== "0" && helperservice.checkarraylength(value)) {
                         if (value.toString() !== "0") {
                             colors = "selectborderclasscolor";
                             $('#' + id).next().find('button').addClass("bacg");
@@ -482,7 +478,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
 ]);
 app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindService) {
     var modalpopupopen;
-
     return {
         open: function(url, scope, uibModal) {
             modalpopupopen = uibModal.open({
@@ -508,7 +503,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         },
         StateBind: function(parentval) {
             var stateArr = [];
-
             SelectBindService.stateSelect(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     stateArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -519,7 +513,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         districtBind: function(parentval) {
             var disttrictArr = [];
             disttrictArr.push({ "label": "--select--", "title": "--select--", "value": "" });
-
             SelectBindService.districtSelect(parentval).then(function(response) {
                 _.each(response.data, function(item) {
                     disttrictArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -538,7 +531,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             });
             return cityeArr;
         },
-
         professionBind: function(parentval) {
             var professionArr = [];
             professionArr.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -551,7 +543,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return professionArr;
         },
         educationGroupBind: function(parentval) {
-           
             var educationGroupArr = [];
             SelectBindService.EducationGroup(parentval).then(function(response) {
                 _.each(response.data, function(item) {
@@ -570,10 +561,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             });
             return educationSpecialArr;
         },
-
         numbersBind: function(str, from, to) {
             var numArr = [];
-
             numArr.push({ "label": "--select--", "title": "--select--", "value": "" });
             for (var i = from; i <= to; i++) {
                 numArr.push({ "label": i + " " + str, "title": i + " " + str, "value": i });
@@ -603,7 +592,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return starArr;
         },
         casteDepedency: function(parentval1, parentval2) {
-         
             var casteArr = [];
             SelectBindService.castedependency(parentval1, parentval2).then(function(response) {
                 _.each(response.data, function(item) {
@@ -633,7 +621,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
             return branchArr;
         },
         showConfirm: function(ev, mdDialog, header, okTxt, cancelTxt) {
-
             var status = false;
             var confirm = mdDialog.confirm()
                 .title(header)
@@ -649,7 +636,6 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
         checkvals: function(val) {
             return (val !== undefined && val !== null && val !== '') ? true : false;
         }
-
     };
 
 }]);
@@ -809,7 +795,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         });
                     }
                 };
-
                 scope.$on('showforgetpassword', function(event) {
                     scope.showforgetpassword();
                 });
@@ -849,15 +834,12 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'MaritalStatus':
                         scope.databind(cons.MaritalStatus);
                         break;
-
                     case 'height':
                         scope.databind(cons.height);
                         break;
-
                     case 'Religion':
                         scope.databind(cons.Religion);
                         break;
-
                     case 'Mothertongue':
                         scope.databind(cons.Mothertongue);
                         break;
@@ -867,53 +849,40 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'educationcategory':
                         scope.databind(cons.educationcategory);
                         break;
-
                     case 'visastatus':
                         scope.databind(cons.visastatus);
                         break;
-
                     case 'stars':
                         scope.databind(cons.stars);
                         break;
-
                     case 'region':
                         scope.databind(cons.region);
                         break;
-
                     case 'bodyType':
                         scope.databind(cons.bodyType);
                         break;
-
                     case 'bloodGroup':
                         scope.databind(cons.bloodGroup);
                         break;
-
                     case 'healthCondition':
                         scope.databind(cons.healthCondition);
                         break;
-
                     case 'starLanguage':
                         scope.databind(cons.starLanguage);
                         break;
-
                     case 'lagnam':
                         scope.databind(cons.lagnam);
                         break;
-
                     case 'ZodaicSign':
                         scope.databind(cons.ZodaicSign);
                         break;
-
                     case 'paadam':
                         scope.databind(cons.paadam);
                         break;
-
                     case 'familyStatus':
                         scope.databind(cons.familyStatus);
                         break;
-
                     case 'RelationshipType':
-
                         scope.databind(cons.RelationshipType);
                         break;
                     case "childStayingWith":
@@ -922,32 +891,24 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'hereabout':
                         scope.databind(cons.hereabout);
                         break;
-
-
                     case 'improveourwebsite':
                         scope.databind(cons.improveourwebsite);
                         break;
-
                     case 'prices':
                         scope.databind(cons.prices);
                         break;
-
                     case 'downloadtime':
                         scope.databind(cons.downloadtime);
                         break;
-
                     case 'yourratethesearch':
                         scope.databind(cons.yourratethesearch);
                         break;
-
                     case 'comparesites':
                         scope.databind(cons.comparesites);
                         break;
-
                     case 'recomendedtofriends':
                         scope.databind(cons.recomendedtofriends);
                         break;
-
                     case 'Country':
                         service.countrySelect().then(function(response) {
                             var option = [];
@@ -958,9 +919,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'ProfCatgory':
-
                         service.ProfessionCatgory().then(function(response) {
                             var option = [];
                             option.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -970,7 +929,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'ProfGroup':
                         service.ProfessionGroup().then(function(response) {
                             var option = [];
@@ -981,7 +939,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             scope.databind(option);
                         });
                         break;
-
                     case 'indiaStates':
                         service.stateSelect('1').then(function(response) {
                             var option = [];
@@ -1039,11 +996,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case 'Priority':
                         scope.databind(cons.Priority);
                         break;
-
                     case 'Age':
                     case 'Ageselect':
                         var test = [];
-
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
                             if (scope.typeofdata === "Ageselect") {
@@ -1088,7 +1043,6 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         //     }
                         //     scope.databind(Arr);
                         //     break;
-
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
@@ -1118,26 +1072,20 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                 scope.$applyAsync(element.multiselect('rebuild'));
                 element.multiselect('select', scope.ngModel);
             });
-
             // Watch for any changes from outside the directive and refresh
             scope.$watch(attrs.ngModel, function() {
                 element.multiselect('refresh');
             });
-
-
         }
-
     };
 }]);
 app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce',
-
     function(commonFactory, uibModal, timeout, $sce) {
         var modalinstance;
         return {
             restrict: "E",
             templateUrl: "templates/oldAlert.html",
             link: function(scope, element, attrs) {
-
                 scope.$on('showAlertPopupccc', function(event, cls, msg, time) {
                     scope.typecls = cls;
                     scope.msgs = msg;
@@ -1164,9 +1112,9 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce
     }
 ]);
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
+    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
-        uibModal) {
+        uibModal, $http) {
 
         return {
             restrict: "E",
@@ -1253,62 +1201,56 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.servicehttp = function(type, object) {
-                    return $injector.invoke(function($http) {
-                        return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
-                            .then(function(response) {
-
-                                console.log(response);
-                                switch (type) {
-                                    case "B":
-
-                                        if (response.data === 1) {
-
+                    return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
+                        .then(function(response) {
+                            console.log(response);
+                            switch (type) {
+                                case "B":
+                                    if (response.data === 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "bookmarked suceessfully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "bookmarked failed", "warning");
                                         }
-                                        break;
-                                    case "E":
-
-
-                                        if (response.data == 1) {
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "bookmarked suceessfully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "bookmarked failed", "warning");
+                                    }
+                                    break;
+                                case "E":
+                                    if (response.data == 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                         }
-
-                                        break;
-                                    case "I":
-                                        if (response.data === 1) {
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "EXpressInterest Fail", "warning");
+                                    }
+                                    break;
+                                case "I":
+                                    if (response.data === 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "Ignore SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "Ignore profile Fail", "warning");
                                         }
-                                        break;
-                                    case "M":
-                                    case "TH":
-                                    case "RP":
-
-                                        if (response.data === 1) {
-
-                                            scope.$emit('successfailer', "Message sent SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "Message sending Fail", "warning");
-                                        }
-                                        break;
-                                }
-                            });
-                    });
-
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "Ignore SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "Ignore profile Fail", "warning");
+                                    }
+                                    break;
+                                case "M":
+                                case "TH":
+                                case "RP":
+                                    if (response.data === 1) {
+                                        scope.$emit('successfailer', "Message sent SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "Message sending Fail", "warning");
+                                    }
+                                    break;
+                            }
+                        });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1326,10 +1268,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-
                         console.log(typeofactionflag);
                         switch (type) {
-
                             case "B":
                                 if (typeofactionflag !== true || typeofactionflag !== 1) {
                                     scope.servicehttp(type, object);
@@ -1361,7 +1301,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 scope.servicehttp(type, object);
                                 break;
                             case "V":
-
                                 scope.servicehttp(type, object);
                                 break;
                         }
@@ -1371,7 +1310,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-                    //scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1452,13 +1390,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.indexvalue = function(index) {
                     scope.indexvalues = index;
                 };
-
                 scope.modifyursearch = function() {
                     scope.PartnerProfilesnew = [];
                     scope.listclick();
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
-
                 scope.checkitemnew = function(carouselID) {
                     var $this;
                     $this = $("#" + carouselID);
@@ -1468,7 +1404,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     } else if ($("#" + carouselID + " .carousel-inner .item:last").hasClass("active")) {
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').hide();
-
                     } else {
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').show();
@@ -1489,7 +1424,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         }
                     });
                 };
-
                 scope.checkitemGlobal = function(carouselID) {
                     var checkitem = function() {
                         scope.checkitemnew(carouselID);
@@ -1506,7 +1440,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.checkitemGlobal(carouselID);
                 };
                 scope.pageloadslidebind = function() {
-
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
@@ -1518,7 +1451,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-
                     if (currentslide < currentIndex1) {
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
@@ -1555,14 +1487,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         interval: 2000,
                         pause: "false"
                     });
-
                     //hide slide arrows for  first and last slide slides  
                     var checkitem = function() {
                         scope.checkitemnew("slideShowCarousel");
                     };
                     $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
                 };
-
                 scope.Slideshowpage = function() {
                     scope.slideshowsearches = true;
                     scope.playpausebuttons = false;
@@ -1574,7 +1504,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
                     $('#slideShowCarousel').carousel('pause');
                 };
-
                 scope.playslide = function() {
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = false;
@@ -1593,7 +1522,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
-
                 scope.prevslide = function() {
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
@@ -1603,7 +1531,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.lnkLastSlide = currentIndex1;
                     currentslide = parseInt(currentIndex1 - 1);
                 };
-
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
@@ -1611,7 +1538,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                     scope.photoalbum(custid, profileid, photocount);
                 });
-
                 scope.$on('setslide', function(event) {
                     scope.listclick();
                 });
@@ -1620,14 +1546,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 });
             }
         };
-
     }
 ]);
 app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', '$uibModal', function($injector, authSvc, successstoriesdata, uibModal) {
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
     var modalinstance;
-
     return {
         restrict: "E",
         scope: {
@@ -1635,7 +1559,6 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
         },
         templateUrl: "templates/photopopup.html",
         link: function(scope, element, attrs) {
-             
             var vvv = scope.arrayphotos;
             if (scope.arrayphotos === 1) {
                 modalinstance = uibModal.open({
@@ -1646,7 +1569,6 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
                 });
             }
             scope.closepopup = function() {
-                 
                 modalinstance.close();
             };
         }
@@ -1678,14 +1600,11 @@ app.factory('singlestaticbindings', ['arrayConstants', 'SelectBindServiceApp', f
 }]);
 app.directive('setClassWhenAtTop', function($window) {
     var $win = angular.element($window); // wrap window object as jQuery object
-
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
-
             var topClass = attrs.setClassWhenAtTop, // get CSS class from directive's attribute value
                 offsetTop = element.offset().top; // get element's offset top relative to document
-
             $win.on('scroll', function(e) {
                 element[($win.scrollTop() >= offsetTop) ? 'addClass' : 'removeClass'](topClass);
             });
@@ -1693,10 +1612,10 @@ app.directive('setClassWhenAtTop', function($window) {
     };
 });
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
-    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route', '$stateParams', 'commonFactory',
-
+    'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route',
+    '$stateParams', 'commonFactory', 'helperservice',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory, helperservice) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1715,7 +1634,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notificationtxt = [];
         scope.notifytype = 'page';
         scope.notificationpopup = [];
-        // var searchObjectquery = $location.search();
         scope.Typeofdatabind = $stateParams.type;
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
             scope.exactflagstorage = exactflag;
@@ -1724,14 +1642,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.typeodbind = type;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
-
                         if (scope.counts === 1) {
                             sessionStorage.removeItem("LoginPhotoIsActive");
                             scope.bindcounts(response.data.DashBoardCounts);
-
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-
                             scope.photopersonal = scope.PersonalInfo.Photo;
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -1751,7 +1666,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew !== undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
                     });
@@ -1770,7 +1685,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             });
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew !== undefined ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                        scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
                     });
@@ -1781,8 +1696,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-
-
         scope.paging = function(frompage, topage, typeodbind) {
             scope.counts = 0;
             typeodbind = typeodbind == 'C' ? 'P' : typeodbind;
@@ -1792,7 +1705,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
                 { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
@@ -1853,13 +1765,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     pageto: scope.endindexexpress
                 };
                 customerDashboardServices.getexpressintersetdata(exp).then(function(response) {
-
                     if (parseInt(frompage) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data, function(item) {
                             scope.PartnerProfilesnew.push(item);
                         });
-
                         if (typeofinterest === "All Profiles") {
                             scope.click = "";
                             scope.flagexpress = 9;
@@ -1877,7 +1787,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                                 scope.OppProceed = scope.PartnerProfilesnew[0].OppProceed;
                                 scope.Oppskipped = scope.PartnerProfilesnew[0].Oppskipped;
                                 scope.Opppending = scope.PartnerProfilesnew[0].Opppending;
-                                scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
+                                scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data[0]) ? response.data[0].TotalRows : 0;
                                 scope.lblUHaveviewd = TypeOfReport === 'R' ? 'Interest Expressed By ' + scope.Gendercustomer : headertext;
                                 scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                                 scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
@@ -1885,7 +1795,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             }
 
                         } else {
-                            if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
+                            if (helperservice.checkstringvalue(scope.PartnerProfilesnew[0])) {
                                 scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                                 scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                                 scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
@@ -1941,7 +1851,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
-                if (response.data !== null && response.data !== undefined) {
+                if (helperservice.checkstringvalue(response.data)) {
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
                         alerts.timeoutoldalerts(scope, 'alert-success', mobilenumbers, 3000);
@@ -1971,7 +1881,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.modalpopupheadertext = "Match Followup Of " + name + "(" + profileid + ")";
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     customerDashboardServices.Tickethistory(TicketID, 'H').then(function(response) {
-
                         scope.Tickethistoryarray = [];
                         _.each(response.data, function(item) {
                             scope.Tickethistoryarray.push(item);
@@ -1989,7 +1898,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
         };
         scope.sendmessages = function(form) {
-            if (form !== undefined && form.message !== "" && form.message !== null && form.message !== undefined) {
+            if (form !== undefined && helperservice.checkstringvalue(form.message)) {
                 scope.$broadcast('sendmsg', 'M', scope.messagecustid, undefined, form, undefined);
             } else {
                 alert('please enter Message');
@@ -2004,7 +1913,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.endindexexpress = (scope.totalrows > scope.endindexexpress === true) ? scope.endindexexpress : scope.totalrows;
                 scope.loadmoreexpress = (scope.totalrows > scope.endindexexpress) ? true : false;
                 scope.Norowsendexpress = (scope.totalrows === scope.endindexexpress) ? true : false;
-
             }
         };
         scope.chatsdiv = function(fromindex, toindex, status, headertext, countalert) {
@@ -2017,7 +1925,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 }
                 var object = { CustID: scope.custid, Status: scope.chatstatus, iStartIndex: fromindex, iEndIndex: toindex };
                 customerDashboardServices.getCustometDashBoardchats(object).then(function(response) {
-                    scope.PartnerProfilesnewTotalrows = response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" ? response.data[0].TotalRows : 0;
+                    scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data[0]) ? response.data[0].TotalRows : 0;
                     if (parseInt(fromindex) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data, function(item) {
@@ -2048,7 +1956,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.chatstatus = type;
                 }
                 customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex, scope.exactflagstorage).then(function(response) {
-                    scope.PartnerProfilesnewTotalrows = response.data.PartnerProfilesnew !== null && response.data.PartnerProfilesnew[0] !== undefined && response.data.PartnerProfilesnew[0] !== null && response.data.PartnerProfilesnew[0] !== "" ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                    scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                     if (parseInt(fromindex) === 1) {
                         scope.PartnerProfilesnew = [];
                         _.each(response.data.PartnerProfilesnew, function(item) {
@@ -2089,7 +1997,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     break;
                 case "Requestphotos":
                 case "RequestPassword":
-
                     scope.receivesrecphotoss(scope.startindexexpress, scope.endindexexpress);
                     scope.spinexpress = false;
                     break;
@@ -2155,11 +2062,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.photoPasswordactionss = function(type, tocustid) {
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
-
                 if (response.data === 1) {
                     if (type === 1) {
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Accepted successfully', 2500);
-
                     } else {
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Rejected successfully', 2500);
                     }
@@ -2201,13 +2106,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.modalbodyshow = 4;
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
         };
-
-
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
-
             logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid);
-
         };
         scope.incrementsdashboardcounts = function() {
             customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9, "UnPaid").then(function(response) {
@@ -2228,23 +2129,18 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
 
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
-
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
         scope.pageloadbind = function(response) {
             scope.bindcounts(response.data.DashBoardCounts);
-
             scope.bindallcounts = response.data.DashBoardCounts;
             scope.PersonalInfo = (response.data.PersonalInfo);
-
             scope.photopersonal = scope.PersonalInfo.Photo;
             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-
         };
         scope.init = function() {
-
             scope.PartnerProfilesnew = [];
             switch (scope.Typeofdatabind) {
                 case "MB":
@@ -2342,7 +2238,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             customerDashboardServices.getNotifications(inobj).then(function(response) {
                 var dddddd = JSON.parse(response.data);
                 _.each(dddddd, function(item, index) {
-
                     if ((index % 2 === 0) || index === 0) {
                         item.bakcolor = { "background-color": "#f47370" };
                         item.linkcolor = { "color": "maroon" };
@@ -2351,9 +2246,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         item.linkcolor = { "color": "#66643e" };
                     }
                 });
-
                 console.log(scope.notificationtxt);
-
                 if (scope.notifytype === 'page') {
                     scope.notificationtxt = dddddd;
                 } else {
@@ -2366,9 +2259,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
 
                         }
-
                     }
-
                 }
                 scope.hidemorelnk = false;
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
@@ -2377,19 +2268,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 }
             });
         };
-
         scope.getNotify = function() {
             scope.getNotifyArray(1, 5);
         };
-
         scope.getNotify();
-
         scope.moreNotification = function() {
             from = 1;
             scope.disClass = '';
             scope.loadMore();
         };
-
         scope.cancel = function() {
             commonFactory.closepopup();
         };
@@ -2406,8 +2293,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     console.log("bottom");
                 }
             });
-
-
         });
         scope.readNotify = function(notifyID, type, index) {
             scope.disClass = index;
@@ -2422,42 +2307,28 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             to = 10;
         scope.loadMore = function(e) {
             scope.notifytype = 'popup';
-
             if (from === 1) {
                 scope.notificationpopup = [];
                 scope.getNotifyArray(1, 10);
                 from = to;
                 commonFactory.open('notifyPopup.html', scope, uibModal);
             } else {
-
                 scope.getNotifyArray(to + 1, to + 10);
                 to = to + 10;
                 $("#modalbody").animate({ scrollTop: 800 }, 1000);
-
             }
         };
-
         scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {
             if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
                 scope.readNotify(notifyID, type, index);
                 scope.redirectToviewfull(ToCust_Id);
             }
         };
-
-
-
-
-
-
-
-
     }
 ]);
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
-
     scope.showforgetpasswordpopup = function() {
         scope.$broadcast('showforgetpassword');
-
     };
     scope.searchpage = function(typeurl) {
         sessionStorage.removeItem("homepageobject");
@@ -2475,14 +2346,13 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', fun
     };
 }]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route',
-
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
-            if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
+            if (helperservice.checkstringvalue(datatinfo.custid)) {
                 scope.loginstatus = false;
                 scope.loginoutstatus = true;
                 scope.usernamepersonal = datatinfo.username;
@@ -2503,7 +2373,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.withoutlogin = true;
             }
         };
-
         scope.$on('IdleTimeout', function() {
             //show pop up with two choices,wherther enduser needs to continue session or logout of application
             //Idle.setIdle(5);
@@ -2526,12 +2395,9 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.showhidetestbuttons();
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
-
         };
         scope.validate = function() {
-
             if ((scope.username).indexOf("@") != -1) {
-
                 if (!scope.ValidateEmail(scope.username)) {
                     scope.username = '';
                     alert(" Please enter valid ProfileID/Email");
@@ -2544,15 +2410,12 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     alert("Please enter valid ProfileID/Email");
                     scope.username = '';
                     return false;
-
                 } else {
                     return true;
                 }
-
             }
         };
         scope.loginsubmit = function() {
-
             if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
                 alert("Please enter user name");
                 return false;
@@ -2572,7 +2435,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
                             console.log('custStatus');
                             console.log(innerresponse.data);
-
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -2580,7 +2442,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
-
                             if (custProfileStatus === 439) {
                                 sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
@@ -2595,16 +2456,13 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             } else {
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
-
                         });
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
-
                 }
             }
         };
-
         scope.ValidateEmail = function(email) {
             var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return expr.test(email);
@@ -2616,8 +2474,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.ClearlocalStorage = function() {
             authSvc.logout();
         };
-
-
         scope.viewfullmyprofile = function() {
             var custidlogin = authSvc.getCustId();
             sessionStorage.removeItem("localcustid");
@@ -2635,33 +2491,28 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 var realpath = '/';
                 route.go('home', {});
             }
-
         };
         scope.searchpage = function(typeurl) {
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
-
                     route.go('General', { id: 2 });
                     $rootscope.$broadcast("profile", 2);
                     break;
                 case "general":
                     route.go('General', { id: 0 });
                     $rootscope.$broadcast("profile", 0);
-
                     break;
                 case "advanced":
                     route.go('General', { id: 1 });
                     $rootscope.$broadcast("profile", 1);
                     break;
                 case "profilesearch":
-
                     route.go('General', { id: 2 });
                     $rootscope.$broadcast("profile", 2);
                     break;
             }
         };
-
         scope.homepagelinks = function(typeurl) {
             var currentstatte = $state.current;
             switch (typeurl) {
@@ -2673,29 +2524,21 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     }
                     break;
                 case "BookMarkedme":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'WB' });
                     } else {
-
                         route.go('dashboardnew', { type: 'WB' });
                     }
                     break;
                 case "Ignored":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'I' });
                     } else {
-
                         route.go('dashboardnew', { type: 'I' });
                     }
                     break;
                 case "myprofile":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'WV' });
                     } else {
                         route.go('dashboardnew', { type: 'WV' });
@@ -2708,10 +2551,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     } else {
                         route.go('dashboardnew', { type: 'C' });
                     }
-
                     break;
                 case "Chats":
-
                     if (currentstatte.name === "dashboardnew") {
                         route.go('dashboard', { type: 'Chats' });
                     } else {
@@ -2719,22 +2560,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     }
                     break;
                 case "Requests":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'Requests' });
                     } else {
-
                         route.go('dashboardnew', { type: 'Requests' });
                     }
                     break;
                 case "Express":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'Express' });
                     } else {
-
                         route.go('dashboardnew', { type: 'Express' });
                     }
                     break;
@@ -2743,10 +2578,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
-
         };
         scope.$on("notify-error", function(event, value) {
-            console.log(value);
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             console.log(httperrorpopupstatus);
@@ -2759,7 +2592,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             });
 
         });
-
         scope.modalpopupclosehttp = function() {
             var httperrorpopupstatus = 1;
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
@@ -2774,16 +2606,14 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route',
+    'missingFieldService', '$state', 'route', 'helperservice',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
-
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
             scope.username = '';
             scope.password = "";
-
             timeout(function() {
                 successstoriesdata.suceessdataget(1, 5).then(function(response) {
                     scope.successstoriesarray = response.data;
@@ -2795,10 +2625,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 500);
             scope.$on("$destroy", scope.destroy);
         };
-
-
         scope.destroy = function() {
-
             scope.loginpopup = false;
             scope.emailss = "";
             scope.username = '';
@@ -2850,7 +2677,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
                             var missingStatus = null,
                                 custProfileStatus = null;
-                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                            var datav = (helperservice.checkstringvalue(innerresponse.data)) ? (innerresponse.data).split(';') : null;
                             if (datav !== null) {
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
@@ -3215,27 +3042,32 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.PartnerProfilesnew = [];
         scope.truepartner = true;
         scope.truepartnerrefine = true;
+        scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
+
             var storeValue = "";
-            if (whereValue.indexOf(',') === -1) {
-                _.filter(arr, function(obj) {
-                    if ((obj.value) == parseInt(whereValue)) {
-                        storeValue = obj.label;
-                    }
-                });
-            } else {
-                var arrvals = whereValue.split(',');
-                _.each(arrvals, function(item, index) {
+            if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
+                if (whereValue.indexOf(',') === -1) {
                     _.filter(arr, function(obj) {
-                        if ((obj.value) == parseInt(arrvals[index])) {
-                            storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
+                        if ((obj.value) == parseInt(whereValue)) {
+                            storeValue = obj.label;
                         }
                     });
-                });
+                } else {
+                    var arrvals = whereValue.split(',');
+                    _.each(arrvals, function(item, index) {
+                        _.filter(arr, function(obj) {
+                            if ((obj.value) == parseInt(arrvals[index])) {
+                                storeValue = commonpopup.checkvals(storeValue) ? storeValue + ',' + obj.label : obj.label;
+                            }
+                        });
+                    });
+                }
             }
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -3620,10 +3452,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 scope.truepartnerrefine = true;
             }
-            scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
+
             switch (type) {
                 case "advanced":
                 case "general":
+                    // scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
                     scope.modelsearch.typesearch = type;
                     // scope.sliders.minvalueyext = scope.checkheight(scope.sliders.minvalueyext);
                     // scope.sliders.maxValuetext = scope.checkheight(scope.sliders.maxValuetext);
@@ -3637,10 +3470,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                     scope.PartnerProfilesnew.push(item);
                                 });
                             } else {
-                                scope.modelsearch.showcontrols = true;
-                                scope.truepartner = true;
-                                scope.truepartnerrefine = true;
-                                alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                if (scope.refinesubmitflag === "refine") {
+                                    scope.refinesubmitflag = "normal";
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change your Refine search cretria', 2500);
+                                } else {
+                                    scope.modelsearch.showcontrols = true;
+                                    scope.truepartner = true;
+                                    scope.truepartnerrefine = true;
+                                    alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                }
                             }
                         } else {
                             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
@@ -3676,6 +3514,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
+                    scope.truepartnerrefine = true;
                     if (scope.checkLength()) {
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
@@ -3696,10 +3535,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                                             scope.PartnerProfilesnew.push(item);
                                         });
                                     } else {
-                                        scope.modelsearch.showcontrols = true;
-                                        scope.truepartner = true;
-                                        scope.truepartnerrefine = true;
-                                        alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                        if (scope.refinesubmitflag === "refine") {
+                                            scope.refinesubmitflag = "normal";
+                                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change your Refine search cretria', 2500);
+                                        } else {
+                                            scope.modelsearch.showcontrols = true;
+                                            scope.truepartner = true;
+                                            scope.truepartnerrefine = true;
+                                            alerts.timeoutoldalerts(scope, 'alert-danger', 'No Records Found,Please Change search Criteria', 2500);
+                                        }
                                     }
                                 } else {
                                     _.each(response.data, function(item) {
@@ -3859,10 +3703,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             }
         });
         scope.refinesubmit = function() {
+            scope.refinesubmitflag = "refine";
             // scope.modelsearch.AgeFrom = scope.slider.minValue;
             // scope.modelsearch.Ageto = scope.slider.maxValue;
             // scope.modelsearch.HeightFrom = scope.sliders.minValue;
             // scope.modelsearch.Heightto = scope.sliders.maxValue;
+
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };

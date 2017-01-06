@@ -124,11 +124,12 @@ app.run(function($rootScope, $state) {
                             $state.go('mobileverf');
                             e.preventDefault();
                         } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
-                            window.location = "missingfields/" + misStatus;
+                            // window.location = "missingfields/" + misStatus;
+                            $state.go("missingfields", { id: misStatus });
+                            e.preventDefault();
                         }
                     }
                 }
-
             }
         }
 

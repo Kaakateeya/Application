@@ -2,7 +2,6 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
     var logincustid = authSvc.getCustId();
     var loginprofileid = authSvc.getProfileid();
     var modalinstance;
-
     return {
         restrict: "E",
         scope: {
@@ -10,7 +9,6 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
         },
         templateUrl: "templates/photopopup.html",
         link: function(scope, element, attrs) {
-             
             var vvv = scope.arrayphotos;
             if (scope.arrayphotos === 1) {
                 modalinstance = uibModal.open({
@@ -21,7 +19,6 @@ app.directive("photoPopupalbum", ["$injector", 'authSvc', 'successstoriesdata', 
                 });
             }
             scope.closepopup = function() {
-                 
                 modalinstance.close();
             };
         }

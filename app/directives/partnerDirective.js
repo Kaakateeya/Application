@@ -1,7 +1,7 @@
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal',
+    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
-        uibModal) {
+        uibModal, $http) {
 
         return {
             restrict: "E",
@@ -88,62 +88,56 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                 };
                 scope.servicehttp = function(type, object) {
-                    return $injector.invoke(function($http) {
-                        return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
-                            .then(function(response) {
-
-                                console.log(response);
-                                switch (type) {
-                                    case "B":
-
-                                        if (response.data === 1) {
-
+                    return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
+                        .then(function(response) {
+                            console.log(response);
+                            switch (type) {
+                                case "B":
+                                    if (response.data === 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "bookmarked suceessfully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "bookmarked failed", "warning");
                                         }
-                                        break;
-                                    case "E":
-
-
-                                        if (response.data == 1) {
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "bookmarked suceessfully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "bookmarked failed", "warning");
+                                    }
+                                    break;
+                                case "E":
+                                    if (response.data == 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "EXpressInterest Fail", "warning");
                                         }
-
-                                        break;
-                                    case "I":
-                                        if (response.data === 1) {
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "EXpressInterest done SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "EXpressInterest Fail", "warning");
+                                    }
+                                    break;
+                                case "I":
+                                    if (response.data === 1) {
+                                        if (scope.indexvalues !== 'index') {
                                             scope.array.splice(scope.indexvalues, 1);
-                                            scope.$emit('incrementcounts');
-                                            scope.$emit('successfailer', "Ignore SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "Ignore profile Fail", "warning");
                                         }
-                                        break;
-                                    case "M":
-                                    case "TH":
-                                    case "RP":
-
-                                        if (response.data === 1) {
-
-                                            scope.$emit('successfailer', "Message sent SuccessFully", "success");
-                                        } else {
-                                            scope.$emit('successfailer', "Message sending Fail", "warning");
-                                        }
-                                        break;
-                                }
-                            });
-                    });
-
+                                        scope.$emit('incrementcounts');
+                                        scope.$emit('successfailer', "Ignore SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "Ignore profile Fail", "warning");
+                                    }
+                                    break;
+                                case "M":
+                                case "TH":
+                                case "RP":
+                                    if (response.data === 1) {
+                                        scope.$emit('successfailer', "Message sent SuccessFully", "success");
+                                    } else {
+                                        scope.$emit('successfailer', "Message sending Fail", "warning");
+                                    }
+                                    break;
+                            }
+                        });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -161,10 +155,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-
                         console.log(typeofactionflag);
                         switch (type) {
-
                             case "B":
                                 if (typeofactionflag !== true || typeofactionflag !== 1) {
                                     scope.servicehttp(type, object);
@@ -196,7 +188,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 scope.servicehttp(type, object);
                                 break;
                             case "V":
-
                                 scope.servicehttp(type, object);
                                 break;
                         }
@@ -206,7 +197,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
 
                 scope.$on('sendmsg', function(event, type, tocustid, typeofactionflag, form, logid, MessageHistoryId) {
-                    //scope.serviceactions(type, tocustid, typeofactionflag, undefined, form, logid, MessageHistoryId);
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -287,13 +277,11 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.indexvalue = function(index) {
                     scope.indexvalues = index;
                 };
-
                 scope.modifyursearch = function() {
                     scope.PartnerProfilesnew = [];
                     scope.listclick();
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
-
                 scope.checkitemnew = function(carouselID) {
                     var $this;
                     $this = $("#" + carouselID);
@@ -303,7 +291,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     } else if ($("#" + carouselID + " .carousel-inner .item:last").hasClass("active")) {
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').hide();
-
                     } else {
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').show();
@@ -324,7 +311,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         }
                     });
                 };
-
                 scope.checkitemGlobal = function(carouselID) {
                     var checkitem = function() {
                         scope.checkitemnew(carouselID);
@@ -341,7 +327,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.checkitemGlobal(carouselID);
                 };
                 scope.pageloadslidebind = function() {
-
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
@@ -353,7 +338,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     $('#slideShowCarousel').find('div.active').index();
                     scope.lnkLastSlide = currentIndex1;
-
                     if (currentslide < currentIndex1) {
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
@@ -390,14 +374,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         interval: 2000,
                         pause: "false"
                     });
-
                     //hide slide arrows for  first and last slide slides  
                     var checkitem = function() {
                         scope.checkitemnew("slideShowCarousel");
                     };
                     $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
                 };
-
                 scope.Slideshowpage = function() {
                     scope.slideshowsearches = true;
                     scope.playpausebuttons = false;
@@ -409,7 +391,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
                     $('#slideShowCarousel').carousel('pause');
                 };
-
                 scope.playslide = function() {
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = false;
@@ -428,7 +409,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
-
                 scope.prevslide = function() {
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
@@ -438,7 +418,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.lnkLastSlide = currentIndex1;
                     currentslide = parseInt(currentIndex1 - 1);
                 };
-
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
@@ -446,7 +425,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
 
                     scope.photoalbum(custid, profileid, photocount);
                 });
-
                 scope.$on('setslide', function(event) {
                     scope.listclick();
                 });
@@ -455,6 +433,5 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 });
             }
         };
-
     }
 ]);

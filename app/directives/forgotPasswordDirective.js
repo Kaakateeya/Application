@@ -68,7 +68,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         });
                     }
                 };
-
                 scope.$on('showforgetpassword', function(event) {
                     scope.showforgetpassword();
                 });

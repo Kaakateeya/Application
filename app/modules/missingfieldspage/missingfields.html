@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="col-lg-8" id="ddlstarlanguagesdiv">
 
-                                    <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',ddlstarlanguages);"></select>
+                                    <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',misObj.ddlstarlanguages);"></select>
 
                                 </div>
                                 <div class="clearfix"></div>
@@ -634,6 +634,9 @@
             <form name="astroForm" novalidate role="form" ng-submit="astroSubmit(atroObj)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Astro details
+                        <a href="javascript:void(0);" ng-click="redirectToMobVerification();">
+                            <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                        </a>
                     </h3>
                 </div>
                 <div class="modal-body clearfix pop_content_my" id="modal-body">

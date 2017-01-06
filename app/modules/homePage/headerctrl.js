@@ -1,12 +1,11 @@
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route',
-
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
         window.scrollTo(0, 0);
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
-            if (datatinfo.custid !== "" && datatinfo.custid !== undefined && datatinfo.custid !== null) {
+            if (helperservice.checkstringvalue(datatinfo.custid)) {
                 scope.loginstatus = false;
                 scope.loginoutstatus = true;
                 scope.usernamepersonal = datatinfo.username;
@@ -27,7 +26,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.withoutlogin = true;
             }
         };
-
         scope.$on('IdleTimeout', function() {
             //show pop up with two choices,wherther enduser needs to continue session or logout of application
             //Idle.setIdle(5);
@@ -50,12 +48,9 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.showhidetestbuttons();
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
-
         };
         scope.validate = function() {
-
             if ((scope.username).indexOf("@") != -1) {
-
                 if (!scope.ValidateEmail(scope.username)) {
                     scope.username = '';
                     alert(" Please enter valid ProfileID/Email");
@@ -68,15 +63,12 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     alert("Please enter valid ProfileID/Email");
                     scope.username = '';
                     return false;
-
                 } else {
                     return true;
                 }
-
             }
         };
         scope.loginsubmit = function() {
-
             if (scope.username === "" || scope.username === null || scope.username === "ProfileID/EmailID") {
                 alert("Please enter user name");
                 return false;
@@ -96,7 +88,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
                             console.log('custStatus');
                             console.log(innerresponse.data);
-
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -104,7 +95,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
                             }
-
                             if (custProfileStatus === 439) {
                                 sessionStorage.setItem('missingStatus', missingStatus);
                                 if (missingStatus === 0) {
@@ -119,16 +109,13 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                             } else {
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
-
                         });
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
-
                 }
             }
         };
-
         scope.ValidateEmail = function(email) {
             var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return expr.test(email);
@@ -140,8 +127,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.ClearlocalStorage = function() {
             authSvc.logout();
         };
-
-
         scope.viewfullmyprofile = function() {
             var custidlogin = authSvc.getCustId();
             sessionStorage.removeItem("localcustid");
@@ -159,33 +144,28 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 var realpath = '/';
                 route.go('home', {});
             }
-
         };
         scope.searchpage = function(typeurl) {
             sessionStorage.removeItem("homepageobject");
             switch (typeurl) {
                 case "profile":
-
                     route.go('General', { id: 2 });
                     $rootscope.$broadcast("profile", 2);
                     break;
                 case "general":
                     route.go('General', { id: 0 });
                     $rootscope.$broadcast("profile", 0);
-
                     break;
                 case "advanced":
                     route.go('General', { id: 1 });
                     $rootscope.$broadcast("profile", 1);
                     break;
                 case "profilesearch":
-
                     route.go('General', { id: 2 });
                     $rootscope.$broadcast("profile", 2);
                     break;
             }
         };
-
         scope.homepagelinks = function(typeurl) {
             var currentstatte = $state.current;
             switch (typeurl) {
@@ -197,29 +177,21 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     }
                     break;
                 case "BookMarkedme":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'WB' });
                     } else {
-
                         route.go('dashboardnew', { type: 'WB' });
                     }
                     break;
                 case "Ignored":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'I' });
                     } else {
-
                         route.go('dashboardnew', { type: 'I' });
                     }
                     break;
                 case "myprofile":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'WV' });
                     } else {
                         route.go('dashboardnew', { type: 'WV' });
@@ -232,10 +204,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     } else {
                         route.go('dashboardnew', { type: 'C' });
                     }
-
                     break;
                 case "Chats":
-
                     if (currentstatte.name === "dashboardnew") {
                         route.go('dashboard', { type: 'Chats' });
                     } else {
@@ -243,22 +213,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                     }
                     break;
                 case "Requests":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'Requests' });
                     } else {
-
                         route.go('dashboardnew', { type: 'Requests' });
                     }
                     break;
                 case "Express":
-
                     if (currentstatte.name === "dashboardnew") {
-
                         route.go('dashboard', { type: 'Express' });
                     } else {
-
                         route.go('dashboardnew', { type: 'Express' });
                     }
                     break;
@@ -267,10 +231,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
             scope.$broadcast('showforgetpassword');
-
         };
         scope.$on("notify-error", function(event, value) {
-            console.log(value);
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             console.log(httperrorpopupstatus);
@@ -283,7 +245,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             });
 
         });
-
         scope.modalpopupclosehttp = function() {
             var httperrorpopupstatus = 1;
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);

@@ -1,15 +1,13 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route',
+    'missingFieldService', '$state', 'route', 'helperservice',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route) {
-
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
             scope.username = '';
             scope.password = "";
-
             timeout(function() {
                 successstoriesdata.suceessdataget(1, 5).then(function(response) {
                     scope.successstoriesarray = response.data;
@@ -21,10 +19,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 500);
             scope.$on("$destroy", scope.destroy);
         };
-
-
         scope.destroy = function() {
-
             scope.loginpopup = false;
             scope.emailss = "";
             scope.username = '';
@@ -76,7 +71,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
                             var missingStatus = null,
                                 custProfileStatus = null;
-                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                            var datav = (helperservice.checkstringvalue(innerresponse.data)) ? (innerresponse.data).split(';') : null;
                             if (datav !== null) {
                                 missingStatus = parseInt((datav[0].split(':'))[1]);
                                 custProfileStatus = parseInt((datav[1].split(':'))[1]);
