@@ -423,8 +423,8 @@ app.constant('config', function() {
     };
 });
 app.directive("angularMultiselect", ["$injector", 'authSvc',
-    'successstoriesdata', 'alert', '$timeout', 'helperservice',
-    function($injector, authSvc, successstoriesdata, alerts, timeout, helperservice) {
+    'successstoriesdata', 'alert', '$timeout',
+    function($injector, authSvc, successstoriesdata, alerts, timeout) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         return {
@@ -440,27 +440,29 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
             link: function(scope, element, attrs) {
                 scope.selectallMdl = false;
                 scope.IDs = scope.id;
-                scope.Caste = helperservice.checkarraylength(scope.array) ? scope.array : [];
-                scope.Castehide = helperservice.checkstringvalue(scope.array) ? false : true;
+                scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 0 ? scope.array : [];
+                scope.Castehide = scope.array !== undefined && scope.array !== "" && scope.array !== null ? false : true;
                 scope.Castehide = scope.castehideval === 'castehid' ? true : false;
                 scope.$watch('array', function() {
-                    scope.Caste = helperservice.checkarraylength(scope.array) ? scope.array : [];
+                    scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
                 scope.$watch('model', function(current, old) {
-                    if (helperservice.checkstringvalue(scope.array) && scope.array.length > 100 && helperservice.checkstringvalue(scope.model) && scope.model.length > 100) {
+
+                    if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
                         if (scope.model.length === scope.array.length) {
                             scope.model = null;
                         }
-                    } else if (helperservice.checkarraylength(scope.model)) {
+                    } else if (scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 0) {
                         scope.model = current;
                     }
                 });
                 scope.directivechangeevent = function(model) {
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
+
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
-                    if (value !== 0 && value !== "0" && helperservice.checkarraylength(value)) {
+                    if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
                         if (value.toString() !== "0") {
                             colors = "selectborderclasscolor";
                             $('#' + id).next().find('button').addClass("bacg");
@@ -1714,7 +1716,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
                 { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
                 { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General/3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: 'help' },
             ];
@@ -2949,7 +2951,6 @@ app.controller('mobileverifyController', ['$scope', 'mobileVerificationService',
     function(scope, mobileVerificationService, authSvc, route) {
         scope.pageloadSelect = {};
         var logincustid = authSvc.getCustId();
-
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.pageLoad = function(custid) {
             mobileVerificationService.getmobileverificationData(custid).then(function(res) {
@@ -3981,156 +3982,135 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         // };
     }
 ]);
-app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout) {
-
-    scope.month = 'month';
-    scope.reg = {};
-    scope.monthArr = [];
-
-    var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    scope.monthBind = function() {
-
-        var option = [];
-
-        _.each(monthArr, function(item) {
-            option.push({ "label": item, "title": item, "value": item });
-        });
-        return option;
-    };
-    scope.date = function(str, from, to) {
-        var Arr = [];
-
-        for (var i = from; i <= to; i++) {
-            var strValue = null;
-            if (i <= 9) {
-                strValue = "0" + i;
-            } else {
-                strValue = i;
-            }
-            Arr.push({ "label": strValue, "title": strValue, "value": strValue });
-        }
-        return Arr;
-    };
-
-    scope.year = function(str, from, to) {
-        var Arr = [];
-
-        for (var i = to; i >= from; i--) {
-            Arr.push({ "label": i, "title": i, "value": i });
-        }
-        return Arr;
-    };
-    scope.monthArr = scope.monthBind();
-    scope.dateArr = scope.date('', 1, 31);
-    scope.yearArr = scope.year('', 1936, 1998);
-
-
-    timeout(function() {
-        scope.postedby = getArray.GArray('childStayingWith');
-        scope.religion = getArray.GArray('Religion');
-        scope.Mothertongue = getArray.GArray('Mothertongue');
-        scope.Caste = getArray.GArray('Caste');
-        scope.countryCode = getArray.GArray('countryCode');
-
-    }, 1000);
-    timeout(function() {
-        scope.Country = getArray.GArray('Country');
-
-    }, 500);
-
-    scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
-
-    scope.dayChange = function(obj, type) {
-
-        var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
-        var minth30 = 'Apr,Jun,Sep,Nov';
-        var month28 = 'Feb';
-
-
-        if ((obj.ddlDD <= 30 && minth30.indexOf(obj.ddlMM) !== -1) || (obj.ddlDD <= 31 && months31.indexOf(obj.ddlMM) !== -1) || ((obj.ddlDD <= 28 && month28.indexOf(obj.ddlMM) !== -1))) {
-
-        } else {
-            if (type === 'day') {
-                obj.ddlMM = '';
-            } else {
-                scope.dateArr = [];
-                scope.dateArr = scope.date('DD', 1, 31);
-                obj.ddlDD = '';
-            }
-        }
-    };
-
-    scope.changeBind = function(parentval, parentval2) {
-
-        scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2) !== undefined && commondependency.listSelectedVal(parentval2) !== null && commondependency.listSelectedVal(parentval2) !== "" ? commondependency.listSelectedVal(parentval2) : 0);
-    };
-
-    scope.regSubmit = function(obj) {
-
-        var valmm = _.indexOf(monthArr, obj.ddlMM);
-        var date = obj.ddlDD + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.ddlYear;
-        var inputObj = {
-            strFirstName: obj.txtfirstname,
-            strLastName: obj.txtlastname,
-            dtDOB: date !== '' ? filter('date')(date, 'yyyy-MM-dd') : null,
-            intGenderID: obj.rbtngender,
-            intReligionID: obj.ddlreligion,
-            intMotherTongueID: obj.ddlmothertongue,
-            intCasteID: obj.ddlcaste,
-            intCountryLivingID: obj.ddlcountry,
-            intMobileCode: obj.ddlmobilecountry,
-            intLandCode: obj.ddllandcountry,
-            IsCustomer: 1,
-            strMobileNo: obj.txtMobileNo,
-            ID: 1,
-            strAreaCode: obj.txtArea,
-            strLandNo: obj.txtlandNum,
-            strEmail: obj.txtEmail,
-            strPassword: obj.txtpassword,
-            intProfileRegisteredBy: null,
-            intEmpID: null,
-            intCustPostedBY: obj.ddlpostedby,
-            //strMobileVerificationCode: obj.
-        };
-        console.log(inputObj);
-        basicRegistrationService.submitBasicRegistration(inputObj).then(function(res) {
-            console.log(res);
-            scope.genderID = 0;
-            authSvc.login(scope.reg.txtEmail, scope.reg.txtpassword).then(function(response) {
-                console.log(response);
-                authSvc.user(response.response !== null ? response.response[0] : null);
-                scope.genderID = response.response[0].GenderID;
-                route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
-                return false;
+app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', 'route',
+    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route) {
+        scope.month = 'month';
+        scope.reg = {};
+        scope.monthArr = [];
+        var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        scope.monthBind = function() {
+            var option = [];
+            _.each(monthArr, function(item) {
+                option.push({ "label": item, "title": item, "value": item });
             });
-        });
-    };
-
-    scope.valueExists = function(type, flag, val) {
-        basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
-            console.log(response);
-            if (response.data === 1) {
-                if (type === 'email') {
-                    scope.reg.txtEmail = '';
-                    alert('Email Already Exists');
+            return option;
+        };
+        scope.date = function(str, from, to) {
+            var Arr = [];
+            for (var i = from; i <= to; i++) {
+                var strValue = null;
+                if (i <= 9) {
+                    strValue = "0" + i;
                 } else {
-                    scope.reg.txtMobileNo = '';
-                    alert('Mobile number Already Exists');
+                    strValue = i;
+                }
+                Arr.push({ "label": strValue, "title": strValue, "value": strValue });
+            }
+            return Arr;
+        };
+        scope.year = function(str, from, to) {
+            var Arr = [];
+            for (var i = to; i >= from; i--) {
+                Arr.push({ "label": i, "title": i, "value": i });
+            }
+            return Arr;
+        };
+        scope.monthArr = scope.monthBind();
+        scope.dateArr = scope.date('', 1, 31);
+        scope.yearArr = scope.year('', 1936, 1998);
+        timeout(function() {
+            scope.postedby = getArray.GArray('childStayingWith');
+            scope.religion = getArray.GArray('Religion');
+            scope.Mothertongue = getArray.GArray('Mothertongue');
+            scope.Caste = getArray.GArray('Caste');
+            scope.countryCode = getArray.GArray('countryCode');
+        }, 1000);
+        timeout(function() {
+            scope.Country = getArray.GArray('Country');
+        }, 500);
+        scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
+        scope.dayChange = function(obj, type) {
+            var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
+            var minth30 = 'Apr,Jun,Sep,Nov';
+            var month28 = 'Feb';
+            if ((obj.ddlDD <= 30 && minth30.indexOf(obj.ddlMM) !== -1) || (obj.ddlDD <= 31 && months31.indexOf(obj.ddlMM) !== -1) || ((obj.ddlDD <= 28 && month28.indexOf(obj.ddlMM) !== -1))) {} else {
+                if (type === 'day') {
+                    obj.ddlMM = '';
+                } else {
+                    scope.dateArr = [];
+                    scope.dateArr = scope.date('DD', 1, 31);
+                    obj.ddlDD = '';
                 }
             }
+        };
+        scope.changeBind = function(parentval, parentval2) {
+            scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2) !== undefined && commondependency.listSelectedVal(parentval2) !== null && commondependency.listSelectedVal(parentval2) !== "" ? commondependency.listSelectedVal(parentval2) : 0);
+        };
+        scope.regSubmit = function(obj) {
+            var valmm = _.indexOf(monthArr, obj.ddlMM);
+            var date = obj.ddlDD + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.ddlYear;
+            var inputObj = {
+                strFirstName: obj.txtfirstname,
+                strLastName: obj.txtlastname,
+                dtDOB: date !== '' ? filter('date')(date, 'yyyy-MM-dd') : null,
+                intGenderID: obj.rbtngender,
+                intReligionID: obj.ddlreligion,
+                intMotherTongueID: obj.ddlmothertongue,
+                intCasteID: obj.ddlcaste,
+                intCountryLivingID: obj.ddlcountry,
+                intMobileCode: obj.ddlmobilecountry,
+                intLandCode: obj.ddllandcountry,
+                IsCustomer: 1,
+                strMobileNo: obj.txtMobileNo,
+                ID: 1,
+                strAreaCode: obj.txtArea,
+                strLandNo: obj.txtlandNum,
+                strEmail: obj.txtEmail,
+                strPassword: obj.txtpassword,
+                intProfileRegisteredBy: null,
+                intEmpID: null,
+                intCustPostedBY: obj.ddlpostedby,
+                //strMobileVerificationCode: obj.
+            };
+            console.log(inputObj);
+            basicRegistrationService.submitBasicRegistration(inputObj).then(function(res) {
+                console.log(res);
+                scope.genderID = 0;
+                authSvc.login(scope.reg.txtEmail, scope.reg.txtpassword).then(function(response) {
+                    console.log(response);
+                    authSvc.user(response.response !== null ? response.response[0] : null);
+                    scope.genderID = response.response[0].GenderID;
+                    route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
+                    return false;
+                });
+            });
+        };
+        scope.valueExists = function(type, flag, val) {
+            if (val !== undefined) {
+                basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
+                    console.log(response);
+                    if (response.data === 1) {
+                        if (type === 'email') {
+                            scope.reg.txtEmail = '';
+                            alert('Email Already Exists');
+                        } else {
+                            scope.reg.txtMobileNo = '';
+                            alert('Mobile number Already Exists');
+                        }
+                    }
+                });
+            }
+        };
+        scope.$watch(function() {
+            return scope.reg.ddlcountry;
+        }, function(current, original) {
+            scope.reg.ddllandcountry = scope.reg.ddlmobilecountry = current;
         });
-    };
-
-
-    scope.$watch(function() {
-        return scope.reg.ddlcountry;
-    }, function(current, original) {
-        scope.reg.ddllandcountry = scope.reg.ddlmobilecountry = current;
-    });
-    scope.redirectprivacy = function(type) {
-        window.open('privacyPolicy', '_blank');
-    };
-}]);
+        scope.redirectprivacy = function(type) {
+            window.open('privacyPolicy', '_blank');
+        };
+    }
+]);
 app.controller('aboutus', ['$scope', function (scope) {
 }]);
  app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
@@ -4267,8 +4247,6 @@ app.controller("faqs", ['$scope', function(scope) {
     scope.filters = {
         search: ''
     };
-
-
     scope.arrayfaqs = [
         { questons: 'How do I Bookmark profile?', answers: 'In every view profile you will find the book mark option for future reference before you express interest to filter suitable profiles' },
         { questons: 'How do I delete my profile? (Manage Profile)', answers: 'You can delete your profile including your picture by clicking on Delete Profile in the services page after you login. You have to login to your account to delete your profilfre.4r554r' },
@@ -4297,7 +4275,6 @@ app.controller("faqs", ['$scope', function(scope) {
 app.directive('faqdirective', function() {
     return {
         link: function(scope, element, attrs) {
-
             scope.expanall = function() {
                 _.each(scope.arrayfaqs, function(item) {
                     item.styleanswer = true;
@@ -4309,13 +4286,10 @@ app.directive('faqdirective', function() {
                     item.styleanswer = false;
                     item.activeClass = 'faqs_list_main_item';
                 });
-
-
             };
             scope.toggleans = function(faqs) {
                 faqs.styleanswer = !faqs.styleanswer;
                 faqs.activeClass = (faqs.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item');
-
             };
         }
     };
@@ -4324,66 +4298,7 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
     'authSvc',
     function(scope, reCAPTCHA, feedbacksubmit, authSvc) {
         reCAPTCHA.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
-        // scope.optionhereabout = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Search Engine', title: 'Search Engine', value: 481 },
-        //     { label: 'Newspaper', title: 'Newspaper', value: 482 },
-        //     { label: 'Magzine', title: 'Magzine', value: 483 },
-        //     { label: 'Friend', title: 'Friend', value: 484 },
-        //     { label: 'Email', title: 'Email', value: 485 },
-        //     { label: 'No Answer', title: 'No Answer', value: 486 }
-        // ];
-        // scope.improveourwebsite = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Search', title: 'Search', value: 487 },
-        //     { label: 'Registration', title: 'Registration', value: 488 },
-        //     { label: 'Login', title: 'Login', value: 489 },
-        //     { label: 'FAQ', title: 'FAQ', value: 490 },
-        //     { label: 'About Us', title: 'About Us', value: 491 },
-        //     { label: 'No Answer', title: 'No Answer', value: 492 }
-        // ];
-
-        // scope.prices = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Expensive', title: 'Expensive', value: 493 },
-        //     { label: 'OK', title: 'OK', value: 494 },
-        //     { label: 'Cheap', title: 'Cheap', value: 495 },
-        //     { label: 'No comments', title: 'No comments', value: 496 },
-        //     { label: 'No Answer', title: 'No Answer', value: 497 },
-        // ];
-
-        // scope.downloadtime = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Fast', title: 'Fast', value: 498 },
-        //     { label: 'Average', title: 'Average', value: 499 },
-        //     { label: 'Slow', title: 'Slow', value: 500 },
-        //     { label: 'No Answer', title: 'No Answer', value: 501 },
-        // ];
-
-        // scope.yourratethesearch = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Valuable', title: 'Valuable', value: 507 },
-        //     { label: 'Average', title: 'Average', value: 508 },
-        //     { label: 'Bad', title: 'Bad', value: 509 },
-        //     { label: 'No Answer', title: 'No Answer', value: 510 },
-        // ];
-        // scope.comparesites = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Better', title: 'Better', value: 502 },
-        //     { label: 'Same', title: 'Same', value: 503 },
-        //     { label: 'Bad', title: 'Bad', value: 504 },
-        //     { label: 'No Answer', title: 'No Answer', value: 505 },
-        // ];
-        // scope.recomendedtofriends = [
-        //     { label: '--select--', title: '--select--', value: 0 },
-        //     { label: 'Yes', title: 'Yes', value: 511 },
-        //     { label: 'No', title: 'No', value: 512 },
-        //     { label: 'No Answer', title: 'No Answer', value: 513 },
-        // ];
-
-        //scope.HearAbout = "481";
         scope.submit = function() {
-
             var custid = authSvc.getCustId();
             scope.Cust_ID = custid !== undefined && custid !== null && custid !== "" ? custid : null;
             var objectfeedback = {};
@@ -4401,7 +4316,6 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
                 if (response.data == 1) {
                     alert("Thank u for your valuable feedback");
                     scope.clearallfields();
-
                 }
             });
         };
@@ -4418,12 +4332,10 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
             scope.Comments = "";
             Recaptcha.reload();
         };
-
     }
 ]);
 app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 'reCAPTCHA',
     function(uibModal, scope, helpService, arrayConstants, reCAPTCHA) {
-
         scope.catgory = 'catgory';
         scope.Priority = 'Priority';
         scope.countryCode = 'countryCode';
@@ -4436,12 +4348,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 scope: scope
             });
         };
-
         scope.submit = function() {
-
             if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
                 (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
-
                 scope.inputObj = {
                     profile: '210910352',
                     AssignedEmpID: null,
@@ -4458,7 +4367,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     PhoneNum: scope.txtphnum,
                     EmpID: 0
                 };
-
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
                     console.log(response);
                     scope.CustName = scope.txtname;
@@ -4472,9 +4380,7 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 alert('Please enter Catgory and Priority');
 
             }
-
         };
-
         scope.SendMail = function() {
             scope.SendMailObj = {
                 TicketID: scope.lblTicketID,
@@ -4484,7 +4390,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 EmpID: 0,
                 EmpTicketID: 0
             };
-
             helpService.SendMail(scope.SendMailObj).then(function(response) {
                 if (response.data == 1) {
                     alert('mail has sent successfully');
@@ -4492,7 +4397,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 }
             });
             scope.modalInstance.close();
-
         };
         scope.resethelp = function() {
             scope.txtname = "";
@@ -4512,7 +4416,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
      cerateNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
          var custData = (res.data).split(';');
          scope.profileID = custData[1];
-         //scope.custID = custData[2];
          scope.RelationShipManager = custData[3];
          scope.mngrMob = custData[4] === 'NoEmpOfficialCCn' ? '' : custData[4];
      });
@@ -4525,60 +4428,46 @@ app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
         scope.pageinit = function() {
             customerProfilesettings.getmyorderspayments(scope.custid).then(function(response) {
                 scope.myorders = [];
-
                 _.each(response.data, function(item) {
                     scope.myorders = JSON.parse(item);
-
                 });
             });
         };
     }
 ]);
-app.controller("ourbranches", ["$scope", "ourBranchService", function(scope, ourBranchService) {
-
+app.controller("ourbranches", ["$scope", "ourBranchService", "helperservice", function(scope, ourBranchService, helperservice) {
     scope.region = 'region';
     scope.BranchArr = [];
     scope.BranchDetailsArr = [];
-
-
     scope.telanganaArr = [{ count: 1, "BranchAddress": "103 , 109, Vijayasree Apartments, Behind Chermas ,", "PhoneNumbers": "23747777", "Mobilenumber": "7675818080", "BranchemailID": "kaakateeya.com@gmail.com", "WorkingEndTime": "8:30:00 PM", "Branch_ID": 319, "Address": "Ameerpet , Hyderabad-500073", "WorkingStartTime": "8:30:00 AM", "Landlineareacode": "40", "Landlinenumber": "23747777", "BranchesName": "Hyderabad - Ameerpet" }, { count: 2, "BranchAddress": "2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,", "PhoneNumbers": "24065959", "Mobilenumber": "9966636222", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 320, "Address": "Dilsukhnagar , Hyderabad - 500060", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "24065959", "BranchesName": "Hyderabad-Dilsukhnagar" }, { count: 3, "BranchAddress": "202 , Uday Krishna Complex , Bhagyanagar colony ,", "PhoneNumbers": "23067373", "Mobilenumber": "9392009391", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 321, "Address": "opp KPHB , Hyderabad-500072", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "23067373", "BranchesName": "Hyderabad-Kukatpally" }];
     scope.pundicherry = [{ "BranchAddress": "No 10 , 1st Floor , 2 nd Cross , Annanagar East , ", "PhoneNumbers": "43543543", "Mobilenumber": "7668687687", "BranchemailID": "naveena@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 341, "Address": "Behind Housing Board , Puducherry ( Pondicherry ) - 600 005", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "44", "Landlinenumber": "43543543", "BranchesName": "Pondicheery" }];
-
     ourBranchService.BranchPageloadSelect().then(function(response) {
-
         scope.BranchDetailsArr = response.data;
         _.map(scope.BranchDetailsArr, function(item, index) {
             item.count = parseInt(index + 1);
         });
-
     });
     scope.changeBind = function(type) {
-
         if (scope.ddlbranches == '1') {
-
             scope.BranchDetailsArr = [];
-            if (scope.ddlbranchaddress !== null && scope.ddlbranchaddress !== undefined) {
-
+            if (helperservice.checkstringvalue(scope.ddlbranchaddress)) {
                 scope.BranchDetailsArr = _.where(scope.telanganaArr, { Branch_ID: parseInt(scope.ddlbranchaddress) });
                 _.map(scope.BranchDetailsArr, function(item, index) {
                     item.count = parseInt(index + 1);
                 });
             }
-
             if (type == 'region') {
                 scope.BranchDetailsArr = scope.telanganaArr;
                 scope.BranchArr = [];
                 _.each(scope.telanganaArr, function(item) {
                     scope.BranchArr.push({ "label": item.BranchesName, "title": item.BranchesName, "value": item.Branch_ID });
                 });
-
             }
         } else if (scope.ddlbranches == '2') {
             scope.BranchDetailsArr = [];
             scope.BranchDetailsArr = scope.pundicherry;
             if (type == 'region') {
                 scope.BranchArr = [];
-
             }
         } else {
             if (type == 'region') {
@@ -4598,11 +4487,7 @@ app.controller("ourbranches", ["$scope", "ourBranchService", function(scope, our
                 }
             });
         }
-
     };
-
-
-
 }]);
 app.controller('privacypolicy', ['$scope', function (scope) {
     //hide #back-top first
@@ -4626,279 +4511,263 @@ app.controller('privacypolicy', ['$scope', function (scope) {
     };
 
 }]);
-app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindServiceApp', 'authSvc', 'alert', function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts) {
-
-    scope.selectChanged = function() {
-        alert("value changed-->");
-
-    };
-
-    var logincustid = authSvc.getCustId();
-    scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-    scope.days = function() {
-        scope.test = [];
-        scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
-        for (var i = 1; i <= 30; i++) {
-            scope.test.push({ label: i + ' days', title: i + ' days', value: i });
-        }
-        return scope.test;
-    };
-    scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-    scope.countryCode = [];
-    scope.arraydays = scope.days();
-    scope.mailyes = "1";
-    scope.smsyes = "1";
-    scope.activated = false;
-    scope.disabled = true;
-    scope.activatedmobile = false;
-    scope.countrycodedisable = true;
-    scope.passwordsisableswitch = false;
-    scope.passwordsisable = true;
-    scope.alertmanageswitch = false;
-    scope.manageakerts = true;
-    scope.hideprofileswitchs = false;
-    scope.hideprofile = true;
-    scope.deleteprofileswitch = false;
-    scope.deleteprofiledis = true;
-    service.countryCodeselect().then(function(response) {
-        scope.countryCode = [];
-
-        scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
-        _.each(response.data, function(item) {
-            scope.countryCode.push({ label: item.Name, title: item.Name, value: item.ID });
-        });
-
-    });
-    scope.arrayprofilesettings = {};
-    scope.getdetails = function() {
-        customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
-
-            _.each(response.data, function(item) {
-                scope.arrayprofilesettings = item;
-                scope.mailyes = scope.arrayprofilesettings.AllowEmail === "False" ? "0" : "1";
-                scope.smsyes = scope.arrayprofilesettings.AllowSMS === "False" ? "0" : "1";
+app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindServiceApp',
+    'authSvc', 'alert', 'helperservice',
+    function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts, helperservice) {
+        scope.getdetails = function() {
+            var logincustid = authSvc.getCustId();
+            scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
+            scope.days = function() {
+                scope.test = [];
+                scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
+                for (var i = 1; i <= 30; i++) {
+                    scope.test.push({ label: i + ' days', title: i + ' days', value: i });
+                }
+                return scope.test;
+            };
+            scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+            scope.countryCode = [];
+            scope.arraydays = scope.days();
+            scope.mailyes = "1";
+            scope.smsyes = "1";
+            scope.activated = false;
+            scope.disabled = true;
+            scope.activatedmobile = false;
+            scope.countrycodedisable = true;
+            scope.passwordsisableswitch = false;
+            scope.passwordsisable = true;
+            scope.alertmanageswitch = false;
+            scope.manageakerts = true;
+            scope.hideprofileswitchs = false;
+            scope.hideprofile = true;
+            scope.deleteprofileswitch = false;
+            scope.deleteprofiledis = true;
+            service.countryCodeselect().then(function(response) {
+                scope.countryCode = [];
+                scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
+                _.each(response.data, function(item) {
+                    scope.countryCode.push({ label: item.Name, title: item.Name, value: item.ID });
+                });
             });
-        });
-    };
-    scope.pageload = function() {
-        scope.getdetails();
-    };
-
-
-    scope.toggleActivationsss = function(btntype) {
-        switch (btntype) {
-            case "email":
-
-                if (scope.activated)
-                    scope.disabled = false;
-                else
+            scope.arrayprofilesettings = {};
+            customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
+                _.each(response.data, function(item) {
+                    scope.arrayprofilesettings = item;
+                    scope.mailyes = scope.arrayprofilesettings.AllowEmail === "False" ? "0" : "1";
+                    scope.smsyes = scope.arrayprofilesettings.AllowSMS === "False" ? "0" : "1";
+                });
+            });
+        };
+        scope.pageload = function() {
+            scope.getdetails();
+        };
+        scope.toggleActivationsss = function(btntype) {
+            switch (btntype) {
+                case "email":
+                    if (scope.activated)
+                        scope.disabled = false;
+                    else
+                        scope.disabled = true;
+                    break;
+                case "mobile":
+                    if (scope.activatedmobile)
+                        scope.countrycodedisable = false;
+                    else
+                        scope.countrycodedisable = true;
+                    break;
+                case "password":
+                    if (scope.passwordsisableswitch)
+                        scope.passwordsisable = false;
+                    else
+                        scope.passwordsisable = true;
+                    break;
+                case "managealerts":
+                    if (scope.alertmanageswitch)
+                        scope.manageakerts = false;
+                    else
+                        scope.manageakerts = true;
+                    break;
+                case "hideprofiles":
+                    if (scope.hideprofileswitchs)
+                        scope.hideprofile = false;
+                    else
+                        scope.hideprofile = true;
+                    break;
+                case "deleteprofile":
+                    if (scope.deleteprofileswitch)
+                        scope.deleteprofiledis = false;
+                    else
+                        scope.deleteprofiledis = true;
+                    break;
+            }
+        };
+        scope.submitemailamdmobile = function(Typeofsub) {
+            switch (Typeofsub) {
+                case "email":
+                    var FamilyID = scope.arrayprofilesettings.EmailCust_Family_ID;
+                    var NewEmail = scope.NewEmail;
+                    customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
+                        if (response.data == 1) {
+                            scope.Resetallfields('email');
+                            alerts.open('Email Upadated successfully', 'success');
+                        } else {
+                            alerts.open('Email Updated failed', 'warning');
+                        }
+                    });
+                    break;
+                case "mobile":
+                    var FamilyIDs = scope.arrayprofilesettings.MobileCustFamily_ID;
+                    var CountryCodeID = scope.ddlcountrycode;
+                    var number = scope.Confirmnewnumber;
+                    customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
+                        if (response.data == 1) {
+                            scope.Resetallfields('mobile');
+                            alerts.open('Mobile Upadated successfully', 'success');
+                        } else {
+                            alerts.open('Mobile Updated failed', 'warning');
+                        }
+                    });
+                    break;
+            }
+        };
+        scope.submitpassword = function() {
+            var OldPassword = scope.OldPassword;
+            var NewPassword = scope.NewPassword;
+            var ConfirmPassword = scope.ConfirmPassword;
+            var custId = scope.custid;
+            customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
+                if (response.data == 1) {
+                    scope.Resetallfields('password');
+                    alerts.open('Passsword updated successfully', 'success');
+                } else {
+                    alerts.open('Passsword updated failed', 'warning');
+                }
+            });
+        };
+        scope.submithideprofile = function() {
+            var Expirydate = scope.hideprofiledays;
+            var CustID = scope.custid;
+            var iflag = 1;
+            var Narration = scope.hiddennarration;
+            customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
+                if (response.data == 1) {
+                    scope.Resetallfields('hide');
+                    alerts.open('Hide Profile successfully', 'success');
+                } else {
+                    alerts.open('Hide Profile failed', 'warning');
+                }
+            });
+        };
+        scope.submitdeleteprofile = function() {
+            var ProfileID = scope.ProfileID;
+            var Narrtion = scope.Narrtion;
+            customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
+                if (response.data == 1) {
+                    scope.Resetallfields('deleteprofiles');
+                    alerts.open('Delete Profile successfully', 'success');
+                } else {
+                    alerts.open('Delete Profile failed', 'warning');
+                }
+            });
+        };
+        scope.submitmanagealerts = function() {
+            var CustID = scope.custid;
+            var AllowEmail = scope.mailyes === 0 ? 0 : 1;
+            var AllowSMS = scope.smsyes === 0 ? 0 : 1;
+            customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
+                if (response.data == 1) {
+                    scope.Resetallfields('alerts');
+                    alerts.open('Submit successfully', 'success');
+                } else {
+                    alerts.open('submit failed', 'warning');
+                }
+            });
+        };
+        scope.unhideprofile = function() {
+            var Expirydate = "";
+            var CustID = scope.custid;
+            var iflag = 0;
+            customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
+                if (response.data == 1) {
+                    alerts.open('Unhide your Profile successfully', 'success');
+                } else {
+                    alerts.open('Unhide your Profile failed', 'warning');
+                }
+            });
+        };
+        scope.Resetallfields = function(type) {
+            switch (type) {
+                case "email":
+                    scope.NewEmail = null;
+                    scope.Confirmnewemail = null;
+                    scope.getdetails();
+                    scope.activated = false;
                     scope.disabled = true;
-                break;
-            case "mobile":
-                if (scope.activatedmobile)
-                    scope.countrycodedisable = false;
-                else
+                    this.emailform.NewEmail = null;
+                    this.emailform.Confirmnewemail = null;
+                    this.emailform.$setPristine();
+                    this.emailform.$setUntouched();
+                    this.emailform.$setValidity();
+                    break;
+                case "mobile":
+                    scope.ddlcountrycode = null;
+                    scope.Confirmnewnumber = null;
+                    scope.getdetails();
+                    scope.activatedmobile = false;
                     scope.countrycodedisable = true;
-                break;
-            case "password":
-                if (scope.passwordsisableswitch)
-                    scope.passwordsisable = false;
-                else
+                    this.mobileform.ddlcountrycode = null;
+                    this.mobileform.Confirmnewnumber = null;
+                    this.mobileform.$setPristine();
+                    this.mobileform.$setUntouched();
+                    this.mobileform.$setValidity();
+                    break;
+                case "password":
+                    scope.OldPassword = null;
+                    scope.NewPassword = null;
+                    scope.ConfirmPassword = null;
+                    scope.getdetails();
+                    scope.passwordsisableswitch = false;
                     scope.passwordsisable = true;
-                break;
-            case "managealerts":
-                if (scope.alertmanageswitch)
-                    scope.manageakerts = false;
-                else
-                    scope.manageakerts = true;
-                break;
-            case "hideprofiles":
-
-                if (scope.hideprofileswitchs)
-                    scope.hideprofile = false;
-                else
+                    this.projectForm.OldPassword = null;
+                    this.projectForm.NewPassword = null;
+                    this.projectForm.ConfirmPassword = null;
+                    this.projectForm.$setPristine();
+                    this.projectForm.$setUntouched();
+                    this.projectForm.$setValidity();
+                    break;
+                case "hide":
+                    scope.hideprofiledays = null;
+                    scope.hiddennarration = null;
+                    scope.getdetails();
+                    scope.hideprofileswitchs = false;
                     scope.hideprofile = true;
-                break;
-            case "deleteprofile":
-                if (scope.deleteprofileswitch)
-                    scope.deleteprofiledis = false;
-                else
+                    this.hideprofileform.hideprofiledays = null;
+                    this.hideprofileform.$setPristine();
+                    this.hideprofileform.$setUntouched();
+                    this.hideprofileform.$setValidity();
+                    break;
+                case "alerts":
+                    scope.mailyes = null;
+                    scope.smsyes = null;
+                    scope.getdetails();
+                    scope.alertmanageswitch = false;
+                    scope.manageakerts = true;
+                    break;
+                case "deleteprofiles":
+                    scope.Narration = null;
+                    scope.isChecked = null;
+                    scope.getdetails();
+                    scope.deleteprofileswitch = false;
                     scope.deleteprofiledis = true;
-                break;
-        }
-    };
-    scope.submitemailamdmobile = function(Typeofsub) {
-        switch (Typeofsub) {
-            case "email":
-                var FamilyID = scope.arrayprofilesettings.EmailCust_Family_ID;
-                var NewEmail = scope.NewEmail;
-                customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
-
-                    if (response.data == 1) {
-                        scope.Resetallfields('email');
-                        alerts.open('Email Upadated successfully', 'success');
-                    } else {
-                        alerts.open('Email Updated failed', 'warning');
-                    }
-                });
-                break;
-            case "mobile":
-                var FamilyIDs = scope.arrayprofilesettings.MobileCustFamily_ID;
-                var CountryCodeID = scope.ddlcountrycode;
-                var number = scope.Confirmnewnumber;
-                customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
-
-                    if (response.data == 1) {
-                        scope.Resetallfields('mobile');
-                        alerts.open('Mobile Upadated successfully', 'success');
-                    } else {
-                        alerts.open('Mobile Updated failed', 'warning');
-                    }
-                });
-                break;
-        }
-    };
-    scope.submitpassword = function() {
-
-        var OldPassword = scope.OldPassword;
-        var NewPassword = scope.NewPassword;
-        var ConfirmPassword = scope.ConfirmPassword;
-        var custId = scope.custid;
-        customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
-
-            if (response.data == 1) {
-                scope.Resetallfields('password');
-                alerts.open('Passsword updated successfully', 'success');
-            } else {
-                alerts.open('Passsword updated failed', 'warning');
+                    this.deleteprofileform.narration = null;
+                    this.deleteprofileform.$setPristine();
+                    this.deleteprofileform.$setUntouched();
+                    this.deleteprofileform.$setValidity();
+                    break;
             }
-        });
-    };
-    scope.submithideprofile = function() {
-        var Expirydate = scope.hideprofiledays;
-        var CustID = scope.custid;
-        var iflag = 1;
-        var Narration = scope.hiddennarration;
-        customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-            if (response.data == 1) {
-                scope.Resetallfields('hide');
-                alerts.open('Hide Profile successfully', 'success');
-            } else {
-                alerts.open('Hide Profile failed', 'warning');
-            }
-        });
-    };
-    scope.submitdeleteprofile = function() {
-        var ProfileID = scope.ProfileID;
-        var Narrtion = scope.Narrtion;
-        customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
-            if (response.data == 1) {
-                scope.Resetallfields('deleteprofiles');
-                alerts.open('Delete Profile successfully', 'success');
-            } else {
-                alerts.open('Delete Profile failed', 'warning');
-            }
-        });
-    };
-    scope.submitmanagealerts = function() {
-        var CustID = scope.custid;
-        var AllowEmail = scope.mailyes === 0 ? 0 : 1;
-        var AllowSMS = scope.smsyes === 0 ? 0 : 1;
-        customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
-            if (response.data == 1) {
-                scope.Resetallfields('alerts');
-                alerts.open('Submit successfully', 'success');
-            } else {
-                alerts.open('submit failed', 'warning');
-            }
-        });
-    };
-    scope.unhideprofile = function() {
-        var Expirydate = "";
-        var CustID = scope.custid;
-        var iflag = 0;
-        customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
-            if (response.data == 1) {
-                alerts.open('Unhide your Profile successfully', 'success');
-            } else {
-                alerts.open('Unhide your Profile failed', 'warning');
-            }
-        });
-    };
-    scope.Resetallfields = function(type) {
-        switch (type) {
-            case "email":
-
-                scope.NewEmail = null;
-                scope.Confirmnewemail = null;
-                scope.getdetails();
-                scope.activated = false;
-                scope.disabled = true;
-                this.emailform.NewEmail = null;
-                this.emailform.Confirmnewemail = null;
-                this.emailform.$setPristine();
-                this.emailform.$setUntouched();
-                this.emailform.$setValidity();
-                break;
-            case "mobile":
-                scope.ddlcountrycode = null;
-                scope.Confirmnewnumber = null;
-                scope.getdetails();
-                scope.activatedmobile = false;
-                scope.countrycodedisable = true;
-                this.mobileform.ddlcountrycode = null;
-                this.mobileform.Confirmnewnumber = null;
-                this.mobileform.$setPristine();
-                this.mobileform.$setUntouched();
-                this.mobileform.$setValidity();
-                break;
-            case "password":
-                scope.OldPassword = null;
-                scope.NewPassword = null;
-                scope.ConfirmPassword = null;
-                scope.getdetails();
-                scope.passwordsisableswitch = false;
-                scope.passwordsisable = true;
-                this.projectForm.OldPassword = null;
-                this.projectForm.NewPassword = null;
-                this.projectForm.ConfirmPassword = null;
-                this.projectForm.$setPristine();
-                this.projectForm.$setUntouched();
-                this.projectForm.$setValidity();
-                break;
-            case "hide":
-                scope.hideprofiledays = null;
-                scope.hiddennarration = null;
-                scope.getdetails();
-                scope.hideprofileswitchs = false;
-                scope.hideprofile = true;
-                this.hideprofileform.hideprofiledays = null;
-                this.hideprofileform.$setPristine();
-                this.hideprofileform.$setUntouched();
-                this.hideprofileform.$setValidity();
-                break;
-            case "alerts":
-                scope.mailyes = null;
-                scope.smsyes = null;
-                scope.getdetails();
-                scope.alertmanageswitch = false;
-                scope.manageakerts = true;
-                break;
-            case "deleteprofiles":
-                scope.Narration = null;
-                scope.isChecked = null;
-                scope.getdetails();
-                scope.deleteprofileswitch = false;
-                scope.deleteprofiledis = true;
-                this.deleteprofileform.narration = null;
-                this.deleteprofileform.$setPristine();
-                this.deleteprofileform.$setUntouched();
-                this.deleteprofileform.$setValidity();
-                break;
-        }
-    };
-
-}]);
+        };
+    }
+]);
 app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope, suceessdata) {
     scope.success = [];
 
@@ -4908,7 +4777,6 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     scope.loadmore = true;
     scope.init = function() {
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-
             scope.success = response.data;
         });
     };
@@ -4931,7 +4799,6 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
             });
         }
     });
-
     scope.loadmorefunction = function() {
         scope.loadmore = false;
         scope.loaderspin = true;
@@ -4966,10 +4833,8 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             };
             customerProfilesettings.getmysupporttickets(obj).then(function(response) {
                 scope.supporttickets = [];
-
                 _.each(response.data, function(item) {
                     scope.supporttickets = JSON.parse(item);
-
                 });
             });
         };
@@ -5085,10 +4950,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.searchObjectquery = $location.search();
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
         var meValue = scope.searchObjectquery[meKey];
-        console.log(JSON.stringify(meKey));
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
-        //scope.MyProfileQSAccept = "?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8Gcmd5CJeEgGxzzdNKIoh4aNLbFIeuQbobbjEJM1L3JNQ4m3RfyPbdBGS/1fpiGXNg8SVz/a9JEPOJ4YdUBddXsCQsqooF28ehFR9hqwWgD1mD+JPSOU7+mIJukWIlbE27g==";
-        console.log(scope.MyProfileQSAccept);
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -5098,15 +4960,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
-
                     scope.personalinfo = testArr;
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
                         scope.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
-
                     scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
-
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -5139,7 +4998,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                         alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     }
                                 }
-                                //
                                 if (testArr[0].MatchFollowUpStatus === 1) {
                                     if (testArr[0].SeenStatus === "Accept" || testArr[0].SeenStatus === "Reject") {
                                         scope.divacceptreject = true;
@@ -5153,28 +5011,22 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 } else if (testArr[0].Acceptflag === 1) {
                                     scope.divacceptreject = true;
                                     scope.liproceed = true;
-
                                 } else if (testArr[0].ExpressFlag === 1) {
                                     scope.divacceptreject = true;
                                     scope.liaccept = true;
-
                                 } else {
                                     scope.divacceptreject = false;
                                     scope.liaccept = false;
-
                                 }
-
                                 if (testArr[0].ExpressInterstId !== null) {
                                     scope.hdnexpressinterstfiled = testArr[0].ExpressInterstId;
                                 }
-
                                 break;
                             case "Paidstatus":
                                 scope.lblpaid = testArr[0].Paidstatus;
                                 break;
                             case "Ignore":
                                 scope.Ignore = testArr;
-
                                 break;
                         }
                     }
@@ -5256,7 +5108,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 9:
                     scope.pagerefersh(scope.ToProfileID);
                     break;
-
                 case 10:
                     scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
@@ -5321,13 +5172,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclose = function() {
-
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-
             window.close();
-
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
@@ -5339,7 +5187,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 alerts.dynamicpopup("photopopup.html", scope, uibModal);
             }
         };
-
         scope.btnoksubmit = function() {
             switch (scope.AccRejFlag) {
                 case "MailAccept":
@@ -5413,7 +5260,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.pagerefersh(scope.ToProfileID);
         };
         scope.acceptreject = function(typeofaction) {
-
             if (scope.tocustid !== null && scope.tocustid !== null) {
                 var MobjViewprofile = {
                     FromCustID: scope.fromcustid,
@@ -5453,15 +5299,16 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
     }
 ]);
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams', '$location',
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog',
+    '$stateParams', '$location', 'helperservice', '$http',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
-        $mdDialog, $stateParams, $location) {
+        $mdDialog, $stateParams, $location, helperservice, $http) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
-        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.lnkViewHoro = true;
@@ -5473,6 +5320,11 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
         scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
+        scope.Bookmark = [];
+        scope.Viewed = [];
+        scope.Express = [];
+        scope.Paidstatus = [];
+        scope.Ignore = [];
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -5483,8 +5335,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
+                    console.log(scope.personalinfo);
                     scope.divclassmask = function(logphotostatus) {
-                        var photo = scope.slides[0].ApplicationPhotoPath;
+                        var photo = scope.personalinfo[0].ApplicationPhotoPath;
                         var photocount = scope.personalinfo[0].PhotoName_Cust;
                         logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
                         if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
@@ -5501,13 +5354,23 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
             });
         };
+        scope.slideshowimages = function() {
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+        };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                    scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                    scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
                 customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
@@ -5518,7 +5381,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             switch (testArr[0].TableName) {
                                 case "Bookmark":
                                     scope.Bookmark = testArr;
-                                    scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
+                                    scope.BookmarkFlag = scope.Bookmark[0].BookmarkFlag === 1 ? false : true;
                                     break;
                                 case "Viewed":
                                     scope.Viewed = testArr;
@@ -5532,7 +5395,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     scope.lnkViewHoro = true;
                                     break;
                                 case "Express":
-
                                     scope.Express = testArr;
                                     if (scope.Express[0].MatchFollowUpStatus === 1) {
                                         if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
@@ -5584,52 +5446,43 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     });
                 });
             }
-            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
-                scope.slides = [];
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
-                });
-            });
         };
 
         scope.servicehttp = function(type, object) {
-            return $injector.invoke(function($http) {
-                return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
-                    .then(function(response) {
+            return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
+                .then(function(response) {
+                    switch (type) {
+                        case "B":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
-                        switch (type) {
-                            case "B":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
-
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
-                                }
-                                break;
-                            case "E":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
-                                }
-                                break;
-                            case "I":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
-                                }
-                                break;
-                            case "M":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
-                                }
-                                break;
-                        }
-                    });
-            });
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
+                            }
+                            break;
+                        case "E":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
+                            }
+                            break;
+                        case "I":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
+                            }
+                            break;
+                        case "M":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
+                            }
+                            break;
+                    }
+                });
         };
         scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
             var logincustid = authSvc.getCustId();
@@ -5649,21 +5502,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 FromProfileID: loginprofileid,
                 ToProfileID: profileid !== undefined ? profileid : null
             };
-
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });
                     break;
-
                 default:
                     scope.servicehttp(type, object);
                     break;
             }
-
         };
         scope.sendmessages = function(form) {
 
@@ -5782,9 +5631,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
             }
         };
-
-
-
     }
 ]);
 //  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {

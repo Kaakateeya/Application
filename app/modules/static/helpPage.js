@@ -1,6 +1,5 @@
 app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 'reCAPTCHA',
     function(uibModal, scope, helpService, arrayConstants, reCAPTCHA) {
-
         scope.catgory = 'catgory';
         scope.Priority = 'Priority';
         scope.countryCode = 'countryCode';
@@ -13,12 +12,9 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 scope: scope
             });
         };
-
         scope.submit = function() {
-
             if (scope.helpForm.$valid && (scope.ddlcategory !== undefined && scope.ddlcategory !== '0' && scope.ddlcategory !== '') &&
                 (scope.ddlpriority !== undefined && scope.ddlpriority !== '0' && scope.ddlpriority !== '')) {
-
                 scope.inputObj = {
                     profile: '210910352',
                     AssignedEmpID: null,
@@ -35,7 +31,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     PhoneNum: scope.txtphnum,
                     EmpID: 0
                 };
-
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
                     console.log(response);
                     scope.CustName = scope.txtname;
@@ -49,9 +44,7 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 alert('Please enter Catgory and Priority');
 
             }
-
         };
-
         scope.SendMail = function() {
             scope.SendMailObj = {
                 TicketID: scope.lblTicketID,
@@ -61,7 +54,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 EmpID: 0,
                 EmpTicketID: 0
             };
-
             helpService.SendMail(scope.SendMailObj).then(function(response) {
                 if (response.data == 1) {
                     alert('mail has sent successfully');
@@ -69,7 +61,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                 }
             });
             scope.modalInstance.close();
-
         };
         scope.resethelp = function() {
             scope.txtname = "";

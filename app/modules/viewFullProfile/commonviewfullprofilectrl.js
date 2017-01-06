@@ -9,10 +9,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.searchObjectquery = $location.search();
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
         var meValue = scope.searchObjectquery[meKey];
-        console.log(JSON.stringify(meKey));
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
-        //scope.MyProfileQSAccept = "?MyProfileQSAccept=7YrKbCteX/RfSC2jOgj8Gcmd5CJeEgGxzzdNKIoh4aNLbFIeuQbobbjEJM1L3JNQ4m3RfyPbdBGS/1fpiGXNg8SVz/a9JEPOJ4YdUBddXsCQsqooF28ehFR9hqwWgD1mD+JPSOU7+mIJukWIlbE27g==";
-        console.log(scope.MyProfileQSAccept);
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -22,15 +19,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
-
                     scope.personalinfo = testArr;
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
                         scope.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
-
                     scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
-
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
@@ -63,7 +57,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                         alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     }
                                 }
-                                //
                                 if (testArr[0].MatchFollowUpStatus === 1) {
                                     if (testArr[0].SeenStatus === "Accept" || testArr[0].SeenStatus === "Reject") {
                                         scope.divacceptreject = true;
@@ -77,28 +70,22 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 } else if (testArr[0].Acceptflag === 1) {
                                     scope.divacceptreject = true;
                                     scope.liproceed = true;
-
                                 } else if (testArr[0].ExpressFlag === 1) {
                                     scope.divacceptreject = true;
                                     scope.liaccept = true;
-
                                 } else {
                                     scope.divacceptreject = false;
                                     scope.liaccept = false;
-
                                 }
-
                                 if (testArr[0].ExpressInterstId !== null) {
                                     scope.hdnexpressinterstfiled = testArr[0].ExpressInterstId;
                                 }
-
                                 break;
                             case "Paidstatus":
                                 scope.lblpaid = testArr[0].Paidstatus;
                                 break;
                             case "Ignore":
                                 scope.Ignore = testArr;
-
                                 break;
                         }
                     }
@@ -180,7 +167,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 9:
                     scope.pagerefersh(scope.ToProfileID);
                     break;
-
                 case 10:
                     scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
@@ -245,13 +231,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclose = function() {
-
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-
             window.close();
-
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
@@ -263,7 +246,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 alerts.dynamicpopup("photopopup.html", scope, uibModal);
             }
         };
-
         scope.btnoksubmit = function() {
             switch (scope.AccRejFlag) {
                 case "MailAccept":
@@ -337,7 +319,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.pagerefersh(scope.ToProfileID);
         };
         scope.acceptreject = function(typeofaction) {
-
             if (scope.tocustid !== null && scope.tocustid !== null) {
                 var MobjViewprofile = {
                     FromCustID: scope.fromcustid,

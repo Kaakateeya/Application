@@ -101,7 +101,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
                 { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
                 { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General?selectedIndex=3' },
+                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General/3' },
                 { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
                 { value: 'help', bindvalue: 'profile', hrefs: 'help' },
             ];

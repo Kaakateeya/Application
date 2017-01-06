@@ -1,9 +1,7 @@
 <div id="mainidv" class="register_page_main">
     <h4>Help</h4>
-
     <div class="rating_main help_page_main">
         <p>Contact any of the closest branches for immediate response or post your queries in the sumission form provided below and we will get back to you shortly</p>
-
         <div class="help_no_list clearfix">
             <h4>Contact us</h4>
             <ul>
@@ -36,49 +34,39 @@
                         <input ng-model="txtname" class="input-box" ng-class="aboutForm.$invalid==true && aboutForm.gg?'input-box danger':'input-box'" type="text" required>
                     </div>
                 </div>
-
                 <div class="control-group span6">
                     <label class="control-label">Your email id<span style="color: red;">*</span></label>
                     <div class="controls clearfix">
                         <input name="email" ng-model="txtemail" class="input-box" type="text" required ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
-
                         <span style="color:Red" ng-show="helpForm.email.$dirty && helpForm.email.$error.pattern">Please Enter Valid Email</span>
                     </div>
                 </div>
-
                 <div class="control-group span6">
                     <label class="control-label">Subject<span style="color: red;">*</span></label>
                     <div class="controls clearfix">
                         <input ng-model="txtsubject" class="input-box" type="text" required>
                     </div>
                 </div>
-
                 <div class="control-group span6">
                     <label class="control-label">Category<span style="color: red;">*</span></label>
                     <div class="controls clearfix" id="ddlcategorydd">
                         <select multiselectdropdown ng-model="ddlcategory" typeofdata="catgory" required>  </select>
                     </div>
                 </div>
-
                 <div class="clear"></div>
                 <div class="control-group">
                     <label class="control-label">Message<span style="color: red;">*</span></label>
                     <div class="controls clearfix">
                         <textarea rows="2" cols="20" ng-model="txtmsg" class="marital textarea" required></textarea>
                     </div>
-
-
                     <br>
                 </div>
-
                 <div class="control-group span6 select-box-my">
                     <label class="control-label">Priority<span style="color: red;">*</span></label>
                     <div class="controls clearfix" id="ddlprioritydd">
                         <select multiselectdropdown ng-model="ddlpriority" typeofdata="Priority" required>  </select>
                     </div>
-
                 </div>
-
                 <div class="control-group pics_upload span6 file_upload_help" ng-hide="true">
                     <label class="control-label">Upload your image</label>
                     <div class="controls">
@@ -92,16 +80,11 @@
                                     <input name="fileupload1" ng-model="fileupload1" class="default" type="file"></span>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-
                 <div class="control-group span6 select-box-my select-box-my-trible clearfix">
                     <label class="control-label">Contact phone</label>
-
                     <div class="controls clearfix row">
-
                         <div id="countrycodedd" style="float:left;margin-left:16px;"> <select multiselectdropdown ng-model="ddlcountrycode" typeofdata="countryCode" class="select">  </select></div>
                         <div> <input name="txtphonecode" maxlength="4" ng-model="txtphonecode" class="form-Control" placeholder="area code" type="text">
                         </div>
@@ -124,14 +107,12 @@
         <a href="javascript:void(0)" class="help_icons_pos help_icons_pos2">&nbsp;</a>
         <a href="javascript:void(0)" class="help_icons_pos help_icons_pos3">&nbsp;</a>
     </div>
-
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title text-center" id="modal-title">Mail Preview </h3>
         </div>
         <div class="modal-body" id="modal-body">
             <div class="control-label">
-
                 <div><label ng-model="CustName">{{CustName}}</label></div>
                 <br/>
                 <div> Thank you for contacting Kaakateeya.com. Your enquiry is currently being processed and it can be tracked through reference
@@ -145,13 +126,9 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="SendMail()">Send Mail</button>
-
         </div>
     </script>
-
-
 </div>
-
 <style type="text/css">
     #ddlcategorydd .multiselect.dropdown-toggle,
     #ddlprioritydd .multiselect.dropdown-toggle {

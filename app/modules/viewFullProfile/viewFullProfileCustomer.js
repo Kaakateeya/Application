@@ -1,13 +1,14 @@
 app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope', 'alert',
-    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams', '$location',
+    'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog',
+    '$stateParams', '$location', 'helperservice', '$http',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
-        $mdDialog, $stateParams, $location) {
+        $mdDialog, $stateParams, $location, helperservice, $http) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var localcustid = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         scope.localcustidhide = sessionStorage.getItem("localcustid") !== undefined && sessionStorage.getItem("localcustid") !== "" ? sessionStorage.getItem("localcustid") : null;
         var locallogid = sessionStorage.getItem("locallogid");
-        scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.lnkViewHoro = true;
@@ -19,6 +20,11 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
         scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
+        scope.Bookmark = [];
+        scope.Viewed = [];
+        scope.Express = [];
+        scope.Paidstatus = [];
+        scope.Ignore = [];
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -29,8 +35,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
+                    console.log(scope.personalinfo);
                     scope.divclassmask = function(logphotostatus) {
-                        var photo = scope.slides[0].ApplicationPhotoPath;
+                        var photo = scope.personalinfo[0].ApplicationPhotoPath;
                         var photocount = scope.personalinfo[0].PhotoName_Cust;
                         logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
                         if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
@@ -47,13 +54,23 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 }
             });
         };
+        scope.slideshowimages = function() {
+            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
+                scope.slides = [];
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
+        };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                    scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+                    scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
                 customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
@@ -64,7 +81,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             switch (testArr[0].TableName) {
                                 case "Bookmark":
                                     scope.Bookmark = testArr;
-                                    scope.BookmarkFlag = Bookmark[0].BookmarkFlag === 1 ? false : true;
+                                    scope.BookmarkFlag = scope.Bookmark[0].BookmarkFlag === 1 ? false : true;
                                     break;
                                 case "Viewed":
                                     scope.Viewed = testArr;
@@ -78,7 +95,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     scope.lnkViewHoro = true;
                                     break;
                                 case "Express":
-
                                     scope.Express = testArr;
                                     if (scope.Express[0].MatchFollowUpStatus === 1) {
                                         if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
@@ -130,52 +146,43 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     });
                 });
             }
-            customerDashboardServices.getphotoslideimages(localcustid).then(function(response) {
-                scope.slides = [];
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
-                });
-            });
         };
 
         scope.servicehttp = function(type, object) {
-            return $injector.invoke(function($http) {
-                return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
-                    .then(function(response) {
+            return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
+                .then(function(response) {
+                    switch (type) {
+                        case "B":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
-                        switch (type) {
-                            case "B":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
-
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
-                                }
-                                break;
-                            case "E":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
-                                }
-                                break;
-                            case "I":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
-                                }
-                                break;
-                            case "M":
-                                if (response.data === 1) {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
-                                } else {
-                                    scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
-                                }
-                                break;
-                        }
-                    });
-            });
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'bookmarked failed', 2500);
+                            }
+                            break;
+                        case "E":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
+                            }
+                            break;
+                        case "I":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
+                            }
+                            break;
+                        case "M":
+                            if (response.data === 1) {
+                                scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
+                            } else {
+                                scope.$broadcast("showAlertPopupccc", 'alert-danger', "Message sending Fail", 2500);
+                            }
+                            break;
+                    }
+                });
         };
         scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
             var logincustid = authSvc.getCustId();
@@ -195,21 +202,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 FromProfileID: loginprofileid,
                 ToProfileID: profileid !== undefined ? profileid : null
             };
-
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });
                     break;
-
                 default:
                     scope.servicehttp(type, object);
                     break;
             }
-
         };
         scope.sendmessages = function(form) {
 
@@ -328,8 +331,5 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
             }
         };
-
-
-
     }
 ]);

@@ -7,7 +7,6 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
     scope.loadmore = true;
     scope.init = function() {
         suceessdata.suceessdataget(scope.fromge, scope.topage).then(function(response) {
-
             scope.success = response.data;
         });
     };
@@ -30,7 +29,6 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
             });
         }
     });
-
     scope.loadmorefunction = function() {
         scope.loadmore = false;
         scope.loaderspin = true;

@@ -14,10 +14,8 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
             };
             customerProfilesettings.getmysupporttickets(obj).then(function(response) {
                 scope.supporttickets = [];
-
                 _.each(response.data, function(item) {
                     scope.supporttickets = JSON.parse(item);
-
                 });
             });
         };

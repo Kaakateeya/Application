@@ -2,8 +2,6 @@ app.controller("faqs", ['$scope', function(scope) {
     scope.filters = {
         search: ''
     };
-
-
     scope.arrayfaqs = [
         { questons: 'How do I Bookmark profile?', answers: 'In every view profile you will find the book mark option for future reference before you express interest to filter suitable profiles' },
         { questons: 'How do I delete my profile? (Manage Profile)', answers: 'You can delete your profile including your picture by clicking on Delete Profile in the services page after you login. You have to login to your account to delete your profilfre.4r554r' },
@@ -32,7 +30,6 @@ app.controller("faqs", ['$scope', function(scope) {
 app.directive('faqdirective', function() {
     return {
         link: function(scope, element, attrs) {
-
             scope.expanall = function() {
                 _.each(scope.arrayfaqs, function(item) {
                     item.styleanswer = true;
@@ -44,13 +41,10 @@ app.directive('faqdirective', function() {
                     item.styleanswer = false;
                     item.activeClass = 'faqs_list_main_item';
                 });
-
-
             };
             scope.toggleans = function(faqs) {
                 faqs.styleanswer = !faqs.styleanswer;
                 faqs.activeClass = (faqs.styleanswer === true ? 'faqs_list_main_item active' : 'faqs_list_main_item');
-
             };
         }
     };
