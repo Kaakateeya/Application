@@ -1,8 +1,8 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route', 'helperservice',
+    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
@@ -147,12 +147,21 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.showforgetpasswordpopup = function() {
+
             scope.loginpopup = false;
-            scope.$broadcast('showforgetpassword');
+            alerts.showforgetpopup(scope);
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
             route.go('General', { id: 2 });
+        };
+        scope.cancel = function() {
+
+            alerts.dynamicpopupclose();
+        };
+
+        scope.mddiologcancel = function() {
+            alerts.forgetpasswordhide();
         };
     }
 ]);

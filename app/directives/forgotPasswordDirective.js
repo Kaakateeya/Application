@@ -3,17 +3,18 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
     function(authSvc, customerProfilesettings, alerts, $mdDialog) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
+        var modalinstance;
         return {
             restrict: "E",
             scope: {
                 arrayphotos: '='
             },
-            templateUrl: "templates/forgotPasswordDirective.html",
+            // templateUrl: "templates/forgotPasswordDirective.html",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
-                    $mdDialog.show({
 
-                        templateUrl: 'forgetpassword.html',
+                    $mdDialog.show({
+                        templateUrl: 'templates/forgotPasswordDirective.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
                         scope: scope
@@ -52,7 +53,8 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     }
                 };
                 scope.cancel = function() {
-                    $mdDialog.cancel();
+                    $mdDialog.hide();
+                    //modalinstance.cancel();
                 };
                 scope.forgotpasswordsubmit = function(form) {
                     if (scope.validate(form)) {
@@ -68,7 +70,8 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         });
                     }
                 };
-                scope.$on('showforgetpassword', function(event) {
+                scope.$on('showforgetpassworddirective', function(event) {
+
                     scope.showforgetpassword();
                 });
             }

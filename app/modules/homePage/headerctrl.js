@@ -230,7 +230,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
-            scope.$broadcast('showforgetpassword');
+            //scope.$broadcast('showforgetpassword');
+            alertpopup.showforgetpopup(scope);
         };
         scope.$on("notify-error", function(event, value) {
             var logincustid = authSvc.getCustId();

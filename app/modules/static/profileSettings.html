@@ -42,7 +42,7 @@
                                         </md-input-container>
                                     </div>
 
-                                    <div latout="row" ng-if="activated">
+                                    <div latout="row" ng-show="activated">
                                         <md-button class="md-raised md-warn md-hue-2" ng-disabled="emailform.$invalid" ng-click="submitemailamdmobile('email')">Update</md-button>
                                         <md-button class="md-raised  md-hue-1" ng-click="Resetallfields('email')">Reset</md-button>
                                     </div>
@@ -83,7 +83,7 @@
                                             </div>
                                         </md-input-container>
                                     </div>
-                                    <div latout="row" ng-if="activatedmobile">
+                                    <div latout="row" ng-show="activatedmobile">
                                         <md-button class="md-raised md-warn md-hue-2" ng-disabled="mobileform.$invalid" ng-click="submitemailamdmobile('mobile')">Update</md-button>
                                         <md-button class="md-raised md-hue-1" ng-click="Resetallfields('mobile')">Reset</md-button>
                                     </div>
@@ -131,7 +131,7 @@
                                         </md-input-container>
                                     </div>
                                     <br>
-                                    <div latout="row" ng-if="passwordsisableswitch">
+                                    <div latout="row" ng-show="passwordsisableswitch">
                                         <md-button class="md-raised md-warn md-hue-2" ng-disabled="projectForm.$invalid" ng-click="submitpassword()">Update</md-button>
                                         <md-button class="md-raised md-hue-1" ng-click="Resetallfields('password')">Reset</md-button>
                                     </div>
@@ -164,7 +164,7 @@
                                         </md-radio-group>
                                     </div>
                                     <br>
-                                    <div latout="row" ng-if="alertmanageswitch">
+                                    <div latout="row" ng-show="alertmanageswitch">
                                         <md-button class="md-raised md-warn md-hue-2" ng-click="submitmanagealerts()">Update</md-button>
                                         <md-button class="md-raised md-hue-1" ng-click="Resetallfields('alerts')">Reset</md-button>
                                     </div>
@@ -202,7 +202,7 @@
                                                 <textarea name="hiddennarration" ng-model="hiddennarration" ng-disabled="hideprofile" rows=5 md-maxlength="150"></textarea>
                                             </md-input-container>
                                         </div>
-                                        <div latout="row" ng-if="hideprofileswitchs">
+                                        <div latout="row" ng-show="hideprofileswitchs">
                                             <md-button ng-disabled="hideprofileform.$invalid" class="md-raised md-warn md-hue-2" ng-click="submithideprofile()">Update</md-button>
                                             <md-button class="md-raised md-hue-1" ng-click="Resetallfields('hide')">Reset</md-button>
                                         </div>
@@ -241,7 +241,7 @@
                                             </md-checkbox>
 
                                         </div>
-                                        <div latout="row" ng-if="deleteprofileswitch">
+                                        <div latout="row" ng-show="deleteprofileswitch">
                                             <md-button class="md-raised md-warn md-hue-2" ng-disabled="deleteprofileform.$invalid" ng-click="submitdeleteprofile()">Update</md-button>
                                             <md-button class="md-raised md-hue-1" ng-click="Resetallfields('deleteprofiles')">Reset</md-button>
                                         </div>

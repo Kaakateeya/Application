@@ -2,7 +2,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
     'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route',
     '$stateParams', 'commonFactory', 'helperservice',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory, helperservice) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route,
+        $stateParams, commonFactory, helperservice) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -16,7 +17,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        scope.exactshow = false;
+        console.log(loginpaidstatus);
+        scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
         scope.normaldata = true;
         scope.notificationtxt = [];
         scope.notifytype = 'page';
@@ -27,6 +29,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
+                scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (scope.counts === 1) {
@@ -75,6 +78,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
+                    }).catch(function(response) {
+                        console.log(response);
                     });
                 }
             } else if (bindvalue == 'profile') {
@@ -92,18 +97,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
+            console.log(array);
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
-                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
-                { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'dashboard/MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'dashboard/WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General/3' },
-                { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
-                { value: 'help', bindvalue: 'profile', hrefs: 'help' },
+                { value: 'Edit my profile', bindvalue: 'profile', statename: 'editview', object: {} },
+                { value: 'Upgrade your membership', bindvalue: 'profile', statename: 'UpgradeMembership', object: {} },
+                { value: 'manage photo', bindvalue: 'profile', statename: 'editview.editManagePhoto', object: {} },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you' },
+                { value: 'Saved search', bindvalue: array.SaveSearchCount, statename: 'General', object: { id: 3 } },
+                { value: 'Profile Settings', bindvalue: 'profile', statename: 'profilesettings', object: {} },
+                { value: 'help', bindvalue: 'profile', statename: 'help', object: {} },
             ];
         };
         var TypeOfReportexpress = null;
@@ -111,6 +117,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var oppfilterexpress = null;
         scope.flagexpress = 9;
         scope.expressinterestselect = function(count, TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
+            scope.exactshow = true;
             if (count !== 0) {
                 if (eventclick !== null) {
                     scope.click = eventclick;
@@ -303,6 +310,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.chatsdiv = function(fromindex, toindex, status, headertext, countalert) {
+            scope.exactshow = true;
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     scope.flagexpress = 9;
@@ -334,6 +342,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+            scope.exactshow = true;
             scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
@@ -529,6 +538,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.init = function() {
             scope.PartnerProfilesnew = [];
+            scope.exactshow = (scope.Typeofdatabind === 'C' || scope.Typeofdatabind === 'P') && loginpaidstatus === "1" ? false : true;
             switch (scope.Typeofdatabind) {
                 case "MB":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
@@ -709,6 +719,20 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
                 scope.readNotify(notifyID, type, index);
                 scope.redirectToviewfull(ToCust_Id);
+            }
+        };
+        scope.leftmenulinks = function(item) {
+            switch (item.value) {
+                case "My bookmarked profiles":
+                case "Who bookmarked me":
+                case 'Profiles viewed by me':
+                case "My profile viewed by others":
+                case "Ignored profiles":
+                    scope.gettingpartnerdata(item.clickvalues, 1, 9, item.clickvaluesbind, item.bindvalue, 'UnPaid');
+                    break;
+                default:
+                    route.go(item.statename, item.object);
+                    break;
             }
         };
     }

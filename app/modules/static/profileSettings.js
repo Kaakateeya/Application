@@ -194,7 +194,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.emailform.Confirmnewemail = null;
                     this.emailform.$setPristine();
                     this.emailform.$setUntouched();
-                    this.emailform.$setValidity();
+                    this.emailform.$setinValidity();
                     break;
                 case "mobile":
                     scope.ddlcountrycode = null;
@@ -206,7 +206,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.mobileform.Confirmnewnumber = null;
                     this.mobileform.$setPristine();
                     this.mobileform.$setUntouched();
-                    this.mobileform.$setValidity();
+                    this.mobileform.$setinValidity();
                     break;
                 case "password":
                     scope.OldPassword = null;
@@ -220,7 +220,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.projectForm.ConfirmPassword = null;
                     this.projectForm.$setPristine();
                     this.projectForm.$setUntouched();
-                    this.projectForm.$setValidity();
+                    this.projectForm.$setinValidity();
                     break;
                 case "hide":
                     scope.hideprofiledays = null;
@@ -231,7 +231,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.hideprofileform.hideprofiledays = null;
                     this.hideprofileform.$setPristine();
                     this.hideprofileform.$setUntouched();
-                    this.hideprofileform.$setValidity();
+                    this.hideprofileform.$setinValidity();
                     break;
                 case "alerts":
                     scope.mailyes = null;
@@ -249,7 +249,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.deleteprofileform.narration = null;
                     this.deleteprofileform.$setPristine();
                     this.deleteprofileform.$setUntouched();
-                    this.deleteprofileform.$setValidity();
+                    this.deleteprofileform.$setinValidity();
                     break;
             }
         };

@@ -96,6 +96,8 @@
         display: inline-block!important;
         float: left;
     }
+    
+    .textboxremvecolor {}
 </style>
 
 <div class="search_page_main" ng-show="modelsearch.showcontrols" ng-init="generalpageload()">
@@ -686,22 +688,23 @@
                                 <li class="row clearfix">
                                     <label  class="pop_label_left col-lg-4">Name<span style="color: red; margin-left: 3px;">*</span></label>
                                    <div class="pop_controls_right select-box-my select-box-my-double col-lg-8">
-                                       <input placeholder="First Name" maxlength="100" class="form-control col-lg-4" required="" md-asterisk="" name="txtfirstname" ng-model="reg.txtfirstname" style="border: 1px solid #cac3c3 !important;width:48% !important;">
-                                       <input placeholder="Last Name" maxlength="50" required="" class="form-control col-lg-4" md-asterisk="" name="txtlastname" ng-model="reg.txtlastname" style="border: 1px solid #cac3c3 !important;width: 48% !important;margin-left: 3px;">
+                                       <input placeholder="First Name"  maxlength="100" class="form-control col-lg-4" required="" md-asterisk="" 
+                                       ng-class="dynamictextboxcolor(reg.txtfirstname,'txtfirstname')" id="txtfirstname" ng-model="reg.txtfirstname" style="border: 1px solid #cac3c3 !important;width:48% !important;">
+                                       <input placeholder="Last Name" ng-class="dynamictextboxcolor(reg.txtlastname,'txtlastname')"  maxlength="50" required="" class="form-control col-lg-4" md-asterisk="" id="txtlastname" ng-model="reg.txtlastname" style="border: 1px solid #cac3c3 !important;width: 48% !important;margin-left: 3px;">
                                    </div>
                                 </li>
                                <br/>
                                 <li class="row clearfix" >
                                     <label  class="pop_label_left col-lg-4">Email&Password<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  select-box-my-double col-lg-8">
-                                        <input required="" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control col-lg-4" name="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;width:57% !important;" ng-pattern="/^.+@.+\..+$/" >
-                                          <input maxlength="15" placeholder="Password" class="form-control col-lg-4" style="border: 1px solid #cac3c3 !important;border-radius: 3px !important;width:38% !important;margin-left: 3px;height: 33px !important;" required="" md-asterisk="" name="txtpassword" ng-model="reg.txtpassword" type="password">  
+                                        <input required="" ng-class="dynamictextboxcolor(reg.txtEmail,'txtEmail')" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control col-lg-4" id="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;width:57% !important;" ng-pattern="/^.+@.+\..+$/" >
+                                          <input maxlength="15" placeholder="Password" class="form-control col-lg-4" style="border: 1px solid #cac3c3 !important;border-radius: 3px !important;width:38% !important;margin-left: 3px;height: 33px !important;" required="" md-asterisk="" id="txtpassword" ng-model="reg.txtpassword" type="password"  ng-class="dynamictextboxcolor(reg.txtpassword,'txtpassword')">  
                                     </div>
                                  </li>                     
                                  <li class="row">
                                     <label  class="pop_label_left col-lg-4">Posted by<span style="color: red; margin-left: 3px;">*</span></label>
                                       <div class="pop_controls_right select-box-my col-lg-8">
-                                        <select multiselectdropdown  ng-model="reg.ddlpostedby" required="" typeofdata="'childStayingWith'">
+                                        <select multiselectdropdown  ng-model="reg.ddlpostedby" id="ddlpostedby" required="" typeofdata="'childStayingWith'" ng-class="dynamicaapplycolors(reg.ddlpostedby,'ddlpostedby')">
                                            </select>
                                    </div>
                                 </li>
@@ -709,11 +712,12 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">DOB<span style="color: red; margin-left: 3px;">*</span></label>
                                        <div class="pop_controls_right select-box-my select-box-my-trible col-lg-8">                             
-                                        <select  multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in dateArr" style="border-radius: 3px !important;width:30%;" name="ddlDD" placeholder="Day" ng-model="reg.ddlDD" required="" ng-change="dayChange(reg,'day');" >
+                                        <select  multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in dateArr" style="border-radius: 3px !important;width:30%;" id="ddlDD" placeholder="Day" ng-model="reg.ddlDD" required="" ng-change="dayChange(reg,'day');" ng-class="dynamicaapplycolors(reg.ddlDD,'ddlDD')">
                                         </select>
-                                            <select name="ddlMM" multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in monthArr" style="border-radius: 3px !important;width:30%;" ng-model="reg.ddlMM" required="" ng-change="dayChange(reg,'month');" >
+                                            <select id="ddlMM" multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in monthArr" style="border-radius: 3px !important;width:30%;" ng-model="reg.ddlMM" required="" ng-change="dayChange(reg,'month');" ng-class="dynamicaapplycolors(reg.ddlMM,'ddlMM')">
                                             </select>
-                                            <select name="ddlYear"  multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in yearArr" style="border-radius: 3px !important;width:30%;" ng-model="reg.ddlYear" required="">
+                                            <select id="ddlYear"  multiselectdropdown typeofdata=""  ng-options="item.value as item.label for item in yearArr" style="border-radius: 3px !important;width:30%;" ng-model="reg.ddlYear" required=""
+                                            ng-class="dynamicaapplycolors(reg.ddlYear,'ddlYear')">
                                           </select>
                                     </div>
                                 </li>
@@ -721,9 +725,11 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Religion&MotherTongue<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my select-box-my-double col-lg-8 regreligion">
-                                        <select multiselectdropdown  style="width:50% !important;"  typeofdata="'Religion'"  name="ddlreligion" ng-model="reg.ddlreligion"   required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
+                                        <select multiselectdropdown  style="width:50% !important;"  typeofdata="'Religion'"  id="ddlreligion" ng-model="reg.ddlreligion"   required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);"
+                                       ng-class="dynamicaapplycolors(reg.ddlreligion,'ddlreligion')" >
                                         </select>
-                                           <select multiselectdropdown  style="width:50% !important;" typeofdata="'Mothertongueselect'" name="ddlmothertongue" ng-model="reg.ddlmothertongue" required="" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
+                                           <select multiselectdropdown  style="width:50% !important;" typeofdata="'Mothertongueselect'" id="ddlmothertongue" ng-model="reg.ddlmothertongue" required="" 
+                                           ng-class="dynamicaapplycolors(reg.ddlmothertongue,'ddlmothertongue')" ng-change="changeBind(reg.ddlreligion,reg.ddlmothertongue);">
                                        </select>
                                     </div>
                                 </li>
@@ -731,7 +737,7 @@
                                  <li class="row">
                                     <label  class="pop_label_left col-lg-4">Caste<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  col-lg-8">
-                                        <select name="ddlcaste"  multiselectdropdown typeofdata="" ng-options="item.value as item.label for item in casteArr"  ng-model="reg.ddlcaste" required="">
+                                        <select id="ddlcaste"  ng-class="dynamicaapplycolors(reg.ddlcaste,'ddlcaste')"  multiselectdropdown typeofdata="" ng-options="item.value as item.label for item in casteArr"  ng-model="reg.ddlcaste" required="">
                                         </select>
                                     </div>
                                 </li>
@@ -739,7 +745,7 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Residing At<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  col-lg-8">
-                                        <select multiselectdropdown  typeofdata="'Country'"  name="ddlcountry"  ng-model="reg.ddlcountry" required="" >
+                                        <select multiselectdropdown  ng-class="dynamicaapplycolors(reg.ddlcountry,'ddlcountry')" typeofdata="'Country'"  id="ddlcountry"  ng-model="reg.ddlcountry" required="" >
                                       </select>
                                     </div>
                                 </li>
@@ -747,9 +753,9 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Mobile Number<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my select-box-my-double col-lg-8 regmobilenumber">
-                                      <select  multiselectdropdown class="col-lg-4"  typeofdata="'countryCode'" name="ddlmobilecountry" ng-model="reg.ddlmobilecountry" required="">
+                                      <select ng-class="dynamicaapplycolors(reg.ddlmobilecountry,'ddlmobilecountry')"  multiselectdropdown class="col-lg-4"  typeofdata="'countryCode'" id="ddlmobilecountry" ng-model="reg.ddlmobilecountry" required="">
                                             </select>         
-                                            <input maxlength="10" class="form-control col-lg-8"   required="" md-no-asterisk="" ng-pattern="/^[0-9]+$/" name="txtMobileNo" ng-model="reg.txtMobileNo" ng-blur="valueExists('number',1,reg.txtMobileNo);" style="border: 1px solid #a29b9b;width: 51% !important;float: right;margin-right: 12px;margin-top: 3px;">
+                                            <input maxlength="10" class="form-control col-lg-8" ng-class="dynamictextboxcolor(reg.txtMobileNo,'txtMobileNo')"  required="" md-no-asterisk="" ng-pattern="/^[0-9]+$/" id="txtMobileNo" ng-model="reg.txtMobileNo" ng-blur="valueExists('number',1,reg.txtMobileNo);" style="border: 1px solid #a29b9b;width: 51% !important;float: right;margin-right: 12px;margin-top: 3px;">
                                     </div>
                                 </li>
                                   <br/>

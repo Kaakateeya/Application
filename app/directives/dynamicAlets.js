@@ -1,5 +1,56 @@
-app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', function($mdDialog, uibModal, timeout, arrayConstants) {
-    var modalinstance;
+app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'customerProfilesettings', function($mdDialog, uibModal, timeout, arrayConstants, customerProfilesettings) {
+    var modalinstance, forgetpassword;
+
+    function closepopup($scope) {
+        $scope.hide = function() {
+            forgetpassword.hide();
+        };
+
+        $scope.ValidateEmail = function(email) {
+            var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return expr.test(email);
+        };
+        $scope.Validatnumber = function(num) {
+            var expr1 = /[0-9 -()+]+$/;
+            return expr1.test(num);
+        };
+        $scope.validate = function(form) {
+            if ((form.txtforgetemail).indexOf("@") != -1) {
+                if (!$scope.ValidateEmail(form.txtforgetemail)) {
+                    form.txtforgetemail = '';
+                    alert(" Please enter valid ProfileID/Email");
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (!$scope.Validatnumber(form.txtforgetemail) || (form.txtforgetemail).length != 9) {
+                    alert("Please enter valid ProfileID/Email");
+                    form.txtforgetemail = '';
+                    return false;
+
+                } else {
+                    return true;
+                }
+            }
+        };
+
+        $scope.forgotpasswordsubmit = function(form) {
+            if ($scope.validate(form)) {
+                customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
+                    if (response.data == 1) {
+                        alert('Mail sent to your email, To reset your password check your mail');
+                        forgetpassword.hide();
+                    } else if (response.data == 2) {
+                        alert("Invalid Matrimony ID OR  E-mail-ID.");
+                    } else {
+                        alert("Invalid Matrimony ID OR  E-mail-ID.");
+                    }
+                });
+            }
+        };
+    }
+
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -50,15 +101,7 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
         dynamicpopupclose: function() {
             modalinstance.close();
         },
-        showloginpopup: function() {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'login.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
 
-            });
-        },
         mddiologcancel: function() {
             $mdDialog.hide();
         },
@@ -81,6 +124,40 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
             scope.close = function() {
                 modalinstance.close();
             };
-        }
+        },
+        applycolors: function(value, id) {
+            var colors = "selectborderclass";
+            if (value !== 0 && value !== "0" && value !== "" && value !== undefined && value !== null) {
+                colors = "selectborderclasscolor";
+                $('#' + id).next().find('button').addClass("bacg");
+            } else {
+                colors = "selectborderclass";
+                $('#' + id).next().find('button').removeClass("bacg");
+            }
+            return colors;
+        },
+        applycolorsfortextboxes: function(value, id) {
+            var colors = "textboxremvecolor";
+            if (value !== "" && value !== undefined && value !== null) {
+                colors = "bacg";
+                $('#' + id).addClass("bacg");
+            } else {
+                colors = "textboxremvecolor";
+                $('#' + id).removeClass("bacg");
+            }
+            return colors;
+        },
+
+
+        showforgetpopup: function(scope) {
+            forgetpassword = $mdDialog;
+            forgetpassword.show({
+                templateUrl: 'templates/forgotPasswordDirective.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+                controller: closepopup,
+            });
+        },
+
     };
 }]);

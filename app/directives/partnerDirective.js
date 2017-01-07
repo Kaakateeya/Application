@@ -138,6 +138,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -156,16 +157,19 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
                         console.log(typeofactionflag);
+                        if (typeofactionflag === 1) {
+                            typeofactionflag = true;
+                        }
                         switch (type) {
                             case "B":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Bookmark This ProfileID", "warning");
                                 }
                                 break;
                             case "E":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
                                         console.log(responsepaid);
                                         if (responsepaid === true)
@@ -176,7 +180,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                                 break;
                             case "I":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Ignore This ProfileID", "warning");
@@ -318,6 +322,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
                 };
                 scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    scope.$emit('slideshowrefinehide');
                     var totalItems = $('#' + carouselID).find('.item').length;
                     if (totalItems === 0) {
                         scope.$emit('slideshowsubmit', 1, 10, "slideshow");
@@ -325,6 +330,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     scope.ArrowMove(carouselID);
                     scope.checkitemGlobal(carouselID);
+
                 };
                 scope.pageloadslidebind = function() {
                     $('.list-inline li a').removeClass('selected');
@@ -381,6 +387,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
                 };
                 scope.Slideshowpage = function() {
+                    scope.$emit('slideshowrefinehide');
                     scope.slideshowsearches = true;
                     scope.playpausebuttons = false;
                     scope.partnersearchessearches = false;
@@ -405,11 +412,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
+                    scope.$emit('slideshowrefinehide');
                     scope.pageloadslidebind();
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
                 scope.prevslide = function() {
+                    scope.$emit('slideshowrefinehide');
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;

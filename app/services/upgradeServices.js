@@ -11,6 +11,9 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         sendsms: function(CategoryID, Cust_ID, SendPhonenumber) {
             return http.get(app.apiroot + 'StaticPages/getUnpaidMembersOwnerNotification', { params: { CategoryID: CategoryID, Cust_ID: Cust_ID, SendPhonenumber: SendPhonenumber } });
+        },
+        Paymentinsert: function(Mobj) {
+            return http.post(app.apiroot + 'Payment/InsertPaymentDetails', Mobj);
         }
 
     };

@@ -641,8 +641,59 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
     };
 
 }]);
-app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', function($mdDialog, uibModal, timeout, arrayConstants) {
-    var modalinstance;
+app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'customerProfilesettings', function($mdDialog, uibModal, timeout, arrayConstants, customerProfilesettings) {
+    var modalinstance, forgetpassword;
+
+    function closepopup($scope) {
+        $scope.hide = function() {
+            forgetpassword.hide();
+        };
+
+        $scope.ValidateEmail = function(email) {
+            var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return expr.test(email);
+        };
+        $scope.Validatnumber = function(num) {
+            var expr1 = /[0-9 -()+]+$/;
+            return expr1.test(num);
+        };
+        $scope.validate = function(form) {
+            if ((form.txtforgetemail).indexOf("@") != -1) {
+                if (!$scope.ValidateEmail(form.txtforgetemail)) {
+                    form.txtforgetemail = '';
+                    alert(" Please enter valid ProfileID/Email");
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (!$scope.Validatnumber(form.txtforgetemail) || (form.txtforgetemail).length != 9) {
+                    alert("Please enter valid ProfileID/Email");
+                    form.txtforgetemail = '';
+                    return false;
+
+                } else {
+                    return true;
+                }
+            }
+        };
+
+        $scope.forgotpasswordsubmit = function(form) {
+            if ($scope.validate(form)) {
+                customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
+                    if (response.data == 1) {
+                        alert('Mail sent to your email, To reset your password check your mail');
+                        forgetpassword.hide();
+                    } else if (response.data == 2) {
+                        alert("Invalid Matrimony ID OR  E-mail-ID.");
+                    } else {
+                        alert("Invalid Matrimony ID OR  E-mail-ID.");
+                    }
+                });
+            }
+        };
+    }
+
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -693,15 +744,7 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
         dynamicpopupclose: function() {
             modalinstance.close();
         },
-        showloginpopup: function() {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'login.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
 
-            });
-        },
         mddiologcancel: function() {
             $mdDialog.hide();
         },
@@ -724,25 +767,78 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', fu
             scope.close = function() {
                 modalinstance.close();
             };
-        }
+        },
+        applycolors: function(value, id) {
+            var colors = "selectborderclass";
+            if (value !== 0 && value !== "0" && value !== "" && value !== undefined && value !== null) {
+                colors = "selectborderclasscolor";
+                $('#' + id).next().find('button').addClass("bacg");
+            } else {
+                colors = "selectborderclass";
+                $('#' + id).next().find('button').removeClass("bacg");
+            }
+            return colors;
+        },
+        applycolorsfortextboxes: function(value, id) {
+            var colors = "textboxremvecolor";
+            if (value !== "" && value !== undefined && value !== null) {
+                colors = "bacg";
+                $('#' + id).addClass("bacg");
+            } else {
+                colors = "textboxremvecolor";
+                $('#' + id).removeClass("bacg");
+            }
+            return colors;
+        },
+
+
+        showforgetpopup: function(scope) {
+            forgetpassword = $mdDialog;
+            forgetpassword.show({
+                templateUrl: 'templates/forgotPasswordDirective.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+                controller: closepopup,
+            });
+        },
+
     };
 }]);
+app.directive('focus',
+    function($timeout) {
+        return {
+            scope: {
+                trigger: '@focus'
+            },
+            link: function(scope, element) {
+                scope.$watch('trigger', function(value) {
+                    if (value === "true") {
+                        $timeout(function() {
+                            element[0].focus();
+                        });
+                    }
+                });
+            }
+        };
+    }
+);
 app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
     '$mdDialog',
     function(authSvc, customerProfilesettings, alerts, $mdDialog) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
+        var modalinstance;
         return {
             restrict: "E",
             scope: {
                 arrayphotos: '='
             },
-            templateUrl: "templates/forgotPasswordDirective.html",
+            // templateUrl: "templates/forgotPasswordDirective.html",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
-                    $mdDialog.show({
 
-                        templateUrl: 'forgetpassword.html',
+                    $mdDialog.show({
+                        templateUrl: 'templates/forgotPasswordDirective.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
                         scope: scope
@@ -781,7 +877,8 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     }
                 };
                 scope.cancel = function() {
-                    $mdDialog.cancel();
+                    $mdDialog.hide();
+                    //modalinstance.cancel();
                 };
                 scope.forgotpasswordsubmit = function(form) {
                     if (scope.validate(form)) {
@@ -797,7 +894,8 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         });
                     }
                 };
-                scope.$on('showforgetpassword', function(event) {
+                scope.$on('showforgetpassworddirective', function(event) {
+
                     scope.showforgetpassword();
                 });
             }
@@ -1253,6 +1351,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
+
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1271,16 +1370,19 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
                         console.log(typeofactionflag);
+                        if (typeofactionflag === 1) {
+                            typeofactionflag = true;
+                        }
                         switch (type) {
                             case "B":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Bookmark This ProfileID", "warning");
                                 }
                                 break;
                             case "E":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
                                         console.log(responsepaid);
                                         if (responsepaid === true)
@@ -1291,7 +1393,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                                 break;
                             case "I":
-                                if (typeofactionflag !== true || typeofactionflag !== 1) {
+                                if (typeofactionflag !== true) {
                                     scope.servicehttp(type, object);
                                 } else {
                                     scope.$emit('successfailer', "You have already Ignore This ProfileID", "warning");
@@ -1433,6 +1535,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
                 };
                 scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    scope.$emit('slideshowrefinehide');
                     var totalItems = $('#' + carouselID).find('.item').length;
                     if (totalItems === 0) {
                         scope.$emit('slideshowsubmit', 1, 10, "slideshow");
@@ -1440,6 +1543,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     scope.ArrowMove(carouselID);
                     scope.checkitemGlobal(carouselID);
+
                 };
                 scope.pageloadslidebind = function() {
                     $('.list-inline li a').removeClass('selected');
@@ -1496,6 +1600,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
                 };
                 scope.Slideshowpage = function() {
+                    scope.$emit('slideshowrefinehide');
                     scope.slideshowsearches = true;
                     scope.playpausebuttons = false;
                     scope.partnersearchessearches = false;
@@ -1520,11 +1625,13 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     $('#slideShowCarousel').carousel('pause');
                 };
                 scope.nextslide = function() {
+                    scope.$emit('slideshowrefinehide');
                     scope.pageloadslidebind();
                     var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
                     scope.lnkLastSlide = currentIndex1 + 1;
                 };
                 scope.prevslide = function() {
+                    scope.$emit('slideshowrefinehide');
                     $('.list-inline li a').removeClass('selected');
                     $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
                     var totalItems1 = $('#slideShowCarousel').find('.item').length;
@@ -1617,7 +1724,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
     'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route',
     '$stateParams', 'commonFactory', 'helperservice',
     function(uibModal, scope, customerDashboardServices, authSvc, alerts,
-        window, $location, successstoriesdata, $rootscope, $timeout, route, $stateParams, commonFactory, helperservice) {
+        window, $location, successstoriesdata, $rootscope, $timeout, route,
+        $stateParams, commonFactory, helperservice) {
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
@@ -1631,7 +1739,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        scope.exactshow = false;
+        console.log(loginpaidstatus);
+        scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
         scope.normaldata = true;
         scope.notificationtxt = [];
         scope.notifytype = 'page';
@@ -1642,6 +1751,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
                 scope.flag = frompage === 1 ? 9 : scope.flag;
                 scope.typeodbind = type;
+                scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
                 if (type === 'C') {
                     customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (scope.counts === 1) {
@@ -1690,6 +1800,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
+                    }).catch(function(response) {
+                        console.log(response);
                     });
                 }
             } else if (bindvalue == 'profile') {
@@ -1707,18 +1819,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
+            console.log(array);
             scope.leftMenuArr = [
-                { value: 'Edit my profile', bindvalue: 'profile', hrefs: 'editview' },
-                { value: 'Upgrade your membership', bindvalue: 'profile', hrefs: 'UpgradeMembership' },
-                { value: 'manage photo', bindvalue: 'profile', hrefs: 'editview/editManagePhoto' },
-                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked', hrefs: 'dashboard/MB' },
-                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You', hrefs: 'dashboard/WB' },
-                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me', hrefs: 'dashboard/RV' },
-                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile', hrefs: 'dashboard/WV' },
-                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you', hrefs: 'dashboard/I' },
-                { value: 'Saved search', bindvalue: 'profile', hrefs: 'General/3' },
-                { value: 'Profile Settings', bindvalue: 'profile', hrefs: 'profilesettings' },
-                { value: 'help', bindvalue: 'profile', hrefs: 'help' },
+                { value: 'Edit my profile', bindvalue: 'profile', statename: 'editview', object: {} },
+                { value: 'Upgrade your membership', bindvalue: 'profile', statename: 'UpgradeMembership', object: {} },
+                { value: 'manage photo', bindvalue: 'profile', statename: 'editview.editManagePhoto', object: {} },
+                { value: 'My bookmarked profiles', bindvalue: array.MybookMarkedProfCount, clickvalues: 'MB', clickvaluesbind: 'Profiles you have bookmarked' },
+                { value: 'Who bookmarked me', bindvalue: array.WhobookmarkedCount, clickvalues: 'WB', clickvaluesbind: 'Profiles Who BookMarked You' },
+                { value: 'Profiles viewed by me', bindvalue: array.RectViewedProfCount, clickvalues: 'RV', clickvaluesbind: 'Profiles viewed by me' },
+                { value: 'My profile viewed by others', bindvalue: array.RectWhoViewedCout, clickvalues: 'WV', clickvaluesbind: 'Members viewed my profile' },
+                { value: 'Ignored profiles', bindvalue: array.IgnoreProfileCount, clickvalues: 'I', clickvaluesbind: 'Profiles ignored by you' },
+                { value: 'Saved search', bindvalue: array.SaveSearchCount, statename: 'General', object: { id: 3 } },
+                { value: 'Profile Settings', bindvalue: 'profile', statename: 'profilesettings', object: {} },
+                { value: 'help', bindvalue: 'profile', statename: 'help', object: {} },
             ];
         };
         var TypeOfReportexpress = null;
@@ -1726,6 +1839,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var oppfilterexpress = null;
         scope.flagexpress = 9;
         scope.expressinterestselect = function(count, TypeOfReport, yourFilter, oppfilter, frompage, topage, headertext, typeofinterest, eventclick) {
+            scope.exactshow = true;
             if (count !== 0) {
                 if (eventclick !== null) {
                     scope.click = eventclick;
@@ -1918,6 +2032,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.chatsdiv = function(fromindex, toindex, status, headertext, countalert) {
+            scope.exactshow = true;
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     scope.flagexpress = 9;
@@ -1949,6 +2064,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+            scope.exactshow = true;
             scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
@@ -2144,6 +2260,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.init = function() {
             scope.PartnerProfilesnew = [];
+            scope.exactshow = (scope.Typeofdatabind === 'C' || scope.Typeofdatabind === 'P') && loginpaidstatus === "1" ? false : true;
             switch (scope.Typeofdatabind) {
                 case "MB":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
@@ -2326,27 +2443,44 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.redirectToviewfull(ToCust_Id);
             }
         };
+        scope.leftmenulinks = function(item) {
+            switch (item.value) {
+                case "My bookmarked profiles":
+                case "Who bookmarked me":
+                case 'Profiles viewed by me':
+                case "My profile viewed by others":
+                case "Ignored profiles":
+                    scope.gettingpartnerdata(item.clickvalues, 1, 9, item.clickvaluesbind, item.bindvalue, 'UnPaid');
+                    break;
+                default:
+                    route.go(item.statename, item.object);
+                    break;
+            }
+        };
     }
 ]);
-app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', function(scope, authSvc, $rootscope, route) {
-    scope.showforgetpasswordpopup = function() {
-        scope.$broadcast('showforgetpassword');
-    };
-    scope.searchpage = function(typeurl) {
-        sessionStorage.removeItem("homepageobject");
-        switch (typeurl) {
-            case "profile":
-                route.go('General', { id: 2 });
-                break;
-            case "general":
-                route.go('General', { id: 0 });
-                break;
-            case "advanced":
-                route.go('General', { id: 1 });
-                break;
-        }
-    };
-}]);
+app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', 'alert',
+    function(scope, authSvc, $rootscope, route, alerts) {
+        scope.showforgetpasswordpopup = function() {
+            // scope.$broadcast('showforgetpassword');
+            alerts.showforgetpopup(scope);
+        };
+        scope.searchpage = function(typeurl) {
+            sessionStorage.removeItem("homepageobject");
+            switch (typeurl) {
+                case "profile":
+                    route.go('General', { id: 2 });
+                    break;
+                case "general":
+                    route.go('General', { id: 0 });
+                    break;
+                case "advanced":
+                    route.go('General', { id: 1 });
+                    break;
+            }
+        };
+    }
+]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
     '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
@@ -2579,7 +2713,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
-            scope.$broadcast('showforgetpassword');
+            //scope.$broadcast('showforgetpassword');
+            alertpopup.showforgetpopup(scope);
         };
         scope.$on("notify-error", function(event, value) {
             var logincustid = authSvc.getCustId();
@@ -2608,9 +2743,9 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route', 'helperservice',
+    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
@@ -2755,12 +2890,21 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.showforgetpasswordpopup = function() {
+
             scope.loginpopup = false;
-            scope.$broadcast('showforgetpassword');
+            alerts.showforgetpopup(scope);
         };
         scope.searchpage = function() {
             sessionStorage.removeItem("homepageobject");
             route.go('General', { id: 2 });
+        };
+        scope.cancel = function() {
+
+            alerts.dynamicpopupclose();
+        };
+
+        scope.mddiologcancel = function() {
+            alerts.forgetpasswordhide();
         };
     }
 ]);
@@ -3005,15 +3149,31 @@ app.controller("payment",function()
 {
 
 });
-app.controller('paymentresponse', ['$scope', 'route',
-    function(scope, route) {
+app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
+    function(scope, route, myAppFactory) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         };
         scope.backtopayment = function() {
             route.go('UpgradeMembership', {});
         };
+        scope.paymentinsert = function() {
 
+            var obj = {
+                intCustID: scope.paymentobject.CustID,
+                intMembershipID: scope.paymentobject.MembershipID,
+                DiscountID: scope.paymentobject.DiscountID !== "" ? scope.paymentobject.DiscountID : null,
+                Points: scope.paymentobject.Points,
+                MembershipName: scope.paymentobject.MembershipName,
+                Duration: scope.paymentobject.Duration,
+                MembershipAmount: scope.paymentobject.Amount
+            };
+            myAppFactory.Paymentinsert(obj).then(function(response) {
+
+                console.log(response);
+            });
+
+        };
     }
 ]);
 app.controller("registration", function () {
@@ -3448,7 +3608,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.truepartner = false;
-            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
+            if (helperservice.checkstringvalue(scope.modelsearch.custid) && scope.modelsearch.slideshow !== "slideshow") {
                 scope.truepartnerrefine = false;
             } else {
                 scope.truepartnerrefine = true;
@@ -3491,6 +3651,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             }
                         }
                         scope.modelsearch.loadinging = true;
+
                         if (scope.modelsearch.slideshow !== "slideshow") {
                             scope.$broadcast('loadmore');
                         }
@@ -3675,8 +3836,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartnerrefine = true;
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
+
+            scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "slideshow";
             scope.generalsearchsubmit(scope.modelsearch.typesearch, frompageslide, topageslide);
+        });
+        scope.$on('slideshowrefinehide', function(event) {
+            scope.truepartnerrefine = true;
         });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
@@ -3982,8 +4148,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         // };
     }
 ]);
-app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', 'route',
-    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route) {
+app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService',
+    '$filter', 'authSvc', '$timeout', 'route', 'alert',
+    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route, alerts) {
         scope.month = 'month';
         scope.reg = {};
         scope.monthArr = [];
@@ -4108,6 +4275,12 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         });
         scope.redirectprivacy = function(type) {
             window.open('privacyPolicy', '_blank');
+        };
+        scope.dynamicaapplycolors = function(value, id) {
+            alerts.applycolors(value, id);
+        };
+        scope.dynamictextboxcolor = function(value, id) {
+            alerts.applycolorsfortextboxes(value, id);
         };
     }
 ]);
@@ -4707,7 +4880,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.emailform.Confirmnewemail = null;
                     this.emailform.$setPristine();
                     this.emailform.$setUntouched();
-                    this.emailform.$setValidity();
+                    this.emailform.$setinValidity();
                     break;
                 case "mobile":
                     scope.ddlcountrycode = null;
@@ -4719,7 +4892,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.mobileform.Confirmnewnumber = null;
                     this.mobileform.$setPristine();
                     this.mobileform.$setUntouched();
-                    this.mobileform.$setValidity();
+                    this.mobileform.$setinValidity();
                     break;
                 case "password":
                     scope.OldPassword = null;
@@ -4733,7 +4906,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.projectForm.ConfirmPassword = null;
                     this.projectForm.$setPristine();
                     this.projectForm.$setUntouched();
-                    this.projectForm.$setValidity();
+                    this.projectForm.$setinValidity();
                     break;
                 case "hide":
                     scope.hideprofiledays = null;
@@ -4744,7 +4917,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.hideprofileform.hideprofiledays = null;
                     this.hideprofileform.$setPristine();
                     this.hideprofileform.$setUntouched();
-                    this.hideprofileform.$setValidity();
+                    this.hideprofileform.$setinValidity();
                     break;
                 case "alerts":
                     scope.mailyes = null;
@@ -4762,7 +4935,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.deleteprofileform.narration = null;
                     this.deleteprofileform.$setPristine();
                     this.deleteprofileform.$setUntouched();
-                    this.deleteprofileform.$setValidity();
+                    this.deleteprofileform.$setinValidity();
                     break;
             }
         };
@@ -6189,6 +6362,9 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         sendsms: function(CategoryID, Cust_ID, SendPhonenumber) {
             return http.get(app.apiroot + 'StaticPages/getUnpaidMembersOwnerNotification', { params: { CategoryID: CategoryID, Cust_ID: Cust_ID, SendPhonenumber: SendPhonenumber } });
+        },
+        Paymentinsert: function(Mobj) {
+            return http.post(app.apiroot + 'Payment/InsertPaymentDetails', Mobj);
         }
 
     };

@@ -424,7 +424,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.truepartner = false;
-            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
+            if (helperservice.checkstringvalue(scope.modelsearch.custid) && scope.modelsearch.slideshow !== "slideshow") {
                 scope.truepartnerrefine = false;
             } else {
                 scope.truepartnerrefine = true;
@@ -467,6 +467,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             }
                         }
                         scope.modelsearch.loadinging = true;
+
                         if (scope.modelsearch.slideshow !== "slideshow") {
                             scope.$broadcast('loadmore');
                         }
@@ -651,8 +652,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartnerrefine = true;
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
+
+            scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "slideshow";
             scope.generalsearchsubmit(scope.modelsearch.typesearch, frompageslide, topageslide);
+        });
+        scope.$on('slideshowrefinehide', function(event) {
+            scope.truepartnerrefine = true;
         });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {

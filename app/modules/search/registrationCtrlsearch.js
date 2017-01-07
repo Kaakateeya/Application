@@ -1,5 +1,6 @@
-app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService', '$filter', 'authSvc', '$timeout', 'route',
-    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route) {
+app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService',
+    '$filter', 'authSvc', '$timeout', 'route', 'alert',
+    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route, alerts) {
         scope.month = 'month';
         scope.reg = {};
         scope.monthArr = [];
@@ -124,6 +125,12 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         });
         scope.redirectprivacy = function(type) {
             window.open('privacyPolicy', '_blank');
+        };
+        scope.dynamicaapplycolors = function(value, id) {
+            alerts.applycolors(value, id);
+        };
+        scope.dynamictextboxcolor = function(value, id) {
+            alerts.applycolorsfortextboxes(value, id);
         };
     }
 ]);
