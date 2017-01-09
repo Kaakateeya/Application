@@ -4,7 +4,7 @@
 </head>
 
 <body>
-    <form method="POST" name="customerData" action="/postCCAvenue">
+    <form method="POST" name="customerData" action="/ccavRequestHandler">
         <table width="40%" height="100" border='1' align="center">
             <caption>
                 <font size="4" color="blue"><b>Integration Kit</b></font>
@@ -20,11 +20,11 @@
             </tr>
             <tr>
                 <td>Merchant Id</td>
-                <td><input type="text" name="merchant_id" id="merchant_id" value="M_151047_9927" /> </td>
+                <td><input type="text" name="merchant_id" id="merchant_id" value="63448" /> </td>
             </tr>
             <tr>
                 <td>Order Id</td>
-                <td><input type="text" name="order_id" value="Ord_91022_8214" /></td>
+                <td><input type="text" name="order_id" value="Ord_91022_592" /></td>
             </tr>
             <tr>
                 <td>Currency</td>
@@ -36,12 +36,12 @@
             </tr>
             <tr>
                 <td>Redirect URL</td>
-                <td><input type="text" name="redirect_url" value="http://183.82.0.58:7100/ccAvenue" />
+                <td><input type="text" name="redirect_url" value="http://localhost:3000/ccavResponseHand" />
                 </td>
             </tr>
             <tr>
                 <td>Cancel URL</td>
-                <td><input type="text" name="cancel_url" value="http://127.0.0.1:3001/ccavResponseHandler" />
+                <td><input type="text" name="cancel_url" value="http://localhost:3000/ccavResponseHand" />
                 </td>
             </tr>
             <tr>

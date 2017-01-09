@@ -26,8 +26,22 @@
                 <span id="hdnMembershipPoints" style="font-weight:bold;">{{paymentobject.Points}}</span>
 
             </div>
-            <a id="imgProceedtoPay" class="btn btn-primary" ng-click="paymentinsert()" href="javascript:void(0)"><span class="glyphicon glyphicon-share-alt"></span>Proceed To Payment</a>
-            <!--href="https://secure.ccavenue.com/transaction/TransactionInitiator"-->
+
+            <form method="POST" name="customerData" action="/ccavRequestHandler">
+
+                <input type="hidden" name="merchant_id" id="merchant_id" value="63448" />
+                <input type="hidden" name="order_id" ng-value="orderid" />
+                <input type="hidden" name="currency" value="INR" />
+                <input type="hidden" name="amount" ng-value="paymentobject.Amount" />
+                <input type="hidden" name="redirect_url" value="http://localhost:3000/ccavResponseHand" />
+                <input type="hidden" name="cancel_url" value="http://localhost:3000/UpgradeMembership" />
+                <input type="hidden" name="language" id="language" value="EN" />
+                <!--<a id="imgProceedtoPay" class="btn btn-primary" ng-click="paymentinsert()" href="javascript:void(0)"><span class="glyphicon glyphicon-share-alt"></span>Proceed To Payment</a>-->
+
+                <input type="submit" class="btn btn-primary" value="Proceed To Payment">
+
+                <!--href="https://secure.ccavenue.com/transaction/TransactionInitiator"-->
+            </form>
         </div>
 
     </div>

@@ -123,7 +123,7 @@
                                             <label class="control-label">Age</label>
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
-                                                    <select id="generalage" multiselectdropdown ng-model="modelsearch.AgeFrom" ng-class="applycolors(modelsearch.AgeFrom,'generalage')" typeofdata="'Ageselect'">   
+                                                    <select id="generalage" multiselectdropdown ng-model="modelsearch.AgeFrom" typeofdata="'Ageselect'" ng-class="applycolors(modelsearch.AgeFrom,'generalage')">   
                                                      </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
@@ -551,8 +551,8 @@
                             <md-slider-container flex-gt-xs>
                                 <p>{{modelsearch.AgeFrom}}</p>
 
-                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.AgeFrom" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.Ageto" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.AgeFrom" ng-change="hightFromrefine('agefrom')" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.Ageto" ng-change="hightFromrefine('ageto')" aria-label="Slider"></md-slider>
 
                                 <p>{{modelsearch.Ageto}}</p>
 
@@ -567,8 +567,8 @@
                             <h6><span>Height</span></h6>
                             <md-slider-container flex-gt-xs>
                                 <p>{{modelsearch.HeightFromtext}}</p>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.HeightFrom" ng-change="hightFromrefine()" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.Heightto" ng-change="hightTorefine()" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.HeightFrom" ng-change="hightFromrefine('heightfrom')" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.Heightto" ng-change="hightFromrefine('heightto')" aria-label="Slider"></md-slider>
                                 <p>{{modelsearch.Heighttotext}}</p>
                             </md-slider-container>
 

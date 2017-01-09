@@ -198,9 +198,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
                             if (scope.typeofdata === "Ageselect") {
-                                test.push({ label: i + ' years', title: i + ' years', value: i });
+                                test.push({ "label": i + ' years', "title": i + ' years', "value": i });
                             } else {
-                                test.push({ label: i, title: i, value: i });
+                                test.push({ "label": i, "title": i, "value": i });
                             }
                         }
                         scope.databind(test);

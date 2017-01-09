@@ -284,6 +284,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.modifyursearch = function() {
                     scope.PartnerProfilesnew = [];
                     scope.listclick();
+                    scope.loadmore = false;
+                    scope.loaderspin = false;
+                    scope.Norowsend = false;
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
                 scope.checkitemnew = function(carouselID) {

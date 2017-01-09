@@ -21,7 +21,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
-
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -44,7 +43,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
-
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -149,11 +147,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return string !== null ? (string.split(',')).map(Number) : null;
         };
         scope.partnerbindings = function(response) {
-
             scope.modelsearch.casteshow = false;
             scope.modelsearch.gender = (response.data.intGender) === 2 ? 2 : 1;
-            scope.modelsearch.AgeFrom = response.data.Ageto;
-            scope.modelsearch.Ageto = response.data.Agefrom;
+            scope.modelsearch.AgeFrom = parseInt(response.data.Ageto);
+            scope.modelsearch.Ageto = parseInt(response.data.Agefrom);
             scope.modelsearch.HeightFrom = response.data.Heightto;
             scope.modelsearch.Heightto = response.data.Heightfrom;
             scope.modelsearch.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
@@ -233,7 +230,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 educationcategory: [],
                 SearchResult_IDflag: null,
                 height: [],
-                MaritalStatus: [],
                 Mothertongue: [],
                 visastatus: [],
                 stars: [],
@@ -342,7 +338,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
 
         scope.resetfunctionality = function() {
-
             // scope.truepartner= true;
             //  scope.truepartnerrefine = true;
             // scope.modelsearch.gender = 2;
@@ -429,7 +424,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 scope.truepartnerrefine = true;
             }
-
             switch (type) {
                 case "advanced":
                 case "general":
@@ -634,6 +628,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
         };
         scope.$on("modifyursearchpartner", function(event) {
+
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (helperservice.checkstringvalue(scope.modelsearch.object)) {
                 scope.controlsbinding();
@@ -647,12 +642,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.modelsearch.Heightto = 38;
                 sessionStorage.removeItem("homepageobject");
             }
+
             scope.modelsearch.showcontrols = true;
             scope.truepartner = true;
             scope.truepartnerrefine = true;
+            scope.modelsearch.slideshow = "";
+            console.log(scope.modelsearch);
+            scope.$watch("modelsearch.AgeFrom", function(current, old) {
+
+                scope.modelsearch.AgeFrom = current;
+            });
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
-
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "slideshow";
             scope.generalsearchsubmit(scope.modelsearch.typesearch, frompageslide, topageslide);
@@ -695,12 +696,25 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
-        scope.hightFromrefine = function() {
-            scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+        scope.hightFromrefine = function(type) {
+
+            switch (type) {
+                case "heightfrom":
+                    scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+                    break;
+                case "heightto":
+                    scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
+                    break;
+                case "agefrom":
+                    scope.modelsearch.AgeFrom = scope.modelsearch.AgeFrom;
+                    break;
+                case "ageto":
+                    scope.modelsearch.Ageto = scope.modelsearch.Ageto;
+                    break;
+            }
+
         };
-        scope.hightTorefine = function() {
-            scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-        };
+
         scope.showloginpopup = function() {
             alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
@@ -924,6 +938,22 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
+
+
+
+        //  scope.$watch(function() {
+        //             return scope.modelsearch.AgeFrom;
+        //         }, function(current, original) {
+        //             scope.modelsearch.AgeFrom = current;
+        //         });
+
+        //         scope.$watch(function() {
+        //             return scope.modelsearch.Ageto;
+        //         }, function(current, original) {
+        //             scope.modelsearch.Ageto = current;
+        //         });
+
+
         // scope.slider = {
         //     minValue: 18,
         //     maxValue: 30,

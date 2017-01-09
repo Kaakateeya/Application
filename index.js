@@ -17,13 +17,11 @@ app.global = {
     'alertType': 'toast-top-right'
 };
 
-
 app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider, $locationProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
     IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
     IdleProvider.idle(5 * 60);
-
 
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/dashboard/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
@@ -52,6 +50,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccAvenue', url: '/ccAvenue', templateUrl: 'app/modules/static/ccAvenue.Html', controller: "ccAvenueCtrl", isloginrequired: false },
         { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
         { name: 'commonviewfull', url: '/commonviewfull', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
+        { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');

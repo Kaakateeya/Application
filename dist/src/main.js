@@ -39,27 +39,45 @@ app.constant('arrayConstants', {
     "height": [
 
         { "label": "--select--", "title": "--select--", "value": "" },
-        { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
+        { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 },
+        { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
         { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
-        { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
-        { "label": "4'5 in - 135 cms", "title": "4'5 in - 135 cms", "value": 6 }, { "label": "4'6 in - 137 cms", "title": "4'6 in - 137 cms", "value": 7 },
+        { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 },
+        { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
+        { "label": "4'5 in - 135 cms", "title": "4'5 in - 135 cms", "value": 6 },
+        { "label": "4'6 in - 137 cms", "title": "4'6 in - 137 cms", "value": 7 },
         { "label": "4'7 in - 140 cms", "title": "4'7 in - 140 cms", "value": 8 },
         { "label": "4'8 in - 142 cms", "title": "4'8 in - 142 cms", "value": 9 },
-        { "label": "4'9 in - 144 cms", "title": "4'9 in - 144 cms", "value": 10 }, { "label": "4'10 in - 147 cms", "title": "4'10 in - 147 cms", "value": 11 },
-        { "label": "4'11 in - 150 cms", "title": "4'11 in - 150 cms", "value": 12 }, { "label": "5'0 in - 152 cms", "title": "5'0 in - 152 cms", "value": 13 },
-        { "label": "5'1 in - 155 cms", "title": "5'1 in - 155 cms", "value": 14 }, { "label": "5'2 in - 157 cms", "title": "5'2 in - 157 cms", "value": 15 },
-        { "label": "5'3 in - 160 cms", "title": "5'3 in - 160 cms", "value": 16 }, { "label": "5'4 in - 162 cms", "title": "5'4 in - 162 cms", "value": 17 },
-        { "label": "5'5 in - 165 cms", "title": "5'5 in - 165 cms", "value": 18 }, { "label": "5'6 in - 167 cms", "title": "5'6 in - 167 cms", "value": 19 },
-        { "label": "5'7 in - 170 cms", "title": "5'7 in - 170 cms", "value": 20 }, { "label": "5'8 in - 172 cms", "title": "5'8 in - 172 cms", "value": 21 },
-        { "label": "5'9 in - 175 cms", "title": "5'9 in - 175 cms", "value": 22 }, { "label": "5'10 in - 177 cms", "title": "5'10 in - 177 cms", "value": 23 },
-        { "label": "5'11 in - 180 cms", "title": "5'11 in - 180 cms", "value": 24 }, { "label": "6'0 in - 183 cms", "title": "6'0 in - 183 cms", "value": 25 },
-        { "label": "6'1 in - 185 cms", "title": "6'1 in - 185 cms", "value": 26 }, { "label": "6'2 in - 188 cms", "title": "6'2 in - 188 cms", "value": 27 },
-        { "label": "6'3 in - 190 cms", "title": "6'3 in - 190 cms", "value": 28 }, { "label": "6'4 in - 193 cms", "title": "6'4 in - 193 cms", "value": 29 },
-        { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 }, { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
-        { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 }, { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
-        { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 }, { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
-        { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms", "title": "7'0 in - 213 cms", "value": 37 },
-        { "label": "7'1 in - 215 cms", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms", "title": "7'2 in - 218 cms", "value": 39 }
+        { "label": "4'9 in - 144 cms", "title": "4'9 in - 144 cms", "value": 10 },
+        { "label": "4'10 in - 147 cms", "title": "4'10 in - 147 cms", "value": 11 },
+        { "label": "4'11 in - 150 cms", "title": "4'11 in - 150 cms", "value": 12 },
+        { "label": "5'0 in - 152 cms", "title": "5'0 in - 152 cms", "value": 13 },
+        { "label": "5'1 in - 155 cms", "title": "5'1 in - 155 cms", "value": 14 },
+        { "label": "5'2 in - 157 cms", "title": "5'2 in - 157 cms", "value": 15 },
+        { "label": "5'3 in - 160 cms", "title": "5'3 in - 160 cms", "value": 16 },
+        { "label": "5'4 in - 162 cms", "title": "5'4 in - 162 cms", "value": 17 },
+        { "label": "5'5 in - 165 cms", "title": "5'5 in - 165 cms", "value": 18 },
+        { "label": "5'6 in - 167 cms", "title": "5'6 in - 167 cms", "value": 19 },
+        { "label": "5'7 in - 170 cms", "title": "5'7 in - 170 cms", "value": 20 },
+        { "label": "5'8 in - 172 cms", "title": "5'8 in - 172 cms", "value": 21 },
+        { "label": "5'9 in - 175 cms", "title": "5'9 in - 175 cms", "value": 22 },
+        { "label": "5'10 in - 177 cms", "title": "5'10 in - 177 cms", "value": 23 },
+        { "label": "5'11 in - 180 cms", "title": "5'11 in - 180 cms", "value": 24 },
+        { "label": "6'0 in - 183 cms", "title": "6'0 in - 183 cms", "value": 25 },
+        { "label": "6'1 in - 185 cms", "title": "6'1 in - 185 cms", "value": 26 },
+        { "label": "6'2 in - 188 cms", "title": "6'2 in - 188 cms", "value": 27 },
+        { "label": "6'3 in - 190 cms", "title": "6'3 in - 190 cms", "value": 28 },
+        { "label": "6'4 in - 193 cms", "title": "6'4 in - 193 cms", "value": 29 },
+        { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 },
+        { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
+        { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 },
+        { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
+        { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 },
+        { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
+        { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 },
+        { "label": "7'0 in - 213 cms", "title": "7'0 in - 213 cms", "value": 37 },
+        { "label": "7'1 in - 215 cms", "title": "7'1 in - 215 cms", "value": 38 },
+        { "label": "7'2 in - 218 cms", "title": "7'2 in - 218 cms", "value": 39 }
     ],
     "Religion": [
         { "label": "--select--", "title": "--select--", "value": 0 },
@@ -1102,9 +1120,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         test.push({ label: "--select--", title: "--select--", value: "0" });
                         for (var i = 18; i < 78; i++) {
                             if (scope.typeofdata === "Ageselect") {
-                                test.push({ label: i + ' years', title: i + ' years', value: i });
+                                test.push({ "label": i + ' years', "title": i + ' years', "value": i });
                             } else {
-                                test.push({ label: i, title: i, value: i });
+                                test.push({ "label": i, "title": i, "value": i });
                             }
                         }
                         scope.databind(test);
@@ -1497,6 +1515,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.modifyursearch = function() {
                     scope.PartnerProfilesnew = [];
                     scope.listclick();
+                    scope.loadmore = false;
+                    scope.loaderspin = false;
+                    scope.Norowsend = false;
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
                 scope.checkitemnew = function(carouselID) {
@@ -3153,6 +3174,10 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
     function(scope, route, myAppFactory) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
+            console.log(scope.paymentobject);
+            scope.randomNumbers = Math.round((Math.random() * 100) * 100);
+            scope.orderid = "Ord_" + scope.paymentobject.CustID + "_" + scope.randomNumbers;
+
         };
         scope.backtopayment = function() {
             route.go('UpgradeMembership', {});
@@ -3176,6 +3201,12 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
         };
     }
 ]);
+app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', function(scope, stateParams, http) {
+    console.log(stateParams.data);
+    http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
+        console.log(response.data);
+    });
+}]);
 app.controller("registration", function () {
 
 });
@@ -3205,7 +3236,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
-
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -3228,7 +3258,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
-
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -3333,11 +3362,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return string !== null ? (string.split(',')).map(Number) : null;
         };
         scope.partnerbindings = function(response) {
-
             scope.modelsearch.casteshow = false;
             scope.modelsearch.gender = (response.data.intGender) === 2 ? 2 : 1;
-            scope.modelsearch.AgeFrom = response.data.Ageto;
-            scope.modelsearch.Ageto = response.data.Agefrom;
+            scope.modelsearch.AgeFrom = parseInt(response.data.Ageto);
+            scope.modelsearch.Ageto = parseInt(response.data.Agefrom);
             scope.modelsearch.HeightFrom = response.data.Heightto;
             scope.modelsearch.Heightto = response.data.Heightfrom;
             scope.modelsearch.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
@@ -3417,7 +3445,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 educationcategory: [],
                 SearchResult_IDflag: null,
                 height: [],
-                MaritalStatus: [],
                 Mothertongue: [],
                 visastatus: [],
                 stars: [],
@@ -3526,7 +3553,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
 
         scope.resetfunctionality = function() {
-
             // scope.truepartner= true;
             //  scope.truepartnerrefine = true;
             // scope.modelsearch.gender = 2;
@@ -3613,7 +3639,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             } else {
                 scope.truepartnerrefine = true;
             }
-
             switch (type) {
                 case "advanced":
                 case "general":
@@ -3818,6 +3843,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
         };
         scope.$on("modifyursearchpartner", function(event) {
+
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (helperservice.checkstringvalue(scope.modelsearch.object)) {
                 scope.controlsbinding();
@@ -3831,12 +3857,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.modelsearch.Heightto = 38;
                 sessionStorage.removeItem("homepageobject");
             }
+
             scope.modelsearch.showcontrols = true;
             scope.truepartner = true;
             scope.truepartnerrefine = true;
+            scope.modelsearch.slideshow = "";
+            console.log(scope.modelsearch);
+            scope.$watch("modelsearch.AgeFrom", function(current, old) {
+
+                scope.modelsearch.AgeFrom = current;
+            });
         });
         scope.$on('slideshowsubmit', function(event, frompageslide, topageslide, slideshow) {
-
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "slideshow";
             scope.generalsearchsubmit(scope.modelsearch.typesearch, frompageslide, topageslide);
@@ -3879,12 +3911,25 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
-        scope.hightFromrefine = function() {
-            scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+        scope.hightFromrefine = function(type) {
+
+            switch (type) {
+                case "heightfrom":
+                    scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+                    break;
+                case "heightto":
+                    scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
+                    break;
+                case "agefrom":
+                    scope.modelsearch.AgeFrom = scope.modelsearch.AgeFrom;
+                    break;
+                case "ageto":
+                    scope.modelsearch.Ageto = scope.modelsearch.Ageto;
+                    break;
+            }
+
         };
-        scope.hightTorefine = function() {
-            scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-        };
+
         scope.showloginpopup = function() {
             alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
@@ -4108,6 +4153,22 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
+
+
+
+        //  scope.$watch(function() {
+        //             return scope.modelsearch.AgeFrom;
+        //         }, function(current, original) {
+        //             scope.modelsearch.AgeFrom = current;
+        //         });
+
+        //         scope.$watch(function() {
+        //             return scope.modelsearch.Ageto;
+        //         }, function(current, original) {
+        //             scope.modelsearch.Ageto = current;
+        //         });
+
+
         // scope.slider = {
         //     minValue: 18,
         //     maxValue: 30,
