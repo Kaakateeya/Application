@@ -12,10 +12,10 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.lnkViewHoro = true;
-        scope.BookmarkFlag = false;
-        scope.ViewedFlag = false;
-        scope.msgflag = false;
-        scope.IgnoreFlaghide = false;
+        scope.BookmarkFlag = true;
+        scope.ViewedFlag = true;
+        scope.msgflag = true;
+        scope.IgnoreFlaghide = true;
         scope.liproceed = false;
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
@@ -85,11 +85,10 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     break;
                                 case "Viewed":
                                     scope.Viewed = testArr;
-                                    scope.BookmarkFlag = true;
-                                    scope.IgnoreFlaghide = true;
+                                    scope.BookmarkFlag = scope.BookmarkFlag === true ? true : false;
+                                    scope.IgnoreFlaghide = scope.IgnoreFlaghide === true ? true : false;
                                     scope.ViewedFlag = true;
                                     scope.msgflag = true;
-                                    scope.ViewedFlag = true;
                                     scope.liproceed = false;
                                     scope.logidliproceed = false;
                                     scope.lnkViewHoro = true;
@@ -140,6 +139,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     break;
                                 case "Ignore":
                                     scope.Ignore = testArr;
+                                    scope.IgnoreFlaghide = scope.Ignore[0].IgnoreFlag === 1 ? false : true;
                                     break;
                             }
                         }

@@ -2,7 +2,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
     '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
         $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
-        window.scrollTo(0, 0);
+
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -26,10 +26,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.withoutlogin = true;
             }
         };
+        scope.headerinit = function() {
+            scope.loginstatus = true;
+            scope.loginoutstatus = false;
+            scope.loginpopup = false;
+            scope.withlogin = false;
+            scope.withoutlogin = true;
+            window.scrollTo(0, 0);
+            scope.showhidetestbuttons();
+        };
         scope.$on('IdleTimeout', function() {
-            //show pop up with two choices,wherther enduser needs to continue session or logout of application
-            //Idle.setIdle(5);
-            //redirect to home page
             alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
         });
         scope.acceptcontinue = function() {
@@ -40,12 +46,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             authSvc.logout();
             alertpopup.dynamicpopupclose();
         };
-        scope.loginstatus = true;
-        scope.loginoutstatus = false;
-        scope.loginpopup = false;
-        scope.withlogin = false;
-        scope.withoutlogin = true;
-        scope.showhidetestbuttons();
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
         };
@@ -73,7 +73,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 alert("Please enter user name");
                 return false;
             } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
-
                 alert("Please enter password");
                 return false;
             } else {
@@ -230,7 +229,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
-            //scope.$broadcast('showforgetpassword');
             alertpopup.showforgetpopup(scope);
         };
         scope.$on("notify-error", function(event, value) {

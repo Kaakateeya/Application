@@ -98,6 +98,11 @@
     }
     
     .textboxremvecolor {}
+    
+    #mdHeightFromtext .md-sign,
+    #mdHeighttotext .md-sign {
+        width: 34px;
+    }
 </style>
 
 <div class="search_page_main" ng-show="modelsearch.showcontrols" ng-init="generalpageload()">
@@ -137,8 +142,7 @@
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
                                                     <select id="generalheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.HeightFrom" ng-class="applycolors(modelsearch.HeightFrom,'generalheightfrom')">
-                                                    
-                                                    </select>
+                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
                                                     <select id="generalheightto" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.Heightto" ng-class="applycolors(modelsearch.Heightto,'generalheightto')">
@@ -550,30 +554,21 @@
                             <h6><span>Age</span></h6>
                             <md-slider-container flex-gt-xs>
                                 <p>{{modelsearch.AgeFrom}}</p>
-
-                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.AgeFrom" ng-change="hightFromrefine('agefrom')" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.Ageto" ng-change="hightFromrefine('ageto')" aria-label="Slider"></md-slider>
-
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.AgeFrom" aria-label="Slider"></md-slider>
+                                <md-slider flex md-discrete min="18" max="77" ng-model="modelsearch.Ageto" aria-label="Slider"></md-slider>
                                 <p>{{modelsearch.Ageto}}</p>
-
                             </md-slider-container>
-
-
                             <!--<rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>-->
-
-
                         </div>
                         <div class="col-lg-4">
                             <h6><span>Height</span></h6>
                             <md-slider-container flex-gt-xs>
                                 <p>{{modelsearch.HeightFromtext}}</p>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.HeightFrom" ng-change="hightFromrefine('heightfrom')" aria-label="Slider"></md-slider>
-                                <md-slider flex md-discrete min="0" max="40" ng-model="modelsearch.Heightto" ng-change="hightFromrefine('heightto')" aria-label="Slider"></md-slider>
+                                <md-slider id="mdHeightFromtext" flex md-discrete min="1" heightss=true max="39" ng-model="modelsearch.HeightFrom" ng-change="hightFromrefine('heightfrom')" aria-label="Slider"></md-slider>
+                                <md-slider id="mdHeighttotext" flex md-discrete min="1" heightss=true max="39" ng-model="modelsearch.Heightto" ng-change="hightFromrefine('heightto')" aria-label="Slider"></md-slider>
                                 <p>{{modelsearch.Heighttotext}}</p>
                             </md-slider-container>
-
                             <!--<rzslider rz-slider-model="sliders.minValue" rz-slider-high="sliders.maxValue" rz-slider-options="sliders.options"></rzslider>-->
-
                         </div>
                         <div class="col-lg-2">
                             <h6><span style="display:none;">Height</span></h6>

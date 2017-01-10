@@ -149,10 +149,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.partnerbindings = function(response) {
             scope.modelsearch.casteshow = false;
             scope.modelsearch.gender = (response.data.intGender) === 2 ? 2 : 1;
-            scope.modelsearch.AgeFrom = parseInt(response.data.Ageto);
-            scope.modelsearch.Ageto = parseInt(response.data.Agefrom);
-            scope.modelsearch.HeightFrom = response.data.Heightto;
-            scope.modelsearch.Heightto = response.data.Heightfrom;
+            scope.modelsearch.AgeFrom = response.data.Ageto !== null && response.data.Ageto !== "" ? parseInt(response.data.Ageto) : "0";
+            scope.modelsearch.Ageto = response.data.Agefrom !== null && response.data.Agefrom !== "" ? parseInt(response.data.Agefrom) : "0";
+            scope.modelsearch.HeightFrom = response.data.Heightto !== null && response.data.Heightto !== "" ? parseInt(response.data.Heightto) : "0";
+            scope.modelsearch.Heightto = response.data.Heightfrom !== null && response.data.Heightfrom !== "" ? parseInt(response.data.Heightfrom) : "0";
             scope.modelsearch.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
             scope.modelsearch.educationcat = scope.arrayToString(response.data.Educationcategory);
             scope.modelsearch.country = scope.arrayToString(response.data.Country);
@@ -169,18 +169,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return number >= lower && number <= upper;
         };
         var checknumber = function(value) {
-            if (numberInRange(value, 0, 11)) {
-                return "4'" + value + " in";
-            } else if (numberInRange(value, 12, 23)) {
+            if (numberInRange(value, 1, 12)) {
+                return "4'" + (value - 1) + " in";
+            } else if (numberInRange(value, 13, 24)) {
 
-                value = (value % 12);
+                value = (value % 13);
                 return "5'" + value + " in";
 
-            } else if (numberInRange(value, 24, 35)) {
-                value = (value % 24);
+            } else if (numberInRange(value, 25, 36)) {
+                value = (value % 25);
                 return "6'" + value + " in";
-            } else if (numberInRange(value, 36, 41)) {
-                value = (value % 36);
+            } else if (numberInRange(value, 37, 39)) {
+                value = (value % 37);
                 return "7'" + value + " in";
             }
         };
@@ -692,29 +692,21 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             // scope.modelsearch.Ageto = scope.slider.maxValue;
             // scope.modelsearch.HeightFrom = scope.sliders.minValue;
             // scope.modelsearch.Heightto = scope.sliders.maxValue;
-
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
         scope.hightFromrefine = function(type) {
-
             switch (type) {
                 case "heightfrom":
                     scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+
                     break;
                 case "heightto":
                     scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-                    break;
-                case "agefrom":
-                    scope.modelsearch.AgeFrom = scope.modelsearch.AgeFrom;
-                    break;
-                case "ageto":
-                    scope.modelsearch.Ageto = scope.modelsearch.Ageto;
+
                     break;
             }
-
         };
-
         scope.showloginpopup = function() {
             alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
@@ -722,7 +714,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
             alerts.dynamicpopup('loginpopup.html', scope, uibModal, 'sm');
         };
-
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });

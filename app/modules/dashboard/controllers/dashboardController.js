@@ -24,6 +24,37 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notifytype = 'page';
         scope.notificationpopup = [];
         scope.Typeofdatabind = $stateParams.type;
+        scope.catchfunction = function() {
+            var obj = {
+                ExpressAllcount: 0,
+                ExpressIntReceived: 0,
+                ExpressIntSent: 0,
+                IgnoreProfileCount: 0,
+                MenuName: null,
+                MybookMarkedProfCount: 0,
+                NewMsgs: 0,
+                OnlyName: null,
+                PageName: null,
+                ReceivedHoroRequestCount: 0,
+                ReceivedPhotoRequestCount: 0,
+                ReceivedProtectedAccept: 0,
+                ReceivedProtectedNew: 0,
+                ReceivedProtectedReject: 0,
+                RectViewedProfCount: 0,
+                RectWhoViewedCout: 0,
+                SaveSearchCount: 0,
+                SentHoroRequestCount: 0,
+                SentPhotoRequestCount: 0,
+                SentProtectedAccept: 0,
+                SentProtectedReject: 0,
+                SentProtectedReply: 0,
+                TotalMsgs: 0,
+                WhobookmarkedCount: 0
+            };
+
+            scope.bindcounts(obj);
+            scope.bindallcounts = obj;
+        };
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
             scope.exactflagstorage = exactflag;
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
@@ -59,6 +90,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
+                    }).catch(function(response) {
+                        scope.catchfunction();
                     });
                 } else {
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
@@ -79,6 +112,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.lblUHaveviewd = headertext;
 
                     }).catch(function(response) {
+                        scope.catchfunction();
                         console.log(response);
                     });
                 }

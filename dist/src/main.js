@@ -1185,6 +1185,9 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
             scope.$watch(function() {
+                console.log("TYPEDROP   " + scope.typeofdata);
+                console.log(element[0].length);
+                element.multiselect('select', scope.ngModel);
                 return element[0].length;
             }, function() {
                 scope.$applyAsync(element.multiselect('rebuild'));
@@ -1192,6 +1195,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             });
             // Watch for any changes from outside the directive and refresh
             scope.$watch(attrs.ngModel, function() {
+                console.log(scope.ngModel);
                 element.multiselect('refresh');
             });
         }
@@ -1767,6 +1771,37 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notifytype = 'page';
         scope.notificationpopup = [];
         scope.Typeofdatabind = $stateParams.type;
+        scope.catchfunction = function() {
+            var obj = {
+                ExpressAllcount: 0,
+                ExpressIntReceived: 0,
+                ExpressIntSent: 0,
+                IgnoreProfileCount: 0,
+                MenuName: null,
+                MybookMarkedProfCount: 0,
+                NewMsgs: 0,
+                OnlyName: null,
+                PageName: null,
+                ReceivedHoroRequestCount: 0,
+                ReceivedPhotoRequestCount: 0,
+                ReceivedProtectedAccept: 0,
+                ReceivedProtectedNew: 0,
+                ReceivedProtectedReject: 0,
+                RectViewedProfCount: 0,
+                RectWhoViewedCout: 0,
+                SaveSearchCount: 0,
+                SentHoroRequestCount: 0,
+                SentPhotoRequestCount: 0,
+                SentProtectedAccept: 0,
+                SentProtectedReject: 0,
+                SentProtectedReply: 0,
+                TotalMsgs: 0,
+                WhobookmarkedCount: 0
+            };
+
+            scope.bindcounts(obj);
+            scope.bindallcounts = obj;
+        };
         scope.gettingpartnerdata = function(type, frompage, topage, headertext, bindvalue, exactflag) {
             scope.exactflagstorage = exactflag;
             if (bindvalue !== null && bindvalue !== 0 && bindvalue !== 'profile') {
@@ -1802,6 +1837,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
 
+                    }).catch(function(response) {
+                        scope.catchfunction();
                     });
                 } else {
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
@@ -1822,6 +1859,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.lblUHaveviewd = headertext;
 
                     }).catch(function(response) {
+                        scope.catchfunction();
                         console.log(response);
                     });
                 }
@@ -2483,7 +2521,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', 'alert',
     function(scope, authSvc, $rootscope, route, alerts) {
         scope.showforgetpasswordpopup = function() {
-            // scope.$broadcast('showforgetpassword');
             alerts.showforgetpopup(scope);
         };
         scope.searchpage = function(typeurl) {
@@ -2506,7 +2543,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
     '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
         $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
-        window.scrollTo(0, 0);
+
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -2530,10 +2567,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 scope.withoutlogin = true;
             }
         };
+        scope.headerinit = function() {
+            scope.loginstatus = true;
+            scope.loginoutstatus = false;
+            scope.loginpopup = false;
+            scope.withlogin = false;
+            scope.withoutlogin = true;
+            window.scrollTo(0, 0);
+            scope.showhidetestbuttons();
+        };
         scope.$on('IdleTimeout', function() {
-            //show pop up with two choices,wherther enduser needs to continue session or logout of application
-            //Idle.setIdle(5);
-            //redirect to home page
             alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
         });
         scope.acceptcontinue = function() {
@@ -2544,12 +2587,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             authSvc.logout();
             alertpopup.dynamicpopupclose();
         };
-        scope.loginstatus = true;
-        scope.loginoutstatus = false;
-        scope.loginpopup = false;
-        scope.withlogin = false;
-        scope.withoutlogin = true;
-        scope.showhidetestbuttons();
         scope.divloginblock = function() {
             scope.loginpopup = scope.loginpopup ? false : true;
         };
@@ -2577,7 +2614,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 alert("Please enter user name");
                 return false;
             } else if (scope.password === "" || scope.password === null || scope.password === "Enter the Password") {
-
                 alert("Please enter password");
                 return false;
             } else {
@@ -2734,7 +2770,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.showforgetpasswordpopup = function() {
             scope.loginpopup = false;
-            //scope.$broadcast('showforgetpassword');
             alertpopup.showforgetpopup(scope);
         };
         scope.$on("notify-error", function(event, value) {
@@ -3364,10 +3399,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.partnerbindings = function(response) {
             scope.modelsearch.casteshow = false;
             scope.modelsearch.gender = (response.data.intGender) === 2 ? 2 : 1;
-            scope.modelsearch.AgeFrom = parseInt(response.data.Ageto);
-            scope.modelsearch.Ageto = parseInt(response.data.Agefrom);
-            scope.modelsearch.HeightFrom = response.data.Heightto;
-            scope.modelsearch.Heightto = response.data.Heightfrom;
+            scope.modelsearch.AgeFrom = response.data.Ageto !== null && response.data.Ageto !== "" ? parseInt(response.data.Ageto) : "0";
+            scope.modelsearch.Ageto = response.data.Agefrom !== null && response.data.Agefrom !== "" ? parseInt(response.data.Agefrom) : "0";
+            scope.modelsearch.HeightFrom = response.data.Heightto !== null && response.data.Heightto !== "" ? parseInt(response.data.Heightto) : "0";
+            scope.modelsearch.Heightto = response.data.Heightfrom !== null && response.data.Heightfrom !== "" ? parseInt(response.data.Heightfrom) : "0";
             scope.modelsearch.maritalstatus = scope.arrayToString(response.data.Maritalstatus);
             scope.modelsearch.educationcat = scope.arrayToString(response.data.Educationcategory);
             scope.modelsearch.country = scope.arrayToString(response.data.Country);
@@ -3384,18 +3419,18 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return number >= lower && number <= upper;
         };
         var checknumber = function(value) {
-            if (numberInRange(value, 0, 11)) {
-                return "4'" + value + " in";
-            } else if (numberInRange(value, 12, 23)) {
+            if (numberInRange(value, 1, 12)) {
+                return "4'" + (value - 1) + " in";
+            } else if (numberInRange(value, 13, 24)) {
 
-                value = (value % 12);
+                value = (value % 13);
                 return "5'" + value + " in";
 
-            } else if (numberInRange(value, 24, 35)) {
-                value = (value % 24);
+            } else if (numberInRange(value, 25, 36)) {
+                value = (value % 25);
                 return "6'" + value + " in";
-            } else if (numberInRange(value, 36, 41)) {
-                value = (value % 36);
+            } else if (numberInRange(value, 37, 39)) {
+                value = (value % 37);
                 return "7'" + value + " in";
             }
         };
@@ -3907,29 +3942,21 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             // scope.modelsearch.Ageto = scope.slider.maxValue;
             // scope.modelsearch.HeightFrom = scope.sliders.minValue;
             // scope.modelsearch.Heightto = scope.sliders.maxValue;
-
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
         scope.hightFromrefine = function(type) {
-
             switch (type) {
                 case "heightfrom":
                     scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
+
                     break;
                 case "heightto":
                     scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-                    break;
-                case "agefrom":
-                    scope.modelsearch.AgeFrom = scope.modelsearch.AgeFrom;
-                    break;
-                case "ageto":
-                    scope.modelsearch.Ageto = scope.modelsearch.Ageto;
+
                     break;
             }
-
         };
-
         scope.showloginpopup = function() {
             alerts.dynamicpopup('login.html', scope, uibModal, 'sm');
         };
@@ -3937,7 +3964,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
             alerts.dynamicpopup('loginpopup.html', scope, uibModal, 'sm');
         };
-
         scope.$on('showloginpopup', function() {
             scope.showloginpopup();
         });
@@ -5546,10 +5572,10 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.lnkViewHoro = true;
-        scope.BookmarkFlag = false;
-        scope.ViewedFlag = false;
-        scope.msgflag = false;
-        scope.IgnoreFlaghide = false;
+        scope.BookmarkFlag = true;
+        scope.ViewedFlag = true;
+        scope.msgflag = true;
+        scope.IgnoreFlaghide = true;
         scope.liproceed = false;
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
@@ -5619,11 +5645,10 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     break;
                                 case "Viewed":
                                     scope.Viewed = testArr;
-                                    scope.BookmarkFlag = true;
-                                    scope.IgnoreFlaghide = true;
+                                    scope.BookmarkFlag = scope.BookmarkFlag === true ? true : false;
+                                    scope.IgnoreFlaghide = scope.IgnoreFlaghide === true ? true : false;
                                     scope.ViewedFlag = true;
                                     scope.msgflag = true;
-                                    scope.ViewedFlag = true;
                                     scope.liproceed = false;
                                     scope.logidliproceed = false;
                                     scope.lnkViewHoro = true;
@@ -5674,6 +5699,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                     break;
                                 case "Ignore":
                                     scope.Ignore = testArr;
+                                    scope.IgnoreFlaghide = scope.Ignore[0].IgnoreFlag === 1 ? false : true;
                                     break;
                             }
                         }
