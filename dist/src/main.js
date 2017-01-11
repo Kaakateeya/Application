@@ -6099,6 +6099,11 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             responseError: function(rejection) {
                 $rootScope.$broadcast('notify-error', rejection);
                 return $q.reject(rejection);
+            },
+            response: function(config) {
+                var deferred = $q.defer();
+                deferred.resolve(config);
+                return deferred.promise;
             }
         };
     }]);
