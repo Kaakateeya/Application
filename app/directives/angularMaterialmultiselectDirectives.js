@@ -35,7 +35,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.directivechangeevent = function(model) {
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
-
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {

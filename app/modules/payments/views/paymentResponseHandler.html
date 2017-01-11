@@ -1,46 +1,58 @@
-<div>
+<div id="Div2">
+    <div class="text-center">
+        <br/> Payment Details
+        <br/><br/>
 
-    <div id="Div2">
-        <div>
-            <div class="panel_com">
-                <div class="panel_hd_com">
-                    Payment Details
-                </div>
-                <div class="panel_bd_com">
-                    <div id="fldConfMember" width="80%" align="left">
-                        <span class="OrangeText_b">Selected Membership Details</span>
-                        <table width="80%" align="center">
-                            <tr>
-                                <td>
-                                    <table align="center" width="60%">
-                                        <tr>
-                                            <td>Membership Name :
+    </div>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Membership Amount :
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Membership Expiry Date :
+    <div class="mainPage">
+        <div class="row well">
+            <div class="text-center" style="font-weight: bold;">Selected Membership Details</div>
+            <div class="clearfix">
+                <div class="span2">Membership Name :</div>
+                <div class="span4">{{MembershipName}}</div>
+            </div>
+            <div class="clearfix">
+                <div class="span2">Membership Amount :</div>
+                <div class="span4">{{MembershipAmount}}</div>
+            </div>
+            <div class="clearfix">
+                <div class="span2">Membership Expiry Date :</div>
+                <div class="span4">{{ExpiryDate}}</div>
+            </div>
+            <div class="clearfix">
+                <div class="span2">Membership Points :</div>
+                <div class="span4">{{points}}</div>
+            </div>
+            <div class="clearfix" ng-style="{color: orderStatus=='Success'?'Green':'Red'}">
+                <div class="span2">Order status :</div>
+                <div class="span4">{{orderStatus}}</div>
+            </div>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Membership Points :
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+            <div class="clearfix pull-right">
+                <a href="dashboard/c" class="center-block;">Back to home</a>
             </div>
         </div>
     </div>
 
 </div>
+
+<style>
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f4bd;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+    }
+    
+    .mainPage {
+        line-height: 230%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+</style>

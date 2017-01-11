@@ -5,7 +5,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
         $scope.hide = function() {
             forgetpassword.hide();
         };
-
         $scope.ValidateEmail = function(email) {
             var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return expr.test(email);
@@ -34,7 +33,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
                 }
             }
         };
-
         $scope.forgotpasswordsubmit = function(form) {
             if ($scope.validate(form)) {
                 customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
@@ -50,7 +48,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
             }
         };
     }
-
     return {
         open: function(msg, classname) {
             classname = classname || "success";
