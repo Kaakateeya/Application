@@ -12,7 +12,6 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
         },
-
         getViewFullProfileMail: function(OriginalString) {
             console.log(OriginalString);
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
@@ -23,7 +22,5 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
             return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: ErrorMessage, CustID: CustID, PageName: PageName, Type: Type } });
         }
-
-
     };
 }]);

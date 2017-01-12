@@ -77,18 +77,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {
                                 scope.PartnerProfilesnew.push(item);
-
                             });
                         } else {
                             _.each(response.data.PartnerProfilesnew, function(item) {
                                 scope.PartnerProfilesnew.push(item);
                             });
-
                         }
                         scope.$broadcast('loadmore');
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
-
                     }).catch(function(response) {
                         scope.catchfunction();
                     });
@@ -109,15 +106,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.$broadcast('loadmore');
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
-
                     }).catch(function(response) {
                         scope.catchfunction();
                         console.log(response);
                     });
                 }
-            } else if (bindvalue == 'profile') {
-
-            } else {
+            } else if (bindvalue == 'profile') {} else {
                 scope.zerorecorsalert();
             }
         };
@@ -220,7 +214,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                                 scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                                 scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
                             }
-
                         } else {
                             if (helperservice.checkstringvalue(scope.PartnerProfilesnew[0])) {
                                 scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
@@ -274,7 +267,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.modalbodyshow = 1;
             scope.buttonname = "Send Message";
             alerts.dynamicpopup(url, scope, uibModal);
-
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
@@ -282,15 +274,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
                         alerts.timeoutoldalerts(scope, 'alert-success', mobilenumbers, 3000);
-
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
                         alerts.timeoutoldalerts(scope, 'alert-danger', mobilenumber, 3000);
                     }
                 }
-
             });
-
         };
         scope.Tickethistoryarray = [];
         scope.messagetorm = function(typeofdiv, custid, name, profileid, logid, TicketID) {
@@ -322,7 +311,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     break;
             }
-
         };
         scope.sendmessages = function(form) {
             if (form !== undefined && helperservice.checkstringvalue(form.message)) {
@@ -361,13 +349,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                             scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                             scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
                         });
                     } else {
                         _.each(response.data, function(item) {
                             scope.PartnerProfilesnew.push(item);
                         });
-
                     }
                 });
             } else {
@@ -390,11 +376,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnew = [];
                         _.each(response.data.PartnerProfilesnew, function(item) {
                             scope.PartnerProfilesnew.push(item);
-
                             scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                             scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                             scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
                         });
                     } else {
                         _.each(response.data.PartnerProfilesnew, function(item) {
@@ -406,7 +390,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-
         scope.allloadmorepaging = function() {
             scope.spinexpress = true;
             scope.Norowsendexpress = false;
@@ -429,7 +412,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.receivesrecphotoss(scope.startindexexpress, scope.endindexexpress);
                     scope.spinexpress = false;
                     break;
-
             }
         };
         scope.modalpopupclose = function() {
@@ -457,12 +439,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             } else {
                 window.open(realpath, '_blank');
             }
-
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
         });
-
         scope.communicationmessageshistory = function(messagechatlinkid, messagechatcustid, messagehistoryid) {
             scope.messagechatlinkid = messagechatlinkid;
             scope.messagechatcustid = messagechatcustid;
@@ -480,7 +460,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
             scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
-
                 _.each(response.data, function(item) {
                     scope.arraytickethistory.push(item);
                 });
@@ -499,12 +478,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
                 } else {
                     if (type === 1) {
-
                         alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
                         alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
-
                 }
             });
         };
@@ -548,7 +525,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.$on("incrementcounts", function() {
             scope.incrementsdashboardcounts();
         });
-
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
                 console.log(response);
@@ -556,7 +532,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
             });
         };
-
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
@@ -661,7 +636,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.normaldata = true;
             }
         };
-
         scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
             notifyID = notifyID === undefined ? '' : notifyID;
             var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
@@ -687,7 +661,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             insertType = undefined;
                         } else {
                             scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
-
                         }
                     }
                 }

@@ -2,7 +2,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
     '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
         $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
-
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -242,7 +241,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             customerviewfullprofileservices.getCustomerApplicationErroLog(value.statusText, logincustid, value.data.Message, value.status).then(function(response) {
                 console.log(response);
             });
-
         });
         scope.modalpopupclosehttp = function() {
             var httperrorpopupstatus = 1;

@@ -3,6 +3,5 @@ app.factory('feedbacksubmit', ["$http", function(http) {
         feedbacksubmitinsert: function(object) {
             return http.post(app.apiroot + 'StaticPages/CustomerRating_sendMail', object);
         }
-
     };
 }]);

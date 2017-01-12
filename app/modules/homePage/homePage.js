@@ -50,7 +50,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 } else {
                     return true;
                 }
-
             }
         };
         scope.loginsubmit = function() {
@@ -147,7 +146,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.showforgetpasswordpopup = function() {
-
             scope.loginpopup = false;
             alerts.showforgetpopup(scope);
         };
@@ -156,10 +154,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.cancel = function() {
-
             alerts.dynamicpopupclose();
         };
-
         scope.mddiologcancel = function() {
             alerts.forgetpasswordhide();
         };

@@ -1,7 +1,5 @@
 <div class="header_inner" id="divInnerMaster" ng-controller='headctrl' ng-init="headerinit()">
-
     <div class="container_my clearfix">
-
         <a id="IbtnLogodisplay" href="javascript:void(0)" ng-click="redirecthomeordashboard()" class="logo3 pull-left linkdisableCls" />
         <input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();" />
         <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
@@ -18,7 +16,6 @@
             </form>
             <span class="clear">&nbsp;</span>
         </div>
-
         <div class="header_inner_rt clearfix">
             <h3>
                 <a id="lnkFeedbackMenu" class="linkdisableCls" href="feedback">Feedback</a>
@@ -28,7 +25,6 @@
         </div>
     </div>
     <div class="navbar_inner" id="divMemberName" ng-show="withlogin" set-class-when-at-top="fix-to-top">
-
         <div class="container_my clearfix">
             <div class="profile_own_name pull-left clearfix">
                 <img id="IMasterpic" ng-src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
@@ -44,13 +40,11 @@
             <div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
                 <a class="menu_toggle pull-right">Menu</a>
                 <ul class="pull-right">
-
                     <li>
                         <a id="lnkMyHome" class="linkdisableCls" href="javascript:void(0)" ng-click="homepagelinks('myhome')">My Home</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="linkdisableCls">my account</a>
-
                         <ul>
                             <li>
                                 <a id="linkviewmyprofile" href="javascript:void(0);" ng-click="viewfullmyprofile()">View My Profile</a>
@@ -67,9 +61,7 @@
                             <li>
                                 <a id="linkprofilesettings" href="profilesettings">Profile Settings</a>
                             </li>
-
                         </ul>
-
                     </li>
                     <li>
                         <a id="lnksearch" class="linkdisableCls" href="javascript:void(0)" ng-click="searchpage('profilesearch')">Search</a>
@@ -86,7 +78,6 @@
 
                         </ul>
                     </li>
-
                     <li>
                         <a href="javascript:void(0)" class="linkdisableCls">my package</a>
                         <ul>
@@ -102,7 +93,6 @@
                             <li>
                                 <a id="linkAddOnPacks" href="AddOnPacks" ng-hide="true">Add On Packs</a>
                             </li>
-
                         </ul>
                     </li>
                     <li>
@@ -135,7 +125,6 @@
                             <li>
                                 <a id="linkMyContact" href="javascript:void(0)" ng-click="homepagelinks('Express')">Express interest</a>
                             </li>
-
                         </ul>
                     </li>
                     <li>
@@ -159,14 +148,11 @@
             </div>
         </div>
     </div>
-
     <div class="navbar_inner" id="divwithoutlogin" ng-show="withoutlogin">
         <div class="container_my clearfix">
-
             <div class="profile_own_menu pull-right">
                 <a class="menu_toggle pull-right">Menu</a>
                 <ul class="pull-right">
-
                     <li><a href="registration">Register free</a></li>
                     <li><a href="javascript:void(0)" ng-click="searchpage('profilesearch')">Search <span></span></a></li>
                     <li><a href="javascript:void(0);" ng-click="divloginblock()">Upgrade</a></li>
@@ -177,7 +163,6 @@
                         <a id="linkfooterhelp" href="help">Help</a>
                     </li>
                     <li><a href="javascript:void(0)" ng-click="redirecthomeordashboard()">Home</a></li>
-
                 </ul>
             </div>
         </div>
@@ -188,7 +173,6 @@
             <div class="modal-header">
                 <h3> Confirmation</h3>
             </div>
-
             <div class="modal-body">
                 <div class="row">
                     <h4 class="col-lg-offset-1">Do you want to continue Session</h4>
@@ -207,10 +191,7 @@
             <div class="modal-footer">
             </div>
         </div>
-
     </script>
-
-
     <script type="text/ng-template" id="httperrorpopup.html" style="z-index: 999999999999 !important;">
         <div class="modal-message modal-danger">
             <div class="modal-header" id="div6">
@@ -223,13 +204,10 @@
             <div class="modal-footer">
                 <button class="btn btn-default" ng-click="modalpopupclosehttp()">Ignore</button>
                 <button class="btn btn-default" ng-click="feedbackpage()">FeedBack</button>
-
             </div>
         </div>
     </script>
 </div>
-
-
 <style type="text/css">
     .fix-to-top {
         position: fixed;

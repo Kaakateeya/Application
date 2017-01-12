@@ -1,10 +1,8 @@
 <div id="body" class="panel panel-success" ng-init="pageloadpayment()" ng-controller="paymentresponse">
-
     <div class="panel">
         <a id="lnkbtnBacktoListMemberships" ng-click="backtopayment()" class="btn btn-danger pull-right" href="javascript:void(0);">Back to List of Memberships</a>
     </div>
     <div class="panel-body text-center">
-
         <div role="form" style="line-height: 225%;">
             <div class="form-group">
                 Please Confirm the below Membership Details before you Pay
@@ -24,30 +22,21 @@
             <div class="form-group">
                 Membership Points :
                 <span id="hdnMembershipPoints" style="font-weight:bold;">{{paymentobject.Points}}</span>
-
             </div>
-
             <form method="POST" name="customerData" action="/ccavRequestHandler">
-
                 <input type="hidden" name="merchant_id" id="merchant_id" value="63448" />
                 <input type="hidden" name="order_id" ng-value="orderid" />
                 <input type="hidden" name="currency" value="INR" />
                 <input type="hidden" name="amount" ng-value="paymentobject.Amount" />
-                <input type="hidden" name="redirect_url" value="http://localhost:3000/ccavResponseHand" />
-                <input type="hidden" name="cancel_url" value="http://localhost:3000/ccavResponseHand" />
+                <input type="hidden" name="redirect_url" value="183.82.0.58:8090/ccavResponseHand" />
+                <input type="hidden" name="cancel_url" value="183.82.0.58:8090/ccavResponseHand" />
                 <input type="hidden" name="language" id="language" value="EN" />
                 <!--<a id="imgProceedtoPay" class="btn btn-primary" ng-click="paymentinsert()" href="javascript:void(0)"><span class="glyphicon glyphicon-share-alt"></span>Proceed To Payment</a>-->
-
                 <input type="submit" class="btn btn-primary" value="Proceed To Payment">
-
-                <!--href="https://secure.ccavenue.com/transaction/TransactionInitiator"-->
             </form>
         </div>
-
     </div>
     <div>
-        <!--<input name="Merchant_Id" id="Merchant_Id" value="M_151047_9927" type="hidden">
-        <input name="encRequest" id="encRequest" value="87d949f75bf7064c1f57a714a0f0dd2ba4c013e40d16bc8c98354d6006b455e67adf8756dc374876df97dd217f32bd670c491a7869b0db79064c9e47d35424ffd6597d5aa995a8fb5abb8a8e0db9014388ca7c005b6cf4491cdfd02f14f26db7d1061ae2b55d6aa1e8350de85afa6d549bcea2ea7ae1f802d8803ecfc087c1dbf5f643ca55d6c88a30c44aa9bd651212cfcf3427fe8217b6af69a6698573ff3f2d56e32f174bd270e4b1015536d4c92edebd2c6f85f2e8aabc92f6169467f2da"
-            type="hidden">-->
+
     </div>
 </div>

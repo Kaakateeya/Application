@@ -12,7 +12,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
             // templateUrl: "templates/forgotPasswordDirective.html",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
-
                     $mdDialog.show({
                         templateUrl: 'templates/forgotPasswordDirective.html',
                         parent: angular.element(document.body),
@@ -20,7 +19,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         scope: scope
                     });
                 };
-
                 scope.ValidateEmail = function(email) {
                     var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                     return expr.test(email);
@@ -30,9 +28,7 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     return expr1.test(num);
                 };
                 scope.validate = function(form) {
-
                     if ((form.txtforgetemail).indexOf("@") != -1) {
-
                         if (!scope.ValidateEmail(form.txtforgetemail)) {
                             form.txtforgetemail = '';
                             alert(" Please enter valid ProfileID/Email");
@@ -49,7 +45,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         } else {
                             return true;
                         }
-
                     }
                 };
                 scope.cancel = function() {
@@ -71,7 +66,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     }
                 };
                 scope.$on('showforgetpassworddirective', function(event) {
-
                     scope.showforgetpassword();
                 });
             }

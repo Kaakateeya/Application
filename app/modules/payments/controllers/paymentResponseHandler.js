@@ -27,7 +27,6 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 }
             }
         });
-
         console.log(scope.paymentobject);
         scope.points = scope.paymentobject.Points;
         scope.MembershipName = scope.paymentobject.MembershipName;
@@ -44,14 +43,9 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 Duration: scope.paymentobject.Duration,
                 MembershipAmount: scope.paymentobject.Amount
             };
-
             myAppFactory.Paymentinsert(obj).then(function(response) {
-
                 console.log(response);
             });
-
         };
-
-
     }
 ]);

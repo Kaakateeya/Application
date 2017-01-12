@@ -7,7 +7,6 @@ app.constant('arrayConstants', {
         { "label": "Separated", "title": "Separated", "value": 46 }
     ],
     "height": [
-
         { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 },
         { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
@@ -60,7 +59,6 @@ app.constant('arrayConstants', {
         { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
     ],
     "Mothertongue": [
-
         { "label": "Telugu", "title": "Telugu", "value": 1 },
         { "label": "Tamil", "title": "Tamil", "value": 2 },
         { "label": "Kannada", "title": "Kannada", "value": 3 },
@@ -125,7 +123,6 @@ app.constant('arrayConstants', {
         { "label": "Other", "title": "Other", "value": 22 }
     ],
     "visastatus": [
-
         { "label": "Student Visa", "title": "Student Visa", "value": 284 },
         { "label": "Work Permit", "title": "Work Permit", "value": 285 },
         { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
@@ -134,7 +131,6 @@ app.constant('arrayConstants', {
         { "label": "Green Card", "title": "Green Card", "value": 553 }
     ],
     "stars": [
-
         { "label": "Bharani", "title": "Bharani", "value": 2 },
         { "label": "Krithika", "title": "Krithika", "value": 3 },
         { "label": "Rohini", "title": "Rohini", "value": 4 },
@@ -390,7 +386,6 @@ app.constant('arrayConstants', {
         { "label": "Relative", "title": "Relative", "value": 560 },
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
-
     ],
     'Upgrade': "Upgrade online Membership",
     'Complexion': [
@@ -401,5 +396,4 @@ app.constant('arrayConstants', {
         { "label": "Dark", "title": "Dark", "value": 20 },
         { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
     ]
-
 });

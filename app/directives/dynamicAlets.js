@@ -144,8 +144,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
             }
             return colors;
         },
-
-
         showforgetpopup: function(scope) {
             forgetpassword = $mdDialog;
             forgetpassword.show({
@@ -155,6 +153,5 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
                 controller: closepopup,
             });
         },
-
     };
 }]);

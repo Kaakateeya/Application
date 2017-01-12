@@ -21,7 +21,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
-
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -44,7 +43,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
-
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -333,13 +331,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             scope.$on("$destroy", scope.destroy);
         };
-
         scope.destroy = function() {
             scope.modelsearch.object = {};
             scope.reset = {};
         };
-
-
         scope.resetfunctionality = function() {
             // scope.truepartner= true;
             //  scope.truepartnerrefine = true;
@@ -370,7 +365,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             angular.copy(scope.reset, scope.modelsearch);
             console.log(scope.reset);
         };
-
         scope.returnnullvalue = function(value) {
             var obj = helperservice.checkstringvalue(value) && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
             return obj;
@@ -472,7 +466,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             scope.$broadcast('loadmore');
                         }
                     });
-
                     break;
                 case "homepage":
                     scope.modelsearch.typesearch = type;
@@ -488,7 +481,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         scope.modelsearch.loadinging = true;
                         scope.$broadcast('loadmore');
                     });
-
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
@@ -610,7 +602,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.modalpopupclose();
                     break;
             }
-
         };
         scope.savedseapopup = function(type) {
             scope.modelsearch.typesearch = type;
@@ -635,7 +626,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
         };
         scope.$on("modifyursearchpartner", function(event) {
-
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (helperservice.checkstringvalue(scope.modelsearch.object)) {
                 scope.controlsbinding();
@@ -649,14 +639,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.modelsearch.Heightto = 38;
                 sessionStorage.removeItem("homepageobject");
             }
-
             scope.modelsearch.showcontrols = true;
             scope.truepartner = true;
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "";
             console.log(scope.modelsearch);
             scope.$watch("modelsearch.AgeFrom", function(current, old) {
-
                 scope.modelsearch.AgeFrom = current;
             });
         });
@@ -896,7 +884,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
         });
-
         scope.$on('popuplogin', function(event, url, custid) {
             scope.modelsearch.modalpopupheadertext = "Enter your message here";
             scope.modelsearch.messagecustid = "";
@@ -916,7 +903,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
-
         scope.onlyAlphabets = function(e, t) {
             var inputValue = window.event.keyCode;
             if (!(inputValue >= 65 && inputValue <= 120) && (inputValue !== 32 && inputValue !== 0)) {
@@ -930,9 +916,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-
-
-
         //  scope.$watch(function() {
         //             return scope.modelsearch.AgeFrom;
         //         }, function(current, original) {

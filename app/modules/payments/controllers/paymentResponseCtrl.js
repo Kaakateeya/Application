@@ -5,13 +5,11 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
             console.log(scope.paymentobject);
             scope.randomNumbers = Math.round((Math.random() * 100) * 100);
             scope.orderid = "Ord_" + scope.paymentobject.CustID + "_" + scope.randomNumbers;
-
         };
         scope.backtopayment = function() {
             route.go('UpgradeMembership', {});
         };
         scope.paymentinsert = function() {
-
             var obj = {
                 intCustID: scope.paymentobject.CustID,
                 intMembershipID: scope.paymentobject.MembershipID,
@@ -22,10 +20,8 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-
                 console.log(response);
             });
-
         };
     }
 ]);

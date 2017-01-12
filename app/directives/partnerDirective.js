@@ -2,7 +2,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
         uibModal, $http) {
-
         return {
             restrict: "E",
             scope: {
@@ -38,7 +37,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var i = 0;
                 scope.slides = [];
                 scope.directivepaging = function() {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         scope.loaderspin = true;
                         scope.loadmore = false;
@@ -76,7 +74,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
-
                 };
                 scope.gridclick = function() {
                     scope.typeofdiv = 'Grid';
@@ -232,7 +229,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.redirectToviewfullprofile = function(custid, logid, recentlyviewes) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         scope.$emit('redirectToviewfullprofiles', custid, logid);
                     } else {
                         scope.$emit('showloginpopup');

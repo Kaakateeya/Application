@@ -151,9 +151,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
                 //.targetEvent(ev)
                 .cancel(cancelTxt)
                 .ok(okTxt);
-
             return confirm;
-
         },
         checkvals: function(val) {
             return (val !== undefined && val !== null && val !== '') ? true : false;
