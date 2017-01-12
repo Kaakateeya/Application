@@ -18,7 +18,5 @@ app.factory('singlestaticbindings', ['arrayConstants', 'SelectBindServiceApp', f
             });
             return Countryi;
         }
-
     };
-
 }]);

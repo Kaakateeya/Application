@@ -69,18 +69,15 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
             console.log('custStatus');
             console.log(response);
-
         });
         scope.cancel = function() {
             $mdDialog.cancel();
         };
-
         scope.changeBind = function(type, parentval, countryVal) {
             switch (type) {
                 case 'Country':
                     scope.stateArr = commonFactory.StateBind(parentval);
                     break;
-
                 case 'State':
                     if (countryVal === '1' || countryVal === 1) {
                         scope.districtArr = commonFactory.districtBind(parentval);
@@ -89,18 +86,14 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.cityeArr = commonFactory.districtBind(parentval);
                     }
                     break;
-
                 case 'District':
                     scope.cityeArr = commonFactory.cityBind(parentval);
                     break;
-
                 case 'star':
                     scope.starArr = commonFactory.starBind(parentval);
                     break;
             }
-
         };
-
         scope.misFieldsSubmit = function(obj) {
             var misInputobj = {
                 Starlanguage: obj.ddlstarlanguages,
@@ -126,7 +119,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-
             console.log(JSON.stringify(misInputobj));
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
                 console.log(response);
@@ -134,17 +126,12 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 scope.cancel();
             });
         };
-
         scope.redirectToMobVerification = function() {
             sessionStorage.removeItem('missingStatus');
             route.go('mobileverf', {});
         };
-
         scope.pagerload = function(type) {
-
             timeout(function() {
-
-
                 switch (scope.dataqr) {
                     case 1:
                         scope.$broadcast('datagetinedu', 'showEduModal');
@@ -152,11 +139,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                     case 2:
                         scope.$broadcast('datagetinedu', 'showProfModal');
                         break;
-
                     case 3:
                         scope.$broadcast('datagetinParent', 'parent');
                         break;
-
                     case 4:
                         scope.$broadcast('datagetinAstro');
                         break;
@@ -164,20 +149,13 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.showpopup();
                         break;
                 }
-
             }, 50);
-
         };
         scope.pagerload(scope.dataqr);
-
         scope.currencyChange = function() {
-
             // if (!commonFactory.checkvals(scope.ddlAnnualincome)) {
             //     alert("Please select Curency");
             // }
         };
-
-
-
     }
 ]);

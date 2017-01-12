@@ -18,7 +18,6 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         submitemailmobilesubmit: function(FamilyID, MobileEmail, CountryCodeID, imobileEmailflag) {
             return http.get(app.apiroot + 'StaticPages/getProfilesettingEmailMobileChange', { params: { FamilyID: FamilyID, MobileEmail: MobileEmail, CountryCodeID: CountryCodeID, imobileEmailflag: imobileEmailflag } });
         },
-
         getmyorderspayments: function(custid) {
             return http.get(app.apiroot + 'StaticPages/getpaymentdetailsmethoddal', { params: { CustID: custid } });
         },

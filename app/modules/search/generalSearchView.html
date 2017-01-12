@@ -273,25 +273,20 @@
                                             <div class="controls clearfix row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane">
                                                     <select id="advancedheightfrom" class="selectcolor" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.HeightFrom" ng-class="applycolors(modelsearch.HeightFrom,'advancedheightfrom')">
-                                                    
-                                                    </select>
+                                                                                                        </select>
                                                 </div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 generalane" style="margin-left: -20px;">
-
-                                                    <select id="advancedheightto" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.Heightto" ng-class="applycolors(modelsearch.Heightto,'advancedheightto')">
-                                                    
+                                                    <select id="advancedheightto" multiselectdropdown typeofdata="'height'" ng-model="modelsearch.Heightto" ng-class="applycolors(modelsearch.Heightto,'advancedheightto')">                                                   
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Marital status</label>
-
                                             <div class="controls clearfix" style="margin-right: 16px;">
                                                 <angular-multiselect id="'advancedmaritalstatusid'" class="general" array="MaritalStatus" change="true" model="modelsearch.maritalstatus">
                                                 </angular-multiselect>
                                             </div>
-
                                         </div>
                                         <div class="control-group span3 select-box-my">
                                             <label class="control-label">Religion</label>
@@ -323,7 +318,6 @@
                                                 <label style="font-weight: bold; display: none;">{{modelsearch.caste}}</label>
                                             </div>
                                         </div>
-
                                         <div class="control-group span3">
                                             <label class="control-label control-label-marg">Physical status</label>
                                             <div class="controls">
@@ -339,7 +333,6 @@
                                         <br>
                                     </div>
                                     <div class="clearfix"></div>
-
                                     <h4>CURRENT LOCATION</h4>
                                     <div class="row">
                                         <div class="control-group span3 select-box-my">
@@ -436,7 +429,6 @@
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-
                                     <div class="search_advance_block1">
                                         <h4>Habits</h4>
                                         <div class="row">
@@ -497,13 +489,11 @@
                                                 <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" onkeyup="this.value=this.value.replace(/[^a-z]/g,'');" id="txtLastNameProfileid">
                                             </md-input-container>
                                         </div>
-
                                         <br>
                                         <br>
                                         <br>
                                         <br>
                                     </div>
-
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('profileid',1,8)">Search</md-button>
                                     <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')" ng-hide="true">Reset</md-button>
                                 </form>
@@ -522,7 +512,6 @@
                                                 <md-button class="md-raised md-warn md-hue-2" ng-click="savedsearchselectmethods(modelsearch.custid,modelsearch.txtsavesearchname,1)">Search</md-button>
                                             </md-input-container>
                                         </div>
-
                                     </div>
                                     <div class="saved_search_list">
                                         <div class="saved_search_list_item" ng-repeat="saved in modelsearch.savedsearchselect">
@@ -609,8 +598,7 @@
           </div>
         </div>
    </div>
-    <div class="search_results_main clearfix">
-      
+    <div class="search_results_main clearfix">     
         <div class="search_result_items_main clearfix" style="width:80%;">
             <div class="message-row4">
                 <div id="Div1" class="Maindiv message-row4  wrapper--overflow">
@@ -623,10 +611,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
 </div>
-
 <script type="text/ng-template" id="savedsearch.html">
     <div class="modal-content">
         <div class="modal-header">

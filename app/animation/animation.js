@@ -1,6 +1,5 @@
 app.animation('.fade123', function() {
     return {
-
         leave: function(element, done) {
             $(element).fadeOut(1000, function() {
                 done();

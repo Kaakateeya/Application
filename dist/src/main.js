@@ -14,7 +14,6 @@ app.filter('dateFilter', function() {
 });
 app.animation('.fade123', function() {
     return {
-
         leave: function(element, done) {
             $(element).fadeOut(1000, function() {
                 done();
@@ -37,7 +36,6 @@ app.constant('arrayConstants', {
         { "label": "Separated", "title": "Separated", "value": 46 }
     ],
     "height": [
-
         { "label": "--select--", "title": "--select--", "value": "" },
         { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 },
         { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
@@ -90,7 +88,6 @@ app.constant('arrayConstants', {
         { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
     ],
     "Mothertongue": [
-
         { "label": "Telugu", "title": "Telugu", "value": 1 },
         { "label": "Tamil", "title": "Tamil", "value": 2 },
         { "label": "Kannada", "title": "Kannada", "value": 3 },
@@ -155,7 +152,6 @@ app.constant('arrayConstants', {
         { "label": "Other", "title": "Other", "value": 22 }
     ],
     "visastatus": [
-
         { "label": "Student Visa", "title": "Student Visa", "value": 284 },
         { "label": "Work Permit", "title": "Work Permit", "value": 285 },
         { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
@@ -164,7 +160,6 @@ app.constant('arrayConstants', {
         { "label": "Green Card", "title": "Green Card", "value": 553 }
     ],
     "stars": [
-
         { "label": "Bharani", "title": "Bharani", "value": 2 },
         { "label": "Krithika", "title": "Krithika", "value": 3 },
         { "label": "Rohini", "title": "Rohini", "value": 4 },
@@ -420,7 +415,6 @@ app.constant('arrayConstants', {
         { "label": "Relative", "title": "Relative", "value": 560 },
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
-
     ],
     'Upgrade': "Upgrade online Membership",
     'Complexion': [
@@ -431,7 +425,6 @@ app.constant('arrayConstants', {
         { "label": "Dark", "title": "Dark", "value": 20 },
         { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
     ]
-
 });
 app.constant('config', function() {
     return {
@@ -465,7 +458,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     scope.Caste = scope.array !== undefined && scope.array !== "" && scope.array !== null ? scope.array : [];
                 });
                 scope.$watch('model', function(current, old) {
-
                     if (scope.array !== undefined && scope.array !== "" && scope.array !== null && scope.array.length > 100 && scope.model !== undefined && scope.model !== "" && scope.model !== null && scope.model.length > 100) {
                         if (scope.model.length === scope.array.length) {
                             scope.model = null;
@@ -490,7 +482,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                     }
                     return colors;
                 };
-
             }
         };
     }
@@ -648,9 +639,7 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
                 //.targetEvent(ev)
                 .cancel(cancelTxt)
                 .ok(okTxt);
-
             return confirm;
-
         },
         checkvals: function(val) {
             return (val !== undefined && val !== null && val !== '') ? true : false;
@@ -804,8 +793,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
             }
             return colors;
         },
-
-
         showforgetpopup: function(scope) {
             forgetpassword = $mdDialog;
             forgetpassword.show({
@@ -815,7 +802,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
                 controller: closepopup,
             });
         },
-
     };
 }]);
 app.directive('focus',
@@ -850,7 +836,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
             // templateUrl: "templates/forgotPasswordDirective.html",
             link: function(scope, element, attrs) {
                 scope.showforgetpassword = function() {
-
                     $mdDialog.show({
                         templateUrl: 'templates/forgotPasswordDirective.html',
                         parent: angular.element(document.body),
@@ -858,7 +843,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         scope: scope
                     });
                 };
-
                 scope.ValidateEmail = function(email) {
                     var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                     return expr.test(email);
@@ -868,9 +852,7 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     return expr1.test(num);
                 };
                 scope.validate = function(form) {
-
                     if ((form.txtforgetemail).indexOf("@") != -1) {
-
                         if (!scope.ValidateEmail(form.txtforgetemail)) {
                             form.txtforgetemail = '';
                             alert(" Please enter valid ProfileID/Email");
@@ -887,7 +869,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                         } else {
                             return true;
                         }
-
                     }
                 };
                 scope.cancel = function() {
@@ -909,7 +890,6 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
                     }
                 };
                 scope.$on('showforgetpassworddirective', function(event) {
-
                     scope.showforgetpassword();
                 });
             }
@@ -1233,7 +1213,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
     '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
         uibModal, $http) {
-
         return {
             restrict: "E",
             scope: {
@@ -1269,7 +1248,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var i = 0;
                 scope.slides = [];
                 scope.directivepaging = function() {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         scope.loaderspin = true;
                         scope.loadmore = false;
@@ -1307,7 +1285,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
-
                 };
                 scope.gridclick = function() {
                     scope.typeofdiv = 'Grid';
@@ -1463,7 +1440,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.redirectToviewfullprofile = function(custid, logid, recentlyviewes) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         scope.$emit('redirectToviewfullprofiles', custid, logid);
                     } else {
                         scope.$emit('showloginpopup');
@@ -1714,9 +1690,7 @@ app.factory('singlestaticbindings', ['arrayConstants', 'SelectBindServiceApp', f
             });
             return Countryi;
         }
-
     };
-
 }]);
 app.directive('setClassWhenAtTop', function($window) {
     var $win = angular.element($window); // wrap window object as jQuery object
@@ -1810,18 +1784,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {
                                 scope.PartnerProfilesnew.push(item);
-
                             });
                         } else {
                             _.each(response.data.PartnerProfilesnew, function(item) {
                                 scope.PartnerProfilesnew.push(item);
                             });
-
                         }
                         scope.$broadcast('loadmore');
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
-
                     }).catch(function(response) {
                         scope.catchfunction();
                     });
@@ -1842,15 +1813,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.$broadcast('loadmore');
                         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
                         scope.lblUHaveviewd = headertext;
-
                     }).catch(function(response) {
                         scope.catchfunction();
                         console.log(response);
                     });
                 }
-            } else if (bindvalue == 'profile') {
-
-            } else {
+            } else if (bindvalue == 'profile') {} else {
                 scope.zerorecorsalert();
             }
         };
@@ -1953,7 +1921,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                                 scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                                 scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
                             }
-
                         } else {
                             if (helperservice.checkstringvalue(scope.PartnerProfilesnew[0])) {
                                 scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
@@ -2007,7 +1974,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.modalbodyshow = 1;
             scope.buttonname = "Send Message";
             alerts.dynamicpopup(url, scope, uibModal);
-
         });
         scope.viewcontacts = function(custid, empmobile, empemail, custmobile, custemail) {
             customerDashboardServices.getprofilegrade(custid).then(function(response) {
@@ -2015,15 +1981,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     if (response.data === 3) {
                         var mobilenumbers = "<b>Mobile number : </b> " + custmobile + "<br/>" + " " + "<b>Emails :</b>" + custemail;
                         alerts.timeoutoldalerts(scope, 'alert-success', mobilenumbers, 3000);
-
                     } else {
                         var mobilenumber = "<p style='color:black;'> Please Contact The Below Relationship Manager As This Client Hasn't Given Authentication To Show Untill They Agree</p><br><b>Relationship Manager Mobile number : </b> " + empmobile + "<br/>" + " " + "<b>Relationship Manager Emails :</b>" + empemail;
                         alerts.timeoutoldalerts(scope, 'alert-danger', mobilenumber, 3000);
                     }
                 }
-
             });
-
         };
         scope.Tickethistoryarray = [];
         scope.messagetorm = function(typeofdiv, custid, name, profileid, logid, TicketID) {
@@ -2055,7 +2018,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     alerts.dynamicpopup("myModalContent.html", scope, uibModal);
                     break;
             }
-
         };
         scope.sendmessages = function(form) {
             if (form !== undefined && helperservice.checkstringvalue(form.message)) {
@@ -2094,13 +2056,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                             scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                             scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
                         });
                     } else {
                         _.each(response.data, function(item) {
                             scope.PartnerProfilesnew.push(item);
                         });
-
                     }
                 });
             } else {
@@ -2123,11 +2083,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.PartnerProfilesnew = [];
                         _.each(response.data.PartnerProfilesnew, function(item) {
                             scope.PartnerProfilesnew.push(item);
-
                             scope.totalrows = scope.PartnerProfilesnew[0].TotalRows;
                             scope.loadmoreexpress = scope.PartnerProfilesnew[0].TotalRows > 9 ? true : false;
                             scope.Norowsendexpress = (scope.PartnerProfilesnew[0].TotalRows === scope.endindexexpress) || scope.PartnerProfilesnew[0].TotalRows < scope.endindexexpress ? true : false;
-
                         });
                     } else {
                         _.each(response.data.PartnerProfilesnew, function(item) {
@@ -2139,7 +2097,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.zerorecorsalert();
             }
         };
-
         scope.allloadmorepaging = function() {
             scope.spinexpress = true;
             scope.Norowsendexpress = false;
@@ -2162,7 +2119,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.receivesrecphotoss(scope.startindexexpress, scope.endindexexpress);
                     scope.spinexpress = false;
                     break;
-
             }
         };
         scope.modalpopupclose = function() {
@@ -2190,12 +2146,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             } else {
                 window.open(realpath, '_blank');
             }
-
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
         });
-
         scope.communicationmessageshistory = function(messagechatlinkid, messagechatcustid, messagehistoryid) {
             scope.messagechatlinkid = messagechatlinkid;
             scope.messagechatcustid = messagechatcustid;
@@ -2213,7 +2167,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             };
             scope.arraytickethistory = [];
             customerDashboardServices.communicationhistorychats(obj).then(function(response) {
-
                 _.each(response.data, function(item) {
                     scope.arraytickethistory.push(item);
                 });
@@ -2232,12 +2185,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
                 } else {
                     if (type === 1) {
-
                         alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Accepted Fail', 2500);
                     } else {
                         alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Rejected Fail', 2500);
                     }
-
                 }
             });
         };
@@ -2281,7 +2232,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.$on("incrementcounts", function() {
             scope.incrementsdashboardcounts();
         });
-
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
                 console.log(response);
@@ -2289,7 +2239,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
             });
         };
-
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
@@ -2394,7 +2343,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.normaldata = true;
             }
         };
-
         scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
             notifyID = notifyID === undefined ? '' : notifyID;
             var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
@@ -2420,7 +2368,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             insertType = undefined;
                         } else {
                             scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
-
                         }
                     }
                 }
@@ -2528,7 +2475,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
     '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
         $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
-
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -2768,7 +2714,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             customerviewfullprofileservices.getCustomerApplicationErroLog(value.statusText, logincustid, value.data.Message, value.status).then(function(response) {
                 console.log(response);
             });
-
         });
         scope.modalpopupclosehttp = function() {
             var httperrorpopupstatus = 1;
@@ -2834,7 +2779,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 } else {
                     return true;
                 }
-
             }
         };
         scope.loginsubmit = function() {
@@ -2931,7 +2875,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.showforgetpasswordpopup = function() {
-
             scope.loginpopup = false;
             alerts.showforgetpopup(scope);
         };
@@ -2940,10 +2883,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             route.go('General', { id: 2 });
         };
         scope.cancel = function() {
-
             alerts.dynamicpopupclose();
         };
-
         scope.mddiologcancel = function() {
             alerts.forgetpasswordhide();
         };
@@ -3020,18 +2961,15 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
             console.log('custStatus');
             console.log(response);
-
         });
         scope.cancel = function() {
             $mdDialog.cancel();
         };
-
         scope.changeBind = function(type, parentval, countryVal) {
             switch (type) {
                 case 'Country':
                     scope.stateArr = commonFactory.StateBind(parentval);
                     break;
-
                 case 'State':
                     if (countryVal === '1' || countryVal === 1) {
                         scope.districtArr = commonFactory.districtBind(parentval);
@@ -3040,18 +2978,14 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.cityeArr = commonFactory.districtBind(parentval);
                     }
                     break;
-
                 case 'District':
                     scope.cityeArr = commonFactory.cityBind(parentval);
                     break;
-
                 case 'star':
                     scope.starArr = commonFactory.starBind(parentval);
                     break;
             }
-
         };
-
         scope.misFieldsSubmit = function(obj) {
             var misInputobj = {
                 Starlanguage: obj.ddlstarlanguages,
@@ -3077,7 +3011,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-
             console.log(JSON.stringify(misInputobj));
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
                 console.log(response);
@@ -3085,17 +3018,12 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 scope.cancel();
             });
         };
-
         scope.redirectToMobVerification = function() {
             sessionStorage.removeItem('missingStatus');
             route.go('mobileverf', {});
         };
-
         scope.pagerload = function(type) {
-
             timeout(function() {
-
-
                 switch (scope.dataqr) {
                     case 1:
                         scope.$broadcast('datagetinedu', 'showEduModal');
@@ -3103,11 +3031,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                     case 2:
                         scope.$broadcast('datagetinedu', 'showProfModal');
                         break;
-
                     case 3:
                         scope.$broadcast('datagetinParent', 'parent');
                         break;
-
                     case 4:
                         scope.$broadcast('datagetinAstro');
                         break;
@@ -3115,21 +3041,14 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                         scope.showpopup();
                         break;
                 }
-
             }, 50);
-
         };
         scope.pagerload(scope.dataqr);
-
         scope.currencyChange = function() {
-
             // if (!commonFactory.checkvals(scope.ddlAnnualincome)) {
             //     alert("Please select Curency");
             // }
         };
-
-
-
     }
 ]);
 app.controller('mobileverifyController', ['$scope', 'mobileVerificationService', 'authSvc', 'route',
@@ -3197,13 +3116,11 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
             console.log(scope.paymentobject);
             scope.randomNumbers = Math.round((Math.random() * 100) * 100);
             scope.orderid = "Ord_" + scope.paymentobject.CustID + "_" + scope.randomNumbers;
-
         };
         scope.backtopayment = function() {
             route.go('UpgradeMembership', {});
         };
         scope.paymentinsert = function() {
-
             var obj = {
                 intCustID: scope.paymentobject.CustID,
                 intMembershipID: scope.paymentobject.MembershipID,
@@ -3214,10 +3131,8 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-
                 console.log(response);
             });
-
         };
     }
 ]);
@@ -3250,7 +3165,6 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 }
             }
         });
-
         console.log(scope.paymentobject);
         scope.points = scope.paymentobject.Points;
         scope.MembershipName = scope.paymentobject.MembershipName;
@@ -3267,23 +3181,12 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 Duration: scope.paymentobject.Duration,
                 MembershipAmount: scope.paymentobject.Amount
             };
-
             myAppFactory.Paymentinsert(obj).then(function(response) {
-
                 console.log(response);
             });
-
         };
-
-
     }
 ]);
-app.controller("registration", function () {
-
-});
-app.controller("registrationReg", function () {
-
-});
 app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceApp', 'searches', 'alert',
     '$uibModal', 'dependencybind', 'customerDashboardServices', 'authSvc', '$mdDialog',
     '$location', 'getArray', '$timeout', '$rootScope', 'commonFactory', 'missingFieldService',
@@ -3307,7 +3210,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
-
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -3330,7 +3232,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
-
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -3619,13 +3520,10 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
 
             scope.$on("$destroy", scope.destroy);
         };
-
         scope.destroy = function() {
             scope.modelsearch.object = {};
             scope.reset = {};
         };
-
-
         scope.resetfunctionality = function() {
             // scope.truepartner= true;
             //  scope.truepartnerrefine = true;
@@ -3656,7 +3554,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             angular.copy(scope.reset, scope.modelsearch);
             console.log(scope.reset);
         };
-
         scope.returnnullvalue = function(value) {
             var obj = helperservice.checkstringvalue(value) && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
             return obj;
@@ -3758,7 +3655,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             scope.$broadcast('loadmore');
                         }
                     });
-
                     break;
                 case "homepage":
                     scope.modelsearch.typesearch = type;
@@ -3774,7 +3670,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         scope.modelsearch.loadinging = true;
                         scope.$broadcast('loadmore');
                     });
-
                     break;
                 case "profileid":
                     scope.modelsearch.typesearch = type;
@@ -3896,7 +3791,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.modalpopupclose();
                     break;
             }
-
         };
         scope.savedseapopup = function(type) {
             scope.modelsearch.typesearch = type;
@@ -3921,7 +3815,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             alerts.dynamicpopupclose();
         };
         scope.$on("modifyursearchpartner", function(event) {
-
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
             if (helperservice.checkstringvalue(scope.modelsearch.object)) {
                 scope.controlsbinding();
@@ -3935,14 +3828,12 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 scope.modelsearch.Heightto = 38;
                 sessionStorage.removeItem("homepageobject");
             }
-
             scope.modelsearch.showcontrols = true;
             scope.truepartner = true;
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "";
             console.log(scope.modelsearch);
             scope.$watch("modelsearch.AgeFrom", function(current, old) {
-
                 scope.modelsearch.AgeFrom = current;
             });
         });
@@ -4182,7 +4073,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on('successfailer', function(event, msg, typewarning) {
             scope.successfaileralert(msg, typewarning);
         });
-
         scope.$on('popuplogin', function(event, url, custid) {
             scope.modelsearch.modalpopupheadertext = "Enter your message here";
             scope.modelsearch.messagecustid = "";
@@ -4202,7 +4092,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on("modalpopupclose", function(event) {
             alerts.dynamicpopupclose();
         });
-
         scope.onlyAlphabets = function(e, t) {
             var inputValue = window.event.keyCode;
             if (!(inputValue >= 65 && inputValue <= 120) && (inputValue !== 32 && inputValue !== 0)) {
@@ -4216,9 +4105,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-
-
-
         //  scope.$watch(function() {
         //             return scope.modelsearch.AgeFrom;
         //         }, function(current, original) {
@@ -5951,10 +5837,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
 //   }]);
 
 app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
-
-
     function setUser(value) {
-
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
@@ -5982,7 +5865,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
     }
 
     function clearUserSession() {
-
         clearSession('cust.id');
         clearSession('cust.username');
         clearSession('cust.profileid');
@@ -5991,12 +5873,10 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
         clearSession('cust.GenderID');
         clearSession('cust.isemailverified');
         clearSession('cust.isnumberverifed');
-
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
         sessionStorage.removeItem("httperrorpopupstatus");
         sessionStorage.removeItem("missingStatus");
-
     }
 
     function getUser() {
@@ -6011,7 +5891,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             isnumberverifed: getSession('cust.isnumberverifed')
         };
     }
-
     return {
         user: function(value) {
             if (value) {
@@ -6049,7 +5928,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                 Username: username,
                 Password: password
             };
-
             return $http.post(app.apiroot + 'DB/userLogin/person', body)
                 .then(function(response) {
                     if (response.status === 200) {
@@ -6064,7 +5942,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                 });
         },
         paymentstaus: function(custid, scope) {
-
             return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                 .then(function(response) {
                     if (response.status === 200 && response.data !== null && response.data !== undefined) {
@@ -6076,7 +5953,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                             return false;
                         }
                     }
-
                 });
         }
     };
@@ -6131,7 +6007,6 @@ app.factory('customerDashboardServices', ['$http', function(http) {
 }]);
 (function(app) {
     'use strict';
-
     app.factory('errorInterceptor', ['$rootScope', '$q', function($rootScope, $q) {
         return {
             responseError: function(rejection) {
@@ -6145,28 +6020,23 @@ app.factory('customerDashboardServices', ['$http', function(http) {
                 // }
         };
     }]);
-
     app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.interceptors.push('errorInterceptor');
     }]);
-
 }(window.app));
 app.factory('feedbacksubmit', ["$http", function(http) {
     return {
         feedbacksubmitinsert: function(object) {
             return http.post(app.apiroot + 'StaticPages/CustomerRating_sendMail', object);
         }
-
     };
 }]);
 app.factory('helpService', ["$http", function(http) {
     return {
         helpSubmit: function(object) {
-
             return http.post(app.apiroot + 'StaticPages/InsertTicketInfo', object);
         },
         SendMail: function(object) {
-
             return http.post(app.apiroot + 'StaticPages/SendTicketMail', object);
         }
     };
@@ -6232,48 +6102,46 @@ app.factory('mobileVerificationService', ['$http', function(http) {
         }
     };
 }]);
-app.factory('angularselects', ["SelectBindserviceApp","arrayConstants", function(service,cons) {
+app.factory('angularselects', ["SelectBindserviceApp", "arrayConstants", function(service, cons) {
     return {
         countrySelect: function() {
-            var  Country = [];
-          service.countrySelect().then(function(response) {
-          _.each(response.data, function(item) {
-                Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            var Country = [];
+            service.countrySelect().then(function(response) {
+                _.each(response.data, function(item) {
+                    Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
             });
-        });
-        return Country;
+            return Country;
         },
         casteselect: function() {
-             var Caste = [];
-         service.casteselect().then(function(response) {
-                       _.each(response.data, function(item) {
-               Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            var Caste = [];
+            service.casteselect().then(function(response) {
+                _.each(response.data, function(item) {
+                    Caste.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
             });
-        });
-         return Caste;
+            return Caste;
         },
-       ProfessionGroup: function() {
+        ProfessionGroup: function() {
             var Professiongroup = [];
-       service.ProfessionGroup().then(function(response) {
-           
-            Professiongroup.push({ "label": "--select--", "title": "--select--", "value": 0 });
-            _.each(response.data, function(item) {
-               Professiongroup.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+            service.ProfessionGroup().then(function(response) {
+                Professiongroup.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                _.each(response.data, function(item) {
+                    Professiongroup.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
             });
-        });
-        return Professiongroup;
+            return Professiongroup;
         },
-         currency: function() {
-                var Currency = [];
-         service.currency().then(function(response) {
-          
-            _.each(response.data, function(item) {
-               Currency.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        currency: function() {
+            var Currency = [];
+            service.currency().then(function(response) {
+                _.each(response.data, function(item) {
+                    Currency.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
             });
-        });
-         return Currency;
+            return Currency;
         }
-     };
+    };
 }]);
 app.factory('ourBranchService', ["$http", function(http) {
     return {
@@ -6306,7 +6174,6 @@ app.factory('customerProfilesettings', ['$http', function(http) {
         submitemailmobilesubmit: function(FamilyID, MobileEmail, CountryCodeID, imobileEmailflag) {
             return http.get(app.apiroot + 'StaticPages/getProfilesettingEmailMobileChange', { params: { FamilyID: FamilyID, MobileEmail: MobileEmail, CountryCodeID: CountryCodeID, imobileEmailflag: imobileEmailflag } });
         },
-
         getmyorderspayments: function(custid) {
             return http.get(app.apiroot + 'StaticPages/getpaymentdetailsmethoddal', { params: { CustID: custid } });
         },
@@ -6446,37 +6313,29 @@ app.factory('successstoriesdata', ['$http', function(http) {
                     PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
                 else
                     PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
-
                 if (PhotoMaskDiv === "cssMaskdiv clearfix") {
-
                     photoclass = PhotoMaskDiv === "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
                 } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {
-
                     photoclass = PhotoMaskDiv === "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
                 } else if (photo.toLowerCase().indexOf("_rev") !== -1) {
                     photoclass = PhotoMaskDiv === "cssMaskdivrev clearfix" ? "cssMaskdivrev clearfix Linkdisabled" : "";
-
                 } else if (photo.indexOf("noimage") !== -1) {
                     photoclass = "Linkdisabled";
                 } else if (photo.indexOf("Password-Protected") !== -1) {
-
                     if (PhotoMaskDiv === "cssMaskdiv clearfix") {
                         photoclass = "cssMaskdiv clearfix Linkdisabled";
                     } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {
                         photoclass = "cssMaskdivrev clearfix Linkdisabled";
                     }
-
                     photoclass = "Linkdisabled";
                 } else if ((photocount) === 0) {
                     photoclass = "Linkdisabled";
-
                 } else {
                     photoclass = "";
                 }
             }
             return photoclass;
         }
-
     };
 }]);
 app.factory('myAppFactory', ["$http", function(http) {
@@ -6513,7 +6372,6 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
         },
-
         getViewFullProfileMail: function(OriginalString) {
             console.log(OriginalString);
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
@@ -6524,7 +6382,5 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
             return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: ErrorMessage, CustID: CustID, PageName: PageName, Type: Type } });
         }
-
-
     };
 }]);

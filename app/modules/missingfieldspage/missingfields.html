@@ -21,57 +21,42 @@
                                     <label id="lblheight"></label>
                                 </div>
                             </div>
-
                             <div class="clearfix"></div>
-
                             <div class="form-group  col-lg-12" ng-hide="divMaritalstatus">
-
                                 <label class="col-lg-4 control-label">Marital status<span  style="color: red;">*</span></label>
-
                                 <div class="col-lg-8 input-group" id="lstMaritalstatusdiv">
-
                                     <select multiselectdropdown ng-model="misObj.lstMaritalstatus" typeofdata="'MaritalStatus'" ng-required="divMaritalstatus==true?false:true"> </select>
                                 </div>
-
                                 <div class="col-lg-8" id="lbllstMaritalstatusdiv">
                                     <label id="lbllstMaritalstatus"></label>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                             <div class="control-group form-group  col-lg-12" ng-hide="divComplexion">
                                 <div class="col-lg-4">
                                     <label class="control-label">Complexion<span style="color: red;">*</span></label>
                                 </div>
                                 <div class="col-lg-8 input-group" id="lstComplexiondiv">
-
                                     <select multiselectdropdown ng-model="misObj.lstComplexion" typeofdata="'Complexion'" ng-required="divComplexion==true?false:true"></select>
-
                                 </div>
                                 <div class="col-lg-8" id="lbllstComplexiondiv">
                                     <label id="lbllstComplexion"></label>
-
                                 </div>
                             </div>
                             <div ng-hide="divProfession">
                                 <div class="clearfix"></div>
-
                                 <div class="control-group  col-lg-12" ng-hide="divJobLocCountry">
                                     <div class="col-lg-4">
                                         <label class="control-label">JobLoc Country</label>
                                     </div>
                                     <div class="col-lg-8" id="lstJoblocCountrydiv">
-
                                         <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
-
                                     </div>
                                     <div class="col-lg-8" id="lbllstJoblocCountrydiv">
                                         <label id="lbllstJoblocCountry"></label>
-
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <div class="control-group  col-lg-12" ng-hide="divJobLocState">
                                     <div class="col-lg-4">
                                         <label class="control-label">JobLoc State</label>
@@ -84,22 +69,18 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <div class="control-group  col-lg-12" ng-hide="JobLocDistrict">
                                     <div class="col-lg-4">
                                         <label class="control-label">JobLoc District</label>
                                     </div>
                                     <div class="col-lg-8" id="lstjoblocdistrictdiv">
-
                                         <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
                                     </div>
                                     <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
                                         <label id="lbllstjoblocdistrict"></label>
-
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <div class="control-group  col-lg-12" ng-hide="JobLoc">
                                     <div class="col-lg-4">
                                         <label class="control-label">Job Location</label>
@@ -111,11 +92,9 @@
                                         <label id="lbllstjoblocation"></label>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-lg-6">
-
                             <div class="control-group  col-lg-12" ng-hide="divFatherNative">
                                 <div class="col-lg-4">
                                     <label class="control-label">
@@ -126,11 +105,9 @@
                                 </div>
                                 <div class="col-lg-8" id="lblfathernativediv">
                                     <label id="lblfathernative"></label>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                             <div class="control-group  col-lg-12" ng-hide="divMotherNative">
                                 <div class="col-lg-4">
                                     <label class="control-label">
@@ -140,15 +117,11 @@
                                     <input type="text" class="form-control textboxclear" ng-model="misObj.txtMothernative" />
                                 </div>
                             </div>
-
                             <div class="clearfix"></div>
-
                             <div class="control-group  col-lg-12" ng-hide="divSalary">
                                 <div class="col-lg-4">
                                     <label class="control-label">Salary</label>
                                 </div>
-
-
                                 <div class="col-lg-8 doubleselect" id="ddlAnnualincomediv" style="padding-left: 0px;">
                                     <div class="col-lg-6 pull-left">
                                         <select multiselectdropdown ng-model="misObj.ddlAnnualincome" typeofdata="'currency'"></select>
@@ -157,11 +130,9 @@
                                         <input type="text" class="form-control textboxclear" ng-model="misObj.txtSalary" ng-blur="currencyChange();" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
                                             MaxLength="7" />
                                     </div>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                             <div class="control-group  col-lg-12" ng-hide="divIssharedproperty">
                                 <div class="col-lg-4">
                                     <label class="control-label">
@@ -172,11 +143,9 @@
                                         <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
                                         <md-radio-button value="0"> No </md-radio-button>
                                     </md-radio-group>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                             <div class="control-group  col-lg-12" ng-hide="divProperty">
                                 <div class="col-lg-4">
                                     <label class="control-label">
@@ -184,26 +153,19 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" />
-
                                 </div>
                             </div>
-
                             <div class="clearfix"></div>
-
                             <div class="control-group  col-lg-12" ng-hide="divStarlanguage">
                                 <div class="col-lg-4">
                                     <label class="control-label">Star language</label>
                                 </div>
                                 <div class="col-lg-8" id="ddlstarlanguagesdiv">
-
                                     <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',misObj.ddlstarlanguages);"></select>
-
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <div class="col-lg-8" id="lblddlstarlanguagesdiv">
                                     <label id="lblddlstarlanguages"></label>
-
                                 </div>
                             </div>
                             <div class="control-group  col-lg-12" ng-hide="divStar">
@@ -212,12 +174,9 @@
                                 </div>
                                 <div class="col-lg-8" id="lststardiv">
                                     <select multiselectdropdown ng-model="misObj.lststar" ng-options="item.value as item.label for item in starArr"></select>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
-
                             <div class="control-group  col-lg-12" ng-hide="divGothram">
                                 <div class="col-lg-4">
                                     <label class="control-label">
@@ -228,11 +187,9 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                         </div>
                     </div>
                     <div class="modal-footer">
-
                         <div class="row">
                             <div class="col-lg-9">
                                 <input type="submit" value="Submit" class="button_custom  pull-right">
@@ -246,14 +203,9 @@
             </div>
         </div>
     </form>
-
 </script>
-
-
 <div id="popupdivs">
-
     <div ng-controller="eduAndProfCtrl">
-
         <script type="text/ng-template" id="EduModalContent.html">
             <form name="eduForm" novalidate role="form" ng-submit="eduSubmit(edoObj);">
                 <div class="modal-header">
@@ -278,21 +230,17 @@
                         <li class="clearfix form-group">
                             <label for="lbleducationGroup" class="pop_label_left">Education group<span style="color: red; margin-left: 3px;">*</span></label>
                             <div class="pop_controls_right select-box-my input-group">
-
                                 <select multiselectdropdown ng-model="edoObj.ddlEdugroup" ng-options="item.value as item.label for item in eduGroupArr" ng-change="changeBind('EducationGroup',edoObj.ddlEdugroup);" required></select>
                             </div>
                         </li>
                         <li class="clearfix form-group">
                             <label for="lbleducationGroup" class="pop_label_left">Edu specialization<span style="color: red; margin-left: 3px;">*</span></label>
-
                             <div class="pop_controls_right select-box-my input-group">
-
                                 <select multiselectdropdown ng-model="edoObj.ddlEduspecialization" typeofdata="" ng-options="item.value as item.label for item in eduSpecialisationArr" required></select>
                             </div>
                         </li>
                         <li class="clearfix form-group" id="divuniversity">
                             <label for="lbluniversity" class="pop_label_left">University</label>
-
                             <div class="pop_controls_right">
                                 <input type="text" ng-model="edoObj.txtuniversity" maxlength="100" class="form-control" />
                             </div>
@@ -305,20 +253,15 @@
                         </li>
                         <li class="clearfix form-group">
                             <label for="lblPassOfYear" class="pop_label_left">Pass of year{{edoObj.ddlpassOfyear}}</label>
-
                             <div class="pop_controls_right select-box-my">
                                 <select multiselectdropdown ng-model="edoObj.ddlpassOfyear" ng-options="item1.value as item1.label for item1 in passOfyearArr"></select>
                             </div>
                         </li>
-
                         <country-directive countryshow="true" cityshow="true" othercity="true" dcountry="edoObj.ddlCountry" dstate="edoObj.ddlState" ddistrict="edoObj.ddlDistrict" dcity="edoObj.ddlcity" strothercity="edoObj.txtcity"></country-directive>
-
                         <li class="clearfix form-group">
                             <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
                             <div class="">
-
                                 <textarea ng-model="edoObj.txtEdumerits" maxlength="500" rows="4" cols="20" style="width:515px;" tabindex="12" onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
-
                             </div>
                         </li>
                         <li class="row">
@@ -326,13 +269,9 @@
                             <div class="col-lg-12">
                                 <input value="Submit" class="button_custom pull-right" type="submit">
                             </div>
-
                         </li>
-
                     </ul>
-
                 </div>
-
             </form>
         </script>
         <script type="text/ng-template" id="profModalContent.html">
@@ -376,14 +315,10 @@
                                 <input ng-model="profObj.txtsalary" style="float:right" class="form-control" onchange="currency();" maxlength="7" tabindex="6" />
                             </div>
                         </li>
-
                         <country-directive countryshow="true" cityshow="true" othercity="true" dcountry="profObj.ddlCountryProf" dstate="profObj.ddlStateProf" ddistrict="profObj.ddlDistrictProf" dcity="profObj.ddlcityworkingprofession" strothercity="profObj.txtcityprofession"></country-directive>
-
-
                         <li class="clearfix form-group">
                             <label for="lblworkingfrome" class="pop_label_left">Working from date</label>
                             <div class="pop_controls_right">
-
                                 <date-picker strdate="profObj.txtworkingfrom"></date-picker>
                             </div>
                         </li>
@@ -397,7 +332,6 @@
                                 </div>
                             </li>
                             <li class="clearfix form-group">
-
                                 <label class="pop_label_left" for="lblsincedate">Since date</label>
                                 <div class="pop_controls_right">
                                     <date-picker strdate="profObj.txtssincedate"></date-picker>
@@ -408,9 +342,7 @@
                                 <div class="pop_controls_right">
                                     <date-picker strdate="profObj.txtarrivaldate"></date-picker>
                                 </div>
-
                             </li>
-
                             <li class="clearfix form-group">
                                 <label for="lbldeaparturedate" class="pop_label_left">Departure Date</label>
                                 <div class="pop_controls_right">
@@ -418,13 +350,10 @@
                                 </div>
                             </li>
                         </div>
-
-
                         <li class="clearfix form-group">
                             <label for="lbloccupation" class="pop_label_left">Occupation Details</label>
                             <div class="">
                                 <textarea ng-model="profObj.txtoccupation" style="width:515px;" rows="4" tabindex="16" maxlength="500" onkeydown="return CharacterCount()"></textarea>
-
                                 <label id="lbloccupationcount" style="color: #1e1c1c; font-size: 13px;"></label>
                             </div>
                         </li>
@@ -433,11 +362,9 @@
                             <div class="col-lg-12">
                                 <input type="submit" value="Submit" class="button_custom  pull-right">
                             </div>
-
                         </li>
                     </ul>
                 </div>
-
             </form>
         </script>
     </div>
@@ -461,14 +388,12 @@
                                     <input type="text" ng-model="parent.txtFathername" class="form-control" tabindex="1" required/>
                                 </div>
                             </li>
-
                             <li class="clearfix form-group">
                                 <label for="lblFEducation" class="pop_label_left">Education</label>
                                 <div class="pop_controls_right">
                                     <input type="text" ng-model="parent.txtFEducation" class="form-control" maxlength="150" tabindex="2" />
                                 </div>
                             </li>
-
                             <li class="clearfix form-group">
                                 <label for="lblFProfession" class="pop_label_left">Profession</label>
                                 <div class="pop_controls_right">
@@ -487,7 +412,6 @@
                                     <input type="text" ng-model="parent.txtJobLocation" class="form-control" maxlength="100" tabindex="5" />
                                 </div>
                             </li>
-
                             <contact-directive emailhide="true" dmobile="parent.ddlMobile" strmobile="parent.txtMobile" dalternative="parent.ddlfathermobile2" stralternative="parent.txtfathermobile2" dland="parent.ddlLandLineCountry" strareacode="parent.txtAreCode" strland="parent.txtLandNumber"
                                 strmail="parent.txtEmail"></contact-directive>
                             <li class="clearfix form-group">
@@ -496,13 +420,9 @@
                                     <input type=text ng-model="parent.txtFatherFname" class="form-control" placeholder="Enter Father's father name" maxlength="100" tabindex="17" />
                                 </div>
                             </li>
-
-
                             <contact-directive emailhide="false" dmobile="parent.ddlFatherfatherMobileCountryCode" strmobile="parent.txtMobileFatherfather" dalternative="parent.ddlfatherfatherAlternative" stralternative="parent.txtfatherfatherAlternative" dland="parent.ddlFatherFatherLandLineCode"
                                 strareacode="parent.txtGrandFatherArea" strland="parent.txtGrandFatherLandLinenum"></contact-directive>
-
                             <country-directive countryshow="false" dcountry="dcountry" cityshow="false" othercity="false" dstate="parent.ddlFState" ddistrict="parent.ddlFDistric"></country-directive>
-
                             <li class="clearfix form-group">
                                 <label for="FNativePlace" class="pop_label_left">Native Place</label>
                                 <div class="pop_controls_right">
@@ -518,14 +438,12 @@
                                     <input ng-model="parent.txtMName" class="form-control" maxlength="100" tabindex="30" required/>
                                 </div>
                             </li>
-
                             <li class="clearfix form-group">
                                 <label for="lblMEducation" class="pop_label_left">Education</label>
                                 <div class="pop_controls_right">
                                     <input ng-model="parent.txtMEducation" class="form-control" maxlength="150" tabindex="31" />
                                 </div>
                             </li>
-
                             <li class="clearfix form-group">
                                 <label for="lblMProfession" class="pop_label_left">Profession</label>
                                 <div class="pop_controls_right">
@@ -534,17 +452,14 @@
                 <input type=checkbox ng-model="parent.chkbox"  tabindex="33"  ng-change="housewiseChk(parent);"/><span>&nbsp;HouseWife</span>
             </label>
                                 </div>
-
                             </li>
                             <div id="divmotherprofesseion">
                                 <li id="divComLocation" class="clearfix form-group">
-
                                     <label for="lblMCompanyName" class="pop_label_left">Company Name </label>
                                     <div class="pop_controls_right">
                                         <input ng-model="parent.txtMCompanyName" class="form-control" maxlength="100" tabindex="34" />
                                     </div>
                                 </li>
-
                                 <li class="clearfix form-group">
                                     <label for="lblMJobLocation" class="pop_label_left">Job Location</label>
                                     <div class="pop_controls_right">
@@ -553,14 +468,8 @@
                                 </li>
                             </div>
                             <div style="height: 15px;"></div>
-
-
-
-
                             <contact-directive emailhide="true" dmobile="parent.ddlMMobileCounCodeID" strmobile="parent.txtMMobileNum" dalternative="parent.ddlMMobileCounCodeID2" stralternative="parent.txtMMobileNum2" dland="parent.ddlMLandLineCounCode" strareacode="parent.txtmAreaCode"
                                 strland="parent.txtMLandLineNum" strmail="parent.txtMEmail"></contact-directive>
-
-
                             <li class="clearfix form-group">
                                 <label for="lblMotherFname" class="pop_label_left">Mother's Father Name </label>
                                 <div class="pop_controls_right select-box-my">
@@ -570,13 +479,10 @@
                                 <label for="lblMotherFname" class="pop_label_left">Mother's Last Name </label>
                                 <div class="pop_controls_right select-box-my">
                                     <input type="text" ng-model="parent.txtMFatherLname" class="form-control" placeholder="LAST NAME" tabindex="48" maxlength="50" />
-
                                 </div>
                             </li>
-
                             <contact-directive emailhide="false" dmobile="parent.ddlMotherfatheMobileCountryCode" strmobile="parent.txtMotherfatheMobilenumber" dalternative="parent.ddlmotherfatheralternative" stralternative="parent.txtmotherfatheralternative" dland="parent.ddlMotherFatherLandLineCode"
                                 strareacode="parent.txtMotherFatherLandLineareacode" strland="parent.txtMotherFatherLandLinenum"></contact-directive>
-
                             <country-directive countryshow="false" dcountry="dcountry" cityshow="false" othercity="false" dstate="parent.ddlMState" ddistrict="parent.ddlMDistrict"></country-directive>
                             <li class="clearfix form-group">
                                 <label for="MNativePlace" class="pop_label_left">Native Place</label>
@@ -595,14 +501,10 @@
                 </label>
                                 </div>
                             </li>
-
                             <div ng-if="parent.rbtlParentIntercaste==='1'">
-
                                 <li id="divddlFatherCaste" class="clearfix form-group">
-
                                     <label for="lblFCaste" class="pop_label_left">Father Caste</label>
                                     <div class="pop_controls_right select-box-my">
-
                                         <select multiselectdropdown ng-model="parent.ddlFatherCaste" typeofdata="caste" required></select>
                                     </div>
                                 </li>
@@ -613,13 +515,11 @@
                                     </div>
                                 </li>
                             </div>
-
                             <li class="row">
                                 <br/>
                                 <div class="col-lg-12">
                                     <button type="submit" class="button_custom pull-right">Submit</button>
                                 </div>
-
                             </li>
                         </ul>
                         </div>
@@ -629,7 +529,6 @@
         </div>
     </div>
     <div ng-controller="astroCtrl">
-
         <script type="text/ng-template" id="astroContent.html">
             <form name="astroForm" novalidate role="form" ng-submit="astroSubmit(atroObj)">
                 <div class="modal-header">
@@ -644,28 +543,22 @@
                         <li class="clearfix form-group">
                             <label for="lbltimebirth" class="pop_label_left">Time of Birth<span style="color: red; margin-left: 3px;">*</span></label>
                             <div class="pop_controls_right select-box-my select-box-my-trible select-box-my-trible3">
-
                                 <select multiselectdropdown ng-model="atroObj.ddlFromHours" ng-options="item.value as item.label for item in hrsbindArr"></select>
                                 <select multiselectdropdown ng-model="atroObj.ddlFromMinutes" ng-options="item.value as item.label for item in minbindArr"></select>
                                 <select multiselectdropdown ng-model="atroObj.ddlFromSeconds" ng-options="item.value as item.label for item in secbindArr"></select>
                             </div>
                         </li>
-
                         <country-directive require="true" countryshow="true" cityshow="true" othercity="false" dcountry="atroObj.ddlCountryOfBirthID" dstate="atroObj.ddlStateOfBirthID" ddistrict="atroObj.ddlDistrictOfBirthID" dcity="atroObj.ddlcity"></country-directive>
-
                         <li class="clearfix form-group">
                             <label for="lblstarlan" class="pop_label_left">Star language</label>
                             <div class="pop_controls_right select-box-my">
                                 <select multiselectdropdown ng-model="atroObj.ddlstarlanguage" typeofdata="starLanguage" ng-change="changeBind('star',atroObj.ddlstarlanguage);"></select>
                             </div>
                         </li>
-
                         <li class="clearfix form-group">
                             <label for="lblstar" class="pop_label_left">Star</label>
                             <div class="pop_controls_right select-box-my">
-
                                 <select multiselectdropdown ng-model="atroObj.ddlstar" ng-options="item.value as item.label for item in starArr"></select>
-
                             </div>
                         </li>
                         <li class="clearfix form-group">
@@ -714,12 +607,10 @@
 
                             </div>
                         </li>
-
                         <li class="clearfix form-group" style="display: none;">
                             <label for="lbllongitude" class="pop_label_left">Place of birth longitude</label>
                             <div class="pop_controls_right select-box-my">
                                 <input id="txtlogitude" class="form-control" />
-
                                 <select multiselectdropdown ng-model="atroObj.ddllongitude"></select>
                             </div>
                         </li>
@@ -728,7 +619,6 @@
                             <div class="pop_controls_right select-box-my">
                                 <input id="txtlatitude" class="form-control col-lg-3" />
                                 <select multiselectdropdown ng-model="atroObj.ddllatitude"></select>
-
                             </div>
                         </li>
                         <li class="clearfix form-group" style="display: none;">
@@ -739,19 +629,15 @@
                         </li>
                         <li class="row">
                             <br/>
-
-
                             <div class="col-lg-8">
                                 <input type="submit" value="Submit" class="button_custom  pull-right">
                             </div>
                             <div class="col-lg-3">
                                 <input value="Skip this page" ng-click="redirectToMobVerification();" class="button_custom button_custom_reset  pull-left" type="button">
                             </div>
-
                         </li>
                     </ul>
                 </div>
-
             </form>
         </script>
     </div>

@@ -18,10 +18,7 @@
 //   }]);
 
 app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
-
-
     function setUser(value) {
-
         setSession('cust.id', value.CustID);
         setSession('cust.username', (value.FirstName + ' ' + value.LastName));
         setSession('cust.profileid', (value.ProfileID));
@@ -49,7 +46,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
     }
 
     function clearUserSession() {
-
         clearSession('cust.id');
         clearSession('cust.username');
         clearSession('cust.profileid');
@@ -58,12 +54,10 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
         clearSession('cust.GenderID');
         clearSession('cust.isemailverified');
         clearSession('cust.isnumberverifed');
-
         sessionStorage.removeItem("LoginPhotoIsActive");
         sessionStorage.removeItem("homepageobject");
         sessionStorage.removeItem("httperrorpopupstatus");
         sessionStorage.removeItem("missingStatus");
-
     }
 
     function getUser() {
@@ -78,7 +72,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             isnumberverifed: getSession('cust.isnumberverifed')
         };
     }
-
     return {
         user: function(value) {
             if (value) {
@@ -116,7 +109,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                 Username: username,
                 Password: password
             };
-
             return $http.post(app.apiroot + 'DB/userLogin/person', body)
                 .then(function(response) {
                     if (response.status === 200) {
@@ -131,7 +123,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                 });
         },
         paymentstaus: function(custid, scope) {
-
             return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                 .then(function(response) {
                     if (response.status === 200 && response.data !== null && response.data !== undefined) {
@@ -143,7 +134,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
                             return false;
                         }
                     }
-
                 });
         }
     };
