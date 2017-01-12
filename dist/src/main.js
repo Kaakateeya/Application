@@ -477,7 +477,6 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
                 scope.directivechangeevent = function(model) {
                     scope.$emit('directivechangeevent', model, scope.type);
                 };
-
                 scope.applycolorsdirecive = function(value, id) {
                     var colors = "selectborderclass";
                     if (value !== 0 && value !== "0" && value !== "" && value !== null && value !== undefined && value.length > 0) {
@@ -666,7 +665,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
         $scope.hide = function() {
             forgetpassword.hide();
         };
-
         $scope.ValidateEmail = function(email) {
             var expr = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return expr.test(email);
@@ -695,7 +693,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
                 }
             }
         };
-
         $scope.forgotpasswordsubmit = function(form) {
             if ($scope.validate(form)) {
                 customerProfilesettings.forgotpassword(form.txtforgetemail).then(function(response) {
@@ -711,7 +708,6 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
             }
         };
     }
-
     return {
         open: function(msg, classname) {
             classname = classname || "success";
@@ -1185,8 +1181,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
             scope.$watch(function() {
-                console.log("TYPEDROP   " + scope.typeofdata);
-                console.log(element[0].length);
+                //console.log("TYPEDROP   " + scope.typeofdata);
+                // console.log(element[0].length);
                 element.multiselect('select', scope.ngModel);
                 return element[0].length;
             }, function() {
@@ -1195,7 +1191,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             });
             // Watch for any changes from outside the directive and refresh
             scope.$watch(attrs.ngModel, function() {
-                console.log(scope.ngModel);
+                // console.log(scope.ngModel);
                 element.multiselect('refresh');
             });
         }
@@ -1269,6 +1265,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.Norowsend = false;
                 scope.PartnerProfilesnew = scope.array;
                 scope.indexvalues = 0;
+                scope.loadmore = false;
                 var i = 0;
                 scope.slides = [];
                 scope.directivepaging = function() {
@@ -1320,7 +1317,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
-
                 };
                 scope.servicehttp = function(type, object) {
                     return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -1373,7 +1369,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1476,25 +1471,20 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
                     password = password !== null && password !== "" ? 468 : 467;
-                    return $injector.invoke(function($http) {
-                        return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
-                            .then(function(response) {
-
-                                if (response.data === 1) {
-                                    scope.$emit('successfailer', "Request sent suceessfully", "success");
-                                } else {
-                                    scope.$emit('successfailer', "Request sent Fail", "warning");
-                                }
-                            });
-                    });
+                    return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
+                        .then(function(response) {
+                            if (response.data === 1) {
+                                scope.$emit('successfailer', "Request sent suceessfully", "success");
+                            } else {
+                                scope.$emit('successfailer', "Request sent Fail", "warning");
+                            }
+                        });
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });
@@ -1507,7 +1497,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.divclassmask = function(logphotostatus, photo, photocount) {
                     logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
                     } else {
                         return "";
@@ -1568,7 +1557,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     scope.ArrowMove(carouselID);
                     scope.checkitemGlobal(carouselID);
-
                 };
                 scope.pageloadslidebind = function() {
                     $('.list-inline li a').removeClass('selected');
@@ -1586,14 +1574,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
                                 scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
-
                                 if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                                     $('#slideShowCarousel').find('.left').show();
                                     $('#slideShowCarousel').find('.right').show();
                                 }
                             }
                         } else {
-
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
@@ -1798,7 +1784,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 TotalMsgs: 0,
                 WhobookmarkedCount: 0
             };
-
             scope.bindcounts(obj);
             scope.bindallcounts = obj;
         };
@@ -3236,12 +3221,63 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
         };
     }
 ]);
-app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', function(scope, stateParams, http) {
-    console.log(stateParams.data);
-    http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
-        console.log(response.data);
-    });
-}]);
+app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'alert', 'myAppFactory',
+    function(scope, stateParams, http, alerts, myAppFactory) {
+        console.log(stateParams.data);
+        scope.paymentobject = {};
+        scope.orderid = '';
+        scope.trackingID = '';
+        scope.orderStatus = '';
+        scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
+        http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
+            console.log(response.data);
+            if (response.data !== undefined && response.data !== null) {
+                var paymentStatus = (response.data).split(',');
+                console.log(paymentStatus);
+                scope.orderid = paymentStatus[0].split('=')[1];
+                scope.trackingID = paymentStatus[1].split('=')[1];
+                scope.orderStatus = paymentStatus[3].split('=')[1];
+                if (scope.orderStatus === 'Success') {
+                    scope.paymentinsert();
+                    sessionStorage.setItem('cust.paidstatus', 1);
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'your transaction was successful', 3000);
+                } else if (scope.orderStatus === 'Aborted') {
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'You have aborted the transaction', 3000);
+                } else if (scope.orderStatus === 'Failure') {
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'Your transaction failed', 3000);
+                } else if (scope.orderStatus === 'Invalid') {
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'Some error occured while transaction', 3000);
+                }
+            }
+        });
+
+        console.log(scope.paymentobject);
+        scope.points = scope.paymentobject.Points;
+        scope.MembershipName = scope.paymentobject.MembershipName;
+        scope.Duration = scope.paymentobject.Duration;
+        scope.MembershipAmount = scope.paymentobject.Amount;
+        scope.ExpiryDate = moment().add(scope.Duration, 'M').format("DD-MM-YYYY");
+        scope.paymentinsert = function() {
+            var obj = {
+                intCustID: scope.paymentobject.CustID,
+                intMembershipID: scope.paymentobject.MembershipID,
+                DiscountID: scope.paymentobject.DiscountID !== "" ? scope.paymentobject.DiscountID : null,
+                Points: scope.paymentobject.Points,
+                MembershipName: scope.paymentobject.MembershipName,
+                Duration: scope.paymentobject.Duration,
+                MembershipAmount: scope.paymentobject.Amount
+            };
+
+            myAppFactory.Paymentinsert(obj).then(function(response) {
+
+                console.log(response);
+            });
+
+        };
+
+
+    }
+]);
 app.controller("registration", function () {
 
 });
@@ -3271,6 +3307,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
+
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -3293,6 +3330,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -3413,6 +3451,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.physicalstatusadvance = response.data.PhysicalStatusstring;
             scope.modelsearch.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
             scope.modelsearch.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
+            scope.modelsearch.Educationgroup = commonFactory.educationGroupBind(helperservice.checkstringvalue(response.data.Educationcategory) ? (response.data.Educationcategory).toString() : "");
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
         };
         var numberInRange = function(number, lower, upper) {
@@ -3664,8 +3703,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return SearchRequest;
         };
         scope.generalsearchsubmit = function(type, frompage, topage, form, searchsavedidupdate) {
-            // scope.slider.minValue = scope.modelsearch.AgeFrom;
-            // scope.slider.maxValue = scope.modelsearch.Ageto;
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.truepartner = false;
@@ -3677,10 +3714,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "advanced":
                 case "general":
-                    // scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
+                    scope.modelsearch.AgeFrom = helperservice.checkstringvalue(scope.modelsearch.AgeFrom) ? parseInt(scope.modelsearch.AgeFrom) : "0";
+                    scope.modelsearch.Ageto = helperservice.checkstringvalue(scope.modelsearch.Ageto) ? parseInt(scope.modelsearch.Ageto) : "0";
+                    scope.modelsearch.HeightFrom = helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? parseInt(scope.modelsearch.HeightFrom) : "0";
+                    scope.modelsearch.Heightto = helperservice.checkstringvalue(scope.modelsearch.Heightto) ? parseInt(scope.modelsearch.Heightto) : "0";
+                    console.log(scope.modelsearch.HeightFrom);
+                    console.log((scope.modelsearch.HeightFrom).toString());
+                    scope.textlabels(helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? (scope.modelsearch.HeightFrom).toString() : "0", helperservice.checkstringvalue(scope.modelsearch.Heightto) ? (scope.modelsearch.Heightto).toString() : "0", null,
+                        helperservice.checkstringvalue(scope.modelsearch.educationcat) ? (scope.modelsearch.educationcat).toString() : "0");
                     scope.modelsearch.typesearch = type;
-                    // scope.sliders.minvalueyext = scope.checkheight(scope.sliders.minvalueyext);
-                    // scope.sliders.maxValuetext = scope.checkheight(scope.sliders.maxValuetext);
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
@@ -3792,6 +3834,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                     break;
                 case "savedsearch":
+                    scope.textlabels((scope.modelsearch.HeightFrom).toString(), (scope.modelsearch.Heightto).toString(), null, (scope.modelsearch.educationcat).toString());
                     scope.submitobjectcommongenad(frompage, topage);
                     scope.submitsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
@@ -3938,10 +3981,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.refinesubmit = function() {
             scope.refinesubmitflag = "refine";
-            // scope.modelsearch.AgeFrom = scope.slider.minValue;
-            // scope.modelsearch.Ageto = scope.slider.maxValue;
-            // scope.modelsearch.HeightFrom = scope.sliders.minValue;
-            // scope.modelsearch.Heightto = scope.sliders.maxValue;
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
@@ -3949,11 +3988,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "heightfrom":
                     scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
-
                     break;
                 case "heightto":
                     scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-
                     break;
             }
         };
@@ -5585,10 +5622,10 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.Express = [];
         scope.Paidstatus = [];
         scope.Ignore = [];
+        scope.arr = [];
+        scope.personalinfo = {};
+        scope.aboutmyself = {};
         scope.partnerinformation = function(response) {
-            scope.arr = [];
-            scope.personalinfo = {};
-            scope.aboutmyself = {};
             _.each(response.data, function(item) {
                 var testArr = JSON.parse(item);
                 if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
@@ -5622,6 +5659,81 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 });
             });
         };
+        scope.getallflags = function() {
+            customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
+                console.log(response);
+                _.each(response.data, function(item) {
+                    var testArr = JSON.parse(item);
+                    if (testArr[0] !== undefined) {
+                        switch (testArr[0].TableName) {
+                            case "Bookmark":
+                                scope.Bookmark = testArr;
+                                scope.BookmarkFlag = scope.Bookmark[0].BookmarkFlag === 1 ? false : true;
+                                break;
+                            case "Viewed":
+                                scope.Viewed = testArr;
+                                scope.BookmarkFlag = scope.BookmarkFlag === true ? true : false;
+                                scope.IgnoreFlaghide = scope.IgnoreFlaghide === true ? true : false;
+                                scope.ViewedFlag = true;
+                                scope.msgflag = true;
+                                scope.liproceed = false;
+                                scope.logidliproceed = false;
+                                scope.lnkViewHoro = true;
+                                break;
+                            case "Express":
+                                scope.Express = testArr;
+                                if (scope.Express[0].MatchFollowUpStatus === 1) {
+                                    if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
+                                        scope.liticket = true;
+                                        scope.lnkViewHoro = false;
+                                        scope.logidliproceed = false;
+                                        scope.BookmarkFlag = false;
+                                        scope.IgnoreFlaghide = false;
+                                        scope.ViewedFlag = false;
+                                        scope.msgflag = false;
+                                        scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
+                                    } else {
+                                        scope.logidliproceed = true;
+                                    }
+                                } else if (scope.Express[0].Acceptflag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.liproceed = false;
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.liproceed = true;
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else if (scope.Express[0].ExpressFlag === 1) {
+                                    if (scope.custid !== null) {
+                                        scope.logidliproceed = true;
+                                    } else {
+                                        scope.logidliproceed = false;
+                                    }
+                                    scope.BookmarkFlag = false;
+                                    scope.IgnoreFlaghide = false;
+                                    scope.ViewedFlag = false;
+                                    scope.msgflag = false;
+                                } else {
+                                    scope.logidliproceed = true;
+                                }
+                                break;
+                            case "Paidstatus":
+                                scope.Paidstatus = testArr;
+                                break;
+                            case "Ignore":
+                                scope.Ignore = testArr;
+                                scope.IgnoreFlaghide = scope.Ignore[0].IgnoreFlag === 1 ? false : true;
+                                break;
+                        }
+                    }
+                });
+            });
+            return false;
+        };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
@@ -5632,79 +5744,9 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
                     scope.slideshowimages();
                     scope.partnerinformation(response);
+                    scope.getallflags();
                 });
-                customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-                    console.log(response);
-                    _.each(response.data, function(item) {
-                        var testArr = JSON.parse(item);
-                        if (testArr[0] !== undefined) {
-                            switch (testArr[0].TableName) {
-                                case "Bookmark":
-                                    scope.Bookmark = testArr;
-                                    scope.BookmarkFlag = scope.Bookmark[0].BookmarkFlag === 1 ? false : true;
-                                    break;
-                                case "Viewed":
-                                    scope.Viewed = testArr;
-                                    scope.BookmarkFlag = scope.BookmarkFlag === true ? true : false;
-                                    scope.IgnoreFlaghide = scope.IgnoreFlaghide === true ? true : false;
-                                    scope.ViewedFlag = true;
-                                    scope.msgflag = true;
-                                    scope.liproceed = false;
-                                    scope.logidliproceed = false;
-                                    scope.lnkViewHoro = true;
-                                    break;
-                                case "Express":
-                                    scope.Express = testArr;
-                                    if (scope.Express[0].MatchFollowUpStatus === 1) {
-                                        if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
-                                            scope.liticket = true;
-                                            scope.lnkViewHoro = false;
-                                            scope.logidliproceed = false;
-                                            scope.BookmarkFlag = false;
-                                            scope.IgnoreFlaghide = false;
-                                            scope.ViewedFlag = false;
-                                            scope.msgflag = false;
-                                            scope.ViewTickettext = scope.Express[0].ViewTicket !== null && scope.Express[0].ViewTicket !== undefined ? scope.Express[0].ViewTicket : "View Ticket Status";
-                                        } else {
-                                            scope.logidliproceed = true;
-                                        }
-                                    } else if (scope.Express[0].Acceptflag === 1) {
-                                        if (scope.custid !== null) {
-                                            scope.liproceed = false;
-                                            scope.logidliproceed = true;
-                                        } else {
-                                            scope.liproceed = true;
-                                            scope.logidliproceed = false;
-                                        }
-                                        scope.BookmarkFlag = false;
-                                        scope.IgnoreFlaghide = false;
-                                        scope.ViewedFlag = false;
-                                        scope.msgflag = false;
-                                    } else if (scope.Express[0].ExpressFlag === 1) {
-                                        if (scope.custid !== null) {
-                                            scope.logidliproceed = true;
-                                        } else {
-                                            scope.logidliproceed = false;
-                                        }
-                                        scope.BookmarkFlag = false;
-                                        scope.IgnoreFlaghide = false;
-                                        scope.ViewedFlag = false;
-                                        scope.msgflag = false;
-                                    } else {
-                                        scope.logidliproceed = true;
-                                    }
-                                    break;
-                                case "Paidstatus":
-                                    scope.Paidstatus = testArr;
-                                    break;
-                                case "Ignore":
-                                    scope.Ignore = testArr;
-                                    scope.IgnoreFlaghide = scope.Ignore[0].IgnoreFlag === 1 ? false : true;
-                                    break;
-                            }
-                        }
-                    });
-                });
+
             }
         };
 
@@ -5775,7 +5817,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             }
         };
         scope.sendmessages = function(form) {
-
             scope.serviceactions("M", scope.messagecustid, undefined, undefined, form, undefined, undefined);
             alerts.dynamicpopupclose();
         };
@@ -5783,9 +5824,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             scope.modalpopupheadertext = "Enter your message here";
             scope.messagecustid = tocustid;
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
-
         };
-
         scope.acceptlinkexp = function(type, custid) {
             var locallogid = sessionStorage.getItem("locallogid");
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, locallogid, type, null).then(function(response) {
@@ -5797,7 +5836,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 alerts.dynamicpopupclose();
             });
         };
-
         scope.photoalbum = function() {
             scope.headerpopup = "Slide show";
             scope.popupmodalbody = false;
@@ -6097,14 +6135,14 @@ app.factory('customerDashboardServices', ['$http', function(http) {
     app.factory('errorInterceptor', ['$rootScope', '$q', function($rootScope, $q) {
         return {
             responseError: function(rejection) {
-                $rootScope.$broadcast('notify-error', rejection);
-                return $q.reject(rejection);
-            },
-            response: function(config) {
-                var deferred = $q.defer();
-                deferred.resolve(config);
-                return deferred.promise;
-            }
+                    $rootScope.$broadcast('notify-error', rejection);
+                    return $q.reject(rejection);
+                }
+                // response: function(config) {
+                //     var deferred = $q.defer();
+                //     deferred.resolve(config);
+                //     return deferred.promise;
+                // }
         };
     }]);
 

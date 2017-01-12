@@ -103,6 +103,13 @@
     #mdHeighttotext .md-sign {
         width: 34px;
     }
+    
+    md-slider .md-sign .md-thumb-text,
+    md-slider[md-vertical][md-discrete] .md-sign .md-thumb-text {
+        font-size: 10px !important;
+        font-weight: 700;
+        z-index: 1;
+    }
 </style>
 
 <div class="search_page_main" ng-show="modelsearch.showcontrols" ng-init="generalpageload()">
@@ -453,7 +460,7 @@
                                     <p ng-show="modelsearch.custid!==null?true:false">To include other castes in your search, please update “caste” in “partner preference”.<a id="lnkEdit" style="font-weight: bold; text-decoration: underline; margin-left: 0px;" href="editview/editPartnerPreferences">Edit partner preference</a></p>
                                     <md-button class="md-raised md-warn md-hue-2" ng-click="generalsearchsubmit('advanced',1,8)">Search</md-button>
                                     <md-button class="md-raised md-hue-1" ng-click="resetgenral('general')" ng-hide="true">Reset</md-button>
-                                    <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus" ng-click="savedseapopup('advanced')">{{advancedsavedsearchbtn}}</md-button>
+                                    <md-button class="md-raised md-warn md-hue-2" ng-show="modelsearch.getpaidstatus" ng-click="savedseapopup('advanced')">{{modelsearch.advancedsavedsearchbtn}}</md-button>
                                 </div>
                             </form>
                         </div>
@@ -481,13 +488,13 @@
                                         <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>First name</label>
-                                                <input ng-model="modelsearch.firstname" ng-keypress="onlyAlphabets(event)" id="txtFirstNameProfileid">
+                                                <input ng-model="modelsearch.firstname" onkeyup="this.value=this.value.replace(/[^a-z]/g,'');" id="txtFirstNameProfileid">
                                             </md-input-container>
                                         </div>
                                         <div class="span4">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Last name</label>
-                                                <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" ng-keypress="onlyAlphabets(event)" id="txtLastNameProfileid">
+                                                <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" onkeyup="this.value=this.value.replace(/[^a-z]/g,'');" id="txtLastNameProfileid">
                                             </md-input-container>
                                         </div>
 

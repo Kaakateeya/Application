@@ -263,8 +263,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             //element.multiselect('rebuild');
             // Watch for any changes to the length of our select element
             scope.$watch(function() {
-                console.log("TYPEDROP   " + scope.typeofdata);
-                console.log(element[0].length);
+                //console.log("TYPEDROP   " + scope.typeofdata);
+                // console.log(element[0].length);
                 element.multiselect('select', scope.ngModel);
                 return element[0].length;
             }, function() {
@@ -273,7 +273,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             });
             // Watch for any changes from outside the directive and refresh
             scope.$watch(attrs.ngModel, function() {
-                console.log(scope.ngModel);
+                // console.log(scope.ngModel);
                 element.multiselect('refresh');
             });
         }

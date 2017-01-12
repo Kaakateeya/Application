@@ -21,6 +21,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.truepartnerrefine = true;
         scope.refinesubmitflag = "normal";
         scope.filtervalues = function(arr, whereValue) {
+
             var storeValue = "";
             if (whereValue !== null && whereValue !== "" && whereValue !== undefined) {
                 if (whereValue.indexOf(',') === -1) {
@@ -43,6 +44,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return storeValue;
         };
         scope.textlabels = function(fromheight, toheight, caste, education) {
+
             scope.modelsearch.HeightFromtext = scope.filtervalues(scope.modelsearch.height, fromheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, fromheight)).split('-'))[0] : '';
             scope.modelsearch.Heighttotext = scope.filtervalues(scope.modelsearch.height, toheight) !== '' ? ((scope.filtervalues(scope.modelsearch.height, toheight)).split('-'))[0] : '';
             scope.modelsearch.educationcategorytxt = scope.filtervalues(scope.modelsearch.educationcategory, education) !== '' ? (scope.filtervalues(scope.modelsearch.educationcategory, education)) : '';
@@ -163,6 +165,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.modelsearch.physicalstatusadvance = response.data.PhysicalStatusstring;
             scope.modelsearch.State = response.data.Country !== null ? commonFactory.StateBind(response.data.Country) : "0";
             scope.modelsearch.stateadvance = response.data.State !== null ? scope.arrayToString(response.data.State) : "0";
+            scope.modelsearch.Educationgroup = commonFactory.educationGroupBind(helperservice.checkstringvalue(response.data.Educationcategory) ? (response.data.Educationcategory).toString() : "");
             scope.textlabels(response.data.Heightto, response.data.Heightfrom, response.data.Caste, response.data.Educationcategory);
         };
         var numberInRange = function(number, lower, upper) {
@@ -414,8 +417,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return SearchRequest;
         };
         scope.generalsearchsubmit = function(type, frompage, topage, form, searchsavedidupdate) {
-            // scope.slider.minValue = scope.modelsearch.AgeFrom;
-            // scope.slider.maxValue = scope.modelsearch.Ageto;
             scope.modelsearch.loadinging = frompage === 1 ? false : true;
             scope.modelsearch.showcontrols = false;
             scope.truepartner = false;
@@ -427,10 +428,15 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "advanced":
                 case "general":
-                    // scope.textlabels(scope.modelsearch.HeightFrom, scope.modelsearch.Heightto, undefined, scope.modelsearch.educationcat);
+                    scope.modelsearch.AgeFrom = helperservice.checkstringvalue(scope.modelsearch.AgeFrom) ? parseInt(scope.modelsearch.AgeFrom) : "0";
+                    scope.modelsearch.Ageto = helperservice.checkstringvalue(scope.modelsearch.Ageto) ? parseInt(scope.modelsearch.Ageto) : "0";
+                    scope.modelsearch.HeightFrom = helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? parseInt(scope.modelsearch.HeightFrom) : "0";
+                    scope.modelsearch.Heightto = helperservice.checkstringvalue(scope.modelsearch.Heightto) ? parseInt(scope.modelsearch.Heightto) : "0";
+                    console.log(scope.modelsearch.HeightFrom);
+                    console.log((scope.modelsearch.HeightFrom).toString());
+                    scope.textlabels(helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? (scope.modelsearch.HeightFrom).toString() : "0", helperservice.checkstringvalue(scope.modelsearch.Heightto) ? (scope.modelsearch.Heightto).toString() : "0", null,
+                        helperservice.checkstringvalue(scope.modelsearch.educationcat) ? (scope.modelsearch.educationcat).toString() : "0");
                     scope.modelsearch.typesearch = type;
-                    // scope.sliders.minvalueyext = scope.checkheight(scope.sliders.minvalueyext);
-                    // scope.sliders.maxValuetext = scope.checkheight(scope.sliders.maxValuetext);
                     searches.CustomerGeneralandAdvancedSearchsubmit(scope.submitobjectcommongenad(frompage, topage)).then(function(response) {
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
@@ -542,6 +548,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                     break;
                 case "savedsearch":
+                    scope.textlabels((scope.modelsearch.HeightFrom).toString(), (scope.modelsearch.Heightto).toString(), null, (scope.modelsearch.educationcat).toString());
                     scope.submitobjectcommongenad(frompage, topage);
                     scope.submitsavedsearchobject = {
                         customerpersonaldetails: SearchRequest,
@@ -688,10 +695,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         });
         scope.refinesubmit = function() {
             scope.refinesubmitflag = "refine";
-            // scope.modelsearch.AgeFrom = scope.slider.minValue;
-            // scope.modelsearch.Ageto = scope.slider.maxValue;
-            // scope.modelsearch.HeightFrom = scope.sliders.minValue;
-            // scope.modelsearch.Heightto = scope.sliders.maxValue;
             scope.generalsearchsubmit(scope.modelsearch.typesearch, 1, 8);
             scope.$broadcast('setslide');
         };
@@ -699,11 +702,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             switch (type) {
                 case "heightfrom":
                     scope.modelsearch.HeightFromtext = scope.checkheight(scope.modelsearch.HeightFrom);
-
                     break;
                 case "heightto":
                     scope.modelsearch.Heighttotext = scope.checkheight(scope.modelsearch.Heightto);
-
                     break;
             }
         };
