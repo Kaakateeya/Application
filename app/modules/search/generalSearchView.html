@@ -488,13 +488,13 @@
                                         <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>First name</label>
-                                                <input ng-model="modelsearch.firstname" ng-keypress="onlyAlphabets(event)" id="txtFirstNameProfileid">
+                                                <input ng-model="modelsearch.firstname" onkeyup="this.value=this.value.replace(/[^a-z]/g,'');" id="txtFirstNameProfileid">
                                             </md-input-container>
                                         </div>
                                         <div class="span4">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Last name</label>
-                                                <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" ng-keypress="onlyAlphabets(event)" id="txtLastNameProfileid">
+                                                <input ng-model="modelsearch.lastname" name="txtLastNameProfileid" onkeyup="this.value=this.value.replace(/[^a-z]/g,'');" id="txtLastNameProfileid">
                                             </md-input-container>
                                         </div>
 

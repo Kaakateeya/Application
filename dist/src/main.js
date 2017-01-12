@@ -1265,6 +1265,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.Norowsend = false;
                 scope.PartnerProfilesnew = scope.array;
                 scope.indexvalues = 0;
+                scope.loadmore = false;
                 var i = 0;
                 scope.slides = [];
                 scope.directivepaging = function() {
@@ -1316,7 +1317,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.pauseplaybuttons = true;
                     scope.partnersearchessearches = true;
                     scope.searchestype = scope.paggingflag === false ? false : true;
-
                 };
                 scope.servicehttp = function(type, object) {
                     return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
@@ -1369,7 +1369,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         });
                 };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
-
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
                         var object = {
@@ -1472,25 +1471,20 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
                     password = password !== null && password !== "" ? 468 : 467;
-                    return $injector.invoke(function($http) {
-                        return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
-                            .then(function(response) {
-
-                                if (response.data === 1) {
-                                    scope.$emit('successfailer', "Request sent suceessfully", "success");
-                                } else {
-                                    scope.$emit('successfailer', "Request sent Fail", "warning");
-                                }
-                            });
-                    });
+                    return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
+                        .then(function(response) {
+                            if (response.data === 1) {
+                                scope.$emit('successfailer', "Request sent suceessfully", "success");
+                            } else {
+                                scope.$emit('successfailer', "Request sent Fail", "warning");
+                            }
+                        });
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         alerts.dynamicpopup("photopopup.html", scope, uibModal);
                         customerDashboardServices.getphotoslideimages(custid).then(function(response) {
                             scope.slides = [];
-
                             _.each(response.data, function(item) {
                                 scope.slides.push(item);
                             });
@@ -1503,7 +1497,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.divclassmask = function(logphotostatus, photo, photocount) {
                     logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-
                         return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
                     } else {
                         return "";
@@ -1564,7 +1557,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                     scope.ArrowMove(carouselID);
                     scope.checkitemGlobal(carouselID);
-
                 };
                 scope.pageloadslidebind = function() {
                     $('.list-inline li a').removeClass('selected');
@@ -1582,14 +1574,12 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
                                 scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
-
                                 if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
                                     $('#slideShowCarousel').find('.left').show();
                                     $('#slideShowCarousel').find('.right').show();
                                 }
                             }
                         } else {
-
                             if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
                                 scope.$emit('showloginpopup');
                             }
@@ -1794,7 +1784,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 TotalMsgs: 0,
                 WhobookmarkedCount: 0
             };
-
             scope.bindcounts(obj);
             scope.bindallcounts = obj;
         };

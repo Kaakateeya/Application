@@ -51,7 +51,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 TotalMsgs: 0,
                 WhobookmarkedCount: 0
             };
-
             scope.bindcounts(obj);
             scope.bindallcounts = obj;
         };
