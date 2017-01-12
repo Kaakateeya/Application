@@ -1,0 +1,39 @@
+undefined
+{ keyname: 'Imagesnew/ProfilePics/KMPL_109454_Images/Img2.PDF' }
+-------------------
+{ fieldName: 'file',
+  originalFilename: '4854XXXXXXXXXX32_02-01-2017.PDF',
+  path: 'C:\\Windows\\TEMP\\7A3yJC9WTzhZDL03K3dXCdpY.PDF',
+  headers: 
+   { 'content-disposition': 'form-data; name="file"; filename="4854XXXXXXXXXX32_02-01-2017.PDF"',
+     'content-type': 'application/pdf' },
+  size: 165977,
+  name: '4854XXXXXXXXXX32_02-01-2017.PDF',
+  type: 'application/pdf' }
+Upload Success https://angularkaknew.s3.ap-south-1.amazonaws.com/Imagesnew/ProfilePics/KMPL_109454_Images/Img2.PDF
+undefined
+{ keyname: 'Imagesnew/ProfilePics/KMPL_109454_Images/Img3.rtf' }
+-------------------
+{ fieldName: 'file',
+  originalFilename: 'Book2.rtf',
+  path: 'C:\\Windows\\TEMP\\JbpfEohsVe_QWoFh8P40xzXm.rtf',
+  headers: 
+   { 'content-disposition': 'form-data; name="file"; filename="Book2.rtf"',
+     'content-type': 'application/rtf' },
+  size: 226641,
+  name: 'Book2.rtf',
+  type: 'application/rtf' }
+Upload Success https://angularkaknew.s3.ap-south-1.amazonaws.com/Imagesnew/ProfilePics/KMPL_109454_Images/Img3.rtf
+undefined
+{ keyname: 'Imagesnew/HoroscopeImages/109454_HaroscopeImage/109454_HaroscopeImage.txt' }
+-------------------
+{ fieldName: 'file',
+  originalFilename: 'no calls from recrd.txt',
+  path: 'C:\\Windows\\TEMP\\WvPDAR-aTF_eLyWeRMnsAHYo.txt',
+  headers: 
+   { 'content-disposition': 'form-data; name="file"; filename="no calls from recrd.txt"',
+     'content-type': 'text/plain' },
+  size: 520,
+  name: 'no calls from recrd.txt',
+  type: 'text/plain' }
+Upload Success https://angularkaknew.s3.ap-south-1.amazonaws.com/Imagesnew/HoroscopeImages/109454_HaroscopeImage/109454_HaroscopeImage.txt

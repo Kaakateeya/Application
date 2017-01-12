@@ -1,0 +1,16 @@
+undefined
+{ keyname: 'Imagesnew/ProfilePics/KMPL_91022_Images/Img1.txt' }
+-------------------
+{ fieldName: 'file',
+  originalFilename: 'misfields.txt',
+  path: 'C:\\Windows\\TEMP\\cFkREcE6wWspFQ2fLun8ZbRl.txt',
+  headers: 
+   { 'content-disposition': 'form-data; name="file"; filename="misfields.txt"',
+     'content-type': 'text/plain' },
+  size: 57496,
+  name: 'misfields.txt',
+  type: 'text/plain' }
+Upload Success https://angularkaknew.s3.ap-south-1.amazonaws.com/Imagesnew/ProfilePics/KMPL_91022_Images/Img1.txt
+Imagesnew/ProfilePics/KMPL_91022_Images/Img1.txt
+-------------------
+Successfully deleted myBucket/myKey
