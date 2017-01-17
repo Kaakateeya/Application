@@ -24,7 +24,7 @@
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>
                                          New Email ID</label>
-                                            <input ng-model="NewEmail" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ng-disabled='disabled' required md-no-asterisk name="NewEmail">
+                                            <input ng-model="NewEmail" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ng-disabled='disabled' required md-no-asterisk name="NewEmail" ng-blur="valueExists('email',0,NewEmail);">
                                             <div ng-messages="emailform.NewEmail.$error">
                                                 <div ng-message="required">This is required.</div>
                                                 <div ng-message="pattern">Your email address is invalid</div>
@@ -75,8 +75,8 @@
                                         </md-input-container>
                                         <md-input-container class="md-block" flex-gt-sm>
                                             <label>New Mobile Number</label>
-                                            <input ng-model="Confirmnewnumber" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="Confirmnewnumber" ng-disabled="countrycodedisable" required
-                                                md-no-asterisk>
+                                            <input ng-model="Confirmnewnumber" ng-blur="valueExists('number',1,Confirmnewnumber);" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="Confirmnewnumber"
+                                                ng-disabled="countrycodedisable" required md-no-asterisk>
                                             <div ng-messages="mobileform.Confirmnewnumber.$error">
                                                 <div ng-message="required">This is required.</div>
                                                 <div ng-message="pattern">Must be a valid 10 digit phone number</div>

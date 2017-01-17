@@ -8,6 +8,7 @@ app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
                 scope.myorders = [];
                 _.each(response.data, function(item) {
                     scope.myorders = JSON.parse(item);
+                    console.log(scope.myorders);
                 });
             });
         };

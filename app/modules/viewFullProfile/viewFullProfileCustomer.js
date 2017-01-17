@@ -50,6 +50,8 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
+                        console.log('tewst');
+                        console.log(scope.arr);
                     }
                 }
             });
