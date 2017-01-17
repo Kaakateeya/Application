@@ -662,7 +662,7 @@
                         <div class="modal-body" id="modal-body">
                             <ul id="ulregistration" class="modal-body clearfix">
                                 <li class="row clearfix" style="margin-top: -20px;">
-                                    <label  class="pop_label_left col-lg-4">Gender<span style="color: red; margin-left: 3px;">*</span></label>
+                                    <label class="pop_label_left col-lg-4">Gender<span style="color: red; margin-left: 3px;">*</span></label>
                                     <md-input-container class="col-lg-8" style="margin-top: 0px !important;">
                                         <md-radio-group ng-required="true" name="rbtngender" layout="row" ng-model="reg.rbtngender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                             <md-radio-button value="1" class="md-primary">Male</md-radio-button>
@@ -747,15 +747,7 @@
                                     </div>
                                 </li>
                                   <br/>
-                                <li class="row" ng-hide="true">
-                                    <label  class="pop_label_left col-lg-4">Land Number<span style="color: red; margin-left: 3px;">*</span></label>
-                                     <div class="pop_controls_right select-box-my select-box-my-trible col-lg-8">
-                                             <select  multiselectdropdown  typeofdata="'countryCode'" name="ddllandcountry" ng-model="reg.ddllandcountry" ng-required="((regForm.txtMobileNo.$valid && regForm.ddlmobilecountry.$valid) || regForm.ddllandcountry.$valid)?false:true" >
-                                           </select>
-                                            <input maxlength="8"  class="form-control" ng-required="((regForm.txtMobileNo.$valid && regForm.ddlmobilecountry.$valid) || regForm.txtArea.$valid)?false:true" md-no-asterisk="" name="txtArea" ng-model="reg.txtArea" ng-pattern="/^[0-9]+$/" style="border: 1px solid #a29b9b;width:32%;margin-top:0px;">
-                                          <input maxlength="8" class="form-control" ng-required="((regForm.txtMobileNo.$valid && regForm.ddlmobilecountry.$valid) || regForm.txtlandNum.$valid)?false:true" md-no-asterisk="" name="txtlandNum" ng-model="reg.txtlandNum" ng-pattern="/^[0-9]+$/" style="border: 1px solid #a29b9b;width:32% !important;margin-top:0px;">
-                                    </div>
-                                </li>
+                                
                                 <li class="row">
                                <md-input-container class="col-lg-8">
                                     <md-checkbox ng-model="reg.Chkprivacy" name="Chkprivacy" aria-label="Checkbox 1" ng-required="true" md-asterisk="">

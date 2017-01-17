@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="search_result_item_descr pull-left">
-                <p>
+                <p ng-hide="data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined">
                     <span>{{data.iGenderID===1?"He":"She"}}</span> was born and raised in
                     <label class="label_check"><span>{{data.placeofbirth}}</span></label>
                 </p>

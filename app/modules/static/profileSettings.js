@@ -1,6 +1,6 @@
 app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindServiceApp',
-    'authSvc', 'alert', 'helperservice',
-    function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts, helperservice) {
+    'authSvc', 'alert', 'helperservice', 'basicRegistrationService',
+    function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts, helperservice, basicRegistrationService) {
         scope.getdetails = function() {
             var logincustid = authSvc.getCustId();
             scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
@@ -40,8 +40,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
                 _.each(response.data, function(item) {
                     scope.arrayprofilesettings = item;
-                    scope.mailyes = scope.arrayprofilesettings.AllowEmail === "False" ? "0" : "1";
-                    scope.smsyes = scope.arrayprofilesettings.AllowSMS === "False" ? "0" : "1";
+
+                    scope.mailyes = scope.arrayprofilesettings.AllowEmail === false ? 0 : 1;
+                    scope.smsyes = scope.arrayprofilesettings.AllowSMS === false ? 0 : 1;
                 });
             });
         };
@@ -95,8 +96,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     var NewEmail = scope.NewEmail;
                     customerProfilesettings.submitemailmobilesubmit(FamilyID, NewEmail, "", 1).then(function(response) {
                         if (response.data == 1) {
-                            scope.Resetallfields('email');
                             alerts.open('Email Upadated successfully', 'success');
+                            scope.Resetallfields('email');
                         } else {
                             alerts.open('Email Updated failed', 'warning');
                         }
@@ -108,8 +109,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     var number = scope.Confirmnewnumber;
                     customerProfilesettings.submitemailmobilesubmit(FamilyIDs, number, CountryCodeID, 0).then(function(response) {
                         if (response.data == 1) {
-                            scope.Resetallfields('mobile');
                             alerts.open('Mobile Upadated successfully', 'success');
+                            scope.Resetallfields('mobile');
                         } else {
                             alerts.open('Mobile Updated failed', 'warning');
                         }
@@ -124,8 +125,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var custId = scope.custid;
             customerProfilesettings.passwordchange(OldPassword, NewPassword, ConfirmPassword, custId).then(function(response) {
                 if (response.data == 1) {
-                    scope.Resetallfields('password');
                     alerts.open('Passsword updated successfully', 'success');
+                    scope.Resetallfields('password');
                 } else {
                     alerts.open('Passsword updated failed', 'warning');
                 }
@@ -138,8 +139,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var Narration = scope.hiddennarration;
             customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
                 if (response.data == 1) {
-                    scope.Resetallfields('hide');
                     alerts.open('Hide Profile successfully', 'success');
+                    scope.Resetallfields('hide');
+
                 } else {
                     alerts.open('Hide Profile failed', 'warning');
                 }
@@ -150,8 +152,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var Narrtion = scope.Narrtion;
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
-                    scope.Resetallfields('deleteprofiles');
+
                     alerts.open('Delete Profile successfully', 'success');
+                    scope.Resetallfields('deleteprofiles');
                 } else {
                     alerts.open('Delete Profile failed', 'warning');
                 }
@@ -159,12 +162,12 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         };
         scope.submitmanagealerts = function() {
             var CustID = scope.custid;
-            var AllowEmail = scope.mailyes === 0 ? 0 : 1;
-            var AllowSMS = scope.smsyes === 0 ? 0 : 1;
+            var AllowEmail = scope.mailyes === '0' ? 0 : 1;
+            var AllowSMS = scope.smsyes === '0' ? 0 : 1;
             customerProfilesettings.manageprofiles(CustID, AllowEmail, AllowSMS).then(function(response) {
                 if (response.data == 1) {
-                    scope.Resetallfields('alerts');
                     alerts.open('Submit successfully', 'success');
+                    scope.Resetallfields('alerts');
                 } else {
                     alerts.open('submit failed', 'warning');
                 }
@@ -253,5 +256,27 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     break;
             }
         };
+
+
+
+        scope.valueExists = function(type, flag, val) {
+            if (val !== undefined) {
+                basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
+                    console.log(response);
+                    if (response.data === 1) {
+                        if (type === 'email') {
+                            scope.NewEmail = '';
+                            alerts.open('Email Already Exists', 'warning');
+                        } else {
+                            scope.Confirmnewnumber = '';
+                            alerts.open('Mobile number Already Exists', 'warning');
+                        }
+                    }
+                });
+            }
+        };
+
+
+
     }
 ]);
