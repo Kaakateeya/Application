@@ -11,7 +11,7 @@ app.factory('successstoriesdata', ['$http', function(http) {
             person.pageto = topage;
             return http.post(app.apiroot + 'StaticPages/SuccessStoriesdetails', person);
         },
-        maskclasspartner: function(logphotostatus, photo, photocount, custid) {
+        maskclasspartner: function(logphotostatus, photo, photocount, custid, photostatuslogin) {
             var photoclass = "";
             var PhotoMaskDiv;
             if (custid !== undefined && custid !== null && custid !== "") {
@@ -19,8 +19,13 @@ app.factory('successstoriesdata', ['$http', function(http) {
                     PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdivrev clearfix" : "";
                 else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") !== -1)
                     PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
-                else
-                    PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
+                else {
+                    if ((logphotostatus === "null" || logphotostatus === null) && photostatuslogin !== undefined && photostatuslogin.toLowerCase().indexOf("_rev") !== -1) {
+                        PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
+                    } else {
+                        PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
+                    }
+                }
                 if (PhotoMaskDiv === "cssMaskdiv clearfix") {
                     photoclass = PhotoMaskDiv === "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
                 } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {

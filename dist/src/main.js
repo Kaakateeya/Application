@@ -1210,9 +1210,9 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce
     }
 ]);
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
+    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http', 'helperservice',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
-        uibModal, $http) {
+        uibModal, $http, helperservice) {
         return {
             restrict: "E",
             scope: {
@@ -1278,6 +1278,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                 });
                 scope.listclick = function() {
+                    scope.$emit('slideshowrefineshow');
                     scope.typeofdiv = 'List';
                     $('.search_result_items_main').attr("style", "width:80%;");
                     scope.slideshowsearches = false;
@@ -1287,6 +1288,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.searchestype = scope.paggingflag === false ? false : true;
                 };
                 scope.gridclick = function() {
+                    scope.$emit('slideshowrefineshow');
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
@@ -1472,8 +1474,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.divclassmask = function(logphotostatus, photo, photocount) {
                     logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                    var photostatuslogin = helperservice.checkstringvalue(authSvc.getprofilepic()) ? authSvc.getprofilepic() : "";
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid, photostatuslogin);
                     } else {
                         return "";
                     }
@@ -1714,6 +1717,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
+        var photostatuslogin = helperservice.checkstringvalue(authSvc.getprofilepic()) ? authSvc.getprofilepic() : "";
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.typeodbind = 'C';
         scope.typeofdiv = "Grid";
@@ -2041,6 +2045,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactshow = true;
             if (countalert !== 0) {
                 if (fromindex === 1) {
+                    window.scrollTo(0, 0);
                     scope.flagexpress = 9;
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = "chats";
@@ -2072,6 +2077,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
+                    window.scrollTo(0, 0);
                     scope.flagexpress = 9;
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = typeofdiv;
@@ -2144,7 +2150,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
                 });
             } else {
-                window.open(realpath, '_blank');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
             }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -2221,7 +2227,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid);
+            console.log(photostatuslogin);
+            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid, photostatuslogin);
         };
         scope.incrementsdashboardcounts = function() {
             customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9, "UnPaid").then(function(response) {
@@ -3845,6 +3852,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on('slideshowrefinehide', function(event) {
             scope.truepartnerrefine = true;
         });
+
+        scope.$on('slideshowrefineshow', function(event) {
+            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
+                scope.truepartnerrefine = false;
+            } else {
+                scope.truepartnerrefine = true;
+            }
+        });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
                 case 'Country':
@@ -4057,7 +4072,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                 });
             } else {
-                window.open(realpath, '_blank');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
             }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -4737,13 +4752,15 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
                 _.each(response.data, function(item) {
                     scope.arrayprofilesettings = item;
-
                     scope.mailyes = scope.arrayprofilesettings.AllowEmail === false ? 0 : 1;
                     scope.smsyes = scope.arrayprofilesettings.AllowSMS === false ? 0 : 1;
+                    scope.ProfileStatusID = scope.arrayprofilesettings.ProfileStatusID !== 55 ? { 'display': 'block' } : { 'display': 'none' };
+                    scope.ProfileStatusIDunhide = scope.arrayprofilesettings.ProfileStatusID === 55 ? { 'display': 'block' } : { 'display': 'none' };
                 });
             });
         };
         scope.pageload = function() {
+
             scope.getdetails();
         };
         scope.toggleActivationsss = function(btntype) {
@@ -4849,7 +4866,6 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var Narrtion = scope.Narrtion;
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
-
                     alerts.open('Delete Profile successfully', 'success');
                     scope.Resetallfields('deleteprofiles');
                 } else {
@@ -4876,6 +4892,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var iflag = 0;
             customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
                 if (response.data == 1) {
+                    scope.getdetails();
                     alerts.open('Unhide your Profile successfully', 'success');
                 } else {
                     alerts.open('Unhide your Profile failed', 'warning');
@@ -6331,7 +6348,7 @@ app.factory('successstoriesdata', ['$http', function(http) {
             person.pageto = topage;
             return http.post(app.apiroot + 'StaticPages/SuccessStoriesdetails', person);
         },
-        maskclasspartner: function(logphotostatus, photo, photocount, custid) {
+        maskclasspartner: function(logphotostatus, photo, photocount, custid, photostatuslogin) {
             var photoclass = "";
             var PhotoMaskDiv;
             if (custid !== undefined && custid !== null && custid !== "") {
@@ -6339,8 +6356,13 @@ app.factory('successstoriesdata', ['$http', function(http) {
                     PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ApplicationPhoto") !== -1 ? "cssMaskdivrev clearfix" : "";
                 else if (logphotostatus !== "null" && logphotostatus !== null && photo.indexOf("ThumbNail") !== -1)
                     PhotoMaskDiv = logphotostatus !== true && logphotostatus !== "true" && photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
-                else
-                    PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
+                else {
+                    if ((logphotostatus === "null" || logphotostatus === null) && photostatuslogin !== undefined && photostatuslogin.toLowerCase().indexOf("_rev") !== -1) {
+                        PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdivrev clearfix" : "";
+                    } else {
+                        PhotoMaskDiv = photo.indexOf("ApplicationPhoto") !== -1 || photo.indexOf("ThumbNail") !== -1 ? "cssMaskdiv clearfix" : "";
+                    }
+                }
                 if (PhotoMaskDiv === "cssMaskdiv clearfix") {
                     photoclass = PhotoMaskDiv === "cssMaskdiv clearfix" ? "cssMaskdiv clearfix Linkdisabled" : "";
                 } else if (PhotoMaskDiv === "cssMaskdivrev clearfix") {

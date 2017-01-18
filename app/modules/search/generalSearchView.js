@@ -656,6 +656,14 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
         scope.$on('slideshowrefinehide', function(event) {
             scope.truepartnerrefine = true;
         });
+
+        scope.$on('slideshowrefineshow', function(event) {
+            if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
+                scope.truepartnerrefine = false;
+            } else {
+                scope.truepartnerrefine = true;
+            }
+        });
         scope.$on('directivechangeevent', function(event, modal, type) {
             switch (type) {
                 case 'Country':
@@ -868,7 +876,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     }
                 });
             } else {
-                window.open(realpath, '_blank');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
             }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {

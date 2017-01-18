@@ -752,7 +752,7 @@
                                <md-input-container class="col-lg-8">
                                     <md-checkbox ng-model="reg.Chkprivacy" name="Chkprivacy" aria-label="Checkbox 1" ng-required="true" md-asterisk="">
                                         I agree to the
-                                        <a ng-model="reg.lnkprivacyPolicy" Font-Size="12px" ng-click="redirectprivacy()">Privacy Policy and T&C.</a>
+                                        <a ng-model="reg.lnkprivacyPolicy" Font-Size="12px" ng-click="redirectprivacy()">Privacy Policy and T&C.<span style="color: red;">*</span></a>
                                 </md-checkbox>
                                 <div ng-messages="regForm.Chkprivacy.$invalid">
                                     <div ng-if="regForm.Chkprivacy.$invalid && (regForm.$submitted)">This is required.</div>

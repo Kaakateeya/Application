@@ -40,13 +40,15 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             customerProfilesettings.getprofilesettinginfo(scope.custid).then(function(response) {
                 _.each(response.data, function(item) {
                     scope.arrayprofilesettings = item;
-
                     scope.mailyes = scope.arrayprofilesettings.AllowEmail === false ? 0 : 1;
                     scope.smsyes = scope.arrayprofilesettings.AllowSMS === false ? 0 : 1;
+                    scope.ProfileStatusID = scope.arrayprofilesettings.ProfileStatusID !== 55 ? { 'display': 'block' } : { 'display': 'none' };
+                    scope.ProfileStatusIDunhide = scope.arrayprofilesettings.ProfileStatusID === 55 ? { 'display': 'block' } : { 'display': 'none' };
                 });
             });
         };
         scope.pageload = function() {
+
             scope.getdetails();
         };
         scope.toggleActivationsss = function(btntype) {
@@ -152,7 +154,6 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var Narrtion = scope.Narrtion;
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
-
                     alerts.open('Delete Profile successfully', 'success');
                     scope.Resetallfields('deleteprofiles');
                 } else {
@@ -179,6 +180,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             var iflag = 0;
             customerProfilesettings.hideprofile(Expirydate, CustID, iflag).then(function(response) {
                 if (response.data == 1) {
+                    scope.getdetails();
                     alerts.open('Unhide your Profile successfully', 'success');
                 } else {
                     alerts.open('Unhide your Profile failed', 'warning');
