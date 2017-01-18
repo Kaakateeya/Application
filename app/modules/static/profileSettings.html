@@ -175,7 +175,7 @@
                         <div class="tab">
                             <form name="hideprofileform">
                                 <div class="profile_search_main profile_settings_main clearfix">
-                                    <div ng-style="arrayprofilesettings.ProfileStatusID!==55?{'display':'block'}:{'display':'none'}">
+                                    <div ng-style="ProfileStatusID">
                                         <div class="row">
                                             <p class="col-lg-9">
                                                 In order to hide profile for certain time period please select the option below and mention the reason for hiding the profile. &nbsp;&nbsp;<span style="color:black;font-weight: 700;">Edit</span></p>
@@ -207,7 +207,7 @@
                                             <md-button class="md-raised md-hue-1" ng-click="Resetallfields('hide')">Reset</md-button>
                                         </div>
                                     </div>
-                                    <div latout="row" ng-style="arrayprofilesettings.ProfileStatusID===55?{'display':'block'}:{'display':'none'}">
+                                    <div latout="row" ng-style="ProfileStatusIDunhide">
                                         <a href="javascript:void(0);" ng-click="unhideprofile()">Click here to unhide your Profile</a>
                                     </div>
                                 </div>

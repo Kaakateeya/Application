@@ -7,6 +7,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var logincustid = authSvc.getCustId();
         var loginprofileid = authSvc.getProfileid();
         var loginpaidstatus = authSvc.getpaidstatus();
+        var photostatuslogin = helperservice.checkstringvalue(authSvc.getprofilepic()) ? authSvc.getprofilepic() : "";
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         scope.typeodbind = 'C';
         scope.typeofdiv = "Grid";
@@ -334,6 +335,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactshow = true;
             if (countalert !== 0) {
                 if (fromindex === 1) {
+                    window.scrollTo(0, 0);
                     scope.flagexpress = 9;
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = "chats";
@@ -365,6 +367,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactflagstorage = exactflag;
             if (countalert !== 0) {
                 if (fromindex === 1) {
+                    window.scrollTo(0, 0);
                     scope.flagexpress = 9;
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = typeofdiv;
@@ -437,7 +440,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     }
                 });
             } else {
-                window.open(realpath, '_blank');
+                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
             }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -514,7 +517,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid);
+            console.log(photostatuslogin);
+            return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid, photostatuslogin);
         };
         scope.incrementsdashboardcounts = function() {
             customerDashboardServices.getCustomercounts(scope.custid, "COU", 1, 9, "UnPaid").then(function(response) {

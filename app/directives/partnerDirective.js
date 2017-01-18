@@ -1,7 +1,7 @@
 app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
-    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http',
+    '$mdDialog', 'alert', 'customerDashboardServices', '$uibModal', '$http', 'helperservice',
     function($injector, authSvc, successstoriesdata, $mdDialog, alerts, customerDashboardServices,
-        uibModal, $http) {
+        uibModal, $http, helperservice) {
         return {
             restrict: "E",
             scope: {
@@ -67,6 +67,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                 });
                 scope.listclick = function() {
+                    scope.$emit('slideshowrefineshow');
                     scope.typeofdiv = 'List';
                     $('.search_result_items_main').attr("style", "width:80%;");
                     scope.slideshowsearches = false;
@@ -76,6 +77,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.searchestype = scope.paggingflag === false ? false : true;
                 };
                 scope.gridclick = function() {
+                    scope.$emit('slideshowrefineshow');
                     scope.typeofdiv = 'Grid';
                     $('.search_result_items_main').attr("style", "");
                     scope.slideshowsearches = false;
@@ -261,8 +263,9 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 };
                 scope.divclassmask = function(logphotostatus, photo, photocount) {
                     logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
+                    var photostatuslogin = helperservice.checkstringvalue(authSvc.getprofilepic()) ? authSvc.getprofilepic() : "";
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
-                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid);
+                        return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, logincustid, photostatuslogin);
                     } else {
                         return "";
                     }
