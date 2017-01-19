@@ -16,13 +16,11 @@ app.apiroot = 'http://183.82.0.58:8010/Api/';
 app.global = {
     'alertType': 'toast-top-right'
 };
-
 app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider, $locationProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
     IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
     IdleProvider.idle(5 * 60);
-
     var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/dashboard/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'dashboardnew', url: '/dashboardnew/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
@@ -51,6 +49,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
         { name: 'commonviewfull', url: '/commonviewfull', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
         { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false }
+        // { name: 'bootstapCarousal', url: '/bootstapCarousal', templateUrl: 'templates/bootstapCarousal.html', controller: 'CarouselDemoCtrl', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');

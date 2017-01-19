@@ -133,7 +133,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if (iEditDelete === 0) {
                 searches.savedsearchselectmethod(scope.modelsearch.custid, "", 1).then(function(response) {
                     scope.modelsearch.savedsearchselect = [];
-                    console.log(response);
+
                     _.each(response.data, function(item) {
                         scope.modelsearch.savedsearchselect.push(item);
                     });
@@ -275,7 +275,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                     angular.copy(scope.modelsearch, scope.reset);
-                    console.log(scope.modelsearch);
+
                 });
                 scope.savedsearchselectmethods(scope.modelsearch.custid, "", 1);
 
@@ -322,11 +322,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 };
                 scope.generalsearchsubmit("homepage", 1, 8);
                 angular.copy(scope.modelsearch, scope.reset);
-                console.log(scope.modelsearch);
+
             } else {
                 scope.nologindata();
                 angular.copy(scope.modelsearch, scope.reset);
-                console.log(scope.modelsearch);
+
             }
 
             scope.$on("$destroy", scope.destroy);
@@ -363,7 +363,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             // scope.modelsearch.firstname = "";
             // scope.modelsearch.lastname = "";
             angular.copy(scope.reset, scope.modelsearch);
-            console.log(scope.reset);
+
         };
         scope.returnnullvalue = function(value) {
             var obj = helperservice.checkstringvalue(value) && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
@@ -426,8 +426,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.modelsearch.Ageto = helperservice.checkstringvalue(scope.modelsearch.Ageto) ? parseInt(scope.modelsearch.Ageto) : "0";
                     scope.modelsearch.HeightFrom = helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? parseInt(scope.modelsearch.HeightFrom) : "0";
                     scope.modelsearch.Heightto = helperservice.checkstringvalue(scope.modelsearch.Heightto) ? parseInt(scope.modelsearch.Heightto) : "0";
-                    console.log(scope.modelsearch.HeightFrom);
-                    console.log((scope.modelsearch.HeightFrom).toString());
+
                     scope.textlabels(helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? (scope.modelsearch.HeightFrom).toString() : "0", helperservice.checkstringvalue(scope.modelsearch.Heightto) ? (scope.modelsearch.Heightto).toString() : "0", null,
                         helperservice.checkstringvalue(scope.modelsearch.educationcat) ? (scope.modelsearch.educationcat).toString() : "0");
                     scope.modelsearch.typesearch = type;
@@ -435,6 +434,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             if (helperservice.checkarraylength(response.data)) {
+                                console.log(response.data);
                                 scope.modelsearch.showcontrols = false;
                                 scope.truepartner = false;
                                 _.each(response.data, function(item) {
@@ -643,7 +643,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartner = true;
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "";
-            console.log(scope.modelsearch);
+
             scope.$watch("modelsearch.AgeFrom", function(current, old) {
                 scope.modelsearch.AgeFrom = current;
             });
@@ -866,18 +866,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
             var realpath = '/viewFullProfileCustomer';
-            if (helperservice.checkstringvalue(logid)) {
-                authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
-                    console.log(responsepaid);
-                    if (responsepaid === true) {
-                        window.open(realpath, '_blank');
-                    } else {
-                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-                    }
-                });
-            } else {
-                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-            }
+            // if (helperservice.checkstringvalue(logid)) {
+            authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
+
+                if (responsepaid === true) {
+                    window.open(realpath, '_blank');
+                }
+                //else {
+                // alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
+                //}
+            });
+            // } else {
+            //     alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
+            // }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);

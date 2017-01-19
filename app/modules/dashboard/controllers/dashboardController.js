@@ -25,6 +25,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notifytype = 'page';
         scope.notificationpopup = [];
         scope.Typeofdatabind = $stateParams.type;
+        scope.oldnotificationpopup = [];
+        scope.newnitify = false;
+        scope.oldnitify = false;
+
+
         scope.catchfunction = function() {
             var obj = {
                 ExpressAllcount: 0,
@@ -659,14 +664,24 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.notificationtxt = dddddd;
                 } else {
                     if (from === 1) {
+                        scope.newnitify = true;
+                        from = to;
                         scope.notificationpopup = dddddd;
                     } else {
+                        from = to;
                         if (insertType !== undefined && insertType === 'Action') {
                             insertType = undefined;
                         } else {
-                            scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
+                            if (scope.oldnotificationpopup.length > 0) {
+                                scope.newnitify = false;
+                                scope.notificationpopup = $.unique((scope.notificationpopup).concat(scope.oldnotificationpopup));
+                            }
+                            scope.oldnotificationpopup = $.unique((scope.oldnotificationpopup).concat(dddddd));
                         }
                     }
+
+
+
                 }
                 scope.hidemorelnk = false;
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
@@ -717,12 +732,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (from === 1) {
                 scope.notificationpopup = [];
                 scope.getNotifyArray(1, 10);
-                from = to;
                 commonFactory.open('notifyPopup.html', scope, uibModal);
             } else {
                 scope.getNotifyArray(to + 1, to + 10);
                 to = to + 10;
-                $("#modalbody").animate({ scrollTop: 800 }, 1000);
+                $("#modalbody").animate({ scrollTop: 0 }, 1000);
+
+                scope.newnitify = false;
+                scope.oldnitify = true;
+
             }
         };
         scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {

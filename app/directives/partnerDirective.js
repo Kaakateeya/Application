@@ -281,6 +281,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.Norowsend = false;
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
+
+                //Bootstrap Carousal
                 scope.checkitemnew = function(carouselID) {
                     var $this;
                     $this = $("#" + carouselID);
@@ -294,10 +296,47 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').show();
                     }
-
                 };
+
+                function pageload(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    currentslide = 1;
+                    var totalItems = $('#' + carouselID).find('.item').length;
+                    if (totalItems === 0) {
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
+                        scope.checkitemnew(carouselID);
+                    }
+                    slidBind(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID);
+                    ArrowMove(carouselID);
+                    checkitemGlobal(carouselID);
+                }
+
+
+
+                function slidBind(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    $('#' + carouselID).bind('slide.bs.carousel', function(e) {
+                        $('.list-inline li a').removeClass('selected');
+                        $('[id=carousel-selector-' + $('#' + carouselID).find('div.active').index() + ']').addClass('selected');
+                        var totalItems1 = $('#' + carouselID).find('.item').length;
+                        var currentIndex1 = $('#' + carouselID).find('div.active').index() + 1;
+                        $("#lnkLastSlide").text(currentIndex1);
+                        $('#' + carouselID).find('div.active').index();
+                        if (currentslide < currentIndex1) {
+                            if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                                if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
+                                    scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
+                                }
+                            } else {
+                                if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
+                                    scope.$emit('showloginpopup');
+                                }
+                            }
+                        }
+                        currentslide = currentIndex1;
+
+                    });
+                }
                 //method to move slide to left or right arrow press
-                scope.ArrowMove = function(carouselID) {
+                function ArrowMove(carouselID) {
                     $(document).bind('keyup', function(e) {
                         var totalItems = $('#' + carouselID).find('.item').length;
                         var currentIndex = $('#' + carouselID).find('div.active').index() + 1;
@@ -309,88 +348,16 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 $('#' + carouselID).carousel('prev');
                         }
                     });
-                };
-                scope.checkitemGlobal = function(carouselID) {
+                }
+
+                function checkitemGlobal(carouselID) {
                     var checkitem = function() {
                         scope.checkitemnew(carouselID);
                     };
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
-                };
-                scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
-                    scope.$emit('slideshowrefinehide');
-                    var totalItems = $('#' + carouselID).find('.item').length;
-                    if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
-                        scope.checkitemnew(carouselID);
-                    }
-                    scope.ArrowMove(carouselID);
-                    scope.checkitemGlobal(carouselID);
-                };
-                scope.pageloadslidebind = function() {
-                    $('.list-inline li a').removeClass('selected');
-                    $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
-                    var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
-                    if (scope.playpausebuttons === false) {
-                        $('#slideShowCarousel').carousel('pause');
-                        scope.playpausebuttons = false;
-                        scope.pauseplaybuttons = true;
-                    }
-                    $('#slideShowCarousel').find('div.active').index();
-                    scope.lnkLastSlide = currentIndex1;
-                    if (currentslide < currentIndex1) {
-                        if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
-                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
-                                if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
-                                    $('#slideShowCarousel').find('.left').show();
-                                    $('#slideShowCarousel').find('.right').show();
-                                }
-                            }
-                        } else {
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
-                                scope.$emit('showloginpopup');
-                            }
-                        }
-                    }
-                    currentslide = currentIndex1;
-                };
-                scope.pageloadslide = function() {
-                    var currentslide = 1,
-                        totalItems = $('#slideShowCarousel').find('.item').length;
-                    if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
-                        if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
-                            $('#slideShowCarousel').find('.left').show();
-                            $('#slideShowCarousel').find('.right').show();
-                        }
-                        return false;
-                    }
-                    scope.pageloadslidebind();
-                    //play and pause function on click event
-                    $('#slideShowCarousel').carousel({
-                        interval: 2000,
-                        pause: "false"
-                    });
-                    //hide slide arrows for  first and last slide slides  
-                    var checkitem = function() {
-                        scope.checkitemnew("slideShowCarousel");
-                    };
-                    $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
-                };
-                scope.Slideshowpage = function() {
-                    scope.$emit('slideshowrefinehide');
-                    scope.slideshowsearches = true;
-                    scope.playpausebuttons = false;
-                    scope.partnersearchessearches = false;
-                    scope.searchestype = true;
-                    scope.pageloadslide();
-                    $('.search_result_items_main').attr("style", "width:100%;");
-                    scope.checkitemnew("slideShowCarousel");
-                    scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
-                    $('#slideShowCarousel').carousel('pause');
-                };
+                }
                 scope.playslide = function() {
+
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = false;
                     $('#slideShowCarousel').carousel({
@@ -399,26 +366,25 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     });
                 };
                 scope.pauseslide = function() {
+
                     scope.playpausebuttons = false;
                     scope.pauseplaybuttons = true;
                     $('#slideShowCarousel').carousel('pause');
                 };
-                scope.nextslide = function() {
+
+                scope.Slideshowpage = function() {
                     scope.$emit('slideshowrefinehide');
-                    scope.pageloadslidebind();
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
-                    scope.lnkLastSlide = currentIndex1 + 1;
+                    scope.slideshowsearches = true;
+                    scope.playpausebuttons = false;
+                    scope.partnersearchessearches = false;
+                    scope.searchestype = true;
+                    pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
+                    $('.search_result_items_main').attr("style", "width:100%;");
+                    scope.checkitemnew("slideShowCarousel");
+                    $('#slideShowCarousel').carousel('pause');
                 };
-                scope.prevslide = function() {
-                    scope.$emit('slideshowrefinehide');
-                    $('.list-inline li a').removeClass('selected');
-                    $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
-                    var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
-                    $('#slideShowCarousel').find('div.active').index();
-                    scope.lnkLastSlide = currentIndex1;
-                    currentslide = parseInt(currentIndex1 - 1);
-                };
+
+                ///////
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
