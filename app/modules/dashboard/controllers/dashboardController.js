@@ -79,6 +79,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                         }
                         if (parseInt(frompage) === 1) {
+                            console.log(response.data);
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {

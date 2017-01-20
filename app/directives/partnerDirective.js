@@ -14,7 +14,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var logincustid = authSvc.getCustId();
                 scope.LcustID = logincustid;
                 var loginprofileid = authSvc.getProfileid();
-                var loginpaidstatus = authSvc.getpaidstatus();
+                scope.loginpaidstatus = authSvc.getpaidstatus();
                 var currentslide = 1;
                 var photoclass = "";
                 scope.searchestype = scope.typeofsearch;

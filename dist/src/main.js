@@ -1250,7 +1250,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var logincustid = authSvc.getCustId();
                 scope.LcustID = logincustid;
                 var loginprofileid = authSvc.getProfileid();
-                var loginpaidstatus = authSvc.getpaidstatus();
+                scope.loginpaidstatus = authSvc.getpaidstatus();
                 var currentslide = 1;
                 var photoclass = "";
                 scope.searchestype = scope.typeofsearch;
@@ -1780,6 +1780,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                         }
                         if (parseInt(frompage) === 1) {
+                            console.log(response.data);
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {

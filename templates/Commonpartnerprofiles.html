@@ -120,9 +120,10 @@
                 </div>
             </div>
             <div class="search_result_item_descr pull-left">
-                <p ng-hide="data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined">
+                <p ng-hide="(LcustID!==null && LcustID!==undefined && LcustID!=='')&&(loginpaidstatus==='1')?(data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined):(data.DistName=='' || data.DistName==null || data.DistName==undefined)">
                     <span>{{data.iGenderID===1?"He":"She"}}</span> was born and raised in
-                    <label class="label_check"><span>{{data.placeofbirth}}</span></label>
+                    <!--{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")}}-->
+                    <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
                     <p class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
