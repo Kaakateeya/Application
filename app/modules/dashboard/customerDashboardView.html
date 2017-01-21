@@ -534,7 +534,6 @@
                                 <div>
                                     <ul>
                                         <li class='clearfix'>
-
                                             <a href='javascript:void(0);' ng-click="redirectToviewfull(passwordrequest.Cust_ID,undefined)"> View Complete Profile</a></li>
                                         <li class='clearfix'></li>
                                     </ul>
@@ -686,11 +685,7 @@
                 <div class="modal-body clearfix pop_content_my" id="modalbody" >
                    <ul id="modalbody11">
                  <li>
-                   
-
-
-
-<uib-accordion close-others="oneAtATime">
+                   <uib-accordion close-others="oneAtATime">
                 <div uib-accordion-group class="panel-default" heading="new notifications" is-open="newnitify">
                     <div class="maquicls" ng-repeat="item in notificationpopup track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
@@ -700,7 +695,6 @@
                     </div> 
                 </div> 
             </uib-accordion>
-
             <uib-accordion close-others="oneAtATime" ng-if="oldnotificationpopup.length > 0">
                 <div uib-accordion-group class="panel-default" heading="old notifications" is-open="oldnitify">
                     <div class="maquicls" ng-repeat="item in oldnotificationpopup track by $index" ng-style="item.bakcolor">
