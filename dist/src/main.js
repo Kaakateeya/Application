@@ -2137,18 +2137,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            if (logid !== undefined && logid !== "" && logid !== null) {
-                authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
-                    console.log(responsepaid);
-                    if (responsepaid === true) {
-                        window.open(realpath, '_blank');
-                    } else {
-                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-                    }
-                });
-            } else {
-                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-            }
+            authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
+                console.log(responsepaid);
+                if (responsepaid === true) {
+                    window.open(realpath, '_blank');
+                }
+            });
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
@@ -4072,19 +4066,16 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
             var realpath = '/viewFullProfileCustomer';
-            // if (helperservice.checkstringvalue(logid)) {
+
             authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
 
+                console.log(responsepaid);
                 if (responsepaid === true) {
                     window.open(realpath, '_blank');
                 }
-                //else {
-                // alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-                //}
+
             });
-            // } else {
-            //     alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-            // }
+
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
