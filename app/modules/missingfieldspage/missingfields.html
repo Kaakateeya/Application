@@ -50,7 +50,7 @@
                                         <label class="control-label">JobLoc Country</label>
                                     </div>
                                     <div class="col-lg-8" id="lstJoblocCountrydiv">
-                                        <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',lstJoblocCountry);"></select>
+                                        <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',misObj.lstJoblocCountry);"></select>
                                     </div>
                                     <div class="col-lg-8" id="lbllstJoblocCountrydiv">
                                         <label id="lbllstJoblocCountry"></label>
@@ -62,7 +62,7 @@
                                         <label class="control-label">JobLoc State</label>
                                     </div>
                                     <div class="col-lg-8" id="lstjoblocstatediv">
-                                        <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',lstjoblocstate,lstJoblocCountry);"></select>
+                                        <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',misObj.lstjoblocstate,misObj.lstJoblocCountry);"></select>
                                     </div>
                                     <div class="col-lg-8" id="lbllstjoblocstatediv">
                                         <label id="lbllstjoblocstate"></label>
@@ -74,7 +74,7 @@
                                         <label class="control-label">JobLoc District</label>
                                     </div>
                                     <div class="col-lg-8" id="lstjoblocdistrictdiv">
-                                        <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',lstjoblocdistrict);"></select>
+                                        <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',misObj.lstjoblocdistrict);"></select>
                                     </div>
                                     <div class="col-lg-8" id="lbllstjoblocdistrictdiv">
                                         <label id="lbllstjoblocdistrict"></label>
@@ -549,10 +549,10 @@
                     <ul id="ulastro">
                         <li class="clearfix form-group">
                             <label for="lbltimebirth" class="pop_label_left">Time of Birth<span style="color: red; margin-left: 3px;">*</span></label>
-                            <div class="pop_controls_right select-box-my select-box-my-trible select-box-my-trible3">
-                                <select multiselectdropdown ng-model="atroObj.ddlFromHours" ng-options="item.value as item.label for item in hrsbindArr"></select>
-                                <select multiselectdropdown ng-model="atroObj.ddlFromMinutes" ng-options="item.value as item.label for item in minbindArr"></select>
-                                <select multiselectdropdown ng-model="atroObj.ddlFromSeconds" ng-options="item.value as item.label for item in secbindArr"></select>
+                            <div class="pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group">
+                                <select multiselectdropdown ng-model="atroObj.ddlFromHours" ng-options="item.value as item.label for item in hrsbindArr" required></select>
+                                <select multiselectdropdown ng-model="atroObj.ddlFromMinutes" ng-options="item.value as item.label for item in minbindArr" required></select>
+                                <select multiselectdropdown ng-model="atroObj.ddlFromSeconds" ng-options="item.value as item.label for item in secbindArr" required></select>
                             </div>
                         </li>
                         <country-directive require="true" countryshow="true" cityshow="true" othercity="false" dcountry="atroObj.ddlCountryOfBirthID" dstate="atroObj.ddlStateOfBirthID" ddistrict="atroObj.ddlDistrictOfBirthID" dcity="atroObj.ddlcity"></country-directive>

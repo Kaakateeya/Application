@@ -94,7 +94,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
                 requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
                 //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
             }
-        })
+        });
         $locationProvider.html5Mode(true);
     });
 }]);
@@ -104,10 +104,9 @@ app.config(function(reCAPTCHAProvider) {
     reCAPTCHAProvider.setOptions({
         theme: 'clean'
     });
-})
+});
 app.run(function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
-
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();
@@ -133,4 +132,4 @@ app.run(function($rootScope, $state) {
 
     });
 
-})
+});
