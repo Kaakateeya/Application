@@ -8,22 +8,27 @@
         <a id="lnklist" class="normal_view icon-grid" title="Grid View" ng-click="gridclick()" style="cursor: pointer;" />
     </div>
 </div>
-<div id="divviewdprofiles" class="col-lg-12" ng-show="slideshowsearches">
-    <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;">{{lnkLastSlide}}</label>&nbsp;
-    <label style="color: #000;">Profiles</label>
-</div>
+
 <div id="slideShowCarousel" class="carousel slide slideShowCarousel" ng-show="slideshowsearches">
     <br>
     <!-- Carousel items -->
     <div class="carousel-inner" id="maincarousal">
         <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="data in PartnerProfilesnew">
+
+            <div id="divviewdprofiles" class="col-lg-12" ng-show="slideshowsearches">
+                <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;display:none;">{{lnkLastSlide}}</label>
+
+                <label style="color: blue;" ng-bind="{{($index+1)}}"></label>&nbsp;
+                <label style="color: #000;">Profiles</label>
+            </div>
+            <br>
             <div class="container">
                 <div id="galleryCarousel_0" class="slide span6">
                     <div ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
                         <img name="imagepath" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)" style="height: 300px;width: 300px !important;cursor:pointer;" class="undefined" ng-src="{{data.Photo}}" /></div>
                     <div>
                         <a href="javascript:void(0)" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')" style="font-weight: bold; text-decoration: underline;">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
-                        (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a></div>
+                        (data.Photo).indexOf("Password-Protected")!=-1?'Request Password':"Photo Request"):""}}</a></div>
                 </div>
                 <div class="span6">
                     <table>
@@ -91,13 +96,14 @@
         </div>
     </div>
     <!-- Carousel nav -->
-    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel" ng-hide="false" ng-click="prevslide()" data-slide="prev">‹</a>
-    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" ng-click="nextslide()" data-slide="next">›</a>
+    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel" ng-hide="false" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" data-slide="next">›</a>
     <label style="display: none;" id="lblcurrentprofile"></label>
     <label style="display: none;" id="lblcurSlide">1</label>
     <label style="display: none;" id="lnkLastSlide1"></label>
 </div>
 <div id="PartnerProfilles" ng-show="partnersearchessearches">
+
     <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
@@ -110,13 +116,14 @@
                 <p style="align-items: center; text-align: center;"></p>
                 <div>
                     <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
-                        (data.Photo).indexOf("Password-Protected")?'Request Password':"Photo Request"):""}}</a>
+                        (data.Photo).indexOf("Password-Protected")!=-1?'Request Password':"Photo Request"):""}}</a>
                 </div>
             </div>
             <div class="search_result_item_descr pull-left">
-                <p ng-hide="data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined">
+                <p ng-hide="(LcustID!==null && LcustID!==undefined && LcustID!=='')&&(loginpaidstatus==='1')?(data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined):(data.DistName=='' || data.DistName==null || data.DistName==undefined)">
                     <span>{{data.iGenderID===1?"He":"She"}}</span> was born and raised in
-                    <label class="label_check"><span>{{data.placeofbirth}}</span></label>
+                    <!--{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")}}-->
+                    <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
                     <p class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">

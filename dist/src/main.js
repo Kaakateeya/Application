@@ -486,6 +486,31 @@ app.directive("angularMultiselect", ["$injector", 'authSvc',
         };
     }
 ]);
+app.controller('CarouselDemoCtrl', function($scope) {
+    $scope.myInterval = 5000;
+    $scope.noWrapSlides = false;
+    $scope.active = 0;
+    var slides = $scope.slides = [];
+    var currIndex = 0;
+
+    $scope.addSlide = function() {
+        var newWidth = 600 + slides.length + 1;
+        slides.push({
+            image: '//unsplash.it/' + newWidth + '/300',
+            text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+            id: currIndex++
+        });
+    };
+    for (var i = 0; i < 4; i++) {
+        $scope.addSlide();
+    }
+    $('#playButton').click(function() {
+        $scope.myInterval = 3000;
+    });
+    $('#pauseButton').click(function() {
+        $scope.myInterval = 0;
+    });
+});
 app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindService) {
     var modalpopupopen;
     return {
@@ -1225,7 +1250,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 var logincustid = authSvc.getCustId();
                 scope.LcustID = logincustid;
                 var loginprofileid = authSvc.getProfileid();
-                var loginpaidstatus = authSvc.getpaidstatus();
+                scope.loginpaidstatus = authSvc.getpaidstatus();
                 var currentslide = 1;
                 var photoclass = "";
                 scope.searchestype = scope.typeofsearch;
@@ -1492,6 +1517,8 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     scope.Norowsend = false;
                     scope.$emit('modifyursearchpartner', 1, 10);
                 };
+
+                //Bootstrap Carousal
                 scope.checkitemnew = function(carouselID) {
                     var $this;
                     $this = $("#" + carouselID);
@@ -1505,10 +1532,47 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').show();
                     }
-
                 };
+
+                function pageload(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    currentslide = 1;
+                    var totalItems = $('#' + carouselID).find('.item').length;
+                    if (totalItems === 0) {
+                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
+                        scope.checkitemnew(carouselID);
+                    }
+                    slidBind(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID);
+                    ArrowMove(carouselID);
+                    checkitemGlobal(carouselID);
+                }
+
+
+
+                function slidBind(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
+                    $('#' + carouselID).bind('slide.bs.carousel', function(e) {
+                        $('.list-inline li a').removeClass('selected');
+                        $('[id=carousel-selector-' + $('#' + carouselID).find('div.active').index() + ']').addClass('selected');
+                        var totalItems1 = $('#' + carouselID).find('.item').length;
+                        var currentIndex1 = $('#' + carouselID).find('div.active').index() + 1;
+                        $("#lnkLastSlide").text(currentIndex1);
+                        $('#' + carouselID).find('div.active').index();
+                        if (currentslide < currentIndex1) {
+                            if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
+                                if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
+                                    scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
+                                }
+                            } else {
+                                if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
+                                    scope.$emit('showloginpopup');
+                                }
+                            }
+                        }
+                        currentslide = currentIndex1;
+
+                    });
+                }
                 //method to move slide to left or right arrow press
-                scope.ArrowMove = function(carouselID) {
+                function ArrowMove(carouselID) {
                     $(document).bind('keyup', function(e) {
                         var totalItems = $('#' + carouselID).find('.item').length;
                         var currentIndex = $('#' + carouselID).find('div.active').index() + 1;
@@ -1520,88 +1584,16 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 $('#' + carouselID).carousel('prev');
                         }
                     });
-                };
-                scope.checkitemGlobal = function(carouselID) {
+                }
+
+                function checkitemGlobal(carouselID) {
                     var checkitem = function() {
                         scope.checkitemnew(carouselID);
                     };
                     $("#" + carouselID).on("slid.bs.carousel", "", checkitem);
-                };
-                scope.pageload = function(carouselID, curProfileID, totalrecordsID, lnkLastSlide, playButtonID, pauseButtonID) {
-                    scope.$emit('slideshowrefinehide');
-                    var totalItems = $('#' + carouselID).find('.item').length;
-                    if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
-                        scope.checkitemnew(carouselID);
-                    }
-                    scope.ArrowMove(carouselID);
-                    scope.checkitemGlobal(carouselID);
-                };
-                scope.pageloadslidebind = function() {
-                    $('.list-inline li a').removeClass('selected');
-                    $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
-                    var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
-                    if (scope.playpausebuttons === false) {
-                        $('#slideShowCarousel').carousel('pause');
-                        scope.playpausebuttons = false;
-                        scope.pauseplaybuttons = true;
-                    }
-                    $('#slideShowCarousel').find('div.active').index();
-                    scope.lnkLastSlide = currentIndex1;
-                    if (currentslide < currentIndex1) {
-                        if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 4) {
-                                scope.$emit('slideshowsubmit', totalItems1 + 1, totalItems1 + 10, "slideshow");
-                                if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
-                                    $('#slideShowCarousel').find('.left').show();
-                                    $('#slideShowCarousel').find('.right').show();
-                                }
-                            }
-                        } else {
-                            if (parseInt(totalItems1) - parseInt(currentIndex1) === 1) {
-                                scope.$emit('showloginpopup');
-                            }
-                        }
-                    }
-                    currentslide = currentIndex1;
-                };
-                scope.pageloadslide = function() {
-                    var currentslide = 1,
-                        totalItems = $('#slideShowCarousel').find('.item').length;
-                    if (totalItems === 0) {
-                        scope.$emit('slideshowsubmit', 1, 10, "slideshow");
-                        if ($("#slideShowCarousel .carousel-inner .item:first").hasClass("active")) {
-                            $('#slideShowCarousel').find('.left').show();
-                            $('#slideShowCarousel').find('.right').show();
-                        }
-                        return false;
-                    }
-                    scope.pageloadslidebind();
-                    //play and pause function on click event
-                    $('#slideShowCarousel').carousel({
-                        interval: 2000,
-                        pause: "false"
-                    });
-                    //hide slide arrows for  first and last slide slides  
-                    var checkitem = function() {
-                        scope.checkitemnew("slideShowCarousel");
-                    };
-                    $("#slideShowCarousel").on("slid.bs.carousel", "", checkitem);
-                };
-                scope.Slideshowpage = function() {
-                    scope.$emit('slideshowrefinehide');
-                    scope.slideshowsearches = true;
-                    scope.playpausebuttons = false;
-                    scope.partnersearchessearches = false;
-                    scope.searchestype = true;
-                    scope.pageloadslide();
-                    $('.search_result_items_main').attr("style", "width:100%;");
-                    scope.checkitemnew("slideShowCarousel");
-                    scope.pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
-                    $('#slideShowCarousel').carousel('pause');
-                };
+                }
                 scope.playslide = function() {
+
                     scope.playpausebuttons = true;
                     scope.pauseplaybuttons = false;
                     $('#slideShowCarousel').carousel({
@@ -1610,26 +1602,25 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     });
                 };
                 scope.pauseslide = function() {
+
                     scope.playpausebuttons = false;
                     scope.pauseplaybuttons = true;
                     $('#slideShowCarousel').carousel('pause');
                 };
-                scope.nextslide = function() {
+
+                scope.Slideshowpage = function() {
                     scope.$emit('slideshowrefinehide');
-                    scope.pageloadslidebind();
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index() + 1;
-                    scope.lnkLastSlide = currentIndex1 + 1;
+                    scope.slideshowsearches = true;
+                    scope.playpausebuttons = false;
+                    scope.partnersearchessearches = false;
+                    scope.searchestype = true;
+                    pageload("slideShowCarousel", "lblcurrentprofile", "lblcurSlide", "lnkLastSlide", "playButton", "pauseButton");
+                    $('.search_result_items_main').attr("style", "width:100%;");
+                    scope.checkitemnew("slideShowCarousel");
+                    $('#slideShowCarousel').carousel('pause');
                 };
-                scope.prevslide = function() {
-                    scope.$emit('slideshowrefinehide');
-                    $('.list-inline li a').removeClass('selected');
-                    $('[id=carousel-selector-' + $('#slideShowCarousel').find('div.active').index() + ']').addClass('selected');
-                    var totalItems1 = $('#slideShowCarousel').find('.item').length;
-                    var currentIndex1 = $('#slideShowCarousel').find('div.active').index();
-                    $('#slideShowCarousel').find('div.active').index();
-                    scope.lnkLastSlide = currentIndex1;
-                    currentslide = parseInt(currentIndex1 - 1);
-                };
+
+                ///////
                 scope.modalpopupclose = function() {
                     alerts.dynamicpopupclose();
                 };
@@ -1735,6 +1726,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notifytype = 'page';
         scope.notificationpopup = [];
         scope.Typeofdatabind = $stateParams.type;
+        scope.oldnotificationpopup = [];
+        scope.newnitify = false;
+        scope.oldnitify = false;
+
+
         scope.catchfunction = function() {
             var obj = {
                 ExpressAllcount: 0,
@@ -1784,6 +1780,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                         }
                         if (parseInt(frompage) === 1) {
+                            console.log(response.data);
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {
@@ -2369,14 +2366,24 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.notificationtxt = dddddd;
                 } else {
                     if (from === 1) {
+                        scope.newnitify = true;
+                        from = to;
                         scope.notificationpopup = dddddd;
                     } else {
+                        from = to;
                         if (insertType !== undefined && insertType === 'Action') {
                             insertType = undefined;
                         } else {
-                            scope.notificationpopup = $.unique((scope.notificationpopup).concat(dddddd));
+                            if (scope.oldnotificationpopup.length > 0) {
+                                scope.newnitify = false;
+                                scope.notificationpopup = $.unique((scope.notificationpopup).concat(scope.oldnotificationpopup));
+                            }
+                            scope.oldnotificationpopup = $.unique((scope.oldnotificationpopup).concat(dddddd));
                         }
                     }
+
+
+
                 }
                 scope.hidemorelnk = false;
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
@@ -2427,12 +2434,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             if (from === 1) {
                 scope.notificationpopup = [];
                 scope.getNotifyArray(1, 10);
-                from = to;
                 commonFactory.open('notifyPopup.html', scope, uibModal);
             } else {
                 scope.getNotifyArray(to + 1, to + 10);
                 to = to + 10;
-                $("#modalbody").animate({ scrollTop: 800 }, 1000);
+                $("#modalbody").animate({ scrollTop: 0 }, 1000);
+
+                scope.newnitify = false;
+                scope.oldnitify = true;
+
             }
         };
         scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {
@@ -3329,7 +3339,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             if (iEditDelete === 0) {
                 searches.savedsearchselectmethod(scope.modelsearch.custid, "", 1).then(function(response) {
                     scope.modelsearch.savedsearchselect = [];
-                    console.log(response);
+
                     _.each(response.data, function(item) {
                         scope.modelsearch.savedsearchselect.push(item);
                     });
@@ -3471,7 +3481,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
                     scope.partnerbindings(response);
                     angular.copy(scope.modelsearch, scope.reset);
-                    console.log(scope.modelsearch);
+
                 });
                 scope.savedsearchselectmethods(scope.modelsearch.custid, "", 1);
 
@@ -3518,11 +3528,11 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 };
                 scope.generalsearchsubmit("homepage", 1, 8);
                 angular.copy(scope.modelsearch, scope.reset);
-                console.log(scope.modelsearch);
+
             } else {
                 scope.nologindata();
                 angular.copy(scope.modelsearch, scope.reset);
-                console.log(scope.modelsearch);
+
             }
 
             scope.$on("$destroy", scope.destroy);
@@ -3559,7 +3569,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             // scope.modelsearch.firstname = "";
             // scope.modelsearch.lastname = "";
             angular.copy(scope.reset, scope.modelsearch);
-            console.log(scope.reset);
+
         };
         scope.returnnullvalue = function(value) {
             var obj = helperservice.checkstringvalue(value) && (value.toString()) !== "0" && (value.toString()) !== 0 ? (value.toString()) : null;
@@ -3622,8 +3632,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     scope.modelsearch.Ageto = helperservice.checkstringvalue(scope.modelsearch.Ageto) ? parseInt(scope.modelsearch.Ageto) : "0";
                     scope.modelsearch.HeightFrom = helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? parseInt(scope.modelsearch.HeightFrom) : "0";
                     scope.modelsearch.Heightto = helperservice.checkstringvalue(scope.modelsearch.Heightto) ? parseInt(scope.modelsearch.Heightto) : "0";
-                    console.log(scope.modelsearch.HeightFrom);
-                    console.log((scope.modelsearch.HeightFrom).toString());
+
                     scope.textlabels(helperservice.checkstringvalue(scope.modelsearch.HeightFrom) ? (scope.modelsearch.HeightFrom).toString() : "0", helperservice.checkstringvalue(scope.modelsearch.Heightto) ? (scope.modelsearch.Heightto).toString() : "0", null,
                         helperservice.checkstringvalue(scope.modelsearch.educationcat) ? (scope.modelsearch.educationcat).toString() : "0");
                     scope.modelsearch.typesearch = type;
@@ -3631,6 +3640,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             if (helperservice.checkarraylength(response.data)) {
+                                console.log(response.data);
                                 scope.modelsearch.showcontrols = false;
                                 scope.truepartner = false;
                                 _.each(response.data, function(item) {
@@ -3839,7 +3849,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             scope.truepartner = true;
             scope.truepartnerrefine = true;
             scope.modelsearch.slideshow = "";
-            console.log(scope.modelsearch);
+
             scope.$watch("modelsearch.AgeFrom", function(current, old) {
                 scope.modelsearch.AgeFrom = current;
             });
@@ -4062,18 +4072,19 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
             var realpath = '/viewFullProfileCustomer';
-            if (helperservice.checkstringvalue(logid)) {
-                authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
-                    console.log(responsepaid);
-                    if (responsepaid === true) {
-                        window.open(realpath, '_blank');
-                    } else {
-                        alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-                    }
-                });
-            } else {
-                alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
-            }
+            // if (helperservice.checkstringvalue(logid)) {
+            authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
+
+                if (responsepaid === true) {
+                    window.open(realpath, '_blank');
+                }
+                //else {
+                // alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
+                //}
+            });
+            // } else {
+            //     alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade online membership', 3000);
+            // }
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
