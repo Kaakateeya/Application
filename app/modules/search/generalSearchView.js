@@ -270,7 +270,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 Caste: []
             };
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
-
+            debugger;
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {

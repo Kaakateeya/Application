@@ -141,6 +141,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
+            debugger;
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             route.go('General', { id: 2 });
         };

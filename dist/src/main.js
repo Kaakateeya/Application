@@ -2881,6 +2881,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
+            debugger;
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             route.go('General', { id: 2 });
         };
@@ -3463,7 +3464,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 Caste: []
             };
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
-
+            debugger;
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
@@ -4712,6 +4713,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             scope.hideprofile = true;
             scope.deleteprofileswitch = false;
             scope.deleteprofiledis = true;
+            scope.selectedIndex = 0;
             service.countryCodeselect().then(function(response) {
                 scope.countryCode = [];
                 scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];

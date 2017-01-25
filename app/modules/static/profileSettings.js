@@ -29,6 +29,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             scope.hideprofile = true;
             scope.deleteprofileswitch = false;
             scope.deleteprofiledis = true;
+            scope.selectedIndex = 0;
             service.countryCodeselect().then(function(response) {
                 scope.countryCode = [];
                 scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
