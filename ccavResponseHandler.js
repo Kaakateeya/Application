@@ -28,8 +28,9 @@ exports.postRes = function(request, response) {
         for (var i = 0; i < 4; i++) {
             strdata = strdata === '' ? splitdata[i] : strdata + ',' + splitdata[i];
         }
-        strdata = 'order_id=Ord_91022_592,tracking_id=106169688335,bank_ref_no=null,order_status=Aborted';
+       
         var encryprRes = ccav.encrypt(strdata, workingKey);
+		console.log(encryprRes);
         response.redirect('/ccavResponseHand/' + encryprRes);
     });
 
