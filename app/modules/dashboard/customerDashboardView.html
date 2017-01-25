@@ -55,7 +55,7 @@
                 <div class="marquee">
                     <div class="maquicls" ng-repeat="item in notificationtxt track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
-                        <div> {{item.ActionType}} on {{item.ActionDate}}</div>
+                        <div> {{item.ActionType}} on {{item.ActionDate | date : "dd-MM-y H:mm:ss" }}</div>
                         <div class="span2"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'page',$index);">View profile</a></div>
                         <a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="readNotify(item.Cust_NotificationID,'page',$index);">Close Notification</a>
                     </div>
@@ -689,7 +689,7 @@
                 <div uib-accordion-group class="panel-default" heading="new notifications" is-open="newnitify">
                     <div class="maquicls" ng-repeat="item in notificationpopup track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
-                        <div> {{item.ActionType}} on {{item.ActionDate}}</div>
+                        <div> {{item.ActionType}} on {{item.ActionDate | date :  "dd-MM-y H:mm:ss" }}</div>
                         <div class="span3"><a ng-style="item.linkcolor" ng-class="disClass===$index ? 'linkdis': ''" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);">View profile</a></div>
                         <a ng-style="item.linkcolor" href="javascript:void(0);" ng-class="disClass===$index ? 'linkdis': ''" ng-click="readNotify(item.Cust_NotificationID,'popup',$index);">Close Notification</a>
                     </div> 
@@ -699,7 +699,7 @@
                 <div uib-accordion-group class="panel-default" heading="old notifications" is-open="oldnitify">
                     <div class="maquicls" ng-repeat="item in oldnotificationpopup track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
-                        <div> {{item.ActionType}} on {{item.ActionDate}}</div>
+                        <div> {{item.ActionType}} on {{item.ActionDate | date :  "dd-MM-y H:mm:ss" }}</div>
                         <div class="span3"><a ng-style="item.linkcolor" ng-class="disClass===$index ? 'linkdis': ''" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);">View profile</a></div>
                         <a ng-style="item.linkcolor" href="javascript:void(0);" ng-class="disClass===$index ? 'linkdis': ''" ng-click="readNotify(item.Cust_NotificationID,'popup',$index);">Close Notification</a>
                     </div> 

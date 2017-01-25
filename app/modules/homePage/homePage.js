@@ -17,7 +17,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.Ageto = 30;
                 scope.religion = 1;
             }, 500);
-            scope.$on("$destroy", scope.destroy);
+            //scope.$on("$destroy", scope.destroy);
         };
         scope.destroy = function() {
             scope.loginpopup = false;
