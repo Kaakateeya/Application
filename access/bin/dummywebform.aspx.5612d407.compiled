@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/DummyWebform.aspx" hash="fffffffff0855c68" filehash="110b4f4a3abf920f" flags="110000" assembly="App_Web_1ompc5ij" type="ASP.designedpages_dummywebform_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/DesignedPages/DummyWebform.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/DummyWebform.aspx.cs" />
-    </filedeps>
-</preserve>

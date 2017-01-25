@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/uctrlCummulativeSearch.ascx" hash="fffffffff0855c68" filehash="435598c2ebfe876d" flags="110000" assembly="App_Web_lrwinacg" type="ASP.usercontrols_search_uctrlcummulativesearch_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlCummulativeSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlCummulativeSearch.ascx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/Mail.aspx" hash="fffffffff0855c68" filehash="ba13115bca79917c" flags="110000" assembly="App_Web_c52jcsax" type="ASP.designedpages_mail_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/DesignedPages/Mail.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/Mail.aspx.cs" />
-    </filedeps>
-</preserve>

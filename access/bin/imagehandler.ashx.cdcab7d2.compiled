@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/kaakateeyaWeb/ImageHandler.ashx" hash="30418b6" filehash="ffffe8341eef3e03" flags="110000" assembly="App_Web_accql1ug" type="ImageHandler">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/ImageHandler.ashx" />
-    </filedeps>
-</preserve>

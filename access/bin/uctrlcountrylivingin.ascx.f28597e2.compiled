@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCountrylivingin.ascx" hash="fffffffff0855c68" filehash="1042592766fd0a4a" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlcountrylivingin_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCountrylivingin.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCountrylivingin.ascx.cs" />
-    </filedeps>
-</preserve>

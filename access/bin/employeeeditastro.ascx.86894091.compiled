@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeEditAstro.ascx" hash="fffffffff0855c68" filehash="1a88a994091fe86f" flags="110000" assembly="App_Web_hnaqz2rv" type="ASP.customer_new_employee_new_employeeeditastro_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeEditAstro.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeEditAstro.ascx.cs" />
-    </filedeps>
-</preserve>

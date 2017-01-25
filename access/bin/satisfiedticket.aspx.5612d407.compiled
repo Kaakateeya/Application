@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/satisfiedTicket.aspx" hash="fffffffff0855c68" filehash="f93d66c874767b16" flags="110000" assembly="App_Web_tqo5zrun" type="ASP.designedpages_satisfiedticket_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/DesignedPages/satisfiedTicket.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/satisfiedTicket.aspx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EditProfileSettings.ascx" hash="fffffffff0855c68" filehash="2e1a0280136ceb17" flags="110000" assembly="App_Web_mpbvppen" type="ASP.customer_new_employee_new_editprofilesettings_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EditProfileSettings.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EditProfileSettings.ascx.cs" />
-    </filedeps>
-</preserve>

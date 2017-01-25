@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Advertiseentrypage.aspx" hash="fffffffff0855c68" filehash="4924f46338122903" flags="110000" assembly="App_Web_nwpbri4k" type="ASP.customer_advertiseentrypage_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/Advertiseentrypage.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer/Advertiseentrypage.aspx.cs" />
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/writehoro.aspx" hash="fffffffff0855c68" filehash="297ce2ec69b04a43" flags="110000" assembly="App_Web_acwgidep" type="ASP.employee_writehoro_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/writehoro.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/writehoro.aspx.cs" />
-    </filedeps>
-</preserve>

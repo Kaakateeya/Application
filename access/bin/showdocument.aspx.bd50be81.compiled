@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ShowDocument.aspx" hash="fffffffff0855c68" filehash="bb72b286b7c8bcae" flags="110000" assembly="App_Web_0wiyojdn" type="ASP.employee_showdocument_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/ShowDocument.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/ShowDocument.aspx.cs" />
-    </filedeps>
-</preserve>

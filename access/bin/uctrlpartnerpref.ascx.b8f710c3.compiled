@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/uctrlPartnerPref.ascx" hash="fffffffff0855c68" filehash="47a4d9bf1063ef3b" flags="110000" assembly="App_Web_ql0ne4iv" type="ASP.usercontrols_registration_uctrlpartnerpref_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPartnerPref.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPartnerPref.ascx.cs" />
-    </filedeps>
-</preserve>

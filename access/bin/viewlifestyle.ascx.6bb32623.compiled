@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/ViewLifeStyle.ascx" hash="fffffffff0855c68" filehash="b697261d59cc58e2" flags="110000" assembly="App_Web_sd1eeoai" type="ASP.usercontrols_viewlifestyle_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/ViewLifeStyle.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/ViewLifeStyle.ascx.cs" />
-    </filedeps>
-</preserve>

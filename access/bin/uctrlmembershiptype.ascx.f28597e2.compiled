@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMemberShiptype.ascx" hash="fffffffff0855c68" filehash="af2fb12a46b45c1b" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlmembershiptype_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMemberShiptype.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMemberShiptype.ascx.cs" />
-    </filedeps>
-</preserve>

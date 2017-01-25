@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPartnerJob.ascx" hash="fffffffff0855c68" filehash="6f219cefd879c7e6" flags="110000" assembly="App_Web_kd114d02" type="ASP.usercontrols_edit_editpartnerjob_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerJob.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerJob.ascx.cs" />
-    </filedeps>
-</preserve>

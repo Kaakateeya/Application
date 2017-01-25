@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeGenaralSearch.ascx" hash="fffffffff0855c68" filehash="82ff3c3805eed855" flags="110000" assembly="App_Web_znl0padm" type="ASP.customer_new_employee_new_employeegenaralsearch_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeGenaralSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeGenaralSearch.ascx.cs" />
-    </filedeps>
-</preserve>

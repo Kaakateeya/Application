@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaPrivacyPolicy.aspx" hash="fffffffff0855c68" filehash="38f92d034e84733b" flags="110000" assembly="App_Web_tlwa23x4" type="ASP.customer_new_customerdesignedpages_kaakateeyaprivacypolicy_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaPrivacyPolicy.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaPrivacyPolicy.aspx.cs" />
-    </filedeps>
-</preserve>

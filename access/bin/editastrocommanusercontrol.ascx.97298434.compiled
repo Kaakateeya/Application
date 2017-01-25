@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControl.ascx" hash="fffffffff0855c68" filehash="aa9f0c6919d53997" flags="110000" assembly="App_Web_ybqbllzy" type="ASP.customer_new_customerdesignedpages_editastrocommanusercontrol_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControl.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControl.ascx.cs" />
-    </filedeps>
-</preserve>

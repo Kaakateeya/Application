@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlPrefDistrict.ascx" hash="fffffffff0855c68" filehash="3cd7fe47675314fe" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlprefdistrict_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlPrefDistrict.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlPrefDistrict.ascx.cs" />
-    </filedeps>
-</preserve>

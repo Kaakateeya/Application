@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx" hash="fffffffff0855c68" filehash="dd1dd7a635b3b7f" flags="110000" assembly="App_Web_bixh2dkf" type="ASP.usercontrols_employeenewmenulist_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx.cs" />
-    </filedeps>
-</preserve>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Static/AdvertiseLink.aspx" hash="fffffffff0855c68" filehash="a3af33f53f767e75" flags="110000" assembly="App_Web_bbhmuinu" type="ASP.customer_static_advertiselink_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
-        <filedep name="/kaakateeyaWeb/Customer/Static/AdvertiseLink.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer/Static/AdvertiseLink.aspx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerProfileIDSearch.ascx" hash="fffffffff0855c68" filehash="7e1cb8515d8a5b75" flags="110000" assembly="App_Web_vgrpwts2" type="ASP.customer_new_uctrlcustomernew_customerprofileidsearch_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerProfileIDSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerProfileIDSearch.ascx.cs" />
-    </filedeps>
-</preserve>

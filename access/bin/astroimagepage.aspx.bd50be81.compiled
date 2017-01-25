@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/AstroImagePage.aspx" hash="fffffffff0855c68" filehash="3ff9d2ef16fd5bc4" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_astroimagepage_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/AstroImagePage.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/AstroImagePage.aspx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Default.aspx" hash="fffffffff0855c68" filehash="8a2a601cda39d43" flags="110000" assembly="App_Web_accql1ug" type="ASP.default_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Default.aspx" />
-        <filedep name="/kaakateeyaWeb/Default.aspx.cs" />
-    </filedeps>
-</preserve>

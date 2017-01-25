@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/Siblings.ascx" hash="fffffffff0855c68" filehash="88f66143f4cfb1b8" flags="110000" assembly="App_Web_pm3q33a4" type="ASP.usercontrols_registration_siblings_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/Siblings.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/Siblings.ascx.cs" />
-    </filedeps>
-</preserve>

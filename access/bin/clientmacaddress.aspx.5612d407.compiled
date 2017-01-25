@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/ClientMacaddress.aspx" hash="fffffffff0855c68" filehash="ec52c39984fe4a37" flags="110000" assembly="App_Web_jlgytgze" type="ASP.designedpages_clientmacaddress_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/General.master" />
-        <filedep name="/kaakateeyaWeb/Customer/General.master.cs" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/ClientMacaddress.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/ClientMacaddress.aspx.cs" />
-    </filedeps>
-</preserve>

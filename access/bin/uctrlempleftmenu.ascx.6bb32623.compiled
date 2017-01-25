@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" hash="fffffffff0855c68" filehash="a062d9d08135affc" flags="110000" assembly="App_Web_yxcg5ljh" type="ASP.usercontrols_uctrlempleftmenu_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
-    </filedeps>
-</preserve>

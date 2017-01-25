@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/UctrlTicketInformation.ascx" hash="fffffffff0855c68" filehash="d073338f1d427a17" flags="110000" assembly="App_Web_nr1ikhem" type="ASP.customer_new_employee_new_uctrlticketinformation_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/UctrlTicketInformation.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/UctrlTicketInformation.ascx.cs" />
-    </filedeps>
-</preserve>

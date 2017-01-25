@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPartnerAstro.ascx" hash="fffffffff0855c68" filehash="64d62f5e0acb43be" flags="110000" assembly="App_Web_tnbrd15x" type="ASP.usercontrols_edit_editpartnerastro_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerAstro.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerAstro.ascx.cs" />
-    </filedeps>
-</preserve>

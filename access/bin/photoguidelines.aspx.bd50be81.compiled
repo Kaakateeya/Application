@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/PhotoGuideLines.aspx" hash="fffffffff0855c68" filehash="fb686b992c26e270" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_photoguidelines_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/PhotoGuideLines.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/PhotoGuideLines.aspx.cs" />
-    </filedeps>
-</preserve>

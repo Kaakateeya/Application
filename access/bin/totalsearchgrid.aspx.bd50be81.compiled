@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/TotalSearchGrid.aspx" hash="fffffffff0855c68" filehash="a5ce67431864aa97" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_totalsearchgrid_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/General.master" />
-        <filedep name="/kaakateeyaWeb/Customer/General.master.cs" />
-        <filedep name="/kaakateeyaWeb/Employee/TotalSearchGrid.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/TotalSearchGrid.aspx.cs" />
-    </filedeps>
-</preserve>

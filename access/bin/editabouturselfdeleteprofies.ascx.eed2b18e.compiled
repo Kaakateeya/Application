@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAboutUrSelfDeleteProfies.ascx" hash="fffffffff0855c68" filehash="1675536d9d0b11f2" flags="110000" assembly="App_Web_lkpj1wok" type="ASP.usercontrols_uctrldeleteprofiles_uctrldeleteprofileedit_editabouturselfdeleteprofies_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAboutUrSelfDeleteProfies.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAboutUrSelfDeleteProfies.ascx.cs" />
-    </filedeps>
-</preserve>

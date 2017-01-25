@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPostedBy.ascx" hash="fffffffff0855c68" filehash="2c987f304de26fcf" flags="110000" assembly="App_Web_ux2nii1z" type="ASP.usercontrols_edit_editpostedby_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPostedBy.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPostedBy.ascx.cs" />
-    </filedeps>
-</preserve>

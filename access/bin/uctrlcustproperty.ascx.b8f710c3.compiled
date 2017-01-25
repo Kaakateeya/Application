@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx" hash="fffffffff0855c68" filehash="6e1f114476f1607e" flags="110000" assembly="App_Web_zyh5pmtr" type="ASP.usercontrols_registration_uctrlcustproperty_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx.cs" />
-    </filedeps>
-</preserve>

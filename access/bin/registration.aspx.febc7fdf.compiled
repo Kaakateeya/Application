@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Registration/Registration.aspx" hash="fffffffff0855c68" filehash="b4cebdbf19e48198" flags="110000" assembly="App_Web_udwoxkm1" type="ASP.customer_registration_registration_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
-        <filedep name="/kaakateeyaWeb/Customer/Registration/Registration.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer/Registration/Registration.aspx.cs" />
-    </filedeps>
-</preserve>

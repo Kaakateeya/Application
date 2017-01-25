@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/ViewAstroDetails.ascx" hash="fffffffff0855c68" filehash="a734befd1b12d3f" flags="110000" assembly="App_Web_ka3io05v" type="ASP.usercontrols_viewastrodetails_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/ViewAstroDetails.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/ViewAstroDetails.ascx.cs" />
-    </filedeps>
-</preserve>

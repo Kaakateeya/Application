@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditCustomerAboutUrSelfDeleteProfies.ascx" hash="fffffffff0855c68" filehash="6310abfcda3f9624" flags="110000" assembly="App_Web_kd114d02" type="ASP.usercontrols_edit_editcustomerabouturselfdeleteprofies_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditCustomerAboutUrSelfDeleteProfies.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditCustomerAboutUrSelfDeleteProfies.ascx.cs" />
-    </filedeps>
-</preserve>

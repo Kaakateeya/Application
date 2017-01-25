@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/UserControls/ExpressInterest.ascx" hash="fffffffff0855c68" filehash="5690e7ce669e1edd" flags="110000" assembly="App_Web_vwmej12q" type="ASP.customer_usercontrols_expressinterest_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/UserControls/ExpressInterest.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer/UserControls/ExpressInterest.ascx.cs" />
-    </filedeps>
-</preserve>

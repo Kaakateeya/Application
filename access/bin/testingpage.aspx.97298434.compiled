@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Testingpage.aspx" hash="fffffffff0855c68" filehash="bf0ab3e61c61074c" flags="110000" assembly="App_Web_cydthvkp" type="ASP.customer_new_customerdesignedpages_testingpage_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Testingpage.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Testingpage.aspx.cs" />
-        <filedep name="/kaakateeyaWeb/Customer_new/MasterPageTesting.master" />
-        <filedep name="/kaakateeyaWeb/Customer_new/MasterPageTesting.master.cs" />
-    </filedeps>
-</preserve>

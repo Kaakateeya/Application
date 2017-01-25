@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/kaakateeyaWeb/App_Browsers/" hash="30418b6" filehash="ffffbefb32656efb" flags="110000" assembly="App_Browsers" type="ASP.ApplicationBrowserCapabilitiesFactory">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/App_Browsers/browserfile.browser" />
-    </filedeps>
-</preserve>

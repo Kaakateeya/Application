@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/UserControls/successstories_New.ascx" hash="fffffffff0855c68" filehash="40b9e6bfdd6fc186" flags="110000" assembly="App_Web_vwmej12q" type="ASP.customer_usercontrols_successstories_new_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/UserControls/successstories_New.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer/UserControls/successstories_New.ascx.cs" />
-    </filedeps>
-</preserve>

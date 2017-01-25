@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/photoDownloadTest.aspx" hash="fffffffff0855c68" filehash="f9942d41892777e3" flags="110000" assembly="App_Web_1rq4dujl" type="ASP.designedpages_photodownloadtest_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/photoDownloadTest.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/photoDownloadTest.aspx.cs" />
-    </filedeps>
-</preserve>

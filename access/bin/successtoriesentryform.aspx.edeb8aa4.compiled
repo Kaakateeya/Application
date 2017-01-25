@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Static/SuccesStoriesEntryForm.aspx" hash="fffffffff0855c68" filehash="d64ab27db199a8bb" flags="110000" assembly="App_Web_iddte1bj" type="ASP.customer_static_successtoriesentryform_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
-        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
-        <filedep name="/kaakateeyaWeb/Customer/Static/SuccesStoriesEntryForm.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer/Static/SuccesStoriesEntryForm.aspx.cs" />
-    </filedeps>
-</preserve>

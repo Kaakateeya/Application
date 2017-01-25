@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/uctrlCommonLoginPopup.ascx" hash="fffffffff0855c68" filehash="d997a5c079fb1b64" flags="110000" assembly="App_Web_vgrpwts2" type="ASP.customer_new_uctrlcustomernew_uctrlcommonloginpopup_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/uctrlCommonLoginPopup.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/uctrlCommonLoginPopup.ascx.cs" />
-    </filedeps>
-</preserve>

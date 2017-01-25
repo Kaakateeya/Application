@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Search/CustomerfullprofileNew.aspx" hash="fffffffff0855c68" filehash="b66467ea80e63614" flags="110000" assembly="App_Web_orvsdx5e" type="ASP.customer_search_customerfullprofilenew_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/Search/CustomerfullprofileNew.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer/Search/CustomerfullprofileNew.aspx.cs" />
-    </filedeps>
-</preserve>

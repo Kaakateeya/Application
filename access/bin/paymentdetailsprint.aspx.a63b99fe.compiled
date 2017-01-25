@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Payments/PaymentDetailsPrint.aspx" hash="fffffffff0855c68" filehash="576b3abd44d9c94c" flags="110000" assembly="App_Web_3ajzaswa" type="ASP.payments_paymentdetailsprint_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Payments/PaymentDetailsPrint.aspx" />
-        <filedep name="/kaakateeyaWeb/Payments/PaymentDetailsPrint.aspx.cs" />
-    </filedeps>
-</preserve>

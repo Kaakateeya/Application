@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editpartnerpreference.ascx" hash="fffffffff0855c68" filehash="e8d14742492e54ca" flags="110000" assembly="App_Web_f0ymkdtw" type="ASP.customer_new_customerdesignedpages_editpartnerpreference_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editpartnerpreference.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editpartnerpreference.ascx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditMyReferences.ascx" hash="fffffffff0855c68" filehash="d8416eea553b0f72" flags="110000" assembly="App_Web_2o2dxy5o" type="ASP.usercontrols_edit_editmyreferences_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditMyReferences.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditMyReferences.ascx.cs" />
-    </filedeps>
-</preserve>

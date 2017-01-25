@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/SearchResult/SendSearchPrint.aspx" hash="fffffffff0855c68" filehash="6225825da138b2f6" flags="110000" assembly="App_Web_lfgashzg" type="ASP.searchresult_sendsearchprint_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/SearchResult/SendSearchPrint.aspx" />
-        <filedep name="/kaakateeyaWeb/SearchResult/SendSearchPrint.aspx.cs" />
-    </filedeps>
-</preserve>

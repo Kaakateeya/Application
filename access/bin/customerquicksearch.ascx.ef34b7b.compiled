@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerQuickSearch.ascx" hash="fffffffff0855c68" filehash="1b556434420e198f" flags="110000" assembly="App_Web_vgrpwts2" type="ASP.customer_new_uctrlcustomernew_customerquicksearch_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerQuickSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/CustomerQuickSearch.ascx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/onlyClient.aspx" hash="fffffffff0855c68" filehash="72bcc0c074dac947" flags="110000" assembly="App_Web_kpxavohh" type="ASP.customer_new_onlyclient_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/onlyClient.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/onlyClient.aspx.cs" />
-    </filedeps>
-</preserve>

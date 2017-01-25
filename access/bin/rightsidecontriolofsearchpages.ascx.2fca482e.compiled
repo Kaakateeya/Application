@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Search/RightSideContriolOfSearchPages.ascx" hash="fffffffff0855c68" filehash="3d591e6bfda50c72" flags="110000" assembly="App_Web_2ihjhtb1" type="ASP.customer_search_rightsidecontriolofsearchpages_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/Search/RightSideContriolOfSearchPages.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer/Search/RightSideContriolOfSearchPages.ascx.cs" />
-    </filedeps>
-</preserve>

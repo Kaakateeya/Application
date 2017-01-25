@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/uctrlHoroscopeSearch.ascx" hash="fffffffff0855c68" filehash="c3ab4bcf2e7597b7" flags="110000" assembly="App_Web_wximwgrn" type="ASP.usercontrols_search_uctrlhoroscopesearch_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlHoroscopeSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlHoroscopeSearch.ascx.cs" />
-    </filedeps>
-</preserve>

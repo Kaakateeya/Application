@@ -3150,12 +3150,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
         scope.orderStatus = '';
         scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
-<<<<<<< HEAD
-			
-            console.log(response.data);
-=======
 
->>>>>>> 29b4a4306d58a5cde78199db1ddbb19f4babf971
             if (response.data !== undefined && response.data !== null) {
                 var paymentStatus = (response.data).split(',');
                 scope.orderid = paymentStatus[0].split('=')[1];

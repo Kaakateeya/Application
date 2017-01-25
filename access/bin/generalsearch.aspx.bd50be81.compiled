@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/GeneralSearch.aspx" hash="fffffffff0855c68" filehash="d6284c8d24288007" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_generalsearch_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/GeneralSearch.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/GeneralSearch.aspx.cs" />
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlGeneralSearch.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlGeneralSearch.ascx.cs" />
-    </filedeps>
-</preserve>

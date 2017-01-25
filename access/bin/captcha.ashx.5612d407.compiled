@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/kaakateeyaWeb/DesignedPages/Captcha.ashx" hash="30418b6" filehash="fffff2ae9ebbebcb" flags="110000" assembly="App_Web_vb0in41a" type="Captcha">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/DesignedPages/Captcha.ashx" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Search/ShowSelectedItems.aspx" hash="fffffffff0855c68" filehash="7bfa04163adc4f84" flags="110000" assembly="App_Web_h4nnboek" type="ASP.search_showselecteditems_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Search/ShowSelectedItems.aspx" />
-        <filedep name="/kaakateeyaWeb/Search/ShowSelectedItems.aspx.cs" />
-    </filedeps>
-</preserve>

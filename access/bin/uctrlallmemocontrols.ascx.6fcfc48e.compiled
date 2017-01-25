@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeUserControls/uctrlAllMemoControls.ascx" hash="fffffffff0855c68" filehash="1d47dacfaca78d88" flags="110000" assembly="App_Web_xdjwnvky" type="ASP.customer_new_employee_new_employeeusercontrols_uctrlallmemocontrols_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeUserControls/uctrlAllMemoControls.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeUserControls/uctrlAllMemoControls.ascx.cs" />
-    </filedeps>
-</preserve>

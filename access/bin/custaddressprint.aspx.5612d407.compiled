@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/CustAddressPrint.aspx" hash="fffffffff0855c68" filehash="14fa78927dffc989" flags="110000" assembly="App_Web_pxw3loce" type="ASP.designedpages_custaddressprint_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/DesignedPages/CustAddressPrint.aspx" />
-        <filedep name="/kaakateeyaWeb/DesignedPages/CustAddressPrint.aspx.cs" />
-    </filedeps>
-</preserve>

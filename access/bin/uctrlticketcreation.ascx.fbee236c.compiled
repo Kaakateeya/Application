@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Ticketing/UctrlTicketCreation.ascx" hash="fffffffff0855c68" filehash="9c3f31a0ac1e9720" flags="110000" assembly="App_Web_czllji4k" type="ASP.customer_ticketing_uctrlticketcreation_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer/Ticketing/UctrlTicketCreation.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer/Ticketing/UctrlTicketCreation.ascx.cs" />
-    </filedeps>
-</preserve>

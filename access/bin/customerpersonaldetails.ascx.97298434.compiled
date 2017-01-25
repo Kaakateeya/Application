@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Customerpersonaldetails.ascx" hash="fffffffff0855c68" filehash="27eb8f788699afa8" flags="110000" assembly="App_Web_3cf5zino" type="ASP.customer_new_customerdesignedpages_customerpersonaldetails_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Customerpersonaldetails.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Customerpersonaldetails.ascx.cs" />
-    </filedeps>
-</preserve>

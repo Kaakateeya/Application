@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/MasterPageTesting.master" hash="fffffffff0855c68" filehash="17dbc99dfaff8e7a" flags="110000" assembly="App_Web_kpxavohh" type="ASP.customer_new_masterpagetesting_master">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/MasterPageTesting.master" />
-        <filedep name="/kaakateeyaWeb/Customer_new/MasterPageTesting.master.cs" />
-    </filedeps>
-</preserve>

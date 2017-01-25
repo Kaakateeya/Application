@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/Totalsearchfullfunc.aspx" hash="fffffffff0855c68" filehash="236a475e40c94a9f" flags="110000" assembly="App_Web_jtzdwwbk" type="ASP.employee_totalsearchfullfunc_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Employee/Totalsearchfullfunc.aspx" />
-        <filedep name="/kaakateeyaWeb/Employee/Totalsearchfullfunc.aspx.cs" />
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
-    </filedeps>
-</preserve>

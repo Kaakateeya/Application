@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/urctrlMySpouce.ascx" hash="fffffffff0855c68" filehash="90f25b82dec6bb56" flags="110000" assembly="App_Web_lkf1gbn2" type="ASP.usercontrols_registration_urctrlmyspouce_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/urctrlMySpouce.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/Registration/urctrlMySpouce.ascx.cs" />
-    </filedeps>
-</preserve>

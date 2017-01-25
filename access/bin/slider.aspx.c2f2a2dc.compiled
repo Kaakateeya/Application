@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/slider.aspx" hash="fffffffff0855c68" filehash="4453b5dcf59dafca" flags="110000" assembly="App_Web_kpxavohh" type="ASP.customer_new_slider_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/slider.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/slider.aspx.cs" />
-    </filedeps>
-</preserve>

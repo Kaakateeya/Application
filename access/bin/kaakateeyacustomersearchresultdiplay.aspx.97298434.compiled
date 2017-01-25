@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerSearchresultdiplay.aspx" hash="fffffffff0855c68" filehash="5bde5abb5664b635" flags="110000" assembly="App_Web_v5tic4u1" type="ASP.customer_new_customerdesignedpages_kaakateeyacustomersearchresultdiplay_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerSearchresultdiplay.aspx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerSearchresultdiplay.aspx.cs" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
-    </filedeps>
-</preserve>

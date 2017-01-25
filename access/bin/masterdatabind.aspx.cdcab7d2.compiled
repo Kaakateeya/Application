@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Masterdatabind.aspx" hash="fffffffff0855c68" filehash="1162dbc1582634bf" flags="110000" assembly="App_Web_accql1ug" type="ASP.masterdatabind_aspx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Masterdatabind.aspx" />
-        <filedep name="/kaakateeyaWeb/Masterdatabind.aspx.cs" />
-    </filedeps>
-</preserve>

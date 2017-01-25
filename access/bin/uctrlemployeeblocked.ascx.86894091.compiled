@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/UctrlEmployeeBlocked.ascx" hash="fffffffff0855c68" filehash="d08f2658d0674d7d" flags="110000" assembly="App_Web_oc3edhst" type="ASP.customer_new_employee_new_uctrlemployeeblocked_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/UctrlEmployeeBlocked.ascx" />
-        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/UctrlEmployeeBlocked.ascx.cs" />
-    </filedeps>
-</preserve>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewPartnerDetailsDeleteProfiles.ascx" hash="fffffffff0855c68" filehash="290630733d3bcbfd" flags="110000" assembly="App_Web_ai05mbha" type="ASP.usercontrols_uctrldeleteprofiles_uctrldeleteprofilesview_viewpartnerdetailsdeleteprofiles_ascx">
-    <filedeps>
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewPartnerDetailsDeleteProfiles.ascx" />
-        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewPartnerDetailsDeleteProfiles.ascx.cs" />
-    </filedeps>
-</preserve>
