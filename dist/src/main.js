@@ -1325,7 +1325,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.servicehttp = function(type, object) {
                     return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                         .then(function(response) {
-                            console.log(response);
+
                             switch (type) {
                                 case "B":
                                     if (response.data === 1) {
@@ -1390,7 +1390,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-                        console.log(typeofactionflag);
+
                         if (typeofactionflag === 1) {
                             typeofactionflag = true;
                         }
@@ -1405,7 +1405,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             case "E":
                                 if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-                                        console.log(responsepaid);
+
                                         if (responsepaid === true)
                                             scope.servicehttp(type, object);
                                     });
@@ -1719,7 +1719,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        console.log(loginpaidstatus);
         scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
         scope.normaldata = true;
         scope.notificationtxt = [];
@@ -1780,7 +1779,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                         }
                         if (parseInt(frompage) === 1) {
-                            console.log(response.data);
+
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {
@@ -1816,7 +1815,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.lblUHaveviewd = headertext;
                     }).catch(function(response) {
                         scope.catchfunction();
-                        console.log(response);
+
                     });
                 }
             } else if (bindvalue == 'profile') {} else {
@@ -1832,7 +1831,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-            console.log(array);
+
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', statename: 'editview', object: {} },
                 { value: 'Upgrade your membership', bindvalue: 'profile', statename: 'UpgradeMembership', object: {} },
@@ -2137,12 +2136,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
-                console.log(responsepaid);
-                if (responsepaid === true) {
-                    window.open(realpath, '_blank');
-                }
-            });
+            window.open(realpath, '_blank');
+            // authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
+            //     if (responsepaid === true) {
+            //         window.open(realpath, '_blank');
+            //     }
+            // });
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
@@ -2218,7 +2217,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-            console.log(photostatuslogin);
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid, photostatuslogin);
         };
         scope.incrementsdashboardcounts = function() {
@@ -2232,7 +2230,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
-                console.log(response);
                 if (response === true)
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
             });
@@ -2355,7 +2352,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         item.linkcolor = { "color": "#66643e" };
                     }
                 });
-                console.log(scope.notificationtxt);
+
                 if (scope.notifytype === 'page') {
                     scope.notificationtxt = dddddd;
                 } else {
@@ -2407,9 +2404,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             $('#modalbody').bind('scroll', function(e) {
                 alert(1);
                 var elem = $(e.currentTarget);
-                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
-                    console.log("bottom");
-                }
+                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {}
             });
         });
         scope.readNotify = function(notifyID, type, index) {
@@ -2561,15 +2556,12 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-                        console.log(response);
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            console.log('custStatus');
-                            console.log(innerresponse.data);
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -2717,7 +2709,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.$on("notify-error", function(event, value) {
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
-            console.log(httperrorpopupstatus);
             if (httperrorpopupstatus !== "1") {
                 httperrorpopupstatus = 1;
                 alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
@@ -2736,6 +2727,15 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
             route.go('feedback', {});
         };
+        $(document).ready(function() {
+            $('.menu_toggle').click(function(e) {
+                $('.profile_own_menu>ul').slideToggle();
+            });
+            $('.profile_own_menu>ul>li').click(function(e) {
+                $(this).find('ul').slideToggle();
+                $(this).siblings().find('ul').slideUp();
+            });
+        });
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
@@ -2802,7 +2802,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-                        console.log(response);
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
@@ -2925,8 +2924,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
                 // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
-                console.log('test');
-                console.log(scope.MFSelectArray);
                 scope.divSkip = true;
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
@@ -2970,8 +2967,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
-            console.log('custStatus');
-            console.log(response);
+
         });
         scope.cancel = function() {
             $mdDialog.cancel();
@@ -3022,9 +3018,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-            console.log(JSON.stringify(misInputobj));
+
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
-                console.log(response);
+
                 scope.redirectToMobVerification();
                 scope.cancel();
             });
@@ -3124,7 +3120,6 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
     function(scope, route, myAppFactory) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
-            console.log(scope.paymentobject);
             scope.randomNumbers = Math.round((Math.random() * 100) * 100);
             scope.orderid = "Ord_" + scope.paymentobject.CustID + "_" + scope.randomNumbers;
         };
@@ -3142,25 +3137,27 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-                console.log(response);
+
             });
         };
     }
 ]);
 app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'alert', 'myAppFactory',
     function(scope, stateParams, http, alerts, myAppFactory) {
-        console.log(stateParams.data);
         scope.paymentobject = {};
         scope.orderid = '';
         scope.trackingID = '';
         scope.orderStatus = '';
         scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
+<<<<<<< HEAD
 			
             console.log(response.data);
+=======
+
+>>>>>>> 29b4a4306d58a5cde78199db1ddbb19f4babf971
             if (response.data !== undefined && response.data !== null) {
                 var paymentStatus = (response.data).split(',');
-                console.log(paymentStatus);
                 scope.orderid = paymentStatus[0].split('=')[1];
                 scope.trackingID = paymentStatus[1].split('=')[1];
                 scope.orderStatus = paymentStatus[3].split('=')[1];
@@ -3177,7 +3174,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 }
             }
         });
-        console.log(scope.paymentobject);
+
         scope.points = scope.paymentobject.Points;
         scope.MembershipName = scope.paymentobject.MembershipName;
         scope.Duration = scope.paymentobject.Duration;
@@ -3194,7 +3191,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-                console.log(response);
+
             });
         };
     }
@@ -3471,6 +3468,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 Caste: []
             };
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
+            console.log(scope.modelsearch.object.ToAge);
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
@@ -3635,7 +3633,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             if (helperservice.checkarraylength(response.data)) {
-                                console.log(response.data);
                                 scope.modelsearch.showcontrols = false;
                                 scope.truepartner = false;
                                 _.each(response.data, function(item) {
@@ -4067,15 +4064,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
             var realpath = '/viewFullProfileCustomer';
+            window.open(realpath, '_blank');
+            // authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
+            //     if (responsepaid === true) {
+            //         window.open(realpath, '_blank');
+            //     }
 
-            authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
-
-                console.log(responsepaid);
-                if (responsepaid === true) {
-                    window.open(realpath, '_blank');
-                }
-
-            });
+            // });
 
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -4123,57 +4118,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-        //  scope.$watch(function() {
-        //             return scope.modelsearch.AgeFrom;
-        //         }, function(current, original) {
-        //             scope.modelsearch.AgeFrom = current;
-        //         });
 
-        //         scope.$watch(function() {
-        //             return scope.modelsearch.Ageto;
-        //         }, function(current, original) {
-        //             scope.modelsearch.Ageto = current;
-        //         });
-
-
-        // scope.slider = {
-        //     minValue: 18,
-        //     maxValue: 30,
-        //     options: {
-        //         floor: 18,
-        //         ceil: 77,
-        //         step: 1,
-        //         noSwitching: true
-        //     }
-
-        // };
-        // scope.heightslidermin = 1;
-        // scope.heightslidermax = 38;
-        // scope.sliders = {
-        //     minValue: 4.0,
-        //     maxValue: 7.2,
-        //     options: {
-        //         floor: 4.0,
-        //         ceil: 7.2,
-        //         step: 0.1,
-        //         precision: 1,
-        //         noSwitching: true
-        //     }
-        // };
-
-        // scope.sliders = {
-        //     minValue: 0,
-        //     maxValue: 38,
-        //     minvalueyext: 0,
-        //     maxValuetext: 38,
-        //     options: {
-        //         floor: 0,
-        //         ceil: 41,
-        //         step: 1,
-        //         noSwitching: true,
-
-        //     }
-        // };
     }
 ]);
 app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService',
@@ -4267,12 +4212,10 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 intCustPostedBY: obj.ddlpostedby,
                 //strMobileVerificationCode: obj.
             };
-            console.log(inputObj);
+
             basicRegistrationService.submitBasicRegistration(inputObj).then(function(res) {
-                console.log(res);
                 scope.genderID = 0;
                 authSvc.login(scope.reg.txtEmail, scope.reg.txtpassword).then(function(response) {
-                    console.log(response);
                     authSvc.user(response.response !== null ? response.response[0] : null);
                     scope.genderID = response.response[0].GenderID;
                     route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
@@ -4283,7 +4226,6 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         scope.valueExists = function(type, flag, val) {
             if (val !== undefined) {
                 basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
-                    console.log(response);
                     if (response.data === 1) {
                         if (type === 'email') {
                             scope.reg.txtEmail = '';
@@ -4537,17 +4479,13 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
 ]);
  app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route',
      function(scope, forgetPwdservices, stateParams, alerts, uibModal, route) {
-
          scope.custidpassword = stateParams.custid;
          scope.statuspassword = null;
          scope.divngit = function() {
              alerts.dynamicpopup("forgetpasswordemail.html", scope, uibModal);
              forgetPwdservices.getstatuscustid(scope.custidpassword).then(function(response) {
-                 console.log(response);
                  _.each(response.data, function(item) {
                      var passwordarray = JSON.parse(item);
-                     console.log(passwordarray[0].Password);
-                     console.log(passwordarray[0].STATUS);
                      if (passwordarray !== undefined && passwordarray !== null && passwordarray !== "" && passwordarray[0] !== undefined && passwordarray[0] !== null && passwordarray[0] !== "") {
                          if (passwordarray[0].STATUS === 1) {
                              scope.statuspassword = passwordarray[0].Password;
@@ -4563,7 +4501,6 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
          scope.passwordsubmit = function(formloagin) {
              alerts.dynamicpopupclose();
              forgetPwdservices.getChangePassword(scope.custidpassword, formloagin.txtPassword).then(function(response) {
-                 console.log(response);
                  if (response.data === 1) {
                      alerts.timeoutoldalerts(scope, 'alert-success', 'Your password updated successfully', 2500);
                      route.go('home', {});
@@ -4607,7 +4544,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     EmpID: 0
                 };
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
-                    console.log(response);
                     scope.CustName = scope.txtname;
                     if (response.data !== null) {
                         scope.lblTicketID = response.data.Ticket !== null ? response.data.Ticket : '';
@@ -4669,7 +4605,6 @@ app.controller("myorders", ['$scope', 'customerProfilesettings', 'authSvc',
                 scope.myorders = [];
                 _.each(response.data, function(item) {
                     scope.myorders = JSON.parse(item);
-                    console.log(scope.myorders);
                 });
             });
         };
@@ -5017,7 +4952,6 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         scope.valueExists = function(type, flag, val) {
             if (val !== undefined) {
                 basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
-                    console.log(response);
                     if (response.data === 1) {
                         if (type === 'email') {
                             scope.NewEmail = '';
@@ -5307,7 +5241,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
-                console.log(response);
                 scope.slides = [];
                 _.each(response.data, function(item) {
                     scope.slides.push(item);
@@ -5318,8 +5251,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             switch (type) {
                 case "DontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(object).then(function(response) {
-                        console.log("secrchfun");
-                        console.log(response);
                         if (response.data == 1) {
                             scope.divmodalbodytoClose = "This profile was Skipped successfully";
                             alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal);
@@ -5343,7 +5274,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.Searchfunctionality("DontProceed", MobjViewprofile);
         };
         scope.statusalert = function(status) {
-            console.log(status);
             switch (status) {
                 case 0:
                 case 3:
@@ -5407,7 +5337,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
         scope.pageload = function() {
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
-                console.log(response);
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
@@ -5481,7 +5410,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         MatchFollwupStatus: 1
                     };
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
-                        console.log(response);
                         switch (response.data) {
                             case 1:
                                 scope.modalbodyID1 = "To Move the Match for MatchFollowup";
@@ -5506,7 +5434,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         MatchFollwupStatus: 2
                     };
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofiledont).then(function(response) {
-                        console.log(response);
                         switch (response.data) {
                             case 1:
                                 scope.modalbodyID1 = "Oops go through your search";
@@ -5535,7 +5462,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 switch (typeofaction) {
                     case "btnaccept":
                         authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                            console.log(responsepaid);
                             if (responsepaid === true) {
                                 //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal({ backdrop: 'static', keyboard: false});", true);
                             } else {
@@ -5602,7 +5528,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
-                    console.log(scope.personalinfo);
                     scope.divclassmask = function(logphotostatus) {
                         var photo = scope.personalinfo[0].ApplicationPhotoPath;
                         var photocount = scope.personalinfo[0].PhotoName_Cust;
@@ -5617,8 +5542,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
-                        console.log('tewst');
-                        console.log(scope.arr);
                     }
                 }
             });
@@ -5633,7 +5556,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
         scope.getallflags = function() {
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-                console.log(response);
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
                     if (testArr[0] !== undefined) {
@@ -5834,14 +5756,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (typeofbtn) {
                 case "Proceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
-                        console.log(response);
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
                         scope.pageload();
                     });
                     break;
                 case "btnDontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
-                        console.log(response);
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
                         scope.pageload();
                     });
@@ -5855,7 +5775,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "Proceed":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             var MobjViewprofile = {
                                 ExpressInrestID: scope.Express[0].ExpressInterstId,
@@ -5873,7 +5792,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
                 case "dont":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             var MobjViewprofile = {
                                 ExpressInrestID: scope.Express[0].ExpressInterstId,
@@ -5891,7 +5809,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
                 case "tell":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             alerts.timeoutoldalerts(scope, 'alert-sucess', 'Your action send sucessfully', 3000);
                         } else {
@@ -6031,7 +5948,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                 .then(function(response) {
                     if (response.status === 200 && response.data !== null && response.data !== undefined) {
-                        console.log(response);
                         if (response.data === "Paid") {
                             return true;
                         } else {
@@ -6483,7 +6399,6 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
         },
         getViewFullProfileMail: function(OriginalString) {
-            console.log(OriginalString);
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
         },
         UpdateExpressIntrestViewfullprofile: function(obj) {

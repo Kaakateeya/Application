@@ -66,7 +66,8 @@
                 </div>
             </div>
             <div class="profile_full_header_in_ui clearfix">
-                <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!=='' && personalinfo[0].HoroscopeImage!==null && personalinfo[0].HoroscopeImage!=='Not given'">
+                <div id="updateHoror" ng-if="personalinfo[0].HoroscopeImage!=='' && personalinfo[0].HoroscopeImage!==null && personalinfo[0].HoroscopeImage!=='Not given'
+                 && (personalinfo[0].HoroscopeImage).indexOf('Horo_no.jpg')===-1">
                     <a ng-show="lnkViewHoro" href="javascript:void(0);" ng-click="viewhoroscopeimage()">View Horo</a>
                 </div>
             </div>

@@ -35,7 +35,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
-                    console.log(scope.personalinfo);
                     scope.divclassmask = function(logphotostatus) {
                         var photo = scope.personalinfo[0].ApplicationPhotoPath;
                         var photocount = scope.personalinfo[0].PhotoName_Cust;
@@ -50,8 +49,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 } else {
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
-                        console.log('tewst');
-                        console.log(scope.arr);
                     }
                 }
             });
@@ -66,7 +63,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
         scope.getallflags = function() {
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
-                console.log(response);
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
                     if (testArr[0] !== undefined) {
@@ -267,14 +263,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (typeofbtn) {
                 case "Proceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
-                        console.log(response);
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
                         scope.pageload();
                     });
                     break;
                 case "btnDontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(obj).then(function(response) {
-                        console.log(response);
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Your action send sucessfully', 3000);
                         scope.pageload();
                     });
@@ -288,7 +282,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "Proceed":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             var MobjViewprofile = {
                                 ExpressInrestID: scope.Express[0].ExpressInterstId,
@@ -306,7 +299,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
                 case "dont":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             var MobjViewprofile = {
                                 ExpressInrestID: scope.Express[0].ExpressInterstId,
@@ -324,7 +316,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     break;
                 case "tell":
                     authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true) {
                             alerts.timeoutoldalerts(scope, 'alert-sucess', 'Your action send sucessfully', 3000);
                         } else {

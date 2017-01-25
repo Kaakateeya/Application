@@ -89,12 +89,10 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 intCustPostedBY: obj.ddlpostedby,
                 //strMobileVerificationCode: obj.
             };
-            console.log(inputObj);
+
             basicRegistrationService.submitBasicRegistration(inputObj).then(function(res) {
-                console.log(res);
                 scope.genderID = 0;
                 authSvc.login(scope.reg.txtEmail, scope.reg.txtpassword).then(function(response) {
-                    console.log(response);
                     authSvc.user(response.response !== null ? response.response[0] : null);
                     scope.genderID = response.response[0].GenderID;
                     route.go('registration.seconadryRegistration', { fn: obj.txtfirstname, ln: obj.txtlastname, countryID: obj.ddlcountry, genderID: response.response[0].GenderID });
@@ -105,7 +103,6 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         scope.valueExists = function(type, flag, val) {
             if (val !== undefined) {
                 basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
-                    console.log(response);
                     if (response.data === 1) {
                         if (type === 'email') {
                             scope.reg.txtEmail = '';

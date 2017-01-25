@@ -2,7 +2,6 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
     function(scope, route, myAppFactory) {
         scope.pageloadpayment = function() {
             scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
-            console.log(scope.paymentobject);
             scope.randomNumbers = Math.round((Math.random() * 100) * 100);
             scope.orderid = "Ord_" + scope.paymentobject.CustID + "_" + scope.randomNumbers;
         };
@@ -20,7 +19,7 @@ app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-                console.log(response);
+
             });
         };
     }

@@ -22,8 +22,6 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
                 // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
-                console.log('test');
-                console.log(scope.MFSelectArray);
                 scope.divSkip = true;
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
@@ -67,8 +65,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
             });
         };
         missingFieldService.GetCustStatus(scope.custid).then(function(response) {
-            console.log('custStatus');
-            console.log(response);
+
         });
         scope.cancel = function() {
             $mdDialog.cancel();
@@ -119,9 +116,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 Height: obj.ddlFromheight,
                 CustID: scope.custid
             };
-            console.log(JSON.stringify(misInputobj));
+
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
-                console.log(response);
+
                 scope.redirectToMobVerification();
                 scope.cancel();
             });

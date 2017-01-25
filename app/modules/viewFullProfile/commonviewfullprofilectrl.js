@@ -99,7 +99,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
-                console.log(response);
                 scope.slides = [];
                 _.each(response.data, function(item) {
                     scope.slides.push(item);
@@ -110,8 +109,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             switch (type) {
                 case "DontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(object).then(function(response) {
-                        console.log("secrchfun");
-                        console.log(response);
                         if (response.data == 1) {
                             scope.divmodalbodytoClose = "This profile was Skipped successfully";
                             alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal);
@@ -135,7 +132,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.Searchfunctionality("DontProceed", MobjViewprofile);
         };
         scope.statusalert = function(status) {
-            console.log(status);
             switch (status) {
                 case 0:
                 case 3:
@@ -199,7 +195,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
         scope.pageload = function() {
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
-                console.log(response);
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
@@ -273,7 +268,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         MatchFollwupStatus: 1
                     };
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
-                        console.log(response);
                         switch (response.data) {
                             case 1:
                                 scope.modalbodyID1 = "To Move the Match for MatchFollowup";
@@ -298,7 +292,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         MatchFollwupStatus: 2
                     };
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofiledont).then(function(response) {
-                        console.log(response);
                         switch (response.data) {
                             case 1:
                                 scope.modalbodyID1 = "Oops go through your search";
@@ -327,7 +320,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 switch (typeofaction) {
                     case "btnaccept":
                         authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                            console.log(responsepaid);
                             if (responsepaid === true) {
                                 //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal({ backdrop: 'static', keyboard: false});", true);
                             } else {

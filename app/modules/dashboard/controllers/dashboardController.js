@@ -18,7 +18,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.staticNotification = ["New profiles waiting for you from last month", "your photograph has been viewed by members"];
         scope.chatstatus = null;
         scope.form = {};
-        console.log(loginpaidstatus);
         scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
         scope.normaldata = true;
         scope.notificationtxt = [];
@@ -79,7 +78,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
                         }
                         if (parseInt(frompage) === 1) {
-                            console.log(response.data);
+
                             scope.PartnerProfilesnew = [];
                             scope.typeofdiv = "Grid";
                             _.each(response.data.PartnerProfilesnew, function(item) {
@@ -115,7 +114,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         scope.lblUHaveviewd = headertext;
                     }).catch(function(response) {
                         scope.catchfunction();
-                        console.log(response);
+
                     });
                 }
             } else if (bindvalue == 'profile') {} else {
@@ -131,7 +130,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-            console.log(array);
+
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', statename: 'editview', object: {} },
                 { value: 'Upgrade your membership', bindvalue: 'profile', statename: 'UpgradeMembership', object: {} },
@@ -436,12 +435,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             sessionStorage.removeItem("locallogid");
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
-            authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
-                console.log(responsepaid);
-                if (responsepaid === true) {
-                    window.open(realpath, '_blank');
-                }
-            });
+            window.open(realpath, '_blank');
+            // authSvc.paymentstaus(scope.custid, scope).then(function(responsepaid) {
+            //     if (responsepaid === true) {
+            //         window.open(realpath, '_blank');
+            //     }
+            // });
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
             scope.redirectToviewfull(custid, logid);
@@ -517,7 +516,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.divclassmaskforall = function(logphotostatus, photo, photocount) {
             logphotostatus = sessionStorage.getItem("LoginPhotoIsActive");
-            console.log(photostatuslogin);
             return successstoriesdata.maskclasspartner(logphotostatus, photo, photocount, scope.custid, photostatuslogin);
         };
         scope.incrementsdashboardcounts = function() {
@@ -531,7 +529,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         });
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
-                console.log(response);
                 if (response === true)
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
             });
@@ -654,7 +651,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                         item.linkcolor = { "color": "#66643e" };
                     }
                 });
-                console.log(scope.notificationtxt);
+
                 if (scope.notifytype === 'page') {
                     scope.notificationtxt = dddddd;
                 } else {
@@ -706,9 +703,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             $('#modalbody').bind('scroll', function(e) {
                 alert(1);
                 var elem = $(e.currentTarget);
-                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
-                    console.log("bottom");
-                }
+                if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {}
             });
         });
         scope.readNotify = function(notifyID, type, index) {

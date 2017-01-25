@@ -685,7 +685,7 @@
                                 <li class="row clearfix" >
                                     <label  class="pop_label_left col-lg-4">Email&Password<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  select-box-my-double col-lg-8">
-                                        <input required="" ng-class="dynamictextboxcolor(reg.txtEmail,'txtEmail')" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control col-lg-4" id="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;width:57% !important;" ng-pattern="/^.+@.+\..+$/" >
+                                        <input required="" ng-class="dynamictextboxcolor(reg.txtEmail,'txtEmail')" placeholder="Email"  maxlength="50" md-asterisk="" class="form-control col-lg-4" id="txtEmail" ng-model="reg.txtEmail" style="border: 1px solid #cac3c3 !important;width:57% !important;" ng-pattern="/^.+@.+\..+$/"  ng-blur="valueExists('email',0,reg.txtEmail);">
                                           <input maxlength="15" placeholder="Password" class="form-control col-lg-4" style="border: 1px solid #cac3c3 !important;border-radius: 3px !important;width:38% !important;margin-left: 3px;height: 33px !important;" required="" md-asterisk="" id="txtpassword" ng-model="reg.txtpassword" type="password"  ng-class="dynamictextboxcolor(reg.txtpassword,'txtpassword')">  
                                     </div>
                                  </li>                     
