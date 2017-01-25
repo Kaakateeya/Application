@@ -2899,6 +2899,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             alerts.forgetpasswordhide();
         };
         scope.agefromtoagechange = function(from, to, flag) {
+
             switch (flag) {
                 case 1:
                     if ((parseInt(scope.Agefrom)) !== 0 && (parseInt(scope.Ageto)) !== 0) {

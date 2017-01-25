@@ -141,18 +141,14 @@ module.exports = function(grunt) {
         }
 
     });
-    // grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
-
-    grunt.registerTask('default', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
-
+    grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    //grunt.registerTask('default', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
     // this task will only run the dev configuration 
-    //grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
-    grunt.registerTask('dev', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
-
+    grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    //grunt.registerTask('dev', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
     // only run production configuration 
-    //  grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
-
-    grunt.registerTask('prod', ['concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
+    grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
+    //grunt.registerTask('prod', ['concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
 
     // ===========================================================================
     // LOAD GRUNT PLUGINS ========================================================
