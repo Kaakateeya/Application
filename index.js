@@ -48,7 +48,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccAvenue', url: '/ccAvenue', templateUrl: 'app/modules/static/ccAvenue.Html', controller: "ccAvenueCtrl", isloginrequired: false },
         { name: 'viewFull', url: '/Customer_new/Employee_new/EmployeeViewFullProfile.aspx', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
         { name: 'commonviewfull', url: '/commonviewfull', templateUrl: 'app/modules/viewFullProfile/commonviewfullprofile.html', controller: 'commonviewfullprofile', isloginrequired: false },
-        { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false }
+        { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false },
+        { name: 'forgetpasswordemail', url: '/forgetpasswordemail/:custid', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false }
         // { name: 'bootstapCarousal', url: '/bootstapCarousal', templateUrl: 'templates/bootstapCarousal.html', controller: 'CarouselDemoCtrl', isloginrequired: false }
     ];
 
