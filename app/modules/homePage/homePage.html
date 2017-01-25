@@ -97,11 +97,11 @@
                     <label class="control-label">Age</label>
                     <div class="controls" layout="flex-gt-sm">
                         <div id="homeage">
-                            <select multiselectdropdown placeholder="AgeFrom" ng-model="Agefrom" typeofdata="'Age'">   
+                            <select multiselectdropdown ng-change="agefromtoagechange(Agefrom,Ageto,1)" placeholder="AgeFrom" ng-model="Agefrom" typeofdata="'Age'">   
                         </select>
                         </div>
                         <div id="homeageto">
-                            <select multiselectdropdown placeholder="AgeTo" ng-model="Ageto" typeofdata="'Age'">   
+                            <select multiselectdropdown ng-change="agefromtoagechange(Agefrom,Ageto,2)" placeholder="AgeTo" ng-model="Ageto" typeofdata="'Age'">   
                         </select>
                         </div>
                     </div>

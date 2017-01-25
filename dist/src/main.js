@@ -2898,6 +2898,26 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         scope.mddiologcancel = function() {
             alerts.forgetpasswordhide();
         };
+        scope.agefromtoagechange = function(from, to, flag) {
+            switch (flag) {
+                case 1:
+                    if ((parseInt(from)) !== 0 && (parseInt(to)) !== 0) {
+                        if (parseInt(from) > parseInt(to)) {
+                            scope.Agefrom = 0;
+                            alert('Please enter valid From Age');
+                        }
+                    }
+                    break;
+                case 2:
+                    if ((parseInt(from)) !== 0 && (parseInt(to)) !== 0) {
+                        if (parseInt(from) > parseInt(to)) {
+                            scope.Ageto = 0;
+                            alert('Please enter valid To Age');
+                        }
+                    }
+                    break;
+            }
+        };
     }
 ]);
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
