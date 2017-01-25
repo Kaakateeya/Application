@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/NoKaakateeyaSealReport.aspx" hash="fffffffff0855c68" filehash="f40fbabe8ee88ba3" flags="110000" assembly="App_Web_2eyia10k" type="ASP.designedpages_nokaakateeyasealreport_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoKaakateeyaSealReport.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoKaakateeyaSealReport.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

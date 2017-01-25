@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ManagePhotoNew.aspx" hash="fffffffff0855c68" filehash="3ab9faf56a8bbbde" flags="110000" assembly="App_Web_fwo5kec4" type="ASP.customer_new_customerdesignedpages_managephotonew_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ManagePhotoNew.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ManagePhotoNew.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/UctrlRegistrationManagePhoto.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/UctrlRegistrationManagePhoto.ascx.cs" />
+    </filedeps>
+</preserve>

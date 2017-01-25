@@ -1,0 +1,20 @@
+﻿#printpage {
+    display: none;
+    visibility: hidden;
+}
+
+#Image1 {
+    display: none;
+    visibility: hidden;
+}
+#Image2 {
+    display: none;
+    visibility: hidden;
+}
+#Image3 {
+    display: none;
+    visibility: hidden;
+}
+#imgProfile {
+    display: block;
+}

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ViewMyReferences.aspx" hash="fffffffff0855c68" filehash="da167cc154300c48" flags="110000" assembly="App_Web_d0fdyhpt" type="ASP.employee_viewmyreferences_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewMyReferences.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewMyReferences.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewMyReferences.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewMyReferences.ascx.cs" />
+    </filedeps>
+</preserve>

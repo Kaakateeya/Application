@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/KaakateeyaApi.aspx" hash="fffffffff0855c68" filehash="805c656e24e5bb4d" flags="110000" assembly="App_Web_kpxavohh" type="ASP.customer_new_kaakateeyaapi_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/KaakateeyaApi.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/KaakateeyaApi.aspx.cs" />
+    </filedeps>
+</preserve>

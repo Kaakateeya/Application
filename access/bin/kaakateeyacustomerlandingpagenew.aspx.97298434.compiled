@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerLandingPageNew.aspx" hash="fffffffff0855c68" filehash="19f85122e38444cc" flags="110000" assembly="App_Web_02rc3hiu" type="ASP.customer_new_customerdesignedpages_kaakateeyacustomerlandingpagenew_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerLandingPageNew.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomerLandingPageNew.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/PartnerProfilles.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/PartnerProfilles.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlExpressInterest.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlExpressInterest.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlMessages.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlMessages.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlPhotoPassword.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlPhotoPassword.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlRequests.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/uctrlRequests.ascx.cs" />
+    </filedeps>
+</preserve>

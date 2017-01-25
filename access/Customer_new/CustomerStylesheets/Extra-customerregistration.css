@@ -1,0 +1,139 @@
+﻿body {
+}
+
+.bubbletooltip {
+    border-radius: 6px;
+    color: #ee0101;
+    font-family: tahoma;
+    font-size: 11px;
+    padding: 4px 10px;
+    position: relative;
+    width: 150px;
+    z-index: 5001;
+}
+
+.right {
+    float: right;
+}
+
+
+.modalBackground {
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.modalPopup {
+    background-color: #FFFFFF;
+    width: 500px;
+    border: 3px solid #F05D31;
+    padding: 0;
+}
+
+    .modalPopup .header {
+        background-color: #F05D31;
+        height: 30px;
+        color: White;
+        line-height: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+
+    .modalPopup .body {
+        min-height: 50px;
+        line-height: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+
+.ModalPopupBG {
+    background-color: #666699;
+    filter: alpha(opacity=50);
+    opacity: 0.7;
+}
+
+.pop_main {
+    width: auto;
+    height: auto;
+    border: 7px solid #555555;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+.pop_bdr {
+    color: #555555;
+    font-weight: normal;
+    line-height: 22px;
+    padding-top: 5px;
+    text-align: left;
+    font-family: 'Comic Sans MS';
+}
+
+.pop_hdr {
+    background-color: #D67124;
+    border: 1px solid #fab430;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    height: 22px;
+    line-height: 14px;
+    margin: -11px;
+    padding: 4px;
+    text-align: left;
+}
+
+#divacceptterms {
+    height: 525px;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-right: 15px;
+    text-align: justify;
+    width: 705px;
+}
+
+.OrangeText_b {
+    color: red;
+    font-weight: bold;
+}
+
+.lblcen_b {
+    color: #AD1111;
+    font-weight: bold;
+    font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+}
+
+.left {
+    float: right;
+    margin-right: 350px;
+    margin-top: -19px;
+}
+
+.radio tr {
+    float: left !important;
+    width: 80px !important;
+    border: none;
+}
+
+.radio td {
+    border: medium none !important;
+    float: left !important;
+    text-align: left !important;
+    width: 125px !important;
+}
+
+.radio input {
+    float: left !important;
+    width: 10px !important;
+}
+
+.radio label {
+    display: inline-block !important;
+    float: left !important;
+    font-weight: normal !important;
+    width: 100px !important;
+}

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/SendSMS.aspx" hash="fffffffff0855c68" filehash="1bca51f52e4d2237" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_sendsms_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/SendSMS.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/SendSMS.aspx.cs" />
+    </filedeps>
+</preserve>

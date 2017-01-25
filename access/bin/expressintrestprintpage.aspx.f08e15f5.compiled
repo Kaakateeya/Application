@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/SearchResult/ExpressIntrestPrintPage.aspx" hash="fffffffff0855c68" filehash="10bd7e2933f43315" flags="110000" assembly="App_Web_aozbqssc" type="ASP.searchresult_expressintrestprintpage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/SearchResult/ExpressIntrestPrintPage.aspx" />
+        <filedep name="/kaakateeyaWeb/SearchResult/ExpressIntrestPrintPage.aspx.cs" />
+    </filedeps>
+</preserve>

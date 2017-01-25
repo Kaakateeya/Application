@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/SearchonContact.aspx" hash="fffffffff0855c68" filehash="13d7eccc5d23687f" flags="110000" assembly="App_Web_d0fdyhpt" type="ASP.employee_searchoncontact_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/SearchonContact.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/SearchonContact.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlSearchonContact.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlSearchonContact.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/AdvertisementSearch.aspx" hash="fffffffff0855c68" filehash="a0f5e521613b2b08" flags="110000" assembly="App_Web_griznpp0" type="ASP.employee_advertisementsearch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/AdvertisementSearch.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/AdvertisementSearch.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlAdvertisementSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlAdvertisementSearch.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

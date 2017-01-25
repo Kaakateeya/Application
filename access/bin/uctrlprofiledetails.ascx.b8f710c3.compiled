@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/uctrlProfileDetails.ascx" hash="fffffffff0855c68" filehash="36ba1719e145d4d1" flags="110000" assembly="App_Web_pukwdldi" type="ASP.usercontrols_registration_uctrlprofiledetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlProfileDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlProfileDetails.ascx.cs" />
+    </filedeps>
+</preserve>

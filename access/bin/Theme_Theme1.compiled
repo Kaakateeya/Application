@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/App_Themes/Theme1/" hash="fffffffff0855c68" filehash="ad683251e1b787d8" flags="110000" assembly="App_Theme_Theme1" type="ASP.Theme1">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/App_Themes/Theme1/" />
+    </filedeps>
+</preserve>

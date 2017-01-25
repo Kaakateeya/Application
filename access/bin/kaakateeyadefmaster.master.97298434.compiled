@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/kaakateeyadefMaster.master" hash="fffffffff0855c68" filehash="76523301342579dd" flags="110000" assembly="App_Web_cydthvkp" type="ASP.customer_new_customerdesignedpages_kaakateeyadefmaster_master">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/kaakateeyadefMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/kaakateeyadefMaster.master.cs" />
+    </filedeps>
+</preserve>

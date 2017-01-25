@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditEducationDetailsDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="6f74d59b39f4b2b2" flags="110000" assembly="App_Web_u42mpavh" type="ASP.employee_editeducationdetailsdeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditEducationDetailsDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditEducationDetailsDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditEducationDetailsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditEducationDetailsDeleteProfiles.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

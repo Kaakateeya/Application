@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditFamilyProfile.ascx" hash="fffffffff0855c68" filehash="e9051929a7ac71a2" flags="110000" assembly="App_Web_d1duwsew" type="ASP.usercontrols_edit_editfamilyprofile_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditFamilyProfile.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditFamilyProfile.ascx.cs" />
+    </filedeps>
+</preserve>

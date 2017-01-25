@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerEditEducation.aspx" hash="fffffffff0855c68" filehash="f6da329233501ffa" flags="110000" assembly="App_Web_evp0jsuv" type="ASP.customer_new_customerdesignedpages_customerediteducation_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerEditEducation.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerEditEducation.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerEditEducation.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerEditEducation.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Customerpersonaldetails.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Customerpersonaldetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editcustomerprofession.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editcustomerprofession.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Personprofilelink.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Personprofilelink.ascx.cs" />
+    </filedeps>
+</preserve>

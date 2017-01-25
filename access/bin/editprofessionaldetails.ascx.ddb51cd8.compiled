@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditProfessionalDetails.ascx" hash="fffffffff0855c68" filehash="694626b9cf148942" flags="110000" assembly="App_Web_d1duwsew" type="ASP.usercontrols_edit_editprofessionaldetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditProfessionalDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditProfessionalDetails.ascx.cs" />
+    </filedeps>
+</preserve>

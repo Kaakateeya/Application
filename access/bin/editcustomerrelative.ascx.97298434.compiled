@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditCustomerRelative.ascx" hash="fffffffff0855c68" filehash="496e390d84c5b953" flags="110000" assembly="App_Web_ari00dhw" type="ASP.customer_new_customerdesignedpages_editcustomerrelative_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditCustomerRelative.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditCustomerRelative.ascx.cs" />
+    </filedeps>
+</preserve>

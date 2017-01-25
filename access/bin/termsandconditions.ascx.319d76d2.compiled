@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/UserControls/TermsAndConditions.ascx" hash="fffffffff0855c68" filehash="9627299144f77b37" flags="110000" assembly="App_Web_vwmej12q" type="ASP.customer_usercontrols_termsandconditions_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/TermsAndConditions.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/TermsAndConditions.ascx.cs" />
+    </filedeps>
+</preserve>

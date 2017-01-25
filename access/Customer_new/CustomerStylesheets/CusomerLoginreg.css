@@ -1,0 +1,131 @@
+﻿
+#mask {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.textbox label::after {
+    display: none;
+}
+
+.textbox label::before {
+    display: none;
+}
+
+.login-popup {
+    background-image: url("../CutomerImages/Login-1.png");
+    border-radius: 8px;
+    display: none;
+    float: left;
+    font-size: 1.2em;
+    height: 182px;
+    left: 76.5%;
+    padding: 10px 15px;
+    position: fixed;
+    top: 175px;
+    width: 255px;
+    z-index: 99999;
+}
+
+img.btn_close {
+    float: right;
+    margin: -14px -13px 0 0;
+}
+
+fieldset {
+    border: medium none;
+    padding: 30px 5px;
+}
+
+.signin1 .textbox label {
+    display: block;
+    padding-bottom: 7px;
+}
+
+.signin1 .textbox span {
+    display: block;
+}
+
+.signin1 p, .signin1 span {
+    color: #bbb;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 15px;
+}
+
+.forgot {
+    color: grey;
+    text-decoration: none;
+}
+
+.signin1 .textbox input {
+    background: #ffffff none repeat scroll 0 0;
+    border-color: #c3c3c3;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    color: #929292;
+    font: 15px Arial,Helvetica,sans-serif;
+    padding: 10px 6px;
+    width: 230px;
+
+}
+
+.signin1 input:-moz-placeholder {
+    color: #bbb;
+    text-shadow: 0 0 2px #000;
+}
+
+.button1 {
+    background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top, #a00200, #a00200) repeat scroll 0 0 !important;
+    border-color: #a00200 !important;
+    border-radius: 8px !important;
+    border-style: none !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    float: right !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    margin-top: 10px !important;
+    padding: 8px 6px !important;
+    width: 90px !important;
+}
+
+.form-p .button1:hover {
+    background: #a00200 none repeat scroll 0 0;
+}
+
+.signin1 .dropdown input {
+    background: #ffffff none repeat scroll 0 0;
+    border-color: #c3c3c3;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    color: #929292;
+    float: left;
+    font: 15px Arial,Helvetica,sans-serif;
+    padding: 10px 6px;
+}
+
+.dropdown label::after {
+    display: none;
+}
+
+.dropdown label::before {
+    display: none;
+}
+
+.signin1 .dropdown label {
+    display: block;
+    padding-bottom: 7px;
+}
+
+.signin1 .dropdown span {
+    display: block;
+}

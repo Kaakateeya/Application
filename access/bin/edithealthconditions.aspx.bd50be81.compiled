@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditHealthConditions.aspx" hash="fffffffff0855c68" filehash="4a31f6b2840372ba" flags="110000" assembly="App_Web_pivaegga" type="ASP.employee_edithealthconditions_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditHealthConditions.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditHealthConditions.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditHealthDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditHealthDetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

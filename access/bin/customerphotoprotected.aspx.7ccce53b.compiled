@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Messages/CustomerPhotoProtected.aspx" hash="fffffffff0855c68" filehash="b99bb4d778d01432" flags="110000" assembly="App_Web_30yhhwro" type="ASP.customer_messages_customerphotoprotected_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Messages/CustomerPhotoProtected.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Messages/CustomerPhotoProtected.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/MyprofileUpgradeMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/MyprofileUpgradeMenu.ascx.cs" />
+    </filedeps>
+</preserve>

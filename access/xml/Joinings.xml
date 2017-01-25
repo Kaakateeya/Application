@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<key name="1">
+		<value> from Cust_Login cl</value>
+  </key>
+	<key name="2">
+		<value> left join cust_Basicinfo cb on cl.Cust_ID=cb.Cust_ID  </value>
+	</key>
+	<key name="3">
+		<value> left join Cust_Details cd on cd.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="4">
+		<value> left join Cust_Family cf on cf.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="5">
+		<value> left join Cust_Address ca on cf.Cust_Family_ID=ca.Cust_Family_ID</value>
+	</key>
+	<key name="6">
+		<value> left join Cust_Education ce on ce.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="7">
+		<value> left join Cust_Profession cp on cp.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="8">
+		<value> left join Cust_Horoscope ch on ch.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="9">
+		<value> left join Cust_Property cpro on cpro.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="10">
+		<value> left join Cust_ProfileGrades1 cpg on cpg.Cust_ID=cb.Cust_ID </value>
+	</key>
+	<key name="11">
+		<value> left join Cust_Emails cemail on cemail.Cust_Family_ID=cf.Cust_Family_ID </value>
+	</key>
+	<key name="12">
+		<value> left join Cust_ContactNumbers cconNum on cconNum.Cust_Family_ID=cf.Cust_Family_ID </value>
+	</key>
+	<key name="13">
+		<value> left join Cust_Payments cpay on cpay.Cust_ID=cb.Cust_ID </value>
+	</key>
+	<key name="14">
+		<value> left join Cust_Children cchild on cchild.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="15">
+		<value> left join Cust_Spouse cspou on cspou.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="16">
+		<value> left join Cust_CitizenShip ccitizen on ccitizen.Cust_ID=cb.Cust_ID</value>
+	</key>
+	<key name="17">
+		<value> left join Adm_Branch ab on cb.BranchID=ab.Branch_ID</value>
+	</key>
+	<key name="18">
+		<value> left join Emp_Advertisement_Given Ed on cb.Cust_ID=Ed.CustID</value>
+	</key>
+	<key name="19">
+		<value> left join Cust_PartnerPreferences_Basic cppb on cb.Cust_ID=cppb.Cust_ID</value>
+	</key>
+	<key name="20">
+		<value> left join Cust_PartnerPreferences_Stars cpps on cb.Cust_ID=cpps.CustID</value>
+	</key>
+	<key name="21">
+		<value> left join Cust_PartnerPreferences_Location cppl on cb.Cust_ID=cppl.Cust_ID</value>
+	</key>
+	<key name="22">
+		<value> left join Cust_PartnerPreferences_Education cppe on cb.Cust_ID=cppe.Cust_ID</value>
+	</key>
+	<key name="23">
+		<value> left join Cust_PartnerPreferences_Profession cppp on cb.Cust_ID=cppp.Cust_ID</value>
+	</key>
+	<key name="24">
+		<value> left join Cust_Photos cphoto on cb.Cust_ID=cphoto.Cust_ID</value>
+	</key>
+	<key name="25">
+		<value> left join Cust_HoroscopeImage choro on cb.Cust_ID=choro.Cust_ID</value>
+	</key>
+	<key name="26">
+		<value> left join Cust_Reference cr on cb.Cust_ID=cr.Cust_ID</value>
+	</key>
+	<key name="27">
+		<value> left join Cust_Address caa on cf.Cust_Family_ID=caa.Cust_Family_ID</value>
+	</key>
+  <key name="28">
+    <value> left join Cust_Family cfmother  on cfmother.Cust_ID=cb.Cust_ID</value>
+  </key>
+  <key name="29">
+    <value> left join Cust_Address camother on cf.Cust_Family_ID=camother.Cust_Family_ID</value>
+  </key>
+  <key name="30">
+    <value> left join Cust_Family cfsblings  on cfsblings.Cust_ID=cb.Cust_ID</value>
+  </key>
+  <key name="31">
+    <value> left join Cust_Family cfsblingsnew  on cfsblingsnew.Cust_ID=cb.Cust_ID</value>
+  </key>
+  <key name="333">
+    <value>1</value>
+  </key>
+  <key name="password">
+    <value>Photopassword</value>
+  </key>
+</root>

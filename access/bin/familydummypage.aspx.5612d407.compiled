@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/familydummypage.aspx" hash="fffffffff0855c68" filehash="53fd00e10c5de3b8" flags="110000" assembly="App_Web_mr1jy1jz" type="ASP.designedpages_familydummypage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/familydummypage.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/familydummypage.aspx.cs" />
+    </filedeps>
+</preserve>

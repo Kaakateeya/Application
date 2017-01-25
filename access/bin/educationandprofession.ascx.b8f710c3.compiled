@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/EducationAndProfession.ascx" hash="fffffffff0855c68" filehash="576f65c70b27ebc5" flags="110000" assembly="App_Web_3ojkkqg1" type="ASP.usercontrols_registration_educationandprofession_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/EducationAndProfession.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/EducationAndProfession.ascx.cs" />
+    </filedeps>
+</preserve>

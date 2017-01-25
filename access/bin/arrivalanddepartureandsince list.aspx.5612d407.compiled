@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/ArrivalandDepartureAndSince List.aspx" hash="fffffffff0855c68" filehash="dc34750c30805331" flags="110000" assembly="App_Web_0bvwikc4" type="ASP.designedpages_arrivalanddepartureandsince_list_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/ArrivalandDepartureAndSince List.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/ArrivalandDepartureAndSince List.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/AllSlideShow.aspx" hash="fffffffff0855c68" filehash="d9d80ba279addfd6" flags="110000" assembly="App_Web_53tl3brs" type="ASP.customer_new_employee_new_allslideshow_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/AllSlideShow.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/AllSlideShow.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/CommonMarkttingEmployee.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/CommonMarkttingEmployee.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrlBothOneSide.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrlBothOneSide.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

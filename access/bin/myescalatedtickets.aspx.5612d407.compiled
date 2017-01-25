@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/MyEscalatedTickets.aspx" hash="fffffffff0855c68" filehash="7f2516d3dc03549c" flags="110000" assembly="App_Web_p3ewi4sk" type="ASP.designedpages_myescalatedtickets_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/MyEscalatedTickets.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/MyEscalatedTickets.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

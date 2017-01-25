@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/SearchResult/Viewprofile.aspx" hash="fffffffff0855c68" filehash="56b5713cc4ea501c" flags="110000" assembly="App_Web_ginb1052" type="ASP.searchresult_viewprofile_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/SearchResult/Viewprofile.aspx" />
+        <filedep name="/kaakateeyaWeb/SearchResult/Viewprofile.aspx.cs" />
+    </filedeps>
+</preserve>

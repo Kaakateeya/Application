@@ -1,0 +1,558 @@
+﻿body
+{
+    font-family: Arial, Verdana, Geneva, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin: 0 auto;
+    background-color: #feeecc;
+}
+
+table
+{
+    font-family: Arial, Verdana, Geneva, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #6a6a6a;
+    padding: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+tr td th
+{
+    font-family: Arial, Verdana, Geneva, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #6a6a6a;
+}
+
+div
+{
+    font-family: Arial, Verdana, Geneva, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #6a6a6a;
+}
+
+p
+{
+    font-size: 12px; /*color: #58a718;*/
+    color: #ffa500;
+}
+
+.divc
+{
+    text-align: center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#body
+{
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+}
+
+.divBox_1
+{
+    padding: 10px 10px 10px 65px;
+    float:left;
+    background-color: #f8f6f7;
+    width: 950px;
+    margin: 0 auto;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #f35c31;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+}
+
+.divBox_2
+{
+    background-color: #f8f6f7;
+    width: 950px;
+    margin: 0 auto;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #f35c31;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    height: 150px;
+}
+
+.divInBox_1
+{
+    
+   padding: 10px 10px 10px 50px;
+   float:left;
+   
+}
+
+
+
+.required
+{
+    font-size: 16px;
+    color: red;
+    text-align: left;
+}
+
+.mandatory
+{
+    font-size: 13px;
+    color: red;
+    text-align: left;
+    float:right;
+    width: auto;
+    margin: 5px 0 5px 0px;
+   
+}
+.mandatory1
+{
+    font-size: 13px;
+    color: red;
+    text-align: left;
+    float: left;
+    width: auto;
+    margin: 5px 0 5px 10px;
+   
+}
+
+.regLabel
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #393738;
+    height: 25px;
+    vertical-align: middle;
+    float: left;
+    text-align: left;
+    width: 198px;
+    margin:8px 0px 0px 75px;
+    
+    }
+
+.col
+{
+    font-size: 16px;
+    font-weight: normal;
+    color: #393738;
+    height: 25px;
+    vertical-align: middle;
+    float: left;
+    text-align: right;
+    width: 20px;
+    margin:8px 20px 0px 0px;
+}
+
+.regLabelSmall
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #393738;
+    height: 25px;
+    vertical-align: bottom;
+    float: right;
+    text-align: right;
+    width: 35px;
+   
+}
+
+.regLabelSmall_1
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #393738;
+    height: 25px;
+    vertical-align: bottom;
+    float: right;
+    text-align: right;
+    width: 45px;
+    
+}
+
+.regLabelMedium
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #393738;
+    height: 25px;
+    vertical-align: middle;
+    float: left;
+    text-align: right;
+    width: 210px;
+    margin:4px 20px 0px -22px;
+}
+
+
+.inTextField
+{
+    float: left;
+    /*border: 1px solid #adadaf;*/
+    font-family: arial,verdana;
+    height: 22px;
+    padding: 0px 0 0 5px;
+    width: 200px;
+    margin-right:10px;
+}
+
+.inTextFieldPhone
+{
+    float: left;
+    border: 1px solid #adadaf;
+    font-family: arial,verdana;
+    height: 22px;
+    padding: 0px 0 0 5px;
+    width: 120px;
+}
+
+
+.comSelectField
+{
+   /* border: 1px solid #adadaf; */
+    color: #3a3839;
+    font-family: arial,verdana;
+    height: 25px;
+    padding: 1px 1px 2px 5px;
+    width: 206px;
+    float:left;
+    margin-right:10px;
+}
+
+.div_200
+{
+    width: 200px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+}
+
+.div_emp_250
+{
+    width: 250px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+}
+.div_emp_350
+{
+    width: 350px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+}
+
+.div_emp_m
+{
+    width: 575px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+    height: 25px;
+}
+
+.div_emp_m_a
+{
+    width: auto;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+    height: auto;
+}
+
+.div_emp_m2
+{
+    width: 575px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+    height: auto;
+}
+
+.div_emp_450
+{
+    width: 25%;
+    float: right;
+    margin: 5px 0 5px 0px;
+}
+.div_emp_125
+{
+    width: 125px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+}
+.div_emp_Save
+{
+    width: 125px;
+    color: #000000;
+    float: left;
+    margin: 5px 0 5px 0px;
+}
+.div_emp_a
+{
+    width: 100%;
+    
+    float: left;
+    margin: 5px 0 5px 0px;
+    
+    color: #393738;
+    height: 15px;
+    vertical-align: middle;
+    float: left;
+    text-align: left;
+    
+    margin:8px 0px 0px 75px;
+}
+
+.div_emp_a_a
+{
+    width: auto;
+    
+   
+}
+
+.div_emp_b
+{
+    width: 100%;
+    
+    float: left;
+    margin: 5px 0 5px 0px;
+    
+    color: #393738;
+    height: 15px;
+    vertical-align: middle;
+    float: left;
+    text-align: left;
+    
+    margin:-15px 0px 0px 75px;
+}
+
+.rad_b
+{
+    float: left;
+    border: 1px solid #adadaf;
+    height: 22px;
+    padding: 0px 0 0 5px;
+    width: auto;
+    margin-right:15px;
+}
+
+
+/* from Kaakateeya.css classes start*/
+
+/*Input fields(email, number, password, tel, text, url, file) style for show, hover and focus -- Starts*/
+input[type=email], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=url], input[type=file]
+{
+    display: inline-block;
+    height: 27px;
+    width: 200px;
+    line-height: 25px;
+    margin: 0;
+    padding: 0 8px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+input[type=email]:hover, input[type=number]:hover, input[type=password]:hover, input[type=tel]:hover, input[type=text]:hover, input[type=url]:hover, input[type=file]:hover
+{
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=url]:focus, input[type=file]:focus
+{
+    outline: none;
+    border: 1px solid #793532;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+/*Input fields(email, number, password, tel, text, url, file) style for show, hover and focus -- Ends*/
+
+/*Textarea style for show, hover and focus -- Starts*/
+textarea
+{
+    resize: none;
+    display: inline-block;
+    height: 100px;
+    width: 300px;
+    line-height: 25px;
+    margin: 0;
+    padding: 0 8px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+textarea:hover
+{
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+textarea:focus
+{
+    outline: none;
+    border: 1px solid #793532;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+/*Textarea style for show, hover and focus -- Ends*/
+
+/*Input fields(Dropdown) style for show, hover and focus -- Starts*/
+.ddlInput
+{
+    display: inline-block;
+    height: 27px;
+    width: 200px;
+    padding-top: 0px;
+    vertical-align: middle;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ddlInput_1
+{
+    display: inline-block;
+    height: 27px;
+    width: auto;
+    padding-top: 0px;
+    vertical-align: middle;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ddlInput:hover
+{
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.ddlInput:focus
+{
+    outline: none;
+    border: 1px solid #793532;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+/*Input fields(Dropdown) style for show, hover and focus -- Ends*/
+
+/*Input fields(Select) style for show, hover and focus -- Starts*/
+.selInput
+{
+    display: inline-block;
+    height: 70px;
+    width: 200px;
+    padding-top: 4px;
+    vertical-align: middle;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.selInput:hover
+{
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.selInput:focus
+{
+    outline: none;
+    border: 1px solid #793532;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+/*Input fields(Select) style for show, hover and focus -- Ends*/
+
+/*Input fields(Other) style for show, hover and focus -- Starts*/
+.txtOther
+{
+    display: inline-block;
+    height: 70px;
+    width: 27px;
+    padding-top: 2px;
+    vertical-align: middle;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.txtOther:hover
+{
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.txtOther:focus
+{
+    outline: none;
+    border: 1px solid #793532;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* from Kaakateeya.css classes end*/

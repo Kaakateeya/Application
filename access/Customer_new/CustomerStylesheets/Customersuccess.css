@@ -1,0 +1,142 @@
+.couple
+{
+    float: left;
+    width: 100%;
+}
+.success-left
+{
+    float: left;
+    margin: 0 15px;
+    padding: 20px 0;
+    width: 228px;
+}
+.success-left > img
+{
+    display: table-caption;
+    margin-left: auto;
+    margin-right: auto;
+}
+.success-right
+{
+    float: left;
+    padding: 20px 0;
+    width: 718px;
+}
+.success-right-col1
+{
+    width: 360px;
+    float: left;
+}
+.success-right-col2
+{
+    width: 360px;
+}
+.success-right-col1 > p
+{
+    color: #373737;
+    font-family: helvetica;
+    font-size: 16px;
+}
+.success-right-col2 > p
+{
+    color: #373737;
+    font-family: helvetica;
+    font-size: 16px;
+}
+.success-right-row1
+{
+    float: left;
+    padding: 10px 0;
+    width: 725px;
+}
+.success-right-row1 > p
+{
+    color: #9f0400;
+    font-family: helvetica;
+    font-size: 16px;
+}
+.success-right-row2
+{
+    float: left;
+    width: 725px;
+}
+.success-right-row2 > p
+{
+    color: #363636;
+    font-family: helvetica;
+    font-size: 16px;
+}
+
+.success-right-row2 textarea
+{
+    color: #363636;
+    font-family: helvetica;
+    font-size: 16px;
+    resize: none;
+}
+.message
+{
+    width: 150px !important;
+    display: inline-block;
+}
+.inner_cont tr
+{
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 6px;
+    color: #9f0400;
+}
+.inner_cont
+{
+    padding: 25px 10px;
+    background: #fff;
+    float: left;
+}
+
+
+.inner_cont h2
+{
+    color: #fff;
+    background: #9F0400; /* margin: 0 15px;*/
+    padding: 10px 15px;
+    font-size: 16px;
+}
+.inner_cont h3
+{
+    padding: 15px 30px;
+    font-size: 14px;
+    color: #3E3E3E;
+}
+.admin-icons-bg {
+    background: #eceaeb none repeat scroll 0 0;
+    float: left;   
+    margin-top: 15px;
+    padding: 10px;
+    width: 960px;
+}
+.admin-icons {
+    margin: 0 auto;
+    width: 190px;
+}
+.ImageButton {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.admin-icons > span {
+    color: #979596;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0 5px;
+}
+.SuccessRow1 {
+    border-bottom: 5px solid #9f0400;
+    border-left: 1px solid #9f0400;
+    border-right: 1px solid #9f0400;
+    float: left;
+    width: 977px;
+}

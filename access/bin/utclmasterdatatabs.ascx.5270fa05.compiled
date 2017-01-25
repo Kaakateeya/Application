@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/MasterDataManagement/UserControls/utclMasterDataTabs.ascx" hash="fffffffff0855c68" filehash="1c55ccb24bca8fae" flags="110000" assembly="App_Web_ioluurtk" type="ASP.masterdatamanagement_usercontrols_utclmasterdatatabs_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/UserControls/utclMasterDataTabs.ascx" />
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/UserControls/utclMasterDataTabs.ascx.cs" />
+    </filedeps>
+</preserve>

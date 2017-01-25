@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditPostedBy.aspx" hash="fffffffff0855c68" filehash="41741fe0b4591f03" flags="110000" assembly="App_Web_xnuohdt2" type="ASP.employee_editpostedby_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditPostedBy.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditPostedBy.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPostedBy.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPostedBy.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

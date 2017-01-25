@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/View/ViewCustLifeStyle.aspx" hash="fffffffff0855c68" filehash="f6fa82b220f3f30f" flags="110000" assembly="App_Web_faq4dl4l" type="ASP.customer_view_viewcustlifestyle_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/View/ViewCustLifeStyle.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/View/ViewCustLifeStyle.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewLifeStyle.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewLifeStyle.ascx.cs" />
+    </filedeps>
+</preserve>

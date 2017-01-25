@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/Totalseartest.aspx" hash="fffffffff0855c68" filehash="8a7c8bb1f41e1648" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_totalseartest_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/Totalseartest.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/Totalseartest.aspx.cs" />
+    </filedeps>
+</preserve>

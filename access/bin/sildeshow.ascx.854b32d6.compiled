@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/SildeShow.ascx" hash="fffffffff0855c68" filehash="2e1e80dfc1f91e1e" flags="110000" assembly="App_Web_caghvjl0" type="ASP.customer_sildeshow_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/SildeShow.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/SildeShow.ascx.cs" />
+    </filedeps>
+</preserve>

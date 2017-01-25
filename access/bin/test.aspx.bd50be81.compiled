@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/test.aspx" hash="fffffffff0855c68" filehash="c1ca7ec4c0ac4011" flags="110000" assembly="App_Web_ty5a1ydp" type="ASP.employee_test_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/test.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/test.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlTreeMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlTreeMenu.ascx.cs" />
+    </filedeps>
+</preserve>

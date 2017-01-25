@@ -3156,6 +3156,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
         scope.orderStatus = '';
         scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
+			
             console.log(response.data);
             if (response.data !== undefined && response.data !== null) {
                 var paymentStatus = (response.data).split(',');

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/UnassignedProfiles.aspx" hash="fffffffff0855c68" filehash="29af0cdf1358df6b" flags="110000" assembly="App_Web_g23elhnq" type="ASP.designedpages_unassignedprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/UnassignedProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/UnassignedProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

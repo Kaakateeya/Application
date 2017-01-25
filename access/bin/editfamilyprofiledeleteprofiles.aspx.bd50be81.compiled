@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditFamilyProfileDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="b4a3c980cfa68167" flags="110000" assembly="App_Web_h5errbgr" type="ASP.employee_editfamilyprofiledeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditFamilyProfileDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditFamilyProfileDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditFamilyProfileDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditFamilyProfileDeleteProfiles.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Search/KeywordSearchPage.aspx" hash="fffffffff0855c68" filehash="2376d8270ce25920" flags="110000" assembly="App_Web_1zovue3h" type="ASP.customer_search_keywordsearchpage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/KeywordSearchPage.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/KeywordSearchPage.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/RightSideContriolOfSearchPages.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/RightSideContriolOfSearchPages.ascx.cs" />
+    </filedeps>
+</preserve>

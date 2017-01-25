@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ViewAstroDetailsDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="c78b07dbe1fadb8f" flags="110000" assembly="App_Web_pivaegga" type="ASP.employee_viewastrodetailsdeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewAstroDetailsDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewAstroDetailsDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewAstroDetailsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewAstroDetailsDeleteProfiles.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

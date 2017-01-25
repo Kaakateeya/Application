@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/RefineSearch.ascx" hash="fffffffff0855c68" filehash="541a13d2f8d5ba1e" flags="110000" assembly="App_Web_vgrpwts2" type="ASP.customer_new_uctrlcustomernew_refinesearch_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/RefineSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlCustomerNew/RefineSearch.ascx.cs" />
+    </filedeps>
+</preserve>

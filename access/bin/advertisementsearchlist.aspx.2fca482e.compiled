@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Search/AdvertisementSearchlist.aspx" hash="fffffffff0855c68" filehash="568c8e3d1720bc8f" flags="110000" assembly="App_Web_enxieszi" type="ASP.customer_search_advertisementsearchlist_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/AdvertisementSearchlist.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/AdvertisementSearchlist.aspx.cs" />
+    </filedeps>
+</preserve>

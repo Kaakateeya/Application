@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlstarlanguage.ascx" hash="fffffffff0855c68" filehash="149d7f66706eb43d" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlstarlanguage_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlstarlanguage.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlstarlanguage.ascx.cs" />
+    </filedeps>
+</preserve>

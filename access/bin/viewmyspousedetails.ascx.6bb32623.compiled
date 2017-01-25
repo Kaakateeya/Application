@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/ViewMySpouseDetails.ascx" hash="fffffffff0855c68" filehash="90df89e532d88f6f" flags="110000" assembly="App_Web_yxcg5ljh" type="ASP.usercontrols_viewmyspousedetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/ViewMySpouseDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewMySpouseDetails.ascx.cs" />
+    </filedeps>
+</preserve>

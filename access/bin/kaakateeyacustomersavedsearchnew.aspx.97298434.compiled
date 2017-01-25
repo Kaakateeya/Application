@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomersavedsearchNew.aspx" hash="fffffffff0855c68" filehash="62807557fd3ab0b0" flags="110000" assembly="App_Web_v5tic4u1" type="ASP.customer_new_customerdesignedpages_kaakateeyacustomersavedsearchnew_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CommonSearchResult.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CommonSearchResult.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomersavedsearchNew.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyaCustomersavedsearchNew.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/Incompleteprofileinfo.aspx" hash="fffffffff0855c68" filehash="b0c953818b490048" flags="110000" assembly="App_Web_2fxs13nl" type="ASP.designedpages_incompleteprofileinfo_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/Incompleteprofileinfo.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/Incompleteprofileinfo.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

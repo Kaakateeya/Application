@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/PropertyInfo.aspx" hash="fffffffff0855c68" filehash="582a257c00a4459" flags="110000" assembly="App_Web_cq2kxdpz" type="ASP.employee_propertyinfo_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/PropertyInfo.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/PropertyInfo.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Static/Disclaimer.aspx" hash="fffffffff0855c68" filehash="f5a44377d311fb2c" flags="110000" assembly="App_Web_iddte1bj" type="ASP.customer_static_disclaimer_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Static/Disclaimer.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Static/Disclaimer.aspx.cs" />
+    </filedeps>
+</preserve>

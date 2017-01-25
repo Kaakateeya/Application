@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditMotherBrotherDetails.aspx" hash="fffffffff0855c68" filehash="caef9676f46001d" flags="110000" assembly="App_Web_griznpp0" type="ASP.employee_editmotherbrotherdetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditMotherBrotherDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditMotherBrotherDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditMotherBrotherDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditMotherBrotherDetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

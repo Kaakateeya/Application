@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Edit/EditCustLocationDetails.aspx" hash="fffffffff0855c68" filehash="e192c33b39cd8ec9" flags="110000" assembly="App_Web_cjbtvnnk" type="ASP.customer_edit_editcustlocationdetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustLocationDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustLocationDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditLocationDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditLocationDetails.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/OutgoingCall.aspx" hash="fffffffff0855c68" filehash="f423690d3727fb1f" flags="110000" assembly="App_Web_mex3qxrj" type="ASP.designedpages_outgoingcall_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/OutgoingCall.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/OutgoingCall.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlTicketInformation.ascx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlTicketInformation.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewReminder.ascx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewReminder.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/Outgoingincomeinguctrl.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/Outgoingincomeinguctrl.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

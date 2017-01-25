@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/EmailBounceEntryForm.aspx" hash="fffffffff0855c68" filehash="3f43a0e155d6df22" flags="110000" assembly="App_Web_pxw3loce" type="ASP.designedpages_emailbounceentryform_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/EmailBounceEntryForm.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/EmailBounceEntryForm.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

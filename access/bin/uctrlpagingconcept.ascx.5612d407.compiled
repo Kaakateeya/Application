@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/uctrlPagingConcept.ascx" hash="fffffffff0855c68" filehash="9c0a3ff134778b2c" flags="110000" assembly="App_Web_pyq4qqn1" type="ASP.designedpages_uctrlpagingconcept_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlPagingConcept.ascx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlPagingConcept.ascx.cs" />
+    </filedeps>
+</preserve>

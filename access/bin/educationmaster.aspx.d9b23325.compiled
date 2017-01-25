@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/MasterDataManagement/EducationMaster.aspx" hash="fffffffff0855c68" filehash="aa5f89542be4e091" flags="110000" assembly="App_Web_lj1rvukz" type="ASP.masterdatamanagement_educationmaster_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/EducationMaster.aspx" />
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/EducationMaster.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/UserControls/utclMasterDataTabs.ascx" />
+        <filedep name="/kaakateeyaWeb/MasterDataManagement/UserControls/utclMasterDataTabs.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

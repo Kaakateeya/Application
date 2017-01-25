@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Edit/EditCustProfessionDetailsDeletProfiles.aspx" hash="fffffffff0855c68" filehash="6f3d63962c98d6d2" flags="110000" assembly="App_Web_cjbtvnnk" type="ASP.customer_edit_editcustprofessiondetailsdeletprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustProfessionDetailsDeletProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustProfessionDetailsDeletProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditCustomerProfessionalDetailsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditCustomerProfessionalDetailsDeleteProfiles.ascx.cs" />
+    </filedeps>
+</preserve>

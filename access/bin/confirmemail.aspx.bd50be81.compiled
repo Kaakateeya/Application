@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ConfirmEmail.aspx" hash="fffffffff0855c68" filehash="5c4c2e0e9174f3e0" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_confirmemail_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/ConfirmEmail.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/ConfirmEmail.aspx.cs" />
+    </filedeps>
+</preserve>

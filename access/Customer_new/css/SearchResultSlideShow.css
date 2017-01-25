@@ -1,0 +1,75 @@
+﻿body {
+}
+  .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 100%;
+            margin: auto;
+            height: 100%;
+        }
+
+        .Heart {
+            color: rgba(170, 71, 8, 0.63);
+            font-size: 23px;
+        }
+
+            .Heart:hover {
+                color: red !important;
+                font-size: 23px;
+            }
+
+        .num, .numpopup {
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            width: 116px;
+            text-align: center;
+        }
+
+        .Heartbook {
+            color: rgb(150, 131, 131);
+            font-size: 18px;
+        }
+
+            .Heartbook:hover {
+                color: red;
+                font-size: 18px;
+            }
+
+        #carouselButtons {
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .pop_content_mydiv {
+            display: block;
+            width: 100%;
+            max-height: 500px;
+            overflow-y: scroll;
+        }
+
+        .carousel-control.left {
+            background-repeat: repeat-x;
+            background-image: linear-gradient(to right,rgba(219, 198, 198, 0.44) 0,rgba(0,0,0,.0001) 100%);
+        }
+
+        .carousel-control.right {
+            right: 0;
+            left: auto;
+            background-repeat: repeat-x;
+            background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(219, 198, 198, 0.44) 100%);
+        }
+
+        .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+            margin-right: -15px;
+            color: black;
+        }
+
+        .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+            margin-left: -15px;
+            color: black;
+        }
+
+        #backgroungcolordiv {
+            position: relative;
+            padding: 0px;
+        }

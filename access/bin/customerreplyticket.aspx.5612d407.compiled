@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/CustomerReplyTicket.aspx" hash="fffffffff0855c68" filehash="a5e3317be4e65bea" flags="110000" assembly="App_Web_1rq4dujl" type="ASP.designedpages_customerreplyticket_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/CustomerReplyTicket.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/CustomerReplyTicket.aspx.cs" />
+    </filedeps>
+</preserve>

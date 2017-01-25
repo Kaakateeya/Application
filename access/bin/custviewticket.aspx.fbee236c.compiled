@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Ticketing/CustViewTicket.aspx" hash="fffffffff0855c68" filehash="c64bb040b3c9182f" flags="110000" assembly="App_Web_0sxpsdia" type="ASP.customer_ticketing_custviewticket_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/Ticketing/CustViewTicket.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Ticketing/CustViewTicket.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+    </filedeps>
+</preserve>

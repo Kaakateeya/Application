@@ -1,0 +1,101 @@
+﻿body {
+}
+ .buttoncls {
+        margin-left: 6px;
+    }
+
+
+    .carousel-control {
+        width: 7%;
+    }
+
+    .radio {
+        color: gray;
+        text-transform: capitalize !important;
+        font-size: 13px !important;
+    }
+
+    .fa-heart {
+        color: #f00;
+    }
+
+    .fa-bolt {
+        top: -5%;
+        left: 2%;
+        font-size: 70%;
+    }
+
+    .pop_label_left {
+        width: 24%;
+    }
+
+    .popover-content .row:nth-of-type(even) {
+        background: #e0e0e0;
+    }
+
+    .popover-title {
+        text-align: center;
+    }
+
+    .popover {
+        max-width: 100%;
+    }
+
+    .maroon {
+        color: maroon;
+    }
+
+    .pop_controls_right textarea {
+        width: 96%;
+    }
+
+    .form-control {
+        width: 96%;
+    }
+
+    .popover-content {
+        height: 400px;
+        overflow-y: scroll;
+    }
+
+    .btn-success-outline {
+        color: rgb(35,82,124);
+        background-color: transparent;
+        background-image: none;
+        border-color: rgb(35,82,124);
+    }
+
+        .btn-success-outline:hover {
+            color: #fff;
+            background-color: orange;
+            border-color: orange;
+        }
+
+    .selected img {
+        opacity: 0.5;
+    }
+
+    .carousel-inner > .item > img {
+        max-width: 80%;
+        height: 100%;
+        max-height: 800px;
+        margin: auto;
+    }
+
+    #tabs > li.active > a {
+        color: maroon !important;
+    }
+
+    #tabs > li > a {
+        color: gray !important;
+    }
+
+    .pop_label_left:after {
+        content: "*";
+        color: red;
+    }
+
+    .Notrequired:after {
+        content: "*";
+        color: white;
+    }

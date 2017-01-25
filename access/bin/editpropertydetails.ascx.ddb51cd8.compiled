@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPropertyDetails.ascx" hash="fffffffff0855c68" filehash="adf892287f287ae4" flags="110000" assembly="App_Web_pu4ki1cq" type="ASP.usercontrols_edit_editpropertydetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPropertyDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPropertyDetails.ascx.cs" />
+    </filedeps>
+</preserve>

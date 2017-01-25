@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ViewProfileDetails.aspx" hash="fffffffff0855c68" filehash="418ee90bd77d3e2d" flags="110000" assembly="App_Web_gm3bmzss" type="ASP.employee_viewprofiledetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewProfileDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewProfileDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewProfileDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewProfileDetails.ascx.cs" />
+    </filedeps>
+</preserve>

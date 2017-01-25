@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/ViewParentDetails.ascx" hash="fffffffff0855c68" filehash="4a30caa55683c75f" flags="110000" assembly="App_Web_fpkuv42b" type="ASP.usercontrols_viewparentdetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/ViewParentDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewParentDetails.ascx.cs" />
+    </filedeps>
+</preserve>

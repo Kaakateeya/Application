@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Ticketing/CImage.aspx" hash="fffffffff0855c68" filehash="58b18be5252776c0" flags="110000" assembly="App_Web_0sxpsdia" type="ASP.customer_ticketing_cimage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/Ticketing/CImage.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Ticketing/CImage.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditAstroDisplaySettingsDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="d45cf29a3a2ac08b" flags="110000" assembly="App_Web_pivaegga" type="ASP.employee_editastrodisplaysettingsdeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditAstroDisplaySettingsDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditAstroDisplaySettingsDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAstroDisplaySettingsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAstroDisplaySettingsDeleteProfiles.ascx.cs" />
+    </filedeps>
+</preserve>
