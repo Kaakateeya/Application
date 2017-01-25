@@ -106,7 +106,7 @@ app.config(function(reCAPTCHAProvider) {
         theme: 'clean'
     });
 });
-app.run(function($rootScope, $state) {
+app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
@@ -129,8 +129,25 @@ app.run(function($rootScope, $state) {
                     }
                 }
             }
+        } else {
+            debugger;
+            console.log(to.data);
+            if (to.name === 'General') {
+                if (sessionStorage.getItem('cust.id') !== null) {
+                    var misStatuss = sessionStorage.getItem('missingStatus');
+                    if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
+                        console.log('success');
+                        if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
+                            $state.go('mobileverf');
+                            e.preventDefault();
+                        } else if (misStatuss === '1' || misStatuss === '2' || misStatuss === '3' || misStatuss === '4' || misStatuss === '5') {
+                            // window.location = "missingfields/" + misStatus;
+                            $state.go("missingfields", { id: misStatuss });
+                            e.preventDefault();
+                        }
+                    }
+                }
+            }
         }
-
     });
-
 });

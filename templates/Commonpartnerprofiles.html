@@ -32,7 +32,7 @@
                 </div>
                 <div class="span6">
                     <table>
-                        <caption>{{data.NAME}}</caption>
+                        <caption ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false">{{data.NAME}}</caption>
                         <label id="labaljdjs" ng-hide="true">{{$index}}</label>
                         <tbody>
                             <tr>
@@ -126,7 +126,7 @@
                     <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
-                    <p class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
+                    <p ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Name</label>
                         <span>{{data.NAME}}</span>
                     </p>
