@@ -159,19 +159,18 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             alerts.forgetpasswordhide();
         };
         scope.agefromtoagechange = function(from, to, flag) {
-            debugger;
             switch (flag) {
                 case 1:
-                    if ((parseInt(from)) !== 0 && (parseInt(to)) !== 0) {
-                        if (parseInt(from) > parseInt(to)) {
+                    if ((parseInt(scope.Agefrom)) !== 0 && (parseInt(scope.Ageto)) !== 0) {
+                        if (parseInt(scope.Agefrom) > parseInt(scope.Ageto)) {
                             scope.Agefrom = 0;
                             alert('Please enter valid From Age');
                         }
                     }
                     break;
                 case 2:
-                    if ((parseInt(from)) !== 0 && (parseInt(to)) !== 0) {
-                        if (parseInt(from) > parseInt(to)) {
+                    if ((parseInt(scope.Agefrom)) !== 0 && (parseInt(scope.Ageto)) !== 0) {
+                        if (parseInt(scope.Agefrom) > parseInt(scope.Ageto)) {
                             scope.Ageto = 0;
                             alert('Please enter valid To Age');
                         }
