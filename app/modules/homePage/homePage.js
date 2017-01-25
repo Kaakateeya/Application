@@ -159,6 +159,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             alerts.forgetpasswordhide();
         };
         scope.agefromtoagechange = function(from, to, flag) {
+            debugger;
             switch (flag) {
                 case 1:
                     if ((parseInt(from)) !== 0 && (parseInt(to)) !== 0) {
