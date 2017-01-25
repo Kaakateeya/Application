@@ -2881,7 +2881,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             srchobject.PageName = null;
             srchobject.SavedSearchresultid = null;
             srchobject.Searchresult = null;
-            debugger;
             sessionStorage.setItem("homepageobject", JSON.stringify(srchobject));
             route.go('General', { id: 2 });
         };
@@ -3464,7 +3463,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 Caste: []
             };
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
-            debugger;
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
