@@ -1,16 +1,14 @@
 app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'alert', 'myAppFactory',
     function(scope, stateParams, http, alerts, myAppFactory) {
-        console.log(stateParams.data);
         scope.paymentobject = {};
         scope.orderid = '';
         scope.trackingID = '';
         scope.orderStatus = '';
         scope.paymentobject = JSON.parse(sessionStorage.getItem("paymentobject"));
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
-            console.log(response.data);
+
             if (response.data !== undefined && response.data !== null) {
                 var paymentStatus = (response.data).split(',');
-                console.log(paymentStatus);
                 scope.orderid = paymentStatus[0].split('=')[1];
                 scope.trackingID = paymentStatus[1].split('=')[1];
                 scope.orderStatus = paymentStatus[3].split('=')[1];
@@ -27,7 +25,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 }
             }
         });
-        console.log(scope.paymentobject);
+
         scope.points = scope.paymentobject.Points;
         scope.MembershipName = scope.paymentobject.MembershipName;
         scope.Duration = scope.paymentobject.Duration;
@@ -44,7 +42,7 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
                 MembershipAmount: scope.paymentobject.Amount
             };
             myAppFactory.Paymentinsert(obj).then(function(response) {
-                console.log(response);
+
             });
         };
     }

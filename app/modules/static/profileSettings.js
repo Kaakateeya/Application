@@ -264,7 +264,6 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         scope.valueExists = function(type, flag, val) {
             if (val !== undefined) {
                 basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
-                    console.log(response);
                     if (response.data === 1) {
                         if (type === 'email') {
                             scope.NewEmail = '';

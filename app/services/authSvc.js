@@ -126,7 +126,6 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                 .then(function(response) {
                     if (response.status === 200 && response.data !== null && response.data !== undefined) {
-                        console.log(response);
                         if (response.data === "Paid") {
                             return true;
                         } else {

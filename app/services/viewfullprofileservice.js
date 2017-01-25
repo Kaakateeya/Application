@@ -13,7 +13,6 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
         },
         getViewFullProfileMail: function(OriginalString) {
-            console.log(OriginalString);
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
         },
         UpdateExpressIntrestViewfullprofile: function(obj) {

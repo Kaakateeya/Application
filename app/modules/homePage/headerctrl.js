@@ -77,15 +77,12 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             } else {
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
-                        console.log(response);
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            console.log('custStatus');
-                            console.log(innerresponse.data);
                             var missingStatus = null,
                                 custProfileStatus = null;
                             var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
@@ -233,7 +230,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.$on("notify-error", function(event, value) {
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
-            console.log(httperrorpopupstatus);
             if (httperrorpopupstatus !== "1") {
                 httperrorpopupstatus = 1;
                 alertpopup.dynamicpopup("httperrorpopup.html", scope, uibModal, 'sm');
@@ -252,5 +248,14 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
             sessionStorage.setItem("httperrorpopupstatus", httperrorpopupstatus);
             route.go('feedback', {});
         };
+        $(document).ready(function() {
+            $('.menu_toggle').click(function(e) {
+                $('.profile_own_menu>ul').slideToggle();
+            });
+            $('.profile_own_menu>ul>li').click(function(e) {
+                $(this).find('ul').slideToggle();
+                $(this).siblings().find('ul').slideUp();
+            });
+        });
     }
 ]);

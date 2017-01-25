@@ -32,7 +32,6 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
                     EmpID: 0
                 };
                 helpService.helpSubmit(scope.inputObj).then(function(response) {
-                    console.log(response);
                     scope.CustName = scope.txtname;
                     if (response.data !== null) {
                         scope.lblTicketID = response.data.Ticket !== null ? response.data.Ticket : '';

@@ -270,6 +270,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 Caste: []
             };
             scope.modelsearch.object = JSON.parse(sessionStorage.getItem("homepageobject"));
+            console.log(scope.modelsearch.object.ToAge);
             if (helperservice.checkstringvalue(scope.modelsearch.custid)) {
                 scope.controlsbinding();
                 searches.partnerdetails(scope.modelsearch.custid, "", "").then(function(response) {
@@ -434,7 +435,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         if (parseInt(frompage) === 1) {
                             scope.PartnerProfilesnew = [];
                             if (helperservice.checkarraylength(response.data)) {
-                                console.log(response.data);
                                 scope.modelsearch.showcontrols = false;
                                 scope.truepartner = false;
                                 _.each(response.data, function(item) {
@@ -866,15 +866,13 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             sessionStorage.setItem("localcustid", custid);
             sessionStorage.setItem("locallogid", logid);
             var realpath = '/viewFullProfileCustomer';
+            window.open(realpath, '_blank');
+            // authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
+            //     if (responsepaid === true) {
+            //         window.open(realpath, '_blank');
+            //     }
 
-            authSvc.paymentstaus(scope.modelsearch.custid, scope).then(function(responsepaid) {
-
-                console.log(responsepaid);
-                if (responsepaid === true) {
-                    window.open(realpath, '_blank');
-                }
-
-            });
+            // });
 
         };
         scope.$on("redirectToviewfullprofiles", function(event, custid, logid) {
@@ -922,56 +920,6 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
-        //  scope.$watch(function() {
-        //             return scope.modelsearch.AgeFrom;
-        //         }, function(current, original) {
-        //             scope.modelsearch.AgeFrom = current;
-        //         });
 
-        //         scope.$watch(function() {
-        //             return scope.modelsearch.Ageto;
-        //         }, function(current, original) {
-        //             scope.modelsearch.Ageto = current;
-        //         });
-
-
-        // scope.slider = {
-        //     minValue: 18,
-        //     maxValue: 30,
-        //     options: {
-        //         floor: 18,
-        //         ceil: 77,
-        //         step: 1,
-        //         noSwitching: true
-        //     }
-
-        // };
-        // scope.heightslidermin = 1;
-        // scope.heightslidermax = 38;
-        // scope.sliders = {
-        //     minValue: 4.0,
-        //     maxValue: 7.2,
-        //     options: {
-        //         floor: 4.0,
-        //         ceil: 7.2,
-        //         step: 0.1,
-        //         precision: 1,
-        //         noSwitching: true
-        //     }
-        // };
-
-        // scope.sliders = {
-        //     minValue: 0,
-        //     maxValue: 38,
-        //     minvalueyext: 0,
-        //     maxValuetext: 38,
-        //     options: {
-        //         floor: 0,
-        //         ceil: 41,
-        //         step: 1,
-        //         noSwitching: true,
-
-        //     }
-        // };
     }
 ]);

@@ -89,7 +89,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.servicehttp = function(type, object) {
                     return $http.post(app.apiroot + 'CustomerService/CustomerServiceBal', object)
                         .then(function(response) {
-                            console.log(response);
+
                             switch (type) {
                                 case "B":
                                     if (response.data === 1) {
@@ -154,7 +154,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             FromProfileID: loginprofileid,
                             ToProfileID: profileid !== undefined ? profileid : null
                         };
-                        console.log(typeofactionflag);
+
                         if (typeofactionflag === 1) {
                             typeofactionflag = true;
                         }
@@ -169,7 +169,7 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             case "E":
                                 if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-                                        console.log(responsepaid);
+
                                         if (responsepaid === true)
                                             scope.servicehttp(type, object);
                                     });
