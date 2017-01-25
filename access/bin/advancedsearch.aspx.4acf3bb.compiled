@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Search/AdvancedSearch.aspx" hash="fffffffff0855c68" filehash="85779d4357df39fb" flags="110000" assembly="App_Web_h4nnboek" type="ASP.search_advancedsearch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Search/AdvancedSearch.aspx" />
+        <filedep name="/kaakateeyaWeb/Search/AdvancedSearch.aspx.cs" />
+    </filedeps>
+</preserve>

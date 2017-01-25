@@ -1,0 +1,312 @@
+﻿
+.My_account_row1 {
+    margin-top: 0;
+    padding: 0 0 0 5px;
+    width:1000px;
+    float: left;
+}
+.acct-col1 {
+    float: left;
+    list-style: outside none none;
+    width: 150px;
+}
+.acct-col2 {
+    float: left;
+    list-style: outside none none;
+    width: 120px;
+}
+
+.acct-col2 > p {
+    color: #2a2a2a;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.acct-col3 {
+    float: left;
+    list-style: outside none none;
+    width: 250px;
+}
+.acct-col3> p {
+    color: #848484;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.acct-col4 {
+    float: left;
+    list-style: outside none none;
+    width: 120px;
+}
+
+.acct-col4  p {
+    color: #2a2a2a;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.acct-col5 {
+    float: left;
+    list-style: outside none none;
+    width: 240px;
+}
+.acct-col5 p {
+    color: #848484;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.acct-col6 {
+    float: left;
+    list-style: outside none none;
+    width: 110px;
+}
+
+.acct-col6 > a {
+    color: #9c0200;
+    font-family: arial;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.My_account_row2 {
+    border: 1px solid #f8b8b8;
+    float: left;
+    margin: 0 4px;
+    padding: 0;
+    width: 977px;
+}
+
+.My_account_row2 .profile-col1 {
+    float: left;
+    list-style: outside none none;
+    padding: 15px 20px;
+    width: 150px;
+}
+
+
+.profile-col1  a {
+    color: #a1100d;
+    float: left;
+    font-family: arial;
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: 150px;
+}
+.My_account_row2 .profile-col2 {
+    float: left;
+    list-style: outside none none;
+    padding: 15px 20px;
+    width: 180px;
+}
+
+
+.profile-col2  a {
+    color: #a1100d;
+    float: left;
+    font-family: arial;
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: 180px;
+}
+.My_account_row2 .profile-col3{
+    float: left;
+    list-style: outside none none;
+    padding: 15px 20px;
+    width: 150px;
+}
+
+
+.profile-col3  a {
+    color: #a1100d;
+    float: left;
+    font-family: arial;
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: 130px;
+}
+.My_account_row2 .profile-col4{
+    float: left;
+    list-style: outside none none;
+    padding: 15px 20px;
+    width: 130px;
+}
+
+
+.profile-col4  a {
+    color: #a1100d;
+    float: left;
+    font-family: arial;
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: 150px;
+}
+.My_account_row2 .profile-col5{
+    float: left;
+    list-style: outside none none;
+    padding: 15px 20px;
+    width: 150px;
+}
+
+
+.profile-col5  a {
+    color: #a1100d;
+    float: left;
+    font-family: arial;
+    font-size: 13px;
+    margin-bottom: 15px;
+    width: 150px;
+}
+.My_account_row3 {
+    margin-top: 0;
+    padding: 20px 0 0 5px;
+    width:1000px;
+    float: left;
+    list-style: none;
+}
+.education {
+    background: #f7f5f6 none repeat scroll 0 0;
+    float: left;
+    padding: 5px 20px;
+    width: 940px;
+}
+
+.education  .edu-col1 {
+    float: left;
+    width: 870px;
+}
+.edu-col1 > p {
+    color: #a1100d;
+    font-family: helvetica;
+    font-size: 20px;
+}
+.edu-col2 {
+    float: left;
+    width: 30px;
+}
+.edu-col3 {
+    float: left;
+    width: 30px;
+}
+.edu-col3 > a {
+    color: #9c0300;
+    padding-top: 5px;
+}
+.My_account_row4 {
+    float: left;
+    list-style: outside none none;
+    margin-top: 0;
+    padding: 0 20px;
+    width: 1000px;
+}
+.edu-det-col1 > a {
+    color: #010101;
+    float: left;
+    padding-bottom: 10px;
+    width: 185px;
+}
+.edu-det-col1 {
+    float: left;
+    width: 160px;
+}
+
+.edu-det-col1 > p {
+    color: #000000;
+    float: left;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    width: 160px;
+}
+.edu-det-col2 {
+    float: left;
+    width: 430px;
+}
+.edu-det-col2 > p {
+    color: #848484;
+    float: left;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    width: 410px;
+}
+.edu-det-col3 {
+    float: left;
+    width: 160px;
+}
+.edu-det-col3 > p {
+    color: #000000;
+    float: left;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    width: 160px;
+}
+.edu-det-col4 {
+    float: left;
+    width: 160px;
+}
+.edu-det-col4 > p {
+    color: #848484;
+    float: left;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    width: 220px;
+}
+.edu-det-col6 {
+    float: left;
+    width: 963px;
+}
+.edu-det-col6 p{
+     color: #848484;
+     float: left;
+     font-family: arial;
+     font-size: 15px;
+     font-weight: bold;
+     line-height: 22px;
+     padding-bottom: 8px;
+     text-align: justify;
+     width: 963px;
+ }
+ .data-tranp {
+    color: transparent !important;    
+    }
+    .educations {
+    background: #f7f5f6 none repeat scroll 0 0;
+    float: left;
+    padding: 5px 20px;
+    width: 680px;
+}
+
+.educations  .edus-col1 {
+    float: left;
+    width: 600px;
+}
+.edus-col1 > p {
+    color: #a1100d;
+    font-family: helvetica;
+    font-size: 20px;
+}
+.edus-col2 {
+    float: left;
+    width: 30px;
+}
+.edus-col3 {
+    float: left;
+    width: 30px;
+    margin-top: 2px;
+font-size: 13px;
+}
+.edus-col3 > a {
+    color: #9c0300;
+    padding-top: 5px;
+}

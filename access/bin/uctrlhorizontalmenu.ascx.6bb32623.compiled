@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" hash="fffffffff0855c68" filehash="7f31aa1e259c646f" flags="110000" assembly="App_Web_sd1eeoai" type="ASP.usercontrols_uctrlhorizontalmenu_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

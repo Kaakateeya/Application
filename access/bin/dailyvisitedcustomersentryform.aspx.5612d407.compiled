@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/DailyVisitedCustomersEntryForm.aspx" hash="fffffffff0855c68" filehash="45e08a00c738efb9" flags="110000" assembly="App_Web_42h2dwlj" type="ASP.designedpages_dailyvisitedcustomersentryform_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/DailyVisitedCustomersEntryForm.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/DailyVisitedCustomersEntryForm.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPrimaryInformation.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPrimaryInformation.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

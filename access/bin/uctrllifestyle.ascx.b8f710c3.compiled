@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/uctrlLifeStyle.ascx" hash="fffffffff0855c68" filehash="506edac060de02aa" flags="110000" assembly="App_Web_3ojkkqg1" type="ASP.usercontrols_registration_uctrllifestyle_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlLifeStyle.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlLifeStyle.ascx.cs" />
+    </filedeps>
+</preserve>

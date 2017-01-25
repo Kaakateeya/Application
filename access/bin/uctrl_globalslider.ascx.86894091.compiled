@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/uctrl_GlobalSlider.ascx" hash="fffffffff0855c68" filehash="230caf46b456a465" flags="110000" assembly="App_Web_nr1ikhem" type="ASP.customer_new_employee_new_uctrl_globalslider_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrl_GlobalSlider.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrl_GlobalSlider.ascx.cs" />
+    </filedeps>
+</preserve>

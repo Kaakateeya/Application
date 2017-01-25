@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/uctrlProfileIDSearch.ascx" hash="fffffffff0855c68" filehash="1cbf8677547b802a" flags="110000" assembly="App_Web_wximwgrn" type="ASP.usercontrols_search_uctrlprofileidsearch_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlProfileIDSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlProfileIDSearch.ascx.cs" />
+    </filedeps>
+</preserve>

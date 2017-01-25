@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeViewFullProfile.aspx" hash="fffffffff0855c68" filehash="879c46394b0b04d1" flags="110000" assembly="App_Web_co51nz1j" type="ASP.customer_new_employee_new_employeeviewfullprofile_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/CommonViewFullProfileUserControl.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/CommonViewFullProfileUserControl.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeViewFullProfile.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeViewFullProfile.aspx.cs" />
+    </filedeps>
+</preserve>

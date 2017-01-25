@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/uctrlBothOneSide.ascx" hash="fffffffff0855c68" filehash="7d01c414541c1a4f" flags="110000" assembly="App_Web_hnaqz2rv" type="ASP.customer_new_employee_new_uctrlbothoneside_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrlBothOneSide.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/uctrlBothOneSide.ascx.cs" />
+    </filedeps>
+</preserve>

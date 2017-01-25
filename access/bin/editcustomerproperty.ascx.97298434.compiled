@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editcustomerproperty.ascx" hash="fffffffff0855c68" filehash="eac6d3d6e05af2fe" flags="110000" assembly="App_Web_f0ymkdtw" type="ASP.customer_new_customerdesignedpages_editcustomerproperty_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editcustomerproperty.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Editcustomerproperty.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeContactNumbersedit.ascx" hash="fffffffff0855c68" filehash="94ede7f6b1c20864" flags="110000" assembly="App_Web_rcf5ujrx" type="ASP.customer_new_employee_new_employeecontactnumbersedit_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeContactNumbersedit.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/EmployeeContactNumbersedit.ascx.cs" />
+    </filedeps>
+</preserve>

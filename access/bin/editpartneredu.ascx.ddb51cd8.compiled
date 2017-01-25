@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPartnerEdu.ascx" hash="fffffffff0855c68" filehash="799810891176d445" flags="110000" assembly="App_Web_tnbrd15x" type="ASP.usercontrols_edit_editpartneredu_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerEdu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerEdu.ascx.cs" />
+    </filedeps>
+</preserve>

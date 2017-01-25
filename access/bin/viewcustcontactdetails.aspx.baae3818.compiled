@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/View/ViewCustContactDetails.aspx" hash="fffffffff0855c68" filehash="bfe24fb4cb6b6bbe" flags="110000" assembly="App_Web_faq4dl4l" type="ASP.customer_view_viewcustcontactdetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/View/ViewCustContactDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/View/ViewCustContactDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewContactDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewContactDetails.ascx.cs" />
+    </filedeps>
+</preserve>

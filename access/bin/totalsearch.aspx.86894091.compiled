@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Employee_new/Totalsearch.aspx" hash="fffffffff0855c68" filehash="7793d506aaccaaf2" flags="110000" assembly="App_Web_olsfd1yp" type="ASP.customer_new_employee_new_totalsearch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/CustomerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/Totalsearch.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Employee_new/Totalsearch.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/EmployeeNewMenuList.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

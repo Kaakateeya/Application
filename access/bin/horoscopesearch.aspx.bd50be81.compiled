@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/HoroscopeSearch.aspx" hash="fffffffff0855c68" filehash="873785d7bc8b5ca7" flags="110000" assembly="App_Web_griznpp0" type="ASP.employee_horoscopesearch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/HoroscopeSearch.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/HoroscopeSearch.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlHoroscopeSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlHoroscopeSearch.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/CustBasicInfo.ascx" hash="fffffffff0855c68" filehash="66c86c519c25c6b1" flags="110000" assembly="App_Web_caghvjl0" type="ASP.customer_custbasicinfo_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustBasicInfo.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/CustBasicInfo.ascx.cs" />
+    </filedeps>
+</preserve>

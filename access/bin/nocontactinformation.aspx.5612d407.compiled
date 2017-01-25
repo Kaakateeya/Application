@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/NoContactInformation.aspx" hash="fffffffff0855c68" filehash="231c8b54280162bd" flags="110000" assembly="App_Web_r1xp2byt" type="ASP.designedpages_nocontactinformation_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoContactInformation.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoContactInformation.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

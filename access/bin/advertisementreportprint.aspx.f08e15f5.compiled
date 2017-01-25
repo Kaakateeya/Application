@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/SearchResult/AdvertisementReportPrint.aspx" hash="fffffffff0855c68" filehash="4d9086cd67da228" flags="110000" assembly="App_Web_h53fbzjr" type="ASP.searchresult_advertisementreportprint_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/SearchResult/AdvertisementReportPrint.aspx" />
+        <filedep name="/kaakateeyaWeb/SearchResult/AdvertisementReportPrint.aspx.cs" />
+    </filedeps>
+</preserve>

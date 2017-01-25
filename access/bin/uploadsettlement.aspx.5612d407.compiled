@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/UploadSettlement.aspx" hash="fffffffff0855c68" filehash="15c720b9ac2c68c8" flags="110000" assembly="App_Web_1rq4dujl" type="ASP.designedpages_uploadsettlement_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/UploadSettlement.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/UploadSettlement.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

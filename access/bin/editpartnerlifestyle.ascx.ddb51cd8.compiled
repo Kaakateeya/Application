@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditPartnerLifeStyle.ascx" hash="fffffffff0855c68" filehash="427110f796a41ec6" flags="110000" assembly="App_Web_ux2nii1z" type="ASP.usercontrols_edit_editpartnerlifestyle_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerLifeStyle.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditPartnerLifeStyle.ascx.cs" />
+    </filedeps>
+</preserve>

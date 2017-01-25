@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Search/CustSearchClubVeiw.aspx" hash="fffffffff0855c68" filehash="85882807108752c0" flags="110000" assembly="App_Web_enxieszi" type="ASP.customer_search_custsearchclubveiw_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/CustSearchClubVeiw.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Search/CustSearchClubVeiw.aspx.cs" />
+    </filedeps>
+</preserve>

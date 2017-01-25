@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<!--Search Result Page Back Button-->
+	<key name="13">
+		<value>../Search/Search.aspx?SearchType=advsearch</value>
+	</key>
+	<key name="15">
+		<value>../Employee/CummulativeSearch.aspx</value>
+	</key>
+	<key name="16">
+		<value>../Search/Search.aspx?SearchType=gen</value>
+	</key>
+	<key name="17">
+		<value>../Employee/HoroscopeSearch.aspx</value>
+	</key>
+	<key name="20">
+		<value>../Search/Search.aspx?SearchType=quick</value>
+	</key>
+	<key name="24">
+		<value>../Employee/TotalsearchEmployee.aspx</value>
+	</key>
+	<key name="21">
+		<value>../Employee/SearchonContact.aspx</value>
+	</key>
+	<key name="19">
+		<value>../Search/Search.aspx?SearchType=prof</value>
+	</key>
+	<key name="18">
+		<value>../Employee/KeywordSearch.aspx</value>
+	</key>
+	<key name="14">
+		<value>../Employee/AdvertisementSearch.aspx</value>
+	</key>
+
+  <key name="100">
+    <value>http://localhost:28374/kaakateeyaWeb/</value>
+  </key>
+
+	<key name="1">
+		<value>../DesignedPages/MyopenTickets.aspx</value>
+	</key>
+	<key name="2">
+		<value>../DesignedPages/MyPendingTickets.aspx</value>
+	</key>
+	<key name="3">
+		<value>../DesignedPages/MyClosedTickets.aspx</value>
+	</key>
+	<key name="4">
+		<value>../DesignedPages/MyEscalatedTickets.aspx</value>
+	</key>
+	<key name="5">
+		<value>../DesignedPages/AllEscalatedTickets.aspx</value>		
+	</key>
+	<key name="6">
+		<value>../DesignedPages/AllPendingTickets.aspx</value>
+	</key>
+	<key name="7">
+		<value>../DesignedPages/AllDeletedTickets.aspx</value>
+	</key>
+	<key name="8">
+		<value>../DesignedPages/AllOpenTickets.aspx</value>
+	</key>
+	<key name="9">
+		<value>../DesignedPages/AllClosedTickets.aspx</value>
+	</key>
+  <key name="10">
+    <value>../DesignedPages/MyDeletedTickets.aspx</value>
+  </key>
+	<key name="11">
+		<value>../DesignedPages/UnassignedTickets.aspx</value>
+	</key>
+  <key name="119">
+    <value>../searchresult/CommunicationLogPage.aspx</value>
+  </key>
+  <key name="120">
+    <value>../searchresult/CommunicationLognew.aspx</value>
+  </key>
+  <key name="124">
+    <value>../DesignedPages/serviceticketsearch.aspx</value>
+  </key>
+  <key name="125">
+    <value>../DesignedPages/Ticketservicereport.aspx</value>
+  </key>
+  <key name="123">
+    <value>../DesignedPages/AllMarketingpendingsTickets.aspx</value>
+  </key>
+  <key name="121">
+    <value>../DesignedPages/MyserviceFollowupsnew.aspx</value>
+  </key>
+  <key name="101">
+    <value>../DesignedPages/AllEmployeeRemainderReport.aspx</value>
+  </key>
+	<key name="102">
+		<value>../DesignedPages/SearchTicket.aspx</value>
+	</key>
+  <key name="103">
+    <value>../DesignedPages/SettledDeleteProfilesReport.aspx</value>
+  </key>
+  <key name="104">
+    <value>../Employee/ProfileDetails.aspx</value>
+  </key>
+  <key name="105">
+    <value>../Employee/EducationAndProfession.aspx</value>
+  </key>
+  <key name="106">
+    <value>../Employee/CustProperty.aspx</value>
+  </key>
+  <key name="107">
+    <value>../Employee/PhotoUpload.aspx</value>
+  </key>
+  <key name="108">
+    <value>../Employee/ParentDetails.aspx</value>
+  </key>
+  <key name="109">
+    <value>../Employee/PartnerPref.aspx</value>
+  </key>
+  <key name="110">
+    <value>../Employee/AstroDetails.aspx</value>
+  </key>
+  <key name="111">
+    <value>../Employee/Siblings.aspx</value>
+  </key>
+  <key name="112">
+    <value>../Employee/RelativeDetails.aspx</value>
+  </key>
+  <key name="113">
+    <value>../Employee/MyReferenceDetails.aspx</value>
+  </key>
+  <key name="114">
+    <value>../Employee/LifeStyle.aspx</value>
+  </key>
+  <key name="115">
+    <value>../Employee/MySpouceDetails.aspx</value>
+	</key>
+  <key name="116">
+    <value>../DesignedPages/BranchCreation.aspx</value>
+  </key>
+	<key name="117">
+		<value>../DesignedPages/MyServiceFollowups.aspx</value>
+	</key>
+	<key name="118">
+		<value>../DesignedPages/MatchFollowupsReport.aspx</value>
+	</key>
+
+  <key name="999">
+    <value>http://telugumarriages.com/access</value>
+  </key>
+  <key name="998">
+    <value>telugumarriages</value>
+  </key>
+  <key name="255">
+ <value>http://localhost:28374/kaakateeyaWeb</value></key>
+  <key name="333">
+    <value>1</value>
+  </key>
+  <key name="777">
+    <value>defaultiis</value>
+  </key>
+  <key name="payment">
+    <value>0</value>
+  </key>
+</root>

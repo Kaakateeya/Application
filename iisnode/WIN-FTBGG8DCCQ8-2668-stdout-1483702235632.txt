@@ -1,0 +1,13 @@
+undefined
+{ keyname: 'Imagesnew/ProfilePics/KMPL_109452_Images/Img1.jpg' }
+-------------------
+{ fieldName: 'file',
+  originalFilename: 'Img2.jpg',
+  path: 'C:\\Windows\\TEMP\\SammtfNLaauXqmCIN1na-V59.jpg',
+  headers: 
+   { 'content-disposition': 'form-data; name="file"; filename="Img2.jpg"',
+     'content-type': 'image/jpeg' },
+  size: 253747,
+  name: 'Img2.jpg',
+  type: 'image/jpeg' }
+Upload Success https://angularkaknew.s3.ap-south-1.amazonaws.com/Imagesnew/ProfilePics/KMPL_109452_Images/Img1.jpg

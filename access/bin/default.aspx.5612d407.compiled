@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/Default.aspx" hash="fffffffff0855c68" filehash="40aec67d16ff91cc" flags="110000" assembly="App_Web_pyq4qqn1" type="ASP.designedpages_default_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/Default.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/Default.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

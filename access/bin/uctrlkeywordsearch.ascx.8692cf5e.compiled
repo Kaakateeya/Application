@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/uctrlKeywordSearch.ascx" hash="fffffffff0855c68" filehash="8c28e2577451fada" flags="110000" assembly="App_Web_lrwinacg" type="ASP.usercontrols_search_uctrlkeywordsearch_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlKeywordSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlKeywordSearch.ascx.cs" />
+    </filedeps>
+</preserve>

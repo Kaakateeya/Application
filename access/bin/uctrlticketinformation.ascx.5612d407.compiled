@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/uctrlTicketInformation.ascx" hash="fffffffff0855c68" filehash="76894bba41e6314d" flags="110000" assembly="App_Web_d4jblkzx" type="ASP.designedpages_uctrlticketinformation_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlTicketInformation.ascx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/uctrlTicketInformation.ascx.cs" />
+    </filedeps>
+</preserve>

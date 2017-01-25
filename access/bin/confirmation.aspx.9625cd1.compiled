@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Payment/Confirmation.aspx" hash="fffffffff0855c68" filehash="3cac2fc3705c1766" flags="110000" assembly="App_Web_acfebmuq" type="ASP.customer_payment_confirmation_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/Payment/Confirmation.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Payment/Confirmation.aspx.cs" />
+    </filedeps>
+</preserve>

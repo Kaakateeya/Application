@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<!--Registration Primary Details Start-->
+	<key name="PRIMARYFIRSTNAME">
+		<value>Please enter first name</value>
+	</key>
+	<key name="PRIMARYLASTTNAME">
+		<value>Please enter last name</value>
+	</key>
+	<key name="PRIMARYDOB">
+		<value>Please select date of birth</value>
+	</key>
+	<key name="PRIMARYGENDER">
+		<value>Please select gender</value>
+	</key>
+	<key name="PRIMARYRELIGION">
+		<value>Please select religion</value>
+	</key>
+	<key name="PRIMARYMOTHERTONGUE">
+		<value>Please select mother tongue</value>
+	</key>
+	<key name="PRIMARYCASTE">
+		<value>Please select caste</value>
+	</key>
+	<key name="PRIMARYCOUNTRYLIVINGIN">
+		<value>Please select country living in</value>
+	</key>
+	<key name="PRIMARYCONTACTNUMBER">
+		<value>Please enter valid<![CDATA[<br /><br /><br />]]> contact number</value>
+	</key>
+	<key name="PRIMARYEMAIL">
+		<value>Please enter valid email address</value>
+	</key>
+	<key name="PRIMARYPASSWORD">
+		<value>Please enter password for the profile</value>
+	</key>
+	<key name="PRIMARYREQPASSWORD">
+		<value>Please enter confirm password</value>
+	</key>
+	<key name="PRIMARYEMAIL2">
+		<value>Please enter email address</value>
+	</key>
+	<key name="PRIMARYCONTACTINFO">
+		<value>Please enter any one contact number</value>
+	</key>
+	<!--Registration Primary Details End-->
+	<!--Profile Details Start-->
+	<key name="PROFILEPOSTEDBY">
+		<value>Please select profile posted by</value>
+	</key>
+	<key name="PROFILEEMAIL">
+		<value>Please enter email</value>
+	</key>
+	<key name="PROFILEFIRSTNAME">
+		<value>Please enter first name</value>
+	</key>
+	<key name="PROFILELASTNAME">
+		<value>Please enter last name</value>
+	</key>
+	<key name="PROFILECONTACTNUMBER">
+		<value>Please provide atleast one contact information</value>
+	</key>
+	<key name="PROFILEMOBILENUMBER">
+		<value>Contact number is invalid</value>
+	</key>
+	<key name="PROFILEMARTIALSTATUS">
+		<value>Please select marital status</value>
+	</key>
+	<key name="PROFILENOOFCHILDRENS">
+		<value>Please select no of childrens</value>
+	</key>
+	<key name="PROFILEHEIGHT">
+		<value>Please select height</value>
+	</key>
+	<key name="PROFILECOMPLEXION">
+		<value>Please select complexion</value>
+	</key>
+	<key name="PROFILEPHYSICALSTATUS">
+		<value>Please select physical status</value>
+	</key>
+	<key name="PROFILEBORNCITIZEN">
+		<value>Please select born citizenship</value>
+	</key>
+	<key name="PROFILECOUNTRYLIVING">
+		<value>Please select country</value>
+	</key>
+	<key name="PROFILESTATELIVING">
+		<value>Please select state</value>
+	</key>
+	<key name="PROFILECITYLIVING">
+		<value>Please select city</value>
+	</key>
+	<key name="PROFILECITYLIVINGOTHER">
+		<value>Please enter city</value>
+	</key>
+	<key name="PROFILEVISASTATUS">
+		<value>Please select visa status</value>
+	</key>
+	<key name="PROFILEFLATNUMBER">
+		<value>Please enter house or flat number</value>
+	</key>
+	<key name="PROFILESTREETNAME">
+		<value>Please enter street name</value>
+	</key>
+	<key name="PROFILEAREANAME">
+		<value>Please enter area name</value>
+	</key>
+	<key name="PROFILECOUNTRY">
+		<value>Please select country</value>
+	</key>
+	<key name="PROFILESTATE">
+		<value>Please select state</value>
+	</key>
+	<key name="PROFILECITY">
+		<value>Please select city</value>
+	</key>
+	<key name="PROFILECITYOTHER">
+		<value>Please enter city</value>
+	</key>
+	<!--Profile Details End-->
+
+</root>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditEducationDetails.aspx" hash="fffffffff0855c68" filehash="d70595107dccc73d" flags="110000" assembly="App_Web_cq2kxdpz" type="ASP.employee_editeducationdetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditEducationDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditEducationDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditEducationDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditEducationDetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

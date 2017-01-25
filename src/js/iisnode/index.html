@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"WIN-FTBGG8DCCQ8-1304-stderr-1481348059360.txt","computername":"WIN-FTBGG8DCCQ8","pid":1304,"type":"stderr","created":1481348059360},{"file":"WIN-FTBGG8DCCQ8-1700-stderr-1481348084195.txt","computername":"WIN-FTBGG8DCCQ8","pid":1700,"type":"stderr","created":1481348084195},{"file":"WIN-FTBGG8DCCQ8-2776-stderr-1481348108983.txt","computername":"WIN-FTBGG8DCCQ8","pid":2776,"type":"stderr","created":1481348108983},{"file":"WIN-FTBGG8DCCQ8-2936-stderr-1481348084445.txt","computername":"WIN-FTBGG8DCCQ8","pid":2936,"type":"stderr","created":1481348084445},{"file":"WIN-FTBGG8DCCQ8-2936-stderr-1481348108843.txt","computername":"WIN-FTBGG8DCCQ8","pid":2936,"type":"stderr","created":1481348108843},{"file":"WIN-FTBGG8DCCQ8-3032-stderr-1481348108874.txt","computername":"WIN-FTBGG8DCCQ8","pid":3032,"type":"stderr","created":1481348108874},{"file":"WIN-FTBGG8DCCQ8-3300-stderr-1481348059016.txt","computername":"WIN-FTBGG8DCCQ8","pid":3300,"type":"stderr","created":1481348059016},{"file":"WIN-FTBGG8DCCQ8-3328-stderr-1481348108890.txt","computername":"WIN-FTBGG8DCCQ8","pid":3328,"type":"stderr","created":1481348108890},{"file":"WIN-FTBGG8DCCQ8-3644-stderr-1481348084445.txt","computername":"WIN-FTBGG8DCCQ8","pid":3644,"type":"stderr","created":1481348084445},{"file":"WIN-FTBGG8DCCQ8-3720-stderr-1481348109093.txt","computername":"WIN-FTBGG8DCCQ8","pid":3720,"type":"stderr","created":1481348109093},{"file":"WIN-FTBGG8DCCQ8-4228-stderr-1481348084320.txt","computername":"WIN-FTBGG8DCCQ8","pid":4228,"type":"stderr","created":1481348084320},{"file":"WIN-FTBGG8DCCQ8-4392-stderr-1481348059016.txt","computername":"WIN-FTBGG8DCCQ8","pid":4392,"type":"stderr","created":1481348059016},{"file":"WIN-FTBGG8DCCQ8-4628-stderr-1481348084195.txt","computername":"WIN-FTBGG8DCCQ8","pid":4628,"type":"stderr","created":1481348084195},{"file":"WIN-FTBGG8DCCQ8-4812-stderr-1481348108999.txt","computername":"WIN-FTBGG8DCCQ8","pid":4812,"type":"stderr","created":1481348108999},{"file":"WIN-FTBGG8DCCQ8-5452-stderr-1481348109093.txt","computername":"WIN-FTBGG8DCCQ8","pid":5452,"type":"stderr","created":1481348109093},{"file":"WIN-FTBGG8DCCQ8-5548-stderr-1481348059360.txt","computername":"WIN-FTBGG8DCCQ8","pid":5548,"type":"stderr","created":1481348059360},{"file":"WIN-FTBGG8DCCQ8-5652-stderr-1481348084336.txt","computername":"WIN-FTBGG8DCCQ8","pid":5652,"type":"stderr","created":1481348084336},{"file":"WIN-FTBGG8DCCQ8-5708-stderr-1481348059156.txt","computername":"WIN-FTBGG8DCCQ8","pid":5708,"type":"stderr","created":1481348059156},{"file":"WIN-FTBGG8DCCQ8-5952-stderr-1481348059126.txt","computername":"WIN-FTBGG8DCCQ8","pid":5952,"type":"stderr","created":1481348059126},{"file":"WIN-FTBGG8DCCQ8-6076-stderr-1481348084195.txt","computername":"WIN-FTBGG8DCCQ8","pid":6076,"type":"stderr","created":1481348084195}];
+        var lastUpdated = 1481348109108;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>

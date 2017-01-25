@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/MatchWatchProfilesReport.aspx" hash="fffffffff0855c68" filehash="44701d43ce40c1b9" flags="110000" assembly="App_Web_jlgytgze" type="ASP.designedpages_matchwatchprofilesreport_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/MatchWatchProfilesReport.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/MatchWatchProfilesReport.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

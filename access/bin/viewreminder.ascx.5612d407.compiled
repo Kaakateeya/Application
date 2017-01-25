@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/ViewReminder.ascx" hash="fffffffff0855c68" filehash="a38273f189896ad8" flags="110000" assembly="App_Web_pvpndznz" type="ASP.designedpages_viewreminder_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewReminder.ascx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewReminder.ascx.cs" />
+    </filedeps>
+</preserve>

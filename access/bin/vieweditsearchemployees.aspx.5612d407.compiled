@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/ViewEditSearchEmployees.aspx" hash="fffffffff0855c68" filehash="11efb8fe585d2119" flags="110000" assembly="App_Web_r1xp2byt" type="ASP.designedpages_vieweditsearchemployees_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewEditSearchEmployees.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/ViewEditSearchEmployees.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

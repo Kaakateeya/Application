@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/CustomerHome.aspx" hash="fffffffff0855c68" filehash="9b9c326171c23ec" flags="110000" assembly="App_Web_b14vt4g0" type="ASP.customer_customerhome_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerHome.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerHome.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/SildeShow.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/SildeShow.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/successstories_New.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/successstories_New.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Edit/EditAstro.ascx" hash="fffffffff0855c68" filehash="a053f23f1d87a234" flags="110000" assembly="App_Web_dwccozho" type="ASP.usercontrols_edit_editastro_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditAstro.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/EditAstro.ascx.cs" />
+    </filedeps>
+</preserve>

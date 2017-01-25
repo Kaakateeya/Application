@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/JavaScriptDis.aspx" hash="fffffffff0855c68" filehash="efb6719911bca9bd" flags="110000" assembly="App_Web_jtzdwwbk" type="ASP.employee_javascriptdis_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/JavaScriptDis.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/JavaScriptDis.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/UctrlCollapseTotalSearch.ascx" hash="fffffffff0855c68" filehash="320fbea809a078e1" flags="110000" assembly="App_Web_3kswby3w" type="ASP.usercontrols_search_uctrlcollapsetotalsearch_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Search/UctrlCollapseTotalSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/UctrlCollapseTotalSearch.ascx.cs" />
+    </filedeps>
+</preserve>

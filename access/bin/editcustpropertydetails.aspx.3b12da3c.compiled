@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Edit/EditCustPropertyDetails.aspx" hash="fffffffff0855c68" filehash="522eb110e691cd38" flags="110000" assembly="App_Web_qjuzdcjm" type="ASP.customer_edit_editcustpropertydetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustPropertyDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Edit/EditCustPropertyDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx.cs" />
+    </filedeps>
+</preserve>

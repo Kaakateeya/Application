@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EmpLandingPage.aspx" hash="fffffffff0855c68" filehash="9d669e70eef486d5" flags="110000" assembly="App_Web_acwgidep" type="ASP.employee_emplandingpage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpLandingPage.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpLandingPage.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpLeftMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

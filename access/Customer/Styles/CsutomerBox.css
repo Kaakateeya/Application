@@ -1,0 +1,94 @@
+﻿#bodytest {
+    width: 100%;
+    overflow: hidden; /* This is IMP */
+    padding: 0;
+    margin: 0 auto;
+}
+
+#feedback {
+    width: 362px;
+    padding: 10px;
+    position: absolute;
+    top: 100px;
+    display: none;
+}
+
+    #feedback .formdiv {
+        width: 300px;
+        float: left;
+        background-color: #6f115c;
+        padding: 0px 5px 5px 5px;
+        -moz-border-radius-bottomright: 6px;
+        -moz-border-radius-bottomleft: 6px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+        min-height: 100px;
+    }
+
+    #feedback label {
+        font: bold 11px arial;
+        color: #febaf9;
+    }
+
+    #feedback textarea {
+        width: 290px;
+        height: 100px;
+        color: #fcd1f2;
+        font: normal 11px verdana;
+        border: none;
+        padding: 5px;
+        background-color: #943080;
+        -moz-box-shadow: inset 1px 1px 1px #4c0b3f;
+        -webkit-box-shadow: inset 1px 1px 1px #4c0b3f;
+        resize: none; /* disable extending textarea in chrome */
+    }
+
+    #feedback input[type="text"] {
+        color: #606060;
+        font: normal 11px verdana;
+        padding: 3px;
+        width: 200px;
+        height: 25px;
+        border: none;
+        color: #fcd1f2;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        background-color: #943080;
+        -moz-box-shadow: inset 1px 1px 1px #4c0b3f;
+        -webkit-box-shadow: inset 1px 1px 1px #4c0b3f;
+    }
+
+    #feedback input[type="submit"] {
+        background-color: #ffaffa;
+        border: none;
+        color: #6f115c;
+        font: bold 11px arial;
+        padding: 2px 6px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        cursor: pointer;
+    }
+
+    #feedback .left_btn,
+    #feedback .right_btn {
+        width: 26px;
+        height: 100px;
+        float: left;
+        cursor: pointer;
+    }
+
+    #feedback .feed_close {
+        cursor: pointer;
+        margin: -15px -5px 0px 0px;
+    }
+
+#error {
+    color: #fff;
+    padding: 4px;
+    font-size: 11px;
+}
+
+.thankyou {
+    text-align: center;
+    display: none;
+}

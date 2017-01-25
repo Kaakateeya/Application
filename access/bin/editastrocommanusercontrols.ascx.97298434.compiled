@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControls.ascx" hash="fffffffff0855c68" filehash="2652a8df635e7687" flags="110000" assembly="App_Web_wpgao4bb" type="ASP.customer_new_customerdesignedpages_editastrocommanusercontrols_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControls.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EditAstroCommanUserControls.ascx.cs" />
+    </filedeps>
+</preserve>

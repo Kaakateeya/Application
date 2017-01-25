@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" hash="fffffffff0855c68" filehash="7263b012deb265a2" flags="110000" assembly="App_Web_bixh2dkf" type="ASP.usercontrols_presentunpaidmemberslogin_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

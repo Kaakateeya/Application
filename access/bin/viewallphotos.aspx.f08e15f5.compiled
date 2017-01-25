@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/SearchResult/Viewallphotos.aspx" hash="fffffffff0855c68" filehash="de007da06cb02dc9" flags="110000" assembly="App_Web_zihorey4" type="ASP.searchresult_viewallphotos_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/SearchResult/Viewallphotos.aspx" />
+        <filedep name="/kaakateeyaWeb/SearchResult/Viewallphotos.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

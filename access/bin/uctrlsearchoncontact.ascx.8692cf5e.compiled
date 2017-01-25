@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Search/uctrlSearchonContact.ascx" hash="fffffffff0855c68" filehash="7c5f17d9b8c6ceb" flags="110000" assembly="App_Web_lrwinacg" type="ASP.usercontrols_search_uctrlsearchoncontact_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlSearchonContact.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlSearchonContact.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/QuickSearch.aspx" hash="fffffffff0855c68" filehash="8346575607430ef2" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_quicksearch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/QuickSearch.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/QuickSearch.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlQuickSearch.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Search/uctrlQuickSearch.ascx.cs" />
+    </filedeps>
+</preserve>

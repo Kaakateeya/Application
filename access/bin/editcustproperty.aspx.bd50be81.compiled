@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditCustProperty.aspx" hash="fffffffff0855c68" filehash="ca51d4b3c2d869e4" flags="110000" assembly="App_Web_ty5a1ydp" type="ASP.employee_editcustproperty_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditCustProperty.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditCustProperty.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlCustProperty.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx.cs" />
+    </filedeps>
+</preserve>

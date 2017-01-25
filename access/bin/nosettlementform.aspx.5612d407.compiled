@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/NoSettlementForm.aspx" hash="fffffffff0855c68" filehash="a858ed99ed9546fd" flags="110000" assembly="App_Web_yolba5qq" type="ASP.designedpages_nosettlementform_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoSettlementForm.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/NoSettlementForm.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

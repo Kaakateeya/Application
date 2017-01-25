@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/Registration/uctrlAstroHoroDetails.ascx" hash="fffffffff0855c68" filehash="4b0dcd40236bca92" flags="110000" assembly="App_Web_zyh5pmtr" type="ASP.usercontrols_registration_uctrlastrohorodetails_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlAstroHoroDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlAstroHoroDetails.ascx.cs" />
+    </filedeps>
+</preserve>

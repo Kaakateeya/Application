@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlProfessionGroup.ascx" hash="fffffffff0855c68" filehash="df209d9404113e8d" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlprofessiongroup_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlProfessionGroup.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlProfessionGroup.ascx.cs" />
+    </filedeps>
+</preserve>

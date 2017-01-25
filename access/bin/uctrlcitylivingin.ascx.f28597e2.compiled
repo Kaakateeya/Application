@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCityLivingin.ascx" hash="fffffffff0855c68" filehash="5ef6e729f221c19c" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlcitylivingin_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCityLivingin.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlCityLivingin.ascx.cs" />
+    </filedeps>
+</preserve>

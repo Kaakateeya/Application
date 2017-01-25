@@ -1,0 +1,69 @@
+﻿.HeaderCSS {
+    background: url("../CutomerImages/inner/icon-plus.png") no-repeat scroll 98% center / 15px 15px rgba(0, 0, 0, 0);
+    color: black;
+    display: block;
+    margin-bottom: 10px;
+    padding: 7px 36px 7px 15px;
+    background-color: #E3E1E2;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.addminus {
+        background: url("../CutomerImages/inner/icon-minus.png") no-repeat scroll 98% center / 15px 15px;
+        color: black;
+    display: block;
+    margin-bottom: 10px;    
+    padding: 7px 36px 7px 15px;
+    background-color: #E3E1E2;
+    cursor: pointer;
+    font-size: 15px;
+}
+.addplus {
+        background: url("../CutomerImages/inner/icon-plus.png") no-repeat scroll 98% center / 15px 15px rgba(0, 0, 0, 0);
+        color: black;
+    display: block;
+    margin-bottom: 10px;
+    padding: 7px 36px 7px 15px;
+    background-color: #E3E1E2;
+    cursor: pointer;
+    font-size: 15px;
+}
+.HeaderSelectedCSS
+
+{
+    background: url("../CutomerImages/inner/icon-minus.png") no-repeat scroll 98% center / 15px 15px #9c0200;
+    color: White;
+    display: block;
+    margin-bottom: 10px;
+    padding: 7px 36px 7px 15px;
+    cursor: pointer;
+}
+.ContentCss
+{
+    background-color: White;
+    color: #595959;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    line-height: 1.5;
+    padding-left:2%;
+}
+.lnkExpand
+{
+    color: blue !important;
+    float: right;
+    margin-right: 20px;
+    text-decoration: normal !important;
+}
+
+.AutoComplete
+{
+    margin-left: 30px;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+    color: darkgrey;
+    padding: 7px 5px;
+    width: 250px;
+}

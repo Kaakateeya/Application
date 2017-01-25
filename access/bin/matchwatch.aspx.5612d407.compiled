@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/MatchWatch.aspx" hash="fffffffff0855c68" filehash="ed763f5bc574aa66" flags="110000" assembly="App_Web_1rq4dujl" type="ASP.designedpages_matchwatch_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/MatchWatch.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/MatchWatch.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPartnerPref.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlPartnerPref.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/CustomError/CustomerErrorPage.aspx" hash="fffffffff0855c68" filehash="fab6bdd940432738" flags="110000" assembly="App_Web_4zh1pqnr" type="ASP.customerror_customererrorpage_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/CustomError/CustomerErrorPage.aspx" />
+        <filedep name="/kaakateeyaWeb/CustomError/CustomerErrorPage.aspx.cs" />
+    </filedeps>
+</preserve>

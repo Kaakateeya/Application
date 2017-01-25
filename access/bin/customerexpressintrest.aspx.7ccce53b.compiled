@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer/Messages/CustomerExpressIntrest.aspx" hash="fffffffff0855c68" filehash="1442d38d9d9fa6d8" flags="110000" assembly="App_Web_c5p40qb5" type="ASP.customer_messages_customerexpressintrest_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master" />
+        <filedep name="/kaakateeyaWeb/Customer/CustomerMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/Messages/CustomerExpressIntrest.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer/Messages/CustomerExpressIntrest.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/MyprofileUpgradeMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer/UserControls/MyprofileUpgradeMenu.ascx.cs" />
+    </filedeps>
+</preserve>

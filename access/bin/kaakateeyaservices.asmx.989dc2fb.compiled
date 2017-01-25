@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/kaakateeyaWeb/Services/KaakateeyaServices.asmx" hash="30418b6" filehash="40299d859ebc" flags="130000" assembly="App_Code" type="KaakateeyaServices">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Services/KaakateeyaServices.asmx" />
+    </filedeps>
+</preserve>

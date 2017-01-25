@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMaritalstatus.ascx" hash="fffffffff0855c68" filehash="649b2af4000af83f" flags="110000" assembly="App_Web_uea3dwwp" type="ASP.customer_new_uctrlallcontrols_uctrlmaritalstatus_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMaritalstatus.ascx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/uctrlAllControls/uctrlMaritalstatus.ascx.cs" />
+    </filedeps>
+</preserve>

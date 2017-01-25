@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Default3.aspx" hash="fffffffff0855c68" filehash="6bf389d5bce64ec4" flags="110000" assembly="App_Web_ym3bir4f" type="ASP.customer_new_customerdesignedpages_default3_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Default3.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/Default3.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EmployeeBootsrap.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/EmployeeBootsrap.master.cs" />
+    </filedeps>
+</preserve>

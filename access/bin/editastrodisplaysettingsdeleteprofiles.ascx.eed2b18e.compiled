@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAstroDisplaySettingsDeleteProfiles.ascx" hash="fffffffff0855c68" filehash="29a6e63e307ab26b" flags="110000" assembly="App_Web_vkcdguq1" type="ASP.usercontrols_uctrldeleteprofiles_uctrldeleteprofileedit_editastrodisplaysettingsdeleteprofiles_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAstroDisplaySettingsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditAstroDisplaySettingsDeleteProfiles.ascx.cs" />
+    </filedeps>
+</preserve>

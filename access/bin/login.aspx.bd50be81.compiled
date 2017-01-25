@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/Login.aspx" hash="fffffffff0855c68" filehash="5aa012812437b8b0" flags="110000" assembly="App_Web_jtzdwwbk" type="ASP.employee_login_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/Login.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/Login.aspx.cs" />
+    </filedeps>
+</preserve>

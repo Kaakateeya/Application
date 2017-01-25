@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/UserControls/ViewEducationAndProfession.ascx" hash="fffffffff0855c68" filehash="85b812fe4e89924c" flags="110000" assembly="App_Web_sd1eeoai" type="ASP.usercontrols_vieweducationandprofession_ascx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/UserControls/ViewEducationAndProfession.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewEducationAndProfession.ascx.cs" />
+    </filedeps>
+</preserve>

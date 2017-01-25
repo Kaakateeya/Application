@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/SettlementPaidBalanceDetailsReport.aspx" hash="fffffffff0855c68" filehash="fc2641dc1aa59e8" flags="110000" assembly="App_Web_yrfswc1a" type="ASP.designedpages_settlementpaidbalancedetailsreport_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/SettlementPaidBalanceDetailsReport.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/SettlementPaidBalanceDetailsReport.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

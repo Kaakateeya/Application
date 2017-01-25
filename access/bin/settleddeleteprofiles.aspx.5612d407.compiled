@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/SettledDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="93e7f1a99a0c1022" flags="110000" assembly="App_Web_fbpujegf" type="ASP.designedpages_settleddeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/SettledDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/SettledDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+    </filedeps>
+</preserve>

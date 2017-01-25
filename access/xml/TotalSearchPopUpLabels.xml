@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <key name="AGE">
+    <value>Candidate Age</value>
+  </key>
+  <key name="AMOUNT_PAID">
+    <value>Candidate Amount Paid</value>
+  </key>
+  <key name="APP.STATUS">
+    <value>Candidate Application Status</value>
+  </key>
+  <key name="ARRIVAL">
+    <value>Candidate Arrival Date</value>
+  </key>
+  <key name="BRANCH">
+    <value>Candidate Branch</value>
+  </key>
+  <key name="C_SECONDMAILID">
+    <value>Candidate Secondary Email-id</value>
+  </key>
+  <key name="CASTE">
+    <value>Candidate Caste</value>
+  </key>
+  <key name="COMPANY">
+    <value>Candidate Company</value>
+  </key>
+  <key name="COMPLEXION">
+    <value>Candidate Complexion</value>
+  </key>
+  <key name="CON_EMAIL">
+    <value>Candidate Contact Email</value>
+  </key>
+  <key name="CONTACTADDRESS">
+    <value>Candidate Contact Address</value>
+  </key>
+  <key name="CONTACTPHONE">
+    <value>Candidate Contact Phone</value>
+  </key>
+  <key name="CURRENCY">
+    <value>Candidate Currency</value>
+  </key>
+  <key name="DEPARTURE">
+    <value>Candidate Departure Date</value>
+  </key>
+  <key name="DOB">
+    <value>Candidate DateOfBirth</value>
+  </key>
+  <key name="DOMICILE">
+    <value>Citizenship</value>
+  </key>
+  <key name="DOR">
+    <value>Candidate Date of Registration</value>
+  </key>
+  <key name="EDUC_LOCATION">
+    <value>Candidate Education Location Details</value>
+  </key>
+  <key name="EDUC">
+    <value>Candidate Educations</value>
+  </key>
+  <key name="COLLEGE">
+    <value>Candidate College Name</value>
+  </key>
+  <key name="EDUC_MERITS">
+    <value>Candidate Education Merits</value>
+  </key>
+  <key name="EMAIL">
+    <value>Candidate Email</value>
+  </key>
+  <key name="EMAIL_OTHERS">
+    <value>Candidate Email Others</value>
+  </key>
+  <key name="FILENO">
+    <value>Candidate File Number</value>
+  </key>
+  <key name="GBACKGROUND">
+    <value>Candidate Background Grade</value>
+  </key>
+  <key name="GEDUCATION">
+    <value>Candidate Education Grade</value>
+  </key>
+  <key name="GENDER">
+    <value>Candidate Gender</value>
+  </key>
+  <key name="GOTHRAM">
+    <value>Candidate Gothram</value>
+  </key>
+  <key name="GPERSONALITY">
+    <value>Candidate Personality Grade</value>
+  </key>
+  <key name="GPROFESSION">
+    <value>Candidate Profession Grade</value>
+  </key>
+  <key name="HEIGHT">
+    <value>Candidate Height</value>
+  </key>
+  <key name="INCOME">
+    <value>Candidate Income</value>
+  </key>
+  <key name="JOBLOC">
+    <value>Candidate Job Location</value>
+  </key>
+  <key name="LAGNAM">
+    <value>Candidate Lagnam</value>
+  </key>
+  <key name="MARITALSTATUS">
+    <value>Candidate Marrital Status</value>
+  </key>
+  <key name="MEDIA_NAME">
+    <value>Candidate Media Name</value>
+  </key>
+  <key name="MMGOTHRAM">
+    <value>Candidate Maternal Gothram</value>
+  </key>
+  <key name="MOBILE">
+    <value>Candidate Mobile</value>
+  </key>
+  <key name="MOTHERTONGUE">
+    <value>Candidate Mother Tongue</value>
+  </key>
+  <key name="MSNOTES">
+    <value>Candidate Mother Sister Notes</value>
+  </key>
+  <key name="NAME">
+    <value>Candidate Name</value>
+  </key>
+  <key name="PADAM">
+    <value>Candidate Paadam</value>
+  </key>
+  <key name="PERMANENTADDRESS">
+    <value>Candidate Permanent Address</value>
+  </key>
+  <key name="PHC">
+    <value>Candidate Physically Handicapped</value>
+  </key>
+  <key name="PHOTO_HIDE">
+    <value>Candidate Hided Photos</value>
+  </key>
+  <key name="PLACEOFBIRTH">
+    <value>Candidate Place Of Birth</value>
+  </key>
+  <key name="PROFESSION">
+    <value>Candidate Profession</value>
+  </key>
+  <key name="PROPERTY">
+    <value>Candidate Property</value>
+  </key>
+  <key name="RAASI">
+    <value>Candidate Raasi</value>
+  </key>
+  <key name="REFERENCE">
+    <value>Candidate Reference Name</value>
+  </key>
+  <key name="REGNO">
+    <value>Candidate Registered Numbers</value>
+  </key>
+  <key name="REGNO_SUFFIX">
+    <value>Candidate Registered Number Suffix Without Horoscope</value>
+  </key>
+  <key name="RESIDENCEPHONE">
+    <value>Candidate Residence Phone</value>
+  </key>
+  <key name="STARLANGUAGE">
+    <value>Candidate Star Language</value>
+  </key>
+  <key name="SURNAME">
+    <value>Candidate Surname</value>
+  </key>
+  <key name="TIMEOFBIRTH">
+    <value>Candidate TimeofBirth</value>
+  </key>
+  <key name="UNIVERSITY">
+    <value>Candidate University</value>
+  </key>
+  <key name="VISASTATUS">
+    <value>Candidate Visa Status</value>
+  </key>
+
+
+  <key name="FEDUCATION">
+    <value>Father Education</value>
+  </key>
+  <key name="FEMAIL">
+    <value>Father Email</value>
+  </key>
+  <key name="FFDISTRICT">
+    <value>Father Father District</value>
+  </key>
+  <key name="FFEMAIL">
+    <value>Father Father Email</value>
+  </key>
+  <key name="FFNAME">
+    <value>Father Father Name</value>
+  </key>
+  <key name="FFNATIVE">
+    <value>Father Father Native</value>
+  </key>
+  <key name="FFPHONE">
+    <value>Father Father Phone</value>
+  </key>
+  <key name="FNAME">
+    <value>Father Name</value>
+  </key>
+  <key name="FPHONE">
+    <value>Father Phone</value>
+  </key>
+  <key name="FPROFESSION">
+    <value>Father Prosession</value>
+  </key>
+  <key name="MEDUCATION">
+    <value>Mother Education</value>
+  </key>
+  <key name="MFDISTRICT">
+    <value>Mother Father District</value>
+  </key>
+  <key name="MFEMAIL">
+    <value>Mother Father Email</value>
+  </key>
+  <key name="MFNAME">
+    <value>Mother Father Name</value>
+  </key>
+  <key name="MFNATIVE">
+    <value>Mother Father Native</value>
+  </key>
+  <key name="MFPHONE">
+    <value>Mother Father Phone</value>
+  </key>
+  <key name="MFSURNAME">
+    <value>Mother Father Surname</value>
+  </key>
+  <key name="MNAME">
+    <value>Mother Name</value>
+  </key>
+  <key name="MPHONE">
+    <value>Mother Phone</value>
+  </key>
+  <key name="MPROFESSION">
+    <value>Mother Profession</value>
+  </key>
+  <key name="MEMAIL">
+    <value>Mother Email</value>
+  </key>
+
+
+  <key name="CBNAME">
+    <value>Candidate Brother Name</value>
+  </key>
+  <key name="CBEDUCATION">
+    <value>Candidate Brother Education</value>
+  </key>
+  <key name="CBPROFESSION">
+    <value>Candidate Brother Profession</value>
+  </key>
+  <key name="CBDESIGNATION">
+    <value>Candidate Brother Designation</value>
+  </key>
+  <key name="CBPLACEOFJOB">
+    <value>Candidate Brother Job Location</value>
+  </key>
+  <key name="CBPHONE">
+    <value>Candidate Brother Phone</value>
+  </key>
+  <key name="CBEMAIL">
+    <value>Candidate Brother Email</value>
+  </key>
+  <key name="CBWNAME">
+    <value>Candidate Brother Wife Name</value>
+  </key>
+  <key name="CBWEDUCATION">
+    <value>Candidate Brother Wife Education</value>
+  </key>
+  <key name="CBWPROFESSION">
+    <value>Candidate Brother Wife Profession</value>
+  </key>
+  <key name="CBWDESIGNATION">
+    <value>Candidate Brother Wife Designation</value>
+  </key>
+  <key name="CBWPHONE">
+    <value>Candidate Brother Wife Phone</value>
+  </key>
+  <key name="CBWEMAIL">
+    <value>Candidate Brother Wife Email</value>
+  </key>
+  <key name="CBWFNAME">
+    <value>Candidate Brother Wife Father Name</value>
+  </key>
+  <key name="CBWFSURNAME">
+    <value>Candidate Brother Wife Father Surname</value>
+  </key>
+  <key name="CBWNATIVE">
+    <value>Candidate Brother Wife Native</value>
+  </key>
+  <key name="CBCASTENOBAR">
+    <value>Candidate Brother Castenobar</value>
+  </key>
+
+
+  <key name="CSNAME">
+    <value>Candidate Sister Name</value>
+  </key>
+  <key name="CSEDUCATION">
+    <value>Candidate Sister Education</value>
+  </key>
+  <key name="CSPROFESSION">
+    <value>Candidate Sister Profession</value>
+  </key>
+  <key name="CSDESIGNATION">
+    <value>Candidate Sister Designation</value>
+  </key>
+  <key name="CSPLACEOFJOB">
+    <value>Candidate Sister Job Place</value>
+  </key>
+  <key name="CSPHONE">
+    <value>Candidate Sister Phone</value>
+  </key>
+  <key name="CSEMAIL">
+    <value>Candidate Sister Email</value>
+  </key>
+  <key name="CSHNAME">
+    <value>Candidate Sister Husband Name</value>
+  </key>
+  <key name="CSHEDUCATION">
+    <value>Candidate Sister Husband Education</value>
+  </key>
+  <key name="CSHPROFESSION">
+    <value>Candidate Sister Husband Profession</value>
+  </key>
+  <key name="CSHDESIGNATION">
+    <value>Candidate Sister Husband Designation</value>
+  </key>
+  <key name="CSHPHONE">
+    <value>Candidate Sister Husband Phone</value>
+  </key>
+  <key name="CSHFNAME">
+    <value>Candidate Sister Husband Father Name</value>
+  </key>
+  <key name="CSHEMAIL">
+    <value>Candidate Sister Husband Email</value>
+  </key>
+  <key name="CSHFSURNAME">
+    <value>Candidate Sister Husband Father Surname</value>
+  </key>
+  <key name="CSHNATIVE">
+    <value>Candidate Sister Husband Native</value>
+  </key>
+  <key name="CHCASTENOBAR">
+    <value>Candidate Sister Castenobar</value>
+  </key>
+
+
+
+  <key name="EXCASTE">
+    <value>Partner Caste</value>
+  </key>
+  <key name="EXHTHEIGHT">
+    <value>Partner Height</value>
+  </key>
+  <key name="EXABROAD">
+    <value>Partner Is Aboard</value>
+  </key>
+  <key name="EXCOMPLEXION">
+    <value>Partner Complexion</value>
+  </key>
+  <key name="EXMOTHERTONGUE">
+    <value>Partner Mother Tongue</value>
+  </key>
+  <key name="EXPSTARS">
+    <value>Partner Preffered Star</value>
+  </key>
+  <key name="EXNPSTARS">
+    <value>Partner Non-Preffered Star</value>
+  </key>
+  <key name="EXCATEGORY">
+    <value>Partner Category</value>
+  </key>
+  <key name="EXQUALIFICATION">
+    <value>Partner Qualification</value>
+  </key>
+  <key name="EXSPECIALIZATION">
+    <value>Partner Education Specialization</value>
+  </key>
+  
+  <key name="EXJOBLOC">
+    <value>Partner Job Location</value>
+  </key>
+  <key name="EXJOBPREFERED">
+    <value>Partner Jobpreffered</value>
+  </key>
+  <key name="EXPROFESSION">
+    <value>Partner Profession</value>
+  </key>
+  <key name="WILLINGTO2NDMARRIAGE">
+    <value>Partner Willing To 2nd Marriage</value>
+  </key>
+  <key name="CASTENOBAR">
+    <value>Partner Castenobar</value>
+  </key>
+
+
+
+  <key name="FBEMAIL">
+    <value>Father-Brother Email</value>
+  </key>
+  <key name="FBNAME">
+    <value>Father-Brother Name</value>
+  </key>
+  <key name="FBPHONE">
+    <value>Father-Brother Phone</value>
+  </key>
+  <key name="FBPROFESSION">
+    <value>Father-Brother Profession</value>
+  </key>
+
+
+
+  <key name="MBEMAIL">
+    <value>Mother-Brother Email</value>
+  </key>
+  <key name="MBNAME">
+    <value>Mother-Brother Name</value>
+  </key>
+  <key name="MBPHONE">
+    <value>Mother-Brother Phone</value>
+  </key>
+  <key name="MBPROFESSION">
+    <value>Mother-Brother Profession</value>
+  </key>
+
+
+
+  <key name="FSHEMAIL">
+    <value>Father-Sister Husband Email</value>
+  </key>
+  <key name="FSHNAME">
+    <value>Father-Sister Husband Name</value>
+  </key>
+  <key name="FSHNATIVE">
+    <value>Father-Sister Husband Native</value>
+  </key>
+  <key name="FSHPHONE">
+    <value>Father-Sister Husband Phone</value>
+  </key>
+  <key name="FSHPROFESSION">
+    <value>Father-Sister Husband Profession</value>
+  </key>
+  <key name="FSHSURNAME">
+    <value>Father-Sister Husband Surname</value>
+  </key>
+  <key name="FSNAME">
+    <value>Father-Sister Name</value>
+  </key>
+
+
+
+  <key name="MSHEMAIL">
+    <value>Mother-Sister Husband Email</value>
+  </key>
+  <key name="MSHNAME">
+    <value>Mother-Sister Husband Name</value>
+  </key>
+  <key name="MSHNATIVE">
+    <value>Mother-Sister Husband Native</value>
+  </key>
+  <key name="MSHPHONE">
+    <value>Mother-Sister Husband Phone</value>
+  </key>
+  <key name="MSHPROFESSION">
+    <value>Mother-Sister Husband Profession</value>
+  </key>
+  <key name="MSHSURNAME">
+    <value>Mother-Sister Husband Surname</value>
+  </key>
+  <key name="MSNAME">
+    <value>Mother-Sister Name</value>
+  </key>
+
+
+
+  <key name="CHILDRENS">
+    <value>Spouce Childrens</value>
+  </key>
+  <key name="FAMILYPLANNING">
+    <value>Spouce Family Planning</value>
+  </key>
+  <key name="REASONFORDIV">
+    <value>Spouce Reason For Divorce</value>
+  </key>
+  <key name="SPOUCE-ADDRESS">
+    <value>Spouce Address Details</value>
+  </key>
+  <key name="SPOUCE-COUNTRYLIVINGIN">
+    <value>Spouce Country Living-In</value>
+  </key>
+
+
+  <key name="REFERENCENAME">
+    <value>Reference Name</value>
+  </key>
+  <key name="REFPROFESSION">
+    <value>Reference Profession</value>
+  </key>
+  <key name="REFPROFDETAILS">
+    <value>Reference Profession Details</value>
+  </key>
+  <key name="REFNATIVE">
+    <value>Reference Native Place</value>
+  </key>
+  <key name="REFCURRENTLOC">
+    <value>Reference Current Location</value>
+  </key>
+  <key name="REFCOUNTRYLIVINGIN">
+    <value>Reference Country Living In</value>
+  </key>
+  
+  
+
+
+  <key name="All Phones">
+    <value>Search by Phones</value>
+  </key>
+  <key name="All Emails">
+    <value>Search by Emails</value>
+  </key>
+  <key name="All Natives">
+    <value>Search by Natives</value>
+  </key>
+  <key name="All Names">
+    <value>Search by Names</value>
+  </key>
+  <key name="All Surnames">
+    <value>Search by Surnames</value>
+  </key>
+  <key name="All Caste">
+    <value>Search by Caste</value>
+  </key>
+  <key name="All Qualification">
+    <value>Search by Qualification</value>
+  </key>
+  <key name="All Profession">
+    <value>Search by Profession</value>
+  </key>
+  <key name="All District">
+    <value>Search by District</value>
+  </key>
+
+</root>
+

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/TestclientMachineName.aspx" hash="fffffffff0855c68" filehash="65bdc0014ee27873" flags="110000" assembly="App_Web_fcyfehex" type="ASP.employee_testclientmachinename_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/TestclientMachineName.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/TestclientMachineName.aspx.cs" />
+    </filedeps>
+</preserve>

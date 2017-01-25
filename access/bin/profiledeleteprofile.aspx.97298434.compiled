@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ProfileDeleteprofile.aspx" hash="fffffffff0855c68" filehash="f7a49107f596ddf7" flags="110000" assembly="App_Web_ljxpxqyp" type="ASP.customer_new_customerdesignedpages_profiledeleteprofile_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/KaakateeyainnerMasterPage.master.cs" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ProfileDeleteprofile.aspx" />
+        <filedep name="/kaakateeyaWeb/Customer_new/Customerdesignedpages/ProfileDeleteprofile.aspx.cs" />
+    </filedeps>
+</preserve>

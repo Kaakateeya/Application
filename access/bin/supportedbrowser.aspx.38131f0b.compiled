@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Common/SupportedBrowser.aspx" hash="fffffffff0855c68" filehash="57936987e8bd9185" flags="110000" assembly="App_Web_rbievxn2" type="ASP.common_supportedbrowser_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Common/SupportedBrowser.aspx" />
+        <filedep name="/kaakateeyaWeb/Common/SupportedBrowser.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+    </filedeps>
+</preserve>

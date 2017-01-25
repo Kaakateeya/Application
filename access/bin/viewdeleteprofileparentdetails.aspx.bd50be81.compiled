@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/ViewDeleteProfileParentDetails.aspx" hash="fffffffff0855c68" filehash="9b73c305866d555e" flags="110000" assembly="App_Web_ty5a1ydp" type="ASP.employee_viewdeleteprofileparentdetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewDeleteProfileParentDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/ViewDeleteProfileParentDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Edit/PageMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewDeleteProfileParentDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteProfilesView/ViewDeleteProfileParentDetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlHorizontalMenu.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewParentDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/ViewParentDetails.ascx.cs" />
+    </filedeps>
+</preserve>

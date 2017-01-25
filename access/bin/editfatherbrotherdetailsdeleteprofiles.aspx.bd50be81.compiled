@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/EditFatherBrotherDetailsDeleteProfiles.aspx" hash="fffffffff0855c68" filehash="e8017bee55b2ea9b" flags="110000" assembly="App_Web_pivaegga" type="ASP.employee_editfatherbrotherdetailsdeleteprofiles_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/EditFatherBrotherDetailsDeleteProfiles.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/EditFatherBrotherDetailsDeleteProfiles.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditFatherBrotherDetailsDeleteProfiles.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlDeleteProfiles/uctrlDeleteprofileEdit/EditFatherBrotherDetailsDeleteProfiles.ascx.cs" />
+    </filedeps>
+</preserve>

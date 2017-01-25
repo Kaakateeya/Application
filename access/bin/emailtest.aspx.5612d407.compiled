@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/DesignedPages/emailtest.aspx" hash="fffffffff0855c68" filehash="cd09267ad13532d2" flags="110000" assembly="App_Web_p3ewi4sk" type="ASP.designedpages_emailtest_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/DesignedPages/emailtest.aspx" />
+        <filedep name="/kaakateeyaWeb/DesignedPages/emailtest.aspx.cs" />
+    </filedeps>
+</preserve>

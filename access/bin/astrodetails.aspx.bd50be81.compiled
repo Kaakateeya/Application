@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/kaakateeyaWeb/Employee/AstroDetails.aspx" hash="fffffffff0855c68" filehash="e3f81c8552f2b163" flags="110000" assembly="App_Web_pivaegga" type="ASP.employee_astrodetails_aspx">
+    <filedeps>
+        <filedep name="/kaakateeyaWeb/Employee/AstroDetails.aspx" />
+        <filedep name="/kaakateeyaWeb/Employee/AstroDetails.aspx.cs" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master" />
+        <filedep name="/kaakateeyaWeb/Employee/EmpMaster.master.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/PresentUnpaidMembersLogin.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlAstroHoroDetails.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/Registration/uctrlAstroHoroDetails.ascx.cs" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx" />
+        <filedep name="/kaakateeyaWeb/UserControls/uctrlEmpMenuAccordion.ascx.cs" />
+    </filedeps>
+</preserve>
