@@ -4704,6 +4704,7 @@ app.controller('privacypolicy', ['$scope', function (scope) {
 app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettings', 'SelectBindServiceApp',
     'authSvc', 'alert', 'helperservice', 'basicRegistrationService',
     function(scope, $mdDialog, customerProfilesettings, service, authSvc, alerts, helperservice, basicRegistrationService) {
+        scope.selectedIndex = 0;
         scope.getdetails = function() {
             var logincustid = authSvc.getCustId();
             scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
@@ -4732,7 +4733,6 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             scope.hideprofile = true;
             scope.deleteprofileswitch = false;
             scope.deleteprofiledis = true;
-            scope.selectedIndex = 0;
             service.countryCodeselect().then(function(response) {
                 scope.countryCode = [];
                 scope.countryCode = [{ label: "--Select--", title: "--select--", value: "0" }];
@@ -4904,6 +4904,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.emailform.$setPristine();
                     this.emailform.$setUntouched();
                     this.emailform.$setinValidity();
+                    scope.selectedIndex = 0;
                     break;
                 case "mobile":
                     scope.ddlcountrycode = null;
@@ -4916,6 +4917,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.mobileform.$setPristine();
                     this.mobileform.$setUntouched();
                     this.mobileform.$setinValidity();
+                    scope.selectedIndex = 0;
                     break;
                 case "password":
                     scope.OldPassword = null;
@@ -4930,6 +4932,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.projectForm.$setPristine();
                     this.projectForm.$setUntouched();
                     this.projectForm.$setinValidity();
+                    scope.selectedIndex = 1;
                     break;
                 case "hide":
                     scope.hideprofiledays = null;
@@ -4941,6 +4944,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.hideprofileform.$setPristine();
                     this.hideprofileform.$setUntouched();
                     this.hideprofileform.$setinValidity();
+                    scope.selectedIndex = 3;
                     break;
                 case "alerts":
                     scope.mailyes = null;
@@ -4948,6 +4952,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     scope.getdetails();
                     scope.alertmanageswitch = false;
                     scope.manageakerts = true;
+                    scope.selectedIndex = 2;
                     break;
                 case "deleteprofiles":
                     scope.Narration = null;
@@ -4959,6 +4964,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
                     this.deleteprofileform.$setPristine();
                     this.deleteprofileform.$setUntouched();
                     this.deleteprofileform.$setinValidity();
+                    scope.selectedIndex = 4;
                     break;
             }
         };
