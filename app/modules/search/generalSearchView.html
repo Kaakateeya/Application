@@ -743,7 +743,7 @@
                                     <div class="pop_controls_right select-box-my select-box-my-double col-lg-8 regmobilenumber">
                                       <select ng-class="dynamicaapplycolors(reg.ddlmobilecountry,'ddlmobilecountry')"  multiselectdropdown class="col-lg-4"  typeofdata="'countryCode'" id="ddlmobilecountry" ng-model="reg.ddlmobilecountry" required="">
                                             </select>         
-                                            <input maxlength="10" class="form-control col-lg-8" ng-class="dynamictextboxcolor(reg.txtMobileNo,'txtMobileNo')"  required="" md-no-asterisk="" ng-pattern="/^[0-9]+$/" id="txtMobileNo" ng-model="reg.txtMobileNo" ng-blur="valueExists('number',1,reg.txtMobileNo);" style="border: 1px solid #a29b9b;width: 51% !important;float: right;margin-right: 12px;margin-top: 3px;">
+                                            <input minlength="10" maxlength="10" class="form-control col-lg-8" ng-class="dynamictextboxcolor(reg.txtMobileNo,'txtMobileNo')"  required="" md-no-asterisk="" ng-pattern="/^[0-9]+$/" id="txtMobileNo" ng-model="reg.txtMobileNo" ng-blur="valueExists('number',1,reg.txtMobileNo);" style="border: 1px solid #a29b9b;width: 51% !important;float: right;margin-right: 12px;margin-top: 3px;">
                                     </div>
                                 </li>
                                   <br/>

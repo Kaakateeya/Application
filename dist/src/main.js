@@ -2515,6 +2515,10 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.$on('IdleTimeout', function() {
             alertpopup.dynamicpopup("sessionalert.html", scope, uibModal, 'sm');
+            timeout(function() {
+                authSvc.logout();
+                alertpopup.dynamicpopupclose();
+            }, 600 * 1000);
         });
         scope.acceptcontinue = function() {
             ngIdle.setIdle(5 * 60);
