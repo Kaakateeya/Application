@@ -101,7 +101,6 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 }]);
 app.config(function(reCAPTCHAProvider) {
     reCAPTCHAProvider.setPublicKey('6LcrVwkUAAAAAGPJwyydnezgtVE7MlDCi3YQANKW');
-    // optional
     reCAPTCHAProvider.setOptions({
         theme: 'clean'
     });
@@ -122,7 +121,6 @@ app.run(function($rootScope, $state, $stateParams) {
                             $state.go('mobileverf');
                             e.preventDefault();
                         } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
-                            // window.location = "missingfields/" + misStatus;
                             $state.go("missingfields", { id: misStatus });
                             e.preventDefault();
                         }
@@ -130,8 +128,7 @@ app.run(function($rootScope, $state, $stateParams) {
                 }
             }
         } else {
-            debugger;
-            console.log(to.data);
+
             if (to.name === 'General') {
                 if (sessionStorage.getItem('cust.id') !== null) {
                     var misStatuss = sessionStorage.getItem('missingStatus');
@@ -141,7 +138,6 @@ app.run(function($rootScope, $state, $stateParams) {
                             $state.go('mobileverf');
                             e.preventDefault();
                         } else if (misStatuss === '1' || misStatuss === '2' || misStatuss === '3' || misStatuss === '4' || misStatuss === '5') {
-                            // window.location = "missingfields/" + misStatus;
                             $state.go("missingfields", { id: misStatuss });
                             e.preventDefault();
                         }
