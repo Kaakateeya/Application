@@ -642,6 +642,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
             customerDashboardServices.getNotifications(inobj).then(function(response) {
                 var dddddd = JSON.parse(response.data);
+
+                var notifalgg = sessionStorage.getItem('unpaidNotifyflag');
+                if (notifalgg !== 'false' && Startval === 1 && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
+                    dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
+                    sessionStorage.setItem('unpaidNotifyflag', true);
+                }
                 _.each(dddddd, function(item, index) {
                     if ((index % 2 === 0) || index === 0) {
                         item.bakcolor = { "background-color": "#f47370" };
@@ -707,12 +713,26 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             });
         });
         scope.readNotify = function(notifyID, type, index) {
-            scope.disClass = index;
-            scope.notifytype = type;
-            if (type === 'page') {
-                scope.getNotifyArray(1, 5, notifyID);
+
+
+            if (notifyID === undefined || notifyID === null || notifyID === '') {
+                var notiFlag = sessionStorage.getItem('unpaidNotifyflag');
+                if (notiFlag === "true") {
+                    sessionStorage.setItem('unpaidNotifyflag', false);
+                    if (type === 'page') {
+                        scope.notificationtxt.splice(0, 1);
+                    } else {
+                        scope.notificationpopup.splice(0, 1);
+                    }
+                }
             } else {
-                scope.getNotifyArray(1, 10, notifyID, 'Action');
+                scope.disClass = index;
+                scope.notifytype = type;
+                if (type === 'page') {
+                    scope.getNotifyArray(1, 5, notifyID);
+                } else {
+                    scope.getNotifyArray(1, 10, notifyID, 'Action');
+                }
             }
         };
         var from = 1,

@@ -59,6 +59,8 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
         sessionStorage.removeItem("httperrorpopupstatus");
         sessionStorage.removeItem("missingStatus");
         sessionStorage.removeItem("localcustid");
+        sessionStorage.removeItem("unpaidNotifyflag");
+
     }
 
     function getUser() {
