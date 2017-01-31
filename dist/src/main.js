@@ -2498,9 +2498,9 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', 'al
     }
 ]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout) {
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -5696,6 +5696,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     switch (type) {
                         case "B":
                             if (response.data === 1) {
+                                // scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                             } else {
@@ -5704,6 +5705,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             break;
                         case "E":
                             if (response.data === 1) {
+                                //scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                             } else {
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
@@ -5711,6 +5713,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             break;
                         case "I":
                             if (response.data === 1) {
+                                //scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                             } else {
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
@@ -5747,6 +5750,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });
@@ -6454,7 +6458,7 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.post(app.apiroot + 'StaticPages/UpdateExpressIntrestViewfullprofile', obj);
         },
         getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
-            return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: ErrorMessage, CustID: CustID, PageName: PageName, Type: Type } });
+            return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: (ErrorMessage !== null && ErrorMessage !== undefined && ErrorMessage !== "") ? ErrorMessage : "Not Defined", CustID: CustID, PageName: (PageName !== null && PageName !== undefined && PageName !== "") ? PageName : "Not Defined", Type: (Type !== null && Type !== undefined && Type !== "") ? Type : "Not Defined" } });
         }
     };
 }]);

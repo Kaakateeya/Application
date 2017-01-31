@@ -157,6 +157,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                     switch (type) {
                         case "B":
                             if (response.data === 1) {
+                                // scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'bookmarked suceessfully', 2500);
 
                             } else {
@@ -165,6 +166,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             break;
                         case "E":
                             if (response.data === 1) {
+                                //scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'EXpressInterest done SuccessFully', 2500);
                             } else {
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'EXpressInterest Fail', 2500);
@@ -172,6 +174,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             break;
                         case "I":
                             if (response.data === 1) {
+                                //scope.getallflags();
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', 'Ignore SuccessFully', 2500);
                             } else {
                                 scope.$broadcast("showAlertPopupccc", 'alert-danger', 'Ignore profile Fail', 2500);
@@ -208,6 +211,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
+                        console.log(responsepaid);
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });

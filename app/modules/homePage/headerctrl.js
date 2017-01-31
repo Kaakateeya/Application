@@ -1,7 +1,7 @@
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice',
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout) {
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
