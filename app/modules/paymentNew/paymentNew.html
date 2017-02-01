@@ -1,0 +1,449 @@
+<style>
+    .leftlabel {
+        width: 300px;
+    }
+    
+    .ColonLabel {
+        font-weight: bold;
+        font-size: 15px;
+        color: #6B6B6B;
+        text-align: center;
+        padding-right: 2px;
+        width: 20px;
+    }
+</style>
+<form>
+    <div ng-controller="myCtrl">
+
+        <div>
+
+            <div style="width: 98%; margin-left: auto; margin-right: auto;" ng-hide="display==1 || display==3">
+                <div>
+                    <table class="schres" cellspacing="5" cellpadding="5" width="100%">
+                        <tr>
+                            <td>
+                                <b id="Payment">Search Membership Package</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schrescon">
+                                <fieldset>
+                                    <legend><b></b></legend>
+                                    <table cellpadding="5" width="100%" border="0">
+                                        <tr>
+                                            <td colspan="6" align="left">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="lProfileID" class="LeftLabel">Profile ID</label>
+                                            </td>
+                                            <td width="2%" align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="20%" align="left">
+                                                <input type="text" ng-model="tProfileID" onkeypress="return isNumberKey(event)" />
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="LBranchID" class="LeftLabel"></label>
+                                            </td>
+                                            <td width="2%" align="center" class="ColonLabel">
+                                            </td>
+                                            <td> <button ng-click="myFunc()">Payment</button></td>
+                                            <td> <button ng-click="gridView()">GridView</button></td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="width: 98%; margin-left: auto; margin-right: auto;" data-ng-show="display==3">
+                <div>
+                    <table class="schres" cellspacing="5" cellpadding="5" width="100%">
+                        <tr>
+                            <td>
+                                <b id="Payment">Payment GridView</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button ng-click="btnsubmit(2)">Reset </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schrescon">
+                                <fieldset>
+                                    <legend><b></b></legend>
+                                    <table cellpadding="5" width="100%" border="0" border="1">
+                                        <tr>
+                                            <td colspan="6" align="left">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> ProfileID</td>
+                                            <td>AgreedAmount</td>
+                                            <td>PaidAmount</td>
+                                            <td>Type</td>
+                                            <td>MembershipType</td>
+                                            <td>PaymentDate</td>
+                                            <td>ExpiryDate</td>
+                                            <td>CreatedByEmpID</td>
+                                            <td>Application name</td>
+                                        </tr>
+                                        <tr ng-repeat="myObj in  array">
+                                            <td> {{myObj.ProfileID}}</td>
+                                            <td> {{myObj.AgreedAmount}}</td>
+                                            <td> {{myObj.PaidAmount}}</td>
+                                            <td> {{myObj.Type}}</td>
+                                            <td> {{myObj.membershiptype}}</td>
+                                            <td> {{myObj.PaymentDate}}</td>
+                                            <td> {{myObj.ExpiryDate}}</td>
+                                            <td> {{myObj.CreatedByEmpID}}</td>
+                                            <td> {{myObj.Applicationname}}</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="width: 98%; margin-left: auto; margin-right: auto;">
+
+                <div ng-show="tProfileID !=null && display==1">
+                    <table class="schres" cellspacing="5" cellpadding="5" width="100%">
+                        <tr>
+                            <td>
+                                <b id="trHeding">Payment Details</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schrescon">
+                                <fieldset>
+                                    <legend><b></b></legend>
+                                    <table cellpadding="5" width="100%" border="0">
+                                        <tr>
+                                            <td colspan="6" align="left">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label" class="LeftLabel">Profile ID</label>
+                                            </td>
+                                            <td width="2%" align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="20%" align="left">
+                                                <label CssClass="LeftLabel">{{ProfileID}}</label>
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label1" class="LeftLabel">Branch</label>
+                                            </td>
+                                            <td width="2%" align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <label id="lblBranch" class="LeftLabel">{{Branch}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label2" class="LeftLabel">Name</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <label id="lblName" class="LeftLabel">{{Name}}</label>
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label3" class="LeftLabel">Surname<label>
+                                    </td>
+                                    <td align="center" class="ColonLabel">:
+                                    </td>
+                                    <td width="25%" align="left">
+                                        <label id="lblSurName" class="LeftLabel">{{Surname}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label4" class="LeftLabel">Gender<label>
+                                    </td>
+                                    <td align="center" class="ColonLabel">:
+                                    </td>
+                                    <td width="25%" align="left">
+                                        <label id="lblGender" class="LeftLabel">{{Gender}}</label>
+
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label5" class="LeftLabel">Caste</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <label id="lblCaste" class="LeftLabel">{{CasteName}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr id="trMembership" runat="server">
+                                            <td width="20%" align="right">
+                                                <label ID="Label6" class="rightLabel">Payment type</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <input type="radio" ng-model="rbtPaymenttype" value="0"> New
+                                                <input type="radio" ng-model="rbtPaymenttype" value="1"> Partial
+                                                <!--<label id="lblMembershipType" class="LeftLabel">{{MemberShipType}}</label>-->
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label7" class="LeftLabel">AccessFeature</asp:Label>
+                                    </td>
+                                    <td align="center" class="ColonLabel">:
+                                    </td>
+                                    <td width="25%" align="left">
+                                      
+                                           <input type="radio" ng-model="rbtAccessFeature" value="279" > Only online
+                                           <input type="radio" ng-model="rbtAccessFeature" value="280" > Only offline
+                                    </td>
+                                </tr>
+                                <tr id="trAgreedAmount" runat="server">
+                                    <td width="20%" align="right">
+                                        <label id="Label8" class="LeftLabel" >Agreed amount</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+
+                                                <input type="text" ng-model="AgreedAmountNew" />
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label7" class="LeftLabel">ServiceTax</asp:Label>
+                                    </td>
+                                    <td align="center" class="ColonLabel">:
+                                    </td>
+                                    <td width="25%" align="left">
+                                    <input type="text" ng-model="ServiceTax" > 
+                                   </td>
+                                 </tr>
+                               
+                                <tr id="trStartDate" runat="server">
+                                    <td width="20%" align="right">
+                                        <label id="Label10" class="LeftLabel">Start date</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <label id="lblStartDate" class="LeftLabel">{{StartDate}}</label>
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label11" class="LeftLabel">End date</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <label id="lblEndDate" class="LeftLabel">{{EndDate}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr id="trNoofPoints" runat="server">
+                                            <td width="20%" align="right">
+                                                <label id="Label23" class="LeftLabel">No of points</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <!--<label id="lblNoOfPoints" class="LeftLabel" >{{NoofPoints}}</label>-->
+                                                <input type="text" ng-model="NoofPoints" />
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label33" class="LeftLabel">Balance amount</label>
+                                            </td>
+                                            <td id="tdBalAmount" align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <!--<label id="lblBalAmount" class="LeftLabel"></label>-->
+                                                <input type="text" ng-model="Balancepoints" />
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label31" class="LeftLabel">Amount paid</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <input type="text" ng-model="AmountPaid">
+                                            </td>
+                                            <td width="20%" align="right">
+                                                <label id="Label9" class="LeftLabel">Settlement amount</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <input type="text" ng-model="SettlementAmount" />
+                                            </td>
+                                        </tr>
+                                        <tr runat="server" id="trservicetaxwitoutpay">
+                                            <td width="20%" align="right">
+                                                <label id="lblservicetaxwitoutpay" class="LeftLabel">Service Tax Amount</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td width="25%" align="left">
+                                                <input ng-model="txtServiceTaxSettleMent" type="text" />
+
+                                            </td>
+
+                                            <td id="tdMarket" width="20%" align="right">
+                                                <label id="Label25" class="LeftLabel">Date duration</label>
+                                            </td>
+                                            <td id="tdMarket2" align="center" class="ColonLabel">:
+                                            </td>
+                                            <td id="tdMarket3" width="25%" align="left">
+                                                <label id="lblDateDuration" class="LeftLabel">{{Duration}}</label>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label12" class="LeftLabel">Pay mode</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td align="left" colspan="4">
+                                                <input type="radio" ng-model="Paymode" value="345" ng-click="rbtDisplay()"> Cash
+                                                <input type="radio" ng-model="Paymode" value="346" ng-click="rbtDisplay()"> Credit card
+                                                <input type="radio" ng-model="Paymode" value="347" ng-click="rbtDisplay()"> Cheque
+                                                <input type="radio" ng-model="Paymode" value="348" ng-click="rbtDisplay()">Bank online
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="Label15" class="LeftLabel">Send sms\email</label>
+                                            </td>
+                                            <td align="center" class="ColonLabel">:
+                                            </td>
+                                            <td align="left" colspan="4">
+                                                <input type="radio" ng-model="SendEmailSms" value="1"> Yes
+                                                <input type="radio" ng-model="SendEmailSms" value="0"> No
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" colspan="6">
+                                                <table width="100%" id="trRecipt" border="0">
+                                                    <tr align="center" style="width: 100%">
+                                                        <td width="20%" align="right" ng-show="Paymode !=null">
+                                                            <label id="lblReceipt" class="LeftLabel">Receipt/Bill Number</label>
+                                                        </td>
+                                                        <td width="3%" align="center" class="ColonLabel" ng-show="Paymode !=null">&nbsp;:
+                                                        </td>
+                                                        <td width="25%" align="left" ng-show="Paymode !=null">&nbsp;
+                                                            <input type="text" ng-model="ReceiptBillNumber" />
+                                                        </td>
+                                                        <td colspan="3" ng-show="Paymode==346">
+                                                            <table id="tdTransactionID">
+                                                                <tr>
+                                                                    <td align="right" width="27%">
+                                                                        <label id="Label14" class="LeftLabel">Transaction ID</label>
+                                                                    </td>
+                                                                    <td width="4%" align="center" class="ColonLabel">&nbsp;&nbsp;:
+                                                                    </td>
+                                                                    <td width="25%" align="left">
+                                                                        <input type="text" ng-model="TransactionID" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" colspan="6">
+                                                <table ng-model="trCheque" width="100%" border="0" ng-show="Paymode==347">
+                                                    <tr align="center" style="width: 100%;">
+                                                        <td width="19%" align="right">
+                                                            <label id="lblCheque" class="LeftLabel">Cheque no/DD no</label>
+                                                        </td>
+                                                        <td width="3%" align="center" class="ColonLabel">:
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <input type="text" ng-model="Cheque" />
+                                                        </td>
+                                                        <td width="20%" align="right">
+                                                            <label id="lblBankName" class="LeftLabel">Bank Name</asp:Label>
+                                                        </td>
+                                                        <td width="2%" align="center" class="ColonLabel">:
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <input type="text"  ng-model="BankName"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                           </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" colspan="6">
+                                       
+                                                <table id="trBranchName" width="100%" border="0" ng-show="Paymode==348">
+                                                    <tr style="width: 100%;">
+                                                        <td width="19%" align="right">
+                                                            <label id="lblBranchName"  class="LeftLabel" >Branch Name</label>
+                                                        </td>
+                                                        <td width="3%" align="center" class="ColonLabel">:
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <input type="text" ng-model="BranchName" />
+                                                        </td>
+                                                        <td width="20%" align="right">
+                                                            <label id="lblPlace" class="LeftLabel">Place</label>
+                                                        </td>
+                                                        <td width="2%" align="center" class="ColonLabel">:
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <input type="text" ng-model="Place" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="20%" align="right">
+                                                <label id="lblDesc1">Pay description</label>
+                                            </td>
+                                            <td class="ColonLabel">:
+                                            </td>
+                                            <td style="border: 0px;" align="left" colspan="4">
+                                                <input type="text" cols="40" rows="5" style="width:200px; height:50px;" ng-model="Paydescription" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td align="center" colspan="6">
+
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button ng-click="btnsubmit(1)">Submit </button> </td>
+
+                                            <td><button ng-click="btnsubmit(2)">Reset </button> </td>
+
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+
+
+</form>

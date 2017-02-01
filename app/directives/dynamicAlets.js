@@ -92,7 +92,9 @@ app.factory('alert', ['$mdDialog', '$uibModal', '$timeout', 'arrayConstants', 'c
                 ariaDescribedBy: 'modal-body',
                 templateUrl: url,
                 scope: scope,
-                size: size || 'lg'
+                size: size || 'lg',
+                backdrop: 'static',
+                keyboard: false
             });
         },
         dynamicpopupclose: function() {
