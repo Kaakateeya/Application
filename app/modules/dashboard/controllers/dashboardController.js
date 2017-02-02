@@ -644,9 +644,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 var dddddd = JSON.parse(response.data);
 
                 var notifalgg = sessionStorage.getItem('unpaidNotifyflag');
-                if (notifalgg !== 'false' && Startval === 1 && dddddd[0] !== undefined && dddddd[0] !== null && dddddd[0] !== "" && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
+                if (notifalgg !== 'false' && Startval === 1 && dddddd.length > 0 && dddddd[0] !== undefined && dddddd[0] !== null && dddddd[0] !== "" && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
                     dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
                     sessionStorage.setItem('unpaidNotifyflag', true);
+                } else {
+                    if (notifalgg !== 'false' && Startval === 1 && loginpaidstatus === "0" || loginpaidstatus === 0) {
+                        dddddd.splice(0, 0, { ActionType: 'Please upgrade your membership' });
+                        sessionStorage.setItem('unpaidNotifyflag', true);
+                    }
                 }
                 _.each(dddddd, function(item, index) {
                     if ((index % 2 === 0) || index === 0) {
