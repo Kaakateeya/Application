@@ -20,6 +20,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
+                    console.log(JSON.stringify(scope.personalinfo));
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||

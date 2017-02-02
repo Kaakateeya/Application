@@ -4617,9 +4617,10 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
         };
     }
 ]);
- app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route',
-     function(scope, forgetPwdservices, stateParams, alerts, uibModal, route) {
-         scope.custidpassword = stateParams.custid;
+ app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route', '$location',
+     function(scope, forgetPwdservices, stateParams, alerts, uibModal, route, location) {
+         // scope.custidpassword = stateParams.custid;
+         scope.custidpassword = (location.search()).CustID;
          scope.statuspassword = null;
          scope.divngit = function() {
              alerts.dynamicpopup("forgetpasswordemail.html", scope, uibModal);
@@ -5309,6 +5310,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
+                    console.log(JSON.stringify(scope.personalinfo));
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||

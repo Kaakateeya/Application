@@ -1,6 +1,7 @@
- app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route',
-     function(scope, forgetPwdservices, stateParams, alerts, uibModal, route) {
-         scope.custidpassword = stateParams.custid;
+ app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route', '$location',
+     function(scope, forgetPwdservices, stateParams, alerts, uibModal, route, location) {
+         // scope.custidpassword = stateParams.custid;
+         scope.custidpassword = (location.search()).CustID;
          scope.statuspassword = null;
          scope.divngit = function() {
              alerts.dynamicpopup("forgetpasswordemail.html", scope, uibModal);
