@@ -19,7 +19,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.liproceed = false;
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
+        //scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
         scope.Bookmark = [];
         scope.Viewed = [];
         scope.Express = [];
@@ -65,6 +65,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
+                    console.log(testArr);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
@@ -83,6 +84,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 break;
                             case "Express":
                                 scope.Express = testArr;
+                                console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {
                                     if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
                                         scope.liticket = true;
@@ -137,6 +139,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
+                scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
                     scope.slideshowimages();
                     scope.partnerinformation(response);

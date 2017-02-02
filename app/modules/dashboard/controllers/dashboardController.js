@@ -644,7 +644,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 var dddddd = JSON.parse(response.data);
 
                 var notifalgg = sessionStorage.getItem('unpaidNotifyflag');
-                if (notifalgg !== 'false' && Startval === 1 && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
+                if (notifalgg !== 'false' && Startval === 1 && dddddd[0] !== undefined && dddddd[0] !== null && dddddd[0] !== "" && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
                     dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
                     sessionStorage.setItem('unpaidNotifyflag', true);
                 }

@@ -2347,7 +2347,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 var dddddd = JSON.parse(response.data);
 
                 var notifalgg = sessionStorage.getItem('unpaidNotifyflag');
-                if (notifalgg !== 'false' && Startval === 1 && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
+                if (notifalgg !== 'false' && Startval === 1 && dddddd[0] !== undefined && dddddd[0] !== null && dddddd[0] !== "" && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
                     dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
                     sessionStorage.setItem('unpaidNotifyflag', true);
                 }
@@ -5659,7 +5659,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.liproceed = false;
         scope.liticket = false;
         scope.LoginPhotoIsActive = sessionStorage.getItem("LoginPhotoIsActive");
-        scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
+        //scope.logidliproceed = scope.custid === scope.localcustidhide ? false : true;
         scope.Bookmark = [];
         scope.Viewed = [];
         scope.Express = [];
@@ -5705,6 +5705,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
+                    console.log(testArr);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
@@ -5723,6 +5724,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 break;
                             case "Express":
                                 scope.Express = testArr;
+                                console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {
                                     if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
                                         scope.liticket = true;
@@ -5777,6 +5779,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
         scope.pageload = function() {
             if (scope.custid === localcustid) {
+                scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
                     scope.slideshowimages();
                     scope.partnerinformation(response);
