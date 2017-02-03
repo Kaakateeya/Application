@@ -210,6 +210,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
             return helperservice.checkstringvalue(authSvc.getCustId()) ? authSvc.getCustId() : null;
         }
         scope.generalpageload = function() {
+            scope.selectedIndex = $stateParams.id;
             scope.modelsearch = {
                 showcontrols: true,
                 typesearch: "",
