@@ -474,7 +474,7 @@
                                         <div class="span4" style="margin-right:20px;">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label>Profile id</label>
-                                                <input ng-model="modelsearch.profileid" id="txtProfileid" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="9">
+                                                <input ng-model="modelsearch.profileid" id="txtProfileid" onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" maxlength="9">
                                             </md-input-container>
                                         </div>
                                         <div class="span4" style="margin-right:20px;">

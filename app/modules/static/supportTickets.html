@@ -49,14 +49,14 @@
         line-height: 20px;
     }
 </style>
-<div class="wrapper" ng-init="pageinit()">
+<div class="wrapper">
     <!--/ Main Block 1 -->
     <div class="search_page_main tickets_main">
         <div class="search_page_tabs">
             <div class="sample" layout="column" ng-cloak>
                 <md-content class="md-padding">
                     <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
-                        <md-tab label="OPEN / PENDING">
+                        <md-tab label="OPEN / PENDING" md-on-select="submitsupporttickets(1)">
                             <div class="tab">
                                 <form name="open" role="form">
                                     <div class="profile_search_main profile_settings_main clearfix">
@@ -119,7 +119,7 @@
                                 </form>
                             </div>
                         </md-tab>
-                        <md-tab label="CLOSED TICKETS">
+                        <md-tab label="CLOSED TICKETS" md-on-select="submitsupporttickets(2)">
                             <div class="tab">
                                 <form name="close" role="form">
                                     <div class="profile_search_main profile_settings_main clearfix">
@@ -179,7 +179,7 @@
                                 </form>
                             </div>
                         </md-tab>
-                        <md-tab label="DELETED TICKETS">
+                        <md-tab label="DELETED TICKETS" md-on-select="submitsupporttickets(3)">
                             <div class="tab">
                                 <form name="deleted" role="form">
                                     <div class="profile_search_main profile_settings_main clearfix">
@@ -239,7 +239,7 @@
                                 </form>
                             </div>
                         </md-tab>
-                        <md-tab label="ALL TICKETS">
+                        <md-tab label="ALL TICKETS" md-on-select="submitsupporttickets(4)">
                             <div class="tab">
                                 <form name="alltickets" role="form">
                                     <div class="profile_search_main profile_settings_main clearfix">

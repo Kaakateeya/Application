@@ -277,7 +277,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                     angular.copy(scope.modelsearch, scope.reset);
 
                 });
-                scope.savedsearchselectmethods(scope.modelsearch.custid, "", 1);
+                if (scope.modelsearch.getpaidstatus === true) {
+                    scope.savedsearchselectmethods(scope.modelsearch.custid, "", 1);
+                }
 
             } else if (helperservice.checkstringvalue(scope.modelsearch.object)) {
                 scope.truepartner = true;
