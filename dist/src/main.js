@@ -4271,21 +4271,28 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
     }
 ]);
 app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'basicRegistrationService',
-    '$filter', 'authSvc', '$timeout', 'route', 'alert',
-    function(scope, getArray, commondependency, basicRegistrationService, filter, authSvc, timeout, route, alerts) {
+    '$filter', 'authSvc', '$timeout', 'route', 'alert', 'SelectBindServicereg',
+    function(scope, getArray, commondependency, basicRegistrationService, filter,
+        authSvc, timeout, route, alerts, SelectBindServicereg) {
         scope.month = 'month';
         scope.reg = {};
         scope.monthArr = [];
+        scope.casteArr = [];
+        scope.casteArr.push({ "label": '--select--', "title": '--select--', "value": '0' });
+        scope.reg.ddlcaste = '0';
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         scope.monthBind = function() {
             var option = [];
+            option.push({ "label": '--select--', "title": '--select--', "value": '0' });
             _.each(monthArr, function(item) {
                 option.push({ "label": item, "title": item, "value": item });
             });
+            scope.reg.ddlDD = "0";
             return option;
         };
         scope.date = function(str, from, to) {
             var Arr = [];
+            Arr.push({ "label": '--select--', "title": '--select--', "value": '0' });
             for (var i = from; i <= to; i++) {
                 var strValue = null;
                 if (i <= 9) {
@@ -4295,13 +4302,16 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 }
                 Arr.push({ "label": strValue, "title": strValue, "value": strValue });
             }
+            scope.reg.ddlMM = "0";
             return Arr;
         };
         scope.year = function(str, from, to) {
             var Arr = [];
+            Arr.push({ "label": '--select--', "title": '--select--', "value": '0' });
             for (var i = to; i >= from; i--) {
                 Arr.push({ "label": i, "title": i, "value": i });
             }
+            scope.reg.ddlYear = "0";
             return Arr;
         };
         scope.monthArr = scope.monthBind();
@@ -4312,28 +4322,55 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
             scope.religion = getArray.GArray('Religion');
             scope.Mothertongue = getArray.GArray('Mothertongue');
             scope.Caste = getArray.GArray('Caste');
-            scope.countryCode = getArray.GArray('countryCode');
+            // scope.countryCode = getArray.GArray('countryCode');
         }, 1000);
+        // timeout(function() {
+        //     scope.Country = getArray.GArray('Country');
+        // }, 500);
+
         timeout(function() {
-            scope.Country = getArray.GArray('Country');
-        }, 500);
+
+            var Country = [],
+                CountryCode = [];
+            Country.push({ "label": '--select--', "title": '--select--', "value": '0' });
+            CountryCode.push({ "label": '--select--', "title": '--select--', "value": '0' });
+            SelectBindServicereg.CountryWithCode().then(function(response) {
+
+                _.each(response.data, function(item) {
+                    Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    CountryCode.push({ "label": item.CountryCode, "title": item.CountryCode, "value": item.ID });
+                });
+
+                console.log('test..');
+                console.log(Country);
+
+                scope.Country = Country;
+                scope.countryCode = CountryCode;
+                scope.reg.ddlcountry = '0';
+                scope.reg.ddlmobilecountry = '0';
+            });
+
+        }, 100);
+
         scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
         scope.dayChange = function(obj, type) {
+            console.log(obj);
             var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
             var minth30 = 'Apr,Jun,Sep,Nov';
             var month28 = 'Feb';
             if ((obj.ddlDD <= 30 && minth30.indexOf(obj.ddlMM) !== -1) || (obj.ddlDD <= 31 && months31.indexOf(obj.ddlMM) !== -1) || ((obj.ddlDD <= 28 && month28.indexOf(obj.ddlMM) !== -1))) {} else {
                 if (type === 'day') {
-                    obj.ddlMM = '';
+                    obj.ddlMM = '0';
                 } else {
                     scope.dateArr = [];
                     scope.dateArr = scope.date('DD', 1, 31);
-                    obj.ddlDD = '';
+                    obj.ddlDD = '0';
                 }
             }
         };
         scope.changeBind = function(parentval, parentval2) {
             scope.casteArr = commondependency.casteDepedency(commondependency.listSelectedVal(parentval), commondependency.listSelectedVal(parentval2) !== undefined && commondependency.listSelectedVal(parentval2) !== null && commondependency.listSelectedVal(parentval2) !== "" ? commondependency.listSelectedVal(parentval2) : 0);
+            scope.reg.ddlcaste = 0;
         };
         scope.regSubmit = function(obj) {
             var valmm = _.indexOf(monthArr, obj.ddlMM);

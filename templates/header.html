@@ -192,7 +192,7 @@
             </div>
         </div>
     </script>
-    <script type="text/ng-template" id="httperrorpopup.html" style="z-index: 999999999999 !important;">
+    <script type="text/ng-template" id="httperrorpopup.html" style="z-index: 9999999999999999999 !important;">
         <div class="modal-message modal-danger">
             <div class="modal-header" id="div6">
                 <i class="glyphicon glyphicon-fire"></i>
@@ -217,5 +217,10 @@
         left: 0%;
         width: 100%;
         padding: 20px 1%;
+    }
+    
+    .modal.fade.ng-scope.ng-isolate-scope.in {
+        z-index: 99999999999999999999999999999 !important;
+        display: block;
     }
 </style>

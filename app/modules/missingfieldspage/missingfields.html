@@ -152,7 +152,7 @@
                                     Property lakhs</label>
                                 </div>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" />
+                                    <input type="text" class="form-control textboxclear" ng-model="misObj.txtProperty" onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" maxlength="5" />
                                 </div>
                             </div>
                             <div class="clearfix"></div>

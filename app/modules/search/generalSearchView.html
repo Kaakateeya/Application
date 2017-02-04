@@ -733,7 +733,7 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Residing At<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my  col-lg-8">
-                                        <select multiselectdropdown  ng-class="dynamicaapplycolors(reg.ddlcountry,'ddlcountry')" typeofdata="'Country'"  id="ddlcountry"  ng-model="reg.ddlcountry" required="" >
+                                        <select multiselectdropdown  ng-class="dynamicaapplycolors(reg.ddlcountry,'ddlcountry')"  id="ddlcountry"  ng-options="item.value as item.label for item in Country" ng-model="reg.ddlcountry" required="" >
                                       </select>
                                     </div>
                                 </li>
@@ -741,7 +741,7 @@
                                 <li class="row">
                                     <label  class="pop_label_left col-lg-4">Mobile Number<span style="color: red; margin-left: 3px;">*</span></label>
                                     <div class="pop_controls_right select-box-my select-box-my-double col-lg-8 regmobilenumber">
-                                      <select ng-class="dynamicaapplycolors(reg.ddlmobilecountry,'ddlmobilecountry')"  multiselectdropdown class="col-lg-4"  typeofdata="'countryCode'" id="ddlmobilecountry" ng-model="reg.ddlmobilecountry" required="">
+                                      <select ng-class="dynamicaapplycolors(reg.ddlmobilecountry,'ddlmobilecountry')"  multiselectdropdown class="col-lg-4"   id="ddlmobilecountry" ng-options="item.value as item.label for item in countryCode" ng-model="reg.ddlmobilecountry" required="">
                                             </select>         
                                             <input minlength="10" maxlength="10" class="form-control col-lg-8" ng-class="dynamictextboxcolor(reg.txtMobileNo,'txtMobileNo')"  required="" md-no-asterisk="" ng-pattern="/^[0-9]+$/" id="txtMobileNo" ng-model="reg.txtMobileNo" ng-blur="valueExists('number',1,reg.txtMobileNo);" style="border: 1px solid #a29b9b;width: 51% !important;float: right;margin-right: 12px;margin-top: 3px;">
                                     </div>
