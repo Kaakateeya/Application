@@ -237,15 +237,19 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     }
                 };
                 scope.photoRequestMethod = function(tocustid, toprofileieid, password) {
-                    password = password !== null && password !== "" ? 468 : 467;
-                    return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
-                        .then(function(response) {
-                            if (response.data === 1) {
-                                scope.$emit('successfailer', "Request sent suceessfully", "success");
-                            } else {
-                                scope.$emit('successfailer', "Request sent Fail", "warning");
-                            }
-                        });
+                    if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                        password = password !== null && password !== "" ? 468 : 467;
+                        return $http.get(app.apiroot + 'StaticPages/getSendMail_PhotoRequest_Customer', { params: { FromCustID: tocustid, ToCustID: logincustid, Category: password } })
+                            .then(function(response) {
+                                if (response.data === 1) {
+                                    scope.$emit('successfailer', "Request sent suceessfully", "success");
+                                } else {
+                                    scope.$emit('successfailer', "Request sent Fail", "warning");
+                                }
+                            });
+                    } else {
+                        scope.$emit('showloginpopup');
+                    }
                 };
                 scope.photoalbum = function(custid, profileid, photocount) {
                     if (logincustid !== null && logincustid !== undefined && logincustid !== "") {

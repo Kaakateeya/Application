@@ -219,8 +219,8 @@
                                                         Registration days :&nbsp;&nbsp;&nbsp;
                                                         <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                         <md-radio-button value="15"> 15days </md-radio-button>
-                                                        <md-radio-button value="30"> 15days </md-radio-button>
-                                                        <md-radio-button value="45"> 15days </md-radio-button>
+                                                        <md-radio-button value="30"> 30days </md-radio-button>
+                                                        <md-radio-button value="45"> 45days </md-radio-button>
                                                     </md-radio-group>
                                                 </div>
                                             </div>
@@ -385,10 +385,10 @@
                                             <label class="control-label">Monthly  income</label>
                                             <div class="controls clearfix" style="margin-right: -16px;">
                                                 <div layout-gt-sm="row" class="generalane">
-                                                    <select ng-model="modelsearch.monthsalcurrency" id="annualsalary" multiselectdropdown typeofdata="'currency'" ng-class="applycolors(modelsearch.monthsalcurrency,'annualsalary')">
+                                                    <select ng-change="salarycurrencyalert(3)" ng-model="modelsearch.monthsalcurrency" id="annualsalary" multiselectdropdown typeofdata="'currency'" ng-class="applycolors(modelsearch.monthsalcurrency,'annualsalary')">
                                                       </select>
-                                                    <input ng-model="modelsearch.fromcurrency" style="height: 33px;width: 100px !important;" placeholder="From" type="text">
-                                                    <input name="postalCode" placeholder="To" ng-model="modelsearch.tocurrency" type="text" style="height: 33px;width: 100px !important;">
+                                                    <input onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" ng-change="salarycurrencyalert(1)" ng-model="modelsearch.fromcurrency" style="height: 33px;width: 100px !important;" placeholder="From" type="text">
+                                                    <input onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" ng-change="salarycurrencyalert(2)" name="postalCode" placeholder="To" ng-model="modelsearch.tocurrency" type="text" style="height: 33px;width: 100px !important;">
                                                 </div>
                                             </div>
                                         </div>
@@ -443,8 +443,8 @@
                                                 Registration days :&nbsp;&nbsp;&nbsp;
                                                 <md-radio-button value="0" class="md-primary"> All</md-radio-button>
                                                 <md-radio-button value="15"> 15days </md-radio-button>
-                                                <md-radio-button value="30"> 15days </md-radio-button>
-                                                <md-radio-button value="45"> 15days </md-radio-button>
+                                                <md-radio-button value="30"> 30days </md-radio-button>
+                                                <md-radio-button value="45"> 45days </md-radio-button>
                                             </md-radio-group>
                                         </div>
                                     </div>

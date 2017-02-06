@@ -382,7 +382,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 iFromHeight: scope.modelsearch.HeightFrom !== "0" && scope.modelsearch.HeightFrom !== 0 ? scope.modelsearch.HeightFrom : null,
                 iToHeight: scope.modelsearch.Heightto !== "0" && scope.modelsearch.Heightto !== 0 ? (scope.modelsearch.Heightto) : null,
                 Maritalstatus: scope.returnnullvalue(scope.modelsearch.maritalstatus),
-                intReligionID: scope.modelsearch.religion,
+                intReligionID: scope.modelsearch.religion !== "0" && scope.modelsearch.religion !== 0 ? scope.modelsearch.religion : null,
                 MotherTongue: scope.returnnullvalue(scope.modelsearch.mothertongue),
                 Caste: scope.returnnullvalue(scope.modelsearch.caste),
                 iPhysicalstatus: scope.modelsearch.typesearch === "advanced" ? scope.modelsearch.physicalstatusadvance : null,
@@ -554,7 +554,7 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                             FromHeight: scope.modelsearch.HeightFrom !== "0" && scope.modelsearch.HeightFrom !== 0 ? scope.modelsearch.HeightFrom : null,
                             ToHeight: scope.modelsearch.Heightto !== "0" && scope.modelsearch.Heightto !== 0 ? scope.modelsearch.Heightto : null,
                             Maritalstatus: scope.returnnullvalue(scope.modelsearch.maritalstatus),
-                            Religion: scope.modelsearch.religion,
+                            Religion: scope.modelsearch.religion !== "0" && scope.modelsearch.religion !== 0 ? scope.modelsearch.religion : null,
                             Mothertongue: scope.returnnullvalue(scope.modelsearch.mothertongue),
                             Caste: scope.returnnullvalue(scope.modelsearch.caste),
                             Complexion: null,
@@ -922,6 +922,39 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'please select mothertongue and religion', 2500);
             }
         };
+        scope.salarycurrencyalert = function(id) {
 
+            switch (id) {
+                case 1:
+                    if (scope.modelsearch.monthsalcurrency !== "0" && scope.modelsearch.monthsalcurrency !== 0 && scope.modelsearch.monthsalcurrency !== null && scope.modelsearch.monthsalcurrency !== undefined && scope.modelsearch.monthsalcurrency !== "") {
+
+                    } else {
+                        scope.modelsearch.fromcurrency = "";
+                        alert('Please Select Currency');
+                    }
+                    break;
+                case 2:
+                    if (scope.modelsearch.monthsalcurrency !== "0" && scope.modelsearch.monthsalcurrency !== 0 && scope.modelsearch.monthsalcurrency !== null && scope.modelsearch.monthsalcurrency !== undefined && scope.modelsearch.monthsalcurrency !== "") {
+
+                    } else {
+                        scope.modelsearch.tocurrency = "";
+                        alert('Please Select Currency');
+                    }
+                    break;
+                case 3:
+                    if (scope.modelsearch.fromcurrency !== "" && scope.modelsearch.fromcurrency !== null && scope.modelsearch.fromcurrency !== undefined) {
+                        if (scope.modelsearch.monthsalcurrency === "0" || scope.modelsearch.monthsalcurrency === 0 || scope.modelsearch.monthsalcurrency === "") {
+                            scope.modelsearch.fromcurrency = "";
+                        }
+                    }
+                    if (scope.modelsearch.tocurrency !== "" && scope.modelsearch.tocurrency !== null && scope.modelsearch.tocurrency !== undefined) {
+                        if (scope.modelsearch.monthsalcurrency === "0" || scope.modelsearch.monthsalcurrency === 0 || scope.modelsearch.monthsalcurrency === "") {
+                            scope.modelsearch.tocurrency = "";
+                        }
+                    }
+                    break;
+            }
+
+        };
     }
 ]);
