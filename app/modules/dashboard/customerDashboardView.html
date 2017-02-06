@@ -56,7 +56,7 @@
                     <div class="maquicls" ng-repeat="item in notificationtxt track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
                         <div> {{item.ActionType}} <span ng-show="item.ActionType!=='Please upgrade your membership'">   on </span> {{item.ActionDate | date : "dd-MM-y H:mm:ss" }}</div>
-                        <div class="span2"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'page',$index);" ng-show="item.ActionType!=='Please upgrade your membership'">View profile</a></div>
+                        <div class="span2"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'page',$index);" ng-hide="item.hideviewprofile">View profile</a></div>
                         <a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="readNotify(item.Cust_NotificationID,'page',$index);">Close Notification</a>
                     </div>
                 </div>
@@ -673,7 +673,7 @@
            </div>
         </div>
     </script>
-    <script type="text/ng-template" id="notifyPopup.html">
+     <script type="text/ng-template" id="notifyPopup.html">
             <form name="aboutForm" novalidate role="form">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Notifications
@@ -690,8 +690,8 @@
                     <div class="maquicls" ng-repeat="item in notificationpopup track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
                         <div> {{item.ActionType}} <span ng-show="item.ActionType!=='Please upgrade your membership'">   on </span> {{item.ActionDate | date :  "dd-MM-y H:mm:ss" }}</div>
-                        <div class="span3"><a ng-style="item.linkcolor" ng-class="disClass===$index ? 'linkdis': ''" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);" ng-show="item.ActionType!=='Please upgrade your membership'">View profile</a></div>
-                        <a ng-style="item.linkcolor" href="javascript:void(0);" ng-class="disClass===$index ? 'linkdis': ''" ng-click="readNotify(item.Cust_NotificationID,'popup',$index);">Close Notification</a>
+                        <div class="span3"><a ng-style="item.linkcolor"  href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);" ng-hide="item.hideviewprofile">View profile</a></div>
+                        <a ng-style="item.linkcolor" href="javascript:void(0);"  ng-click="readNotify(item.Cust_NotificationID,'popup',$index,'new');">Close Notification</a>
                     </div> 
                 </div> 
             </uib-accordion>
@@ -700,8 +700,8 @@
                     <div class="maquicls" ng-repeat="item in oldnotificationpopup track by $index" ng-style="item.bakcolor">
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
                         <div> {{item.ActionType}} on {{item.ActionDate | date :  "dd-MM-y H:mm:ss" }}</div>
-                        <div class="span3"><a ng-style="item.linkcolor" ng-class="disClass===$index ? 'linkdis': ''" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);">View profile</a></div>
-                        <a ng-style="item.linkcolor" href="javascript:void(0);" ng-class="disClass===$index ? 'linkdis': ''" ng-click="readNotify(item.Cust_NotificationID,'popup',$index);">Close Notification</a>
+                        <div class="span3"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);" ng-hide="item.hideviewprofile">View profile</a></div>
+                        <a ng-style="item.linkcolor" href="javascript:void(0);"  ng-click="readNotify(item.Cust_NotificationID,'popup',$index.'old');">Close Notification</a>
                     </div> 
                 </div> 
             </uib-accordion>

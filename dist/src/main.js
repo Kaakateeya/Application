@@ -2344,6 +2344,14 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.normaldata = true;
             }
         };
+
+
+
+
+
+
+
+
         scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
             notifyID = notifyID === undefined ? '' : notifyID;
             var inobj = { Cust_NotificationID: notifyID, CustID: scope.custid, Startindex: Startval, EndIndex: Endval };
@@ -2352,11 +2360,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
                 var notifalgg = sessionStorage.getItem('unpaidNotifyflag');
                 if (notifalgg !== 'false' && Startval === 1 && dddddd.length > 0 && dddddd[0] !== undefined && dddddd[0] !== null && dddddd[0] !== "" && dddddd[0].unpaidnotify !== null && dddddd[0].unpaidnotify !== undefined) {
-                    dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
+                    // dddddd.splice(0, 0, { ActionType: dddddd[0].unpaidnotify });
+                    dddddd.push({ ActionType: dddddd[0].unpaidnotify, hideviewprofile: true });
                     sessionStorage.setItem('unpaidNotifyflag', true);
                 } else {
                     if (notifalgg !== 'false' && Startval === 1 && loginpaidstatus === "0" || loginpaidstatus === 0) {
-                        dddddd.splice(0, 0, { ActionType: 'Please upgrade your membership' });
+                        dddddd.splice(0, 0, { ActionType: 'upgrade your membership for more bride/bride groom information and quality followups', hideviewprofile: true });
                         sessionStorage.setItem('unpaidNotifyflag', true);
                     }
                 }
@@ -2389,13 +2398,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.oldnotificationpopup = $.unique((scope.oldnotificationpopup).concat(dddddd));
                         }
                     }
-
-
-
                 }
-                scope.hidemorelnk = false;
+
+
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
-                if (scope.notificationpopup.length === (scope.notificationpopup.length > 0 && scope.notificationpopup[0].TotalRows !== undefined) ? scope.notificationpopup[0].TotalRows : null) {
+                scope.hidemorelnk = false;
+                var totalrows = (scope.notificationpopup.length > 0 && scope.notificationpopup[0].TotalRows !== undefined) ? scope.notificationpopup[0].TotalRows : 0;
+                if (scope.notificationpopup.length === parseInt(totalrows) + 1) {
                     scope.hidemorelnk = true;
                 }
             });
@@ -2424,19 +2433,21 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {}
             });
         });
-        scope.readNotify = function(notifyID, type, index) {
-
+        scope.readNotify = function(notifyID, type, index, versiontype) {
 
             if (notifyID === undefined || notifyID === null || notifyID === '') {
                 var notiFlag = sessionStorage.getItem('unpaidNotifyflag');
                 if (notiFlag === "true") {
                     sessionStorage.setItem('unpaidNotifyflag', false);
                     if (type === 'page') {
-                        scope.notificationtxt.splice(0, 1);
+                        scope.notificationtxt.splice(index, 1);
+                        scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
                     } else {
-                        scope.notificationpopup.splice(0, 1);
+                        scope.notificationpopup.splice(index, 1);
+                        scope.showdiv = scope.notificationpopup.length === 0 ? false : true;
                     }
                 }
+
             } else {
                 scope.disClass = index;
                 scope.notifytype = type;
@@ -2444,6 +2455,12 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.getNotifyArray(1, 5, notifyID);
                 } else {
                     scope.getNotifyArray(1, 10, notifyID, 'Action');
+                }
+
+                if (versiontype === 'new') {
+                    scope.notificationpopup.splice(index, 1);
+                } else {
+                    scope.oldnotificationpopup.splice(index, 1);
                 }
             }
         };
@@ -2465,12 +2482,19 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
             }
         };
-        scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index) {
+        scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index, versiontype) {
             if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
                 scope.readNotify(notifyID, type, index);
                 scope.redirectToviewfull(ToCust_Id);
             }
         };
+
+
+
+
+
+
+
         scope.leftmenulinks = function(item) {
             switch (item.value) {
                 case "My bookmarked profiles":
