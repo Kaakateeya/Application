@@ -83,6 +83,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 scope.lnkViewHoro = true;
                                 break;
                             case "Express":
+
                                 scope.Express = testArr;
                                 console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {

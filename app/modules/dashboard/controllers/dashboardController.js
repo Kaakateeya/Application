@@ -697,9 +697,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
                 scope.hidemorelnk = false;
                 var totalrows = (scope.notificationpopup.length > 0 && scope.notificationpopup[0].TotalRows !== undefined) ? scope.notificationpopup[0].TotalRows : 0;
-                if (scope.notificationpopup.length === parseInt(totalrows) + 1) {
+
+                var arrayCount = (scope.oldnotificationpopup.length > 0 ? scope.oldnotificationpopup.length : 0) + (scope.notificationpopup.length > 0 ? scope.notificationpopup.length : 0);
+
+                if (arrayCount === parseInt(totalrows) + 1) {
                     scope.hidemorelnk = true;
                 }
+                // else if(arrayCount === parseInt(totalrows) + 1){
+
+                // }
             });
         };
         scope.getNotify = function() {
@@ -760,6 +766,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var from = 1,
             to = 10;
         scope.loadMore = function(e) {
+
             scope.notifytype = 'popup';
             if (from === 1) {
                 scope.notificationpopup = [];

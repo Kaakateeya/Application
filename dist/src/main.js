@@ -2404,9 +2404,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.showdiv = scope.notificationtxt.length === 0 ? false : true;
                 scope.hidemorelnk = false;
                 var totalrows = (scope.notificationpopup.length > 0 && scope.notificationpopup[0].TotalRows !== undefined) ? scope.notificationpopup[0].TotalRows : 0;
-                if (scope.notificationpopup.length === parseInt(totalrows) + 1) {
+
+                var arrayCount = (scope.oldnotificationpopup.length > 0 ? scope.oldnotificationpopup.length : 0) + (scope.notificationpopup.length > 0 ? scope.notificationpopup.length : 0);
+
+                if (arrayCount === parseInt(totalrows) + 1) {
                     scope.hidemorelnk = true;
                 }
+                // else if(arrayCount === parseInt(totalrows) + 1){
+
+                // }
             });
         };
         scope.getNotify = function() {
@@ -2467,6 +2473,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         var from = 1,
             to = 10;
         scope.loadMore = function(e) {
+
             scope.notifytype = 'popup';
             if (from === 1) {
                 scope.notificationpopup = [];
@@ -3865,9 +3872,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
                             intGender: scope.modelsearch.gender,
-                            strLastName: scope.modelsearch.lastname,
-                            strFirstName: scope.modelsearch.firstname,
-                            strProfileID: scope.modelsearch.profileid,
+                            strLastName: scope.modelsearch.lastname !== '' ? scope.modelsearch.lastname : null,
+                            strFirstName: scope.modelsearch.firstname !== '' ? scope.modelsearch.firstname : null,
+                            strProfileID: scope.modelsearch.profileid !== '' ? scope.modelsearch.profileid : null,
                             intCasteID: null,
                             StartIndex: frompage,
                             EndIndex: topage,
@@ -5595,6 +5602,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
         scope.pageload = function() {
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
+                console.log(response);
+
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
@@ -5834,6 +5843,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 scope.lnkViewHoro = true;
                                 break;
                             case "Express":
+
                                 scope.Express = testArr;
                                 console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {

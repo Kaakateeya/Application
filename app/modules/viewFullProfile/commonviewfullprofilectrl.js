@@ -196,6 +196,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
         scope.pageload = function() {
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
+                console.log(response);
+
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;

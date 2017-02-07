@@ -491,9 +491,9 @@ app.controller('Generalsearch', ['$scope', 'arrayConstants', 'SelectBindServiceA
                         SearchRequest = {
                             intCusID: scope.modelsearch.custid,
                             intGender: scope.modelsearch.gender,
-                            strLastName: scope.modelsearch.lastname,
-                            strFirstName: scope.modelsearch.firstname,
-                            strProfileID: scope.modelsearch.profileid,
+                            strLastName: scope.modelsearch.lastname !== '' ? scope.modelsearch.lastname : null,
+                            strFirstName: scope.modelsearch.firstname !== '' ? scope.modelsearch.firstname : null,
+                            strProfileID: scope.modelsearch.profileid !== '' ? scope.modelsearch.profileid : null,
                             intCasteID: null,
                             StartIndex: frompage,
                             EndIndex: topage,

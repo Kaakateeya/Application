@@ -701,7 +701,7 @@
                         <img ng-src="{{item.ProfilePic}}" class="img-circle pull-left" height="50" width="50">
                         <div> {{item.ActionType}} on {{item.ActionDate | date :  "dd-MM-y H:mm:ss" }}</div>
                         <div class="span3"><a ng-style="item.linkcolor" href="javascript:void(0);" ng-click="notifyViewProfile(item.ToCust_Id,item.LogID,item.Cust_NotificationID,'popup',$index);" ng-hide="item.hideviewprofile">View profile</a></div>
-                        <a ng-style="item.linkcolor" href="javascript:void(0);"  ng-click="readNotify(item.Cust_NotificationID,'popup',$index.'old');">Close Notification</a>
+                        <a ng-style="item.linkcolor" href="javascript:void(0);"  ng-click="readNotify(item.Cust_NotificationID,'popup',$index,'old');">Close Notification</a>
                     </div> 
                 </div> 
             </uib-accordion>
