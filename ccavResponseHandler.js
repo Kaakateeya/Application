@@ -6,7 +6,7 @@ var http = require('http'),
 exports.postRes = function(request, response) {
     var ccavEncResponse = '',
         ccavResponse = '',
-        workingKey = 'C8828C7D9103FB0C530DEBCB7F98B908', //Put in the 32-Bit key shared by CCAvenues.
+        workingKey = '8EC8D431F6443DCD7847A82968CD8E4A', //Put in the 32-Bit key shared by CCAvenues.
         ccavPOST = '';
 
     request.on('data', function(data) {
@@ -28,9 +28,9 @@ exports.postRes = function(request, response) {
         for (var i = 0; i < 4; i++) {
             strdata = strdata === '' ? splitdata[i] : strdata + ',' + splitdata[i];
         }
-       
+
         var encryprRes = ccav.encrypt(strdata, workingKey);
-		console.log(encryprRes);
+        console.log(encryprRes);
         response.redirect('/ccavResponseHand/' + encryprRes);
     });
 
