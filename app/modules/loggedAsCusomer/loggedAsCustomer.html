@@ -1,3 +1,7 @@
+<link href="src/css/loggedascustomer.css" rel="stylesheet">
+</link>
+<link href="src/css/animate.css" rel="stylesheet"></link>
+
 <style type="text/css">
     .fullscreenDiv {
         background-color: #e8e8e8;
@@ -21,52 +25,37 @@
         font-size: larger;
     }
 </style>
-<link href="src/css/loggedascustomer.css" rel="stylesheet"></link>
-<link href="src/css/animate.css" rel="stylesheet"></link>
-<div>
-
-    <div class="box animated  fadeInLeftBig" id="first">
-        <div class="content">
-            <h1>Authentication Required</h1>
-
-            <input class="field" id="UserName"></input>
-
-
-
-            <input class="field" id="Password" type="Password"></input>
-
-
-            <br />
-
-            <button class="btn" id="LoginButton">Log In</button>
-            <br />
-
-            <h2>
-                <asp:Label id="lblmsg"></asp:Label>
-            </h2>
-        </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="box animated  fadeInLeftBig" id="first">
+    <div class="content" ng-show="authentication">
+        <h1>Authentication Required</h1>
+        <input class="field form-control" ng-model="employeeusername" id="UserName"></input>
+        <input class="field form-control" ng-model="employeepassword" id="Password" type="password" style="height: 39px !important;"></input>
+        <br />
+        <button class="btn" id="LoginButton" ng-click="submitcheckpassword()">Log In</button>
+        <br />
+        <h2>
+            <label id="lblmsg"></label>
+        </h2>
     </div>
-
 </div>
-<div class="box  animated  fadeInLeftBig" style="display: none; position: fixed; right: 40%; bottom: 30.5%;" id="profileiddiv">
+
+<div ng-show="Customerprofileiddiv" class="box  animated  fadeInLeftBig" style="position: fixed; right: 40%; bottom: 30.5%;" id="profileiddiv">
     <div class="content">
         <h1>Enter Customer Profileid</h1>
-
-        <input class="field" id="txtprofileid"></input>
-
-
-
+        <input class="field form-control" ng-model="customerprofileid" id="txtprofileid"></input>
         <br />
-        <button class="btn" id="btnsubmit">Enter As Customer</button>
+        <button class="btn" id="btnsubmit" ng-click="submitgetpassword()">Enter As Customer</button>
         <br />
     </div>
 </div>
-<div id="notvisible" style="background-color: blueviolet; border: solid 1px #000000; border-top: solid 0px #000000; margin: 230px 0 0 8px; text-align: left; margin-top: 50px; margin-right: 50px; position: fixed; right: 25%; bottom: 30.5%; opacity: 0.5; width: 500px; height: 500px;"
-    visible="false">
-
-
+<div id="notvisible" style="display:none;background-color: blueviolet; border: solid 1px #000000; border-top: solid 0px #000000; margin: 230px 0 0 8px; text-align: left; margin-top: 50px; margin-right: 50px; position: fixed; right: 25%; bottom: 30.5%; opacity: 0.5; width: 500px; height: 500px;">
     <div class="fullscreenDiv">
         <div class="center"><span style="margin-top: 75px;"><b>Please Logout/close  Kaakateeya  Customer Site in Order to Use this Application</b></span></div>
     </div>
-
 </div>

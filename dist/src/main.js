@@ -2989,7 +2989,64 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
     }
 ]);
+app.controller("loggedascustomers", ['$scope', '$mdDialog',
+    'authSvc', 'alert', 'loggedascustomerservice', 'route',
+    function(scope, $mdDialog, authSvc, alerts, loggedascustomerservice, route) {
+        scope.authentication = true;
+        scope.Customerprofileiddiv = false;
 
+        scope.submitcheckpassword = function() {
+            loggedascustomerservice.getcheckpassword(scope.employeeusername, scope.employeepassword).then(function(response) {
+                console.log(response);
+                if (response.data === 1) {
+                    scope.authentication = false;
+                    scope.Customerprofileiddiv = true;
+                } else {
+                    scope.authentication = true;
+                    scope.Customerprofileiddiv = false;
+                    alert("Authenication Failed Try Again");
+                }
+            });
+        };
+        scope.submitgetpassword = function() {
+            loggedascustomerservice.getcustomerpassword(scope.customerprofileid).then(function(response) {
+                console.log(response);
+                if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
+                    scope.authentication = false;
+                    scope.Customerprofileiddiv = false;
+                    //var passwords = JSON.parse(response.data);
+                    // scope.customerpassword = passwords[0].Password;
+                    var passwords = (response.data).split(';');
+                    scope.customerpassword = (passwords[0].split(':'))[1];
+                    scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
+                    console.log(scope.customerpassword);
+                    //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
+                    authSvc.login(scope.customerprofileid, scope.customerpasswordencrypt).then(function(response) {
+                        sessionStorage.removeItem("homepageobject");
+                        sessionStorage.removeItem("LoginPhotoIsActive");
+                        if (response.response !== null && response.response !== undefined && response.response !== "") {
+                            authSvc.user(response.response !== null ? response.response[0] : null);
+                            route.go('dashboard', { type: 'C' });
+                        } else {
+                            route.go('loggedAscustomer', {});
+                            scope.authentication = true;
+                            scope.Customerprofileiddiv = false;
+                        }
+                    });
+                } else {
+                    scope.authentication = false;
+                    scope.Customerprofileiddiv = true;
+                    alert("Please Use Another Profileid");
+                }
+            });
+        };
+        scope.getcustomerinformation = function(customerprofileid, customerpassword, iflag) {
+            loggedascustomerservice.getcustomerinfo(customerprofileid, customerpassword, iflag).then(function(response) {
+                console.log(response);
+            });
+        };
+    }
+]);
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
     'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
     function(scope, commonFactory,
@@ -6368,6 +6425,19 @@ app.service('helperservice', function() {
         }
     };
 });
+app.factory('loggedascustomerservice', ['$http', function(http) {
+    return {
+        getcheckpassword: function(employeeusername, employeepassword) {
+            return http.get(app.apiroot + 'Registration/getCheckUserPwd', { params: { Username: employeeusername, Password: employeepassword } });
+        },
+        getcustomerpassword: function(customerpassword) {
+            return http.get(app.apiroot + 'Registration/getPassword', { params: { Username: customerpassword } });
+        },
+        getcustomerinfo: function(customerprofileid, customerpassword, iflag) {
+            return http.get(app.apiroot + 'Registration/getloginCustinformation', { params: { Username: customerprofileid, Password: customerpassword, iflag: iflag } });
+        }
+    };
+}]);
 app.factory('missingFieldService', ['$http', function(http) {
     return {
         missingFieldSubmit: function(object) {

@@ -11,9 +11,9 @@
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
     'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons'
 ]);
-// app.apiroot = 'http://183.82.0.58:8010/Api/';
+app.apiroot = 'http://183.82.0.58:8010/Api/';
 //  app.apiroot = 'http://54.169.133.223:8070/Api/';
-app.apiroot = 'http://52.66.131.254:8010/Api/';
+//app.apiroot = 'http://52.66.131.254:8010/Api/';
 
 
 app.global = {
@@ -54,7 +54,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false },
         { name: 'forgetpasswordemail', url: '/forgetpasswordemail', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false },
         { name: 'Paymentnew', url: '/Paymentnew', templateUrl: 'app/modules/paymentNew/paymentNew.html', isloginrequired: false },
-        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', isloginrequired: false }
+        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -71,7 +71,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     _.each(states, function(item) {
 
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
