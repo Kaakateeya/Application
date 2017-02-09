@@ -2989,6 +2989,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
     }
 ]);
+
 app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdDialog',
     'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
     function(scope, commonFactory,
