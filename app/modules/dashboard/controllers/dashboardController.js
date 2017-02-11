@@ -72,7 +72,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.bindcounts(response.data.DashBoardCounts);
                             scope.bindallcounts = response.data.DashBoardCounts;
                             scope.PersonalInfo = (response.data.PersonalInfo);
-                            scope.photopersonal = scope.PersonalInfo.Photo;
+                            scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
                             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
                             scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
@@ -130,7 +130,15 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-
+            if (helperservice.checkarraylength(array) === false) {
+                array = {};
+                array.MybookMarkedProfCount = 0;
+                array.WhobookmarkedCount = 0;
+                array.RectViewedProfCount = 0;
+                array.RectWhoViewedCout = 0;
+                array.IgnoreProfileCount = 0;
+                array.SaveSearchCount = 0;
+            }
             scope.leftMenuArr = [
                 { value: 'Edit my profile', bindvalue: 'profile', statename: 'editview', object: {} },
                 { value: 'Upgrade your membership', bindvalue: 'profile', statename: 'UpgradeMembership', object: {} },
@@ -788,13 +796,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.redirectToviewfull(ToCust_Id);
             }
         };
-
-
-
-
-
-
-
         scope.leftmenulinks = function(item) {
             switch (item.value) {
                 case "My bookmarked profiles":

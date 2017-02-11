@@ -64,7 +64,6 @@
             "node_modules/angular-ui-router/release/angular-ui-router.min.js",
             "node_modules/underscore/underscore-min.js",
             "bower_components/angular-re-captcha/angular-re-captcha.js",
-            "http://commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js",
             "node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js",
             "bower_components/ng-idle/angular-idle.min.js",
             "bower_components/angular-loading-bar/build/loading-bar.min.js",

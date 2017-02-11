@@ -46,4 +46,11 @@ app.controller('suceesstories', ['$scope', 'successstoriesdata', function(scope,
             }
         });
     };
+    scope.showhideliphoto = function(path) {
+        if (path !== "" && path !== null && path !== undefined && path !== " ") {
+            return true;
+        } else {
+            return false;
+        }
+    };
 }]);
