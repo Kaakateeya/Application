@@ -3015,18 +3015,18 @@ app.controller("loggedascustomers", ['$scope', '$mdDialog',
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
                     scope.authentication = false;
                     scope.Customerprofileiddiv = false;
-                    //var passwords = JSON.parse(response.data);
-                    // scope.customerpassword = passwords[0].Password;
                     var passwords = (response.data).split(';');
                     scope.customerpassword = (passwords[0].split(':'))[1];
                     scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
                     console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
                     authSvc.login(scope.customerprofileid, scope.customerpasswordencrypt).then(function(response) {
+                        sessionStorage.removeItem("loggedAscustomerPage");
                         sessionStorage.removeItem("homepageobject");
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         if (response.response !== null && response.response !== undefined && response.response !== "") {
                             authSvc.user(response.response !== null ? response.response[0] : null);
+                            sessionStorage.setItem("loggedAscustomerPage", true);
                             route.go('dashboard', { type: 'C' });
                         } else {
                             route.go('loggedAscustomer', {});
@@ -6227,6 +6227,7 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
         sessionStorage.removeItem("missingStatus");
         sessionStorage.removeItem("localcustid");
         sessionStorage.removeItem("unpaidNotifyflag");
+        sessionStorage.removeItem("loggedAscustomerPage");
 
     }
 

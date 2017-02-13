@@ -111,6 +111,7 @@ app.config(function(reCAPTCHAProvider) {
 });
 app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
+        var loggedAscustomerPage = sessionStorage.getItem("loggedAscustomerPage");
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();
@@ -118,32 +119,38 @@ app.run(function($rootScope, $state, $stateParams) {
                 $state.go('home');
             } else {
                 if (sessionStorage.getItem('cust.id') !== null) {
-                    var misStatus = sessionStorage.getItem('missingStatus');
-                    if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
-                        console.log('success');
-                        if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
-                            $state.go('mobileverf');
-                            e.preventDefault();
-                        } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
-                            $state.go("missingfields", { id: misStatus });
-                            e.preventDefault();
+
+                    if (loggedAscustomerPage === "true") {
+
+                    } else {
+                        var misStatus = sessionStorage.getItem('missingStatus');
+                        if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
+                            console.log('success');
+                            if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
+                                $state.go('mobileverf');
+                                e.preventDefault();
+                            } else if (misStatus === '1' || misStatus === '2' || misStatus === '3' || misStatus === '4' || misStatus === '5') {
+                                $state.go("missingfields", { id: misStatus });
+                                e.preventDefault();
+                            }
                         }
                     }
                 }
             }
         } else {
-
-            if (to.name === 'General') {
-                if (sessionStorage.getItem('cust.id') !== null) {
-                    var misStatuss = sessionStorage.getItem('missingStatus');
-                    if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
-                        console.log('success');
-                        if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
-                            $state.go('mobileverf');
-                            e.preventDefault();
-                        } else if (misStatuss === '1' || misStatuss === '2' || misStatuss === '3' || misStatuss === '4' || misStatuss === '5') {
-                            $state.go("missingfields", { id: misStatuss });
-                            e.preventDefault();
+            if (loggedAscustomerPage === "true") {} else {
+                if (to.name === 'General') {
+                    if (sessionStorage.getItem('cust.id') !== null) {
+                        var misStatuss = sessionStorage.getItem('missingStatus');
+                        if ((to.name !== "mobileverf" && to.name !== "missingfields")) {
+                            console.log('success');
+                            if (sessionStorage.getItem('cust.isemailverified') === 'false' || sessionStorage.getItem('cust.isnumberverifed') === 'false') {
+                                $state.go('mobileverf');
+                                e.preventDefault();
+                            } else if (misStatuss === '1' || misStatuss === '2' || misStatuss === '3' || misStatuss === '4' || misStatuss === '5') {
+                                $state.go("missingfields", { id: misStatuss });
+                                e.preventDefault();
+                            }
                         }
                     }
                 }
