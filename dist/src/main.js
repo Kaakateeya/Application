@@ -1837,7 +1837,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.paging(frompage, topage, scope.typeodbind);
         });
         scope.bindcounts = function(array) {
-            if (helperservice.checkarraylength(array) === false) {
+            if ((array === undefined) || (array === null) || (array === "")) {
                 array = {};
                 array.MybookMarkedProfCount = 0;
                 array.WhobookmarkedCount = 0;
