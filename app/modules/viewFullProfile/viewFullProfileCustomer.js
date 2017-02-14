@@ -142,11 +142,13 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             if (scope.custid === localcustid) {
                 scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+
                     scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+
                     scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();

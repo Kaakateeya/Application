@@ -376,8 +376,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+
             scope.exactshow = true;
-            scope.exactflagstorage = exactflag;
+
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     window.scrollTo(0, 0);
@@ -385,6 +386,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = typeofdiv;
                     scope.chatstatus = type;
+                    scope.exactflagstorage = exactflag;
                 }
                 customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex, scope.exactflagstorage).then(function(response) {
                     scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;

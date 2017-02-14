@@ -10,6 +10,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
         var meValue = scope.searchObjectquery[meKey];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
+        scope.tocustid = null;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};

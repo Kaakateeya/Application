@@ -10,7 +10,7 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { FromProfileID: fromprofileid, EmpID: empid } });
         },
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
-            return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
+            return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: (ToCustID !== "") && (ToCustID !== undefined) ? ToCustID : null } });
         },
         getViewFullProfileMail: function(OriginalString) {
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });

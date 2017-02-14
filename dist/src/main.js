@@ -2083,8 +2083,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
         scope.receivesrecphotoss = function(fromindex, toindex, type, headertext, typeofdiv, countalert, exactflag) {
+
             scope.exactshow = true;
-            scope.exactflagstorage = exactflag;
+
             if (countalert !== 0) {
                 if (fromindex === 1) {
                     window.scrollTo(0, 0);
@@ -2092,6 +2093,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     scope.lblUHaveviewd = headertext;
                     scope.typeofdiv = typeofdiv;
                     scope.chatstatus = type;
+                    scope.exactflagstorage = exactflag;
                 }
                 customerDashboardServices.getcustomerpartnerdata(scope.custid, scope.chatstatus, fromindex, toindex, scope.exactflagstorage).then(function(response) {
                     scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
@@ -5486,6 +5488,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
         var meValue = scope.searchObjectquery[meKey];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
+        scope.tocustid = null;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -5972,11 +5975,13 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             if (scope.custid === localcustid) {
                 scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+
                     scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
+
                     scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();
@@ -6758,7 +6763,7 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { FromProfileID: fromprofileid, EmpID: empid } });
         },
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
-            return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: ToCustID } });
+            return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: (ToCustID !== "") && (ToCustID !== undefined) ? ToCustID : null } });
         },
         getViewFullProfileMail: function(OriginalString) {
             return http.get(app.apiroot + 'StaticPages/getViewFullProfileMail', { params: { OriginalString: OriginalString } });
