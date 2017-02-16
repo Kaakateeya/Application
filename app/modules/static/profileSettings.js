@@ -5,6 +5,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         scope.getdetails = function() {
             var logincustid = authSvc.getCustId();
             scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
+            var profileid = authSvc.getProfileid();
+            scope.ProfileID = helperservice.checkstringvalue(profileid) ? profileid : null;
             scope.days = function() {
                 scope.test = [];
                 scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
@@ -151,8 +153,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             });
         };
         scope.submitdeleteprofile = function() {
-            var ProfileID = scope.ProfileID;
-            var Narrtion = scope.Narrtion;
+            var ProfileID = scope.custid;
+            var Narrtion = scope.Narration;
+
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
                     alerts.open('Delete Profile successfully', 'success');

@@ -5014,6 +5014,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
         scope.getdetails = function() {
             var logincustid = authSvc.getCustId();
             scope.custid = helperservice.checkstringvalue(logincustid) ? logincustid : null;
+            var profileid = authSvc.getProfileid();
+            scope.ProfileID = helperservice.checkstringvalue(profileid) ? profileid : null;
             scope.days = function() {
                 scope.test = [];
                 scope.test = [{ label: "--Select--", title: "--select--", value: "0" }];
@@ -5160,8 +5162,9 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             });
         };
         scope.submitdeleteprofile = function() {
-            var ProfileID = scope.ProfileID;
-            var Narrtion = scope.Narrtion;
+            var ProfileID = scope.custid;
+            var Narrtion = scope.Narration;
+
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
                     alerts.open('Delete Profile successfully', 'success');
@@ -6335,10 +6338,10 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         Viewprofile: function(logcustid, tocustid, selfflag) {
 
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid, RelationshipID: selfflag } });
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: (tocustid !== "" && tocustid !== undefined) ? tocustid : null, CustID: (logcustid !== "" && logcustid !== undefined) ? logcustid : null, RelationshipID: selfflag } });
         },
         Viewprofileflags: function(logcustid, tocustid) {
-            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: logcustid, ToCustID: tocustid } });
+            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: (logcustid !== "" && logcustid !== undefined) ? logcustid : null, ToCustID: (tocustid !== "" && tocustid !== undefined) ? tocustid : null } });
         },
         communicationhistorychats: function(obj) {
             return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);
@@ -6554,7 +6557,7 @@ app.factory('customerProfilesettings', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { Expirydate: Expirydate, CustID: custid, iflag: flag } });
         },
         deleteprofile: function(ProfileID, Narrtion) {
-            return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { ProfileID: ProfileID, Narrtion: Narrtion } });
+            return http.get(app.apiroot + 'StaticPages/getDeletecustomerProfilesettings', { params: { ProfileID: ProfileID, Narrtion: Narrtion } });
         },
         manageprofiles: function(CustID, AllowEmail, AllowSMS) {
             return http.get(app.apiroot + 'StaticPages/getProfilesettingAllowEmailAllowSMS', { params: { CustID: CustID, AllowEmail: AllowEmail, AllowSMS: AllowSMS } });

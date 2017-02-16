@@ -20,10 +20,10 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         Viewprofile: function(logcustid, tocustid, selfflag) {
 
-            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: tocustid, CustID: logcustid, RelationshipID: selfflag } });
+            return http.get(app.apiroot + 'StaticPages/getCustomerViewfullProfileDetails', { params: { ProfileID: (tocustid !== "" && tocustid !== undefined) ? tocustid : null, CustID: (logcustid !== "" && logcustid !== undefined) ? logcustid : null, RelationshipID: selfflag } });
         },
         Viewprofileflags: function(logcustid, tocustid) {
-            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: logcustid, ToCustID: tocustid } });
+            return http.get(app.apiroot + 'StaticPages/getExpressinterstBookmarkIgnore', { params: { loggedcustid: (logcustid !== "" && logcustid !== undefined) ? logcustid : null, ToCustID: (tocustid !== "" && tocustid !== undefined) ? tocustid : null } });
         },
         communicationhistorychats: function(obj) {
             return http.post(app.apiroot + 'DashboardRequest/DashboardCustometMessagesCount', obj);

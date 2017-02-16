@@ -10,7 +10,7 @@ app.factory('customerProfilesettings', ['$http', function(http) {
             return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { Expirydate: Expirydate, CustID: custid, iflag: flag } });
         },
         deleteprofile: function(ProfileID, Narrtion) {
-            return http.get(app.apiroot + 'StaticPages/getInsertcustomerProfilesettings', { params: { ProfileID: ProfileID, Narrtion: Narrtion } });
+            return http.get(app.apiroot + 'StaticPages/getDeletecustomerProfilesettings', { params: { ProfileID: ProfileID, Narrtion: Narrtion } });
         },
         manageprofiles: function(CustID, AllowEmail, AllowSMS) {
             return http.get(app.apiroot + 'StaticPages/getProfilesettingAllowEmailAllowSMS', { params: { CustID: CustID, AllowEmail: AllowEmail, AllowSMS: AllowSMS } });
