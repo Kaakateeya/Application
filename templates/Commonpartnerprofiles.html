@@ -115,7 +115,8 @@
                  <img name="imgProfilefullpic" ng-src="{{data.Photo}}" ng-class="data.PhotoCount==0 && (LcustID !== undefined && LcustID !== null && LcustID !== '') ?'Linkdisabled':''" style="height: 250px; width: 250px;cursor:pointer;" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)"></span>
                 <p style="align-items: center; text-align: center;"></p>
                 <div>
-                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">
+                        {{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
                         (data.Photo).indexOf("Password-Protected")!=-1?'Request Password':"Photo Request"):""}}</a>
                 </div>
             </div>

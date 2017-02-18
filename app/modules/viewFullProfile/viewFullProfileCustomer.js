@@ -28,6 +28,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.arr = [];
         scope.personalinfo = {};
         scope.aboutmyself = {};
+        scope.modalheader = 1;
         scope.partnerinformation = function(response) {
             _.each(response.data, function(item) {
                 var testArr = JSON.parse(item);
@@ -89,7 +90,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {
                                     if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
                                         scope.liticket = true;
-                                        scope.lnkViewHoro = false;
+                                        scope.lnkViewHoro = true;
                                         scope.logidliproceed = false;
                                         scope.BookmarkFlag = false;
                                         scope.IgnoreFlaghide = false;
@@ -187,6 +188,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                             }
                             break;
                         case "M":
+                        case "TH":
                             if (response.data === 1) {
                                 scope.$broadcast("showAlertPopupccc", 'alert-success', "Message sent SuccessFully", 2500);
                             } else {
@@ -232,9 +234,21 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             alerts.dynamicpopupclose();
         };
         scope.sendmessegescommon = function(type, tocustid) {
+            scope.modalheader = 1;
             scope.modalpopupheadertext = "Enter your message here";
             scope.messagecustid = tocustid;
             alerts.dynamicpopup("myModalContent.html", scope, uibModal);
+        };
+        scope.sendmessegestoRMTicket = function(tocustid) {
+            scope.modalheader = 2;
+            scope.modalpopupheadertext = "Enter your message to Relationship Manager for match followup";
+            scope.messagecustid = tocustid;
+            alerts.dynamicpopup("myModalContent.html", scope, uibModal);
+        };
+        scope.sendmessagestoRM = function(form) {
+            var locallogid = sessionStorage.getItem("locallogid");
+            scope.serviceactions('TH', scope.messagecustid, undefined, undefined, form, locallogid, undefined);
+            alerts.dynamicpopupclose();
         };
         scope.acceptlinkexp = function(type, custid) {
             var locallogid = sessionStorage.getItem("locallogid");

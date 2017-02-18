@@ -33,7 +33,7 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/getInsertCustomerExpressinterest', { params: { fromcustid: fromid, tocustid: toid, logID: logid, interstTYpe: type, empid: "" } });
         },
         photopasswordactioninsert: function(fromcustid, tocustid, type) {
-            return http.get(app.apiroot + 'StaticPages/getPhotopasswordAcceptReject', { params: { FromcustID: 91022, TocustID: 91035, Accept_Reject: type } });
+            return http.get(app.apiroot + 'StaticPages/getPhotopasswordAcceptReject', { params: { FromcustID: fromcustid, TocustID: tocustid, Accept_Reject: type } });
         },
         getprofilegrade: function(custid) {
             return http.get(app.apiroot + 'StaticPages/getprofileGrade', { params: { CustID: custid } });

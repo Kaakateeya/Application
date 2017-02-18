@@ -480,11 +480,27 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.SubmitMsg = function(form) {
             scope.$broadcast('sendmsg', 'RP', scope.messagechatcustid, scope.messagechatlinkid, form, undefined, scope.messagehistoryid);
         };
+        scope.pageloadbind = function(response) {
+            scope.bindcounts(response.data.DashBoardCounts);
+            scope.bindallcounts = response.data.DashBoardCounts;
+            scope.PersonalInfo = (response.data.PersonalInfo);
+            scope.photopersonal = scope.PersonalInfo.Photo;
+            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+        };
         scope.photoPasswordactionss = function(type, tocustid) {
+
             customerDashboardServices.photopasswordactioninsert(scope.custid, tocustid, type).then(function(response) {
                 if (response.data === 1) {
                     if (type === 1) {
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Accepted successfully', 2500);
+                        customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                            if (scope.counts === 1) {
+                                sessionStorage.removeItem("LoginPhotoIsActive");
+                                scope.pageloadbind(response);
+                            }
+                        });
                     } else {
                         alerts.timeoutoldalerts(scope, 'alert-success', 'Rejected successfully', 2500);
                     }
@@ -546,15 +562,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
             scope.$broadcast('photoalbum', custid, profileid, photocount);
         };
-        scope.pageloadbind = function(response) {
-            scope.bindcounts(response.data.DashBoardCounts);
-            scope.bindallcounts = response.data.DashBoardCounts;
-            scope.PersonalInfo = (response.data.PersonalInfo);
-            scope.photopersonal = scope.PersonalInfo.Photo;
-            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-        };
+
         scope.init = function() {
             scope.PartnerProfilesnew = [];
             scope.exactshow = (scope.Typeofdatabind === 'C' || scope.Typeofdatabind === 'P') && loginpaidstatus === "1" ? false : true;
@@ -648,12 +656,18 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             }
         };
 
-
-
-
-
-
-
+        // scope.$on('photosrequests', function(event, typerequest) {
+        //     switch (TypeOfReportexpress) {
+        //         case "photorequest":
+        //             customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+        //                 if (scope.counts === 1) {
+        //                     sessionStorage.removeItem("LoginPhotoIsActive");
+        //                     scope.pageloadbind(response);
+        //                 }
+        //             });
+        //             break;
+        //     }
+        // });
 
         scope.getNotifyArray = function(Startval, Endval, notifyID, insertType) {
             notifyID = notifyID === undefined ? '' : notifyID;
