@@ -17656,7 +17656,7 @@ span.duration_of_pack:after {
 
 .live_chat_footer {
     margin: 0 0 0 30%;
-    background: url() center center no-repeat;
+    background: url(src/images/icon_chat_footer.png) center center no-repeat;
     display: block;
     width: 90px;
     height: 90px
