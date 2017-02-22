@@ -102,9 +102,8 @@
     <label style="display: none;" id="lblcurSlide">1</label>
     <label style="display: none;" id="lnkLastSlide1"></label>
 </div>
-<div id="PartnerProfilles" ng-show="partnersearchessearches">
-
-    <div id="partnerDiv1" ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
+<div ng-show="partnersearchessearches">
+    <div ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
         <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
         <p></p>
@@ -124,7 +123,7 @@
             <div class="search_result_item_descr pull-left">
                 <p ng-hide="(LcustID!==null && LcustID!==undefined && LcustID!=='')&&(loginpaidstatus==='1')?(data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined):(data.DistName=='' || data.DistName==null || data.DistName==undefined)">
                     <span>{{(data.iGenderID===1)||(data.GenderID===1)?"He":"She"}}</span> was born and raised in
-                    <!--{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")}}-->
+                  
                     <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
@@ -161,7 +160,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="search_result_item_ui clearfix">
+         <div class="search_result_item_ui clearfix">
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
@@ -212,6 +211,7 @@
         </div>
     </div>
     </br>
+     <div class="clearfix"></div>
     <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
         <div class="col-lg-offset-5" ng-show="loadmore">
             <a href="javascript:void(0)" ng-click="directivepaging()"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
