@@ -291,10 +291,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                 scope.checkitemnew = function(carouselID) {
                     var $this;
                     $this = $("#" + carouselID);
-                    if ($("#" + carouselID + ".carousel-inner .item:first").hasClass("active")) {
+                    if ($("#" + carouselID + " .carousel-inner .item:first").hasClass("active")) {
                         $("#" + carouselID).find('.left').hide();
                         $("#" + carouselID).find('.right').show();
-                    } else if ($("#" + carouselID + ".carousel-inner .item:last").hasClass("active")) {
+                    } else if ($("#" + carouselID + " .carousel-inner .item:last").hasClass("active")) {
                         $("#" + carouselID).find('.left').show();
                         $("#" + carouselID).find('.right').hide();
                     } else {
