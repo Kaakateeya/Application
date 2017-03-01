@@ -249,9 +249,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.btnoksubmit = function() {
             switch (scope.AccRejFlag) {
                 case "MailAccept":
+
+                    alerts.dynamicpopupclose();
                     scope.Reject_paeload();
                     break;
                 case "MailReject":
+                    alerts.dynamicpopupclose();
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
                     scope.pagerefersh(scope.ToProfileID);
                     scope.liticket = false;
