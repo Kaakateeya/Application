@@ -427,11 +427,11 @@ app.constant('arrayConstants', {
     ],
     'newProfessionCatgory': [
         { "label": "--Select--", "title": "--Select--", "value": "" },
-        { "label": "state govt job", "title": "state govt job", "value": 567 },
-        { "label": "central govt job", "title": "central govt job", "value": 568 },
-        { "label": "private job", "title": "private job", "value": 569 },
-        { "label": "doctor", "title": "doctor", "value": 570 },
-        { "label": "business", "title": "business", "value": 571 }
+        { "label": "state govt job", "title": "state govt job", "value": 566 },
+        { "label": "central govt job", "title": "central govt job", "value": 567 },
+        { "label": "private job", "title": "private job", "value": 568 },
+        { "label": "doctor", "title": "doctor", "value": 569 },
+        { "label": "business", "title": "business", "value": 570 }
 
     ]
 });
