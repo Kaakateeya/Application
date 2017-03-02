@@ -242,6 +242,10 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
+                    case 'newProfessionCatgory':
+                        scope.databind(cons.newProfessionCatgory);
+                        break;
+
                 }
             }, 1000);
             element.multiselect({

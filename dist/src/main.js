@@ -424,6 +424,15 @@ app.constant('arrayConstants', {
         { "label": "Medium", "title": "Medium", "value": 19 },
         { "label": "Dark", "title": "Dark", "value": 20 },
         { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
+    ],
+    'newProfessionCatgory': [
+        { "label": "--Select--", "title": "--Select--", "value": "" },
+        { "label": "state govt job", "title": "state govt job", "value": 567 },
+        { "label": "central govt job", "title": "central govt job", "value": 568 },
+        { "label": "private job", "title": "private job", "value": 569 },
+        { "label": "doctor", "title": "doctor", "value": 570 },
+        { "label": "business", "title": "business", "value": 571 }
+
     ]
 });
 app.constant('config', function() {
@@ -1167,6 +1176,10 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
+                    case 'newProfessionCatgory':
+                        scope.databind(cons.newProfessionCatgory);
+                        break;
+
                 }
             }, 1000);
             element.multiselect({
