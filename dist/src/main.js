@@ -5535,8 +5535,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
                         scope.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
-                    scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
+                    if (scope.personalinfo[0].HoroscopeImage !== undefined && scope.personalinfo[0].HoroscopeImage !== null) {
+                        scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
+                    }
                 } else {
+
+                    console.log(testArr);
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
