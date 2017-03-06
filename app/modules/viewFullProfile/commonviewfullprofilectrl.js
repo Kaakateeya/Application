@@ -234,12 +234,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-            // if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
-            //     alerts.dynamicpopupclose();
-            //     scope.pagerefersh(scope.ToProfileID);
-            // } else {
-            window.close();
-            //}
+            if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
+                alerts.dynamicpopupclose();
+                scope.pagerefersh(scope.ToProfileID);
+            } else {
+                window.close();
+            }
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
