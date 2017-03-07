@@ -99,8 +99,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
             });
         };
-        scope.pagerefersh = function(ToProfileID) {
-            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+        scope.pagerefersh = function(ToProfileID, Fromprofileid) {
+            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
                 scope.partnerinformation(responsedata.data);
             });
             scope.bookmarkexpreessdata();
@@ -127,7 +127,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.Reject_paeload = function() {
-            scope.pagerefersh(scope.ToProfileID);
+            scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
             scope.PageDiv = false;
             var MobjViewprofile = {
                 ExpressInrestID: scope.hdnexpressinterstfiled,
@@ -160,19 +160,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 7:
                     scope.modalbodyID1 = "You cannot Skip Accepted Profile";
                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.flagopen = 1;
                     break;
                 case 8:
                     scope.Reject_paeload();
                     break;
                 case 9:
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     break;
                 case 10:
                     scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.flagopen = 1;
                     break;
                 case 11:
@@ -240,7 +240,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.modalpopupclosetab = function() {
             if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
                 alerts.dynamicpopupclose();
-                scope.pagerefersh(scope.ToProfileID);
+                scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
             } else {
                 window.close();
             }
@@ -265,7 +265,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case "MailReject":
                     alerts.dynamicpopupclose();
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.liticket = false;
                     scope.liproceed = true;
                     btnDontProceed.Visible = false;
@@ -326,7 +326,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
             scope.divacceptreject = true;
             alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-            scope.pagerefersh(scope.ToProfileID);
+            scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {

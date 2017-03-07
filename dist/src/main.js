@@ -424,16 +424,8 @@ app.constant('arrayConstants', {
         { "label": "Medium", "title": "Medium", "value": 19 },
         { "label": "Dark", "title": "Dark", "value": 20 },
         { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
-    ],
-    'newProfessionCatgory': [
-        { "label": "--Select--", "title": "--Select--", "value": "" },
-        { "label": "state govt job", "title": "state govt job", "value": 566 },
-        { "label": "central govt job", "title": "central govt job", "value": 567 },
-        { "label": "private job", "title": "private job", "value": 568 },
-        { "label": "doctor", "title": "doctor", "value": 569 },
-        { "label": "business", "title": "business", "value": 570 }
-
     ]
+
 });
 app.constant('config', function() {
     return {
@@ -1177,7 +1169,17 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         scope.databind(cons.Complexion);
                         break;
                     case 'newProfessionCatgory':
-                        scope.databind(cons.newProfessionCatgory);
+
+                        service.newProfessionCat().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
+                        });
+
+
                         break;
 
                 }
@@ -5608,8 +5610,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
             });
         };
-        scope.pagerefersh = function(ToProfileID) {
-            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+        scope.pagerefersh = function(ToProfileID, Fromprofileid) {
+            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
                 scope.partnerinformation(responsedata.data);
             });
             scope.bookmarkexpreessdata();
@@ -5636,7 +5638,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.Reject_paeload = function() {
-            scope.pagerefersh(scope.ToProfileID);
+            scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
             scope.PageDiv = false;
             var MobjViewprofile = {
                 ExpressInrestID: scope.hdnexpressinterstfiled,
@@ -5669,19 +5671,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 7:
                     scope.modalbodyID1 = "You cannot Skip Accepted Profile";
                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.flagopen = 1;
                     break;
                 case 8:
                     scope.Reject_paeload();
                     break;
                 case 9:
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     break;
                 case 10:
                     scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.flagopen = 1;
                     break;
                 case 11:
@@ -5749,7 +5751,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.modalpopupclosetab = function() {
             if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
                 alerts.dynamicpopupclose();
-                scope.pagerefersh(scope.ToProfileID);
+                scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
             } else {
                 window.close();
             }
@@ -5774,7 +5776,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case "MailReject":
                     alerts.dynamicpopupclose();
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID);
+                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.liticket = false;
                     scope.liproceed = true;
                     btnDontProceed.Visible = false;
@@ -5835,7 +5837,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
             scope.divacceptreject = true;
             alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-            scope.pagerefersh(scope.ToProfileID);
+            scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
@@ -6734,6 +6736,12 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
 
             return http.get(app.apiroot + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Region', dependencyValue: obj1, dependencyflagID: '' } });
         },
+
+        newProfessionCat: function() {
+            return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "NewProfessionCat", dependencyValue: '' } });
+        }
+
+
     };
 }]);
 app.factory('successstoriesdata', ['$http', function(http) {
@@ -6817,8 +6825,8 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getInsertExpressViewTicket: function(fromcustid, tocustid, decryptedtext, strtypeofreport) {
             return http.get(app.apiroot + 'StaticPages/getInsertExpressViewTicket', { params: { FromCustID: fromcustid, ToCustID: tocustid, DecriptedText: decryptedtext, strtypeOfReport: strtypeofreport } });
         },
-        getExpressIntrstfullprofile: function(fromprofileid, empid) {
-            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { FromProfileID: fromprofileid, EmpID: empid } });
+        getExpressIntrstfullprofile: function(toprofileid, strFromProfileID, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { ToProfileID: toprofileid, FromProfileID: strFromProfileID, EmpID: empid } });
         },
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: (ToCustID !== "") && (ToCustID !== undefined) ? ToCustID : null } });

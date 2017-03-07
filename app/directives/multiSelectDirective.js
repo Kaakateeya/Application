@@ -243,7 +243,17 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                         scope.databind(cons.Complexion);
                         break;
                     case 'newProfessionCatgory':
-                        scope.databind(cons.newProfessionCatgory);
+
+                        service.newProfessionCat().then(function(response) {
+                            var option = [];
+                            option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                            _.each(response.data, function(item) {
+                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            scope.databind(option);
+                        });
+
+
                         break;
 
                 }
