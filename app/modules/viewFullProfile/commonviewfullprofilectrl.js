@@ -171,7 +171,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     break;
                 case 10:
                     scope.AccRejFlag = "MailReject";
-                    scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
+                    scope.modalbodydivContent = "You have already Rejected this profile. Do you want to continue to view the profile?";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
                     scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.flagopen = 1;
