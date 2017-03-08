@@ -5682,6 +5682,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     break;
                 case 10:
+                    scope.AccRejFlag = "MailReject";
                     scope.modalbodydivContent = "You already " + " " + scope.AccRejFlag + " " + "this Profile ,do you want to continue with these action " + " accept";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
                     scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
@@ -5768,16 +5769,16 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.btnoksubmit = function() {
+            alerts.dynamicpopupclose();
             switch (scope.AccRejFlag) {
                 case "MailAccept":
-
                     alerts.dynamicpopupclose();
                     scope.Reject_paeload();
                     break;
                 case "MailReject":
                     alerts.dynamicpopupclose();
-                    alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
+                    //alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
+                    //scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.liticket = false;
                     scope.liproceed = true;
                     btnDontProceed.Visible = false;
