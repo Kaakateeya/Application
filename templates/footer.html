@@ -7,59 +7,18 @@
             <a onclick="OpenLHNChat();return false;" href="javascript:void(0)" target="_blank" id="lhnWin" class="icon-chat-footer pull-left"></a>
             <!--
             <script type="text/javascript" src="https://www.livehelpnow.net/lhn/scripts/livehelpnow.aspx?lhnid=3422&amp;iv=1&amp;ivid=0&amp;d=2666&amp;ver=5.3&amp;rnd=0.2933060332253514"></script>-->
+
+
+
+
             <div id="livechatdiv">
                 <!-- This code must be installed within the body tags 3422-->
-                <script type="text/javascript">
-                    var lhnAccountN = "3422-1";
-                    var lhnButtonN = -1;
-                    var lhnChatPosition = 'default';
-                    var lhnInviteEnabled = 1;
-                    var lhnWindowN = 0;
-                    var lhnDepartmentN = 2666;
-                </script>
 
-                <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscript"></script>
-                <!--<script type="text/javascript">
-                    function OpenLHNChat() {
-                        var lhnAccountN = "3422-1";
-                        var lhnButtonN = -1;
-                        var lhnChatPosition = 'default';
-                        var lhnInviteEnabled = 1;
-                        var lhnWindowN = 0;
-                        var lhnDepartmentN = 2666;
-                        var wleft = (screen.width - 580 - 32) / 2;
-                        var wtop = (screen.height - 420 - 96) / 2;
-                        var sScrollbars = "yes";
-                        lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
-                    }
-                </script>-->
+
             </div>
         </div>
-        <script type="text/javascript">
-            function OpenLHNChat() {
-                if (typeof CustomOpenLHNChat == 'function') {
-                    CustomOpenLHNChat();
-                    return false;
-                }
-                var wleft = (screen.width - 580 - 32) / 2;
-                var wtop = (screen.height - 420 - 96) / 2;
-                //  alert(bLHNOnline);
 
-                var bLHNOnline = 0;
-                var lhnwindow = 0;
-                var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
-                if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
-                    lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
-                } else {
-                    lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
-                }
-                if (typeof Zstepx != 'undefined') {
-                    if (Zstepx == 10) {
-                        Zslide();
-                    }
-                }
-            }
-        </script>
+
         <div class="social pull-right">
             <ul>
                 <li><a href="javascript:void(0)">&nbsp;

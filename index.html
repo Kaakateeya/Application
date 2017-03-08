@@ -363,8 +363,41 @@
     <script src="app\modules\loggedAsCusomer\loggedAsCustomerCtrl.js"></script>
 
     <script src="app\services\loggedAsCustomerService.js"></script>
+    <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscriptDone"></script>
 
+    <script type="text/javascript">
+        var lhnAccountN = "3422-1";
+        var lhnButtonN = -1;
+        var lhnChatPosition = 'default';
+        var lhnInviteEnabled = 1;
+        var lhnWindowN = 0;
+        var lhnDepartmentN = 2666;
+    </script>
+    <script type="text/javascript">
+        function OpenLHNChat() {
+            if (typeof CustomOpenLHNChat == 'function') {
+                CustomOpenLHNChat();
+                return false;
+            }
+            var wleft = (screen.width - 580 - 32) / 2;
+            var wtop = (screen.height - 420 - 96) / 2;
+            //  alert(bLHNOnline);
 
+            var bLHNOnline = 0;
+            var lhnwindow = 0;
+            var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
+            if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
+                lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            } else {
+                lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            }
+            if (typeof Zstepx != 'undefined') {
+                if (Zstepx == 10) {
+                    Zslide();
+                }
+            }
+        }
+    </script>
     <!--SCRIPTS END-->
     <!-- SCRIPTSP DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -396,6 +429,40 @@
     <script src="index.js"></script>
     <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscript"></script>
     <script src="dist/js/main.min.js"></script>
+
+    <script type="text/javascript">
+        var lhnAccountN = "3422-1";
+        var lhnButtonN = -1;
+        var lhnChatPosition = 'default';
+        var lhnInviteEnabled = 1;
+        var lhnWindowN = 0;
+        var lhnDepartmentN = 2666;
+    </script>
+    <script type="text/javascript">
+        function OpenLHNChat() {
+            if (typeof CustomOpenLHNChat == 'function') {
+                CustomOpenLHNChat();
+                return false;
+            }
+            var wleft = (screen.width - 580 - 32) / 2;
+            var wtop = (screen.height - 420 - 96) / 2;
+            //  alert(bLHNOnline);
+
+            var bLHNOnline = 0;
+            var lhnwindow = 0;
+            var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
+            if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
+                lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            } else {
+                lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            }
+            if (typeof Zstepx != 'undefined') {
+                if (Zstepx == 10) {
+                    Zslide();
+                }
+            }
+        }
+    </script>
     <!--SCRIPTSP END-->
 
 </body>
