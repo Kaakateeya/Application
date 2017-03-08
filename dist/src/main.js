@@ -2238,22 +2238,23 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
         scope.acceptlink = function(type) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, scope.expressintcustid, scope.expressintlogid, type, null).then(function(response) {
+                alerts.dynamicpopupclose();
                 if (response.data === 1) {
                     alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
                     alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
-                alerts.dynamicpopupclose();
+
             });
         };
         scope.acceptlinkexp = function(type, custid, logid) {
             customerDashboardServices.acceptrejectexpressinterest(scope.custid, custid, logid, type, null).then(function(response) {
                 if (response.data === 1) {
+                    alerts.dynamicpopupclose();
                     alerts.timeoutoldalerts(scope, 'alert-success', 'Proceed successfully', 2500);
                 } else {
                     alerts.timeoutoldalerts(scope, 'alert-danger', 'sorry Proceed Fail', 2500);
                 }
-                alerts.dynamicpopupclose();
             });
         };
         scope.acceptrejectpopup = function(custid, logid, Name) {
@@ -5749,12 +5750,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
-            // if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
-            //     alerts.dynamicpopupclose();
-            //     scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
-            // } else {
-            window.close();
-            //}
+            if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
+                alerts.dynamicpopupclose();
+                scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
+            } else {
+                window.close();
+            }
         };
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
