@@ -54,7 +54,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false },
         { name: 'forgetpasswordemail', url: '/forgetpasswordemail', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false },
         { name: 'Paymentnew', url: '/Paymentnew', templateUrl: 'app/modules/paymentNew/paymentNew.html', isloginrequired: false },
-        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false }
+        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false },
+        { name: 'newhome', url: '/newhomepage', templateUrl: 'app/modules/newHomepage/newHomepage.html', controller: 'newhomepcontroller', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -71,7 +72,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     _.each(states, function(item) {
 
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "newhome") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
