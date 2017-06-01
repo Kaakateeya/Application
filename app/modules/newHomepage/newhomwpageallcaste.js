@@ -5,6 +5,8 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
         basicRegistrationService, filter, newhomepageservices) {
+
+        scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         scope.emailpattaren = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i;
         scope.latestprofiles = [];
@@ -380,7 +382,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             }
         };
         scope.regSubmit = function(obj) {
-            debugger;
+
             var valmm = _.indexOf(monthArr, obj.regmonth);
             if (parseInt(valmm) < 9) {
                 var date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
@@ -421,7 +423,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-            debugger;
+
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
                 console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
@@ -457,7 +459,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 case 'Pillai Matrimony':
                     route.go('newhome', { caste: 'pillai-matrimony' });
                     break;
-                case 'SC Matrimony':
+                case 'ST Matrimony':
                     route.go('newhome', { caste: 'st-matrimony' });
                     break;
                 case 'Christian Matrimony':

@@ -1,3 +1,6 @@
+<!--<title>
+    dffff</title>-->
+
 <div id="mg" ng-init="homeinit()">
     <div class="row">
         <div class="head">
@@ -246,35 +249,25 @@
                 <p></p>
             </div>
             <div class="col-md-8">
-                <!--<div class="bread">
-                    <ul>
-                        <a href="/">
-                            <li>Home ></li>
-                        </a>
-                        <a href="caste">
-                            <li>Caste ></li>
-                        </a>
-                        <a href="#">
-                            <li>{{castename}}</li>
-                        </a>
-                    </ul>
-                </div>-->
-
                 <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="http://www.kaakateeya.com" class="home"><span property="name">Home</span></a>
                     <meta property="position" content="1">
                     </span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="http://www.kaakateeya.com/caste" class="post-root post post-post"><span property="name">Caste</span></a>
                     <meta property="position" content="2">
-                    </span> &gt; <span property="itemListElement" typeof="ListItem"><span property="name">{{castename}}</span>
+                    </span> &gt; <span property="itemListElement" typeof="ListItem"><span property="name">{{castenameparam}}</span>
                     <meta property="position" content="3">
                     </span>
                 </div>
             </div>
         </div>
+        <br>
         <div class="row br_gr">
             <div class="col-md-4">
                 <p></p>
+
             </div>
+
             <div class="col-md-3">
+
                 <a href="javascript:void(0)" ng-click="getalldata('',stateparamsid,'',1,4,2,isActiveid)"><span>BRIDES</span></a>
             </div>
             <div class="col-md-5">
@@ -305,9 +298,25 @@
                         <span style="font-size: 16px;color: #006dc0;position: relative;left: 94px;top: 12px;"> Location Matrimonials</span>
                         <hr>
                         <ul style="color: #881616;">
-                            <div ng-repeat="branch in branchesarray">
-                                <a href="#">
-                                    <li id="link_1">{{branch.BranchName}}</li>
+                            <div>
+                                <a>
+                                    <li id="link_1">Hyderabad Matrimony</li>
+                                </a>
+                                <hr>
+                                <a>
+                                    <li id="link_1">Vijayawada Matrimony</li>
+                                </a>
+                                <hr>
+                                <a>
+                                    <li id="link_1">Bangalore Matrimony</li>
+                                </a>
+                                <hr>
+                                <a>
+                                    <li id="link_1">Chennai Matrimony</li>
+                                </a>
+                                <hr>
+                                <a>
+                                    <li id="link_1">Pondicherry Matrimony</li>
                                 </a>
                                 <hr>
                             </div>
@@ -335,6 +344,7 @@
                                     <li>{{latestprofile.height}}</li>
                                     <li>{{latestprofile.Profession}}</li>
                                     <li>{{latestprofile.Place}}</li>
+                                    <li>{{latestprofile.CasteName}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -353,25 +363,12 @@
                 </div>
             </div>
             <div class="row">
-                <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-repeat="happy in happystoriesarray">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <img ng-src="{{happy.SuccessPic}}">
-                    </div>
-                    <div class="col-md-6">
-                    
-                        <h6>{{happy.Name}}</h6>
-                        <br>
-                        <h6>This is really an ideal matrimonial service centre replete with Successful partners’ stories. With in just 3 months of the online proposals, we have got married successfully with the blessings of our respective families. No doubt,
-                            Kamma Matrimony is such a special force helps everyone in finding out the perfect match.</h6>
-                    </div>
-                </div>-->
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <img ng-src="{{happystoriesarray[0].SuccessPic}}">
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <h6 style="font-size: 16px;">This is really an ideal matrimonial service centre replete with Successful partners’ stories. With in just 3 months of the online proposals, we have got married successfully with the blessings of our respective families. No doubt,
-                            Kamma Matrimony is such a special force helps everyone in finding out the perfect match.</h6>
+                        <p ng-bind-html="firstsuccessstory" class="row" style="font-size: 16px;text-align: justify;text-justify: inter-word; line-height: 1.2;width: 250px;"></p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -379,22 +376,17 @@
                         <img ng-src="{{happystoriesarray[1].SuccessPic}}">
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <h6 style="font-size: 16px;">A cordial greeting to the entire team of Kamma matrimony for their pronounced job. The website is too good and functional with hundreds of verified profiles. All because of Kaakateeya Kamma matrimony I got my perfect match.
-                        </h6>
+                        <p ng-bind-html="secondsuccessstory" class="row" style="font-size: 16px;text-align: justify;text-justify: inter-word; line-height: 1.2;width: 250px;">A cordial greeting to the entire team of Kamma matrimony for their pronounced job. The website is too good and functional with hundreds of verified profiles. All because of Kaakateeya Kamma matrimony I got my perfect match.
+                        </p>
                     </div>
-
                 </div>
-
             </div>
         </div>
         <div class="about" style="padding: 10px;">
             <div class="row">
                 <div class="col-md-12">
                     <h1 id="title_1">About Us</h1>
-                    <p>
-                        Caste based matrimonial services are the most effective in Indian context. Taking cue from this phenomenon, Kakateeya.com launched Kamma Matrimony to offer online matrimonial services for this segment of society. We are providing the user friendly search
-                        features to find a bride or groom keeping all your preferences in mind. Now find your Kamma bride or groom in Hyderabad, Guntur, and Vijayawada with ease. We offer a wonderful platform for interaction between the families for fostering
-                        a long lasting relationship. Register now at Kakateeya.com to find a partner from your own community.
+                    <p style="text-align: justify;text-justify: inter-word;" ng-bind-html="aboutus">
                     </p>
                 </div>
             </div>
