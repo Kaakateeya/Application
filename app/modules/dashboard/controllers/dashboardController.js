@@ -90,8 +90,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             });
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                        scope.lblUHaveviewd = headertext;
+                        if (parseInt(frompage) === 1) {
+                            scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                            scope.lblUHaveviewd = headertext;
+                        }
                     }).catch(function(response) {
                         scope.catchfunction();
                     });
@@ -110,8 +112,10 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             });
                         }
                         scope.$broadcast('loadmore');
-                        scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                        scope.lblUHaveviewd = headertext;
+                        if (parseInt(frompage) === 1) {
+                            scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                            scope.lblUHaveviewd = headertext;
+                        }
                     }).catch(function(response) {
                         scope.catchfunction();
 

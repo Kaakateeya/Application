@@ -11,10 +11,10 @@
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
     'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons'
 ]);
-app.apiroot = 'http://183.82.0.58:8010/Api/';
+//app.apiroot = 'http://183.82.0.58:8025/Api/';
 //app.apiroot = 'http://54.169.133.223:8070/Api/';
-//app.apiroot = 'http://52.66.131.254:8010/Api/';
-
+app.apiroot = 'http://52.66.131.254:8010/Api/';
+app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 
 app.global = {
     'alertType': 'toast-top-right'
@@ -55,7 +55,11 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'forgetpasswordemail', url: '/forgetpasswordemail', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false },
         { name: 'Paymentnew', url: '/Paymentnew', templateUrl: 'app/modules/paymentNew/paymentNew.html', isloginrequired: false },
         { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false },
-        { name: 'newhome', url: '/newhomepage', templateUrl: 'app/modules/newHomepage/newHomepage.html', controller: 'newhomepcontroller', isloginrequired: false }
+        // { name: 'newhome', url: '/caste/kamma-matrimony', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
+        { name: 'newhomecaste', url: '/caste', templateUrl: 'app/modules/newHomepage/newhomepageallcaste.html', controller: 'newhomepagecastecontroller', isloginrequired: false },
+        { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false }
+
+
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -70,13 +74,22 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     };
 
     _.each(states, function(item) {
-
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "newhome") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
                     controller: item.controller
+                }
+            };
+        } else if (item.name === "newhome" || item.name === "newhomecaste") {
+            innerView = {
+                "content@": {
+                    templateUrl: item.templateUrl,
+                    controller: item.controller
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
                 }
             };
         } else {

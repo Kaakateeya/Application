@@ -1,18 +1,15 @@
-app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
+app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices', '$stateParams',
+    'basicRegistrationService', '$filter', 'newhomepageservices',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices, $stateParams) {
+        basicRegistrationService, filter, newhomepageservices) {
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         scope.emailpattaren = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i;
         scope.latestprofiles = [];
-        scope.branchesarray = [];
-        scope.happystoriesarray = [];
-        scope.matrimonyarray = [];
-        scope.castename = $stateParams.caste;
         var childStayingWitharray = [
+            // { "label": "--select-- ", "title": "--select--", "value": "" },
             { "label": "Father", "title": "Father", "value": 39 },
             { "label": "Mother", "title": "Mother", "value": 40 },
             { "label": "YoungerBrother", "title": "YoungerBrother", "value": 41 },
@@ -39,6 +36,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             { "label": "Aunt", "title": "Aunt", "value": 562 }
         ];
         var Mothertongueselect = [
+            // { "label": "--select--", "title": "--select--", "value": "" },
             { "label": "Telugu", "title": "Telugu", "value": 1 },
             { "label": "Tamil", "title": "Tamil", "value": 2 },
             { "label": "Kannada", "title": "Kannada", "value": 3 },
@@ -55,6 +53,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             { "label": "telugu", "title": "telugu", "value": 14 }
         ];
         var Religion = [
+            // { "label": "--select--", "title": "--select--", "value": "" },
             { "label": "Hindu", "title": "Hindu", "value": 1 },
             { "label": "Christian", "title": "Christian", "value": 2 },
             { "label": "Muslim", "title": "Muslim", "value": 3 },
@@ -74,6 +73,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
         scope.castebind = function() {
             service.casteselect().then(function(response) {
                 scope.Castearray = [];
+                // scope.Castearray.push({ "label": "--select--", "title": "--select--", "value": "" });
                 _.each(response.data, function(item) {
                     scope.Castearray.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                 });
@@ -84,6 +84,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
         scope.countrybind = function() {
             service.countrySelect().then(function(response) {
                 scope.Countryarray = [];
+                // scope.Countryarray.push({ "label": "--select--", "title": "--select--", "value": "" });
                 _.each(response.data, function(item) {
                     scope.Countryarray.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                 });
@@ -102,6 +103,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
         scope.countryCodeselect = function() {
             service.countryCodeselect().then(function(response) {
                 scope.countryCode = [];
+                // scope.countryCode = [{ label: "--Select--", title: "--select--", value: "" }];
                 _.each(response.data, function(item) {
                     scope.countryCode.push({ label: item.Name, title: item.Name, value: item.ID });
                 });
@@ -110,6 +112,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
         };
         scope.castedependency = function(parentval1, parentval2) {
             var casteArr = [];
+            // casteArr = [{ label: "--Select--", title: "--select--", value: "" }];
             service.castedependency(parentval1, parentval2).then(function(response) {
                 _.each(response.data, function(item) {
                     casteArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
@@ -185,8 +188,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 scope.Regi.regcaste = "";
                 scope.Regi.regcontrycodes = "";
             }, 500);
-            scope.stateparamsredirect(scope.castename);
-            scope.getalldata('', scope.stateparamsid, '', 1, 4, 2, scope.isActiveid);
+            scope.getalldata(1, '', '', 1, 3, 2, '');
         };
 
         scope.divloginblock = function() {
@@ -338,6 +340,8 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     break;
             }
         };
+
+
         scope.dayChange = function(obj, type) {
             var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
             var minth30 = 'Apr,Jun,Sep,Nov';
@@ -352,12 +356,14 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 }
             }
         };
+
         scope.changeBind = function(parentval, parentval2) {
             scope.castearrayreg = [];
             if (parentval !== undefined && parentval !== 0 && parentval2 !== 0 && parentval2 !== undefined && parentval2 !== "" && parentval2 !== null && parentval !== "" && parentval !== null) {
                 scope.castearrayreg = scope.castedependency((parentval), (parentval2));
             }
         };
+
         scope.valueExists = function(type, flag, val) {
             if (val !== undefined) {
                 basicRegistrationService.emailExists({ iflagEmailmobile: flag, EmailMobile: val }).then(function(response) {
@@ -419,15 +425,12 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
                 console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
-                    scope.latestprofiles = response.data[0];
-                    scope.branchesarray = response.data[1];
-                    scope.happystoriesarray = response.data[2];
-                    scope.matrimonyarray = response.data[3];
+                    scope.latestprofiles = response.data;
                 }
             });
-        }
+        };
         scope.redirecttocastepage = function(obj) {
-            switch (obj.CasteName) {
+            switch (obj.TableName) {
                 case 'Kamma Matrimony':
                     route.go('newhome', { caste: 'kamma-matrimony' });
                     break;
@@ -440,60 +443,32 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Balija Matrimony':
                     route.go('newhome', { caste: 'balija-matrimony' });
                     break;
+
                 case 'Yadava Matrimony':
                     route.go('newhome', { caste: 'yadava-matrimony' });
                     break;
-            }
-        };
-        scope.stateparamsredirect = function(statename) {
-            switch (statename) {
-                case 'kamma-matrimony':
-                    scope.stateparamsid = 402;
-                    scope.isActiveid = 1;
+
+                case 'Padmasali Matrimony':
+                    route.go('newhome', { caste: 'padmashali-matrimony' });
                     break;
-                case 'reddy-matrimony':
-                    scope.stateparamsid = 404;
-                    scope.isActiveid = 1;
+                case 'Mudaliar Matrimony':
+                    route.go('newhome', { caste: 'mudaliyar-matrimony' });
                     break;
-                case 'kapu-matrimony':
-                    scope.stateparamsid = 405;
-                    scope.isActiveid = 1;
+                case 'Pillai Matrimony':
+                    route.go('newhome', { caste: 'pillai-matrimony' });
                     break;
-                case 'padmashali-matrimony':
-                    scope.stateparamsid = 410;
-                    scope.isActiveid = 1;
+                case 'SC Matrimony':
+                    route.go('newhome', { caste: 'st-matrimony' });
                     break;
-                case 'mudaliyar-matrimony':
-                    scope.stateparamsid = 438;
-                    scope.isActiveid = 1;
+                case 'Christian Matrimony':
+                    route.go('newhome', { caste: 'christian-matrimony' });
                     break;
-                case 'gowda-matrimony':
-                    scope.stateparamsid = 413;
-                    scope.isActiveid = 1;
+                case 'Second marriage':
+                    route.go('newhome', { caste: 'second-marriage-bureau' });
                     break;
-                case 'pillai-matrimony':
-                    scope.stateparamsid = 439;
-                    scope.isActiveid = 1;
-                    break;
-                case 'christian-matrimony':
-                    scope.stateparamsid = '';
-                    scope.isActiveid = 2;
-                    break;
-                case 'st-matrimony':
-                    scope.stateparamsid = 407;
-                    scope.isActiveid = 1;
-                    break;
-                case 'second-marriage-bureau':
-                    scope.stateparamsid = '';
-                    scope.isActiveid = 3;
-                    break;
-                case 'balija-matrimony':
-                    scope.stateparamsid = 403;
-                    scope.isActiveid = 1;
-                    break;
-                case 'yadava-matrimony':
-                    scope.stateparamsid = 406;
-                    scope.isActiveid = 1;
+
+                case 'Gowda Matrimony':
+                    route.go('newhome', { caste: 'gowda-matrimony' });
                     break;
             }
         };
