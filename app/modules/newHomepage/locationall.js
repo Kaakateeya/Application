@@ -1,4 +1,4 @@
-app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
+app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
     'basicRegistrationService', '$filter', 'newhomepageservices',

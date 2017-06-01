@@ -24,7 +24,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
     IdleProvider.interrupt('keydown DOMMouseScroll mousewheel mousedown');
     IdleProvider.idle(5 * 60);
-    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home', title: "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony", description: "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.", keywords: "Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial" },
+    var states = [{ name: 'home', url: '/', ishomepage: true, isloginrequired: false, controller: 'home' },
         { name: 'dashboard', url: '/dashboard/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'dashboardnew', url: '/dashboardnew/:type', templateUrl: 'app/modules/dashboard/customerDashboardView.html', controller: 'Controllerpartner', isloginrequired: true },
         { name: 'mobileverf', url: '/mobileverf', templateUrl: 'app/modules/mobileverification/mobileverification.html', controller: 'mobileverifyController', isloginrequired: true },
@@ -55,9 +55,10 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'forgetpasswordemail', url: '/forgetpasswordemail', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false },
         { name: 'Paymentnew', url: '/Paymentnew', templateUrl: 'app/modules/paymentNew/paymentNew.html', isloginrequired: false },
         { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false },
-        // { name: 'newhome', url: '/caste/kamma-matrimony', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
         { name: 'newhomecaste', url: '/caste', templateUrl: 'app/modules/newHomepage/newhomepageallcaste.html', controller: 'newhomepagecastecontroller', isloginrequired: false },
-        { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false }
+        { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
+        { name: 'location', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
+        { name: 'locationall', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false }
 
 
     ];
@@ -112,7 +113,6 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             data: {
                 requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
                 //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
-                title: item.title
             }
         });
         $locationProvider.html5Mode(true);
@@ -127,10 +127,10 @@ app.config(function(reCAPTCHAProvider) {
 app.run(function($rootScope, $state, $stateParams) {
 
     $rootScope.casteTitle = '';
+    $rootScope.keyWord = '';
+    $rootScope.description = '';
     $rootScope.$on('$stateChangeStart', function(e, to) {
-        $rootScope.title = to.data.title;
-        $rootScope.description = to.data.description;
-        $rootScope.metakeywords = to.data.keywords;
+
         var loggedAscustomerPage = sessionStorage.getItem("loggedAscustomerPage");
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
