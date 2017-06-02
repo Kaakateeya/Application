@@ -451,20 +451,25 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Gowda Matrimony':
                     route.go('newhome', { caste: 'gowda-matrimony' });
                     break;
+            }
+        };
+        scope.redirecttolocation = function(obj) {
+            debugger;
+            switch (obj) {
                 case 'Hyderabad Matrimony':
-                    route.go('location', { caste: 'matrimony-marriage-bureau-in-hyderabad' });
+                    route.go('location', { location: 'matrimony-marriage-bureau-in-hyderabad' });
                     break;
                 case 'Vijayawada Matrimony':
-                    route.go('location', { caste: 'marriage-bureau-in-vijayawada' });
+                    route.go('location', { location: 'marriage-bureau-in-vijayawada' });
                     break;
                 case 'Bangalore Matrimony':
-                    route.go('location', { caste: 'marriage-bureau-in-bangalore' });
+                    route.go('location', { location: 'marriage-bureau-in-bangalore' });
                     break;
                 case 'Chennai Matrimony':
-                    route.go('location', { caste: 'chennai-matrimony' });
+                    route.go('location', { location: 'chennai-matrimony' });
                     break;
                 case 'Pondicherry Matrimony':
-                    route.go('location', { caste: 'pondicherry-matrimony' });
+                    route.go('location', { location: 'pondicherry-matrimony' });
                     break;
             }
         };

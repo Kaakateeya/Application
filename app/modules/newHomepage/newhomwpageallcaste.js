@@ -455,7 +455,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 case 'Christian Matrimony':
                     route.go('newhome', { caste: 'christian-matrimony' });
                     break;
-                case 'Second marriage':
+                case 'Second marriage bureau':
                     route.go('newhome', { caste: 'second-marriage-bureau' });
                     break;
                 case 'Gowda Matrimony':

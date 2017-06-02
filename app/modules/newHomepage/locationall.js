@@ -182,7 +182,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 scope.Regi.regcaste = "";
                 scope.Regi.regcontrycodes = "";
             }, 500);
-            scope.getalldata(1, '', '', 1, 3, 2, '');
+            scope.getalldata('Branch', '', '', 1, 3, 2, 4);
         };
 
         scope.divloginblock = function() {
@@ -415,7 +415,6 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
                 console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
@@ -423,43 +422,25 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 }
             });
         };
-        scope.redirecttocastepage = function(obj) {
+        scope.redirecttolocationpage = function(obj) {
             switch (obj.TableName) {
-                case 'Kamma Matrimony':
-                    route.go('newhome', { caste: 'kamma-matrimony' });
+                case 'Pondicherry Matrimony':
+                    route.go('location', { location: 'pondicherry-matrimony' });
                     break;
-                case 'Reddy Matrimony':
-                    route.go('newhome', { caste: 'reddy-matrimony' });
+                case 'Coimbator Matrimony':
+                    route.go('location', { location: 'matrimony-in-coimbator' });
                     break;
-                case 'Kapu Matrimony':
-                    route.go('newhome', { caste: 'kapu-matrimony' });
+                case 'Vijayawada Matrimony':
+                    route.go('location', { location: 'marriage-bureau-in-vijayawada' });
                     break;
-                case 'Balija Matrimony':
-                    route.go('newhome', { caste: 'balija-matrimony' });
+                case 'Hyderabad Matrimony':
+                    route.go('location', { location: 'matrimony-marriage-bureau-in-hyderabad' });
                     break;
-                case 'Yadava Matrimony':
-                    route.go('newhome', { caste: 'yadava-matrimony' });
+                case 'Chennai Matrimony':
+                    route.go('location', { location: 'chennai-matrimony' });
                     break;
-                case 'Padmashali Matrimony':
-                    route.go('newhome', { caste: 'padmashali-matrimony' });
-                    break;
-                case 'Mudaliar Matrimony':
-                    route.go('newhome', { caste: 'mudaliyar-matrimony' });
-                    break;
-                case 'Pillai Matrimony':
-                    route.go('newhome', { caste: 'pillai-matrimony' });
-                    break;
-                case 'ST Matrimony':
-                    route.go('newhome', { caste: 'st-matrimony' });
-                    break;
-                case 'Christian Matrimony':
-                    route.go('newhome', { caste: 'christian-matrimony' });
-                    break;
-                case 'Second marriage':
-                    route.go('newhome', { caste: 'second-marriage-bureau' });
-                    break;
-                case 'Gowda Matrimony':
-                    route.go('newhome', { caste: 'gowda-matrimony' });
+                case 'Bangalore Matrimony':
+                    route.go('location', { location: 'marriage-bureau-in-bangalore' });
                     break;
             }
         };

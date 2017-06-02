@@ -57,8 +57,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false },
         { name: 'newhomecaste', url: '/caste', templateUrl: 'app/modules/newHomepage/newhomepageallcaste.html', controller: 'newhomepagecastecontroller', isloginrequired: false },
         { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
-        { name: 'location', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
-        { name: 'locationall', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false }
+        { name: 'locationall', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
+        { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false }
 
 
     ];
