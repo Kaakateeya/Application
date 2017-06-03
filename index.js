@@ -115,9 +115,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
                 //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
             }
         });
-        $locationProvider.hashPrefix('!');
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.html5Mode(true);
     });
 }]);
 app.config(function(reCAPTCHAProvider) {
