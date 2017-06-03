@@ -474,6 +474,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
             }
         };
         scope.stateparamsredirect = function(statename) {
+            debugger;
             switch (statename) {
                 case 'pondicherry-matrimony':
                     scope.isActiveid = 9;

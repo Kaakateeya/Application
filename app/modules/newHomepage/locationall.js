@@ -423,6 +423,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
             });
         };
         scope.redirecttolocationpage = function(obj) {
+            debugger;
             switch (obj.TableName) {
                 case 'Pondicherry Matrimony':
                     route.go('location', { location: 'pondicherry-matrimony' });

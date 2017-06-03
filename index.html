@@ -12,12 +12,13 @@
 
 <head>
     <!-- Meta-Information -->
-    <title data-ng-bind="casteTitle===''?'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony':casteTitle"></title>
-    <meta name="keywords" content="{{keyWord===''?'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial':keyWord}}">
-    <meta name="description" content="{{description===''?'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.':description}}">
+    <title ng-cloak data-ng-bind="casteTitle===''?'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony':casteTitle"></title>
+    <meta ng-cloak name="keywords" content="{{keyWord===''?'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial':keyWord}}">
+    <meta ng-cloak name="description" content="{{description===''?'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.':description}}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="google-site-verification" content="ahloLTv9LQ05CLTkUtqOXiXgBvSCe6Iac5kZABJ7z4k" />
+    <meta name="fragment" content="!" />
     <base href="/">
     <!--<meta name="description" content="ACME Inc.">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -261,9 +262,10 @@
 
 
 <body ui-router-styles>
-    <div ui-view="topbar"></div>
-    <div ui-view="content"></div>
-    <div ui-view="bottompanel"></div>
+    <div ng-cloak ui-view="topbar"></div>
+    <div ng-cloak ui-view="content"></div>
+    <div ng-cloak ui-view="bottompanel"></div>
+    <!--<div template-url="app/modules/newHomepage/location.html"></div>-->
 
     <!-- SCRIPTS DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
