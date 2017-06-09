@@ -424,26 +424,34 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
         };
         scope.redirecttolocationpage = function(obj) {
             debugger;
+            var url = "#";
             switch (obj.TableName) {
                 case 'Pondicherry Matrimony':
-                    route.go('location', { location: 'pondicherry-matrimony' });
+                    // route.go('location', { location: 'pondicherry-matrimony' });
+                    url = "location/pondicherry-matrimony";
                     break;
-                case 'Coimbator Matrimony':
-                    route.go('location', { location: 'matrimony-in-coimbator' });
+                case 'Coimbatore Matrimony':
+                    // route.go('location', { location: 'matrimony-in-coimbatore' });
+                    url = "location/matrimony-in-coimbatore";
                     break;
                 case 'Vijayawada Matrimony':
-                    route.go('location', { location: 'marriage-bureau-in-vijayawada' });
+                    // route.go('location', { location: 'marriage-bureau-in-vijayawada' });
+                    url = "location/marriage-bureau-in-vijayawada";
                     break;
                 case 'Hyderabad Matrimony':
-                    route.go('location', { location: 'matrimony-marriage-bureau-in-hyderabad' });
+                    //route.go('location', { location: 'matrimony-marriage-bureau-in-hyderabad' });
+                    url = "location/matrimony-marriage-bureau-in-hyderabad";
                     break;
                 case 'Chennai Matrimony':
-                    route.go('location', { location: 'chennai-matrimony' });
+                    // route.go('location', { location: 'chennai-matrimony' });
+                    url = "location/chennai-matrimony";
                     break;
                 case 'Bangalore Matrimony':
-                    route.go('location', { location: 'marriage-bureau-in-bangalore' });
+                    //route.go('location', { location: 'marriage-bureau-in-bangalore' });
+                    url = "location/marriage-bureau-in-bangalore";
                     break;
             }
+            return url;
         };
     }
 ]);

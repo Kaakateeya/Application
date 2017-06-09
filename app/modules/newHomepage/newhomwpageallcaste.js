@@ -1,10 +1,10 @@
 app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices',
+    'basicRegistrationService', '$filter', 'newhomepageservices', '$window',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices) {
+        basicRegistrationService, filter, newhomepageservices, $window) {
 
         scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -424,44 +424,64 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             });
         };
         scope.redirecttocastepage = function(obj) {
+            var url = "#";
             switch (obj.TableName) {
                 case 'Kamma Matrimony':
-                    route.go('newhome', { caste: 'kamma-matrimony' });
+                    debugger;
+                    //  route.go('newhome', { caste: 'kamma-matrimony' });
+                    url = "caste/kamma-matrimony";
                     break;
                 case 'Reddy Matrimony':
-                    route.go('newhome', { caste: 'reddy-matrimony' });
+                    //  route.go('newhome', { caste: 'reddy-matrimony' });
+                    url = "caste/reddy-matrimony";
                     break;
                 case 'Kapu Matrimony':
-                    route.go('newhome', { caste: 'kapu-matrimony' });
+                    // route.go('newhome', { caste: 'kapu-matrimony' });
+                    url = "caste/kapu-matrimony";
                     break;
                 case 'Balija Matrimony':
-                    route.go('newhome', { caste: 'balija-matrimony' });
+                    // route.go('newhome', { caste: 'balija-matrimony' });
+                    url = "caste/balija-matrimony";
                     break;
                 case 'Yadava Matrimony':
-                    route.go('newhome', { caste: 'yadava-matrimony' });
+                    // route.go('newhome', { caste: 'yadava-matrimony' });
+                    url = "caste/yadava-matrimony";
+
                     break;
                 case 'Padmashali Matrimony':
-                    route.go('newhome', { caste: 'padmashali-matrimony' });
+                    // route.go('newhome', { caste: 'padmashali-matrimony' });
+                    url = "caste/padmashali-matrimony";
+
                     break;
                 case 'Mudaliar Matrimony':
-                    route.go('newhome', { caste: 'mudaliyar-matrimony' });
+                    // route.go('newhome', { caste: 'mudaliyar-matrimony' });
+                    url = "caste/mudaliyar-matrimony";
+
                     break;
                 case 'Pillai Matrimony':
-                    route.go('newhome', { caste: 'pillai-matrimony' });
+                    //route.go('newhome', { caste: 'pillai-matrimony' });
+                    url = "caste/pillai-matrimony";
+
                     break;
                 case 'ST Matrimony':
-                    route.go('newhome', { caste: 'st-matrimony' });
+                    // route.go('newhome', { caste: 'st-matrimony' });
+                    url = "caste/st-matrimony";
+
                     break;
                 case 'Christian Matrimony':
-                    route.go('newhome', { caste: 'christian-matrimony' });
+                    // route.go('newhome', { caste: 'christian-matrimony' });
+                    url = "caste/christian-matrimony";
                     break;
                 case 'Second marriage bureau':
-                    route.go('newhome', { caste: 'second-marriage-bureau' });
+                    //route.go('newhome', { caste: 'second-marriage-bureau' });
+                    url = "caste/second-marriage-bureau";
                     break;
                 case 'Gowda Matrimony':
-                    route.go('newhome', { caste: 'gowda-matrimony' });
+                    //route.go('newhome', { caste: 'gowda-matrimony' });
+                    url = "caste/gowda-matrimony";
                     break;
             }
+            return url;
         };
     }
 ]);

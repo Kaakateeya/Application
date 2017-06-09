@@ -83,7 +83,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
                     controller: item.controller
                 }
             };
-        } else if (item.name === "newhome" || item.name === "newhomecaste") {
+        } else if (item.name === "newhome" || item.name === "newhomecaste" || item.name === "locationall" || item.name === "location") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,

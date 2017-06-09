@@ -246,14 +246,19 @@
                 <p></p>
             </div>
             <div class="col-md-8">
-                <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="/" class="home"><span property="name">Home</span></a>
-                    <meta property="position" content="1">
-                    </span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="caste" class="post-root post post-post"><span property="name">Caste</span></a>
-                    <meta property="position" content="2">
-                    </span> &gt; <span property="itemListElement" typeof="ListItem"><span property="name">{{castenameparam}}</span>
-                    <meta property="position" content="3">
-                    </span>
+                <div class=row>
+                    <ol style="background-color:#ededed !important;" class="breadcrumb text-awesome" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="/" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Home</span> </a>
+                            <meta itemprop=position content=1 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="caste" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Caste</span> </a>
+                            <meta itemprop=position content=2 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem"> <span itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name><a ng-href="{{redirecttocastepage(castenameparam)}}">{{castenameparam}}</a></span> </span>
+                            <meta itemprop=position content=3 /> </li>
+                    </ol>
                 </div>
+
             </div>
         </div>
         <br>
@@ -282,7 +287,7 @@
                         <hr>
                         <ul style="color: #881616;">
                             <div ng-repeat="matrimony in matrimonyarray">
-                                <a href="javascript:void(0)" ng-click="redirecttocastepage(matrimony)">
+                                <a ng-href="{{redirecttocastepage(matrimony.CasteName)}}">
                                     <li id="link_1">{{matrimony.CasteName}}</li>
                                 </a>
                                 <hr>
@@ -296,29 +301,29 @@
                         <hr>
                         <ul style="color: #881616;">
                             <div>
-                                <a href="javascript:void(0)" ng-click="redirecttolocation('Hyderabad Matrimony')">
+                                <a href="location/matrimony-marriage-bureau-in-hyderabad">
                                     <li id="link_1">Hyderabad Matrimony</li>
                                 </a>
                                 <hr>
-                                <a href="javascript:void(0)" ng-click="redirecttolocation('Vijayawada Matrimony')">
+                                <a href="location/marriage-bureau-in-vijayawada">
                                     <li id="link_1">Vijayawada Matrimony</li>
                                 </a>
                                 <hr>
-                                <a href="javascript:void(0)" ng-click="redirecttolocation('Bangalore Matrimony')">
+                                <a href="location/marriage-bureau-in-bangalore">
                                     <li id="link_1">Bangalore Matrimony</li>
                                 </a>
                                 <hr>
-                                <a href="javascript:void(0)" ng-click="redirecttolocation('Chennai Matrimony')">
+                                <a href="location/chennai-matrimony">
                                     <li id="link_1">Chennai Matrimony</li>
                                 </a>
                                 <hr>
-                                <a href="javascript:void(0)" ng-click="redirecttolocation('Pondicherry Matrimony')">
+                                <a href="location/pondicherry-matrimony">
                                     <li id="link_1">Pondicherry Matrimony</li>
                                 </a>
                                 <hr>
                             </div>
                         </ul>
-                        <a href="#" style="color: #006dc0;margin-left: 125px;font-size: 15px;"> View More</a>
+                        <a href="location" style="color: #006dc0;margin-left: 125px;font-size: 15px;"> View More</a>
                     </div>
                 </div>
             </div>
