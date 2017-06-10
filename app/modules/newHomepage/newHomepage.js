@@ -432,55 +432,41 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             var url = "#";
             switch (obj) {
                 case 'Kamma Matrimony':
-                    // route.go('newhome', { caste: 'kamma-matrimony' });
                     url = "caste/kamma-matrimony";
                     break;
                 case 'Reddy Matrimony':
-                    // route.go('newhome', { caste: 'reddy-matrimony' });
                     url = "caste/reddy-matrimony";
                     break;
                 case 'Kapu Matrimony':
-                    //route.go('newhome', { caste: 'kapu-matrimony' });
                     url = "caste/kapu-matrimony";
                     break;
                 case 'Balija Matrimony':
-                    //  route.go('newhome', { caste: 'balija-matrimony' });
                     url = "caste/balija-matrimony";
                     break;
                 case 'Yadava Matrimony':
-                    // route.go('newhome', { caste: 'yadava-matrimony' });
                     url = "caste/yadava-matrimony";
                     break;
                 case 'Padmashali Matrimony':
-                    // route.go('newhome', { caste: 'padmashali-matrimony' });
                     url = "caste/padmashali-matrimony";
                     break;
                 case 'Gowda Matrimony':
-                    //route.go('newhome', { caste: 'gowda-matrimony' });
                     url = "caste/gowda-matrimony";
                     break;
 
                 case 'Mudaliar Matrimony':
-                    // route.go('newhome', { caste: 'mudaliyar-matrimony' });
                     url = "caste/mudaliyar-matrimony";
 
                     break;
                 case 'Pillai Matrimony':
-                    //route.go('newhome', { caste: 'pillai-matrimony' });
                     url = "caste/pillai-matrimony";
-
                     break;
                 case 'ST Matrimony':
-                    // route.go('newhome', { caste: 'st-matrimony' });
                     url = "caste/st-matrimony";
-
                     break;
                 case 'Christian Matrimony':
-                    // route.go('newhome', { caste: 'christian-matrimony' });
                     url = "caste/christian-matrimony";
                     break;
                 case 'Second marriage bureau':
-                    //route.go('newhome', { caste: 'second-marriage-bureau' });
                     url = "caste/second-marriage-bureau";
                     break;
             }
@@ -491,23 +477,18 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             debugger;
             switch (obj) {
                 case 'Hyderabad Matrimony':
-                    // route.go('location', { location: 'matrimony-marriage-bureau-in-hyderabad' });
                     url = "location/matrimony-marriage-bureau-in-hyderabad";
                     break;
                 case 'Vijayawada Matrimony':
-                    // route.go('location', { location: 'marriage-bureau-in-vijayawada' });
                     url = "location/marriage-bureau-in-vijayawada";
                     break;
                 case 'Bangalore Matrimony':
-                    //route.go('location', { location: 'marriage-bureau-in-bangalore' });
                     url = "location/marriage-bureau-in-bangalore";
                     break;
                 case 'Chennai Matrimony':
-                    //route.go('location', { location: 'chennai-matrimony' });
                     url = "location/chennai-matrimony";
                     break;
                 case 'Pondicherry Matrimony':
-                    //route.go('location', { location: 'pondicherry-matrimony' });
                     url = "location/pondicherry-matrimony";
                     break;
             }
@@ -526,6 +507,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.keyWord = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur.';
                     $root.description = 'Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.';
 
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/kamma-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Kamma Matrimony, Kamma Matrimony sites, Kamma Marriage bureau";
+                    $root.propertydescriptioncontent = "Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/kamma-matrimony";
+                    $root.propertysite_name = "Kamma Matrimony, Kamma Matrimony sites, Kamma Marriage bureau";
+                    $root.twitterdescription = "Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.";
+                    $root.twittertitle = "Kamma Matrimony, Kamma Matrimony sites, Kamma Marriage bureau";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
                     break;
                 case 'reddy-matrimony':
                     scope.stateparamsid = 404;
@@ -537,6 +529,18 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial';
                     $root.keyWord = 'Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial';
                     $root.description = 'Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/reedy-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial";
+                    $root.propertydescriptioncontent = "Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/reddy-matrimony";
+                    $root.propertysite_name = "Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial";
+                    $root.twitterdescription = "Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!";
+                    $root.twittertitle = "Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
                     break;
                 case 'kapu-matrimony':
                     scope.stateparamsid = 405;
@@ -548,6 +552,18 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Kapu Matrimony, Find your perfect match in Kapu marriage bureau';
                     $root.keyWord = 'Kapu matrimony, Kapu marriage bureau';
                     $root.description = 'Kaakateeya Kapu Matrimony - The largest Kapu marriage bureau with Lakhs of Telugu Kapu Matrimony profiles. The Most Trusted Brand. Register for FREE!';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/kapu-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Kapu Matrimony, Find your perfect match in Kapu marriage bureau";
+                    $root.propertydescriptioncontent = "Kaakateeya Kapu Matrimony - The largest Kapu marriage bureau with Lakhs of Telugu Kapu Matrimony profiles. The Most Trusted Brand. Register for FREE!";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/kapu-matrimony";
+                    $root.propertysite_name = "Kapu Matrimony, Find your perfect match in Kapu marriage bureau";
+                    $root.twitterdescription = "Kaakateeya Kapu Matrimony - The largest Kapu marriage bureau with Lakhs of Telugu Kapu Matrimony profiles. The Most Trusted Brand. Register for FREE!";
+                    $root.twittertitle = "Kapu Matrimony, Find your perfect match in Kapu marriage bureau";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
                     break;
                 case 'padmashali-matrimony':
                     scope.stateparamsid = 410;
@@ -559,6 +575,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Padmashali Matrimony, Find your patrner in Padmasali Matrimony';
                     $root.keyWord = 'Padmashali Matrimony, Padmasali Matrimony';
                     $root.description = 'Kaakateeya Padmashali Matrimony - Find thousands of Padmashali matrimony Profiles, Add your profile and find your perfect Partner - Join for Free.';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/padmashali-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Padmashali Matrimony, Find your patrner in Padmasali Matrimony";
+                    $root.propertydescriptioncontent = "Kaakateeya Padmashali Matrimony - Find thousands of Padmashali matrimony Profiles, Add your profile and find your perfect Partner - Join for Free.";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/padmashali-matrimony";
+                    $root.propertysite_name = "Padmashali Matrimony, Find your patrner in Padmasali Matrimony";
+                    $root.twitterdescription = "Kaakateeya Padmashali Matrimony - Find thousands of Padmashali matrimony Profiles, Add your profile and find your perfect Partner - Join for Free.";
+                    $root.twittertitle = "Padmashali Matrimony, Find your patrner in Padmasali Matrimony";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
                 case 'mudaliyar-matrimony':
                     scope.stateparamsid = 438;
@@ -570,6 +597,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms';
                     $root.keyWord = 'Mudaliyar Matrimony, Mudaliyar brides, Mudaliyar grooms';
                     $root.description = 'Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages. Join for Free.';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
+                    $root.propertydescriptioncontent = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.propertysite_name = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
+                    $root.twitterdescription = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
+                    $root.twittertitle = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
                 case 'gowda-matrimony':
                     scope.stateparamsid = 413;
@@ -581,6 +619,18 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Gowda Matrimony - Find your perfect Partner for marriage';
                     $root.keyWord = 'Gowda Matrimony, Gowda brides, Gowda grooms';
                     $root.description = 'Kaakateeya Gowda Matrimony - Find Lakhs of Gowda brides and Gowda grooms Profiles, Add your profile for Safe & Secured matchmaking experience. Join for Free.';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/gowda-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Gowda Matrimony - Find your perfect Partner for marriage";
+                    $root.propertydescriptioncontent = "Kaakateeya Gowda Matrimony - Find Lakhs of Gowda brides and Gowda grooms Profiles, Add your profile for Safe & Secured matchmaking experience. Join for Free.";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/gowda-matrimony";
+                    $root.propertysite_name = "Gowda Matrimony - Find your perfect Partner for marriage";
+                    $root.twitterdescription = "Kaakateeya Gowda Matrimony - Find Lakhs of Gowda brides and Gowda grooms Profiles, Add your profile for Safe & Secured matchmaking experience. Join for Free.";
+                    $root.twittertitle = "Gowda Matrimony - Find your perfect Partner for marriage";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
                     break;
                 case 'pillai-matrimony':
                     scope.stateparamsid = 439;
@@ -592,6 +642,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Pillai Matrimony | Pillai Matrimonial - Kaakateeya Matrimony';
                     $root.keyWord = 'Pillai Matrimony, Pillai Matrimonial';
                     $root.description = 'Pillai Matrimony - Provides hundred thousands of verified and Traditional Pillai matrimonial profiles. Find your perfect life partner. Join For Free.';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/pillai-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Pillai Matrimony | Pillai Matrimonial - Kaakateeya Matrimony";
+                    $root.propertydescriptioncontent = "Pillai Matrimony - Provides hundred thousands of verified and Traditional Pillai matrimonial profiles. Find your perfect life partner. Join For Free.";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/pillai-matrimony";
+                    $root.propertysite_name = "Pillai Matrimony | Pillai Matrimonial - Kaakateeya Matrimony";
+                    $root.twitterdescription = "Pillai Matrimony - Provides hundred thousands of verified and Traditional Pillai matrimonial profiles. Find your perfect life partner. Join For Free.";
+                    $root.twittertitle = "Pillai Matrimony | Pillai Matrimonial - Kaakateeya Matrimony";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
                 case 'christian-matrimony':
                     scope.stateparamsid = '';
@@ -603,6 +664,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Christian Matrimony - Finest Site for Christian Matrimonial';
                     $root.keyWord = 'Christian Matrimony, Christian brides.';
                     $root.description = 'Christian matrimony - Find Lakhs of Christian Brides & Grooms on the finest Christian Matrimony Site for all denominations of Christians - Register for Free';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/christian-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Christian Matrimony - Finest Site for Christian Matrimonial";
+                    $root.propertydescriptioncontent = "Christian matrimony - Find Lakhs of Christian Brides & Grooms on the finest Christian Matrimony Site for all denominations of Christians - Register for Free";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/christian-matrimony";
+                    $root.propertysite_name = "Christian Matrimony - Finest Site for Christian Matrimonial";
+                    $root.twitterdescription = "Christian matrimony - Find Lakhs of Christian Brides & Grooms on the finest Christian Matrimony Site for all denominations of Christians - Register for Free";
+                    $root.twittertitle = "Christian Matrimony - Finest Site for Christian Matrimonial";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
                 case 'st-matrimony':
                     scope.stateparamsid = 407;
@@ -614,6 +686,18 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'ST Matrimony – Find your perfect Match in ST Matrimonial';
                     $root.keyWord = 'ST Matrimony, ST Matrimonial';
                     $root.description = 'ST matrimony - Find Lakhs of ST Brides & Grooms on the leading Matrimonial Site. The Most Trusted Matrimonial website for happy marriages. Register for FREE!';
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/st-matrimony";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "ST Matrimony – Find your perfect Match in ST Matrimonial";
+                    $root.propertydescriptioncontent = "ST matrimony - Find Lakhs of ST Brides & Grooms on the leading Matrimonial Site. The Most Trusted Matrimonial website for happy marriages. Register for FREE!";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/st-matrimony";
+                    $root.propertysite_name = "ST Matrimony – Find your perfect Match in ST Matrimonial";
+                    $root.twitterdescription = "ST matrimony - Find Lakhs of ST Brides & Grooms on the leading Matrimonial Site. The Most Trusted Matrimonial website for happy marriages. Register for FREE!";
+                    $root.twittertitle = "ST Matrimony – Find your perfect Match in ST Matrimonial";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
                     break;
                 case 'second-marriage-bureau':
                     scope.stateparamsid = '';
@@ -625,6 +709,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = 'Second Marriage Bureau - Kaakateeya Matrimonial Services';
                     $root.keyWord = "Second marriage bureau, second marriage matrimony";
                     $root.description = "Second Marriage bureau- India's #1 site for second marriage Matrimony. Give life a second chance, Add your Profile, find your partner. Register for FREE!";
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/second-marriage-bureau";
+                    $root.propertytypecontent = "article";
+                    $root.propertytitlecontent = "Second Marriage Bureau - Kaakateeya Matrimonial Services";
+                    $root.propertydescriptioncontent = "Second Marriage bureau- India's #1 site for second marriage Matrimony. Give life a second chance, Add your Profile, find your partner. Register for FREE!";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/second-marriage-bureau";
+                    $root.propertysite_name = "Second Marriage Bureau - Kaakateeya Matrimonial Services";
+                    $root.twitterdescription = "Second Marriage bureau- India's #1 site for second marriage Matrimony. Give life a second chance, Add your Profile, find your partner. Register for FREE!";
+                    $root.twittertitle = "Second Marriage Bureau - Kaakateeya Matrimonial Services";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
                 case 'balija-matrimony':
                     scope.stateparamsid = 403;
@@ -633,6 +728,17 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = '';
                     $root.keyWord = '';
                     $root.description = '';
+
+                    $root.canonicalhref = "";
+                    $root.propertytypecontent = "";
+                    $root.propertytitlecontent = "";
+                    $root.propertydescriptioncontent = "";
+                    $root.propertyContenturl = "";
+                    $root.propertysite_name = "";
+                    $root.twitterdescription = "";
+                    $root.twittertitle = "";
+                    $root.twitterimage = "";
+
                     break;
                 case 'yadava-matrimony':
                     scope.stateparamsid = 406;
@@ -641,6 +747,16 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.casteTitle = '';
                     $root.keyWord = '';
                     $root.description = '';
+
+                    $root.canonicalhref = "";
+                    $root.propertytypecontent = "";
+                    $root.propertytitlecontent = "";
+                    $root.propertydescriptioncontent = "";
+                    $root.propertyContenturl = "";
+                    $root.propertysite_name = "";
+                    $root.twitterdescription = "";
+                    $root.twittertitle = "";
+                    $root.twitterimage = "";
                     break;
 
             }

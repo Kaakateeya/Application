@@ -246,13 +246,17 @@
                 <p></p>
             </div>
             <div class="col-md-8">
-                <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="/" class="home"><span property="name">Home</span></a>
-                    <meta property="position" content="1">
-                    </span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="location" class="post-root post post-post"><span property="name">Location</span></a>
-                    <meta property="position" content="2">
-                    </span> &gt; <span property="itemListElement" typeof="ListItem"><span property="name">{{castenameparam}}</span>
-                    <meta property="position" content="3">
-                    </span>
+                <div class=row>
+                    <ol style="background-color:#ededed !important;" class="breadcrumb text-awesome" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="/" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Home</span> </a>
+                            <meta itemprop=position content=1 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="location" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Location</span> </a>
+                            <meta itemprop=position content=2 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem"> <span itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name><a ng-href="{{redirecttolocation(castenameparam)}}">{{castenameparam}}</a></span> </span>
+                            <meta itemprop=position content=3 /> </li>
+                    </ol>
                 </div>
             </div>
         </div>

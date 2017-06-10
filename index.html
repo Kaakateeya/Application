@@ -6,16 +6,34 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" ng-app="Kaakateeya">
+<html class="no-js" data-ng-app="Kaakateeya">
 <!--<![endif]-->
 
 
 <head>
     <!-- Meta-Information -->
-    <title ng-cloak>{{casteTitle===''?'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony':casteTitle}}</title>
-    <meta ng-cloak name="keywords" content="{{keyWord===''?'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial':keyWord}}">
-    <meta ng-cloak name="description" content="{{description===''?'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.':description}}">
+    <title ng:bind-template="{{casteTitle}}" ng-cloak></title>
+    <meta ng-cloak name="keywords" content="{{keyWord}}">
+    <meta ng-cloak name="description" content="{{description}}">
     <meta charset="utf-8">
+    <!--seo Content-->
+    <meta name="robots" contents="{{robots}}" />
+    <link rel="canonical" ng-href="{{canonicalhref}}" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="{{propertytypecontent}}" />
+    <meta property="og:title" content="{{propertytitlecontent}}" />
+    <meta property="og:description" content="{{propertydescriptioncontent}}" />
+    <meta property="og:url" content="{{propertyContenturl}}" />
+    <meta property="og:site_name" content="{{propertysite_name}}" />
+    <meta property="article:publisher" content="https://www.facebook.com/Kaakateeya/" />
+    <meta property="og:image" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{twitterdescription}}" />
+    <meta name="twitter:title" content="{{twittertitle}}" />
+    <meta name="twitter:site" content="@KaakateeyaMB" />
+    <meta name="twitter:image" ng-if="twitterimage!==''?true:false" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:creator" content="@KaakateeyaMB" />
+    <!--end seo content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="google-site-verification" content="ahloLTv9LQ05CLTkUtqOXiXgBvSCe6Iac5kZABJ7z4k" />
     <base href="/">
