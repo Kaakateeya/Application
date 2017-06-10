@@ -116,6 +116,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             }
         });
         $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix('!');
+
     });
 }]);
 app.config(function(reCAPTCHAProvider) {
