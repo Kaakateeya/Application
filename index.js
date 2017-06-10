@@ -128,7 +128,7 @@ app.config(function(reCAPTCHAProvider) {
 });
 app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
-        debugger;
+        window.prerenderReady = false;
         if (to.name === 'aboutUs' || to.name === 'faqs' || to.name === 'feedback' || to.name === 'help' ||
             to.name === 'myorders' || to.name === 'ourbranches' || to.name === 'privacyPolicy' || to.name === 'registration' ||
             to.name === 'successstories' || to.name === 'takeatour' || to.name === 'termsAndConditions') {
@@ -241,4 +241,8 @@ app.run(function($rootScope, $state, $stateParams) {
             }
         }
     });
+    $rootScope.$on('$stateChangeSuccess',
+        function(event, toState, toParams, fromState, fromParams) {
+            window.prerenderReady = true;
+        });
 });
