@@ -100,7 +100,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.pagerefersh = function(ToProfileID, Fromprofileid) {
-            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
+            // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
+            //     scope.partnerinformation(responsedata.data);
+            // });
+            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
                 scope.partnerinformation(responsedata.data);
             });
             scope.bookmarkexpreessdata();
@@ -127,7 +130,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.Reject_paeload = function() {
-            scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            // scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             scope.PageDiv = false;
             var MobjViewprofile = {
                 ExpressInrestID: scope.hdnexpressinterstfiled,
@@ -160,20 +164,23 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 7:
                     scope.modalbodyID1 = "You cannot Skip Accepted Profile";
                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    //scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     scope.flagopen = 1;
                     break;
                 case 8:
                     scope.Reject_paeload();
                     break;
                 case 9:
-                    scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    //scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     break;
                 case 10:
                     scope.AccRejFlag = "MailReject";
                     scope.modalbodydivContent = "You have already Rejected this profile. Do you want to continue to view the profile?";
                     alerts.dynamicpopup("PageloadAcceptRejectpopup.html", scope, uibModal);
-                    scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    // scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     scope.flagopen = 1;
                     break;
                 case 11:
@@ -239,9 +246,18 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopupclose();
         };
         scope.modalpopupclosetab = function() {
+            // if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
+            //     alerts.dynamicpopupclose();
+            //     // scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            //     scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+            // } else {
+            //     window.close();
+            // }
+
             if (scope.divmodalbodytoClose === "Please upgrade your membership" || scope.divmodalbodytoClose === "Please upgrade your membership(No points)") {
                 alerts.dynamicpopupclose();
-                scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                // scope.pagerefersh(scope.tocustid, scope.fromcustid);
+                //scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             } else {
                 window.close();
             }
@@ -327,7 +343,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
             scope.divacceptreject = true;
             alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-            scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            //scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
