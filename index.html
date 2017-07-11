@@ -309,12 +309,12 @@
     <script src="node_modules/moment/min/moment.min.js"></script>
     <script src="bower_components/toastr/toastr.min.js"></script>
 
-   <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
 
     <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script>
 
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
-   
+
     <script src="index.js"></script>
     <script src="app/Filters/dateFilter.js"></script>
     <script src="app/constants/arrayConstants.js"></script>
@@ -429,8 +429,40 @@
             }
         }
     </script>
-    <!-- custom js -->
+    <!--SCRIPTSP END-->
+    <script type="text/javascript">
+        var lhnAccountN = "3422-1";
+        var lhnButtonN = -1;
+        var lhnChatPosition = 'default';
+        var lhnInviteEnabled = 1;
+        var lhnWindowN = 0;
+        var lhnDepartmentN = 2666;
+    </script>
+    <script type="text/javascript">
+        function OpenLHNChat() {
+            if (typeof CustomOpenLHNChat == 'function') {
+                CustomOpenLHNChat();
+                return false;
+            }
+            var wleft = (screen.width - 580 - 32) / 2;
+            var wtop = (screen.height - 420 - 96) / 2;
+            //  alert(bLHNOnline);
 
+            var bLHNOnline = 0;
+            var lhnwindow = 0;
+            var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
+            if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
+                lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            } else {
+                lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            }
+            if (typeof Zstepx != 'undefined') {
+                if (Zstepx == 10) {
+                    Zslide();
+                }
+            }
+        }
+    </script>
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -462,11 +494,11 @@
     <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
     <script src="bower_components/ng-idle/angular-idle.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
     <script src="node_modules/angular-module-sanitize/angular-sanitize.js"></script>
-    <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="bower_components/toastr/toastr.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="node_modules/angular-aria/angular-aria.min.js"></script>
     <script src="node_modules/angular-messages/angular-messages.min.js"></script>
     <script src="node_modules/angular-material/angular-material.js"></script>
@@ -479,13 +511,15 @@
     <script src="node_modules/angularjs-slider/dist/rzslider.min.js"></script>
     <script src="bower_components/angular-promise-buttons/dist/angular-promise-buttons.min.js"></script>
     <script src="index.js"></script>
-    <script src="dist/js/main.min.js"></script>
-    <!--SCRIPTSP END-->
+
+    
     <script type="text/javascript" src="app\modules\newHomepage\newHomepage.js"></script>
     <script type="text/javascript" src="app\modules\newHomepage\newhomwpageallcaste.js"></script>
     <script type="text/javascript" src="app\modules\newHomepage\newhomepageService.js"></script>
     <script type="text/javascript" src="app\modules\newHomepage\locationall.js"></script>
     <script type="text/javascript" src="app\modules\newHomepage\location.js"></script>
+    <script src="dist/js/main.min.js"></script>
+    <!--SCRIPTSP END-->
 </body>
 
 </html>

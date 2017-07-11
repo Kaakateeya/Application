@@ -6,7 +6,9 @@ app.directive('setClassWhenAtTop', function($window) {
             var topClass = attrs.setClassWhenAtTop, // get CSS class from directive's attribute value
                 offsetTop = element.offset().top; // get element's offset top relative to document
             $win.on('scroll', function(e) {
-                element[($win.scrollTop() >= offsetTop) ? 'addClass' : 'removeClass'](topClass);
+                offsetTop = element.offset().top;
+                // element[($win.scrollTop() >= offsetTop) ? 'addClass' : 'removeClass'](topClass);
+                element[($win.scrollTop() !== 0) ? 'addClass' : 'removeClass'](topClass);
             });
         }
     };
