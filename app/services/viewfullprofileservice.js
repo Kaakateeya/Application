@@ -9,8 +9,11 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         // getExpressIntrstfullprofile: function(toprofileid, strFromProfileID, empid) {
         //     return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { ToProfileID: toprofileid, FromProfileID: strFromProfileID, EmpID: empid } });
         // },
-        getExpressIntrstfullprofile: function(toprofileid, strFromProfileID, empid) {
-            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { tocustid: toprofileid, fromcustid: strFromProfileID, EmpID: empid } });
+        // getExpressIntrstfullprofile: function(toprofileid, strFromProfileID, empid) {
+        //     return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { tocustid: toprofileid, fromcustid: strFromProfileID, EmpID: empid } });
+        // },
+        getExpressIntrstfullprofile: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { ToProfileID: toprofileid, EmpID: empid } });
         },
         getExpressinterst_bookmark_ignore_data: function(Loggedcustid, ToCustID) {
             return http.get(app.apiroot + 'StaticPages/getExpressinterst_bookmark_ignore_data', { params: { Loggedcustid: Loggedcustid, ToCustID: (ToCustID !== "") && (ToCustID !== undefined) ? ToCustID : null } });
