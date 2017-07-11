@@ -68,7 +68,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 test.push({ "label": i, "title": i, "value": i });
             }
             return test;
-        }
+        };
         scope.castebind = function() {
             service.casteselect().then(function(response) {
                 scope.Castearray = [];
@@ -78,7 +78,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 scope.caste = "";
                 scope.Regi.regcaste = "";
             });
-        }
+        };
         scope.countrybind = function() {
             service.countrySelect().then(function(response) {
                 scope.Countryarray = [];
@@ -88,7 +88,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 scope.country = "";
                 scope.Regi.regcountry = "";
             });
-        }
+        };
         scope.monthBind = function() {
             var option = [];
             option.push({ "label": 'Month', "title": 'Month', "value": "" });
@@ -174,7 +174,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 scope.country = "";
                 scope.Regi.regcountry = "";
                 scope.Regi.regmothertongue = "";
-                scope.Regi.regreligion = ""
+                scope.Regi.regreligion = "";
                 scope.Regi.regpostedby = "";
                 scope.Regi.regdate = "";
                 scope.Regi.regmonth = "";
@@ -374,12 +374,12 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             }
         };
         scope.regSubmit = function(obj) {
-
+            var date;
             var valmm = _.indexOf(monthArr, obj.regmonth);
             if (parseInt(valmm) < 9) {
-                var date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
+                date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
             } else {
-                var date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
+                date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
             }
             var inputObj = {
                 strFirstName: obj.regfirstname,
@@ -427,7 +427,6 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             var url = "#";
             switch (obj.TableName) {
                 case 'Kamma Matrimony':
-                    debugger;
                     url = "caste/kamma-matrimony";
                     break;
                 case 'Reddy Matrimony':

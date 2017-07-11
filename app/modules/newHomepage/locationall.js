@@ -68,7 +68,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 test.push({ "label": i, "title": i, "value": i });
             }
             return test;
-        }
+        };
         scope.castebind = function() {
             service.casteselect().then(function(response) {
                 scope.Castearray = [];
@@ -78,7 +78,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 scope.caste = "";
                 scope.Regi.regcaste = "";
             });
-        }
+        };
         scope.countrybind = function() {
             service.countrySelect().then(function(response) {
                 scope.Countryarray = [];
@@ -88,7 +88,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 scope.country = "";
                 scope.Regi.regcountry = "";
             });
-        }
+        };
         scope.monthBind = function() {
             var option = [];
             option.push({ "label": 'Month', "title": 'Month', "value": "" });
@@ -174,7 +174,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 scope.country = "";
                 scope.Regi.regcountry = "";
                 scope.Regi.regmothertongue = "";
-                scope.Regi.regreligion = ""
+                scope.Regi.regreligion = "";
                 scope.Regi.regpostedby = "";
                 scope.Regi.regdate = "";
                 scope.Regi.regmonth = "";
@@ -374,12 +374,12 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
             }
         };
         scope.regSubmit = function(obj) {
-
+            var date;
             var valmm = _.indexOf(monthArr, obj.regmonth);
             if (parseInt(valmm) < 9) {
-                var date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
+                date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
             } else {
-                var date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
+                date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
             }
             var inputObj = {
                 strFirstName: obj.regfirstname,
@@ -423,7 +423,6 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
             });
         };
         scope.redirecttolocationpage = function(obj) {
-            debugger;
             var url = "#";
             switch (obj.TableName) {
                 case 'Pondicherry Matrimony':
