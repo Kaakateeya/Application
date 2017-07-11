@@ -11,10 +11,10 @@
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
     'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons'
 ]);
-//app.apiroot = 'http://183.82.0.58:8010/Api/';
+//app.apiroot = 'http://183.82.0.58:8025/Api/';
 //app.apiroot = 'http://54.169.133.223:8070/Api/';
 app.apiroot = 'http://52.66.131.254:8010/Api/';
-
+app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 
 app.global = {
     'alertType': 'toast-top-right'
@@ -54,7 +54,13 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'ccavResponseHand', url: '/ccavResponseHand/:data', templateUrl: 'app/modules/payments/views/paymentResponseHandler.html', controller: 'ccavenueresponsectrl', isloginrequired: false },
         { name: 'forgetpasswordemail', url: '/forgetpasswordemail', templateUrl: 'app/modules/static/forgetPassword.html', controller: 'forgetpasswordemail', isloginrequired: false },
         { name: 'Paymentnew', url: '/Paymentnew', templateUrl: 'app/modules/paymentNew/paymentNew.html', isloginrequired: false },
-        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false }
+        { name: 'loggedAscustomer', url: '/loggedAscustomer', templateUrl: 'app/modules/loggedAsCusomer/loggedAsCustomer.html', controller: 'loggedascustomers', isloginrequired: false },
+        { name: 'newhomecaste', url: '/caste', templateUrl: 'app/modules/newHomepage/newhomepageallcaste.html', controller: 'newhomepagecastecontroller', isloginrequired: false },
+        { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
+        { name: 'locationall', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
+        { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false }
+
+
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -69,13 +75,22 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
     };
 
     _.each(states, function(item) {
-
         var innerView = {};
         if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
                     controller: item.controller
+                }
+            };
+        } else if (item.name === "newhome" || item.name === "newhomecaste" || item.name === "locationall" || item.name === "location") {
+            innerView = {
+                "content@": {
+                    templateUrl: item.templateUrl,
+                    controller: item.controller
+                },
+                "bottompanel@": {
+                    templateUrl: "templates/footer.html"
                 }
             };
         } else {
@@ -101,6 +116,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             }
         });
         $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix('!');
+
     });
 }]);
 app.config(function(reCAPTCHAProvider) {
@@ -111,6 +128,73 @@ app.config(function(reCAPTCHAProvider) {
 });
 app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
+        window.prerenderReady = false;
+        if (to.name === 'aboutUs' || to.name === 'faqs' || to.name === 'feedback' || to.name === 'help' ||
+            to.name === 'myorders' || to.name === 'ourbranches' || to.name === 'privacyPolicy' || to.name === 'registration' ||
+            to.name === 'successstories' || to.name === 'takeatour' || to.name === 'termsAndConditions') {
+            $rootScope.robots = "noindex,nofollow";
+            $rootScope.keyWord = '';
+            $rootScope.description = '';
+            $rootScope.canonicalhref = "";
+            $rootScope.propertytypecontent = "website";
+            $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            $rootScope.propertyContenturl = "http://www.kaakateeya.com";
+            $rootScope.propertysite_name = "Best Marriage Bureau In India";
+            $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            $rootScope.twitterimage = "";
+            switch (to.name) {
+                case "aboutUs":
+                    $rootScope.casteTitle = 'AboutUS - Kaakateeya';
+                    break;
+                case "faqs":
+                    $rootScope.casteTitle = 'FAQs';
+                    break;
+                case "feedback":
+                    $rootScope.casteTitle = 'Feedback';
+                    break;
+                case "help":
+                    $rootScope.casteTitle = 'Help';
+                    break;
+                case "myorders":
+                    $rootScope.casteTitle = 'MyOrders';
+                    break;
+                case "ourbranches":
+                    $rootScope.casteTitle = 'Kaakateeya  - Our Branches';
+                    break;
+                case "privacyPolicy":
+                    $rootScope.casteTitle = 'PrivacyPolicy';
+                    break;
+                case "registration":
+                    $rootScope.casteTitle = 'Registration';
+                    break;
+                case "successstories":
+                    $rootScope.casteTitle = 'SuccessStories';
+                    break;
+                case "takeatour":
+                    $rootScope.casteTitle = 'TakeaTour';
+                    break;
+                case "termsAndConditions":
+                    $rootScope.casteTitle = 'TermsandConditions';
+                    break;
+            }
+
+        } else {
+            $rootScope.casteTitle = 'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony';
+            $rootScope.keyWord = 'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial';
+            $rootScope.description = 'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.';
+            $rootScope.canonicalhref = "http://www.kaakateeya.com";
+            $rootScope.propertytypecontent = "website";
+            $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            $rootScope.propertyContenturl = "http://www.kaakateeya.com";
+            $rootScope.propertysite_name = "Best Marriage Bureau In India";
+            $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            $rootScope.twitterimage = "";
+            $rootScope.robots = "noodp";
+        }
         var loggedAscustomerPage = sessionStorage.getItem("loggedAscustomerPage");
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
@@ -157,4 +241,8 @@ app.run(function($rootScope, $state, $stateParams) {
             }
         }
     });
+    $rootScope.$on('$stateChangeSuccess',
+        function(event, toState, toParams, fromState, fromParams) {
+            window.prerenderReady = true;
+        });
 });

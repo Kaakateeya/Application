@@ -6,16 +6,39 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">
+<html class="no-js" data-ng-app="Kaakateeya">
 <!--<![endif]-->
+
 
 <head>
     <!-- Meta-Information -->
-    <title>Kaakateeya Marriages</title>
+    <title ng:bind-template="{{casteTitle}}" ng-cloak></title>
+    <meta name="fragment" content="!">
+    <meta ng-cloak name="keywords" content="{{keyWord}}">
+    <meta ng-cloak name="description" content="{{description}}">
     <meta charset="utf-8">
+    <!--seo Content-->
+    <meta name="robots" contents="{{robots}}" />
+    <link rel="canonical" ng-href="{{canonicalhref}}" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="{{propertytypecontent}}" />
+    <meta property="og:title" content="{{propertytitlecontent}}" />
+    <meta property="og:description" content="{{propertydescriptioncontent}}" />
+    <meta property="og:url" content="{{propertyContenturl}}" />
+    <meta property="og:site_name" content="{{propertysite_name}}" />
+    <meta property="article:publisher" content="https://www.facebook.com/Kaakateeya/" />
+    <meta property="og:image" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{twitterdescription}}" />
+    <meta name="twitter:title" content="{{twittertitle}}" />
+    <meta name="twitter:site" content="@KaakateeyaMB" />
+    <meta name="twitter:image" ng-if="twitterimage!==''?true:false" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:creator" content="@KaakateeyaMB" />
+    <!--end seo content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="ahloLTv9LQ05CLTkUtqOXiXgBvSCe6Iac5kZABJ7z4k" />
     <base href="/">
-    <meta name="description" content="ACME Inc.">
+    <!--<meta name="description" content="ACME Inc.">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="dist/css/main.min.css" rel="stylesheet"></link>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400" rel="stylesheet"></link>
@@ -23,6 +46,7 @@
     <link href="http://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet"></link>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"></link>
+
     <style type="text/css">
         .select-box-my-trible>input {
             height: auto !important;
@@ -254,10 +278,14 @@
 
 </head>
 
-<body ng-app="Kaakateeya" ui-router-styles>
-    <div ui-view="topbar"></div>
-    <div ui-view="content"></div>
-    <div ui-view="bottompanel"></div>
+
+
+<body ui-router-styles>
+    <div ng-cloak ui-view="topbar"></div>
+    <div ng-cloak ui-view="content"></div>
+    <div ng-cloak ui-view="bottompanel"></div>
+    <!--<div template-url="app/modules/newHomepage/location.html"></div>-->
+
 
     <!-- SCRIPTS DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -280,6 +308,15 @@
     <script src="node_modules/angular-material-icons/angular-material-icons.min.js"></script>
     <script src="node_modules/moment/min/moment.min.js"></script>
     <script src="bower_components/toastr/toastr.min.js"></script>
+
+    <!-- fornewpagestart -->
+
+    <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <!--fornewpage end-->
     <script src="index.js"></script>
     <script src="app/Filters/dateFilter.js"></script>
     <script src="app/constants/arrayConstants.js"></script>
@@ -357,14 +394,10 @@
     <script src="app\services\forgetPwdEmailServices.js"></script>
     <script src="app\modules\static\forgetPassword.js"></script>
     <script src="src/js/marqueenotify.js"></script>
-
     <script src="app\modules\paymentNew\paymentNewCtrl.js"></script>
-
     <script src="app\modules\loggedAsCusomer\loggedAsCustomerCtrl.js"></script>
-
     <script src="app\services\loggedAsCustomerService.js"></script>
     <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscriptDone"></script>
-
     <script type="text/javascript">
         var lhnAccountN = "3422-1";
         var lhnButtonN = -1;
@@ -397,6 +430,32 @@
                 }
             }
         }
+    </script>
+    <!-- custom js -->
+    <script type="text/javascript" src="app\modules\newHomepage\newHomepage.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomwpageallcaste.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomepageService.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\locationall.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\location.js"></script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-100212913-1', 'auto');
+
+        ga('send', 'pageview');
     </script>
     <!--SCRIPTS END-->
     <!-- SCRIPTSP DATA --#><script src="node_modules/jquery/dist/jquery.min.js"></script><script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script><script src="node_modules/angular/angular.min.js"></script><script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script><script src="node_modules/underscore/underscore-min.js"></script><script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script><script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script><script src="bower_components/ng-idle/angular-idle.min.js"></script><script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script><script src="bower_components/angular-animate/angular-animate.min.js"></script><script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script><script src="node_modules/angular-module-sanitize/angular-sanitize.js"></script><script src="node_modules/angular-animate/angular-animate.js"></script><script src="bower_components/toastr/toastr.min.js"></script><script src="node_modules/angular-aria/angular-aria.min.js"></script><script src="node_modules/angular-messages/angular-messages.min.js"></script><script src="node_modules/angular-material/angular-material.js"></script><script src="node_modules/editandview/dist/js/main.min.js"></script><script src="node_modules/angular-password/angular-password.min.js"></script><script src="node_modules/angular-material-icons/angular-material-icons.min.js"></script><script src="node_modules/moment/min/moment.min.js"></script><script src="node_modules/registration/dist/js/main.min.js"></script><script src="bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script><script src="node_modules/angularjs-slider/dist/rzslider.min.js"></script><script src="bower_components/angular-promise-buttons/dist/angular-promise-buttons.min.js"></script><script src="index.js"></script><script src="dist/js/main.min.js"></script><!--SCRIPTSP END-->
