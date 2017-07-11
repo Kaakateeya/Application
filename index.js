@@ -11,11 +11,11 @@
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
     'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons'
 ]);
-//app.apiroot = 'http://183.82.0.58:8025/Api/';
+// app.apiroot = 'http://183.82.0.58:8025/Api/';
 //app.apiroot = 'http://54.169.133.223:8070/Api/';
 
-//app.apiroot = 'http://183.82.0.58:8010/Api/';
-app.apiroot = 'http://52.66.131.254:8010/Api/';
+app.apiroot = 'http://183.82.0.58:8010/Api/';
+// app.apiroot = 'http://52.66.131.254:8010/Api/';
 app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 
 app.global = {
@@ -60,9 +60,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'newhomecaste', url: '/caste', templateUrl: 'app/modules/newHomepage/newhomepageallcaste.html', controller: 'newhomepagecastecontroller', isloginrequired: false },
         { name: 'newhome', url: '/caste/:caste', templateUrl: 'app/modules/newHomepage/newHomepagecaste.html', controller: 'newhomepcontroller', isloginrequired: false },
         { name: 'locationall', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
-        { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false }
-
-
+        { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false },
+        { name: 'empLogintoCustomer', url: '/empLogintoCustomer/:profileID', templateUrl: 'app/modules/static/emplogToCustomer.html', controller: "empLogCustomerCtrl", isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
