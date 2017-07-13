@@ -43,7 +43,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'termsAndConditions', url: '/termsAndConditions', templateUrl: 'app/modules/static/termsAndConditions.html', isloginrequired: false },
         { name: 'ourbranches', url: '/ourbranches', templateUrl: 'app/modules/static/ourBranches.html', controller: 'ourbranches', isloginrequired: false },
         { name: 'privacyPolicy', url: '/privacyPolicy', templateUrl: 'app/modules/static/privacyPolicy.html', isloginrequired: false },
-        { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: true },
+        //{ name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership.html', controller: "upgrademembership", isloginrequired: true },
         { name: 'aboutUs', url: '/aboutUs', templateUrl: 'app/modules/static/aboutUs.html', isloginrequired: false },
         { name: 'homedummy', url: '/homedummy', templateUrl: 'app/modules/homePage/homepagedummy.html', isloginrequired: false },
         { name: 'paymentresponse', url: '/paymentresponse', templateUrl: 'app/modules/payments/views/paymentResponse.html', isloginrequired: false },
@@ -60,7 +60,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'locationall', url: '/location', templateUrl: 'app/modules/newHomepage/locationall.html', controller: 'locationall', isloginrequired: false },
         { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false },
         { name: 'empLogintoCustomer', url: '/empLogintoCustomer/:profileID', templateUrl: 'app/modules/static/emplogToCustomer.html', controller: "empLogCustomerCtrl", isloginrequired: false },
-        { name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
+        //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
+        { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
     ];
 
     $urlRouterProvider.otherwise('/');

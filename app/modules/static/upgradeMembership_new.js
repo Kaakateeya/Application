@@ -5,6 +5,7 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         myAppFactory.getpaymentnew(scope.custid).then(function(response) {
+            console.log(response);
             scope.paymentarray = [];
             scope.paymentarray.push({
                 MembershipName: "Services & Features",
@@ -12,10 +13,10 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                 AllottedServicePoints: "Profile Count",
                 AccessFeatue: "Access",
             });
-            _.each(response.data[0], function(item) {
+            _.each(JSON.parse(response.data[0]), function(item) {
                 scope.paymentarray.push(item);
             });
-            console.log(scope.paymentarray);
+            console.log((scope.paymentarray));
         });
 
         scope.selectpaymantoption = function(membershipd, amount, profilecount, discount, custid, servicename, year) {
