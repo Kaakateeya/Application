@@ -14,6 +14,9 @@ app.factory('myAppFactory', ["$http", function(http) {
         },
         Paymentinsert: function(Mobj) {
             return http.post(app.apiroot + 'Payment/InsertPaymentDetails', Mobj);
+        },
+        getpaymentnew: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getCustomerPaymentPackagesDisplay', { params: { CustID: custid } });
         }
 
     };
