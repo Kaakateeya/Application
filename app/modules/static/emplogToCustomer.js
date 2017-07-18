@@ -25,7 +25,7 @@
                     console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
 
-                    authSvc.login(profileID, scope.customerpasswordencrypt).then(function(response) {
+                    authSvc.login(profileID, scope.customerpasswordencrypt, 2).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
@@ -52,15 +52,11 @@
                             } else {
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
-
                         });
 
                     });
                 }
             });
-
-
-
         }
     }
 })();

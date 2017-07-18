@@ -26,7 +26,6 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
             });
         };
 
-
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
 
             if (response.data !== undefined && response.data !== null) {

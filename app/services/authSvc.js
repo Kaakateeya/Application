@@ -108,15 +108,14 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             clearUserSession();
             route.go('home', {});
         },
-        login: function(username, password) {
-
+        login: function(username, password, empFlag) {
             var body = {
                 Username: username,
-                Password: password
+                Password: password,
+                iflag: empFlag ? empFlag : null
             };
             return $http.post(app.apiroot + 'DB/userLogin/person', body)
                 .then(function(response) {
-
                     if (response.status === 200) {
                         if (response.data !== null) {
                             Idle.watch();
