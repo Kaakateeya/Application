@@ -5791,7 +5791,6 @@ app.controller('ccavenueresponsectrl', ['$scope', '$stateParams', '$http', 'aler
             });
         };
 
-
         http.post('/decrypt', JSON.stringify({ keyname: stateParams.data })).then(function(response) {
 
             if (response.data !== undefined && response.data !== null) {
@@ -7107,7 +7106,7 @@ function getvalues(test) {
                     console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
 
-                    authSvc.login(profileID, scope.customerpasswordencrypt).then(function(response) {
+                    authSvc.login(profileID, scope.customerpasswordencrypt, 2).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
@@ -7134,15 +7133,11 @@ function getvalues(test) {
                             } else {
                                 route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                             }
-
                         });
 
                     });
                 }
             });
-
-
-
         }
     }
 })();
@@ -8813,15 +8808,14 @@ app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function
             clearUserSession();
             route.go('home', {});
         },
-        login: function(username, password) {
-
+        login: function(username, password, empFlag) {
             var body = {
                 Username: username,
-                Password: password
+                Password: password,
+                iflag: empFlag ? empFlag : null
             };
             return $http.post(app.apiroot + 'DB/userLogin/person', body)
                 .then(function(response) {
-
                     if (response.status === 200) {
                         if (response.data !== null) {
                             Idle.watch();
