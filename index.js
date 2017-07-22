@@ -12,10 +12,10 @@ var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', '
     'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons'
 ]);
 
-// app.apiroot = 'http://183.82.0.58:8010/Api/';
-app.apiroot = 'http://52.66.131.254:8010/Api/';
-app.apiroot183 = 'http://52.66.131.254:8025/Api/';
-// app.apiroot183 = 'http://183.82.0.58:8025/Api/';
+app.apiroot = 'http://183.82.0.58:8010/Api/';
+//app.apiroot = 'http://52.66.131.254:8010/Api/';
+//app.apiroot183 = 'http://52.66.131.254:8025/Api/';
+app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 app.global = {
     'alertType': 'toast-top-right'
 };
