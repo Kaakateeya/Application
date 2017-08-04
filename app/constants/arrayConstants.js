@@ -387,7 +387,7 @@ app.constant('arrayConstants', {
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
     ],
-    'Upgrade': "Upgrade online Membership",
+    'Upgrade': "Upgrade Membership",
     'Complexion': [
         { "label": "--select-- ", "title": "--select--", "value": "" },
         { "label": "Very Fair", "title": "Very Fair", "value": 17 },

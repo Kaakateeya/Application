@@ -25,10 +25,10 @@
             </div>
         </div>
         <div class="myorders_list_main_item">
-            <h5 class="myorders_list_main_item_heading">Online Membership Details</h5>
+            <h5 class="myorders_list_main_item_heading"> Membership Details</h5>
             <div class="myorders_list_main_item_desc">
-                <p class="clearfix"><small>Internet Membership Type</small><span>
-                    <span id="lblpaid">{{myorders[0].PaymentStatus}}</span></span>
+                <p class="clearfix"><small>Membership Type</small><span>
+                    <span id="lblpaid">{{myorders[0].PaymentStatus===0?'Unpaid':'Paid'}}</span></span>
                 </p>
                 <p class="clearfix"><small>Payment Date</small><span><span id="lblpaidondate">
                     {{myorders[0].PaidOnDate}}</span></span>
@@ -37,9 +37,9 @@
                     <small>Membership Expiry date</small><span>
                             <span id="lblexpiry">{{myorders[0].ExpiryDate}}</span></span>
                 </p>
-                <p class="clearfix"><small>Package Name</small><span><span id="lblMemName">
+                <!-- <p class="clearfix"><small>Package Name</small><span><span id="lblMemName">
                     {{myorders[0].OnlineMembership}}</span></span>
-                </p>
+                </p> -->
 
                 <p class="clearfix"><small>Maximum Profile count</small><span>
                     <span id="lblTolPoints">{{myorders[0].MaxPoints}}</span></span>
