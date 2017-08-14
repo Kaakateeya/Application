@@ -16,7 +16,7 @@
                                 <tr>
                                     <td class="pack_heading2">
                                         <small class="payment-label">
-                                       <label  class="duration_of_pack" ng-hide="payment.MembershipName=='Services & Features'?true:false">{{payment.MemberShipDuration}} Months</label>
+                                       <label  class="duration_of_pack" ng-hide="payment.MembershipName=='Services & Features'?true:false">{{payment.MemberShipDuration}} Days</label>
                                        </small>
                                         <label><span ng-hide="payment.MembershipName=='Services & Features'?true:false">RS :</span>{{payment.MembershipAmount}}</label>
                                         <button class="button_custom" ng-hide="payment.MembershipName=='Services & Features'?true:false" ng-click="selectpaymantoption(payment.Emp_Membership_ID,payment.MembershipAmount,payment.AllottedServicePoints,'',custid,payment.MembershipName,payment.MemberShipDuration)">Select</button>
