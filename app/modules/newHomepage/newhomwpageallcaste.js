@@ -1,10 +1,37 @@
 app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices', '$window',
+    'basicRegistrationService', '$filter', 'newhomepageservices', '$window', '$rootScope',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices, $window) {
+        basicRegistrationService, filter, newhomepageservices, $window, $rootScope) {
+
+        //caste dynamic root initialisation
+
+
+        $rootScope.casteTitle = 'Caste-Kaakateeya';
+        $rootScope.keyWord = '';
+        $rootScope.description = '';
+        // $rootScope.canonicalhref = "http://www.kaakateeya.com";
+        $rootScope.propertytypecontent = "website";
+        $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        //$rootScope.propertyContenturl = "http://www.kaakateeya.com";
+        $rootScope.propertysite_name = "Best Marriage Bureau In India";
+        $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.twitterimage = "";
+        $rootScope.robots = "nofollow, noindex";
+
+
+
+
+
+        //end here
+
+
+
+
 
         scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -447,7 +474,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
 
                     break;
                 case 'Mudaliar Matrimony':
-                    url = "caste/mudaliyar-matrimony";
+                    url = "caste/mudaliar-matrimony";
 
                     break;
                 case 'Pillai Matrimony':

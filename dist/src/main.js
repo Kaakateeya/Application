@@ -416,7 +416,7 @@ app.constant('arrayConstants', {
         { "label": "Uncle", "title": "Uncle", "value": 561 },
         { "label": "Aunt", "title": "Aunt", "value": 562 }
     ],
-    'Upgrade': "Upgrade online Membership",
+    'Upgrade': "Upgrade Membership",
     'Complexion': [
         { "label": "--select-- ", "title": "--select--", "value": "" },
         { "label": "Very Fair", "title": "Very Fair", "value": 17 },
@@ -3753,12 +3753,14 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                 case 'Gowda Matrimony':
                     url = "caste/gowda-matrimony";
                     break;
+                default:
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
         scope.redirecttolocation = function(obj) {
             var url = "/";
-
             switch (obj) {
                 case 'Hyderabad Matrimony':
                     url = "location/matrimony-marriage-bureau-in-hyderabad";
@@ -3778,11 +3780,13 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                 case 'Coimbatore Matrimony':
                     url = "location/matrimony-in-coimbatore";
                     break;
+                default:
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
         scope.stateparamsredirect = function(statename) {
-
             switch (statename) {
                 case 'pondicherry-matrimony':
                     scope.isActiveid = 9;
@@ -3795,7 +3799,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Pondicherry matrimony – The best Matrimony in Pondicherry. Add your Matrimonial profile now! And find your partner. Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/pondicherry-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/pondicherry-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Pondicherry Matrimony | Best Matrimony in Pondicherry";
                     $root.propertydescriptioncontent = "Kaakateeya Pondicherry matrimony – The best Matrimony in Pondicherry. Add your Matrimonial profile now! And find your partner. Register for Free!";
@@ -3818,7 +3822,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Matrimony in Coimbatore - The best matrimony services in Coimbatore. Search your life partner among thousands of best Coimbatore matrimony profiles. Join For Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-in-coimbatore";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-in-coimbatore";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Matrimony in Coimbatore | Matrimony Services in Coimbatore";
                     $root.propertydescriptioncontent = "Matrimony in Coimbatore - The best matrimony services in Coimbatore. Search your life partner among thousands of best Coimbatore matrimony profiles. Join For Free!";
@@ -3839,7 +3843,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Marriage bureau in Vijayawada is Trusted by Thousands of our customers. Add Your Profile and Find Your Perfect Life Partner, Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/marriage-bureau-in-vijayawada";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/marriage-bureau-in-vijayawada";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Marriage Bureau in Vijayawada | Matrimony in Vijayawada";
                     $root.propertydescriptioncontent = "Kaakateeya Marriage bureau in Vijayawada is Trusted by Thousands of our customers. Add Your Profile and Find Your Perfect Life Partner, Register for Free!";
@@ -3861,7 +3865,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
                     $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
@@ -3882,7 +3886,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Chennai Matrimony – First-rate Matrimony site in Chennai. Add your Matrimonial Profile Now and find your dream partner, Register for Free.';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/chennai-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/chennai-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Chennai Matrimony, Matrimony in Chennai- Kaakateeya";
                     $root.propertydescriptioncontent = "Kaakateeya Chennai Matrimony – First-rate Matrimony site in Chennai. Add your Matrimonial Profile Now and find your dream partner, Register for Free.";
@@ -3903,7 +3907,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Marriage bureau in Bangalore is a top matchmaking portal for Matrimony in Bangalore. We offer matrimony services in Bangalore. Register for FREE!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/marriage-bureau-in-bangalore";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/marriage-bureau-in-bangalore";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Marriage bureau in Bangalore | Matrimony in Bangalore";
                     $root.propertydescriptioncontent = "Kaakateeya Marriage bureau in Bangalore is a top matchmaking portal for Matrimony in Bangalore. We offer matrimony services in Bangalore. Register for FREE!";
@@ -3916,24 +3920,30 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
 
                     break;
                 default:
-                    scope.isActiveid = 4;
-                    scope.castenameparam = "Hyderabad Matrimony";
-                    scope.aboutus = "Kaakateeya.com, the leading <b>Marriage Bureau in Hyderabad</b> is a great place to find your perfect match to kick-start a brand new life. We are the one stop source for bride and groom to communicate with each other. We at Hyderabad Matrimony provide safe, secure and verified choices to search for an ideal marriage partner. Create your profile now on our matrimonial website & start searching prospective Indian brides and Indian grooms today!";
-                    scope.firstsuccessstory = "I really express my sincere thanks and gratitude to Hyderabad matrimony for tying us together as God decided. It’s a reliable matrimonial website that helped me to find my perfect partner for the rest of my life. We are very happy to have found each other on Kakateeya.com. Thank you so much again for your wonderful services.";
-                    scope.secondsuccessstory = "I am from Hyderabad, settled in the US, but my family was looking for an Indian traditional girl for me. Frankly speaking, I had rejected almost 10 marriage proposal till last year. At last my parents told me to find a girl of my own and I thought to go with matrimony site. Though I was not sure about my decision, I started my search with matrimonial sites before settling down with Kaakateeya matrimony, one of the finest marriage bureaus in Hyderabad. It has a huge collection of very attractive profiles and offers thousands of options to choose from as per your specification. Thank you Kaakateeya matrimony.";
-                    $root.casteTitle = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya';
-                    $root.keyWord = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad';
-                    $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
-                    // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
-                    $root.propertytypecontent = "article";
-                    $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
-                    $root.propertyContenturl = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
-                    $root.propertysite_name = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.twitterdescription = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
-                    $root.twittertitle = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
+                    // scope.isActiveid = 4;
+                    // scope.castenameparam = "Hyderabad Matrimony";
+                    // scope.aboutus = "Kaakateeya.com, the leading <b>Marriage Bureau in Hyderabad</b> is a great place to find your perfect match to kick-start a brand new life. We are the one stop source for bride and groom to communicate with each other. We at Hyderabad Matrimony provide safe, secure and verified choices to search for an ideal marriage partner. Create your profile now on our matrimonial website & start searching prospective Indian brides and Indian grooms today!";
+                    // scope.firstsuccessstory = "I really express my sincere thanks and gratitude to Hyderabad matrimony for tying us together as God decided. It’s a reliable matrimonial website that helped me to find my perfect partner for the rest of my life. We are very happy to have found each other on Kakateeya.com. Thank you so much again for your wonderful services.";
+                    // scope.secondsuccessstory = "I am from Hyderabad, settled in the US, but my family was looking for an Indian traditional girl for me. Frankly speaking, I had rejected almost 10 marriage proposal till last year. At last my parents told me to find a girl of my own and I thought to go with matrimony site. Though I was not sure about my decision, I started my search with matrimonial sites before settling down with Kaakateeya matrimony, one of the finest marriage bureaus in Hyderabad. It has a huge collection of very attractive profiles and offers thousands of options to choose from as per your specification. Thank you Kaakateeya matrimony.";
+                    // $root.casteTitle = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya';
+                    // $root.keyWord = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad';
+                    // $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
+                    // // seo content
+                    // $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    // $root.propertytypecontent = "article";
+                    // $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
+                    // $root.propertyContenturl = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    // $root.propertysite_name = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.twitterdescription = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
+                    // $root.twittertitle = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
+
+                    route.go('home', {});
+
+
                     break;
             }
         };
@@ -3942,10 +3952,37 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
 app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices',
+    'basicRegistrationService', '$filter', 'newhomepageservices', '$rootScope',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices) {
+        basicRegistrationService, filter, newhomepageservices, $rootScope) {
+
+
+
+        //caste dynamic root initialisation
+
+
+        $rootScope.casteTitle = 'Location-Kaakateeya';
+        $rootScope.keyWord = '';
+        $rootScope.description = '';
+        // $rootScope.canonicalhref = "http://www.kaakateeya.com";
+        $rootScope.propertytypecontent = "website";
+        $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.propertyContenturl = "http://www.kaakateeya.com";
+        $rootScope.propertysite_name = "Best Marriage Bureau In India";
+        $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.twitterimage = "";
+        $rootScope.robots = "nofollow, noindex";
+
+
+
+
+
+        //end here
+
+
 
         scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -4845,7 +4882,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     break;
 
                 case 'Mudaliar Matrimony':
-                    url = "caste/mudaliyar-matrimony";
+                    url = "caste/mudaliar-matrimony";
 
                     break;
                 case 'Pillai Matrimony':
@@ -4859,6 +4896,10 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     break;
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
+                    break;
+                default:
+
+                    route.go('home', {});
                     break;
             }
             return url;
@@ -4881,6 +4922,10 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Pondicherry Matrimony':
                     url = "location/pondicherry-matrimony";
                     break;
+                default:
+
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
@@ -4893,9 +4938,13 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     scope.firstsuccessstory = "This is really an ideal matrimonial service centre replete with Successful partners’ stories. With in just 3 months of the online proposals, we have got married successfully with the blessings of our respective families. No doubt, Kamma Matrimony is such a special force helps everyone in finding out the perfect match.";
                     scope.secondsuccessstory = "A cordial greeting to the entire team of Kamma matrimony for their pronounced job. The website is too good and functional with hundreds of verified profiles. All because of Kaakateeya Kamma matrimony I got my perfect match.";
                     scope.castenameparam = "Kamma Matrimony";
-                    $root.casteTitle = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur.';
-                    $root.keyWord = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur.';
+
+                    $root.casteTitle = 'Kamma Matrimony,Kamma Matrimony sites,Kamma Marriage bureau';
+
+                    $root.keyWord = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur';
+                    // $root.description = 'Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.';
                     $root.description = 'Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.';
+
 
                     // seo content
                     $root.canonicalhref = "http://www.kaakateeya.com/caste/kamma-matrimony";
@@ -4921,7 +4970,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.description = 'Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "http://www.kaakateeya.com/caste/reedy-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/reddy-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial";
                     $root.propertydescriptioncontent = "Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!";
@@ -4977,7 +5026,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "Padmashali Matrimony, Find your patrner in Padmasali Matrimony";
                     $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'mudaliyar-matrimony':
+                case 'mudaliar-matrimony':
                     scope.stateparamsid = 438;
                     scope.isActiveid = 1;
                     scope.castenameparam = "Mudaliyar Matrimony";
@@ -4989,11 +5038,11 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.description = 'Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages. Join for Free.';
 
                     // seo content
-                    $root.canonicalhref = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/mudaliar-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
                     $root.propertydescriptioncontent = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
-                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/mudaliar-matrimony";
                     $root.propertysite_name = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
                     $root.twitterdescription = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
                     $root.twittertitle = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
@@ -5148,7 +5197,9 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "";
                     $root.twitterimage = "";
                     break;
-
+                default:
+                    route.go('home', {});
+                    break;
             }
         };
     }
@@ -5163,10 +5214,37 @@ app.factory('newhomepageservices', ['$http', function(http) {
 app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices', '$window',
+    'basicRegistrationService', '$filter', 'newhomepageservices', '$window', '$rootScope',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices, $window) {
+        basicRegistrationService, filter, newhomepageservices, $window, $rootScope) {
+
+        //caste dynamic root initialisation
+
+
+        $rootScope.casteTitle = 'Caste-Kaakateeya';
+        $rootScope.keyWord = '';
+        $rootScope.description = '';
+        // $rootScope.canonicalhref = "http://www.kaakateeya.com";
+        $rootScope.propertytypecontent = "website";
+        $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        //$rootScope.propertyContenturl = "http://www.kaakateeya.com";
+        $rootScope.propertysite_name = "Best Marriage Bureau In India";
+        $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.twitterimage = "";
+        $rootScope.robots = "nofollow, noindex";
+
+
+
+
+
+        //end here
+
+
+
+
 
         scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -5609,7 +5687,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
 
                     break;
                 case 'Mudaliar Matrimony':
-                    url = "caste/mudaliyar-matrimony";
+                    url = "caste/mudaliar-matrimony";
 
                     break;
                 case 'Pillai Matrimony':

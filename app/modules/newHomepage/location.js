@@ -452,12 +452,14 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                 case 'Gowda Matrimony':
                     url = "caste/gowda-matrimony";
                     break;
+                default:
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
         scope.redirecttolocation = function(obj) {
             var url = "/";
-
             switch (obj) {
                 case 'Hyderabad Matrimony':
                     url = "location/matrimony-marriage-bureau-in-hyderabad";
@@ -477,11 +479,13 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                 case 'Coimbatore Matrimony':
                     url = "location/matrimony-in-coimbatore";
                     break;
+                default:
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
         scope.stateparamsredirect = function(statename) {
-
             switch (statename) {
                 case 'pondicherry-matrimony':
                     scope.isActiveid = 9;
@@ -494,7 +498,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Pondicherry matrimony – The best Matrimony in Pondicherry. Add your Matrimonial profile now! And find your partner. Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/pondicherry-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/pondicherry-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Pondicherry Matrimony | Best Matrimony in Pondicherry";
                     $root.propertydescriptioncontent = "Kaakateeya Pondicherry matrimony – The best Matrimony in Pondicherry. Add your Matrimonial profile now! And find your partner. Register for Free!";
@@ -517,7 +521,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Matrimony in Coimbatore - The best matrimony services in Coimbatore. Search your life partner among thousands of best Coimbatore matrimony profiles. Join For Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-in-coimbatore";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-in-coimbatore";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Matrimony in Coimbatore | Matrimony Services in Coimbatore";
                     $root.propertydescriptioncontent = "Matrimony in Coimbatore - The best matrimony services in Coimbatore. Search your life partner among thousands of best Coimbatore matrimony profiles. Join For Free!";
@@ -538,7 +542,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Marriage bureau in Vijayawada is Trusted by Thousands of our customers. Add Your Profile and Find Your Perfect Life Partner, Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/marriage-bureau-in-vijayawada";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/marriage-bureau-in-vijayawada";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Marriage Bureau in Vijayawada | Matrimony in Vijayawada";
                     $root.propertydescriptioncontent = "Kaakateeya Marriage bureau in Vijayawada is Trusted by Thousands of our customers. Add Your Profile and Find Your Perfect Life Partner, Register for Free!";
@@ -560,7 +564,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
                     $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
@@ -581,7 +585,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Chennai Matrimony – First-rate Matrimony site in Chennai. Add your Matrimonial Profile Now and find your dream partner, Register for Free.';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/chennai-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/chennai-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Chennai Matrimony, Matrimony in Chennai- Kaakateeya";
                     $root.propertydescriptioncontent = "Kaakateeya Chennai Matrimony – First-rate Matrimony site in Chennai. Add your Matrimonial Profile Now and find your dream partner, Register for Free.";
@@ -602,7 +606,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                     $root.description = 'Kaakateeya Marriage bureau in Bangalore is a top matchmaking portal for Matrimony in Bangalore. We offer matrimony services in Bangalore. Register for FREE!';
 
                     // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/marriage-bureau-in-bangalore";
+                    $root.canonicalhref = "http://www.kaakateeya.com/location/marriage-bureau-in-bangalore";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Marriage bureau in Bangalore | Matrimony in Bangalore";
                     $root.propertydescriptioncontent = "Kaakateeya Marriage bureau in Bangalore is a top matchmaking portal for Matrimony in Bangalore. We offer matrimony services in Bangalore. Register for FREE!";
@@ -615,24 +619,30 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
 
                     break;
                 default:
-                    scope.isActiveid = 4;
-                    scope.castenameparam = "Hyderabad Matrimony";
-                    scope.aboutus = "Kaakateeya.com, the leading <b>Marriage Bureau in Hyderabad</b> is a great place to find your perfect match to kick-start a brand new life. We are the one stop source for bride and groom to communicate with each other. We at Hyderabad Matrimony provide safe, secure and verified choices to search for an ideal marriage partner. Create your profile now on our matrimonial website & start searching prospective Indian brides and Indian grooms today!";
-                    scope.firstsuccessstory = "I really express my sincere thanks and gratitude to Hyderabad matrimony for tying us together as God decided. It’s a reliable matrimonial website that helped me to find my perfect partner for the rest of my life. We are very happy to have found each other on Kakateeya.com. Thank you so much again for your wonderful services.";
-                    scope.secondsuccessstory = "I am from Hyderabad, settled in the US, but my family was looking for an Indian traditional girl for me. Frankly speaking, I had rejected almost 10 marriage proposal till last year. At last my parents told me to find a girl of my own and I thought to go with matrimony site. Though I was not sure about my decision, I started my search with matrimonial sites before settling down with Kaakateeya matrimony, one of the finest marriage bureaus in Hyderabad. It has a huge collection of very attractive profiles and offers thousands of options to choose from as per your specification. Thank you Kaakateeya matrimony.";
-                    $root.casteTitle = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya';
-                    $root.keyWord = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad';
-                    $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
-                    // seo content
-                    $root.canonicalhref = "www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
-                    $root.propertytypecontent = "article";
-                    $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
-                    $root.propertyContenturl = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
-                    $root.propertysite_name = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.twitterdescription = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
-                    $root.twittertitle = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
-                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
+                    // scope.isActiveid = 4;
+                    // scope.castenameparam = "Hyderabad Matrimony";
+                    // scope.aboutus = "Kaakateeya.com, the leading <b>Marriage Bureau in Hyderabad</b> is a great place to find your perfect match to kick-start a brand new life. We are the one stop source for bride and groom to communicate with each other. We at Hyderabad Matrimony provide safe, secure and verified choices to search for an ideal marriage partner. Create your profile now on our matrimonial website & start searching prospective Indian brides and Indian grooms today!";
+                    // scope.firstsuccessstory = "I really express my sincere thanks and gratitude to Hyderabad matrimony for tying us together as God decided. It’s a reliable matrimonial website that helped me to find my perfect partner for the rest of my life. We are very happy to have found each other on Kakateeya.com. Thank you so much again for your wonderful services.";
+                    // scope.secondsuccessstory = "I am from Hyderabad, settled in the US, but my family was looking for an Indian traditional girl for me. Frankly speaking, I had rejected almost 10 marriage proposal till last year. At last my parents told me to find a girl of my own and I thought to go with matrimony site. Though I was not sure about my decision, I started my search with matrimonial sites before settling down with Kaakateeya matrimony, one of the finest marriage bureaus in Hyderabad. It has a huge collection of very attractive profiles and offers thousands of options to choose from as per your specification. Thank you Kaakateeya matrimony.";
+                    // $root.casteTitle = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya';
+                    // $root.keyWord = 'Hyderabad Matrimony, Marriage Bureau in Hyderabad';
+                    // $root.description = 'Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!';
+                    // // seo content
+                    // $root.canonicalhref = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    // $root.propertytypecontent = "article";
+                    // $root.propertytitlecontent = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.propertydescriptioncontent = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
+                    // $root.propertyContenturl = "http://www.kaakateeya.com/location/matrimony-marriage-bureau-in-hyderabad";
+                    // $root.propertysite_name = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.twitterdescription = "Hyderabad Matrimony - Kaakateeya Matrimony is one of the best Marriage Bureau in Hyderabad. Trusted by thousands of People. Registration for FREE!";
+                    // $root.twittertitle = "Hyderabad Matrimony, Marriage Bureau in Hyderabad - Kaakateeya";
+                    // $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
+
+
+                    route.go('home', {});
+
+
                     break;
             }
         };

@@ -1,10 +1,37 @@
 app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     'SelectBindServiceApp', 'alert', '$timeout',
     'missingFieldService', '$state', 'route', 'helperservice',
-    'basicRegistrationService', '$filter', 'newhomepageservices',
+    'basicRegistrationService', '$filter', 'newhomepageservices', '$rootScope',
     function(scope, homepageservices, authSvc, successstoriesdata,
         service, alerts, timeout, missingFieldService, $state, route, helperservice,
-        basicRegistrationService, filter, newhomepageservices) {
+        basicRegistrationService, filter, newhomepageservices, $rootScope) {
+
+
+
+        //caste dynamic root initialisation
+
+
+        $rootScope.casteTitle = 'Location-Kaakateeya';
+        $rootScope.keyWord = '';
+        $rootScope.description = '';
+        // $rootScope.canonicalhref = "http://www.kaakateeya.com";
+        $rootScope.propertytypecontent = "website";
+        $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.propertyContenturl = "http://www.kaakateeya.com";
+        $rootScope.propertysite_name = "Best Marriage Bureau In India";
+        $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+        $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+        $rootScope.twitterimage = "";
+        $rootScope.robots = "nofollow, noindex";
+
+
+
+
+
+        //end here
+
+
 
         scope.message = "qqqqqqq";
         var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

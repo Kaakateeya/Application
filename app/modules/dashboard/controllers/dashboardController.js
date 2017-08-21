@@ -559,7 +559,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.incrementsdashboardcounts();
         });
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
-            debugger;
             authSvc.paymentstaus(scope.custid, scope).then(function(response) {
                 if (response === true)
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");

@@ -168,9 +168,13 @@ app.run(function($rootScope, $state, $stateParams) {
                     $rootScope.casteTitle = 'PrivacyPolicy';
                     break;
                 case "registration":
+                    $rootScope.robots = "noodp";
+                    $rootScope.canonicalhref = "http://www.kaakateeya.com/registration";
                     $rootScope.casteTitle = 'Registration';
                     break;
                 case "successstories":
+                    $rootScope.robots = "noodp";
+                    $rootScope.canonicalhref = "http://www.kaakateeya.com/successstories";
                     $rootScope.casteTitle = 'SuccessStories';
                     break;
                 case "takeatour":
@@ -182,19 +186,21 @@ app.run(function($rootScope, $state, $stateParams) {
             }
 
         } else {
-            $rootScope.casteTitle = 'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony';
-            $rootScope.keyWord = 'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial';
-            $rootScope.description = 'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.';
-            $rootScope.canonicalhref = "http://www.kaakateeya.com";
-            $rootScope.propertytypecontent = "website";
-            $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
-            $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
-            $rootScope.propertyContenturl = "http://www.kaakateeya.com";
-            $rootScope.propertysite_name = "Best Marriage Bureau In India";
-            $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
-            $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
-            $rootScope.twitterimage = "";
-            $rootScope.robots = "noodp";
+
+            // $rootScope.casteTitle = 'Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony';
+            // $rootScope.keyWord = 'Marriage bureau, Matrimonial services, Matrimony sites, matrimony, matrimonial';
+            // $rootScope.description = 'We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.';
+            // $rootScope.canonicalhref = "http://www.kaakateeya.com";
+            // $rootScope.propertytypecontent = "website";
+            // $rootScope.propertytitlecontent = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            // $rootScope.propertydescriptioncontent = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            // $rootScope.propertyContenturl = "http://www.kaakateeya.com";
+            // $rootScope.propertysite_name = "Best Marriage Bureau In India";
+            // $rootScope.twitterdescription = "We are the best marriage bureau across Matrimony sites in india. We provide best matrimonial services across the Globe. Lakhs of verified matrimonial profiles.";
+            // $rootScope.twittertitle = "Marriage Bureau, Matrimony sites, Matrimonial Services, Matrimony";
+            // $rootScope.twitterimage = "";
+            // $rootScope.robots = "noodp";
+
         }
         var loggedAscustomerPage = sessionStorage.getItem("loggedAscustomerPage");
         if (to.data && to.data.requiresLogin) {

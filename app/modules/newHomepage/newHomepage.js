@@ -454,7 +454,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     break;
 
                 case 'Mudaliar Matrimony':
-                    url = "caste/mudaliyar-matrimony";
+                    url = "caste/mudaliar-matrimony";
 
                     break;
                 case 'Pillai Matrimony':
@@ -468,6 +468,10 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     break;
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
+                    break;
+                default:
+
+                    route.go('home', {});
                     break;
             }
             return url;
@@ -490,6 +494,10 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Pondicherry Matrimony':
                     url = "location/pondicherry-matrimony";
                     break;
+                default:
+
+                    route.go('home', {});
+                    break;
             }
             return url;
         };
@@ -502,9 +510,13 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     scope.firstsuccessstory = "This is really an ideal matrimonial service centre replete with Successful partners’ stories. With in just 3 months of the online proposals, we have got married successfully with the blessings of our respective families. No doubt, Kamma Matrimony is such a special force helps everyone in finding out the perfect match.";
                     scope.secondsuccessstory = "A cordial greeting to the entire team of Kamma matrimony for their pronounced job. The website is too good and functional with hundreds of verified profiles. All because of Kaakateeya Kamma matrimony I got my perfect match.";
                     scope.castenameparam = "Kamma Matrimony";
-                    $root.casteTitle = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur.';
-                    $root.keyWord = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur.';
+
+                    $root.casteTitle = 'Kamma Matrimony,Kamma Matrimony sites,Kamma Marriage bureau';
+
+                    $root.keyWord = 'Kamma matrimony, Kamma marriage bureau, Kamma marriage bureau in Hyderabad, Kamma marriage bureau in Vijayawada, Kamma marriage bureau in Guntur';
+                    // $root.description = 'Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.';
                     $root.description = 'Kaakateeya Kamma Matrimony - In Kamma Marriage Bureau you will Find thousands of Kamma community profiles. The most trusted Matrimony site for happy marriages.';
+
 
                     // seo content
                     $root.canonicalhref = "http://www.kaakateeya.com/caste/kamma-matrimony";
@@ -530,7 +542,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.description = 'Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!';
 
                     // seo content
-                    $root.canonicalhref = "http://www.kaakateeya.com/caste/reedy-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/reddy-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Reddy Matrimony, Reddy Marriage Bureau, Reddy Matrimonial";
                     $root.propertydescriptioncontent = "Reddy matrimony – a premium Reddy Marriage Bureau website with Lakhs of Reddy Matrimonial Profiles and trusted by thousands of people. Register for Free!";
@@ -586,7 +598,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "Padmashali Matrimony, Find your patrner in Padmasali Matrimony";
                     $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'mudaliyar-matrimony':
+                case 'mudaliar-matrimony':
                     scope.stateparamsid = 438;
                     scope.isActiveid = 1;
                     scope.castenameparam = "Mudaliyar Matrimony";
@@ -598,11 +610,11 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.description = 'Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages. Join for Free.';
 
                     // seo content
-                    $root.canonicalhref = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/mudaliar-matrimony";
                     $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
                     $root.propertydescriptioncontent = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
-                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/mudaliyar-matrimony";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/mudaliar-matrimony";
                     $root.propertysite_name = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
                     $root.twitterdescription = "Mudaliyar Matrimony - Find Lakhs of Mudaliyar brides and Mudaliyar grooms Profiles, The most trusted Matrimony site for happy marriages.";
                     $root.twittertitle = "Mudaliyar Matrimony - Mudaliyar brides and Mudaliyar Grooms";
@@ -757,7 +769,9 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "";
                     $root.twitterimage = "";
                     break;
-
+                default:
+                    route.go('home', {});
+                    break;
             }
         };
     }
