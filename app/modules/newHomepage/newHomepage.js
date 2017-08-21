@@ -601,7 +601,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'mudaliar-matrimony':
                     scope.stateparamsid = 438;
                     scope.isActiveid = 1;
-                    scope.castenameparam = "Mudaliyar Matrimony";
+                    scope.castenameparam = "Mudaliar Matrimony";
                     scope.aboutus = "Thanks for making my life beautiful and I suggest Mudaliyar matrimony website for people who are still looking for their dream life partners as this website provides a wide range of choices and profiles within your community so that we can make a successful decision on our own. I found my life partner here and today I changed my status from unmarried to married.";
                     scope.firstsuccessstory = "Thanks for making my life beautiful and I suggest <b>Mudaliyar matrimony</b> website for people who are still looking for their dream life partners as this website provides a wide range of choices and profiles within your community so that we can make a successful decision on our own. I found my life partner here and today I changed my status from unmarried to married.";
                     scope.secondsuccessstory = "I registered my profile on Kaakateeya.com as I was looking for a good looking girl from Mudaliyar community and found my better half from Kaakateeya Mudaliyar Matrimony and we both are happy together.";

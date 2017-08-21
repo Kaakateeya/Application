@@ -475,7 +475,6 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                     break;
                 case 'Mudaliar Matrimony':
                     url = "caste/mudaliar-matrimony";
-
                     break;
                 case 'Pillai Matrimony':
                     url = "caste/pillai-matrimony";
