@@ -28,7 +28,7 @@
             <h5 class="myorders_list_main_item_heading"> Membership Details</h5>
             <div class="myorders_list_main_item_desc">
                 <p class="clearfix"><small>Membership Type</small><span>
-                    <span id="lblpaid">{{myorders[0].PaymentStatus===0?'Unpaid':'Paid'}}</span></span>
+                    <span id="lblpaid">{{myorders[0].PaymentStatus===1?'Paid':'Unpaid'}}</span></span>
                 </p>
                 <p class="clearfix"><small>Payment Date</small><span><span id="lblpaidondate">
                     {{myorders[0].PaidOnDate}}</span></span>
