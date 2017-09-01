@@ -151,11 +151,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 4:
                     scope.divmodalbodytoClose = "Please upgrade your membership";
                     alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    scope.unpaidflag = true;
                     break;
                 case 5:
                     scope.divmodalbodytoClose = "Please upgrade your membership(No points)";
                     alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
-
+                    scope.unpaidflag = true;
                     break;
                 case 6:
                     scope.divmodalbodytoClose = "You have already Skipped this profile";
@@ -304,11 +305,15 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                                scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                if (scope.unpaidflag) {
+                                    scope.modalbodyID1 = "You need to Upgrade  membership";
+                                } else {
+                                    scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                }
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                scope.modalbodyID1 = "You need to Upgrade  membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
@@ -332,7 +337,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                scope.modalbodyID1 = "You need to Upgrade  membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
