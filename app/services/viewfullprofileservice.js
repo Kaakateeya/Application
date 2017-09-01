@@ -26,6 +26,9 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
             return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: (ErrorMessage !== null && ErrorMessage !== undefined && ErrorMessage !== "") ? ErrorMessage : "Not Defined", CustID: CustID, PageName: (PageName !== null && PageName !== undefined && PageName !== "") ? PageName : "Not Defined", Type: (Type !== null && Type !== undefined && Type !== "") ? Type : "Not Defined" } });
+        },
+        getpaidstatusforviewprfile: function(custid) {
+            return http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } });
         }
     };
 }]);

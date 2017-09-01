@@ -103,8 +103,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
             //     scope.partnerinformation(responsedata.data);
             // });
-            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
-                scope.partnerinformation(responsedata.data);
+            customerviewfullprofileservices.getpaidstatusforviewprfile(scope.fromcustid).then(function(responsepaid) {
+                if (responsepaid.status === 200 && responsepaid.data !== null && responsepaid.data !== undefined) {
+                    if (responsepaid.data === "Paid") {
+                        customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                            scope.partnerinformation(responsedata.data);
+                        });
+                    } else {
+                        scope.unpaidflag = true;
+                        customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
+                            scope.partnerinformation(responseunpaid.data);
+                        });
+                    }
+                }
             });
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
