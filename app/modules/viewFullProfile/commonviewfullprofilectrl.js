@@ -308,7 +308,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                scope.modalbodyID1 = "You need to Upgrade membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
@@ -332,7 +332,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade online membership";
+                                scope.modalbodyID1 = "You need to Upgrade membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
