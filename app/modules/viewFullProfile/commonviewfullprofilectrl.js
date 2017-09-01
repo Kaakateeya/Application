@@ -142,6 +142,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.Searchfunctionality("DontProceed", MobjViewprofile);
         };
         scope.statusalert = function(status) {
+            debugger;
             switch (status) {
                 case 0:
                 case 3:
