@@ -3153,9 +3153,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 //}
             });
         };
-        missingFieldService.GetCustStatus(scope.custid).then(function(response) {
+        // missingFieldService.GetCustStatus(scope.custid).then(function(response) {
 
-        });
+        // });
         scope.cancel = function() {
             $mdDialog.cancel();
         };
@@ -7169,10 +7169,7 @@ function getvalues(test) {
         /* jshint validthis:true */
         var vm = this;
         var profileID = stateParams.profileID;
-        activate();
-
-        function activate() {
-
+        scope.activate = function() {
             loggedascustomerservice.getcustomerpassword(profileID).then(function(response) {
                 console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
@@ -7215,7 +7212,8 @@ function getvalues(test) {
                     });
                 }
             });
-        }
+        };
+        // scope.activate();
     }
 })();
 app.controller("faqs", ['$scope', function(scope) {
@@ -8346,7 +8344,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade membership";
+                                scope.modalbodyID1 = "You need to Upgrade  membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
@@ -8370,7 +8368,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             case 2:
                             case 3:
-                                scope.modalbodyID1 = "You need to Upgrade membership";
+                                scope.modalbodyID1 = "You need to Upgrade  membership";
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
@@ -9394,6 +9392,12 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         getCustomerApplicationErroLog: function(ErrorMessage, CustID, PageName, Type) {
             return http.get(app.apiroot + 'StaticPages/getCustomerApplicationErroLog', { params: { ErrorMessage: (ErrorMessage !== null && ErrorMessage !== undefined && ErrorMessage !== "") ? ErrorMessage : "Not Defined", CustID: CustID, PageName: (PageName !== null && PageName !== undefined && PageName !== "") ? PageName : "Not Defined", Type: (Type !== null && Type !== undefined && Type !== "") ? Type : "Not Defined" } });
-        }
+        },
+        getpaidstatusforviewprfile: function(custid) {
+            return http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } });
+        },
+        Viewprofilepartial: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepartial', { params: { ToProfileID: toprofileid, EmpID: empid } });
+        },
     };
 }]);
