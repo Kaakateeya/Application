@@ -64,9 +64,9 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 //}
             });
         };
-        missingFieldService.GetCustStatus(scope.custid).then(function(response) {
+        // missingFieldService.GetCustStatus(scope.custid).then(function(response) {
 
-        });
+        // });
         scope.cancel = function() {
             $mdDialog.cancel();
         };

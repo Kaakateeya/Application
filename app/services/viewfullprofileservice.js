@@ -29,6 +29,9 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         getpaidstatusforviewprfile: function(custid) {
             return http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } });
-        }
+        },
+        Viewprofilepartial: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepartial', { params: { ToProfileID: toprofileid, EmpID: empid } });
+        },
     };
 }]);

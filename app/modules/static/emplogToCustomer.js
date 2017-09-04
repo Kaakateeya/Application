@@ -11,10 +11,7 @@
         /* jshint validthis:true */
         var vm = this;
         var profileID = stateParams.profileID;
-        activate();
-
-        function activate() {
-
+        scope.activate = function() {
             loggedascustomerservice.getcustomerpassword(profileID).then(function(response) {
                 console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
@@ -57,6 +54,7 @@
                     });
                 }
             });
-        }
+        };
+        // scope.activate();
     }
 })();
