@@ -2,7 +2,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
     'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams',
     '$location', 'customerviewfullprofileservices', '$window', '$state',
     function(customerDashboardServices, scope, alerts, authSvc, $injector, uibModal, successstoriesdata, timeout,
-        $mdDialog, $stateParams, $location, customerviewfullprofileservices, $window, $state) {
+        $mdDialog, $stateParams, $location, customerviewfullprofileservices, window, $state) {
         scope.headerpopup = "Slide show";
         scope.popupmodalbody = false;
         scope.PageDiv = true;
@@ -39,6 +39,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.bookmarkexpreessdata = function() {
+            debugger;
             customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(responsebook) {
                 _.each(responsebook.data, function(item) {
                     var testArr = JSON.parse(item);
@@ -64,6 +65,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     }
                                 }
                                 if (testArr[0].MatchFollowUpStatus === 1) {
+                                    debugger;
                                     if (testArr[0].SeenStatus === "Accept" || testArr[0].SeenStatus === "Reject") {
                                         scope.divacceptreject = true;
                                         scope.btnticket = testArr[0].ViewTicket;
@@ -103,9 +105,26 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
             //     scope.partnerinformation(responsedata.data);
             // });
-            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
-                scope.partnerinformation(responsedata.data);
-            });
+            if (scope.interestedflag === true) {
+                customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
+                    scope.partnerinformation(responseunpaid.data);
+                });
+            } else {
+                customerviewfullprofileservices.getpaidstatusforviewprfile(scope.fromcustid).then(function(responsepaid) {
+                    if (responsepaid.status === 200 && responsepaid.data !== null && responsepaid.data !== undefined) {
+                        if (responsepaid.data === "Paid") {
+                            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                                scope.partnerinformation(responsedata.data);
+                            });
+                        } else {
+                            scope.unpaidflag = true;
+                            customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
+                                scope.partnerinformation(responseunpaid.data);
+                            });
+                        }
+                    }
+                });
+            }
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
                 scope.slides = [];
@@ -142,6 +161,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             scope.Searchfunctionality("DontProceed", MobjViewprofile);
         };
         scope.statusalert = function(status) {
+
             switch (status) {
                 case 0:
                 case 3:
@@ -151,11 +171,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 4:
                     scope.divmodalbodytoClose = "Please upgrade your membership";
                     alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
+                    scope.unpaidflag = true;
                     break;
                 case 5:
                     scope.divmodalbodytoClose = "Please upgrade your membership(No points)";
                     alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
-
+                    scope.unpaidflag = true;
                     break;
                 case 6:
                     scope.divmodalbodytoClose = "You have already Skipped this profile";
@@ -172,6 +193,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.Reject_paeload();
                     break;
                 case 9:
+                case 16:
+                    scope.interestedflag = status === 9 ? true : false;
                     //scope.pagerefersh(scope.tocustid, scope.fromcustid);
                     scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     break;
@@ -240,7 +263,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
         };
         scope.modalpopupclose1 = function() {
-            alerts.dynamicpopupclose();
+            if (scope.interestedflag === true) {
+                alerts.dynamicpopupclose();
+                window.open('/commonviewfull' + scope.MyProfileQSAccept, '_blank');
+            } else {
+                alerts.dynamicpopupclose();
+            }
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -304,7 +332,11 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                                scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                if (scope.unpaidflag) {
+                                    scope.modalbodyID1 = "You need to Upgrade  membership";
+                                } else {
+                                    scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                }
                                 break;
                             case 2:
                             case 3:

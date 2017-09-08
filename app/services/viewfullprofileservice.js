@@ -32,6 +32,7 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         Viewprofilepartial: function(toprofileid, empid) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepartial', { params: { ToProfileID: toprofileid, EmpID: empid } });
-        },
+        }
+
     };
 }]);
