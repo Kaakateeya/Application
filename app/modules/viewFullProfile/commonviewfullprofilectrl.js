@@ -39,7 +39,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.bookmarkexpreessdata = function() {
-            debugger;
             customerviewfullprofileservices.getExpressinterst_bookmark_ignore_data(scope.fromcustid, scope.tocustid).then(function(responsebook) {
                 _.each(responsebook.data, function(item) {
                     var testArr = JSON.parse(item);
@@ -65,7 +64,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     }
                                 }
                                 if (testArr[0].MatchFollowUpStatus === 1) {
-                                    debugger;
                                     if (testArr[0].SeenStatus === "Accept" || testArr[0].SeenStatus === "Reject") {
                                         scope.divacceptreject = true;
                                         scope.btnticket = testArr[0].ViewTicket;
