@@ -170,9 +170,9 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 if (headertext === "1" || headertext === "2" || headertext === "3") {
                     scope.flagexpress = 9;
                     if (headertext === "1") {
-                        yourFilterexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'I' : null;
-                        oppfilterexpress = scope.expressmyinterest.indexOf('I interesed in') == -1 ? 'I' : null;
-                        TypeOfReportexpress = scope.expressmyinterest.indexOf('I interesed in') !== -1 ? 'R' : 'S';
+                        yourFilterexpress = scope.expressmyinterest.indexOf('I interested in') !== -1 ? 'I' : null;
+                        oppfilterexpress = scope.expressmyinterest.indexOf('I interested in') == -1 ? 'I' : null;
+                        TypeOfReportexpress = scope.expressmyinterest.indexOf('I interested in') !== -1 ? 'R' : 'S';
                     } else if (headertext === "2") {
                         yourFilterexpress = scope.expressmynotinterest.indexOf('I skipped') !== -1 ? 'NI' : null;
                         oppfilterexpress = scope.expressmynotinterest.indexOf('I skipped') == -1 ? 'NI' : null;
@@ -213,7 +213,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             scope.click = "";
                             scope.flagexpress = 9;
                             scope.typeofdiv = headertext === 'All Profiles' ? 'Expressinterest' : 'Expressinterestsend';
-                            scope.expressmyinterest = TypeOfReport === 'R' ? 'I interesed in' : scope.Gendercustomer + ' interesed';
+                            scope.expressmyinterest = TypeOfReport === 'R' ? 'I interested in' : scope.Gendercustomer + ' interested';
                             scope.expressmynotinterest = TypeOfReport === 'R' ? 'I skipped' : scope.Gendercustomer + ' skipped';
                             scope.expressmynotviewed = TypeOfReport === 'R' ? 'I Viewed/NotViewed' : scope.Gendercustomer + ' Viewed/NotViewed';
                             if (scope.PartnerProfilesnew[0] !== null && scope.PartnerProfilesnew[0] !== undefined && scope.PartnerProfilesnew[0] !== null) {
