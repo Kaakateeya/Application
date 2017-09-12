@@ -143,14 +143,13 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             if (scope.custid === localcustid) {
                 scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
-
-                    scope.slideshowimages();
+                    // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
 
-                    scope.slideshowimages();
+                    // scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();
                 });
@@ -262,6 +261,8 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             });
         };
         scope.photoalbum = function() {
+
+            scope.slideshowimages();
             scope.headerpopup = "Slide show";
             scope.popupmodalbody = false;
             if (logincustid !== null && logincustid !== undefined && logincustid !== "") {

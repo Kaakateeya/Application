@@ -18,7 +18,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 keyboard: false,
                 windowClass: 'full'
             });
-            scope.starArr = commonFactory.starBind(1);
+
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
                 // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
@@ -41,6 +41,8 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 if (scope.MFSelectArray.AstroFlag === 1) {
                     scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
                     scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
+
+                    scope.starArr = scope.divStar === false ? commonFactory.starBind(1) : [];
                     scope.divGothram = commonFactory.checkvals(scope.MFSelectArray.MeternalGothram) ? true : false;
                     //lblAstroFlag.Text = !scope.MFSelectArray.AstroFlag ? dsresult.Tables[0].Rows[0]["AstroFlag"].ToString() : string.Empty;
                 }
