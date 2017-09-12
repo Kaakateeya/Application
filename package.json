@@ -11,7 +11,7 @@
         "angular-aria": "1.5.8",
         "angular-date-time-input": "latest",
         "angular-material": "^1.1.1",
-        "angular-messages": "^1.5.8",
+        "angular-messages": "1.5.8",
         "angular-password": "^1.0.3",
         "angular-route": "latest",
         "angular-ui-router": "^0.3.1",
