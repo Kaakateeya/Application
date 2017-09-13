@@ -32,7 +32,8 @@
                 </div>
                 <div class="span6">
                     <table>
-                        <caption ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false">{{data.NAME}}</caption>
+                        <!-- <caption ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false">{{data.NAME}}</caption> -->
+                        <caption ng-show="false">{{data.NAME}}</caption>
                         <label id="labaljdjs" ng-hide="true">{{$index}}</label>
                         <tbody>
                             <tr>
@@ -123,14 +124,18 @@
             <div class="search_result_item_descr pull-left">
                 <p ng-hide="(LcustID!==null && LcustID!==undefined && LcustID!=='')&&(loginpaidstatus==='1')?(data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined):(data.DistName=='' || data.DistName==null || data.DistName==undefined)">
                     <span>{{(data.iGenderID===1)||(data.GenderID===1)?"He":"She"}}</span> was born and raised in
-                  
+
                     <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
-                    <p ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
+                    <p ng-show="false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Name</label>
                         <span>{{data.NAME}}</span>
                     </p>
+                    <!-- <p ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
+                        <label>Name</label>
+                        <span>{{data.NAME}}</span>
+                    </p> -->
                     <p class="clearfix">
                         <label>Age / Height</label>
                         <span>{{data.Age}}</span><span>-</span><span>{{data.Height}}</span>
@@ -160,7 +165,7 @@
             </div>
             <div class="clear"></div>
         </div>
-         <div class="search_result_item_ui clearfix">
+        <div class="search_result_item_ui clearfix">
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
@@ -211,7 +216,7 @@
         </div>
     </div>
     </br>
-     <div class="clearfix"></div>
+    <div class="clearfix"></div>
     <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
         <div class="col-lg-offset-5" ng-show="loadmore">
             <a href="javascript:void(0)" ng-click="directivepaging()"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
