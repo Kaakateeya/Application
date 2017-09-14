@@ -347,8 +347,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             case 1:
                                 if (scope.unpaidflag) {
                                     scope.modalbodyID1 = "You need to Upgrade  membership";
+                                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 } else {
                                     scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                    window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
                                 }
                                 break;
                             case 2:
@@ -357,6 +359,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
+                                alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 break;
                         }
                     });
@@ -383,12 +386,13 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 scope.modalbodyID1 = "Updation failed please contact admin";
                                 break;
                         }
+                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                     });
                     break;
             }
             scope.divacceptreject = true;
-            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
             //scope.pagerefersh(scope.tocustid, scope.fromcustid);
+            // alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
             scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
         };
         scope.acceptreject = function(typeofaction) {
