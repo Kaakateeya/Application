@@ -233,7 +233,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.$on("notify-error", function(event, value) {
             console.log(value);
-
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             if (httperrorpopupstatus !== "1") {

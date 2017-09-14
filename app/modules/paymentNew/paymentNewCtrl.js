@@ -27,7 +27,6 @@
               $scope.Cust_ID = $scope.array[0].Cust_ID;
               $scope.MemberShipTypeID = $scope.array[0].MemberShipTypeID;
               $scope.display = 1;
-              console.log($scope.array);
           }).error(function(data, status, headers, config) {
               alert("No  Data found");
           });
@@ -35,24 +34,17 @@
 
       $scope.gridView = function() {
           $scope.display = 3;
-
           $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetailsGridview', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
               $scope.array = JSON.parse(data);
               $scope.ProfileID = $scope.array[0].ProfileID;
-
-
-              console.log($scope.array);
           }).error(function(data, status, headers, config) {
               alert("No  Data found");
           });
       };
 
       $scope.btnsubmit = function(display) {
-
           if (display == 1) {
-
               var obj = {
-
                   ProfileID: $scope.ProfileID,
                   Cust_id: $scope.Cust_ID,
                   Payment_Id: $scope.rbtPaymenttype,
@@ -78,7 +70,6 @@
                   AccessFeatureID: $scope.rbtAccessFeature,
                   PaysmsID: $scope.SendEmailSms
               };
-
               $http.post('http://183.82.0.58:8010/Api/Payment/CustomerInsertPaymentDetilsInfo_NewDesign', obj).then(function(response) {
                   alert("Payment Success......");
               });

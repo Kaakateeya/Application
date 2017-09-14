@@ -66,7 +66,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    console.log(testArr);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
@@ -84,9 +83,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 scope.lnkViewHoro = true;
                                 break;
                             case "Express":
-
                                 scope.Express = testArr;
-                                console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {
                                     if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
                                         scope.liticket = true;
@@ -222,7 +219,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });

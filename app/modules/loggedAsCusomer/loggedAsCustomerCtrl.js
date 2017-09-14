@@ -3,10 +3,8 @@ app.controller("loggedascustomers", ['$scope', '$mdDialog',
     function(scope, $mdDialog, authSvc, alerts, loggedascustomerservice, route) {
         scope.authentication = true;
         scope.Customerprofileiddiv = false;
-
         scope.submitcheckpassword = function() {
             loggedascustomerservice.getcheckpassword(scope.employeeusername, scope.employeepassword).then(function(response) {
-                console.log(response);
                 if (response.data === 1) {
                     scope.authentication = false;
                     scope.Customerprofileiddiv = true;
@@ -19,14 +17,12 @@ app.controller("loggedascustomers", ['$scope', '$mdDialog',
         };
         scope.submitgetpassword = function() {
             loggedascustomerservice.getcustomerpassword(scope.customerprofileid).then(function(response) {
-                console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
                     scope.authentication = false;
                     scope.Customerprofileiddiv = false;
                     var passwords = (response.data).split(';');
                     scope.customerpassword = (passwords[0].split(':'))[1];
                     scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
-                    console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
                     authSvc.login(scope.customerprofileid, scope.customerpasswordencrypt).then(function(response) {
                         sessionStorage.removeItem("loggedAscustomerPage");

@@ -7,7 +7,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.popupmodalbody = false;
         scope.PageDiv = true;
         scope.searchObjectquery = $location.search();
-        debugger;
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
         var mekey2 = Object.getOwnPropertyNames(scope.searchObjectquery)[1];
         var meValue = scope.searchObjectquery[meKey];
@@ -24,7 +23,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
-                    console.log(JSON.stringify(scope.personalinfo));
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -33,8 +31,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
                     }
                 } else {
-
-                    console.log(testArr);
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
@@ -91,7 +87,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     scope.divacceptreject = false;
                                     scope.liaccept = false;
                                 }
-                                debugger;
                                 if (testArr[0].ExpressInterstId !== null) {
                                     scope.hdnexpressinterstfiled = testArr[0].ExpressInterstId;
                                 }
@@ -113,7 +108,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             //     scope.partnerinformation(responsedata.data);
             // });
 
-            debugger;
             if (scope.interestedflag === true) {
                 customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
@@ -143,7 +137,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // });
         };
         scope.Searchfunctionality = function(type, object) {
-            debugger;
             switch (type) {
                 case "DontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(object).then(function(response) {
@@ -159,7 +152,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.Reject_paeload = function() {
-            debugger;
             // scope.pagerefersh(scope.tocustid, scope.fromcustid);
             scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             scope.PageDiv = false;
@@ -244,10 +236,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         };
 
         scope.pageload = function() {
-
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
-                console.log(response);
-
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;

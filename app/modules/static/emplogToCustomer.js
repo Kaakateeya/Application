@@ -4,7 +4,6 @@
     angular
         .module('Kaakateeya')
         .controller('empLogCustomerCtrl', controller);
-
     controller.$inject = ['$scope', '$stateParams', 'loggedascustomerservice', 'missingFieldService', 'authSvc', 'helperservice', 'route'];
 
     function controller(scope, stateParams, loggedascustomerservice, missingFieldService, authSvc, helperservice, route) {
@@ -13,15 +12,11 @@
         var profileID = stateParams.profileID;
         scope.activate = function() {
             loggedascustomerservice.getcustomerpassword(profileID).then(function(response) {
-                console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
-
                     var passwords = (response.data).split(';');
                     scope.customerpassword = (passwords[0].split(':'))[1];
                     scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
-                    console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
-
                     authSvc.login(profileID, scope.customerpasswordencrypt, 2).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);

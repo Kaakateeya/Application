@@ -442,9 +442,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
-                console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
                     scope.latestprofiles = response.data;
                 }
