@@ -276,12 +276,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
         };
         scope.modalpopupclose1 = function() {
-            if (scope.interestedflag === true) {
-                alerts.dynamicpopupclose();
-                window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
-            } else {
-                alerts.dynamicpopupclose();
-            }
+            // if (scope.interestedflag === true) {
+            //     alerts.dynamicpopupclose();
+            //     window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+            // } else {
+            alerts.dynamicpopupclose();
+            //}
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -351,6 +351,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 } else {
                                     scope.modalbodyID1 = "To Move the Match for MatchFollowup";
                                     window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+                                    scope.divacceptreject = true;
+                                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
                                 break;
                             case 2:
@@ -387,13 +389,15 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                         }
                         alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                        scope.divacceptreject = true;
+                        scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     });
                     break;
             }
-            scope.divacceptreject = true;
+
             //scope.pagerefersh(scope.tocustid, scope.fromcustid);
             // alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-            scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
