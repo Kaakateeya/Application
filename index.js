@@ -62,7 +62,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'empLogintoCustomer', url: '/empLogintoCustomer/:profileID', templateUrl: 'app/modules/static/emplogToCustomer.html', controller: "empLogCustomerCtrl", isloginrequired: false },
         //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
-        { name: 'viewMyProfileMail', url: '/viewMyProfileMail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false }
+        { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
