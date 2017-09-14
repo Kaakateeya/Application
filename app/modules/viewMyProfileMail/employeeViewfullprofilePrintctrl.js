@@ -1,5 +1,5 @@
  (function() {
-     'use strict';
+
 
      function controller(employeeViewfullprofileModel, scope, $location) {
          var vm = this,

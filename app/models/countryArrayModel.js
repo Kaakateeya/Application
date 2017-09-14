@@ -23,7 +23,6 @@
         };
 
         model.Countryf = function() {
-            debugger;
             if (model.Country.length === 0) {
                 service.countrySelect().then(function(response) {
                     var option = [];

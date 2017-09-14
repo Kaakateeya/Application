@@ -927,298 +927,301 @@ app.directive("forgotPassword", ['authSvc', "customerProfilesettings", "alert",
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
-app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', '$timeout', function(cons, service, timeout) {
-    return {
-        require: 'ng-model',
-        scope: {
-            ngModel: '=',
-            typeofdata: "=",
-            parentVal: "="
-        },
-        link: function(scope, element, attrs) {
-            scope.options = [];
+app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', '$timeout',
+    'countryArrayModel', 'eduprofArrayModel', 'otherArrayModel',
+    function(cons, service, timeout, countryArrayModel, eduprofArrayModel, otherArrayModel) {
+        return {
+            require: 'ng-model',
+            scope: {
+                ngModel: '=',
+                typeofdata: "=",
+                parentVal: "="
+            },
+            link: function(scope, element, attrs) {
+                scope.options = [];
 
-            scope.databind = function(data) {
-                timeout(function() {
-                    scope.status = 'multiple' in attrs;
-                    if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
-                        data.splice(0, 1);
-                    }
-                    element.multiselect('dataprovider', data);
-                }, 500);
-            };
-            timeout(function() {
-                element.multiselect('select', scope.ngModel);
-
-            }, 500);
-            timeout(function() {
-                switch (scope.typeofdata) {
-                    case 'MaritalStatus':
-                        scope.databind(cons.MaritalStatus);
-                        break;
-                    case 'height':
-                        scope.databind(cons.height);
-                        break;
-                    case 'Religion':
-                        scope.databind(cons.Religion);
-                        break;
-                    case 'Mothertongue':
-                        scope.databind(cons.Mothertongue);
-                        break;
-                    case 'Mothertongueselect':
-                        scope.databind(cons.Mothertongueselect);
-                        break;
-                    case 'educationcategory':
-                        scope.databind(cons.educationcategory);
-                        break;
-                    case 'visastatus':
-                        scope.databind(cons.visastatus);
-                        break;
-                    case 'stars':
-                        scope.databind(cons.stars);
-                        break;
-                    case 'region':
-                        scope.databind(cons.region);
-                        break;
-                    case 'bodyType':
-                        scope.databind(cons.bodyType);
-                        break;
-                    case 'bloodGroup':
-                        scope.databind(cons.bloodGroup);
-                        break;
-                    case 'healthCondition':
-                        scope.databind(cons.healthCondition);
-                        break;
-                    case 'starLanguage':
-                        scope.databind(cons.starLanguage);
-                        break;
-                    case 'lagnam':
-                        scope.databind(cons.lagnam);
-                        break;
-                    case 'ZodaicSign':
-                        scope.databind(cons.ZodaicSign);
-                        break;
-                    case 'paadam':
-                        scope.databind(cons.paadam);
-                        break;
-                    case 'familyStatus':
-                        scope.databind(cons.familyStatus);
-                        break;
-                    case 'RelationshipType':
-                        scope.databind(cons.RelationshipType);
-                        break;
-                    case "childStayingWith":
-                        scope.databind(cons.childStayingWith);
-                        break;
-                    case 'hereabout':
-                        scope.databind(cons.hereabout);
-                        break;
-                    case 'improveourwebsite':
-                        scope.databind(cons.improveourwebsite);
-                        break;
-                    case 'prices':
-                        scope.databind(cons.prices);
-                        break;
-                    case 'downloadtime':
-                        scope.databind(cons.downloadtime);
-                        break;
-                    case 'yourratethesearch':
-                        scope.databind(cons.yourratethesearch);
-                        break;
-                    case 'comparesites':
-                        scope.databind(cons.comparesites);
-                        break;
-                    case 'recomendedtofriends':
-                        scope.databind(cons.recomendedtofriends);
-                        break;
-                    case 'Country':
-                        service.countrySelect().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'ProfCatgory':
-                        service.ProfessionCatgory().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'ProfGroup':
-                        service.ProfessionGroup().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'indiaStates':
-                        service.stateSelect('1').then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'countryCode':
-                        service.countryCodeselect().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'caste':
-                        service.casteselect().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'Caste':
-                        service.casteselect().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'currency':
-                        service.currency().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
-                        break;
-                    case 'catgory':
-                        scope.databind(cons.catgory);
-                        break;
-
-                    case 'Priority':
-                        scope.databind(cons.Priority);
-                        break;
-                    case 'Age':
-                    case 'Ageselect':
-                        var test = [];
-                        test.push({ label: "--select--", title: "--select--", value: "0" });
-                        for (var i = 18; i < 78; i++) {
-                            if (scope.typeofdata === "Ageselect") {
-                                test.push({ "label": i + ' years', "title": i + ' years', "value": i });
-                            } else {
-                                test.push({ "label": i, "title": i, "value": i });
-                            }
+                scope.databind = function(data) {
+                    timeout(function() {
+                        scope.status = 'multiple' in attrs;
+                        if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
+                            data.splice(0, 1);
                         }
-                        scope.databind(test);
-                        break;
-                        // case 'Days':
+                        element.multiselect('dataprovider', data);
+                    }, 500);
+                };
+                timeout(function() {
+                    element.multiselect('select', scope.ngModel);
 
-                        //     var Arr = [];
-                        //     Arr.push({ label: "--select--", title: "--select--", value: "0" });
-                        //     for (var i = 1; i <= 31; i++) {
-                        //         var strValue = null;
-                        //         if (i <= 9) {
-                        //             strValue = "0" + i;
-                        //         } else {
-                        //             strValue = i;
-                        //         }
-                        //         Arr.push({ "label": strValue, "title": strValue, "value": strValue });
-                        //     }
-                        //     scope.databind(Arr);
+                }, 500);
+                timeout(function() {
+                    switch (scope.typeofdata) {
+                        case 'MaritalStatus':
+                            scope.databind(cons.MaritalStatus);
+                            break;
+                        case 'height':
+                            scope.databind(cons.height);
+                            break;
+                        case 'Religion':
+                            scope.databind(cons.Religion);
+                            break;
+                        case 'Mothertongue':
+                            scope.databind(cons.Mothertongue);
+                            break;
+                        case 'Mothertongueselect':
+                            scope.databind(cons.Mothertongueselect);
+                            break;
+                        case 'educationcategory':
+                            scope.databind(cons.educationcategory);
+                            break;
+                        case 'visastatus':
+                            scope.databind(cons.visastatus);
+                            break;
+                        case 'stars':
+                            scope.databind(cons.stars);
+                            break;
+                        case 'region':
+                            scope.databind(cons.region);
+                            break;
+                        case 'bodyType':
+                            scope.databind(cons.bodyType);
+                            break;
+                        case 'bloodGroup':
+                            scope.databind(cons.bloodGroup);
+                            break;
+                        case 'healthCondition':
+                            scope.databind(cons.healthCondition);
+                            break;
+                        case 'starLanguage':
+                            scope.databind(cons.starLanguage);
+                            break;
+                        case 'lagnam':
+                            scope.databind(cons.lagnam);
+                            break;
+                        case 'ZodaicSign':
+                            scope.databind(cons.ZodaicSign);
+                            break;
+                        case 'paadam':
+                            scope.databind(cons.paadam);
+                            break;
+                        case 'familyStatus':
+                            scope.databind(cons.familyStatus);
+                            break;
+                        case 'RelationshipType':
+                            scope.databind(cons.RelationshipType);
+                            break;
+                        case "childStayingWith":
+                            scope.databind(cons.childStayingWith);
+                            break;
+                        case 'hereabout':
+                            scope.databind(cons.hereabout);
+                            break;
+                        case 'improveourwebsite':
+                            scope.databind(cons.improveourwebsite);
+                            break;
+                        case 'prices':
+                            scope.databind(cons.prices);
+                            break;
+                        case 'downloadtime':
+                            scope.databind(cons.downloadtime);
+                            break;
+                        case 'yourratethesearch':
+                            scope.databind(cons.yourratethesearch);
+                            break;
+                        case 'comparesites':
+                            scope.databind(cons.comparesites);
+                            break;
+                        case 'recomendedtofriends':
+                            scope.databind(cons.recomendedtofriends);
+                            break;
+                        case 'Country':
 
-                        //     break;
+                            // service.countrySelect().then(function(response) {
+                            //     var option = [];
 
-                        // case 'Months':
-                        //     var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                        //     var option = [];
-                        //     option.push({ label: "--select--", title: "--select--", value: "0" });
-                        //     _.each(monthArr, function(item) {
-                        //         option.push({ "label": item, "title": item, "value": item });
-                        //     });
-                        //     scope.databind(option);
-                        //     break;
-                        // case "Years":
-                        //     var Arr = [];
-                        //     Arr.push({ label: "--select--", title: "--select--", value: "0" });
-                        //     for (var i = 1998; i >= 1936; i--) {
-                        //         Arr.push({ "label": i, "title": i, "value": i });
-                        //     }
-                        //     scope.databind(Arr);
-                        //     break;
-                    case "Complexion":
-                        scope.databind(cons.Complexion);
-                        break;
-                    case 'newProfessionCatgory':
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
 
-                        service.newProfessionCat().then(function(response) {
-                            var option = [];
-                            option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                            _.each(response.data, function(item) {
-                                option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                            });
-                            scope.databind(option);
-                        });
+                            scope.databind(countryArrayModel.Country);
+
+                            break;
+                        case 'ProfCatgory':
+                            // service.ProfessionCatgory().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
 
 
-                        break;
+                            scope.databind(eduprofArrayModel.ProfCatgory);
 
-                }
-            }, 1000);
-            element.multiselect({
-                buttonClass: 'btn',
-                buttonWidth: 'auto',
-                inheritClass: true,
-                includeSelectAllOption: true,
-                disableIfEmpty: true,
-                nonSelectedText: 'Any',
-                allSelectedText: 'All Selected',
-                selectAllText: 'Check all!',
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                filterPlaceholder: 'Type To Search',
-                buttonContainer: '<div class="btn-group" />',
-                maxHeight: false
-            });
-            //element.multiselect('setOptions', secondConfigurationSet);
-            //element.multiselect('rebuild');
-            // Watch for any changes to the length of our select element
-            scope.$watch(function() {
-                //console.log("TYPEDROP   " + scope.typeofdata);
-                // console.log(element[0].length);
-                element.multiselect('select', scope.ngModel);
-                return element[0].length;
-            }, function() {
-                scope.$applyAsync(element.multiselect('rebuild'));
-                element.multiselect('select', scope.ngModel);
-            });
-            // Watch for any changes from outside the directive and refresh
-            scope.$watch(attrs.ngModel, function() {
-                // console.log(scope.ngModel);
-                element.multiselect('refresh');
-            });
-        }
-    };
-}]);
+
+
+                            break;
+                        case 'ProfGroup':
+                            // service.ProfessionGroup().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+
+                            scope.databind(eduprofArrayModel.ProfGroup);
+
+
+                            break;
+                        case 'indiaStates':
+                            // service.stateSelect('1').then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+
+
+                            scope.databind(countryArrayModel.IndiaStates);
+
+
+                            break;
+                        case 'countryCode':
+                            // service.countryCodeselect().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+
+
+                            scope.databind(countryArrayModel.countryCode);
+
+                            break;
+                        case 'caste':
+                        case 'Caste':
+                            // service.casteselect().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+
+                            scope.databind(otherArrayModel.caste);
+                            break;
+
+                            // case 'Caste':
+                            //     service.casteselect().then(function(response) {
+                            //         var option = [];
+                            //         option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                            //         _.each(response.data, function(item) {
+                            //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //         });
+                            //         scope.databind(option);
+                            //     });
+                            //     scope.databind(otherArrayModel.caste);
+                            //     break;
+
+
+                        case 'currency':
+                            // service.currency().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+
+
+                            scope.databind(countryArrayModel.currency);
+
+                            break;
+                        case 'catgory':
+                            scope.databind(cons.catgory);
+                            break;
+
+                        case 'Priority':
+                            scope.databind(cons.Priority);
+                            break;
+                        case 'Age':
+                        case 'Ageselect':
+                            var test = [];
+                            test.push({ label: "--select--", title: "--select--", value: "0" });
+                            for (var i = 18; i < 78; i++) {
+                                if (scope.typeofdata === "Ageselect") {
+                                    test.push({ "label": i + ' years', "title": i + ' years', "value": i });
+                                } else {
+                                    test.push({ "label": i, "title": i, "value": i });
+                                }
+                            }
+                            scope.databind(test);
+                            break;
+                        case "Complexion":
+                            scope.databind(cons.Complexion);
+                            break;
+                        case 'newProfessionCatgory':
+
+                            // service.newProfessionCat().then(function(response) {
+                            //     var option = [];
+                            //     option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                            //     _.each(response.data, function(item) {
+                            //         option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            //     });
+                            //     scope.databind(option);
+                            // });
+                            scope.databind(eduprofArrayModel.newProfessionCatgory);
+
+                            break;
+
+                    }
+                }, 1000);
+                element.multiselect({
+                    buttonClass: 'btn',
+                    buttonWidth: 'auto',
+                    inheritClass: true,
+                    includeSelectAllOption: true,
+                    disableIfEmpty: true,
+                    nonSelectedText: 'Any',
+                    allSelectedText: 'All Selected',
+                    selectAllText: 'Check all!',
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                    filterPlaceholder: 'Type To Search',
+                    buttonContainer: '<div class="btn-group" />',
+                    maxHeight: false
+                });
+                //element.multiselect('setOptions', secondConfigurationSet);
+                //element.multiselect('rebuild');
+                // Watch for any changes to the length of our select element
+                scope.$watch(function() {
+                    //console.log("TYPEDROP   " + scope.typeofdata);
+                    // console.log(element[0].length);
+                    element.multiselect('select', scope.ngModel);
+                    return element[0].length;
+                }, function() {
+                    scope.$applyAsync(element.multiselect('rebuild'));
+                    element.multiselect('select', scope.ngModel);
+                });
+                // Watch for any changes from outside the directive and refresh
+                scope.$watch(attrs.ngModel, function() {
+                    // console.log(scope.ngModel);
+                    element.multiselect('refresh');
+                });
+            }
+        };
+    }
+]);
 app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce',
     function(commonFactory, uibModal, timeout, $sce) {
         var modalinstance;
@@ -1723,6 +1726,259 @@ app.directive('setClassWhenAtTop', function($window) {
         }
     };
 });
+(function(angular) {
+    'use strict';
+
+    function factory($http, service, timeout) {
+        var model = {};
+        model.Country = [];
+        model.IndiaStates = [];
+        model.countryCode = [];
+        model.currency = [];
+
+        model.init = function() {
+            model.Country = [];
+            model.IndiaStates = [];
+            model.countryCode = [];
+            model.currency = [];
+            // timeout(function() {
+            model.Countryf();
+            model.stateSelectf();
+            model.countryCodeselectf();
+            model.currencyf();
+            // });
+            return model;
+        };
+
+        model.Countryf = function() {
+            if (model.Country.length === 0) {
+                service.countrySelect().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.Country = option;
+                });
+            }
+        };
+
+        model.stateSelectf = function() {
+
+            if (model.IndiaStates.length === 0) {
+                service.stateSelect('1').then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.IndiaStates = option;
+                });
+            }
+
+        };
+
+        model.countryCodeselectf = function() {
+            if (model.countryCode.length === 0) {
+                service.countryCodeselect().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.countryCode = option;
+                });
+            }
+        };
+
+        model.currencyf = function() {
+            if (model.currency.length === 0) {
+                service.currency().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.currency = option;
+                });
+            }
+        };
+
+        return model.init();
+    }
+
+    angular
+        .module('Kaakateeya')
+        .factory('countryArrayModel', factory);
+
+    factory.$inject = ['$http', 'SelectBindServiceApp', '$timeout'];
+
+})(angular);
+(function(angular) {
+    'use strict';
+
+
+    function factory($http, serviceApp, timeout) {
+        var model = {};
+        model.ProfCatgory = [];
+        model.ProfGroup = [];
+        model.newProfessionCatgory = [];
+
+        model.init = function() {
+            model.ProfCatgoryf();
+            model.ProfessionGroupf();
+            model.newProfessionCatgoryf();
+            return model;
+        };
+
+        model.ProfCatgoryf = function() {
+            if (model.ProfCatgory.length === 0) {
+                serviceApp.ProfessionCatgory().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.ProfCatgory = option;
+                });
+            }
+        };
+        model.ProfessionGroupf = function() {
+            if (model.ProfGroup.length === 0) {
+                serviceApp.ProfessionGroup().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.ProfGroup = option;
+                });
+            }
+        };
+
+        model.newProfessionCatgoryf = function() {
+            if (model.newProfessionCatgory.length === 0) {
+                serviceApp.newProfessionCat().then(function(response) {
+                    var option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.newProfessionCatgory = option;
+                });
+            }
+        };
+
+        return model.init();
+    }
+
+    angular
+        .module('Kaakateeya')
+        .factory('eduprofArrayModel', factory);
+
+    factory.$inject = ['$http', 'SelectBindServiceApp', '$timeout'];
+
+})(angular);
+(function(angular) {
+    'use strict';
+
+    function factory($http, serviceApp, timeout) {
+        var model = {};
+        var option = [];
+        model.caste = [];
+        model.init = function() {
+            model.casteselectf();
+            return model;
+        };
+
+        model.casteselectf = function() {
+            if (model.caste.length === 0) {
+                serviceApp.casteselect().then(function(response) {
+                    option = [];
+                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                    model.caste = option;
+                });
+            }
+        };
+
+        // model.empNamesSelectf = function() {
+        //     serviceApp.EmpBinding(1, 2, '').then(function(response) {
+        //         option = [];
+        //         option.push({ "label": "--Select--", "title": "--Select--", "value": "" });
+        //         _.each(response.data, function(item) {
+        //             if (item.CountryCode === 'Profile Owner') {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             }
+        //         });
+        //         model.empNames = option;
+        //     });
+        // };
+
+        // model.branchf = function() {
+        //     option = [];
+        //     //  option.push({ "label": "--Select--", "title": "--Select--", "value": "" });
+        //     serviceApp.BranchName().then(function(response) {
+        //         _.each(response.data, function(item) {
+        //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //         });
+        //         model.branch = option;
+        //     });
+        // };
+
+        // model.Applicationstatusf = function() {
+        //     option = [];
+        //     serviceApp.Applicationstatus().then(function(response) {
+        //         _.each(response.data, function(item) {
+        //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //         });
+        //         model.Applicationstatus = option;
+        //     });
+        // };
+
+        // model.Smokef = function() {
+        //     option = [];
+        //     serviceApp.Smoke().then(function(response) {
+        //         _.each(response.data, function(item) {
+        //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //         });
+        //         model.Smoke = option;
+        //     });
+        // };
+
+
+        // model.Dietf = function() {
+        //     option = [];
+        //     serviceApp.Diet().then(function(response) {
+        //         _.each(response.data, function(item) {
+        //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //         });
+        //         model.Diet = option;
+        //     });
+        // };
+
+        // model.EmpNameswithBranchf = function() {
+        //     option = [];
+        //     serviceApp.EmpwithBranch('ProfileBranch', '').then(function(response) {
+        //         _.each(response.data, function(item) {
+        //             option.push({ "label": item.Name, "title": item.Name, "value": item.ID, ParentName: item.BranchesName });
+        //         });
+        //         model.EmpNameswithBranch = option;
+        //     });
+        // };
+
+        return model.init();
+    }
+
+    angular
+        .module('Kaakateeya')
+        .factory('otherArrayModel', factory);
+
+    factory.$inject = ['$http', 'SelectBindServiceApp', '$timeout'];
+
+})(angular);
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
     'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route',
     '$stateParams', 'commonFactory', 'helperservice',
@@ -2814,7 +3070,6 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         };
         scope.$on("notify-error", function(event, value) {
             console.log(value);
-
             var logincustid = authSvc.getCustId();
             var httperrorpopupstatus = sessionStorage.getItem("httperrorpopupstatus");
             if (httperrorpopupstatus !== "1") {
@@ -3034,10 +3289,8 @@ app.controller("loggedascustomers", ['$scope', '$mdDialog',
     function(scope, $mdDialog, authSvc, alerts, loggedascustomerservice, route) {
         scope.authentication = true;
         scope.Customerprofileiddiv = false;
-
         scope.submitcheckpassword = function() {
             loggedascustomerservice.getcheckpassword(scope.employeeusername, scope.employeepassword).then(function(response) {
-                console.log(response);
                 if (response.data === 1) {
                     scope.authentication = false;
                     scope.Customerprofileiddiv = true;
@@ -3050,14 +3303,12 @@ app.controller("loggedascustomers", ['$scope', '$mdDialog',
         };
         scope.submitgetpassword = function() {
             loggedascustomerservice.getcustomerpassword(scope.customerprofileid).then(function(response) {
-                console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
                     scope.authentication = false;
                     scope.Customerprofileiddiv = false;
                     var passwords = (response.data).split(';');
                     scope.customerpassword = (passwords[0].split(':'))[1];
                     scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
-                    console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
                     authSvc.login(scope.customerprofileid, scope.customerpasswordencrypt).then(function(response) {
                         sessionStorage.removeItem("loggedAscustomerPage");
@@ -3107,7 +3358,7 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 keyboard: false,
                 windowClass: 'full'
             });
-            scope.starArr = commonFactory.starBind(1);
+
             missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
                 // scope.missingfileldsflag = sessionStorage.setItem("missingfileldsflag", 1);
@@ -3130,6 +3381,8 @@ app.controller('missingfieldsctrl', ['$scope', 'commonFactory', 'authSvc', '$mdD
                 if (scope.MFSelectArray.AstroFlag === 1) {
                     scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
                     scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
+
+                    scope.starArr = scope.divStar === false ? commonFactory.starBind(1) : [];
                     scope.divGothram = commonFactory.checkvals(scope.MFSelectArray.MeternalGothram) ? true : false;
                     //lblAstroFlag.Text = !scope.MFSelectArray.AstroFlag ? dsresult.Tables[0].Rows[0]["AstroFlag"].ToString() : string.Empty;
                 }
@@ -3718,9 +3971,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
-                console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
                     scope.latestprofiles = response.data[0];
                     scope.branchesarray = response.data[1];
@@ -4394,7 +4645,6 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
-                console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
                     scope.latestprofiles = response.data;
                 }
@@ -4845,9 +5095,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
-                console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
                     scope.latestprofiles = response.data[0];
                     scope.branchesarray = response.data[1];
@@ -5655,9 +5903,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             });
         };
         scope.getalldata = function(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive) {
-
             newhomepageservices.getCustomerHomePageDesignData(flag, casteid, custid, fromindex, EndIndex, GenderID, isActive).then(function(response) {
-                console.log(response.data);
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data.length > 0) {
                     scope.latestprofiles = response.data;
                 }
@@ -5740,7 +5986,6 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
               $scope.Cust_ID = $scope.array[0].Cust_ID;
               $scope.MemberShipTypeID = $scope.array[0].MemberShipTypeID;
               $scope.display = 1;
-              console.log($scope.array);
           }).error(function(data, status, headers, config) {
               alert("No  Data found");
           });
@@ -5748,24 +5993,17 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
 
       $scope.gridView = function() {
           $scope.display = 3;
-
           $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetailsGridview', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
               $scope.array = JSON.parse(data);
               $scope.ProfileID = $scope.array[0].ProfileID;
-
-
-              console.log($scope.array);
           }).error(function(data, status, headers, config) {
               alert("No  Data found");
           });
       };
 
       $scope.btnsubmit = function(display) {
-
           if (display == 1) {
-
               var obj = {
-
                   ProfileID: $scope.ProfileID,
                   Cust_id: $scope.Cust_ID,
                   Payment_Id: $scope.rbtPaymenttype,
@@ -5791,7 +6029,6 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                   AccessFeatureID: $scope.rbtAccessFeature,
                   PaysmsID: $scope.SendEmailSms
               };
-
               $http.post('http://183.82.0.58:8010/Api/Payment/CustomerInsertPaymentDetilsInfo_NewDesign', obj).then(function(response) {
                   alert("Payment Success......");
               });
@@ -6911,21 +7148,17 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         // }, 500);
 
         timeout(function() {
-
             var Country = [],
                 CountryCode = [];
             Country.push({ "label": '--select--', "title": '--select--', "value": '0' });
             CountryCode.push({ "label": '--select--', "title": '--select--', "value": '0' });
             SelectBindServicereg.CountryWithCode().then(function(response) {
-
                 _.each(response.data, function(item) {
                     Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                     CountryCode.push({ "label": item.CountryCode, "title": item.CountryCode, "value": item.ID });
                 });
-
                 console.log('test..');
                 console.log(Country);
-
                 scope.Country = Country;
                 scope.countryCode = CountryCode;
                 scope.reg.ddlcountry = '0';
@@ -6936,7 +7169,6 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
 
         scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
         scope.dayChange = function(obj, type) {
-            console.log(obj);
             var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
             var minth30 = 'Apr,Jun,Sep,Nov';
             var month28 = 'Feb';
@@ -7162,7 +7394,6 @@ function getvalues(test) {
     angular
         .module('Kaakateeya')
         .controller('empLogCustomerCtrl', controller);
-
     controller.$inject = ['$scope', '$stateParams', 'loggedascustomerservice', 'missingFieldService', 'authSvc', 'helperservice', 'route'];
 
     function controller(scope, stateParams, loggedascustomerservice, missingFieldService, authSvc, helperservice, route) {
@@ -7171,15 +7402,11 @@ function getvalues(test) {
         var profileID = stateParams.profileID;
         scope.activate = function() {
             loggedascustomerservice.getcustomerpassword(profileID).then(function(response) {
-                console.log(response);
                 if (response.data !== null && response.data !== undefined && response.data !== "" && response.data.length > 0) {
-
                     var passwords = (response.data).split(';');
                     scope.customerpassword = (passwords[0].split(':'))[1];
                     scope.customerpasswordencrypt = (passwords[1].split(':'))[1];
-                    console.log(scope.customerpassword);
                     //scope.getcustomerinformation(scope.customerprofileid, scope.customerpassword, 1);
-
                     authSvc.login(profileID, scope.customerpasswordencrypt, 2).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
                         authSvc.user(response.response !== null ? response.response[0] : null);
@@ -7996,7 +8223,6 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         var logincustid = authSvc.getCustId();
         scope.custid = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         myAppFactory.getpaymentnew(scope.custid).then(function(response) {
-            console.log(response);
             scope.paymentarray = [];
             scope.paymentarray.push({
                 MembershipName: "Services & Features",
@@ -8007,9 +8233,7 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
             _.each(JSON.parse(response.data[0]), function(item) {
                 scope.paymentarray.push(item);
             });
-            console.log((scope.paymentarray));
         });
-
         scope.selectpaymantoption = function(membershipd, amount, profilecount, discount, custid, servicename, year) {
             var paymentobject = {
                 MembershipID: membershipd,
@@ -8044,7 +8268,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.PageDiv = true;
         scope.searchObjectquery = $location.search();
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
+        var mekey2 = Object.getOwnPropertyNames(scope.searchObjectquery)[1];
         var meValue = scope.searchObjectquery[meKey];
+        var meValue2 = scope.searchObjectquery[mekey2];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
         scope.tocustid = null;
         scope.partnerinformation = function(response) {
@@ -8057,7 +8283,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
-                    console.log(JSON.stringify(scope.personalinfo));
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -8066,8 +8291,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
                     }
                 } else {
-
-                    console.log(testArr);
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
@@ -8091,12 +8314,17 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have proceeded this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
+
                                     }
                                 } else if (testArr[0].SeenStatus === "Reject" && scope.hdnAccRejFlag !== "MailAccept") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have Skipped this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
                                     }
                                 }
                                 if (testArr[0].MatchFollowUpStatus === 1) {
@@ -8139,6 +8367,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
             //     scope.partnerinformation(responsedata.data);
             // });
+
             if (scope.interestedflag === true) {
                 customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
@@ -8160,12 +8389,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 });
             }
             scope.bookmarkexpreessdata();
-            customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
-                scope.slides = [];
-                _.each(response.data, function(item) {
-                    scope.slides.push(item);
-                });
-            });
+            // customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
+            //     scope.slides = [];
+            //     _.each(response.data, function(item) {
+            //         scope.slides.push(item);
+            //     });
+            // });
         };
         scope.Searchfunctionality = function(type, object) {
             switch (type) {
@@ -8186,13 +8415,15 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // scope.pagerefersh(scope.tocustid, scope.fromcustid);
             scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             scope.PageDiv = false;
-            var MobjViewprofile = {
-                ExpressInrestID: scope.hdnexpressinterstfiled,
-                CustID: scope.fromcustid,
-                AcceptStatus: 2,
-                MatchFollwupStatus: 2
-            };
-            scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            timeout(function() {
+                var MobjViewprofile = {
+                    ExpressInrestID: scope.hdnexpressinterstfiled,
+                    CustID: scope.fromcustid,
+                    AcceptStatus: 2,
+                    MatchFollwupStatus: 2
+                };
+                scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            }, 500);
         };
         scope.statusalert = function(status) {
 
@@ -8265,10 +8496,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         };
 
         scope.pageload = function() {
-
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
-                console.log(response);
-
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
@@ -8297,12 +8525,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
         };
         scope.modalpopupclose1 = function() {
-            if (scope.interestedflag === true) {
-                alerts.dynamicpopupclose();
-                window.open('/commonviewfull' + scope.MyProfileQSAccept, '_blank');
-            } else {
-                alerts.dynamicpopupclose();
-            }
+            // if (scope.interestedflag === true) {
+            //     alerts.dynamicpopupclose();
+            //     window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+            // } else {
+            alerts.dynamicpopupclose();
+            //}
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -8368,8 +8596,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             case 1:
                                 if (scope.unpaidflag) {
                                     scope.modalbodyID1 = "You need to Upgrade  membership";
+                                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 } else {
                                     scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                    window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+                                    scope.divacceptreject = true;
+                                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
                                 break;
                             case 2:
@@ -8378,6 +8610,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
+                                alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 break;
                         }
                     });
@@ -8404,13 +8637,16 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 scope.modalbodyID1 = "Updation failed please contact admin";
                                 break;
                         }
+                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                        scope.divacceptreject = true;
+                        scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     });
                     break;
             }
-            scope.divacceptreject = true;
-            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+
             //scope.pagerefersh(scope.tocustid, scope.fromcustid);
-            scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+            // alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
@@ -8518,7 +8754,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             customerDashboardServices.Viewprofileflags(scope.custid, localcustid).then(function(response) {
                 _.each(response.data, function(item) {
                     var testArr = JSON.parse(item);
-                    console.log(testArr);
                     if (testArr[0] !== undefined) {
                         switch (testArr[0].TableName) {
                             case "Bookmark":
@@ -8536,9 +8771,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                                 scope.lnkViewHoro = true;
                                 break;
                             case "Express":
-
                                 scope.Express = testArr;
-                                console.log(scope.Express);
                                 if (scope.Express[0].MatchFollowUpStatus === 1) {
                                     if (scope.Express[0].SeenStatus === "Accept" || scope.Express[0].SeenStatus === "Reject") {
                                         scope.liticket = true;
@@ -8591,18 +8824,21 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             });
             return false;
         };
+        scope.showmyname = true;
+
         scope.pageload = function() {
             if (scope.custid === localcustid) {
+                scope.showmyname = true;
                 scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
-
-                    scope.slideshowimages();
+                    // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
+                scope.showmyname = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
 
-                    scope.slideshowimages();
+                    // scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();
                 });
@@ -8671,7 +8907,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             switch (type) {
                 case "E":
                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-                        console.log(responsepaid);
                         if (responsepaid === true)
                             scope.servicehttp(type, object);
                     });
@@ -8714,6 +8949,8 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             });
         };
         scope.photoalbum = function() {
+
+            scope.slideshowimages();
             scope.headerpopup = "Slide show";
             scope.popupmodalbody = false;
             if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
@@ -8803,6 +9040,200 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         };
     }
 ]);
+(function(angular) {
+    'use strict';
+
+    function factory(employeeViewfullprofileservice, stateParams, alerts, SelectBindServiceApp, uibModal, customerDashboardServices) {
+        var model = {};
+        model.scope = {};
+        model.viewprofilearray = [];
+        model.aboutmyself = {};
+        model.personalinfo = [];
+        model.basicinfo = [];
+        model.custid = 0;
+        model.stateprofileid = stateParams.ProfileID;
+        model.statecontacts = stateParams.contacts;
+        model.textboxshowhide = true;
+        model.fullprofileshow = true;
+        model.EmpViewfullProfile = function(stateprofileid, type) {
+            model.viewprofilearray = [];
+            model.aboutmyself = {};
+            model.personalinfo = [];
+            model.basicinfo = [];
+        };
+
+        model.getprofileData = function(stateprofileid, empid) {
+            employeeViewfullprofileservice.getEmpViewfullProfile(stateprofileid, empid).then(function(response) {
+                model.fullprofileshow = false;
+                if (response.data !== undefined && response.data !== "" && response.data !== null && response.data.length > 0) {
+                    _.each(response.data, function(item) {
+                        var testArr = JSON.parse(item);
+                        if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "About") {
+                            model.aboutmyself = testArr;
+                        } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
+                            model.personalinfo = testArr;
+                            model.custid = model.personalinfo[0].Cust_ID;
+                            var photocount = model.personalinfo[0].PhotoName_Cust;
+                            model.horoscopeimage = model.personalinfo[0].HoroscopeImage === "" ||
+                                model.personalinfo[0].HoroscopeImage === null ||
+                                model.personalinfo[0].HoroscopeImage === "Not given" ? false : true;
+                            if (model.personalinfo[0].HoroscopeImage !== undefined && model.personalinfo[0].HoroscopeImage !== null) {
+                                model.ViewHoroshow = (model.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? true : false;
+                            }
+                        } else {
+                            if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "My Basic Details") {
+                                model.basicinfo = testArr;
+                            }
+                            if (testArr.length > 0 && testArr[0].TableName !== undefined) {
+                                model.viewprofilearray.push({ header: testArr[0].TableName, value: testArr });
+                            }
+                        }
+                    });
+
+                }
+            });
+        };
+
+        model.getprofileDataencryptedID = function(stateprofileid) {
+            employeeViewfullprofileservice.getdecryptedProfileID(stateprofileid).then(function(response) {
+                if (response.data) {
+                    model.getprofileData(response.data, 2);
+                }
+
+            });
+        };
+
+        model.showPhotoPopup = function() {
+            alerts.ShowPhotoPopup(model.custid, model.scope);
+        };
+
+        model.applyCls = function(header) {
+            if (header === 'My Location Information') {
+                return 'personal_inform_main_in_list clearfix';
+            } else if (header === 'My Basic Details') {
+
+                return 'personal_inform_main_in_list clearfix displayCls';
+            }
+            return '';
+        };
+
+        model.photoalbum = function() {
+            var logincustid = model.personalinfo[0].Cust_ID;
+            model.slideshowimages();
+            model.headerpopup = "Slide show";
+            if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
+                alerts.dynamicpopup("photopopup.html", model.scope, uibModal);
+            }
+        };
+        model.cancel = function() {
+            alerts.dynamicpopupclose();
+        };
+        model.slideshowimages = function() {
+            customerDashboardServices.getphotoslideimages(model.personalinfo[0].Cust_ID).then(function(response) {
+                model.slides = [];
+                _.each(response.data, function(item) {
+                    model.slides.push(item);
+                });
+            });
+        };
+
+        model.viewhoroscopeimage = function(horopath) {
+            if (horopath.indexOf('.html') !== -1) {
+                window.open(horopath, '_blank');
+            } else {
+                model.image = horopath;
+                alerts.dynamicpopup("astroPopup.html", model.scope, uibModal);
+            }
+        };
+
+        return model;
+    }
+    angular
+        .module('Kaakateeya')
+        .factory('employeeViewfullprofilePrintModel', factory);
+    factory.$inject = ['employeeViewfullprofilePrintservice',
+        '$stateParams', 'alert', 'SelectBindServiceApp', '$uibModal', 'customerDashboardServices'
+    ];
+
+})(angular);
+ (function() {
+
+
+     function controller(employeeViewfullprofileModel, scope, $location) {
+         var vm = this,
+             model;
+         vm.init = function() {
+             vm.model = model = employeeViewfullprofileModel;
+             vm.model.scope = scope;
+             vm.refForm = {};
+             model.viewprofilearray = [];
+             model.aboutmyself = {};
+             model.personalinfo = {};
+             model.basicinfo = [];
+             model.selfProfileID = '';
+             model.fullprofileshow = true;
+             model.searchObjectquery = $location.search();
+             model.updatepaymentllink = false;
+             var meKey = Object.getOwnPropertyNames(model.searchObjectquery)[0];
+             var meKeyempid = Object.getOwnPropertyNames(model.searchObjectquery)[1];
+             model.selfProfileID = model.searchObjectquery[meKey];
+             model.selfEmp = model.searchObjectquery[meKeyempid];
+             if (model.selfProfileID) {
+                 model.getprofileDataencryptedID(model.selfProfileID);
+             }
+         };
+
+
+         vm.init();
+     }
+     angular
+         .module('Kaakateeya')
+         .controller('ViewfullprofileEmailCtrl', controller);
+     controller.$inject = ['employeeViewfullprofilePrintModel', '$scope', '$location'];
+
+ })(angular);
+(function() {
+    'use strict';
+
+    function factory(http) {
+        return {
+            getEmpViewfullProfile: function(ProfileID, EmpID) {
+                return http.get(app.apiroot183 + 'StaticPages/getCustomerViewAdminFullDetails', {
+                    params: {
+                        ProfileID: ProfileID,
+                        EmpID: EmpID
+                    }
+                });
+            },
+            inbitdata: function(profileid, empid) {
+                return http.get(app.apiroot183 + 'StaticPages/getInbitdataInfo', {
+                    params: {
+                        ProfileID: profileid,
+                        empid: empid
+                    }
+                });
+            },
+            NoDataFoundDisplay: function(profileid) {
+                return http.get(app.apiroot183 + 'StaticPages/getNoDataFoundDisplay', {
+                    params: {
+                        ProfileID: profileid
+                    }
+                });
+            },
+            getdecryptedProfileID: function(profileid) {
+                return http.get(app.apiroot183 + 'StaticPages/getdecryptedProfileID', {
+                    params: {
+                        ProfileID: profileid
+                    }
+                });
+            }
+        };
+    }
+    angular
+        .module('Kaakateeya')
+        .factory('employeeViewfullprofilePrintservice', factory);
+    factory.$inject = ['$http'];
+})(angular);
 //  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {
 //     return {
 //       request: function (config) {
