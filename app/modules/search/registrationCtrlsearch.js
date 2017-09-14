@@ -57,21 +57,17 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         // }, 500);
 
         timeout(function() {
-
             var Country = [],
                 CountryCode = [];
             Country.push({ "label": '--select--', "title": '--select--', "value": '0' });
             CountryCode.push({ "label": '--select--', "title": '--select--', "value": '0' });
             SelectBindServicereg.CountryWithCode().then(function(response) {
-
                 _.each(response.data, function(item) {
                     Country.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                     CountryCode.push({ "label": item.CountryCode, "title": item.CountryCode, "value": item.ID });
                 });
-
                 console.log('test..');
                 console.log(Country);
-
                 scope.Country = Country;
                 scope.countryCode = CountryCode;
                 scope.reg.ddlcountry = '0';
@@ -82,7 +78,6 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
 
         scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
         scope.dayChange = function(obj, type) {
-            console.log(obj);
             var months31 = 'Jan,Mar,May,Jul,Aug,Oct,Dec';
             var minth30 = 'Apr,Jun,Sep,Nov';
             var month28 = 'Feb';

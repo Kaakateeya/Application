@@ -8,7 +8,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.PageDiv = true;
         scope.searchObjectquery = $location.search();
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
+        var mekey2 = Object.getOwnPropertyNames(scope.searchObjectquery)[1];
         var meValue = scope.searchObjectquery[meKey];
+        var meValue2 = scope.searchObjectquery[mekey2];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
         scope.tocustid = null;
         scope.partnerinformation = function(response) {
@@ -21,7 +23,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
-                    console.log(JSON.stringify(scope.personalinfo));
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -30,8 +31,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         scope.horoimagesrc = (scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1 ? 'src/images/view_horoscope_image.jpg' : scope.personalinfo[0].HoroscopeImage;
                     }
                 } else {
-
-                    console.log(testArr);
                     if (testArr.length > 0 && testArr[0].TableName !== undefined) {
                         scope.arr.push({ header: testArr[0].TableName, value: testArr });
                     }
@@ -55,12 +54,17 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have proceeded this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
+
                                     }
                                 } else if (testArr[0].SeenStatus === "Reject" && scope.hdnAccRejFlag !== "MailAccept") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have Skipped this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
                                     }
                                 }
                                 if (testArr[0].MatchFollowUpStatus === 1) {
@@ -103,6 +107,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
             //     scope.partnerinformation(responsedata.data);
             // });
+
             if (scope.interestedflag === true) {
                 customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
@@ -150,13 +155,15 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // scope.pagerefersh(scope.tocustid, scope.fromcustid);
             scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             scope.PageDiv = false;
-            var MobjViewprofile = {
-                ExpressInrestID: scope.hdnexpressinterstfiled,
-                CustID: scope.fromcustid,
-                AcceptStatus: 2,
-                MatchFollwupStatus: 2
-            };
-            scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            timeout(function() {
+                var MobjViewprofile = {
+                    ExpressInrestID: scope.hdnexpressinterstfiled,
+                    CustID: scope.fromcustid,
+                    AcceptStatus: 2,
+                    MatchFollwupStatus: 2
+                };
+                scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            }, 500);
         };
         scope.statusalert = function(status) {
 
@@ -229,10 +236,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         };
 
         scope.pageload = function() {
-
             customerviewfullprofileservices.getViewFullProfileMail(scope.MyProfileQSAccept).then(function(response) {
-                console.log(response);
-
                 scope.fromcustid = response.data.FromCustID;
                 scope.tocustid = response.data.ToCustID;
                 scope.ToProfileID = response.data.ToProfileID;
@@ -261,12 +265,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
         };
         scope.modalpopupclose1 = function() {
-            if (scope.interestedflag === true) {
-                alerts.dynamicpopupclose();
-                window.open('/commonviewfull' + scope.MyProfileQSAccept, '_blank');
-            } else {
-                alerts.dynamicpopupclose();
-            }
+            // if (scope.interestedflag === true) {
+            //     alerts.dynamicpopupclose();
+            //     window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+            // } else {
+            alerts.dynamicpopupclose();
+            //}
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -332,8 +336,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             case 1:
                                 if (scope.unpaidflag) {
                                     scope.modalbodyID1 = "You need to Upgrade  membership";
+                                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 } else {
                                     scope.modalbodyID1 = "To Move the Match for MatchFollowup";
+                                    window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+                                    scope.divacceptreject = true;
+                                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
                                 break;
                             case 2:
@@ -342,6 +350,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
+                                alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 break;
                         }
                     });
@@ -368,13 +377,16 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 scope.modalbodyID1 = "Updation failed please contact admin";
                                 break;
                         }
+                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                        scope.divacceptreject = true;
+                        scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                     });
                     break;
             }
-            scope.divacceptreject = true;
-            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+
             //scope.pagerefersh(scope.tocustid, scope.fromcustid);
-            scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+            // alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
