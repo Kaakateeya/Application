@@ -139,14 +139,18 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             });
             return false;
         };
+        scope.showmyname = true;
+
         scope.pageload = function() {
             if (scope.custid === localcustid) {
+                scope.showmyname = true;
                 scope.logidliproceed = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
             } else {
+                scope.showmyname = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
 
                     // scope.slideshowimages();
