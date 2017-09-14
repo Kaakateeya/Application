@@ -91,6 +91,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     scope.divacceptreject = false;
                                     scope.liaccept = false;
                                 }
+                                debugger;
                                 if (testArr[0].ExpressInterstId !== null) {
                                     scope.hdnexpressinterstfiled = testArr[0].ExpressInterstId;
                                 }
@@ -111,6 +112,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
             //     scope.partnerinformation(responsedata.data);
             // });
+
+            debugger;
             if (scope.interestedflag === true) {
                 customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
@@ -140,6 +143,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // });
         };
         scope.Searchfunctionality = function(type, object) {
+            debugger;
             switch (type) {
                 case "DontProceed":
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(object).then(function(response) {
@@ -155,16 +159,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.Reject_paeload = function() {
+            debugger;
             // scope.pagerefersh(scope.tocustid, scope.fromcustid);
             scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
             scope.PageDiv = false;
-            var MobjViewprofile = {
-                ExpressInrestID: scope.hdnexpressinterstfiled,
-                CustID: scope.fromcustid,
-                AcceptStatus: 2,
-                MatchFollwupStatus: 2
-            };
-            scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            timeout(function() {
+                var MobjViewprofile = {
+                    ExpressInrestID: scope.hdnexpressinterstfiled,
+                    CustID: scope.fromcustid,
+                    AcceptStatus: 2,
+                    MatchFollwupStatus: 2
+                };
+                scope.Searchfunctionality("DontProceed", MobjViewprofile);
+            }, 500);
         };
         scope.statusalert = function(status) {
 
