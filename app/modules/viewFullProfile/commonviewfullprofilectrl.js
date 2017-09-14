@@ -7,8 +7,11 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.popupmodalbody = false;
         scope.PageDiv = true;
         scope.searchObjectquery = $location.search();
+        debugger;
         var meKey = Object.getOwnPropertyNames(scope.searchObjectquery)[0];
+        var mekey2 = Object.getOwnPropertyNames(scope.searchObjectquery)[1];
         var meValue = scope.searchObjectquery[meKey];
+        var meValue2 = scope.searchObjectquery[mekey2];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
         scope.tocustid = null;
         scope.partnerinformation = function(response) {
@@ -55,12 +58,17 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 if (testArr[0].SeenStatus === "Accept" && scope.hdnAccRejFlag !== "MailReject") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have proceeded this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
+
                                     }
                                 } else if (testArr[0].SeenStatus === "Reject" && scope.hdnAccRejFlag !== "MailAccept") {
                                     if (scope.flagopen !== 1) {
                                         scope.modalbodyID1 = "You have Skipped this profile";
-                                        alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        if (meValue2 !== "1") {
+                                            alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                        }
                                     }
                                 }
                                 if (testArr[0].MatchFollowUpStatus === 1) {
@@ -263,7 +271,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.modalpopupclose1 = function() {
             if (scope.interestedflag === true) {
                 alerts.dynamicpopupclose();
-                window.open('/commonviewfull' + scope.MyProfileQSAccept, '_blank');
+                window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
             } else {
                 alerts.dynamicpopupclose();
             }
