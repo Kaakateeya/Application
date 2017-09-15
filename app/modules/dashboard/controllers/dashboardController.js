@@ -558,11 +558,20 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.$on("incrementcounts", function() {
             scope.incrementsdashboardcounts();
         });
+        var paidstatus;
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
-            authSvc.paymentstaus(scope.custid, scope).then(function(response) {
-                if (response === true)
+            if (paidstatus === undefined) {
+                authSvc.paymentstaus(scope.custid, scope).then(function(response) {
+                    paidstatus = response;
+                    if (response === true)
+                        scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
+                });
+            } else {
+                if (paidstatus === true)
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
-            });
+                else
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);
+            }
         };
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
             scope.$broadcast('photoalbum', custid, profileid, photocount);
