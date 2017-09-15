@@ -61,7 +61,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'location', url: '/location/:location', templateUrl: 'app/modules/newHomepage/location.html', controller: 'locationparicular', isloginrequired: false },
         { name: 'empLogintoCustomer', url: '/empLogintoCustomer/:profileID', templateUrl: 'app/modules/static/emplogToCustomer.html', controller: "empLogCustomerCtrl", isloginrequired: false },
         //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
-        { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
+        { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
+        { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -77,7 +78,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,

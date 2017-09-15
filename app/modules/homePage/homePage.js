@@ -1,23 +1,23 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal',
+    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal', '$window',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
             scope.username = '';
             scope.password = "";
             timeout(function() {
-                successstoriesdata.suceessdataget(1, 5).then(function(response) {
-                    scope.successstoriesarray = response.data;
-                });
+                // successstoriesdata.suceessdataget(1, 5).then(function(response) {
+                //     scope.successstoriesarray = response.data;
+                // });
                 scope.gender = "2";
                 scope.Agefrom = 18;
                 scope.Ageto = 30;
                 scope.religion = 1;
             }, 500);
-            //scope.$on("$destroy", scope.destroy);
+            scope.successstoriesarray = [];
         };
         scope.destroy = function() {
             scope.loginpopup = false;
@@ -179,5 +179,15 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                     break;
             }
         };
+
+        var i = 0;
+        angular.element($window).bind("scroll", function(e) {
+            if (i === 0) {
+                i++;
+                successstoriesdata.suceessdataget(1, 5).then(function(response) {
+                    scope.successstoriesarray = response.data;
+                });
+            }
+        });
     }
 ]);
