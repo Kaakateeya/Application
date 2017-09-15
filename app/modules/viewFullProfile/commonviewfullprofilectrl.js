@@ -116,13 +116,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 customerviewfullprofileservices.getpaidstatusforviewprfile(scope.fromcustid).then(function(responsepaid) {
                     if (responsepaid.status === 200 && responsepaid.data !== null && responsepaid.data !== undefined) {
                         if (responsepaid.data === "Paid") {
-                            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                            // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                            //     scope.partnerinformation(responsedata.data);
+                            // });
+                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
                                 scope.partnerinformation(responsedata.data);
                             });
                         } else {
                             scope.unpaidflag = true;
-                            customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
-                                scope.partnerinformation(responseunpaid.data);
+                            // customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
+                            //     scope.partnerinformation(responseunpaid.data);
+                            // });
+                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                                scope.partnerinformation(responsedata.data);
                             });
                         }
                     }
