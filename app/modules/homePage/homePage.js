@@ -1,8 +1,8 @@
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal', '$window',
+    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal', '$window', '$http',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window, $http) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
@@ -189,5 +189,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 });
             }
         });
+        $http.get('your-server-endpoint');
     }
 ]);

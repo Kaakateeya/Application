@@ -1058,7 +1058,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             // });
 
 
-                            scope.databind(eduprofArrayModel.ProfCatgory);
+                            scope.databind(countryArrayModel.ProfCatgory);
 
 
 
@@ -1073,7 +1073,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     scope.databind(option);
                             // });
 
-                            scope.databind(eduprofArrayModel.ProfGroup);
+                            scope.databind(countryArrayModel.ProfGroup);
 
 
                             break;
@@ -1117,7 +1117,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     scope.databind(option);
                             // });
 
-                            scope.databind(otherArrayModel.caste);
+                            scope.databind(countryArrayModel.caste);
                             break;
 
                             // case 'Caste':
@@ -1180,7 +1180,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     });
                             //     scope.databind(option);
                             // });
-                            scope.databind(eduprofArrayModel.newProfessionCatgory);
+                            scope.databind(countryArrayModel.newProfessionCatgory);
 
                             break;
 
@@ -1742,68 +1742,108 @@ app.directive('setClassWhenAtTop', function($window) {
             model.countryCode = [];
             model.currency = [];
             // timeout(function() {
-            model.Countryf();
-            model.stateSelectf();
-            model.countryCodeselectf();
-            model.currencyf();
+            // model.Countryf();
+            // model.stateSelectf();
+            // model.countryCodeselectf();
+            // model.currencyf();
+            model.allAtOnce();
+
             // });
             return model;
         };
 
-        model.Countryf = function() {
+        // model.Countryf = function() {
+        //     if (model.Country.length === 0) {
+        //         service.countrySelect().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.Country = option;
+        //         });
+        //     }
+        // };
+
+        // model.stateSelectf = function() {
+
+        //     if (model.IndiaStates.length === 0) {
+        //         service.stateSelect('1').then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.IndiaStates = option;
+        //         });
+        //     }
+
+        // };
+
+        // model.countryCodeselectf = function() {
+        //     if (model.countryCode.length === 0) {
+        //         service.countryCodeselect().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.countryCode = option;
+        //         });
+        //     }
+        // };
+
+        // model.currencyf = function() {
+        //     if (model.currency.length === 0) {
+        //         service.currency().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.currency = option;
+        //         });
+        //     }
+        // };
+
+
+        model.allAtOnce = function() {
             if (model.Country.length === 0) {
-                service.countrySelect().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.Country = option;
+                service.getCustomerBindings().then(function(response) {
+                    if (response.data) {
+                        model.IndiaStates = [];
+                        model.countryCode = [];
+                        model.Country = [];
+                        model.profgroup = [];
+                        model.profcatgory = [];
+                        model.currency = [];
+                        model.newProfcatgory = [];
+
+                        model.Country = model.returnFormatArray(JSON.parse(response.data[2]));
+                        model.ProfCatgory = model.returnFormatArray(JSON.parse(response.data[4]));
+                        model.ProfGroup = model.returnFormatArray(JSON.parse(response.data[3]));
+                        model.IndiaStates = model.returnFormatArray(JSON.parse(response.data[0]));
+                        model.countryCode = model.returnFormatArray(JSON.parse(response.data[1]));
+                        model.currency = model.returnFormatArray(JSON.parse(response.data[5]));
+                        model.newProfessionCatgory = model.returnFormatArray(JSON.parse(response.data[6]));
+                        model.caste = model.returnFormatArray(JSON.parse(response.data[7]));
+                        // response.data = JSON.parse(response.data);
+
+                    }
                 });
             }
         };
 
-        model.stateSelectf = function() {
-
-            if (model.IndiaStates.length === 0) {
-                service.stateSelect('1').then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.IndiaStates = option;
+        model.returnFormatArray = function(arr) {
+            var option = [];
+            if (arr.length > 0) {
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(arr, function(item) {
+                    option.push({ "label": item.NAME, "title": item.NAME, "value": item.ID });
                 });
             }
-
+            return option;
         };
-
-        model.countryCodeselectf = function() {
-            if (model.countryCode.length === 0) {
-                service.countryCodeselect().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.countryCode = option;
-                });
-            }
-        };
-
-        model.currencyf = function() {
-            if (model.currency.length === 0) {
-                service.currency().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.currency = option;
-                });
-            }
-        };
-
         return model.init();
     }
 
@@ -1825,49 +1865,49 @@ app.directive('setClassWhenAtTop', function($window) {
         model.newProfessionCatgory = [];
 
         model.init = function() {
-            model.ProfCatgoryf();
-            model.ProfessionGroupf();
-            model.newProfessionCatgoryf();
+            // model.ProfCatgoryf();
+            // model.ProfessionGroupf();
+            // model.newProfessionCatgoryf();
             return model;
         };
 
-        model.ProfCatgoryf = function() {
-            if (model.ProfCatgory.length === 0) {
-                serviceApp.ProfessionCatgory().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.ProfCatgory = option;
-                });
-            }
-        };
-        model.ProfessionGroupf = function() {
-            if (model.ProfGroup.length === 0) {
-                serviceApp.ProfessionGroup().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.ProfGroup = option;
-                });
-            }
-        };
+        // model.ProfCatgoryf = function() {
+        //     if (model.ProfCatgory.length === 0) {
+        //         serviceApp.ProfessionCatgory().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.ProfCatgory = option;
+        //         });
+        //     }
+        // };
+        // model.ProfessionGroupf = function() {
+        //     if (model.ProfGroup.length === 0) {
+        //         serviceApp.ProfessionGroup().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.ProfGroup = option;
+        //         });
+        //     }
+        // };
 
-        model.newProfessionCatgoryf = function() {
-            if (model.newProfessionCatgory.length === 0) {
-                serviceApp.newProfessionCat().then(function(response) {
-                    var option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": 0 });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.newProfessionCatgory = option;
-                });
-            }
-        };
+        // model.newProfessionCatgoryf = function() {
+        //     if (model.newProfessionCatgory.length === 0) {
+        //         serviceApp.newProfessionCat().then(function(response) {
+        //             var option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": 0 });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.newProfessionCatgory = option;
+        //         });
+        //     }
+        // };
 
         return model.init();
     }
@@ -1887,22 +1927,22 @@ app.directive('setClassWhenAtTop', function($window) {
         var option = [];
         model.caste = [];
         model.init = function() {
-            model.casteselectf();
+            // model.casteselectf();
             return model;
         };
 
-        model.casteselectf = function() {
-            if (model.caste.length === 0) {
-                serviceApp.casteselect().then(function(response) {
-                    option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.caste = option;
-                });
-            }
-        };
+        // model.casteselectf = function() {
+        //     if (model.caste.length === 0) {
+        //         serviceApp.casteselect().then(function(response) {
+        //             option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.caste = option;
+        //         });
+        //     }
+        // };
 
         // model.empNamesSelectf = function() {
         //     serviceApp.EmpBinding(1, 2, '').then(function(response) {
@@ -2845,9 +2885,9 @@ app.controller('footercontrol', ['$scope', 'authSvc', '$rootScope', 'route', 'al
     }
 ]);
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout',
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout', '$http',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout, $http) {
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -3108,13 +3148,16 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 $(this).siblings().find('ul').slideUp();
             });
         });
+
+
+        $http.get('your-server-endpoint');
     }
 ]);
 app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstoriesdata',
     '$mdDialog', 'arrayConstants', 'SelectBindServiceApp', '$rootScope', 'alert', '$timeout',
-    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal', '$window',
+    'missingFieldService', '$state', 'route', 'helperservice', '$uibModal', '$window', '$http',
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
-        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window) {
+        arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window, $http) {
         scope.homeinit = function() {
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
@@ -3301,6 +3344,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 });
             }
         });
+        $http.get('your-server-endpoint');
     }
 ]);
 app.controller("loggedascustomers", ['$scope', '$mdDialog',
@@ -9766,11 +9810,12 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
 
             return http.get(app.apiroot + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Region', dependencyValue: obj1, dependencyflagID: '' } });
         },
-
         newProfessionCat: function() {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "NewProfessionCat", dependencyValue: '' } });
+        },
+        getCustomerBindings: function() {
+            return http.get(app.apiroot + 'StaticPages/getCustomerBindings', { params: {} });
         }
-
 
     };
 }]);

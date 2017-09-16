@@ -132,7 +132,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             // });
 
 
-                            scope.databind(eduprofArrayModel.ProfCatgory);
+                            scope.databind(countryArrayModel.ProfCatgory);
 
 
 
@@ -147,7 +147,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     scope.databind(option);
                             // });
 
-                            scope.databind(eduprofArrayModel.ProfGroup);
+                            scope.databind(countryArrayModel.ProfGroup);
 
 
                             break;
@@ -191,7 +191,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     scope.databind(option);
                             // });
 
-                            scope.databind(otherArrayModel.caste);
+                            scope.databind(countryArrayModel.caste);
                             break;
 
                             // case 'Caste':
@@ -254,7 +254,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                             //     });
                             //     scope.databind(option);
                             // });
-                            scope.databind(eduprofArrayModel.newProfessionCatgory);
+                            scope.databind(countryArrayModel.newProfessionCatgory);
 
                             break;
 

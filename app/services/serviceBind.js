@@ -68,11 +68,12 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
 
             return http.get(app.apiroot + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Region', dependencyValue: obj1, dependencyflagID: '' } });
         },
-
         newProfessionCat: function() {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "NewProfessionCat", dependencyValue: '' } });
+        },
+        getCustomerBindings: function() {
+            return http.get(app.apiroot + 'StaticPages/getCustomerBindings', { params: {} });
         }
-
 
     };
 }]);

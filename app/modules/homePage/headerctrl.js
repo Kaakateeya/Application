@@ -1,7 +1,7 @@
 app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '$rootScope', '$window',
-    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout',
+    '$state', 'missingFieldService', 'customerviewfullprofileservices', 'route', 'helperservice', '$timeout', '$http',
     function(scope, authSvc, ngIdle, alertpopup, uibModal,
-        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout) {
+        $rootscope, window, $state, missingFieldService, customerviewfullprofileservices, route, helperservice, timeout, $http) {
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
@@ -262,5 +262,8 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 $(this).siblings().find('ul').slideUp();
             });
         });
+
+
+        $http.get('your-server-endpoint');
     }
 ]);

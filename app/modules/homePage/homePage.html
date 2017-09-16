@@ -38,7 +38,8 @@
         display: none;
     }
 </style>
-<div id="homepageid" ng-init="homeinit()">
+<div id="homepageid" class="homepageid" ng-init="homeinit()">
+    <span us-spinner="{radius:30, width:8, length: 16}" spinner-start-active="true"></span>
     <div class="wrapper">
         <!--/ Header -->
         <div id="header" class="navbar navbar-inverse">
@@ -196,5 +197,6 @@
         </div>
         <!-- Main Block 3 /-->
     </div>
+
 </div>
 <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscript"></script>

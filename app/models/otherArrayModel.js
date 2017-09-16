@@ -6,22 +6,22 @@
         var option = [];
         model.caste = [];
         model.init = function() {
-            model.casteselectf();
+            // model.casteselectf();
             return model;
         };
 
-        model.casteselectf = function() {
-            if (model.caste.length === 0) {
-                serviceApp.casteselect().then(function(response) {
-                    option = [];
-                    option.push({ "label": "--select--", "title": "--select--", "value": "" });
-                    _.each(response.data, function(item) {
-                        option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
-                    });
-                    model.caste = option;
-                });
-            }
-        };
+        // model.casteselectf = function() {
+        //     if (model.caste.length === 0) {
+        //         serviceApp.casteselect().then(function(response) {
+        //             option = [];
+        //             option.push({ "label": "--select--", "title": "--select--", "value": "" });
+        //             _.each(response.data, function(item) {
+        //                 option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+        //             });
+        //             model.caste = option;
+        //         });
+        //     }
+        // };
 
         // model.empNamesSelectf = function() {
         //     serviceApp.EmpBinding(1, 2, '').then(function(response) {
