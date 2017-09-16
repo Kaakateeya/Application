@@ -2539,11 +2539,20 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.$on("incrementcounts", function() {
             scope.incrementsdashboardcounts();
         });
+        var paidstatus;
         scope.newprofileawaiting = function(type, frompage, topage, headertext, bindvalue) {
-            authSvc.paymentstaus(scope.custid, scope).then(function(response) {
-                if (response === true)
+            if (paidstatus === undefined) {
+                authSvc.paymentstaus(scope.custid, scope).then(function(response) {
+                    paidstatus = response;
+                    if (response === true)
+                        scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
+                });
+            } else {
+                if (paidstatus === true)
                     scope.gettingpartnerdata(type, frompage, topage, headertext, 1, "UnPaid");
-            });
+                else
+                    alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);
+            }
         };
         scope.photoalbumdashboard = function(custid, profileid, photocount) {
             scope.$broadcast('photoalbum', custid, profileid, photocount);
@@ -8386,13 +8395,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 customerviewfullprofileservices.getpaidstatusforviewprfile(scope.fromcustid).then(function(responsepaid) {
                     if (responsepaid.status === 200 && responsepaid.data !== null && responsepaid.data !== undefined) {
                         if (responsepaid.data === "Paid") {
-                            customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                            // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
+                            //     scope.partnerinformation(responsedata.data);
+                            // });
+                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
                                 scope.partnerinformation(responsedata.data);
                             });
                         } else {
                             scope.unpaidflag = true;
-                            customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
-                                scope.partnerinformation(responseunpaid.data);
+                            // customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
+                            //     scope.partnerinformation(responseunpaid.data);
+                            // });
+                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                                scope.partnerinformation(responsedata.data);
                             });
                         }
                     }
@@ -9869,6 +9884,9 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         Viewprofilepartial: function(toprofileid, empid) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepartial', { params: { ToProfileID: toprofileid, EmpID: empid } });
+        },
+        getExpressIntrstfullprofilepaidandunpaid: function(fromprofileid, tocustid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepaidandunpaid', { params: { fromProfileID: fromprofileid, toustid: tocustid, EmpID: empid } });
         }
 
     };
