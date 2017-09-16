@@ -81,28 +81,30 @@
 
         model.allAtOnce = function() {
             if (model.Country.length === 0) {
-                service.getCustomerBindings().then(function(response) {
-                    if (response.data) {
-                        model.IndiaStates = [];
-                        model.countryCode = [];
-                        model.Country = [];
-                        model.profgroup = [];
-                        model.profcatgory = [];
-                        model.currency = [];
-                        model.newProfcatgory = [];
+                timeout(function() {
+                    service.getCustomerBindings().then(function(response) {
+                        if (response.data) {
+                            model.IndiaStates = [];
+                            model.countryCode = [];
+                            model.Country = [];
+                            model.profgroup = [];
+                            model.profcatgory = [];
+                            model.currency = [];
+                            model.newProfcatgory = [];
 
-                        model.Country = model.returnFormatArray(JSON.parse(response.data[2]));
-                        model.ProfCatgory = model.returnFormatArray(JSON.parse(response.data[4]));
-                        model.ProfGroup = model.returnFormatArray(JSON.parse(response.data[3]));
-                        model.IndiaStates = model.returnFormatArray(JSON.parse(response.data[0]));
-                        model.countryCode = model.returnFormatArray(JSON.parse(response.data[1]));
-                        model.currency = model.returnFormatArray(JSON.parse(response.data[5]));
-                        model.newProfessionCatgory = model.returnFormatArray(JSON.parse(response.data[6]));
-                        model.caste = model.returnFormatArray(JSON.parse(response.data[7]));
-                        // response.data = JSON.parse(response.data);
+                            model.Country = model.returnFormatArray(JSON.parse(response.data[2]));
+                            model.ProfCatgory = model.returnFormatArray(JSON.parse(response.data[4]));
+                            model.ProfGroup = model.returnFormatArray(JSON.parse(response.data[3]));
+                            model.IndiaStates = model.returnFormatArray(JSON.parse(response.data[0]));
+                            model.countryCode = model.returnFormatArray(JSON.parse(response.data[1]));
+                            model.currency = model.returnFormatArray(JSON.parse(response.data[5]));
+                            model.newProfessionCatgory = model.returnFormatArray(JSON.parse(response.data[6]));
+                            model.caste = model.returnFormatArray(JSON.parse(response.data[7]));
+                            // response.data = JSON.parse(response.data);
 
-                    }
-                });
+                        }
+                    });
+                }, 500);
             }
         };
 
