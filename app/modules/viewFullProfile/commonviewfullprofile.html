@@ -7,7 +7,7 @@
                         <div class="col-lg-8">
                             <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
                         </div>
-                        <div id="updateContentssa" class="">
+                        <div>
                             <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
                                 <a id="btnProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
                                 <a id="btnDontProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
@@ -85,6 +85,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="row pull-right">
+                    <div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
+                        <a id="btnProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                        <a id="btnDontProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                    </div>
+                    <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-12">
+                        <div id="UpdatePanel6">
+                            <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
+                            <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
+                        </div>
+                    </div>
+                    <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-12">
+                        <a class="aspNetDisabled">{{btnticket}}</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <br>
+            </div>
+
         </div>
         <script type="text/ng-template" id="TabClosePopup.html">
             <div class="modal-message modal-danger">
