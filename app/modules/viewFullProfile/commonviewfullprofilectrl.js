@@ -335,7 +335,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             case 1:
                                // if (scope.unpaidflag || scope.unpaidflagrenewal) {
                                      //scope.modalbodyID1 = scope.unpaidflag === true ?
-                                    if (scope.lblpaid === "UnPaid" ||scope.lblpaid === "Renewal") {
+                                    if (scope.lblpaid === "UnPaid" ||scope.lblpaid === "Renual") {
                                          scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
                                         "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
                                         "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969" : "Your memebership points got exhausted so please do the payment to upgrade points." +
