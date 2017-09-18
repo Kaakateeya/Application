@@ -1,0 +1,61 @@
+<link href="src/css/loggedascustomer.css" rel="stylesheet">
+</link>
+<link href="src/css/animate.css" rel="stylesheet"></link>
+
+<style type="text/css">
+    .fullscreenDiv {
+        background-color: #e8e8e8;
+        width: 100%;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0;
+        position: absolute;
+    }
+    
+    .center {
+        position: absolute;
+        color: darkblue;
+        width: 300px;
+        height: 500px;
+        top: 50%;
+        left: 45%;
+        margin-top: -25px;
+        margin-left: -50px;
+        font-size: larger;
+    }
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="box animated  fadeInLeftBig" id="first">
+    <div class="content" ng-show="authentication">
+        <h1>Authentication Required</h1>
+        <input class="field form-control" ng-model="employeeusername" id="UserName"></input>
+        <input class="field form-control" ng-model="employeepassword" id="Password" type="password" style="height: 39px !important;"></input>
+        <br />
+        <button class="btn" id="LoginButton" ng-click="submitcheckpassword()">Log In</button>
+        <br />
+        <h2>
+            <label id="lblmsg"></label>
+        </h2>
+    </div>
+</div>
+
+<div ng-show="Customerprofileiddiv" class="box  animated  fadeInLeftBig" style="position: fixed; right: 40%; bottom: 30.5%;" id="profileiddiv">
+    <div class="content">
+        <h1>Enter Customer Profileid</h1>
+        <input class="field form-control" ng-model="customerprofileid" id="txtprofileid"></input>
+        <br />
+        <button class="btn" id="btnsubmit" ng-click="submitgetpassword()">Enter As Customer</button>
+        <br />
+    </div>
+</div>
+<div id="notvisible" style="display:none;background-color: blueviolet; border: solid 1px #000000; border-top: solid 0px #000000; margin: 230px 0 0 8px; text-align: left; margin-top: 50px; margin-right: 50px; position: fixed; right: 25%; bottom: 30.5%; opacity: 0.5; width: 500px; height: 500px;">
+    <div class="fullscreenDiv">
+        <div class="center"><span style="margin-top: 75px;"><b>Please Logout/close  Kaakateeya  Customer Site in Order to Use this Application</b></span></div>
+    </div>
+</div>

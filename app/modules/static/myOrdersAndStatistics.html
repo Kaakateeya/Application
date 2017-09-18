@@ -1,1 +1,96 @@
-<div>ggggggggggg</div>
+<div class="register_page_main" ng-init="pageinit()">
+    <h4>My Orders and statistics</h4>
+    <div class="myorders_list_main">
+        <div class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading">Profile Statistics</h5>
+            <div class="myorders_list_main_item_desc">
+                <p class="clearfix">
+                    <small>Profile registration date</small><span>
+                   <span id="lblprofiledate">{{myorders[0].RegistrationDate}}</span></span>
+                </p>
+                <p class="clearfix"><small>Profile last updated</small><span><span id="lblprofilelastDate">
+                    {{myorders[0].LastModifiedDate}}</span></span>
+                </p>
+                <p class="clearfix"><small>Login count</small><span><span id="lblNoOfLogins">
+                    {{myorders[0].LoginCount}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Recent login date</small><span>
+                            <span id="lblLastLogin">{{myorders[0].LastLoginDate}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Number of Times your Profile was viewed</small><span>
+                    <span id="lblProfileviewed">{{myorders[0].ProfileVistitedCount}}</span></span>
+                </p>
+            </div>
+        </div>
+        <div class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading"> Membership Details</h5>
+            <div class="myorders_list_main_item_desc">
+                <p class="clearfix"><small>Membership Type</small><span>
+                    <span id="lblpaid">{{myorders[0].PaymentStatus===1?'Paid':'Unpaid'}}</span></span>
+                </p>
+                <p class="clearfix"><small>Payment Date</small><span><span id="lblpaidondate">
+                    {{myorders[0].PaidOnDate}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Membership Expiry date</small><span>
+                            <span id="lblexpiry">{{myorders[0].ExpiryDate}}</span></span>
+                </p>
+                <!-- <p class="clearfix"><small>Package Name</small><span><span id="lblMemName">
+                    {{myorders[0].OnlineMembership}}</span></span>
+                </p> -->
+
+                <p class="clearfix"><small>Maximum Profile count</small><span>
+                    <span id="lblTolPoints">{{myorders[0].MaxPoints}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Remaining profile count</small><span>
+                    <span id="lblBalance">{{myorders[0].Balancepoints}}</span></span>
+                </p>
+            </div>
+        </div>
+        <!--<div class="myorders_list_main_item">
+            <h5 class="myorders_list_main_item_heading">Offline Membership Details <span>(Office Service)</span></h5>
+            <div class="myorders_list_main_item_desc" style="display: none;">
+                <p class="clearfix">
+                    <small>Offline Membership Type</small><span>
+                            <span id="lbloffpaid">{{myorders[0].offPaymentStatus}}</span></span>
+                </p>
+                <p class="clearfix"><small>Payment Date</small><span>
+                    <span id="lblpaidoffdate">{{myorders[0].PaidOffDate}}</span></span>
+                </p>
+                <p class="clearfix"><small>Membership Expiry date</small>
+                    <span><span id="lbloffExpiry">{{myorders[0].offExpiryDate}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Package Name</small><span>
+                   <span id="lbloffmemName">{{myorders[0].OfflineMembership}}</span></span>
+                </p>
+                <p class="clearfix">
+                    <small>Maximum Profile count</small><span>
+                   <span id="lblofftotpoints">{{myorders[0].offMaxPoints}}</span></span>
+                </p>
+                <p class="clearfix"><small>Remaining profile count</small><span>
+                    <span id="lbloffBalpoints">{{myorders[0].offBalancepoints}}</span></span>
+                </p>
+
+            </div>
+        </div> -->
+    </div>
+</div>
+<script>
+    jQuery('.myorders_list_main_item:first-child .myorders_list_main_item_desc').show();
+    jQuery('.myorders_list_main_item:first-child').addClass('active');
+    jQuery('.myorders_list_main_item_heading').click(function() {
+        jQuery(this).parent().find('.myorders_list_main_item_desc').slideToggle(function() {
+            if (jQuery(this).parent().find('.myorders_list_main_item_desc').is(':visible')) {
+                jQuery(this).parent().addClass('active');
+                jQuery(this).parent().siblings().find('.myorders_list_main_item_desc').slideUp();
+                jQuery(this).parent().siblings().removeClass('active');
+            } else {
+                jQuery(this).parent().removeClass('active');
+            }
+        });
+    });
+</script>

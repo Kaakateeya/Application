@@ -1,1 +1,143 @@
-<div ng-controller="help">ggggggggggg</div>
+<div id="mainidv" class="register_page_main">
+    <h4>Help</h4>
+    <div class="rating_main help_page_main">
+        <p>Contact any of the closest branches for immediate response or post your queries in the sumission form provided below and we will get back to you shortly</p>
+        <div class="help_no_list clearfix">
+            <h4>Contact us</h4>
+            <ul>
+                <li>
+                    <p><small>Andhra Pradesh</small>+91-7702 525 444</p>
+                </li>
+                <li>
+                    <p><small>Telangana</small>+91-9390 999 999</p>
+                </li>
+                <li>
+                    <p><small>Karnataka</small>+91-9341 444 444</p>
+                </li>
+                <li>
+                    <p><small>Tamilnadu</small>+91-9383 999 999</p>
+                </li>
+                <li>
+                    <p><small>Panducherry</small>+91-9841 282 222</p>
+                </li>
+                <li>
+                    <a id="lnkMoreourBranch" href="ourbranches">More our Branches</a></li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </div>
+        <form name=helpForm>
+            <div class="rating_main_in help_form clearfix">
+                <p>Please fill the form below to get immediate help</p>
+                <div class="control-group span6">
+                    <label class="control-label">Your Name<span style="color: red;">*</span></label>
+                    <div class="controls clearfix">
+                        <input ng-model="txtname" class="input-box" ng-class="aboutForm.$invalid==true && aboutForm.gg?'input-box danger':'input-box'" type="text" required>
+                    </div>
+                </div>
+                <div class="control-group span6">
+                    <label class="control-label">Your email id<span style="color: red;">*</span></label>
+                    <div class="controls clearfix">
+                        <input name="email" ng-model="txtemail" class="input-box" type="text" required ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+                        <span style="color:Red" ng-show="helpForm.email.$dirty && helpForm.email.$error.pattern">Please Enter Valid Email</span>
+                    </div>
+                </div>
+                <div class="control-group span6">
+                    <label class="control-label">Subject<span style="color: red;">*</span></label>
+                    <div class="controls clearfix">
+                        <input ng-model="txtsubject" class="input-box" type="text" required>
+                    </div>
+                </div>
+                <div class="control-group span6">
+                    <label class="control-label">Category<span style="color: red;">*</span></label>
+                    <div class="controls clearfix" id="ddlcategorydd">
+                        <select multiselectdropdown ng-model="ddlcategory" typeofdata="catgory" required>  </select>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="control-group">
+                    <label class="control-label">Message<span style="color: red;">*</span></label>
+                    <div class="controls clearfix">
+                        <textarea rows="2" cols="20" ng-model="txtmsg" class="marital textarea" required></textarea>
+                    </div>
+                    <br>
+                </div>
+                <div class="control-group span6 select-box-my">
+                    <label class="control-label">Priority<span style="color: red;">*</span></label>
+                    <div class="controls clearfix" id="ddlprioritydd">
+                        <select multiselectdropdown ng-model="ddlpriority" typeofdata="Priority" required>  </select>
+                    </div>
+                </div>
+                <div class="control-group pics_upload span6 file_upload_help" ng-hide="true">
+                    <label class="control-label">Upload your image</label>
+                    <div class="controls">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="icon-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                <span class="btn btn-file drag-icon">
+                                    <input name="fileupload1" ng-model="fileupload1" class="default" type="file"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group span6 select-box-my select-box-my-trible clearfix">
+                    <label class="control-label">Contact phone</label>
+                    <div class="controls clearfix row">
+                        <div id="countrycodedd" style="float:left;margin-left:16px;"> <select multiselectdropdown ng-model="ddlcountrycode" typeofdata="countryCode" class="select">  </select></div>
+                        <div> <input name="txtphonecode" maxlength="4" ng-model="txtphonecode" class="form-Control" placeholder="area code" type="text">
+                        </div>
+                        <div> <input name="txtphnum" maxlength="8" ng-model="txtphnum" class="form-Control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear clear_my"></div>
+                <div class="rating_submit_main clearfix">
+                    <div class="rating_captcha">
+                        <label class="control-label">Please enter the security code<span style="color:red;">*</span></label>
+                        <div re-captcha ng-model="scope.captcha"></div>
+                    </div>
+                    <input name="btnSub" value="submit" class="button_custom pull-right" type="submit" ng-click="submit();">
+                </div>
+
+            </div>
+        </form>
+        <a href="javascript:void(0)" class="help_icons_pos help_icons_pos1">&nbsp;</a>
+        <a href="javascript:void(0)" class="help_icons_pos help_icons_pos2">&nbsp;</a>
+        <a href="javascript:void(0)" class="help_icons_pos help_icons_pos3">&nbsp;</a>
+    </div>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Mail Preview </h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div class="control-label">
+                <div><label ng-model="CustName">{{CustName}}</label></div>
+                <br/>
+                <div> Thank you for contacting Kaakateeya.com. Your enquiry is currently being processed and it can be tracked through reference
+                    <span ng-model="lblTicketID">{{lblTicketID}}</span></div>
+                <br/>
+                <div>Category : {{lblpopupCategory}}</div>
+                <br/>
+                <div> A response will be sent to you shortly.</div>
+                <div> For immediate assistance, please call 91-9848344977 (9 AM to 7 PM IST)</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="SendMail()">Send Mail</button>
+        </div>
+    </script>
+</div>
+<style type="text/css">
+    #ddlcategorydd .multiselect.dropdown-toggle,
+    #ddlprioritydd .multiselect.dropdown-toggle {
+        margin: 0 !important;
+        width: 547px !important;
+    }
+    
+    #countrycodedd .multiselect.dropdown-toggle {
+        margin: 0 !important;
+        width: 180px !important;
+    }
+</style>

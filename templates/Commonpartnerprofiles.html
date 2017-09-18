@@ -1,26 +1,141 @@
+<div class="clearfix" style="padding: 0 0 0 0;">
+    <div id="View" class="content-View clearfix pull-right" ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{'display':'block'}:{'display':'none'}">
+        <a id="lnkModifsearch" ng-click="modifyursearch()" class="view_similar pull-left" ng-show="paggingflag===false" href="javascript:void(0);" style="margin-right: 4px;">Modify Your Search</a>
+        <input id="playButton" ng-hide="playpausebuttons" src="src\images\play-button.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="playslide();" style="height: 32px; width: 32px; display: block;" type="image">
+        <input id="pauseButton" ng-hide="pauseplaybuttons" src="src\images\pause-button.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="pauseslide();" style="height: 32px; width: 32px; display: block;" type="image">
+        <img id="imageslideshow" ng-hide="searchestype" src="src\images\slider.png" class="pull-right" title="SlideShow" data-toggle="modal" ng-click="Slideshowpage();" style="height: 32px; width: 32px; display: block;margin-left:3px;">
+        <a id="lnkgrid" class="gridk_view icon-list" title="List View" ng-click="listclick()" style="cursor: pointer;" />
+        <a id="lnklist" class="normal_view icon-grid" title="Grid View" ng-click="gridclick()" style="cursor: pointer;" />
+    </div>
+</div>
 
-   
-<div id="partnerDiv1" class="list searched_list_item2" style="width: 22%; margin-right: 2.4%; min-width: 250px;" ng-repeat="data in sssarr">
+<div id="slideShowCarousel" class="carousel slide slideShowCarousel" ng-show="slideshowsearches">
+    <br>
+    <!-- Carousel items -->
+    <div class="carousel-inner" id="maincarousal">
+        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="data in PartnerProfilesnew">
+
+            <div id="divviewdprofiles" class="col-lg-12" ng-show="slideshowsearches">
+                <label style="color: #000;">Viewed</label>&nbsp;<label id="lnkLastSlide" style="color: blue;display:none;">{{lnkLastSlide}}</label>
+
+                <label style="color: blue;" ng-bind="{{($index+1)}}"></label>&nbsp;
+                <label style="color: #000;">Profiles</label>
+            </div>
+            <br>
+            <div class="container">
+                <div id="galleryCarousel_0" class="slide span6">
+                    <div ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
+                        <img name="imagepath" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)" style="height: 300px;width: 300px !important;cursor:pointer;" class="undefined" ng-src="{{data.Photo}}" /></div>
+                    <div>
+                        <a href="javascript:void(0)" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')" style="font-weight: bold; text-decoration: underline;">{{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                        (data.Photo).indexOf("Password-Protected")!=-1?'Request Password':"Photo Request"):""}}</a></div>
+                </div>
+                <div class="span6">
+                    <table>
+                        <!-- <caption ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false">{{data.NAME}}</caption> -->
+                        <caption ng-show="false">{{data.NAME}}</caption>
+                        <label id="labaljdjs" ng-hide="true">{{$index}}</label>
+                        <tbody>
+                            <tr>
+                                <th>Profile ID</th>
+                                <td> {{data.ProfileID}}</td>
+                            </tr>
+                            <tr>
+                                <th>Age / Height</th>
+                                <td>{{data.Age}}-{{data.Height}}</td>
+                            </tr>
+                            <tr>
+                                <th>Caste</th>
+                                <td>{{data.ReligionName}}-{{data.Caste}}</td>
+                            </tr>
+                            <tr>
+                                <th>Marital Status</th>
+                                <td>{{data.MaritualStatus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Star</th>
+                                <td> {{data.Star}}</td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>{{ data.Location }}</td>
+                            </tr>
+                            <tr>
+                                <th>Education</th>
+                                <td>{{data.Education}}</td>
+                            </tr>
+                            <tr>
+                                <th>Occupation</th>
+                                <td>{{data.Profession}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="slideShowCarousel_foot clearfix">
+                <div class="container clearfix">
+                    <ul class="slideShowCarousel_ui clearfix">
+                        <li>
+                            <a href="javascript:void(0)" title="BookMark" ng-click="indexvalue('index');serviceactions('B',data.intCusID,data.mybookmarked)"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" title="Express interest" ng-click="indexvalue('index');serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)"></a>
+                        </li>
+                        <li>
+                            <a title="Message" href="javascript:void(0)" ng-click="indexvalue('index');sendmessegescommon('M',data.intCusID)"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" title="Ignore" ng-click="indexvalue('index');serviceactions('I',data.intCusID,data.ignode)"></a>
+                        </li>
+                    </ul>
+                    <ul class="slideShowCarousel_ui2 clearfix">
+                        <li><a href="javascript:void(0)" ng-click="modifyursearch()">Modify search</a></li>
+                        <li><a href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogId,data.recentlyviewes)">view complete profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="javascript:void(0)" data-target="#slideShowCarousel" ng-hide="false" data-slide="prev">‹</a>
+    <a class="carousel-control right" href="javascript:void(0)" data-target="#slideShowCarousel" data-slide="next">›</a>
+    <label style="display: none;" id="lblcurrentprofile"></label>
+    <label style="display: none;" id="lblcurSlide">1</label>
+    <label style="display: none;" id="lnkLastSlide1"></label>
+</div>
+<div ng-show="partnersearchessearches">
+    <div ng-class="typeofdiv==='Grid'?'list searched_list_item2':'list search_result_item clearfix'" ng-style="typeofdiv==='Grid'?{'width':'22%','margin-right': '2.4%','min-width':'250px'}:''" ng-repeat="data in PartnerProfilesnew" class="fade123">
         <p class="profile_no pull-left clearfix"></p>
-        <p class="label_check pull-left clearfix"><span> {{data.ProfileID}}</span></p>
+        <p class="label_check pull-left clearfix" style="width:60%;"><span> {{data.ProfileID}}</span></p>
         <p></p>
         <div class="clear"></div>
         <div class="search_result_item_in clearfix">
             <div class="search_result_item_pic pull-left">
-                <span class="">
-                    <input name="imgProfilefullpic" src="http://kaakateeya.com/access/Images/ProfilePics/KMPL_71648_Images/img1_Images/110716489_ApplicationPhoto.jpg" style="height: 250px; width: 250px;" type="image"></span><p style="align-items: center; text-align: center;"></p>
-                <div><a class="lnkPhotoRequest" href="javascript:void(0)" style="display: none;"></a></div>
+                <span ng-class="divclassmask(LoginPhotoIsActive,data.Photo,data.PhotoCount)">
+                 <img name="imgProfilefullpic" ng-src="{{data.Photo}}" ng-class="data.PhotoCount==0 && (LcustID !== undefined && LcustID !== null && LcustID !== '') ?'Linkdisabled':''" style="height: 250px; width: 250px;cursor:pointer;" ng-click="photoalbum(data.intCusID,data.ProfileID,data.PhotoCount)"></span>
+                <p style="align-items: center; text-align: center;"></p>
+                <div>
+                    <a class="lnkPhotoRequest" href="javascript:void(0)" ng-style="typeofdiv==='Grid' ?{ 'display': ' none'}:{ 'display': 'block'}" ng-click="photoRequestMethod(data.intCusID,data.ProfileID,(data.Photo).indexOf('Password-Protected') != -1?'Admin@123':'')">
+                        {{(data.Photo).indexOf("noimage") != -1 ||(data.Photo).indexOf("Password-Protected") != -1?((data.Photo).indexOf("noimage") != -1 && 
+                        (data.Photo).indexOf("Password-Protected")!=-1?'Request Password':"Photo Request"):""}}</a>
+                </div>
             </div>
+
             <div class="search_result_item_descr pull-left">
-                <p>
-                    <span>He</span> was born and raised in
-                    <label class="label_check"><span>{{data.placeofbirth}}</span></label>
+                <p ng-hide="(LcustID!==null && LcustID!==undefined && LcustID!=='')&&(loginpaidstatus==='1')?(data.placeofbirth=='' || data.placeofbirth==null || data.placeofbirth==undefined):(data.DistName=='' || data.DistName==null || data.DistName==undefined)">
+                    <span>{{(data.iGenderID===1)||(data.GenderID===1)?"He":"She"}}</span> was born and raised in
+
+                    <label class="label_check"><span>{{(LcustID!==null && LcustID!==undefined && LcustID!=="")&&(loginpaidstatus==="1")?(data.placeofbirth):(data.DistName)}}</span></label>
                 </p>
                 <div class="search_result_item_descr_list clearfix">
-                    <p class="clearfix ipName" style="display: none;">
+                    <p ng-show="false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Name</label>
                         <span>{{data.NAME}}</span>
                     </p>
+                    <!-- <p ng-show="(loginpaidstatus===1 || loginpaidstatus==='1')?true:false" class="clearfix ipName" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
+                        <label>Name</label>
+                        <span>{{data.NAME}}</span>
+                    </p> -->
                     <p class="clearfix">
                         <label>Age / Height</label>
                         <span>{{data.Age}}</span><span>-</span><span>{{data.Height}}</span>
@@ -28,14 +143,14 @@
                     <p class="clearfix">
                         <label>Caste</label><span>{{data.ReligionName}}</span><span>-</span><span>{{data.Caste}}</span>
                     </p>
-                    <p class="clearfix ipMaritalstatus" style="display: none;">
+                    <p class="clearfix ipMaritalstatus" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Marital status</label><span>{{data.MaritualStatus}}</span>
                     </p>
-                    <p class="clearfix ipStar" style="display: none;">
+                    <p class="clearfix ipStar" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Star</label>
                         <span>{{data.Star}}</span>
                     </p>
-                    <p class="clearfix ipLocation" style="display: none;">
+                    <p class="clearfix ipLocation" ng-style="typeofdiv==='Grid' ?{ 'display': 'none'}:{ 'display': 'block'}">
                         <label>Location</label>
                         <span>{{ data.Location }}</span>
                     </p>
@@ -43,10 +158,10 @@
                         <label>Education</label><span> {{data.Education}}</span>
                     </p>
                     <p class="clearfix">
-                        <label>Occupation</label><span>{{data.profession}}</span>
+                        <label>Occupation</label><span>{{data.Profession}}</span>
                     </p>
                 </div>
-                <a class="view_profile" href="javascript:void(0)">View full Profile</a>
+                <a class="view_profile" href="javascript:void(0)" ng-click="redirectToviewfullprofile(data.intCusID,data.LogId)">View full Profile</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -54,36 +169,115 @@
             <div class="search_result_item_ui_prsnl pull-left">
                 <ul>
                     <li>
-                        <a title="Mobile" class="mobileicon" ></a></li>
+                        <img title="Mobile" ng-class="typeofdiv==='Grid' ? 'mobile-icon': 'mobile-icon_list'"></img>
+                    </li>
                     <li>
-                        <a title="Emails" class="" style="background: url('src/images/vinod.png') no-repeat -1075px -204px !important;
-    display: block !important;
-    width: 34px !important;
-    height: 34px !important;"></a></li>
+                        <img title="Emails" ng-class="typeofdiv==='Grid' ? 'message-icon': 'message-icon_list'"></img>
+                    </li>
                     <li>
-                        <a title="horo" class="" style="background: url('src/images/vinod.png') no-repeat -1255px -204px !important;
-display: block !important;
-width: 34px !important;
-height: 34px !important;"></a></li>
+                        <img title="horo" ng-class="typeofdiv==='Grid' ? 'planet-icon': 'planet-icon_list'"></img>
+                    </li>
                 </ul>
                 <div class="clear"></div>
             </div>
-            <div class="listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid">
+            <div ng-class="typeofdiv==='Grid' ? 'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid': 'listnew search_result_item_ui_exprsns clearfix search_result_item_ui_exprsns_grid'">
                 <ul>
                     <li>
-                        <img src="../images/bookmark_icon.png" alt="Bookmark" title="BookMark"><div><a title="BookMark" href="javascript:void(0)" style="color: Black;">BookMark</a></div>
+                        <div style="margin-top: 5px;">
+                            <div ng-class="typeofdiv==='Grid' ? 'bookmark-icon2': 'bookmark-icon'" ng-click="indexvalue($index);serviceactions('B',data.intCusID,data.mybookmarked)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" style="color: Black;float:left;cursor:pointer;" ng-click="indexvalue($index);serviceactions('B',data.intCusID,data.mybookmarked)">
+                 BOOKMARK
+                   </span></div>
                     </li>
                     <li>
-                        <img src="../images/interest_icon.png" alt="Express interest" title="Express"><div><a title="Expressinterest" href=" javascript:void(0)" style="color: Black;">Express Interest</a></div>
+                        <div style="padding:5px 6px 12px 12px;">
+                            <div ng-class="typeofdiv==='Grid' ? 'interest-icon2': 'interest-icon'" ng-click="indexvalue($index);serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('E',data.intCusID,data.ExpressFlag,data.ProfileID)" style="color: Black;float:left;cursor:pointer;">
+                         EXPRESS INTEREST
+                            </span></div>
                     </li>
                     <li>
-                        <img src="../images/message_icon2.png" alt="Message" title="Message"><div><a title="Message" href="javascript:void(0)" style="color: Black;">Message</a></div>
+                        <div style="padding: 5px 6px 7px 12px;">
+                            <div ng-class="typeofdiv==='Grid' ? 'message-icon2-small': 'message-icon2'" ng-click="indexvalue($index);sendmessegescommon('M',data.intCusID)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);sendmessegescommon('M',data.intCusID)" style="color: Black;float:left;cursor:pointer;">
+                   MESSAGE
+                        </span></div>
                     </li>
                     <li>
-                        <img src="../images/close_icon.png" alt="Notinterest" title="Ignore"><div><a title="Ignore" href=" javascript:void(0)" style="color: Black;">Ignore</a></div>
+                        <div style="padding: 5px 6px 11px 12px;">
+                            <div ng-class="typeofdiv==='Grid' ? 'close-icon-small': 'close-icon'" ng-click="indexvalue($index);serviceactions('I',data.intCusID,data.ignode)" style="color: Black;float:left;cursor:pointer;" />
+                            <span ng-class="typeofdiv==='Grid' ? 'spandisplay': 'spandisplayblock'" ng-click="indexvalue($index);serviceactions('I',data.intCusID,data.ignode)" style="color: Black;float:left;cursor:pointer;">
+                       IGNORE
+                          </span></div>
                     </li>
                 </ul>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
+    </br>
+    <div class="clearfix"></div>
+    <div class='row col-lg-10' ng-style="typeofdiv==='Grid' || typeofdiv==='List' ?{ 'display': 'block'}:{ 'display': 'none'}">
+        <div class="col-lg-offset-5" ng-show="loadmore">
+            <a href="javascript:void(0)" ng-click="directivepaging()"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+        </div>
+        <div class="col-lg-offset-5" ng-show="loaderspin">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+        </div>
+        <div class="col-lg-offset-5 text-center" ng-show="Norowsend">
+            <h3 style="color: maroon;">End</h3>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="photopopup.html" style="z-index: 999999999999 !important;">
+    <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+            <h4 class="modal-title">Slide show</h4>
+        </div>
+        <div class="modal-body" id="Div2">
+            <div class="bs-example">
+                <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
+                    </div>
+                    <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<style type="text/css">
+    .spandisplay {
+        display: none;
+    }
+    
+    .spandisplayblock {
+        display: block;
+        margin-top: 5px;
+        margin-left: 1px;
+    }
+    
+    .expressinterestdiv {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .activeclassdiv {
+        background-color: maroon;
+    }
+    
+    .modal {
+        z-index: 999999999999 !important;
+        display: block;
+    }
+</style>

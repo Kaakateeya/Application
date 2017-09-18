@@ -1,1 +1,32 @@
-<div ng-controller="faqs">ggggggggggg</div>
+<div class="register_page_main" ng-controller="faqs">
+    <h4>FAQ's</h4>
+    <div class="faq_main">
+        <div class="faq_main_head clearfix">
+            <div class="faq_main_search clearfix">
+                <fieldset>
+                    <input id="filter" autocomplete="off" type="text" ng-model="filters.search">
+                    <span id="filter-count"></span>
+                </fieldset>
+            </div>
+            <div class="faq_grid clearfix">
+                <a class="faq_expand" faqdirective ng-click="expanall()">Expand All</a>
+                <a class="faq_collapse" faqdirective ng-click="collapseall()">Collapse All</a>
+            </div>
+        </div>
+        <div class="faqs_list_main">
+            <div class="">
+                <div class="faqs_list_main_item" ng-class="faqs.activeClass" ng-repeat="faqs in arrayfaqs | filter:filters.search">
+                    <h5 faqdirective class="faq_toggle_heading" ng-click="toggleans(faqs)">
+                        <span class="HeaderCSS">{{faqs.questons}}</span></h5>
+                    <div class="faq_ans_block" ng-show="faqs.styleanswer">
+                        <p>
+                            <span>{{faqs.answers}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="ctl00_modalPopup_backgroundElement" style="display:none; position: fixed; left: 0px; top: 0px; z-index: 10000;" class="modalBackground"></div>

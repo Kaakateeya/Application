@@ -1,1 +1,305 @@
-<div ng-controller="supporttickets">ggggggggggg</div>
+<style type="text/css">
+    .ValueContains {
+        margin: 0 !important;
+        background-color: #f0f0cc !important;
+        /*border-color:green !important;*/
+    }
+    
+    .has-error .control-label {
+        color: #a94442 !important;
+    }
+    
+    .has-error .form-control {
+        color: #a94442 !important;
+        border-color: #a94442 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    }
+    
+    .has-success .control-label {
+        color: green !important;
+    }
+    
+    .has-success .form-control {
+        color: green !important;
+        border-color: green !important;
+        box-shadow: inset 0 1px 1px green;
+    }
+    
+    select {
+        width: 100px;
+        height: 34px;
+        margin-bottom: 10px;
+    }
+    
+    .colorloading {
+        color: black;
+        margin-top: 10px;
+    }
+    
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        /*min-height: 248px*/
+        min-height: 600px;
+    }
+    
+    .select-box-my label {
+        text-transform: capitalize;
+        color: #000 !important;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+</style>
+<div class="wrapper">
+    <!--/ Main Block 1 -->
+    <div class="search_page_main tickets_main">
+        <div class="search_page_tabs">
+            <div class="sample" layout="column" ng-cloak>
+                <md-content class="md-padding">
+                    <md-tabs md-selected="selectedIndex" flex md-border-bottom md-autoselect>
+                        <md-tab label="OPEN / PENDING" md-on-select="submitsupporttickets(1)">
+                            <div class="tab">
+                                <form name="open" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Opened On</span></th>
+                                                        <th>
+                                                            <span>Updated On</span></th>
+                                                        <th>
+                                                            <span>Assigned To</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Email ID :</b><span>
+                                                        <span id="lblEmail">{{support.Email}}</span></span>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.OpenedDate}}</span></td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo">{{support.AssignedToEmp}}</span>
+                                                            <a href="javascript:void(0);" style="display: none;">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="CLOSED TICKETS" md-on-select="submitsupporttickets(2)">
+                            <div class="tab">
+                                <form name="close" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Actions</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo"></span>
+                                                            <a href="javascript:void(0);" ng-click="reopenticket(support.TicketNO)">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="DELETED TICKETS" md-on-select="submitsupporttickets(3)">
+                            <div class="tab">
+                                <form name="deleted" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Actions</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Reported By :</b><span>
+                                                        <span >{{support.Reportedby}}</span></span>
+                                                            </p>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo"></span>
+                                                            <a href="javascript:void(0);" ng-click="reopenticket(support.TicketNO)">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                        <md-tab label="ALL TICKETS" md-on-select="submitsupporttickets(4)">
+                            <div class="tab">
+                                <form name="alltickets" role="form">
+                                    <div class="profile_search_main profile_settings_main clearfix">
+                                        <div class="tickets_main_content">
+                                            <div>
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket ID</th>
+                                                        <th>Ticket Details</th>
+                                                        <th>
+                                                            <span>Status Date</span></th>
+                                                        <th>
+                                                            <span></span></th>
+                                                        <th>
+                                                            <span>Assigned To</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="support in supporttickets">
+                                                        <td>
+                                                            <a href="javascript:void(0);">{{support.TicketID}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="clearfix">
+                                                                <b>Ticket Status :</b><span>
+                                                        <span>{{support.TicketStatus}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Cat :</b><span>
+                                                        <span>{{support.Category}}</span></span>
+                                                            </p>
+                                                            <p class="clearfix">
+                                                                <b>Sub :</b>
+                                                                <span id="lblSubject">{{support.Subject}}</span>
+                                                            </p>
+
+
+                                                        </td>
+                                                        <td>
+                                                            <span>{{support.StatusDate}}</span></td>
+                                                        <td>
+                                                            <span></span></td>
+                                                        <td>
+                                                            <span id="lblAssignedTo">{{support.AssignedToEmp}}</span>
+                                                            <a href="javascript:void(0);" style="display: none;">Reopen</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+    </div>
+
+</div>

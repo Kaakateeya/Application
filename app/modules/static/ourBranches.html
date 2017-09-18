@@ -1,0 +1,90 @@
+<div class="register_page_main branches_page_main">
+    <h4>Branches</h4>
+    <div class="rating_main help_page_main">
+        <p>Contact any of the closest branches for immediate responce or post your queries in the sumission form provided below and we will get back to you shortly</p>
+        <div class="help_no_list clearfix">
+            <h4>contact phone number to your nearest head quarters</h4>
+            <ul>
+                <li>
+                    <p><small>Andhra Pradesh</small>+91-7702 525 444</p>
+                </li>
+                <li>
+                    <p><small>Telangana</small>+91-9390 999 999</p>
+                </li>
+                <li>
+                    <p><small>Karnataka</small>+91-9341 444 444</p>
+                </li>
+                <li>
+                    <p><small>Tamilnadu</small>+91-9383 999 999</p>
+                </li>
+                <li>
+                    <p><small>Puducherry (Pondicherry)</small>+91-9841 282 222</p>
+                </li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </div>
+        <div class="branches_addrss_main clearfix">
+            <h4>Contact numbers of our branches.</h4>
+            <div class="branches_addrss_main_in">
+                <h4>1. Hyderabad Ameerpet (HQ)</h4>
+                <p>
+                    103,109, Vijaya Sri Apartments, Behind Chermas, Ameerpet.<br /> Contact : +91-7658180800, 040-23747777<br /> Email : <span>kaakateeya.com@gmail.com</span><br /> Timings : 9:00 AM To 8:00 pm
+                </p>
+            </div>
+            <div class="branches_addrss_main_in">
+                <h4>1. Hyderabad Dilsukhnagar (BR)</h4>
+                <p>
+                    2nd Floor, Pullareddy Sweets Building, Sai Baba Temple Road, Dilsukhnagar.
+                    <br /> Contact : +91-9848566733, 040-2406 8989<br> Email : <span>info@telugumarriages.com</span><br> Timings : 9:00 AM To 7:00 pm
+                </p>
+            </div>
+        </div>
+        <div class="branches_main_search clearfix">
+            <div class="control-group span5 select-box-my">
+                <label class="control-label">Select the state where you are looking for</label>
+                <div class="controls clearfix">
+                    <select multiselectdropdown ng-model="ddlbranches" typeofdata="region" ng-change="changeBind('region');">  </select>
+                </div>
+            </div>
+            <div class="control-group span5 select-box-my">
+                <label class="control-label">Select the location where you are looking for</label>
+                <div class="controls clearfix">
+                    <select multiselectdropdown ng-model="ddlbranchaddress" ng-change="changeBind('branch');" ng-options="item.value as item.label for item in BranchArr">  </select>
+                </div>
+            </div>
+        </div>
+        <div class="branches_addrss_main clearfix">
+            <h4>contact phone number to your nearest branches</h4>
+            <div class="branches_addrss_main_in" ng-repeat="item in BranchDetailsArr">
+                <h4>
+                    <span id="lblCount">{{item.count}}</span>
+                    <span id="lblBranchNames">{{item.BranchesName }}</span>
+                </h4>
+                <p>
+                    <span id="lblBranchAddress">{{item.BranchAddress }}</span>
+                    <br />
+                    <span id="lblAddressBranch">{{item.Address }}</span>
+                    <br /> Contact :
+                    <span class="branch_spl_char" id="lblMobilenumber">{{"91-"+item.Mobilenumber+" & " }}</span>
+                    <span class="branch_spl_char" id="lblAreacode">{{item.Landlineareacode+" -" }}</span>
+                    <span class="branch_spl_char" id="lblLandnumber">{{item.Landlinenumber }}</span>
+                    <br /> Email : <span class="branch_spl_char">
+                        <span id="lblEmails">{{item.BranchemailID }}</span>
+                    </span>
+                    <br /> Timings :
+                    <span id="lblEmpFromTimes">{{item.WorkingStartTime }}</span> -
+                    <span id="lblEmpToTimes">{{item.WorkingEndTime }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .register_page_main h4 {
+        padding-bottom: 1%;
+    }
+    
+    .radio input {
+        display: none;
+    }
+</style>
