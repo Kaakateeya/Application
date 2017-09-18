@@ -13,14 +13,11 @@
             model.IndiaStates = [];
             model.countryCode = [];
             model.currency = [];
-            // timeout(function() {
+
             model.Countryf();
             model.stateSelectf();
             model.countryCodeselectf();
             model.currencyf();
-            // model.allAtOnce();
-
-            // });
             return model;
         };
 
