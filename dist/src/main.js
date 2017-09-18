@@ -8368,6 +8368,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     scope.aboutmyself = testArr;
                 } else if (testArr.length > 0 && testArr[0].TableName !== undefined && testArr[0].TableName === "Primary") {
                     scope.personalinfo = testArr;
+                    var genderid = scope.Fromgender === 1 ? 'Mr.' : 'Ms.';
+                    var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
+                    var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
+                    var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
+                    scope.titleproceed = "Proceed-" + oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
+                    scope.titledontproceed = "This sends a message to your relationship manager not to proceed further with " + oppositegender + " " + scope.personalinfo[0].NAME + " profile";
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -8449,34 +8455,13 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.pagerefersh = function(ToProfileID, Fromprofileid) {
-            // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, Fromprofileid, "").then(function(responsedata) {
-            //     scope.partnerinformation(responsedata.data);
-            // });
-
             if (scope.interestedflag === true) {
                 customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
                 });
             } else {
-                customerviewfullprofileservices.getpaidstatusforviewprfile(scope.fromcustid).then(function(responsepaid) {
-                    if (responsepaid.status === 200 && responsepaid.data !== null && responsepaid.data !== undefined) {
-                        if (responsepaid.data === "Paid") {
-                            // customerviewfullprofileservices.getExpressIntrstfullprofile(ToProfileID, "").then(function(responsedata) {
-                            //     scope.partnerinformation(responsedata.data);
-                            // });
-                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
-                                scope.partnerinformation(responsedata.data);
-                            });
-                        } else {
-                            scope.unpaidflag = true;
-                            // customerDashboardServices.Viewprofile(scope.fromcustid, scope.tocustid, 283).then(function(responseunpaid) {
-                            //     scope.partnerinformation(responseunpaid.data);
-                            // });
-                            customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
-                                scope.partnerinformation(responsedata.data);
-                            });
-                        }
-                    }
+                customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                    scope.partnerinformation(responsedata.data);
                 });
             }
             scope.bookmarkexpreessdata();
@@ -8532,7 +8517,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 case 5:
                     scope.divmodalbodytoClose = "Please upgrade your membership(No points)";
                     alerts.dynamicpopup("PopupDivToclose.html", scope, uibModal, 'sm');
-                    scope.unpaidflag = true;
+                    scope.unpaidflagrenewal = true;
                     break;
                 case 6:
                     scope.divmodalbodytoClose = "You have already Skipped this profile";
@@ -8594,6 +8579,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 scope.FromProfileID = response.data.FromProfileID;
                 scope.PrimaryEmail = response.data.PrimaryEmail;
                 scope.AccRejFlag = response.data.AccRejFlag;
+                scope.FromProfileName = response.data.FromProfileName;
+                scope.FromProfileLastName = response.data.FromProfileLastName;
+                scope.Fromgender = response.data.Fromgender;
                 scope.statusalert(response.data.status);
             });
         };
@@ -8616,12 +8604,13 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             alerts.dynamicpopup("photopopup.html", scope, uibModal);
         };
         scope.modalpopupclose1 = function() {
-            // if (scope.interestedflag === true) {
-            //     alerts.dynamicpopupclose();
-            //     window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
-            // } else {
-            alerts.dynamicpopupclose();
-            //}
+            if (scope.btnproceedflag === 1) {
+                alerts.dynamicpopupclose();
+                scope.flagopen = 1;
+                scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+            } else {
+                alerts.dynamicpopupclose();
+            }
         };
         scope.modalpopupclose = function() {
             alerts.dynamicpopupclose();
@@ -8672,6 +8661,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             }
         };
         scope.btnProceed_Click = function(typeofbtn) {
+            var genderid = scope.Fromgender === 1 ? 'Mr.' : 'Ms.';
+            var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
+            var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
+            var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
             switch (typeofbtn) {
                 case "btnProceed":
                     var MobjViewprofile = {
@@ -8685,19 +8678,27 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                                if (scope.unpaidflag) {
-                                    scope.modalbodyID1 = "You need to Upgrade  membership";
+                                if (scope.unpaidflag || scope.unpaidflagrenewal) {
+                                    scope.modalbodyID1 = scope.unpaidflag === true ?
+                                        "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
+                                        "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969" : "Your memebership points got exhausted so please do the payment to upgrade points." +
+                                        "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969";
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 } else {
-                                    scope.modalbodyID1 = "To Move the Match for MatchFollowup";
-                                    window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+                                    scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
+                                        " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
+                                        oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern.";
+                                    // window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
                                     scope.divacceptreject = true;
-                                    scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+                                    alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                    scope.btnproceedflag = 1;
+                                    // scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
                                 break;
                             case 2:
                             case 3:
                                 scope.modalbodyID1 = "You need to Upgrade  membership";
+                                alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 break;
                             default:
                                 scope.modalbodyID1 = "Updation failed please contact admin";
@@ -8718,7 +8719,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofiledont).then(function(response) {
                         switch (response.data) {
                             case 1:
+                                scope.flagopen = 1;
                                 scope.modalbodyID1 = "Oops go through your search";
+                                // scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
+                                //   " We have not received any positive response from " + scope.personalinfo[0].NAME + " so far.So lets proceed with our new search options";
                                 break;
                             case 2:
                             case 3:

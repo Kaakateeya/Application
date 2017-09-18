@@ -3,14 +3,21 @@
         <div class="profile_full_main" ng-show="PageDiv">
             <div ng-show="divacceptreject" style="border: solid 1px #fff;">
                 <div id="upAll">
+                    <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                        <label>Ensure to express your opinion as</label>
+                        <label style="color: #de2929;">"PROCEED"</label>
+                        <label>if this profile is suitable for you or else</label>
+                        <label style="color: #de2929;">"DON'T PROCEED"</label>
+                    </div>
+                    <div class="clearfix"></div>
                     <div class="row">
                         <div class="col-lg-8">
                             <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
                         </div>
                         <div>
                             <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
-                                <a id="btnProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
-                                <a id="btnDontProceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                                <a id="btnProceed" title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <a id="btnDontProceed" title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
                             </div>
                         </div>
                         <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-4">
@@ -189,7 +196,7 @@
         padding: 10px 20px;
         text-transform: uppercase;
         color: white;
-        background-color: rgb(102, 204, 255);
+        background-color: #d83222;
         border: solid 1px #ccc;
         transition: all 0.4s ease-in-out;
     }
