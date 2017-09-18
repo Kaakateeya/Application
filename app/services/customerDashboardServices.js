@@ -4,7 +4,8 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         },
         getcustomerpartnerdata: function(custid, typeofaction, frompage, topage, exactflag) {
-            return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+            // return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         },
         getexpressintersetdata: function(object) {
             return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object);
@@ -50,8 +51,8 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         getCustCounts: function(Custid) {
             return http.get(app.apiroot + 'DashboardRequest/getcustDashboardCounts', { params: { CustID: Custid } });
         },
-        getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
-            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
-        }
+        // getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
+        //     return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+        // }
     };
 }]);
