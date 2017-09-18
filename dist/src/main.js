@@ -3338,17 +3338,37 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
         };
 
         var i = 0;
-        angular.element($window).bind("scroll", function(e) {
+        // angular.element($window).bind("scroll", function(e) {
+
+        // });
+
+        scope.loadSuccessStories = function() {
             if (i === 0) {
                 i++;
                 successstoriesdata.suceessdataget(1, 5).then(function(response) {
                     scope.successstoriesarray = response.data;
                 });
             }
+        };
+
+        scope.$on('loadStories', function(event) {
+            scope.loadSuccessStories();
         });
+
         $http.get('your-server-endpoint');
     }
 ]);
+
+
+app.directive("scroll", function() {
+    return {
+        link: function(scope, element, attrs) {
+            element.bind("wheel", function() {
+                scope.$emit('loadStories');
+            });
+        }
+    };
+});
 app.controller("loggedascustomers", ['$scope', '$mdDialog',
     'authSvc', 'alert', 'loggedascustomerservice', 'route',
     function(scope, $mdDialog, authSvc, alerts, loggedascustomerservice, route) {
