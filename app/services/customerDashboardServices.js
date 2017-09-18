@@ -43,6 +43,15 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         getNotifications: function(obj) {
             return http.get(app.apiroot + 'StaticPages/getCust_NotificationDetails', { params: { Cust_NotificationID: obj.Cust_NotificationID, CustID: obj.CustID, Startindex: obj.Startindex, EndIndex: obj.EndIndex } });
+        },
+        getCustInfo: function(Custid) {
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPersonalInfo', { params: { CustID: Custid } });
+        },
+        getCustCounts: function(Custid) {
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardCounts', { params: { CustID: Custid } });
+        },
+        getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         }
     };
 }]);
