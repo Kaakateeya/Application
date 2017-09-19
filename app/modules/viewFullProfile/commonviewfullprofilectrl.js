@@ -310,8 +310,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     //scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.liticket = false;
                     scope.liproceed = true;
-                    btnDontProceed.Visible = false;
-                    btnProceed.Visible = true;
+                    // btnDontProceed.Visible = false;
+                    // btnProceed.Visible = true;
                     break;
             }
         };
@@ -333,10 +333,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                               // if (scope.unpaidflag || scope.unpaidflagrenewal) {
-                                     //scope.modalbodyID1 = scope.unpaidflag === true ?
-                                    if (scope.lblpaid === "UnPaid" ||scope.lblpaid === "Renual") {
-                                         scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
+                                // if (scope.unpaidflag || scope.unpaidflagrenewal) {
+                                //scope.modalbodyID1 = scope.unpaidflag === true ?
+                                if (scope.lblpaid === "UnPaid" || scope.lblpaid === "Renual") {
+                                    scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
                                         "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
                                         "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969" : "Your memebership points got exhausted so please do the payment to upgrade points." +
                                         "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969";

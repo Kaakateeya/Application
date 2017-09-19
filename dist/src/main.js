@@ -8369,7 +8369,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
                     var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
                     var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
-                    scope.titleproceed = "Proceed-" + oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
+                    scope.titleproceed = oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
                     scope.titledontproceed = "This sends a message to your relationship manager not to proceed further with " + oppositegender + " " + scope.personalinfo[0].NAME + " profile";
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
@@ -8652,8 +8652,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     //scope.pagerefersh(scope.ToProfileID, scope.FromProfileID);
                     scope.liticket = false;
                     scope.liproceed = true;
-                    btnDontProceed.Visible = false;
-                    btnProceed.Visible = true;
+                    // btnDontProceed.Visible = false;
+                    // btnProceed.Visible = true;
                     break;
             }
         };
@@ -8675,8 +8675,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                                if (scope.unpaidflag || scope.unpaidflagrenewal) {
-                                    scope.modalbodyID1 = scope.unpaidflag === true ?
+                                // if (scope.unpaidflag || scope.unpaidflagrenewal) {
+                                //scope.modalbodyID1 = scope.unpaidflag === true ?
+                                if (scope.lblpaid === "UnPaid" || scope.lblpaid === "Renual") {
+                                    scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
                                         "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
                                         "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969" : "Your memebership points got exhausted so please do the payment to upgrade points." +
                                         "For further assistance feel free to contact your relationship manager Mr.Kumar :91-9392696969";
