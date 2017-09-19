@@ -19,6 +19,15 @@ app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 app.global = {
     'alertType': 'toast-top-right'
 };
+
+app.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
+app.Mnoimage = app.GlobalImgPath + "Images/customernoimages/Mnoimage.jpg";
+app.Fnoimage = app.GlobalImgPath + "Images/customernoimages/Fnoimage.jpg";
+
+app.prefixPath = 'Images/ProfilePics/';
+app.GlobalImgPathforimage = 'https://s3.ap-south-1.amazonaws.com/kaakateeyaprod/';
+app.accesspathdots = app.GlobalImgPathforimage + app.prefixPath;
+
 app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepaliveProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, IdleProvider, KeepaliveProvider, $locationProvider) {
     IdleProvider.autoResume('notIdle');
     // set idle interrupt events.  This is the default list except for 'mousemove', which is difficult to test with.
@@ -62,7 +71,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'empLogintoCustomer', url: '/empLogintoCustomer/:profileID', templateUrl: 'app/modules/static/emplogToCustomer.html', controller: "empLogCustomerCtrl", isloginrequired: false },
         //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
-        { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false }
+        { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false },
+        { name: 'uploadPhoto', url: '/uploadPhoto', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -78,7 +88,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,

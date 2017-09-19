@@ -73,7 +73,9 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
         },
         getCustomerBindings: function() {
             return http.get(app.apiroot + 'StaticPages/getCustomerBindings', { params: {} });
+        },
+        noPhotoStatus: function(custID) {
+            return http.get(app.apiroot + 'CustomerPersonal/getNoPhotoStatus', { params: { custid: custID } });
         }
-
     };
 }]);

@@ -1,0 +1,223 @@
+<div class="register_page_main">
+    <h4>
+        <label Font-Bold="true" style="font-size:16px;">Upload your recent Photos for better response</label>
+        <a class="skip_button" href="/"> <span class="glyphicon glyphicon-home"></span></a>
+
+    </h4>
+
+    <div class="register_page_main_in">
+        <!-- <div class="register_page_main_steps" id="divFlowfalse">
+            <ul>
+                <li><a class="active" href="#">Basic information</a></li>
+                <li><a class="active" href="#">profile details</a></li>
+                <li><a class="active" href="#">my photos</a></li>
+                <li><a href="#">my payments</a></li>
+            </ul>
+            <div class="clear">&nbsp;</div>
+        </div> -->
+
+
+        <div class="my_photos_main">
+            <!-- <h6>Upload your recent Photos for better response</h6> -->
+
+
+            <div class="clear">&nbsp;</div>
+
+            <br />
+            <div class="dragzone">
+                <div class="pics_selected_list_main clearfix">
+                    <div class="pics_selected_list_main_lt clearfix">
+                        <p class="clearfix"><span>Upload your three different photos</span></p>
+                        <div id="dtimagephoto" class="clearfix" ng-repeat="item in manageArr" style="width:33%;float:left;">
+                            <div class="photos">
+                                <div class="pics_selected_list_item">
+                                    <div ng-class="item.IsActive == 0 && item.PhotoName !== null?'cssMaskdiv clearfix':''">
+                                        <img ng-model="imgPhotoName" ng-src="{{item.ImageUrl}}" />
+                                    </div>
+
+                                    <div class="pics_selected_list_item_ui clearfix">
+                                        <div class="photos_icon">
+                                            <a href="javascript:void(0);" ng-click="AddImage($index+1);">
+                                                <ng-md-icon icon="add_a_photo" style="fill:#665454" size="25">Add</ng-md-icon>
+                                            </a>
+
+                                            <!-- <a href="javascript:void(0);" ng-click="DeleteImage(item.keyname,item.Cust_Photos_ID);">
+                                                <ng-md-icon icon="delete" style="fill:#665454" size="25">Delete</ng-md-icon>
+                                            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="javascript:void(0);" class="set_pic" ng-click="setAsProfilePic(item.Cust_Photos_ID);" style="color:#665454;font-weight:bold;" ng-show='{{item.IsMain=="1"?false:(item.PhotoName!=null?true:false) }}'>
+                                            Set as Profilepic
+                                            </a> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        <!-- <div class="edit_page_photo_manage_submit" ng-hide="true">
+                            <div class="edit_page_photo_manage_protect pull-left clearfix" id="divPassword">
+                                <label class="">
+                                <div class="radio_my2 clearfix">
+                                <label style="font-size: 14px !important; font-weight: 400;"> Protect with Password :</label> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                <md-radio-group layout="row" ng-model="rbtProtectPassword" class="md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
+                                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                    <md-radio-button value="0"> No </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            </label>
+                        </div> -->
+                    </div>
+                    <div class="photo_upload_instrctns_list clearfix">
+                        <a ID="phtoguide" href="javascript:void(0);" ng-click="redirectPage('PhotoGuideLines');">Photo guidelines
+                            </a>
+                        <a ID="photofaq" href="javascript:void(0);" ng-click="redirectPage('Faqs');">Photo faq’s
+                            </a>
+                        <a ID="photoupload" href="javascript:void(0);" ng-click="redirectPage('uploadTips');">Photo upload tips
+                            </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="my_photos_main_block2 clearfix">
+            <div class="clearfix pics_incorrect_list">
+                <h3>Such Photos cannot be Uploaded</h3>
+                <table id="DataList3" class="clearfix" style="border-collapse: collapse;" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img id="DataList3_ctl00_images" src="src\images/Side-face.png">
+                                <p>
+                                    Side Face
+                                </p>
+
+                            </td>
+                            <td>
+                                <img id="DataList3_ctl01_images" src="src\images/Blir.png">
+                                <p>
+                                    Blur
+                                </p>
+
+                            </td>
+                            <td>
+                                <img id="DataList3_ctl02_images" src="src\images/Group-photos.png">
+                                <p>
+                                    Group Photo
+                                </p>
+
+                            </td>
+                            <td>
+                                <img id="DataList3_ctl03_images" src="src\images/Water-mark.png">
+                                <p>
+                                    Watermark
+                                </p>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pics_selected_list_main_rt clearfix pics_correct_list">
+                <h3>Photos that can be uploaded</h3>
+                <table id="DataList2" class="clearfix" style="border-collapse: collapse;" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img id="DataList2_ctl00_images" src="src\images/Close-up.png">
+                                <p>
+                                    Close Up
+                                </p>
+                            </td>
+                            <td>
+                                <img id="DataList2_ctl01_images" src="src\images/Fulsize.png">
+                                <p>
+                                    Full Size
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </div>
+        <div class="my_photos_main_block3">
+            <p>
+                <img src="src/images/whatsup.png" alt="Mail" style="width: 50px; height: 40px;">Whatsup your photos to
+                <span>91-9848535373</span> - Kindly mention your Profile ID and name
+            </p>
+            <p>
+                <img src="src/images/icon_email.png" alt="Mail">Can also Email your photos to <span>photos@telugumarriages.com</span> - Kindly mention your Profile ID and name
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+<script type="text/ng-template" id="AddimagePopup.html">
+    <form name="uploadForm" novalidate role="form" ng-submit="upload(up);">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Upload Photo </h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul id="ulprofession">
+                <input type="file" file-model="up.myFile" />
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <input value="Cancel" class="button_custom button_custom_reset" ng-click="cancel();" type="button">
+            <input value="Upload" class="button_custom" type="submit">
+        </div>
+    </form>
+</script>
+
+</div>
+
+<style>
+    .cssMaskdiv {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+    
+    .cssMaskdiv:after {
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+        color: #ffffff;
+        content: "Under Review";
+        display: block;
+        font-size: 14px;
+        /* height: 100%; */
+        left: 0;
+        padding: 50% 0;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 100%;
+    }
+    
+    .linkdisableCls {
+        pointer-events: none;
+        cursor: default;
+    }
+    
+    .profile_own_menu ul li:hover ul {
+        top: 25px;
+        opacity: 1;
+        display: none;
+    }
+    
+    .skip_button {
+        padding: 9px 20px;
+        font-size: 17px;
+    }
+</style>

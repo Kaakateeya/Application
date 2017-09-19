@@ -66,37 +66,89 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.typeodbind = type;
                 scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
                 if (type === 'C') {
-                    customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.bindcounts(response.data.DashBoardCounts);
-                            scope.bindallcounts = response.data.DashBoardCounts;
-                            scope.PersonalInfo = (response.data.PersonalInfo);
-                            scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
-                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-                        }
-                        if (parseInt(frompage) === 1) {
+                    // customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.bindcounts(response.data.DashBoardCounts);
+                    //         scope.bindallcounts = response.data.DashBoardCounts;
+                    //         scope.PersonalInfo = (response.data.PersonalInfo);
+                    //         scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                    //         scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                    //         sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                    //         scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+                    //     }
+                    //     if (parseInt(frompage) === 1) {
 
-                            scope.PartnerProfilesnew = [];
-                            scope.typeofdiv = "Grid";
-                            _.each(response.data.PartnerProfilesnew, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
-                        } else {
-                            _.each(response.data.PartnerProfilesnew, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
+                    //         scope.PartnerProfilesnew = [];
+                    //         scope.typeofdiv = "Grid";
+                    //         _.each(response.data.PartnerProfilesnew, function(item) {
+                    //             scope.PartnerProfilesnew.push(item);
+                    //         });
+                    //     } else {
+                    //         _.each(response.data.PartnerProfilesnew, function(item) {
+                    //             scope.PartnerProfilesnew.push(item);
+                    //         });
+                    //     }
+                    //     scope.$broadcast('loadmore');
+                    //     if (parseInt(frompage) === 1) {
+                    //         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                    //         scope.lblUHaveviewd = headertext;
+                    //     }
+                    // }).catch(function(response) {
+                    //     scope.catchfunction();
+                    // });
+
+
+
+                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
+                        if (response.data) {
+                            if (parseInt(frompage) === 1) {
+
+                                scope.PartnerProfilesnew = [];
+                                scope.typeofdiv = "Grid";
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            } else {
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            }
+                            scope.$broadcast('loadmore');
+                            if (parseInt(frompage) === 1) {
+                                scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                                scope.lblUHaveviewd = headertext;
+                            }
+
                         }
-                        scope.$broadcast('loadmore');
-                        if (parseInt(frompage) === 1) {
-                            scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                            scope.lblUHaveviewd = headertext;
-                        }
+
+                        customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
+                            if (responseInfo.data) {
+
+                                if (scope.counts === 1) {
+                                    sessionStorage.removeItem("LoginPhotoIsActive");
+                                    scope.PersonalInfo = (responseInfo.data);
+                                    scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                                    scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                                    sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                                    scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
+                                    customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
+                                        if (responseCounts.data) {
+                                            scope.bindcounts(responseCounts.data);
+                                            scope.bindallcounts = responseCounts.data;
+
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
                     }).catch(function(response) {
                         scope.catchfunction();
                     });
+
                 } else {
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (parseInt(frompage) === 1) {
@@ -582,49 +634,49 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactshow = (scope.Typeofdatabind === 'C' || scope.Typeofdatabind === 'P') && loginpaidstatus === "1" ? false : true;
             switch (scope.Typeofdatabind) {
                 case "MB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('MB', 1, 9, 'My bookmarked profiles', 1, "UnPaid");
                     break;
                 case "WB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('WB', 1, 9, 'Who BookMarked Me', 1, "UnPaid");
                     break;
                 case "I":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('I', 1, 9, 'Ignored Profiles', 1, "UnPaid");
                     break;
                 case "WV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('WV', 1, 9, 'My profile viewed by others', 1, "UnPaid");
                     break;
                 case "RV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('RV', 1, 9, 'Profiles viewed by me', 1, "UnPaid");
                     break;
                 case "Chats":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
@@ -658,6 +710,32 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     break;
             }
         };
+
+        scope.custdataload = function(type, frompage, topage, headertext, bindvalue, exactflag) {
+            scope.gettingpartnerdata(type, frompage, topage, headertext, bindvalue, exactflag);
+            customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
+                if (responseInfo.data) {
+
+                    if (scope.counts === 1) {
+                        sessionStorage.removeItem("LoginPhotoIsActive");
+                        scope.PersonalInfo = (responseInfo.data);
+                        scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                        scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                        sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                        scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
+                        customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
+                            if (responseCounts.data) {
+                                scope.bindcounts(responseCounts.data);
+                                scope.bindallcounts = responseCounts.data;
+
+                            }
+                        });
+                    }
+                }
+            });
+        };
+
         scope.exactandnormal = function(typebutton) {
             if (typebutton === "exact") {
                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1, 'Paid');
