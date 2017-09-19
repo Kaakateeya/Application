@@ -8631,7 +8631,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
                     var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
                     scope.titleproceed = oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
-                    scope.titledontproceed = "This sends a message to your relationship manager not to proceed further with " + oppositegender + " " + scope.personalinfo[0].NAME + " profile";
+                    scope.titledontproceed = "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME;
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
