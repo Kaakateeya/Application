@@ -2086,37 +2086,89 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                 scope.typeodbind = type;
                 scope.exactshow = (scope.typeodbind === 'C' || scope.typeodbind === 'P') && loginpaidstatus === "1" ? false : true;
                 if (type === 'C') {
-                    customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.bindcounts(response.data.DashBoardCounts);
-                            scope.bindallcounts = response.data.DashBoardCounts;
-                            scope.PersonalInfo = (response.data.PersonalInfo);
-                            scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
-                            scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                            sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                            scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-                        }
-                        if (parseInt(frompage) === 1) {
+                    // customerDashboardServices.getCustomercounts(scope.custid, type, frompage, topage, exactflag).then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.bindcounts(response.data.DashBoardCounts);
+                    //         scope.bindallcounts = response.data.DashBoardCounts;
+                    //         scope.PersonalInfo = (response.data.PersonalInfo);
+                    //         scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                    //         scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                    //         sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                    //         scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+                    //     }
+                    //     if (parseInt(frompage) === 1) {
 
-                            scope.PartnerProfilesnew = [];
-                            scope.typeofdiv = "Grid";
-                            _.each(response.data.PartnerProfilesnew, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
-                        } else {
-                            _.each(response.data.PartnerProfilesnew, function(item) {
-                                scope.PartnerProfilesnew.push(item);
-                            });
+                    //         scope.PartnerProfilesnew = [];
+                    //         scope.typeofdiv = "Grid";
+                    //         _.each(response.data.PartnerProfilesnew, function(item) {
+                    //             scope.PartnerProfilesnew.push(item);
+                    //         });
+                    //     } else {
+                    //         _.each(response.data.PartnerProfilesnew, function(item) {
+                    //             scope.PartnerProfilesnew.push(item);
+                    //         });
+                    //     }
+                    //     scope.$broadcast('loadmore');
+                    //     if (parseInt(frompage) === 1) {
+                    //         scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                    //         scope.lblUHaveviewd = headertext;
+                    //     }
+                    // }).catch(function(response) {
+                    //     scope.catchfunction();
+                    // });
+
+
+
+                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
+                        if (response.data) {
+                            if (parseInt(frompage) === 1) {
+
+                                scope.PartnerProfilesnew = [];
+                                scope.typeofdiv = "Grid";
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            } else {
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            }
+                            scope.$broadcast('loadmore');
+                            if (parseInt(frompage) === 1) {
+                                scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                                scope.lblUHaveviewd = headertext;
+                            }
+
                         }
-                        scope.$broadcast('loadmore');
-                        if (parseInt(frompage) === 1) {
-                            scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                            scope.lblUHaveviewd = headertext;
-                        }
+
+                        customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
+                            if (responseInfo.data) {
+
+                                if (scope.counts === 1) {
+                                    sessionStorage.removeItem("LoginPhotoIsActive");
+                                    scope.PersonalInfo = (responseInfo.data);
+                                    scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                                    scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                                    sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                                    scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
+                                    customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
+                                        if (responseCounts.data) {
+                                            scope.bindcounts(responseCounts.data);
+                                            scope.bindallcounts = responseCounts.data;
+
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
                     }).catch(function(response) {
                         scope.catchfunction();
                     });
+
                 } else {
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (parseInt(frompage) === 1) {
@@ -2602,49 +2654,49 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.exactshow = (scope.Typeofdatabind === 'C' || scope.Typeofdatabind === 'P') && loginpaidstatus === "1" ? false : true;
             switch (scope.Typeofdatabind) {
                 case "MB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('MB', 1, 9, 'My bookmarked profiles', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('MB', 1, 9, 'My bookmarked profiles', 1, "UnPaid");
                     break;
                 case "WB":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('WB', 1, 9, 'Who BookMarked Me', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('WB', 1, 9, 'Who BookMarked Me', 1, "UnPaid");
                     break;
                 case "I":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('I', 1, 9, 'Ignored Profiles', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('I', 1, 9, 'Ignored Profiles', 1, "UnPaid");
                     break;
                 case "WV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('WV', 1, 9, 'My profile viewed by others', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('WV', 1, 9, 'My profile viewed by others', 1, "UnPaid");
                     break;
                 case "RV":
-                    customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
-                        if (scope.counts === 1) {
-                            sessionStorage.removeItem("LoginPhotoIsActive");
-                            scope.pageloadbind(response);
-                        }
-                        scope.gettingpartnerdata('RV', 1, 9, 'Profiles viewed by me', 1, "UnPaid");
-                    });
+                    // customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
+                    //     if (scope.counts === 1) {
+                    //         sessionStorage.removeItem("LoginPhotoIsActive");
+                    //         scope.pageloadbind(response);
+                    //     }
+                    // });
+                    scope.custdataload('RV', 1, 9, 'Profiles viewed by me', 1, "UnPaid");
                     break;
                 case "Chats":
                     customerDashboardServices.getCustomercounts(scope.custid, "DC", 1, 9, "UnPaid").then(function(response) {
@@ -2678,6 +2730,32 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     break;
             }
         };
+
+        scope.custdataload = function(type, frompage, topage, headertext, bindvalue, exactflag) {
+            scope.gettingpartnerdata(type, frompage, topage, headertext, bindvalue, exactflag);
+            customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
+                if (responseInfo.data) {
+
+                    if (scope.counts === 1) {
+                        sessionStorage.removeItem("LoginPhotoIsActive");
+                        scope.PersonalInfo = (responseInfo.data);
+                        scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                        scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                        sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                        scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
+                        customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
+                            if (responseCounts.data) {
+                                scope.bindcounts(responseCounts.data);
+                                scope.bindallcounts = responseCounts.data;
+
+                            }
+                        });
+                    }
+                }
+            });
+        };
+
         scope.exactandnormal = function(typebutton) {
             if (typebutton === "exact") {
                 scope.gettingpartnerdata('C', 1, 9, 'Suitable Profiles that match you', 1, 'Paid');
@@ -8340,6 +8418,189 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         };
     }
 ]);
+(function() {
+    'use strict';
+
+    angular
+        .module('Kaakateeya')
+        .controller('uploadPhotoCtrl', controller);
+
+    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state'];
+
+    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state) {
+        /* jshint validthis:true */
+        var vm = this,
+            model;
+        vm.fnoimg = '';
+        scope.up = {};
+        var CustID = 91035;
+        scope.photorowID = 0;
+        scope.manageArr = [
+            { ImageUrl: app.Fnoimage },
+            { ImageUrl: app.Fnoimage },
+            { ImageUrl: app.Fnoimage }
+        ];
+        scope.AddImage = function(index) {
+            scope.photorowID = index;
+            Commondependency.open('AddimagePopup.html', scope, uibModal, 'sm');
+        };
+        scope.cancel = function() {
+            Commondependency.closepopup();
+        };
+
+        scope.pageload = function() {
+            SelectBindServiceApp.noPhotoStatus(CustID).then(function(response) {
+                if (parseInt(response.data) === 1) {
+                    state.go('home');
+                } else {
+
+                }
+            });
+        };
+
+        scope.pageload();
+
+        scope.upload = function(obj) {
+            if (obj.myFile) {
+                var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
+                extension = angular.lowercase(extension);
+                var gifFormat = "gif, jpeg, png,jpg";
+
+                if (typeof(obj.myFile.name) != "undefined") {
+
+                    var size = parseFloat(obj.myFile.size / 1024).toFixed(2);
+                    if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
+                        alert('Your uploaded image contains an unapproved file formats.');
+                    } else if (size > 4 * 1024) {
+                        alert('Sorry,Upload Photo Size Must Be Less than 1 mb');
+                    } else {
+
+                        var keyname = app.prefixPath + 'KMPL_' + CustID + '_Images/Img' + scope.photorowID + '.' + extension;
+
+                        fileUpload.uploadFileToUrl(obj.myFile, '/photoUplad', keyname).then(function(res) {
+                            console.log(res.status);
+                            if (res.status == 200) {
+                                Commondependency.closepopup();
+                                scope.uploadData = {
+                                    GetDetails: {
+                                        ID: null,
+                                        url: 'Img' + scope.photorowID + '.' + extension,
+                                        order: scope.photorowID,
+                                        IsProfilePic: 0,
+                                        DisplayStatus: scope.photorowID,
+                                        Password: 0,
+                                        IsReviewed: 0,
+                                        TempImageUrl: app.GlobalImgPath + keyname,
+                                        IsTempActive: '0',
+                                        DeletedImageurl: null,
+                                        IsImageDeleted: 0,
+                                        PhotoStatus: null,
+                                        PhotoID: scope.photorowID,
+                                        PhotoPassword: null
+                                    },
+                                    customerpersonaldetails: {
+                                        intCusID: CustID,
+                                        EmpID: null,
+                                        Admin: null
+                                    }
+                                };
+
+                                SVC.submituploadData(scope.uploadData).then(function(response) {
+                                    console.log(response);
+                                    if (response.status === 200) {
+                                        alert('submitted Succesfully');
+                                        scope.manageArr = response.data;
+                                        scope.refreshPageLoad(scope.manageArr);
+
+                                    } else {
+                                        alert('Updation failed');
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            } else {
+                alert('Please upload Photo');
+            }
+        };
+
+
+        scope.refreshPageLoad = function(Arr) {
+            _.each(Arr, function(item) {
+                scope.rbtProtectPassword = item.PhotoPassword === 'Admin@123' ? '1' : '0';
+                var imagepath = app.accesspathdots;
+
+                if (item.IsActive === 0 && item.PhotoName !== null) {
+                    var strCustDirName1 = "KMPL_" + CustID + "_Images";
+                    var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
+                    item.ImageUrl = path1 + '?decache=' + Math.random();
+                    item.addButtonvisible = false;
+                    item.deleteVisibility = true;
+                    item.keyname = strCustDirName1 + "/" + item.PhotoName;
+
+                } else if (item.IsActive === 1 && item.IsThumbNailCreated === 1) {
+
+                    var strCustDirName = "KMPL_" + CustID + "_Images";
+                    item.addButtonvisible = false;
+                    item.deleteVisibility = true;
+                    switch (item.DisplayOrder) {
+                        case 1:
+                            var photoshoppath = "Img1_Images/" + item.ProfileID + "_ApplicationPhoto.jpg";
+                            var path = imagepath + strCustDirName + "/" + photoshoppath;
+                            item.ImageUrl = path;
+                            item.keyname = strCustDirName + "/" + photoshoppath;
+                            break;
+                        case 2:
+                            var photoshoppathnew = "Img2_Images/" + item.ProfileID + "_ApplicationPhoto.jpg";
+                            var pathnew = imagepath + strCustDirName + "/" + photoshoppathnew;
+                            item.ImageUrl = pathnew;
+                            item.keyname = strCustDirName + "/" + photoshoppathnew;
+                            break;
+                        case 3:
+                            var photoshoppathneew3 = "Img3_Images/" + item.ProfileID + "_ApplicationPhoto.jpg";
+                            var pathneww = imagepath + strCustDirName + "/" + photoshoppathneew3;
+                            item.ImageUrl = pathneww;
+                            item.keyname = strCustDirName + "/" + photoshoppathneew3;
+                            break;
+                    }
+                } else if (item.IsActive === 0 && item.PhotoName === null) {
+                    item.addButtonvisible = true;
+                    item.deleteVisibility = false;
+                    // item.ImageUrl = stateParams.genderID === '1' || stateParams.genderID === 1 ? app.Mnoimage : app.Fnoimage;
+                    item.ImageUrl = app.Fnoimage;
+                }
+            });
+            return Arr;
+        };
+
+        scope.redirectPage = function(type) {
+
+            switch (type) {
+                case 'PhotoGuideLines':
+                    window.open('registration/photoGuideLines', '_blank');
+                    break;
+                case 'Faqs':
+                    window.open('faqs', '_blank');
+                    break;
+                case 'uploadTips':
+                    window.open('registration/uploadTips', '_blank');
+                    break;
+            }
+        };
+
+
+
+
+
+
+
+
+    }
+})();
 app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
     'authSvc', '$injector', '$uibModal', 'successstoriesdata', '$timeout', '$mdDialog', '$stateParams',
     '$location', 'customerviewfullprofileservices', '$window', '$state',
@@ -9472,7 +9733,8 @@ app.factory('customerDashboardServices', ['$http', function(http) {
             return http.get(app.apiroot + 'DashboardRequest/DashboardRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         },
         getcustomerpartnerdata: function(custid, typeofaction, frompage, topage, exactflag) {
-            return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+            // return http.get(app.apiroot + 'DashboardRequest/DashboardGetPartnerProfilesRequestget', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         },
         getexpressintersetdata: function(object) {
             return http.post(app.apiroot + 'DashboardRequest/ExpressInterestSelectrequest', object);
@@ -9511,7 +9773,16 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         },
         getNotifications: function(obj) {
             return http.get(app.apiroot + 'StaticPages/getCust_NotificationDetails', { params: { Cust_NotificationID: obj.Cust_NotificationID, CustID: obj.CustID, Startindex: obj.Startindex, EndIndex: obj.EndIndex } });
-        }
+        },
+        getCustInfo: function(Custid) {
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPersonalInfo', { params: { CustID: Custid } });
+        },
+        getCustCounts: function(Custid) {
+            return http.get(app.apiroot + 'DashboardRequest/getcustDashboardCounts', { params: { CustID: Custid } });
+        },
+        // getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
+        //     return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
+        // }
     };
 }]);
 (function(app) {
@@ -9834,8 +10105,10 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
         },
         getCustomerBindings: function() {
             return http.get(app.apiroot + 'StaticPages/getCustomerBindings', { params: {} });
+        },
+        noPhotoStatus: function(custID) {
+            return http.get(app.apiroot + 'CustomerPersonal/getNoPhotoStatus', { params: { custid: custID } });
         }
-
     };
 }]);
 app.factory('successstoriesdata', ['$http', function(http) {

@@ -100,63 +100,54 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
 
 
 
-                    customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
-                        if (responseInfo.data) {
+                    customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
+                        if (response.data) {
+                            if (parseInt(frompage) === 1) {
 
-                            if (scope.counts === 1) {
-                                sessionStorage.removeItem("LoginPhotoIsActive");
-                                scope.PersonalInfo = (responseInfo.data);
-                                scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
-                                scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
-                                sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
-                                scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
-
-                                customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
-                                    if (responseCounts.data) {
-                                        scope.bindcounts(responseCounts.data);
-                                        scope.bindallcounts = responseCounts.data;
-
-                                        customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
-                                            if (response.data) {
-                                                if (parseInt(frompage) === 1) {
-
-                                                    scope.PartnerProfilesnew = [];
-                                                    scope.typeofdiv = "Grid";
-                                                    _.each(response.data.PartnerProfilesnew, function(item) {
-                                                        scope.PartnerProfilesnew.push(item);
-                                                    });
-                                                } else {
-                                                    _.each(response.data.PartnerProfilesnew, function(item) {
-                                                        scope.PartnerProfilesnew.push(item);
-                                                    });
-                                                }
-                                                scope.$broadcast('loadmore');
-                                                if (parseInt(frompage) === 1) {
-                                                    scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
-                                                    scope.lblUHaveviewd = headertext;
-                                                }
-
-                                            }
-                                        }).catch(function(response) {
-                                            scope.catchfunction();
-                                        });
-                                    }
+                                scope.PartnerProfilesnew = [];
+                                scope.typeofdiv = "Grid";
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
+                                });
+                            } else {
+                                _.each(response.data.PartnerProfilesnew, function(item) {
+                                    scope.PartnerProfilesnew.push(item);
                                 });
                             }
+                            scope.$broadcast('loadmore');
+                            if (parseInt(frompage) === 1) {
+                                scope.PartnerProfilesnewTotalrows = helperservice.checkstringvalue(response.data.PartnerProfilesnew) ? response.data.PartnerProfilesnew[0].TotalRows : 0;
+                                scope.lblUHaveviewd = headertext;
+                            }
+
                         }
+
+                        customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
+                            if (responseInfo.data) {
+
+                                if (scope.counts === 1) {
+                                    sessionStorage.removeItem("LoginPhotoIsActive");
+                                    scope.PersonalInfo = (responseInfo.data);
+                                    scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
+                                    scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
+                                    sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
+                                    scope.Gendercustomer = (scope.PersonalInfo.GenderID) === 2 ? 'Groom' : 'Bride';
+
+                                    customerDashboardServices.getCustCounts(scope.custid).then(function(responseCounts) {
+                                        if (responseCounts.data) {
+                                            scope.bindcounts(responseCounts.data);
+                                            scope.bindallcounts = responseCounts.data;
+
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                    }).catch(function(response) {
+                        scope.catchfunction();
                     });
-
-
-
-
-
-
-
-
-
-
-
-
 
                 } else {
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
@@ -721,7 +712,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         };
 
         scope.custdataload = function(type, frompage, topage, headertext, bindvalue, exactflag) {
-
+            scope.gettingpartnerdata(type, frompage, topage, headertext, bindvalue, exactflag);
             customerDashboardServices.getCustInfo(scope.custid).then(function(responseInfo) {
                 if (responseInfo.data) {
 
@@ -737,17 +728,13 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                             if (responseCounts.data) {
                                 scope.bindcounts(responseCounts.data);
                                 scope.bindallcounts = responseCounts.data;
-                                scope.gettingpartnerdata(type, frompage, topage, headertext, bindvalue, exactflag);
+
                             }
                         });
                     }
                 }
             });
         };
-
-
-
-
 
         scope.exactandnormal = function(typebutton) {
             if (typebutton === "exact") {
