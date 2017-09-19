@@ -8723,12 +8723,12 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 });
             }
             scope.bookmarkexpreessdata();
-            // customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
-            //     scope.slides = [];
-            //     _.each(response.data, function(item) {
-            //         scope.slides.push(item);
-            //     });
-            // });
+            customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
+                scope.slides = [];
+                _.each(response.data, function(item) {
+                    scope.slides.push(item);
+                });
+            });
         };
         scope.Searchfunctionality = function(type, object) {
             switch (type) {
