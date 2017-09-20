@@ -111,7 +111,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         };
         scope.pagerefersh = function(ToProfileID, Fromprofileid) {
             if (scope.interestedflag === true) {
-                customerviewfullprofileservices.Viewprofilepartial(ToProfileID, "").then(function(responseunpaid) {
+                customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
                     scope.partnerinformation(responseunpaid.data);
                 });
             } else {
