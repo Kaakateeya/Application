@@ -341,6 +341,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                         " For further assistance feel free to contact your relationship manager " + scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails : "Your memebership points got exhausted so please do the payment to upgrade points." +
                                         " For further assistance feel free to contact your relationship manager " + scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
+                                    scope.btnproceedflag = 1;
                                 } else {
                                     scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
                                         " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
