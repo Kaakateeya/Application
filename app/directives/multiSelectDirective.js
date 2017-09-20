@@ -16,11 +16,13 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
 
                 scope.databind = function(data) {
                     timeout(function() {
+                        var localArray = [];
+                        angular.copy(data, localArray);
                         scope.status = 'multiple' in attrs;
                         if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
-                            data.splice(0, 1);
+                            localArray.splice(0, 1);
                         }
-                        element.multiselect('dataprovider', data);
+                        element.multiselect('dataprovider', localArray);
                     }, 500);
                 };
                 timeout(function() {
