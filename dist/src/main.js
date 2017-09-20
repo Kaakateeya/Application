@@ -8943,8 +8943,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 if (scope.lblpaid === "UnPaid" || scope.lblpaid === "Renual") {
                                     scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
                                         "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
-                                        " For further assistance feel free to contact your relationship manager " + scope.personalinfo[0].RelationshipManger + ":" + scope.personalinfo[0].RelationshipManagerNumber : "Your memebership points got exhausted so please do the payment to upgrade points." +
-                                        " For further assistance feel free to contact your relationship manager " + scope.personalinfo[0].RelationshipManger + ":" + scope.personalinfo[0].RelationshipManagerNumber;
+                                        " For further assistance feel free to contact your relationship manager " + scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails : "Your memebership points got exhausted so please do the payment to upgrade points." +
+                                        " For further assistance feel free to contact your relationship manager " + scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                 } else {
                                     scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
