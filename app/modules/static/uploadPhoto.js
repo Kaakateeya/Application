@@ -5,15 +5,15 @@
         .module('Kaakateeya')
         .controller('uploadPhotoCtrl', controller);
 
-    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state'];
+    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state', 'uploadService'];
 
-    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state) {
+    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state, uploadService) {
         /* jshint validthis:true */
         var vm = this,
             model;
         vm.fnoimg = '';
         scope.up = {};
-        var CustID = 91035;
+        var CustID = 91022;
         scope.photorowID = 0;
         scope.manageArr = [
             { ImageUrl: app.Fnoimage },
@@ -37,6 +37,14 @@
                 }
             });
         };
+
+        uploadService.getencrypt('91022').then(function() {
+
+        });
+
+
+
+
 
         scope.pageload();
 

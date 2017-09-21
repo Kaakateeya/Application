@@ -8,7 +8,10 @@ app.factory('searches', ["$http", function(http) {
             return http.post(app.apiroot + 'CustomerSearch/CustomerProfileIdsearch', ProfileIDSearch);
         },
         CustomerGeneralandAdvancedSearchsubmit: function(obj) {
-            return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearch', obj);
+            if (obj.strCust_id)
+                return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearch', obj);
+            else
+                return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearchWithoutLogin', obj);
         },
         CustomerGeneralandAdvancedSavedSearch: function(obj) {
 

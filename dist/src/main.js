@@ -8427,15 +8427,15 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         .module('Kaakateeya')
         .controller('uploadPhotoCtrl', controller);
 
-    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state'];
+    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state', 'uploadService'];
 
-    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state) {
+    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state, uploadService) {
         /* jshint validthis:true */
         var vm = this,
             model;
         vm.fnoimg = '';
         scope.up = {};
-        var CustID = 91035;
+        var CustID = 91022;
         scope.photorowID = 0;
         scope.manageArr = [
             { ImageUrl: app.Fnoimage },
@@ -8459,6 +8459,14 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                 }
             });
         };
+
+        uploadService.getencrypt('91022').then(function() {
+
+        });
+
+
+
+
 
         scope.pageload();
 
@@ -10024,7 +10032,10 @@ app.factory('searches', ["$http", function(http) {
             return http.post(app.apiroot + 'CustomerSearch/CustomerProfileIdsearch', ProfileIDSearch);
         },
         CustomerGeneralandAdvancedSearchsubmit: function(obj) {
-            return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearch', obj);
+            if (obj.strCust_id)
+                return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearch', obj);
+            else
+                return http.post(app.apiroot + 'CustomerSearch/CustomerGeneralandAdvancedSearchWithoutLogin', obj);
         },
         CustomerGeneralandAdvancedSavedSearch: function(obj) {
 
@@ -10194,6 +10205,16 @@ app.factory('myAppFactory', ["$http", function(http) {
             return http.get(app.apiroot + 'Payment/getCustomerPaymentPackagesDisplay', { params: { LcustID: custid } });
         }
 
+    };
+}]);
+app.factory('uploadService', ["$http", function(http) {
+    return {
+        getencrypt: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getencryptedProfileID', { params: { ProfileID: custid } });
+        },
+        getdecrypt: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getdecryptedProfileID', { params: { ProfileID: custid } });
+        }
     };
 }]);
 app.factory('customerviewfullprofileservices', ['$http', function(http) {
