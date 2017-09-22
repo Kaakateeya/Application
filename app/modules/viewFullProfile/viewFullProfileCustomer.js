@@ -149,7 +149,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             } else {
                 scope.showmyname = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
-
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();

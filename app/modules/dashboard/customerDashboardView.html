@@ -398,7 +398,8 @@
                                              ng-click="photoalbumdashboard(expressint.Cust_ID,expressint.ProfileID,expressint.PhotosCount)"/></span>
                                             </div>
                                             <div class="sugested_block_top_rht">
-                                                <h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2>
+                                                <!--<h2>{{expressint.NAME}} ({{expressint.ProfileID}})</h2> -->
+                                                <h2>{{expressint.ProfileID}}</h2>
                                                 <ul>
                                                     <li><span>{{expressint.Age}}</span></li>
                                                     <li><span>{{expressint.Caste}}</span></li>
@@ -460,7 +461,7 @@
                         </div>
                         <div class="messages_list_item_rt">
                             <p> Member Id : <span id="lblMseeageProfileID">{{messages.ProfileID}}</span></p>
-                            <p><span id="lblName">{{messages.NAME}}</span></p>
+                            <!--<p><span id="lblName">{{messages.NAME}}</span></p> -->
                             <p class="Messages_profile_view clearfix"> <span id="lblAge">{{messages.Age}}</span>
                                 <span id="lblCastIDs">{{messages.Caste}}</span><span id="lblheight">{{messages.Height}}</span> <span id="lblEducation">{{messages.Education}}</span>
                                 <span id="lblProfessionID">{{messages.profession}}</span></p>
@@ -503,7 +504,7 @@
                                  <img ng-src="{{requestphotos.Photo}}" style="height:120px;width:120px;cursor:pointer;" ng-class="requestphotos.PhotosCount==0?'Linkdisabled':''"> </span> </div>
                             <div class="messages_list_item_rt">
                                 <p> Member Id :<span>{{requestphotos.ProfileID}}</span> </p>
-                                <p> <span>{{requestphotos.NAME}}</span> </p>
+                                <!-- <p> <span>{{requestphotos.NAME}}</span> </p> -->
                                 <p class="Messages_profile_view clearfix"> <span>{{requestphotos.Age}}</span><span>{{requestphotos.Caste}}</span><span>{{requestphotos.Height}}</span><span>{{requestphotos.Education}}</span><span>{{requestphotos.profession}}</span> </p>
                                 <div class="messages_list_item_ui clearfix">
                                     <div>
@@ -537,9 +538,9 @@
                                 Member Id :
                                 <span>{{passwordrequest.ProfileID }} </span>
                             </p>
-                            <p>
+                            <!-- <p>
                                 <span>{{passwordrequest.NAME}} </span><span style='display: none;'></span>
-                            </p>
+                            </p>-->
                             <p class='Messages_profile_view clearfix'>
 
                                 <span>{{passwordrequest.Age}} </span><span>{{passwordrequest.Caste}} </span><span>{{passwordrequest.Height}} </span><span>{{passwordrequest.Education}} </span><span>{{passwordrequest.profession}} </span>
