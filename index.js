@@ -77,7 +77,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
         { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false },
-        { name: 'uploadPhoto', url: '/uploadPhoto', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
+        { name: 'uploadPhoto', url: '/uploadPhoto/:custid', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
+        { name: 'uploadPhotoencrypt', url: '/uploadPhotoencrypt/:custid', templateUrl: 'app/modules/static/uploadPhotoencrypt.html', controller: "uploadPhotoencryptCtrl", isloginrequired: false },
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -93,7 +94,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,

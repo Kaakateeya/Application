@@ -1,19 +1,21 @@
 (function() {
     'use strict';
-
     angular
         .module('Kaakateeya')
         .controller('uploadPhotoCtrl', controller);
+    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload',
+        'SelectBindServiceApp', '$state', 'uploadService', '$stateParams'
+    ];
 
-    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state', 'uploadService'];
-
-    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state, uploadService) {
+    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp,
+        state, uploadService, $stateParams) {
         /* jshint validthis:true */
         var vm = this,
             model;
         vm.fnoimg = '';
         scope.up = {};
-        var CustID = 91022;
+        scope.encryptCustID = $stateParams.custid;
+        scope.decryptCustID = "";
         scope.photorowID = 0;
         scope.manageArr = [
             { ImageUrl: app.Fnoimage },
@@ -27,46 +29,37 @@
         scope.cancel = function() {
             Commondependency.closepopup();
         };
-
         scope.pageload = function() {
-            SelectBindServiceApp.noPhotoStatus(CustID).then(function(response) {
-                if (parseInt(response.data) === 1) {
-                    state.go('home');
-                } else {
-
+            uploadService.getdecrypt(scope.encryptCustID).then(function(response) {
+                if (response.data !== null && response.data !== undefined && response.data !== "") {
+                    SelectBindServiceApp.noPhotoStatus(response.data).then(function(resp) {
+                        if (parseInt(resp.data) === 1) {
+                            state.go('home');
+                        } else {
+                            scope.decryptCustID = response.data;
+                        }
+                    });
                 }
             });
         };
-
-        uploadService.getencrypt('91022').then(function() {
-
-        });
-
-
-
-
-
         scope.pageload();
-
         scope.upload = function(obj) {
             if (obj.myFile) {
                 var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
                 extension = angular.lowercase(extension);
+
                 var gifFormat = "gif, jpeg, png,jpg";
-
                 if (typeof(obj.myFile.name) != "undefined") {
-
                     var size = parseFloat(obj.myFile.size / 1024).toFixed(2);
                     if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
                         alert('Your uploaded image contains an unapproved file formats.');
                     } else if (size > 4 * 1024) {
                         alert('Sorry,Upload Photo Size Must Be Less than 1 mb');
                     } else {
-
-                        var keyname = app.prefixPath + 'KMPL_' + CustID + '_Images/Img' + scope.photorowID + '.' + extension;
-
+                        var keyname = app.prefixPath + 'KMPL_' + scope.decryptCustID + '_Images/Img' + scope.photorowID + '.' + extension;
                         fileUpload.uploadFileToUrl(obj.myFile, '/photoUplad', keyname).then(function(res) {
                             console.log(res.status);
+
                             if (res.status == 200) {
                                 Commondependency.closepopup();
                                 scope.uploadData = {
@@ -87,12 +80,11 @@
                                         PhotoPassword: null
                                     },
                                     customerpersonaldetails: {
-                                        intCusID: CustID,
+                                        intCusID: scope.decryptCustID,
                                         EmpID: null,
                                         Admin: null
                                     }
                                 };
-
                                 SVC.submituploadData(scope.uploadData).then(function(response) {
                                     console.log(response);
                                     if (response.status === 200) {
@@ -104,7 +96,6 @@
                                         alert('Updation failed');
                                     }
                                 });
-
                             }
                         });
                     }
@@ -115,24 +106,19 @@
                 alert('Please upload Photo');
             }
         };
-
-
         scope.refreshPageLoad = function(Arr) {
             _.each(Arr, function(item) {
                 scope.rbtProtectPassword = item.PhotoPassword === 'Admin@123' ? '1' : '0';
                 var imagepath = app.accesspathdots;
-
                 if (item.IsActive === 0 && item.PhotoName !== null) {
-                    var strCustDirName1 = "KMPL_" + CustID + "_Images";
+                    var strCustDirName1 = "KMPL_" + scope.decryptCustID + "_Images";
                     var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
                     item.ImageUrl = path1 + '?decache=' + Math.random();
                     item.addButtonvisible = false;
                     item.deleteVisibility = true;
                     item.keyname = strCustDirName1 + "/" + item.PhotoName;
-
                 } else if (item.IsActive === 1 && item.IsThumbNailCreated === 1) {
-
-                    var strCustDirName = "KMPL_" + CustID + "_Images";
+                    var strCustDirName = "KMPL_" + scope.decryptCustID + "_Images";
                     item.addButtonvisible = false;
                     item.deleteVisibility = true;
                     switch (item.DisplayOrder) {
@@ -166,7 +152,6 @@
         };
 
         scope.redirectPage = function(type) {
-
             switch (type) {
                 case 'PhotoGuideLines':
                     window.open('registration/photoGuideLines', '_blank');
@@ -179,13 +164,5 @@
                     break;
             }
         };
-
-
-
-
-
-
-
-
     }
 })();
