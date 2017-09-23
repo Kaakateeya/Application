@@ -394,7 +394,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                         if (response.data[0][0].FromCust_InterestStatus === 'I' && response.data[0][0].ToCust_InterestStatus === 'V') {
                                             scope.TicketStatusID = "Viewed";
                                             scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
-                                                " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion." +
+                                                " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion. " +
                                                 oppositeher + " relationship manager will contact  " + herhim + " and get back to you with " + oppositeher + " opinion at the earliest.";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
 
