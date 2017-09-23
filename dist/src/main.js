@@ -8440,9 +8440,7 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         scope.decryptCustID = "";
         scope.photorowID = 0;
         scope.manageArr = [
-            { ImageUrl: app.Fnoimage },
-            { ImageUrl: app.Fnoimage },
-            { ImageUrl: app.Fnoimage }
+
         ];
         scope.AddImage = function(index) {
             scope.photorowID = index;
@@ -8455,9 +8453,15 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
             uploadService.getdecrypt(scope.encryptCustID).then(function(response) {
                 if (response.data !== null && response.data !== undefined && response.data !== "") {
                     SelectBindServiceApp.noPhotoStatus(response.data).then(function(resp) {
-                        if (parseInt(resp.data) === 1) {
+                        scope.gendernophotos = resp.data.length > 0 && resp.data[0].GenderID ? resp.data[0].GenderID : 1;
+                        if (resp.data.length > 0 && parseInt(resp.data[0].Status) === 1) {
                             state.go('home');
                         } else {
+                            scope.manageArr = [
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage },
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage },
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage }
+                            ];
                             scope.decryptCustID = response.data;
                         }
                     });
@@ -8602,7 +8606,7 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         scope.CustID = $stateParams.custid;
         scope.pageload = function() {
             SelectBindServiceApp.noPhotoStatus(scope.CustID).then(function(response) {
-                if (parseInt(response.data) === 1) {
+                if (response.data.length > 0 && parseInt(response.data[0].Status) === 1) {
                     state.go('home');
                 } else {
                     uploadService.getencrypt(scope.CustID).then(function(response) {

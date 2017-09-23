@@ -12,7 +12,7 @@
         scope.CustID = $stateParams.custid;
         scope.pageload = function() {
             SelectBindServiceApp.noPhotoStatus(scope.CustID).then(function(response) {
-                if (parseInt(response.data) === 1) {
+                if (response.data.length > 0 && parseInt(response.data[0].Status) === 1) {
                     state.go('home');
                 } else {
                     uploadService.getencrypt(scope.CustID).then(function(response) {
