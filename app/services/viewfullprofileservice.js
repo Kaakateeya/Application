@@ -36,8 +36,14 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         getExpressIntrstfullprofilepaidandunpaid: function(fromprofileid, tocustid, empid) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepaidandunpaid', { params: { fromProfileID: fromprofileid, toustid: tocustid, EmpID: empid } });
         },
-        getfromstatusandtostatus: function(fromprofileid, toprofileid) {
-            return http.get(app.apiroot + 'StaticPages/getfromexpresstoexpressstatus', { params: { Fromprofileid: fromprofileid, Toprofileid: toprofileid } });
+        getfromstatusandtostatus: function(fromprofileid, toprofileid, Empid) {
+            return http.get(app.apiroot + 'StaticPages/getfromexpresstoexpressstatus', { params: { Fromprofileid: fromprofileid, Toprofileid: toprofileid, Empid: Empid } });
+        },
+        sendMail: function(obj) {
+            return http.post(app.apiroot183 + 'EmployeeReportPage/MatchFollowupMailSend', obj);
+        },
+        ResendMail: function(obj) {
+            return http.post(app.apiroot183 + 'EmployeeReportPage/MatchFollowupResendMail', obj);
         }
     };
 }]);
