@@ -263,6 +263,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 alerts.dynamicpopupclose();
                 scope.flagopen = 1;
                 scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+
             } else {
                 alerts.dynamicpopupclose();
             }
@@ -352,6 +353,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     scope.btnproceedflag = 1;
                                     // scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
+
+                                customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID)
+
                                 break;
                             case 2:
                             case 3:
@@ -364,6 +368,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                         }
                     });
+
                     break;
                 case "btnDontProceed":
                     var MobjViewprofiledont = {
