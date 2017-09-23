@@ -111,15 +111,28 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.pagerefersh = function(ToProfileID, Fromprofileid) {
-            if (scope.interestedflag === true) {
-                customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
-                    scope.partnerinformation(responseunpaid.data);
-                });
-            } else {
-                customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
-                    scope.partnerinformation(responsedata.data);
-                });
-            }
+            // if (scope.interestedflag === true) {
+            //     customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
+            //         scope.partnerinformation(responseunpaid.data);
+            //     });
+            // } else {
+            //     customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+            //         scope.partnerinformation(responsedata.data);
+            //     });
+            // }
+            customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
+                if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
+                    if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                        customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                            scope.partnerinformation(responsedata.data);
+                        });
+                    } else {
+                        customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
+                            scope.partnerinformation(responseunpaid.data);
+                        });
+                    }
+                }
+            });
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
                 scope.slides = [];
@@ -389,9 +402,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     scope.btnproceedflag = 1;
                                 }
                                 customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
-                                    console.log(response);
                                     if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
-                                        if (response.data[0][0].FromCust_InterestStatus === 'I' && response.data[0][0].ToCust_InterestStatus === 'V') {
+                                        if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'V') {
                                             scope.TicketStatusID = "Viewed";
                                             scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion. " +
@@ -400,7 +412,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
 
-                                        } else if (response.data[0][0].FromCust_InterestStatus === 'I' && response.data[0][0].ToCust_InterestStatus === 'NV') {
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'NV') {
                                             scope.emailresendflag = 1;
                                             scope.TicketStatusID2 = "Resend";
                                             scope.TicketStatusID = "NotViewed";
@@ -410,7 +422,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                                 "have also sent a mobile message and we will also try to reach  " + oppositeher + " over phone to inform the same";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
-                                        } else if (response.data[0][0].FromCust_InterestStatus === 'V' && response.data[0][0].ToCust_InterestStatus === 'I') {
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'V' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
                                             scope.TicketStatusID = "onsideinterest";
                                             scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
@@ -418,7 +430,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
-                                        } else if (response.data[0][0].FromCust_InterestStatus === 'I' && response.data[0][0].ToCust_InterestStatus === 'I') {
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
                                             scope.txtAllcallflag = 1;
                                             scope.TicketStatusID = "bothSideinterest";
                                             scope.txtAllcallDiscusionemail = "<div style='margin-left:30px;color:black;text-align: justify;'>" + genderid + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.</div><br>" +
