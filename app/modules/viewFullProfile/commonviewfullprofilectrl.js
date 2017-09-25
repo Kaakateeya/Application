@@ -28,6 +28,19 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
                     var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
                     var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
+                    //
+                    switch (scope.tointereststatus) {
+                        case 'I':
+                            scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is interested in your Profile.Ensure to express your opinion as';
+                            break;
+                        case 'V':
+                            scope.proceedtextforbothsides = 'Your Profile was viewed by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
+                            break;
+                        default:
+                            scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                            break;
+                    }
+                    //
                     scope.titleproceed = oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
                     scope.titledontproceed = "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME;
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
@@ -122,6 +135,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // }
             customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
+                    scope.tointereststatus = response.data[0][0].ToCust_InterestStatus.trim();
                     if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
                         customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
                             scope.partnerinformation(responsedata.data);

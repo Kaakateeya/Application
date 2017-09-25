@@ -4,17 +4,19 @@
             <div ng-show="divacceptreject" style="border: solid 1px #fff;">
                 <div id="upAll">
                     <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
-                        <label>Ensure to express your opinion as</label>
-                        <label style="color: #de2929;">"PROCEED"</label>
-                        <label>if this profile is suitable for you or else</label>
-                        <label style="color: #de2929;">"DON'T PROCEED"</label>
+                        <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                        <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                        <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                        <a title="{{titledontproceed}}" class="classproceeddontproceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                        <label style="float: left;margin-left:4px;margin-top: 4px;">If not Interested.</label>
                     </div>
                     <div class="clearfix"></div>
                     <div class="row">
                         <div class="col-lg-8">
-                            <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
+                            <!-- <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>-->
+                            <a class="logo2 pull-left">&nbsp;</a>
                         </div>
-                        <div>
+                        <div ng-hide="true">
                             <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
                                 <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
                                 <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
@@ -92,12 +94,21 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-12">
+                <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                    <br>
+                    <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                    <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                    <a title="{{titledontproceed}}" class="classproceeddontproceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If not Interested.</label>
+                </div>
                 <div class="row pull-right">
-                    <div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
+                    <!--<div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
                         <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
                         <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
-                    </div>
+                    </div>-->
                     <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-12">
                         <div id="UpdatePanel6">
                             <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
@@ -194,6 +205,19 @@
         display: block;
         float: left;
         padding: 10px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
         text-transform: uppercase;
         color: white;
         background-color: #d83222;
