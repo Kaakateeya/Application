@@ -145,6 +145,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             scope.partnerinformation(responseunpaid.data);
                         });
                     }
+                } else if (scope.FromProfileID === scope.ToProfileID) {
+                    customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                        scope.partnerinformation(responsedata.data);
+                    });
                 }
             });
             scope.bookmarkexpreessdata();

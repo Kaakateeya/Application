@@ -6,7 +6,6 @@
                     <div class="clearfix"></div>
                     <div class="row">
                         <div class="col-lg-2">
-                            <!-- <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>-->
                             <a class="logo2 pull-left">&nbsp;</a>
                         </div>
                         <div class="col-lg-10" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
@@ -47,12 +46,10 @@
                             <div id="divmask" class="profile_full_header_pic">
                                 <img name="iProfilePic" id="iProfilePic" ng-click="photoalbum()" ng-src="{{personalinfo[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="profile_full_header_in">
-
                             <h6>
                                 <span id="lblName">{{personalinfo[0].NAME}}</span>
                                 <span>
@@ -69,20 +66,17 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-
                         <img name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" ng-src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
                     </div>
                 </div>
             </div>
             <div id="printdiv">
                 <div class="personal_inform_main">
-
                     <div ng-repeat="item in arr" ng-if="item.header=='Headings' || item.header=='About'?'':item.header">
                         <div id="ctl00_divmain" class="personal_inform_head clearfix" style="background-color: rgb(244, 182, 36); padding: 6px 10px; border-bottom: solid 1px #ccc;">
                             <h6>
                                 <span id="ctl00_lblHeadings" class="lblHeadings" style="color: black;font-weight: 700;">{{item.header}}</span></h6>
                         </div>
-
                         <div id="ctl00_divsub" class="personal_inform_main_in">
                             <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details' || item.header=='My Location' ||item.header=='My Location Information'||item.header=='Basic details'|| item.header=='Location' || item.header=='Religious information'?'personal_inform_main_in_list clearfix': ''">
                                 <p ng-repeat="itm in item.value">
@@ -91,7 +85,6 @@
                               <span  style="color:DarkBlue;"> 
                                 <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null) " style="color:DarkBlue;">:</span>
                                     <span ng-bind-html="itm.value || itm.Value" style="color:DarkBlue;"></span>
-
                                     </span>
                                 </p>
                             </div>
@@ -99,7 +92,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-12">
                 <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
                     <br>
@@ -128,7 +120,6 @@
                 <br>
                 <br>
             </div>
-
         </div>
         <script type="text/ng-template" id="TabClosePopup.html">
             <div class="modal-message modal-danger">
