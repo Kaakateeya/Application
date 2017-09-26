@@ -3,18 +3,23 @@
         <div class="profile_full_main" ng-show="PageDiv">
             <div ng-show="divacceptreject" style="border: solid 1px #fff;">
                 <div id="upAll">
-                    <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
-                        <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
-                        <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
-                        <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
-                        <a title="{{titledontproceed}}" class="classproceeddontproceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
-                        <label style="float: left;margin-left:4px;margin-top: 4px;">If not Interested.</label>
-                    </div>
                     <div class="clearfix"></div>
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-2">
                             <!-- <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>-->
                             <a class="logo2 pull-left">&nbsp;</a>
+                        </div>
+                        <div class="col-lg-10" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                            <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                            <br>
+                            <div class="clearfix">
+                            </div>
+                            <div class="row">
+                                <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                                <a title="{{titledontproceed}}" class="classproceeddontproceed2" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;" class="">If not Interested.</label>
+                            </div>
                         </div>
                         <div ng-hide="true">
                             <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
@@ -28,7 +33,7 @@
                                 <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
                             </div>
                         </div>
-                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-1">
+                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-7">
                             <a class="aspNetDisabled">{{btnticket}}</a>
                         </div>
                     </div>
@@ -59,7 +64,7 @@
                                 <span id="lblAboutMyself" class="lblAboutMyself" style="color:Black;font-weight:bold;color: #000">About Myself :</span>
                             </p>
                             <p>
-                                <span id="lblDescMy" class="fontsize" style="width: 750px;">{{aboutmyself[0].Aboutyourself}}</span>
+                                <span id="lblDescMy" class="fontsize" style="width: 750px;color:DarkBlue;">{{aboutmyself[0].Aboutyourself}}</span>
                             </p>
                         </div>
                     </div>
@@ -213,6 +218,19 @@
     }
     
     .classproceeddontproceed {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed2 {
         border-radius: 3px;
         margin: 0 0 0 10px;
         display: block;
