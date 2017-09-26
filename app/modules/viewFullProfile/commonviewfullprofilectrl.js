@@ -41,8 +41,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                             break;
                     }
                     //
-                    scope.titleproceed = oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
-                    scope.titledontproceed = "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME;
+                    scope.titleproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead" : "";
+                    scope.titledontproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME : "";
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -265,6 +265,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 scope.FromProfileName = response.data.FromProfileName;
                 scope.FromProfileLastName = response.data.FromProfileLastName;
                 scope.Fromgender = response.data.Fromgender;
+                scope.IsConfidential = response.data.IsConfidential;
+                scope.HighConfendential = response.data.HighConfendential;
                 scope.statusalert(response.data.status);
             });
         };
@@ -408,9 +410,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
                                 } else {
-                                    scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
+                                    scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? genderid + " " + scope.FromProfileName +
                                         " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
-                                        oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern.";
+                                        oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern." : "Proceed updated Successfully";
                                     scope.divacceptreject = true;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
@@ -430,7 +432,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                             scope.emailresendflag = 1;
                                             scope.TicketStatusID2 = "Resend";
                                             scope.TicketStatusID = "NotViewed";
-                                            scope.Resendmail(scope.fromcustid, scope.tocustid, scope.FromProfileID, scope.ToProfileID);
+                                            if ((scope.IsConfidential === 0) && (scope.HighConfendential === 0)) {
+                                                scope.Resendmail(scope.fromcustid, scope.tocustid, scope.FromProfileID, scope.ToProfileID);
+                                            }
                                             scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " We have noticed that " + oppositeshe + " is yet to view your profile and we have resent your profile to " + oppositeher + " now and " +
                                                 "have also sent a mobile message and we will also try to reach  " + oppositeher + " over phone to inform the same";
@@ -491,7 +495,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         switch (response.data) {
                             case 1:
                                 scope.flagopen = 1;
-                                scope.modalbodyID1 = "Oops go through your search";
+                                scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Oops go through your search" : "Proceed Updated failed";
                                 // scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
                                 //   " We have not received any positive response from " + scope.personalinfo[0].NAME + " so far.So lets proceed with our new search options";
                                 break;
