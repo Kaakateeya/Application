@@ -44,8 +44,9 @@
                     </ul>
                     <div class="clear"></div>
                 </div>
-                <p>
-                    <span id="lblNames"></span> is: Family oriented, well educated, attractive
+
+                <p ng-hide="aboutmyself[0].Aboutyourself==='NOT Given'">
+                    <span id="lblNames"></span> {{aboutmyself[0].Aboutyourself}}
                 </p>
             </div>
             <div ng-hide="custid===localcustidhide">
