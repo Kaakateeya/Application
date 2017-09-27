@@ -80,10 +80,10 @@
                         <div id="ctl00_divsub" class="personal_inform_main_in">
                             <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details' || item.header=='My Location' ||item.header=='My Location Information'||item.header=='Basic details'|| item.header=='Location' || item.header=='Religious information'?'personal_inform_main_in_list clearfix': ''">
                                 <p ng-repeat="itm in item.value">
-                                    <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;">{{itm.columnname || itm.ColumnName}}</span>
-                                    <span>
-                              <span  style="color:DarkBlue;"> 
-                                <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null) " style="color:DarkBlue;">:</span>
+                                    <!-- <label ng-hide="true" ng-bind-html="bindeduction(itm.ColumnName)"></label>-->
+                                    <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;" ng-bind-html="bindeduction(itm.columnname || itm.ColumnName)"></span>
+                                    <span style="color:DarkBlue;"> 
+                                  <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null && itm.ColumnName!=='Education') " style="color:DarkBlue;">:</span>
                                     <span ng-bind-html="itm.value || itm.Value" style="color:DarkBlue;"></span>
                                     </span>
                                 </p>

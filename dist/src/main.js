@@ -8635,6 +8635,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
         scope.tocustid = null;
         scope.mailInput = {};
+        scope.educationcolumn = false;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -9173,6 +9174,14 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             } else {
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'ExpressInterest failed please contact Admin', 3000);
             }
+        };
+        scope.bindeduction = function(value) {
+            if (value === 'Education') {
+                value = '';
+            } else {
+                value = value;
+            }
+            return value;
         };
     }
 ]);
