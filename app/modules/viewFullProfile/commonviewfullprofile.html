@@ -6,9 +6,11 @@
                     <div class="clearfix"></div>
                     <div class="row">
                         <div class="col-lg-2">
-                            <a class="logo2 pull-left">&nbsp;</a>
+                            <img src="src/images/logo2.png" class="pull-left" style="width: 165px;
+                                height: 83px;">&nbsp;</img>
+                            <!-- <a class="logo2 pull-left">&nbsp;</a> -->
                         </div>
-                        <div class="col-lg-10" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                        <div class="col-lg-9 col-lg-offset-1" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
                             <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
                             <br>
                             <div class="clearfix">
@@ -93,7 +95,7 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;margin-left: 40px;">
                     <br>
                     <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
                     <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>

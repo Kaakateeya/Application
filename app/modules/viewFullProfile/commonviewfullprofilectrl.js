@@ -32,18 +32,18 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     //
                     switch (scope.tointereststatus) {
                         case 'I':
-                            scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is interested in your Profile.Ensure to express your opinion as';
+                            scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is "INTERESTED" in your Profile.Ensure to express your opinion as';
                             break;
                         case 'V':
-                            scope.proceedtextforbothsides = 'Your Profile was viewed by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
+                            scope.proceedtextforbothsides = 'Your Profile was "VIEWED" by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
                             break;
                         default:
                             scope.proceedtextforbothsides = 'Ensure to express your opinion as';
                             break;
                     }
                     //
-                    scope.titleproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead" : "";
-                    scope.titledontproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME : "";
+                    scope.titleproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead" : "Your openion will be conveyed to " + scope.aboutmyself[0].RelationShipManager + " (" + scope.aboutmyself[0].ContactDetails + ")";
+                    scope.titledontproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Your not interested openion will be conveyed to " + oppositegender + " " + scope.personalinfo[0].NAME + " through your relationship manager" : "Your openion will be conveyed to " + scope.aboutmyself[0].RelationShipManager + " (" + scope.aboutmyself[0].ContactDetails + ")";
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -415,9 +415,11 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
                                 } else {
-                                    scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? genderid + " " + scope.FromProfileName +
-                                        " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
-                                        oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern." : "Proceed updated Successfully";
+                                    // scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? genderid + " " + scope.FromProfileName +
+                                    //     " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
+                                    //     oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern." : "Proceed updated Successfully";
+
+                                    scope.modalbodyID1 = "Request Sent";
                                     scope.divacceptreject = true;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
@@ -500,9 +502,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         switch (response.data) {
                             case 1:
                                 scope.flagopen = 1;
-                                scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Oops go through your search" : "Proceed Updated failed";
-                                // scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
-                                //   " We have not received any positive response from " + scope.personalinfo[0].NAME + " so far.So lets proceed with our new search options";
+                                // scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Oops go through your search" : "Proceed Updated failed";
+                                scope.modalbodyID1 = "Request Sent";
                                 break;
                             case 2:
                             case 3:
