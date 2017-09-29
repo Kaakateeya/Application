@@ -9687,14 +9687,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
              model.updatepaymentllink = false;
              var meKey = Object.getOwnPropertyNames(model.searchObjectquery)[0];
              var meKeyempid = Object.getOwnPropertyNames(model.searchObjectquery)[1];
-             model.selfProfileID = model.searchObjectquery[meKey];
+             model.selfProfileID = model.searchObjectquery[meKey].replace(' ', '+');
              model.selfEmp = model.searchObjectquery[meKeyempid];
              if (model.selfProfileID) {
                  model.getprofileDataencryptedID(model.selfProfileID);
              }
          };
-
-
          vm.init();
      }
      angular
