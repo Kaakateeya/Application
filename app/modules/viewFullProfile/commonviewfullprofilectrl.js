@@ -30,16 +30,28 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
                     var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
                     //
-                    switch (scope.tointereststatus) {
-                        case 'I':
-                            scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is "INTERESTED" in your Profile.Ensure to express your opinion as';
-                            break;
-                        case 'V':
-                            scope.proceedtextforbothsides = 'Your Profile was "VIEWED" by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
-                            break;
-                        default:
-                            scope.proceedtextforbothsides = 'Ensure to express your opinion as';
-                            break;
+                    if ((scope.IsConfidential === 0) && (scope.HighConfendential === 0)) {
+                        switch (scope.tointereststatus) {
+                            case 'I':
+                                scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is "INTERESTED" in your Profile.Ensure to express your opinion as';
+                                break;
+                            case 'V':
+                                scope.proceedtextforbothsides = 'Your Profile was "VIEWED" by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
+                                break;
+                            default:
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                        }
+                    } else {
+                        switch (scope.tointereststatus) {
+                            case 'I':
+                            case 'V':
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                            default:
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                        }
                     }
                     //
                     scope.titleproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead" : "Your openion will be conveyed to " + scope.aboutmyself[0].RelationShipManager + " (" + scope.aboutmyself[0].ContactDetails + ")";
