@@ -20,7 +20,7 @@ var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', '
 
 app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 // app.apiroot = 'http://183.82.0.58:8010/Api/';
-app.apiroot = 'http://183.82.0.58:8010/Api/';
+app.apiroot = 'http://183.82.0.58:8070/Api/';
 app.global = {
     'alertType': 'toast-top-right'
 };
@@ -78,6 +78,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
         { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false },
         { name: 'uploadPhoto', url: '/uploadPhoto', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
+        { name: 'mailLogin', url: '/mailLogin', templateUrl: 'app/modules/static/mailLogin.html', controller: "mailLoginCtrl", isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
