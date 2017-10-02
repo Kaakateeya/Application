@@ -2125,7 +2125,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (response.data) {
                             if (parseInt(frompage) === 1) {
-
                                 scope.PartnerProfilesnew = [];
                                 scope.typeofdiv = "Grid";
                                 _.each(response.data.PartnerProfilesnew, function(item) {
@@ -8515,25 +8514,25 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
 ]);
 (function() {
     'use strict';
-
     angular
         .module('Kaakateeya')
         .controller('uploadPhotoCtrl', controller);
+    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload',
+        'SelectBindServiceApp', '$state', 'uploadService', '$stateParams'
+    ];
 
-    controller.$inject = ['$location', '$scope', 'editmanagePhotoServices', 'Commondependency', '$uibModal', 'fileUpload', 'SelectBindServiceApp', '$state', 'uploadService'];
-
-    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp, state, uploadService) {
+    function controller($location, scope, SVC, Commondependency, uibModal, fileUpload, SelectBindServiceApp,
+        state, uploadService, $stateParams) {
         /* jshint validthis:true */
         var vm = this,
             model;
         vm.fnoimg = '';
         scope.up = {};
-        var CustID = 91022;
+        scope.encryptCustID = $stateParams.custid;
+        scope.decryptCustID = "";
         scope.photorowID = 0;
         scope.manageArr = [
-            { ImageUrl: app.Fnoimage },
-            { ImageUrl: app.Fnoimage },
-            { ImageUrl: app.Fnoimage }
+
         ];
         scope.AddImage = function(index) {
             scope.photorowID = index;
@@ -8542,46 +8541,43 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         scope.cancel = function() {
             Commondependency.closepopup();
         };
-
         scope.pageload = function() {
-            SelectBindServiceApp.noPhotoStatus(CustID).then(function(response) {
-                if (parseInt(response.data) === 1) {
-                    state.go('home');
-                } else {
-
+            uploadService.getdecrypt(scope.encryptCustID).then(function(response) {
+                if (response.data !== null && response.data !== undefined && response.data !== "") {
+                    SelectBindServiceApp.noPhotoStatus(response.data).then(function(resp) {
+                        scope.gendernophotos = resp.data.length > 0 && resp.data[0].GenderID ? resp.data[0].GenderID : 1;
+                        if (resp.data.length > 0 && parseInt(resp.data[0].Status) === 1) {
+                            state.go('home');
+                        } else {
+                            scope.manageArr = [
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage },
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage },
+                                { ImageUrl: scope.gendernophotos === 2 ? app.Fnoimage : app.Mnoimage }
+                            ];
+                            scope.decryptCustID = response.data;
+                        }
+                    });
                 }
             });
         };
-
-        uploadService.getencrypt('91022').then(function() {
-
-        });
-
-
-
-
-
         scope.pageload();
-
         scope.upload = function(obj) {
             if (obj.myFile) {
                 var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
                 extension = angular.lowercase(extension);
+
                 var gifFormat = "gif, jpeg, png,jpg";
-
                 if (typeof(obj.myFile.name) != "undefined") {
-
                     var size = parseFloat(obj.myFile.size / 1024).toFixed(2);
                     if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
                         alert('Your uploaded image contains an unapproved file formats.');
                     } else if (size > 4 * 1024) {
                         alert('Sorry,Upload Photo Size Must Be Less than 1 mb');
                     } else {
-
-                        var keyname = app.prefixPath + 'KMPL_' + CustID + '_Images/Img' + scope.photorowID + '.' + extension;
-
+                        var keyname = app.prefixPath + 'KMPL_' + scope.decryptCustID + '_Images/Img' + scope.photorowID + '.' + extension;
                         fileUpload.uploadFileToUrl(obj.myFile, '/photoUplad', keyname).then(function(res) {
                             console.log(res.status);
+
                             if (res.status == 200) {
                                 Commondependency.closepopup();
                                 scope.uploadData = {
@@ -8602,12 +8598,11 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                                         PhotoPassword: null
                                     },
                                     customerpersonaldetails: {
-                                        intCusID: CustID,
+                                        intCusID: scope.decryptCustID,
                                         EmpID: null,
                                         Admin: null
                                     }
                                 };
-
                                 SVC.submituploadData(scope.uploadData).then(function(response) {
                                     console.log(response);
                                     if (response.status === 200) {
@@ -8619,7 +8614,6 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                                         alert('Updation failed');
                                     }
                                 });
-
                             }
                         });
                     }
@@ -8630,24 +8624,19 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                 alert('Please upload Photo');
             }
         };
-
-
         scope.refreshPageLoad = function(Arr) {
             _.each(Arr, function(item) {
                 scope.rbtProtectPassword = item.PhotoPassword === 'Admin@123' ? '1' : '0';
                 var imagepath = app.accesspathdots;
-
                 if (item.IsActive === 0 && item.PhotoName !== null) {
-                    var strCustDirName1 = "KMPL_" + CustID + "_Images";
+                    var strCustDirName1 = "KMPL_" + scope.decryptCustID + "_Images";
                     var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
                     item.ImageUrl = path1 + '?decache=' + Math.random();
                     item.addButtonvisible = false;
                     item.deleteVisibility = true;
                     item.keyname = strCustDirName1 + "/" + item.PhotoName;
-
                 } else if (item.IsActive === 1 && item.IsThumbNailCreated === 1) {
-
-                    var strCustDirName = "KMPL_" + CustID + "_Images";
+                    var strCustDirName = "KMPL_" + scope.decryptCustID + "_Images";
                     item.addButtonvisible = false;
                     item.deleteVisibility = true;
                     switch (item.DisplayOrder) {
@@ -8681,7 +8670,6 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
         };
 
         scope.redirectPage = function(type) {
-
             switch (type) {
                 case 'PhotoGuideLines':
                     window.open('registration/photoGuideLines', '_blank');
@@ -8694,14 +8682,34 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                     break;
             }
         };
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('Kaakateeya')
+        .controller('uploadPhotoencryptCtrl', controller);
+    controller.$inject = ['$scope', '$state', 'uploadService', '$stateParams', 'SelectBindServiceApp'];
 
-
-
-
-
-
-
-
+    function controller(scope, state, uploadService, $stateParams, SelectBindServiceApp) {
+        /* jshint validthis:true */
+        var vm = this,
+            model;
+        scope.CustID = $stateParams.custid;
+        scope.pageload = function() {
+            SelectBindServiceApp.noPhotoStatus(scope.CustID).then(function(response) {
+                if (response.data.length > 0 && parseInt(response.data[0].Status) === 1) {
+                    state.go('home');
+                } else {
+                    uploadService.getencrypt(scope.CustID).then(function(response) {
+                        if (response.data !== null && response.data !== undefined && response.data !== "") {
+                            state.go("uploadPhoto", { custid: response.data });
+                        }
+                    });
+                }
+            });
+        };
+        scope.pageload();
     }
 })();
 app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 'alert',
@@ -8719,6 +8727,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
         var meValue2 = scope.searchObjectquery[mekey2];
         scope.MyProfileQSAccept = "?" + (meKey).toString() + "=" + (meValue).toString();
         scope.tocustid = null;
+        scope.mailInput = {};
+        scope.educationcolumn = false;
         scope.partnerinformation = function(response) {
             scope.arr = [];
             scope.personalinfo = {};
@@ -8733,8 +8743,33 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
                     var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
                     var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
-                    scope.titleproceed = oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead";
-                    scope.titledontproceed = "Your not interested  Opinion will be conveyed  through your relation ship manager to " + oppositegender + " " + scope.personalinfo[0].NAME;
+                    //
+                    if ((scope.IsConfidential === 0) && (scope.HighConfendential === 0)) {
+                        switch (scope.tointereststatus) {
+                            case 'I':
+                                scope.proceedtextforbothsides = oppositegender + scope.personalinfo[0].NAME + ' ' + 'is "INTERESTED" in your Profile.Ensure to express your opinion as';
+                                break;
+                            case 'V':
+                                scope.proceedtextforbothsides = 'Your Profile was "VIEWED" by ' + oppositegender + scope.personalinfo[0].NAME + ' ' + 'Ensure to express your opinion as';
+                                break;
+                            default:
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                        }
+                    } else {
+                        switch (scope.tointereststatus) {
+                            case 'I':
+                            case 'V':
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                            default:
+                                scope.proceedtextforbothsides = 'Ensure to express your opinion as';
+                                break;
+                        }
+                    }
+                    //
+                    scope.titleproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? oppositegender + " " + scope.personalinfo[0].NAME + " will be receiving your positive reply on proceeding further with " + oppositeher + " profile and your relationship manager will be working on this simultaneously to take it ahead" : "Your openion will be conveyed to " + scope.aboutmyself[0].RelationShipManager + " (" + scope.aboutmyself[0].ContactDetails + ")";
+                    scope.titledontproceed = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Your not interested openion will be conveyed to " + oppositegender + " " + scope.personalinfo[0].NAME + " through your relationship manager" : "Your openion will be conveyed to " + scope.aboutmyself[0].RelationShipManager + " (" + scope.aboutmyself[0].ContactDetails + ")";
                     var photocount = scope.personalinfo[0].PhotoName_Cust;
                     scope.horoscopeimage = scope.personalinfo[0].HoroscopeImage === "" ||
                         scope.personalinfo[0].HoroscopeImage === null ||
@@ -8816,15 +8851,33 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             });
         };
         scope.pagerefersh = function(ToProfileID, Fromprofileid) {
-            if (scope.interestedflag === true) {
-                customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
-                    scope.partnerinformation(responseunpaid.data);
-                });
-            } else {
-                customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
-                    scope.partnerinformation(responsedata.data);
-                });
-            }
+            // if (scope.interestedflag === true) {
+            //     customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
+            //         scope.partnerinformation(responseunpaid.data);
+            //     });
+            // } else {
+            //     customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+            //         scope.partnerinformation(responsedata.data);
+            //     });
+            // }
+            customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
+                if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
+                    scope.tointereststatus = response.data[0][0].ToCust_InterestStatus.trim();
+                    if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                        customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                            scope.partnerinformation(responsedata.data);
+                        });
+                    } else {
+                        customerviewfullprofileservices.Viewprofilepartial(ToProfileID, scope.fromcustid).then(function(responseunpaid) {
+                            scope.partnerinformation(responseunpaid.data);
+                        });
+                    }
+                } else if (scope.FromProfileID === scope.ToProfileID) {
+                    customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
+                        scope.partnerinformation(responsedata.data);
+                    });
+                }
+            });
             scope.bookmarkexpreessdata();
             customerDashboardServices.getphotoslideimages(scope.tocustid).then(function(response) {
                 scope.slides = [];
@@ -8943,6 +8996,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 scope.FromProfileName = response.data.FromProfileName;
                 scope.FromProfileLastName = response.data.FromProfileLastName;
                 scope.Fromgender = response.data.Fromgender;
+                scope.IsConfidential = response.data.IsConfidential;
+                scope.HighConfendential = response.data.HighConfendential;
                 scope.statusalert(response.data.status);
             });
         };
@@ -8969,6 +9024,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 alerts.dynamicpopupclose();
                 scope.flagopen = 1;
                 scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
+
             } else {
                 alerts.dynamicpopupclose();
             }
@@ -9021,11 +9077,49 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     break;
             }
         };
+
+        scope.Resendmail = function(fromcustID, toCustID, FormProfileid, Toprofileid) {
+            var resendInputObj = {
+                Notes: 'mail sent',
+                EMPID: null,
+                LFromCustID: toCustID,
+                LToCustID: fromcustID,
+                FromProfileID: Toprofileid,
+                ToProfileID: FormProfileid,
+                TicketStatusID: scope.TicketStatusID2 !== undefined && scope.TicketStatusID2 !== null && scope.TicketStatusID2 !== "" ? scope.TicketStatusID2 : "NotViewed",
+                Subject: "Kaakateeya Email For Bothsideinterest"
+            };
+            customerviewfullprofileservices.ResendMail(resendInputObj).then(function(response) {
+                scope.TicketStatusID2 = "";
+                if (parseInt(response.data) === 1) {}
+            });
+        };
+        scope.proceedemails = function(CallDiscussion, ticketStatusId, ticketid) {
+            scope.mailInput = {
+                Notes: CallDiscussion,
+                EMPID: null,
+                profileid: scope.FromProfileID,
+                LTicketID: ticketid,
+                HistoryUpdate: 2,
+                FromCustID: scope.fromcustid,
+                TocustID: scope.tocustid,
+                TicketStatusID: ticketStatusId,
+                FromProfileID: scope.FromProfileID,
+                ToProfileID: scope.ToProfileID
+            };
+            customerviewfullprofileservices.sendMail(scope.mailInput).then(function(response) {
+                if (parseInt(response.data) === 1) {}
+            });
+        };
         scope.btnProceed_Click = function(typeofbtn) {
             var genderid = scope.Fromgender === 1 ? 'Mr.' : 'Ms.';
             var oppositegender = scope.Fromgender === 1 ? 'Ms.' : 'Mr.';
             var oppositeshe = scope.Fromgender === 2 ? 'He' : 'She';
             var oppositeher = scope.Fromgender === 2 ? 'his' : 'her';
+            var herhim = scope.Fromgender === 1 ? 'him' : 'her';
+            scope.emailmanagers = "<br><br><div style='color:black;text-align: justify;'>For further assistance feel free to contact</div><br> <div style='color:black;text-align: justify;'>Your relationship manager " +
+                scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails + "</div> <br> <div style='color:black;text-align: justify;'>" + scope.personalinfo[0].NAME + " relationship manager " + scope.aboutmyself[0].FromReleationName + ":" + scope.aboutmyself[0].Fromrelationcontact +
+                "</div><br><div style='color:black;text-align: justify;'> Team head Mr.sivaprasad 91-9841282222</div>";
             switch (typeofbtn) {
                 case "btnProceed":
                     var MobjViewprofile = {
@@ -9039,8 +9133,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     customerviewfullprofileservices.UpdateExpressIntrestViewfullprofile(MobjViewprofile).then(function(response) {
                         switch (response.data) {
                             case 1:
-                                // if (scope.unpaidflag || scope.unpaidflagrenewal) {
-                                //scope.modalbodyID1 = scope.unpaidflag === true ?
                                 if (scope.lblpaid === "UnPaid" || scope.lblpaid === "Renual") {
                                     scope.modalbodyID1 = scope.lblpaid === "UnPaid" ?
                                         "Be our paid member to view this complete profile and for our assistance in proceeding with this match" +
@@ -9049,15 +9141,66 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
                                 } else {
-                                    scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
-                                        " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
-                                        oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern.";
-                                    // window.open('/commonviewfull' + scope.MyProfileQSAccept + '&&Vale=1', '_blank');
+                                    // scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? genderid + " " + scope.FromProfileName +
+                                    //     " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
+                                    //     oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern." : "Proceed updated Successfully";
+
+                                    scope.modalbodyID1 = "Request Sent";
                                     scope.divacceptreject = true;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
-                                    // scope.pagerefersh(scope.ToProfileID, scope.fromcustid);
                                 }
+                                customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
+                                    if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
+                                        if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'V') {
+                                            scope.TicketStatusID = "Viewed";
+                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                                " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion. " +
+                                                oppositeher + " relationship manager will contact  " + herhim + " and get back to you with " + oppositeher + " opinion at the earliest.";
+                                            scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
+
+                                            scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
+
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'NV') {
+                                            scope.emailresendflag = 1;
+                                            scope.TicketStatusID2 = "Resend";
+                                            scope.TicketStatusID = "NotViewed";
+                                            if ((scope.IsConfidential === 0) && (scope.HighConfendential === 0)) {
+                                                scope.Resendmail(scope.fromcustid, scope.tocustid, scope.FromProfileID, scope.ToProfileID);
+                                            }
+                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                                " We have noticed that " + oppositeshe + " is yet to view your profile and we have resent your profile to " + oppositeher + " now and " +
+                                                "have also sent a mobile message and we will also try to reach  " + oppositeher + " over phone to inform the same";
+                                            scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
+                                            scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'V' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                                            scope.TicketStatusID = "onsideinterest";
+                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                                " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
+                                                "and please give your opinion in the options provided in the profile.";
+
+                                            scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
+                                            scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
+                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                                            scope.txtAllcallflag = 1;
+                                            scope.TicketStatusID = "bothSideinterest";
+                                            scope.txtAllcallDiscusionemail = "<div style='margin-left:30px;color:black;text-align: justify;'>" + genderid + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.</div><br>" +
+                                                "<div style='color:black;text-align: justify;'>For further assistance feel free to contact</div><br> <div style=color:black;text-align: justify;'>Your relationship manager " +
+                                                scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails + "</div> <br> <div style='color:black;text-align: justify;'>" + scope.personalinfo[0].NAME + " relationship manager " + scope.aboutmyself[0].FromReleationName + ":" + scope.aboutmyself[0].Fromrelationcontact +
+                                                "</div><br><div style='color:black;text-align: justify;'> Team head Mr.sivaprasad 91-9841282222</div>";
+                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.";
+                                            scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
+                                            scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
+                                        } else {
+                                            scope.TicketStatusID = "NotViewed";
+                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + " and " + oppositeshe + " is showing interest in your profile.Please go through the profile and reply to us on the same." +
+                                                "We are resending " + oppositeher + " profile for the ease of viewing and please give your opinion in the options provided in the profile";
+                                            scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
+                                            scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
+
+                                        }
+                                    }
+                                });
                                 break;
                             case 2:
                             case 3:
@@ -9070,6 +9213,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 break;
                         }
                     });
+
                     break;
                 case "btnDontProceed":
                     var MobjViewprofiledont = {
@@ -9084,9 +9228,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                         switch (response.data) {
                             case 1:
                                 scope.flagopen = 1;
-                                scope.modalbodyID1 = "Oops go through your search";
-                                // scope.modalbodyID1 = genderid + " " + scope.FromProfileName +
-                                //   " We have not received any positive response from " + scope.personalinfo[0].NAME + " so far.So lets proceed with our new search options";
+                                // scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? "Oops go through your search" : "Proceed Updated failed";
+                                scope.modalbodyID1 = "Request Sent";
                                 break;
                             case 2:
                             case 3:
@@ -9102,10 +9245,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                     });
                     break;
             }
-
             //scope.pagerefersh(scope.tocustid, scope.fromcustid);
             // alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
-
         };
         scope.acceptreject = function(typeofaction) {
             if (scope.tocustid !== null && scope.tocustid !== null) {
@@ -9116,9 +9257,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 switch (typeofaction) {
                     case "btnaccept":
                         authSvc.paymentstaus(scope.fromcustid, scope).then(function(responsepaid) {
-                            if (responsepaid === true) {
-                                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal({ backdrop: 'static', keyboard: false});", true);
-                            } else {
+                            if (responsepaid === true) {} else {
                                 alerts.timeoutoldalerts(scope, 'alert-danger', 'Please Upgrade Your Membership in order To continue', 3000);
                             }
                         });
@@ -9141,7 +9280,14 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             } else {
                 alerts.timeoutoldalerts(scope, 'alert-danger', 'ExpressInterest failed please contact Admin', 3000);
             }
-            //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "divAcceptReject", "$('#divAcceptReject').modal('hide');", true);
+        };
+        scope.bindeduction = function(value) {
+            if (value === 'Education') {
+                value = '';
+            } else {
+                value = value;
+            }
+            return value;
         };
     }
 ]);
@@ -9296,7 +9442,6 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
             } else {
                 scope.showmyname = false;
                 customerDashboardServices.Viewprofile(scope.custid, localcustid, 283).then(function(response) {
-
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                     scope.getallflags();
@@ -9635,14 +9780,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
              model.updatepaymentllink = false;
              var meKey = Object.getOwnPropertyNames(model.searchObjectquery)[0];
              var meKeyempid = Object.getOwnPropertyNames(model.searchObjectquery)[1];
-             model.selfProfileID = model.searchObjectquery[meKey];
+             model.selfProfileID = model.searchObjectquery[meKey].replace(' ', '+');
              model.selfEmp = model.searchObjectquery[meKeyempid];
              if (model.selfProfileID) {
                  model.getprofileDataencryptedID(model.selfProfileID);
              }
          };
-
-
          vm.init();
      }
      angular
@@ -10347,7 +10490,15 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         },
         getExpressIntrstfullprofilepaidandunpaid: function(fromprofileid, tocustid, empid) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofilepaidandunpaid', { params: { fromProfileID: fromprofileid, toustid: tocustid, EmpID: empid } });
+        },
+        getfromstatusandtostatus: function(fromprofileid, toprofileid, Empid) {
+            return http.get(app.apiroot + 'StaticPages/getfromexpresstoexpressstatus', { params: { Fromprofileid: fromprofileid, Toprofileid: toprofileid, Empid: Empid } });
+        },
+        sendMail: function(obj) {
+            return http.post(app.apiroot183 + 'EmployeeReportPage/MatchFollowupMailSend', obj);
+        },
+        ResendMail: function(obj) {
+            return http.post(app.apiroot183 + 'EmployeeReportPage/MatchFollowupResendMail', obj);
         }
-
     };
 }]);

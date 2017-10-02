@@ -3,18 +3,26 @@
         <div class="profile_full_main" ng-show="PageDiv">
             <div ng-show="divacceptreject" style="border: solid 1px #fff;">
                 <div id="upAll">
-                    <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
-                        <label>Ensure to express your opinion as</label>
-                        <label style="color: #de2929;">"PROCEED"</label>
-                        <label>if this profile is suitable for you or else</label>
-                        <label style="color: #de2929;">"DON'T PROCEED"</label>
-                    </div>
                     <div class="clearfix"></div>
                     <div class="row">
-                        <div class="col-lg-8">
-                            <h2 style="color: rgb(92, 82, 82);">Kaakateeya Marriages</h2>
+                        <div class="col-lg-2">
+                            <img src="src/images/logo2.png" class="pull-left" style="width: 165px;
+                                height: 83px;">&nbsp;</img>
+                            <!-- <a class="logo2 pull-left">&nbsp;</a> -->
                         </div>
-                        <div>
+                        <div class="col-lg-9 col-lg-offset-1" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                            <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                            <br>
+                            <div class="clearfix">
+                            </div>
+                            <div class="row">
+                                <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                                <a title="{{titledontproceed}}" class="classproceeddontproceed2" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;" class="">If not Interested.</label>
+                            </div>
+                        </div>
+                        <div ng-hide="true">
                             <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
                                 <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
                                 <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
@@ -26,7 +34,7 @@
                                 <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
                             </div>
                         </div>
-                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-1">
+                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-7">
                             <a class="aspNetDisabled">{{btnticket}}</a>
                         </div>
                     </div>
@@ -40,12 +48,10 @@
                             <div id="divmask" class="profile_full_header_pic">
                                 <img name="iProfilePic" id="iProfilePic" ng-click="photoalbum()" ng-src="{{personalinfo[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="profile_full_header_in">
-
                             <h6>
                                 <span id="lblName">{{personalinfo[0].NAME}}</span>
                                 <span>
@@ -57,34 +63,30 @@
                                 <span id="lblAboutMyself" class="lblAboutMyself" style="color:Black;font-weight:bold;color: #000">About Myself :</span>
                             </p>
                             <p>
-                                <span id="lblDescMy" class="fontsize" style="width: 750px;">{{aboutmyself[0].Aboutyourself}}</span>
+                                <span id="lblDescMy" class="fontsize" style="width: 750px;color:DarkBlue;">{{aboutmyself[0].Aboutyourself}}</span>
                             </p>
                         </div>
                     </div>
                     <div class="col-lg-2">
-
                         <img name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" ng-src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
                     </div>
                 </div>
             </div>
             <div id="printdiv">
                 <div class="personal_inform_main">
-
                     <div ng-repeat="item in arr" ng-if="item.header=='Headings' || item.header=='About'?'':item.header">
                         <div id="ctl00_divmain" class="personal_inform_head clearfix" style="background-color: rgb(244, 182, 36); padding: 6px 10px; border-bottom: solid 1px #ccc;">
                             <h6>
                                 <span id="ctl00_lblHeadings" class="lblHeadings" style="color: black;font-weight: 700;">{{item.header}}</span></h6>
                         </div>
-
                         <div id="ctl00_divsub" class="personal_inform_main_in">
-                            <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details'||item.header=='My Location Information'||item.header=='Basic details'|| item.header=='Location' || item.header=='Religious information'?'personal_inform_main_in_list clearfix': ''">
+                            <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details' || item.header=='My Location' ||item.header=='My Location Information'||item.header=='Basic details'|| item.header=='Location' || item.header=='Religious information'?'personal_inform_main_in_list clearfix': ''">
                                 <p ng-repeat="itm in item.value">
-                                    <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;">{{itm.columnname || itm.ColumnName}}</span>
-                                    <span>
-                              <span  style="color:DarkBlue;"> 
-                                <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null) " style="color:DarkBlue;">:</span>
+                                    <!-- <label ng-hide="true" ng-bind-html="bindeduction(itm.ColumnName)"></label>-->
+                                    <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;" ng-bind-html="bindeduction(itm.columnname || itm.ColumnName)"></span>
+                                    <span style="color:DarkBlue;"> 
+                                  <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null && itm.ColumnName!=='Education') " style="color:DarkBlue;">:</span>
                                     <span ng-bind-html="itm.value || itm.Value" style="color:DarkBlue;"></span>
-
                                     </span>
                                 </p>
                             </div>
@@ -93,11 +95,19 @@
                 </div>
             </div>
             <div class="col-lg-12">
+                <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;margin-left: 40px;">
+                    <br>
+                    <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                    <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                    <a title="{{titledontproceed}}" class="classproceeddontproceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If not Interested.</label>
+                </div>
                 <div class="row pull-right">
-                    <div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
+                    <!--<div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
                         <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
                         <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
-                    </div>
+                    </div>-->
                     <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-12">
                         <div id="UpdatePanel6">
                             <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
@@ -112,7 +122,6 @@
                 <br>
                 <br>
             </div>
-
         </div>
         <script type="text/ng-template" id="TabClosePopup.html">
             <div class="modal-message modal-danger">
@@ -199,6 +208,37 @@
         background-color: #d83222;
         border: solid 1px #ccc;
         transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed2 {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    a:focus,
+    a:hover {
+        color: white !important;
     }
     
     .modal-backdrop {

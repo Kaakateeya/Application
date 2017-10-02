@@ -103,7 +103,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     customerDashboardServices.getcustomerpartnerdata(scope.custid, type, frompage, topage, exactflag).then(function(response) {
                         if (response.data) {
                             if (parseInt(frompage) === 1) {
-
                                 scope.PartnerProfilesnew = [];
                                 scope.typeofdiv = "Grid";
                                 _.each(response.data.PartnerProfilesnew, function(item) {
