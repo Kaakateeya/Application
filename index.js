@@ -77,13 +77,9 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         //{ name: 'UpgradeMembershipnew', url: '/UpgradeMembershipnew', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true }
         { name: 'UpgradeMembership', url: '/UpgradeMembership', templateUrl: 'app/modules/static/upgradeMembership_new.html', controller: "upgrademembershipnew", isloginrequired: true },
         { name: 'viewMyProfileMail', url: '/Viewfullprofilemail', templateUrl: 'app/modules/viewMyProfileMail/index.html', isloginrequired: false },
-<<<<<<< HEAD
-        { name: 'uploadPhoto', url: '/uploadPhoto', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
-        { name: 'mailLogin', url: '/mailLogin', templateUrl: 'app/modules/static/mailLogin.html', controller: "mailLoginCtrl", isloginrequired: false }
-=======
+        { name: 'mailLogin', url: '/mailLogin', templateUrl: 'app/modules/static/mailLogin.html', controller: "mailLoginCtrl", isloginrequired: false },
         { name: 'uploadPhoto', url: '/uploadPhoto/:custid', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
         { name: 'uploadPhotoencrypt', url: '/uploadPhotoencrypt/:custid', templateUrl: 'app/modules/static/uploadPhotoencrypt.html', controller: "uploadPhotoencryptCtrl", isloginrequired: false },
->>>>>>> 7d9fd6a9b0d67d5665fed86ee727e7871527548e
     ];
 
     $urlRouterProvider.otherwise('/');
