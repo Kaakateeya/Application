@@ -10364,6 +10364,12 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
         },
         noPhotoStatus: function(custID) {
             return http.get(app.apiroot + 'CustomerPersonal/getNoPhotoStatus', { params: { custid: custID } });
+        },
+        getencrypt: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getencryptedProfileID', { params: { ProfileID: custid } });
+        },
+        getdecrypt: function(custid) {
+            return http.get(app.apiroot + 'StaticPages/getdecryptedProfileID', { params: { ProfileID: custid } });
         }
     };
 }]);
