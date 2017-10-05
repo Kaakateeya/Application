@@ -80,6 +80,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'mailLogin', url: '/mailLogin', templateUrl: 'app/modules/static/mailLogin.html', controller: "mailLoginCtrl", isloginrequired: false },
         { name: 'uploadPhoto', url: '/uploadPhoto/:custid', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
         { name: 'uploadPhotoencrypt', url: '/uploadPhotoencrypt/:custid', templateUrl: 'app/modules/static/uploadPhotoencrypt.html', controller: "uploadPhotoencryptCtrl", isloginrequired: false },
+        { name: 'horoDisplay', url: '/horoDisplay', templateUrl: 'app/modules/static/horoDisplay.html', controller: "horoDisplaysCtrl", isloginrequired: false },
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -95,7 +96,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt") {
+        debugger;
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt" || item.name === "horoDisplay") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
@@ -221,6 +223,7 @@ app.run(function($rootScope, $state, $stateParams) {
 
         }
         var loggedAscustomerPage = sessionStorage.getItem("loggedAscustomerPage");
+
         if (to.data && to.data.requiresLogin) {
             if (sessionStorage.getItem('cust.id') === null) {
                 e.preventDefault();
