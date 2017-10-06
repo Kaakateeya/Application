@@ -12,7 +12,8 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce
                         ariaLabelledBy: 'modal-title',
                         ariaDescribedBy: 'modal-body',
                         templateUrl: 'oldAlert.html',
-                        scope: scope
+                        scope: scope,
+                        windowClass: 'editAlertcls',
                     });
                     if (scope.msgs === "upgrade") {
 

@@ -6,7 +6,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: url,
-                scope: scope
+                scope: scope,
+                windowClass: classp,
             });
         },
         closepopup: function() {

@@ -520,7 +520,8 @@ app.factory('dependencybind', ['SelectBindServiceApp', function(SelectBindServic
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: url,
-                scope: scope
+                scope: scope,
+                windowClass: classp,
             });
         },
         closepopup: function() {
@@ -935,7 +936,8 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
             scope: {
                 ngModel: '=',
                 typeofdata: "=",
-                parentVal: "="
+                parentVal: "=",
+                pagetype: '='
             },
             link: function(scope, element, attrs) {
                 scope.options = [];
@@ -1216,7 +1218,7 @@ app.directive('multiselectdropdown', ['arrayConstants', 'SelectBindServiceApp', 
                     element.multiselect('select', scope.ngModel);
                 });
                 // Watch for any changes from outside the directive and refresh
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(scope.pagetype === 'search' ? 'ngModel' : attrs.ngModel, function() {
                     // console.log(scope.ngModel);
                     element.multiselect('refresh');
                 });
@@ -1238,7 +1240,8 @@ app.directive("alertDirective", ['commonFactory', '$uibModal', '$timeout', '$sce
                         ariaLabelledBy: 'modal-title',
                         ariaDescribedBy: 'modal-body',
                         templateUrl: 'oldAlert.html',
-                        scope: scope
+                        scope: scope,
+                        windowClass: 'editAlertcls',
                     });
                     if (scope.msgs === "upgrade") {
 
