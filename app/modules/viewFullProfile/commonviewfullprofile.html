@@ -46,7 +46,7 @@
                     <div class="col-lg-2">
                         <div id="UpdateImagesContent">
                             <div id="divmask" class="profile_full_header_pic">
-                                <img name="iProfilePic" id="iProfilePic" ng-click="photoalbum()" ng-src="{{personalinfo[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
+                                <img name="iProfilePic" tooltips tooltip-template="Click here to view Photos" tooltip-side="bottom" id="iProfilePic" ng-click="photoalbum()" src="{{personalinfo[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <img name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" ng-src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
+                        <img tooltips tooltip-template="Click here to view Horoscope Image" tooltip-side="bottom" name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
                     </div>
                 </div>
             </div>
@@ -243,5 +243,9 @@
     
     .modal-backdrop {
         z-index: 1040 !important;
+    }
+    
+    tooltip tip {
+        width: 200px;
     }
 </style>
