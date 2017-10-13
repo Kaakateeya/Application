@@ -97,7 +97,6 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        debugger;
         if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt" || item.name === "horoDisplay") {
             innerView = {
                 "content@": {
