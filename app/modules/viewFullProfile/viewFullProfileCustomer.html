@@ -123,7 +123,7 @@
             </div>
             <div class="modal-body" id="commonbody">
                 <div class="row col-lg-offset-1">
-                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10"></textarea></div>
+                    <textarea ng-model="form.message" name="txtmsgPartner" maxlength="500" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10"></textarea></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" ng-click="modalpopupclose()">Close</button>
                     <button type="button" class="btn btn-primary" ng-show="modalheader===1" ng-click="sendmessages(form)">Send Message</button>

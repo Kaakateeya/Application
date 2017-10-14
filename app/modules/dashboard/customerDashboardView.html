@@ -601,7 +601,7 @@
             </div>
             <div ng-class="modalbodyshow==3?'modal-body  pop_content_my clearfix':'modal-body'" id="commonbody">
                 <div class="row col-lg-offset-1" ng-if="modalbodyshow==1 || modalbodyshow==2">
-                    <textarea ng-model="form.message" name="txtmsgPartner" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
+                    <textarea ng-model="form.message" name="txtmsgPartner" maxlength="500" rows="6" cols="20" id="txtmsgPartner" class="col-lg-10" value="errr"></textarea></div>
                 <div class='row' ng-if="modalbodyshow==4">
                     <div class='col-lg-4 col-lg-offset-2'>
                         <button type='button' class='btn btn-success' ng-click='acceptlink("I")'>Proceed</button>
