@@ -10501,7 +10501,7 @@ app.factory('customerviewfullprofileservices', ['$http', function(http) {
         // },
         // getExpressIntrstfullprofile: function(toprofileid, strFromProfileID, empid) {
         //     return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { tocustid: toprofileid, fromcustid: strFromProfileID, EmpID: empid } });
-        // },
+        // }, ddd
         getExpressIntrstfullprofile: function(toprofileid, empid) {
             return http.get(app.apiroot + 'StaticPages/getExpressIntrstfullprofile', { params: { ToProfileID: toprofileid, EmpID: empid } });
         },
