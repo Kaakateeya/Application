@@ -427,10 +427,6 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
                                     scope.btnproceedflag = 1;
                                 } else {
-                                    // scope.modalbodyID1 = (scope.IsConfidential === 0) && (scope.HighConfendential === 0) ? genderid + " " + scope.FromProfileName +
-                                    //     " We have forwarded your Basic profile to " + oppositegender + " " + scope.personalinfo[0].NAME + " and you will be receiving " + oppositeher + " reply as soon as " + oppositeshe + " replies to it.And " +
-                                    //     oppositeher + " complete profile will be emailed to you once we get  " + oppositeher + " positive concern." : "Proceed updated Successfully";
-
                                     scope.modalbodyID1 = "Request Sent";
                                     scope.divacceptreject = true;
                                     alerts.dynamicpopup("TabClosePopup.html", scope, uibModal);
@@ -440,7 +436,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                     if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
                                         if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'V') {
                                             scope.TicketStatusID = "Viewed";
-                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion. " +
                                                 oppositeher + " relationship manager will contact  " + herhim + " and get back to you with " + oppositeher + " opinion at the earliest.";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
@@ -454,14 +450,14 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                             if ((scope.IsConfidential === 0) && (scope.HighConfendential === 0)) {
                                                 scope.Resendmail(scope.fromcustid, scope.tocustid, scope.FromProfileID, scope.ToProfileID);
                                             }
-                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " We have noticed that " + oppositeshe + " is yet to view your profile and we have resent your profile to " + oppositeher + " now and " +
                                                 "have also sent a mobile message and we will also try to reach  " + oppositeher + " over phone to inform the same";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
                                         } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'V' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
                                             scope.TicketStatusID = "onsideinterest";
-                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
                                                 "and please give your opinion in the options provided in the profile.";
 
@@ -470,16 +466,16 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                         } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
                                             scope.txtAllcallflag = 1;
                                             scope.TicketStatusID = "bothSideinterest";
-                                            scope.txtAllcallDiscusionemail = "<div style='margin-left:30px;color:black;text-align: justify;'>" + genderid + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.</div><br>" +
+                                            scope.txtAllcallDiscusionemail = "<div style='margin-left:30px;color:black;text-align: justify;'>" + oppositegender + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.</div><br>" +
                                                 "<div style='color:black;text-align: justify;'>For further assistance feel free to contact</div><br> <div style=color:black;text-align: justify;'>Your relationship manager " +
                                                 scope.aboutmyself[0].RelationShipManager + ":" + scope.aboutmyself[0].ContactDetails + "</div> <br> <div style='color:black;text-align: justify;'>" + scope.personalinfo[0].NAME + " relationship manager " + scope.aboutmyself[0].FromReleationName + ":" + scope.aboutmyself[0].Fromrelationcontact +
                                                 "</div><br><div style='color:black;text-align: justify;'> Team head Mr.sivaprasad 91-9841282222</div>";
-                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.";
+                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
                                         } else {
                                             scope.TicketStatusID = "NotViewed";
-                                            scope.txtAllcallDiscusion = genderid + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + " and " + oppositeshe + " is showing interest in your profile.Please go through the profile and reply to us on the same." +
+                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + " and " + oppositeshe + " is showing interest in your profile.Please go through the profile and reply to us on the same." +
                                                 "We are resending " + oppositeher + " profile for the ease of viewing and please give your opinion in the options provided in the profile";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
