@@ -148,8 +148,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
             // }
             customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
-                    scope.tointereststatus = response.data[0][0].ToCust_InterestStatus.trim();
-                    if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                    scope.tointereststatus = response.data[0][0].ToCust_InterestStatus !== null && response.data[0][0].ToCust_InterestStatus !== undefined && response.data[0][0].ToCust_InterestStatus !== '' ? response.data[0][0].ToCust_InterestStatus.trim() : "";
+                    scope.fromintereststatus = response.data[0][0].FromCust_InterestStatus !== null && response.data[0][0].FromCust_InterestStatus !== undefined && response.data[0][0].FromCust_InterestStatus !== '' ? response.data[0][0].FromCust_InterestStatus.trim() : "";
+                    if (scope.fromintereststatus === 'I' && scope.tointereststatus === 'I') {
                         customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
                             scope.partnerinformation(responsedata.data);
                         });
@@ -434,7 +435,11 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                 }
                                 customerviewfullprofileservices.getfromstatusandtostatus(scope.FromProfileID, scope.ToProfileID, '').then(function(response) {
                                     if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
-                                        if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'V') {
+
+                                        scope.toproceedtointereststatus = response.data[0][0].ToCust_InterestStatus !== null && response.data[0][0].ToCust_InterestStatus !== undefined && response.data[0][0].ToCust_InterestStatus !== '' ? response.data[0][0].ToCust_InterestStatus.trim() : "";
+                                        scope.fromproceedfromintereststatus = response.data[0][0].FromCust_InterestStatus !== null && response.data[0][0].FromCust_InterestStatus !== undefined && response.data[0][0].FromCust_InterestStatus !== '' ? response.data[0][0].FromCust_InterestStatus.trim() : "";
+
+                                        if (scope.fromproceedfromintereststatus === 'I' && scope.toproceedtointereststatus === 'V') {
                                             scope.TicketStatusID = "Viewed";
                                             scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " We have noticed that " + oppositeshe + " had viewed your profile but yet to give " + oppositeher + " opinion. " +
@@ -443,7 +448,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
 
-                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'NV') {
+                                        } else if (scope.fromproceedfromintereststatus === 'I' && scope.toproceedtointereststatus === 'NV') {
                                             scope.emailresendflag = 1;
                                             scope.TicketStatusID2 = "Resend";
                                             scope.TicketStatusID = "NotViewed";
@@ -455,7 +460,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                                 "have also sent a mobile message and we will also try to reach  " + oppositeher + " over phone to inform the same";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
-                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'V' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                                        } else if (scope.fromproceedfromintereststatus === 'V' && scope.toproceedtointereststatus === 'I') {
                                             scope.TicketStatusID = "onsideinterest";
                                             scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
                                                 " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
@@ -463,7 +468,7 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
 
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
-                                        } else if (response.data[0][0].FromCust_InterestStatus.trim() === 'I' && response.data[0][0].ToCust_InterestStatus.trim() === 'I') {
+                                        } else if (scope.fromproceedfromintereststatus === 'I' && scope.toproceedtointereststatus === 'I') {
                                             scope.txtAllcallflag = 1;
                                             scope.TicketStatusID = "bothSideinterest";
                                             scope.txtAllcallDiscusionemail = "<div style='margin-left:30px;color:black;text-align: justify;'>" + oppositegender + scope.personalinfo[0].NAME + " is also interested in your profile, Since both of you are interested you need one of our customer relationship manager assistance.</div><br>" +
