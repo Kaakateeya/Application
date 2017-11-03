@@ -150,7 +150,8 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                 if (response.data !== undefined && response.data !== null && response.data !== "" && response.data[0] !== undefined && response.data[0] !== null && response.data[0] !== "" && response.data[0].length > 0) {
                     scope.tointereststatus = response.data[0][0].ToCust_InterestStatus !== null && response.data[0][0].ToCust_InterestStatus !== undefined && response.data[0][0].ToCust_InterestStatus !== '' ? response.data[0][0].ToCust_InterestStatus.trim() : "";
                     scope.fromintereststatus = response.data[0][0].FromCust_InterestStatus !== null && response.data[0][0].FromCust_InterestStatus !== undefined && response.data[0][0].FromCust_InterestStatus !== '' ? response.data[0][0].FromCust_InterestStatus.trim() : "";
-                    if (scope.fromintereststatus === 'I' && scope.tointereststatus === 'I') {
+                    scope.ProfileTypeID = response.data[0][0].ProfileTypeID !== null && response.data[0][0].ProfileTypeID !== undefined && response.data[0][0].ProfileTypeID !== '' ? parseInt(response.data[0][0].ProfileTypeID) : null;
+                    if ((scope.fromintereststatus === 'I' && scope.tointereststatus === 'I') || (scope.ProfileTypeID === 359)) {
                         customerviewfullprofileservices.getExpressIntrstfullprofilepaidandunpaid(scope.FromProfileID, scope.tocustid, "").then(function(responsedata) {
                             scope.partnerinformation(responsedata.data);
                         });
