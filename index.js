@@ -25,7 +25,7 @@ app.apiroot = 'http://183.82.0.58:8070/Api/';
 app.global = {
     'alertType': 'toast-top-right'
 };
-
+//cc
 app.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
 app.Mnoimage = app.GlobalImgPath + "Images/customernoimages/Mnoimage.jpg";
 app.Fnoimage = app.GlobalImgPath + "Images/customernoimages/Fnoimage.jpg";
