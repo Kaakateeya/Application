@@ -20,14 +20,12 @@ var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', '
 
 
 app.apiroot183 = 'http://183.82.0.58:8025/Api/';
+// app.apiroot = 'http://183.82.0.58:8010/Api/';
 app.apiroot = 'http://183.82.0.58:8070/Api/';
-//app.apiroot = 'http://183.82.0.58:8010/Api/';
-// app.apiroot='http://183.82.0.58:3000/Api/';
-
 app.global = {
     'alertType': 'toast-top-right'
 };
-//cc
+
 app.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
 app.Mnoimage = app.GlobalImgPath + "Images/customernoimages/Mnoimage.jpg";
 app.Fnoimage = app.GlobalImgPath + "Images/customernoimages/Fnoimage.jpg";
