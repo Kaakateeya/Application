@@ -274,6 +274,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.viewhoroscopeimage = function() {
             scope.headerpopup = "Horoscope";
             scope.popupmodalbody = true;
+
             if (logincustid !== null && logincustid !== undefined && logincustid !== "") {
                 if ((scope.personalinfo[0].HoroscopeImage).indexOf(".html") !== -1) {
                     scope.personalinfo[0].HoroscopeImage = "http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/" + scope.personalinfo[0].Cust_ID + "_HaroscopeImage/" + scope.personalinfo[0].Cust_ID + "_HaroscopeImage.html";
