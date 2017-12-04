@@ -158,8 +158,8 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
 
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
-                    authSvc.logout();
                     alerts.open('Delete Profile successfully', 'success');
+                    authSvc.logout();
                     scope.Resetallfields('deleteprofiles');
                 } else {
                     alerts.open('Delete Profile failed', 'warning');
