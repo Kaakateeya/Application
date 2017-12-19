@@ -485,12 +485,25 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 case 'Christian Matrimony':
                     url = "caste/christian-matrimony";
                     break;
+
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
                     break;
+
+                case 'Intercaste Matrimony':
+                    url = "caste/intercaste-matrimony";
+                    break;
+
+                case 'Caste No Bar Matrimony':
+                    url = "caste/castenobar-matrimony";
+                    break;
+
+
+
                 case 'Gowda Matrimony':
                     url = "caste/gowda-matrimony";
                     break;
+
             }
             return url;
         };
