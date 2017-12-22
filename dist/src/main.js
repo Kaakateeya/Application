@@ -8772,9 +8772,9 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                 if (response.data.length > 0 && parseInt(response.data[0].Status) === 1) {
                     state.go('home');
                 } else {
-                    uploadService.getencrypt(scope.CustID).then(function(response) {
-                        if (response.data !== null && response.data !== undefined && response.data !== "") {
-                            state.go("uploadPhoto", { custid: response.data });
+                    uploadService.getencrypt(scope.CustID).then(function(resp) {
+                        if (resp.data !== null && resp.data !== undefined && resp.data !== "") {
+                            state.go("uploadPhoto", { custid: resp.data });
                         }
                     });
                 }
