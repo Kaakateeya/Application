@@ -139,10 +139,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.showmyname = true;
 
         scope.pageload = function() {
+            scope.eduvalue = 0;
             if (scope.custid === localcustid) {
                 scope.showmyname = true;
                 scope.logidliproceed = false;
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                var loginprofileid = authSvc.getProfileid();
+                customerDashboardServices.Viewprofileselef(loginprofileid, 2).then(function(response) {
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
@@ -348,6 +350,24 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         }
                     });
                     break;
+            }
+        };
+        scope.Educationvalue = function(value) {
+            if (value === 'Education' && scope.eduvalue === 0) {
+                scope.eduvalue = 1;
+                return "Education";
+
+            } else if (value === 'Education' && scope.eduvalue === 1) {
+                return "";
+            } else {
+                return value;
+            }
+        };
+        scope.valuebinding = function(value) {
+            if (value !== '' && value !== null && value !== undefined) {
+                return ":";
+            } else {
+                return '';
             }
         };
     }

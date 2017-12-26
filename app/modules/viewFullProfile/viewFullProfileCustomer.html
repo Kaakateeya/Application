@@ -100,12 +100,26 @@
                         <span id="lblHeadings">{{item.header}}</span></h4>
                     <a href="#" class="edit_prsnl"></a>
                 </div>
-                <div class="personal_inform_main_in">
+                <!-- <div class="personal_inform_main_in">
                     <div id="divStyle" ng-class="item.header=='Professional information'|| item.header=='Family details'|| item.header=='Sibling Details' || item.header=='Partner Preferences details'?'': 'personal_inform_main_in_list clearfix'">
                         <p ng-repeat="itm in item.value">
                             <span style="color:Black;font-weight:bold;">{{itm.columnname|| (itm.columnName==='1'?'Education':(itm.columnName==='2'|| itm.columnName==='3' || itm.columnName==='4' || itm.columnName==='5')?"":itm.columnName) ||itm.ColumnName}}</span>
                             <span id="lblTextName"> <span ng-if="itm.columnname!='' && itm.columnname!=null">:</span>
                             <span ng-bind-html="itm.value || itm.Value"></span>
+                            </span>
+                        </p>
+                    </div>
+                </div> -->
+                <div class="personal_inform_main_in">
+                    <div id="divStyle" ng-class="item.header==='My Education and Profession' ||item.header==='About My Family' || item.header==='My Contact & Email' || item.header==='My Brothers and Sisters' ?'': 'personal_inform_main_in_list clearfix'">
+                        <p ng-repeat="itm in item.value">
+                            <!-- <span style="color:Black;font-weight:bold;">{{Educationvalue(itm.columnname||itm.ColumnName || itm.columnName)}}</span> -->
+                            <span style="color:Black;font-weight:bold;" ng-class="item.header==='My Basic Details' || item.header==='Partner Preferences details' ?'classspan': ''">{{itm.columnname|| (itm.columnName==='1'?'Education':(itm.columnName==='2'|| itm.columnName==='3' || itm.columnName==='4' || itm.columnName==='5')?"":itm.columnName) ||itm.ColumnName}}</span>
+                            <span>
+                             <span ng-class="itm.columnName!=='1' && item.header==='My Education and Profession' && itm.columnName!=='Profession'?'paddingleft':''"> <span ng-if="valuebinding(itm.columnname||itm.ColumnName || itm.columnName)" >:</span>
+                            <!-- <span id="lblTextName"> <span ng-if="itm.columnname!='' && itm.columnname!=null">:</span> -->
+                            <span ng-bind-html="itm.value || itm.Value"></span>
+                            </span>
                             </span>
                         </p>
                     </div>
@@ -166,3 +180,12 @@
         </div>
     </script>
     </div>
+    <style type="text/css">
+        span.classspan {
+            width: 111px;
+        }
+        
+        .paddingleft {
+            margin-left: 73px;
+        }
+    </style>

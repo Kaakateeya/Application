@@ -7996,7 +7996,7 @@ app.controller("ourbranches", ["$scope", "ourBranchService", "helperservice", fu
     scope.region = 'region';
     scope.BranchArr = [];
     scope.BranchDetailsArr = [];
-    scope.telanganaArr = [{ count: 1, "BranchAddress": "103 , 109, Vijayasree Apartments, Behind Chermas ,", "PhoneNumbers": "23747777", "Mobilenumber": "7675818080", "BranchemailID": "kaakateeya.com@gmail.com", "WorkingEndTime": "8:30:00 PM", "Branch_ID": 319, "Address": "Ameerpet , Hyderabad-500073", "WorkingStartTime": "8:30:00 AM", "Landlineareacode": "40", "Landlinenumber": "23747777", "BranchesName": "Hyderabad - Ameerpet" }, { count: 2, "BranchAddress": "2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,", "PhoneNumbers": "24065959", "Mobilenumber": "9966636222", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 320, "Address": "Dilsukhnagar , Hyderabad - 500060", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "24065959", "BranchesName": "Hyderabad-Dilsukhnagar" }, { count: 3, "BranchAddress": "202 , Uday Krishna Complex , Bhagyanagar colony ,", "PhoneNumbers": "23067373", "Mobilenumber": "9392009391", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 321, "Address": "opp KPHB , Hyderabad-500072", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "23067373", "BranchesName": "Hyderabad-Kukatpally" }];
+    scope.telanganaArr = [{ count: 1, "BranchAddress": "101 , 102, Vijayasree Apartments, Behind Chermas ,", "PhoneNumbers": "23747777", "Mobilenumber": "7675818080", "BranchemailID": "kaakateeya.com@gmail.com", "WorkingEndTime": "8:30:00 PM", "Branch_ID": 319, "Address": "Ameerpet , Hyderabad-500073", "WorkingStartTime": "8:30:00 AM", "Landlineareacode": "40", "Landlinenumber": "23747777", "BranchesName": "Hyderabad - Ameerpet" }, { count: 2, "BranchAddress": "2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,", "PhoneNumbers": "24065959", "Mobilenumber": "9966636222", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 320, "Address": "Dilsukhnagar , Hyderabad - 500060", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "24065959", "BranchesName": "Hyderabad-Dilsukhnagar" }, { count: 3, "BranchAddress": "202 , Uday Krishna Complex , Bhagyanagar colony ,", "PhoneNumbers": "23067373", "Mobilenumber": "9392009391", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 321, "Address": "opp KPHB , Hyderabad-500072", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "23067373", "BranchesName": "Hyderabad-Kukatpally" }];
     scope.pundicherry = [{ "BranchAddress": "No 10 , 1st Floor , 2 nd Cross , Annanagar East , ", "PhoneNumbers": "43543543", "Mobilenumber": "7668687687", "BranchemailID": "naveena@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 341, "Address": "Behind Housing Board , Puducherry ( Pondicherry ) - 600 005", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "44", "Landlinenumber": "43543543", "BranchesName": "Pondicheery" }];
     ourBranchService.BranchPageloadSelect().then(function(response) {
         scope.BranchDetailsArr = response.data;
@@ -9505,10 +9505,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.showmyname = true;
 
         scope.pageload = function() {
+            scope.eduvalue = 0;
             if (scope.custid === localcustid) {
                 scope.showmyname = true;
                 scope.logidliproceed = false;
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                var loginprofileid = authSvc.getProfileid();
+                customerDashboardServices.Viewprofileselef(loginprofileid, 2).then(function(response) {
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
@@ -9714,6 +9716,24 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         }
                     });
                     break;
+            }
+        };
+        scope.Educationvalue = function(value) {
+            if (value === 'Education' && scope.eduvalue === 0) {
+                scope.eduvalue = 1;
+                return "Education";
+
+            } else if (value === 'Education' && scope.eduvalue === 1) {
+                return "";
+            } else {
+                return value;
+            }
+        };
+        scope.valuebinding = function(value) {
+            if (value !== '' && value !== null && value !== undefined) {
+                return ":";
+            } else {
+                return '';
             }
         };
     }
@@ -10110,6 +10130,10 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         // getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
         //     return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         // }
+
+        Viewprofileselef: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getfullprofileself', { params: { ProfileID: toprofileid, EmpID: empid } });
+        }
     };
 }]);
 (function(app) {
