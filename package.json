@@ -18,7 +18,7 @@
         "angular-ui-router": "^0.3.1",
         "angularjs-slider": "^5.9.0",
         "bootstrap": "latest",
-        "editView": "git://github.com/Kaakateeya/EditViewRepo.git#grunt",
+        "editandview": "git+https://github.com/Kaakateeya/EditViewRepo.git#grunt",
         "font-awesome": "latest",
         "jquery": "latest",
         "moment": "latest",
