@@ -111,7 +111,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 intCountryLivingID: obj.ddlcountry,
                 intMobileCode: obj.ddlmobilecountry,
                 intLandCode: obj.ddllandcountry,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.txtMobileNo,
                 ID: 1,
                 strAreaCode: obj.txtArea,

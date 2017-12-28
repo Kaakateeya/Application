@@ -419,7 +419,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
