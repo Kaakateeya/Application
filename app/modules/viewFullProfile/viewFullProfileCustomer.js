@@ -370,5 +370,18 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                 return '';
             }
         };
+        scope.spanclass = function(value) {
+            if (value === 'My Basic Details') {
+                return "classspan";
+            } else if (value === 'My Education and Profession' || value === 'My Brothers and Sisters') {
+                return 'classspan2';
+            } else if (value === 'About My Family') {
+                return 'classspan3';
+            } else if (value === 'Partner Preferences details') {
+                return 'classspan3';
+            } else {
+                return '';
+            }
+        };
     }
 ]);
