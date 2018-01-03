@@ -3254,14 +3254,16 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.religion = 1;
             }, 500);
             scope.successstoriesarray = [];
-            // $http.post('/middlewareToken',JSON.stringify({source:'KaakateeyaAPP'}))
-            // .then(function(response){
-            // if(response.data)
-            // {
-            // sessionStorage.setItem('token', response.data.token);
-            // }
 
-            // });
+            // /middlewareToken
+            $http.post('http://localhost:3000/getTempToken', JSON.stringify({ source: 'KaakateeyaAPP' }))
+                .then(function(response) {
+                    if (response.data) {
+                        sessionStorage.setItem('token', response.data.token);
+                    }
+
+                });
+
         };
         scope.destroy = function() {
             scope.loginpopup = false;
@@ -6129,98 +6131,97 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
         };
     }
 ]);
-  app.controller('myCtrl', function($scope, $http) {
+app.controller('myCtrl', function($scope, $http) {
 
-      $scope.myFunc = function() {
+    $scope.myFunc = function() {
 
-          $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetails_NewDesigns', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
-              $scope.array = JSON.parse(data);
-              $scope.ProfileID = $scope.array[0].ProfileID;
-              $scope.Branch = $scope.array[0].Branch;
-              $scope.Name = $scope.array[0].FirstName;
-              $scope.Surname = $scope.array[0].LastName;
-              $scope.Gender = $scope.array[0].Gender;
-              $scope.CasteName = $scope.array[0].CasteName;
-              $scope.MemberShipType = $scope.array[0].MemberShipType;
-              $scope.ApplicationName = $scope.array[0].ApplicationName;
-              $scope.AgreedAmountNew = $scope.array[0].AgreedAmountNew;
-              $scope.Duration = $scope.array[0].Duration;
-              $scope.MemberShipName = $scope.array[0].MemberShipName;
-              $scope.MemberShipDescription = $scope.array[0].MemberShipDescription;
-              $scope.StartDate = $scope.array[0].StartDate;
-              $scope.EndDate = $scope.array[0].EndDate;
-              $scope.NoofPoints = $scope.array[0].NoofPoints;
-              $scope.SettlementAmount = $scope.array[0].SettlementAmount;
-              $scope.ServiceTax = $scope.array[0].ServiceTax;
-              $scope.MembershipID = $scope.array[0].MembershipID;
-              $scope.GenderID = $scope.array[0].GenderID;
-              $scope.CasteID = $scope.array[0].CasteID;
-              $scope.Cust_ID = $scope.array[0].Cust_ID;
-              $scope.MemberShipTypeID = $scope.array[0].MemberShipTypeID;
-              $scope.display = 1;
-          }).error(function(data, status, headers, config) {
-              alert("No  Data found");
-          });
-      };
+        $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetails_NewDesigns', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
+            $scope.array = JSON.parse(data);
+            $scope.ProfileID = $scope.array[0].ProfileID;
+            $scope.Branch = $scope.array[0].Branch;
+            $scope.Name = $scope.array[0].FirstName;
+            $scope.Surname = $scope.array[0].LastName;
+            $scope.Gender = $scope.array[0].Gender;
+            $scope.CasteName = $scope.array[0].CasteName;
+            $scope.MemberShipType = $scope.array[0].MemberShipType;
+            $scope.ApplicationName = $scope.array[0].ApplicationName;
+            $scope.AgreedAmountNew = $scope.array[0].AgreedAmountNew;
+            $scope.Duration = $scope.array[0].Duration;
+            $scope.MemberShipName = $scope.array[0].MemberShipName;
+            $scope.MemberShipDescription = $scope.array[0].MemberShipDescription;
+            $scope.StartDate = $scope.array[0].StartDate;
+            $scope.EndDate = $scope.array[0].EndDate;
+            $scope.NoofPoints = $scope.array[0].NoofPoints;
+            $scope.SettlementAmount = $scope.array[0].SettlementAmount;
+            $scope.ServiceTax = $scope.array[0].ServiceTax;
+            $scope.MembershipID = $scope.array[0].MembershipID;
+            $scope.GenderID = $scope.array[0].GenderID;
+            $scope.CasteID = $scope.array[0].CasteID;
+            $scope.Cust_ID = $scope.array[0].Cust_ID;
+            $scope.MemberShipTypeID = $scope.array[0].MemberShipTypeID;
+            $scope.display = 1;
+        }).error(function(data, status, headers, config) {
+            alert("No  Data found");
+        });
+    };
 
-      $scope.gridView = function() {
-          $scope.display = 3;
-          $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetailsGridview', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
-              $scope.array = JSON.parse(data);
-              $scope.ProfileID = $scope.array[0].ProfileID;
-          }).error(function(data, status, headers, config) {
-              alert("No  Data found");
-          });
-      };
+    $scope.gridView = function() {
+        $scope.display = 3;
+        $http.get('http://183.82.0.58:8010/Api/Payment/getProfilePaymentDetailsGridview', { params: { intProfileID: $scope.tProfileID } }).success(function(data, status, headers, config) {
+            $scope.array = JSON.parse(data);
+            $scope.ProfileID = $scope.array[0].ProfileID;
+        }).error(function(data, status, headers, config) {
+            alert("No  Data found");
+        });
+    };
 
-      $scope.btnsubmit = function(display) {
-          if (display == 1) {
-              var obj = {
-                  ProfileID: $scope.ProfileID,
-                  Cust_id: $scope.Cust_ID,
-                  Payment_Id: $scope.rbtPaymenttype,
-                  Renual_Type: $scope.MemberShipTypeID,
-                  NoofPoints: $scope.NoofPoints,
-                  AgreedAmount: $scope.AgreedAmountNew,
-                  SettlementAmount: $scope.SettlementAmount,
-                  DateDuration: $scope.Duration,
-                  ServiceTax: $scope.ServiceTax,
-                  ServiceTaxAmt: $scope.txtServiceTaxSettleMent,
-                  AmountPaid: $scope.AmountPaid,
-                  StartDate: $scope.StartDate,
-                  EndDate: $scope.EndDate,
-                  ReceiptNumber: $scope.ReceiptBillNumber,
-                  TransactionID: $scope.TransactionID,
-                  ChequeNoOrDDNo: $scope.Cheque,
-                  BranchName: $scope.BranchName,
-                  BankName: $scope.BankName,
-                  Place: $scope.Place,
-                  Paydescription: $scope.Paydescription,
-                  ModeOfPayment: $scope.Paymode,
-                  EmpID: 2,
-                  AccessFeatureID: $scope.rbtAccessFeature,
-                  PaysmsID: $scope.SendEmailSms
-              };
-              $http.post('http://183.82.0.58:8010/Api/Payment/CustomerInsertPaymentDetilsInfo_NewDesign', obj).then(function(response) {
-                  alert("Payment Success......");
-              });
-          } else {
-              $scope.tProfileID = null;
-              $scope.AgreedAmountNew = null;
-              $scope.searchMemberonline = null;
-              $scope.display = 2;
-          }
-      };
-  });
+    $scope.btnsubmit = function(display) {
+        if (display == 1) {
+            var obj = {
+                ProfileID: $scope.ProfileID,
+                Cust_id: $scope.Cust_ID,
+                Payment_Id: $scope.rbtPaymenttype,
+                Renual_Type: $scope.MemberShipTypeID,
+                NoofPoints: $scope.NoofPoints,
+                AgreedAmount: $scope.AgreedAmountNew,
+                SettlementAmount: $scope.SettlementAmount,
+                DateDuration: $scope.Duration,
+                ServiceTax: $scope.ServiceTax,
+                ServiceTaxAmt: $scope.txtServiceTaxSettleMent,
+                AmountPaid: $scope.AmountPaid,
+                StartDate: $scope.StartDate,
+                EndDate: $scope.EndDate,
+                ReceiptNumber: $scope.ReceiptBillNumber,
+                TransactionID: $scope.TransactionID,
+                ChequeNoOrDDNo: $scope.Cheque,
+                BranchName: $scope.BranchName,
+                BankName: $scope.BankName,
+                Place: $scope.Place,
+                Paydescription: $scope.Paydescription,
+                ModeOfPayment: $scope.Paymode,
+                EmpID: 2,
+                AccessFeatureID: $scope.rbtAccessFeature,
+                PaysmsID: $scope.SendEmailSms
+            };
+            $http.post('http://183.82.0.58:8010/Api/Payment/CustomerInsertPaymentDetilsInfo_NewDesign', obj).then(function(response) {
+                alert("Payment Success......");
+            });
+        } else {
+            $scope.tProfileID = null;
+            $scope.AgreedAmountNew = null;
+            $scope.searchMemberonline = null;
+            $scope.display = 2;
+        }
+    };
+});
 
-  function isNumberKey(evt) {
-      var charCode = (evt.which) ? evt.which : event.keyCode;
-      if (charCode > 31 && (charCode < 48 || charCode > 57))
-          return false;
-      return true;
-  }
-app.controller("payment",function()
-{
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+app.controller("payment", function() {
 
 });
 app.controller('paymentresponse', ['$scope', 'route', 'myAppFactory',
@@ -7428,73 +7429,72 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
         };
     }
 ]);
-app.controller('aboutus', ['$scope', function (scope) {
+app.controller('aboutus', ['$scope', function(scope) {}]);
+app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
+    scope.groups = [{
+            title: "Dynamic Group Header - 1",
+            content: "Dynamic Group Body - 1",
+            open: false
+        },
+        {
+            title: "Dynamic Group Header - 2",
+            content: "Dynamic Group Body - 2",
+            open: false
+        }
+    ];
+
+    scope.addNew = function() {
+        scope.groups.push({
+            title: "New One Created",
+            content: "Dynamically added new one",
+            open: false
+        });
+    };
+
 }]);
- app.controller("AccordionDemoCtrl", ['$scope', function(scope) {
-     scope.groups = [{
-             title: "Dynamic Group Header - 1",
-             content: "Dynamic Group Body - 1",
-             open: false
-         },
-         {
-             title: "Dynamic Group Header - 2",
-             content: "Dynamic Group Body - 2",
-             open: false
-         }
-     ];
+app.controller("ccAvenueCtrl", ['$scope', '$http', function(scope, http) {
 
-     scope.addNew = function() {
-         scope.groups.push({
-             title: "New One Created",
-             content: "Dynamically added new one",
-             open: false
-         });
-     };
-
- }]);
- app.controller("ccAvenueCtrl", ['$scope', '$http', function(scope, http) {
-
-     //  scope.submitCCAvenue = function() {
-     //      var data = {
-     //          merchant_id: 'M_151047_9927',
-     //          order_id: 'Ord_91035_7865',
-     //          currency: 'INR',
-     //          amount: '10000',
-     //          redirect_url: 'http://127.0.0.1:3001/ccavResponseHandler',
-     //          cancel_url: 'http://127.0.0.1:3001/ccavResponseHandler',
-     //          language: 'EN',
-     //          billing_name: 'Peter',
-     //          billing_address: 'Santacruz',
-     //          billing_city: 'Mumbai',
-     //          billing_state: 'MH',
-     //          billing_zip: '400054',
-     //          billing_country: 'India',
-     //          billing_tel: '8985201371',
-     //          billing_email: 'kusumavishwaneni@gmail.com',
-     //          delivery_name: 'Sam',
-     //          delivery_address: 'Vile Parle',
-     //          delivery_city: 'Mumbai',
-     //          delivery_state: 'Maharashtra',
-     //          delivery_zip: '400038',
-     //          delivery_country: 'India',
-     //          delivery_tel: '0123456789',
-     //          merchant_param1: 'additional Info.',
-     //          merchant_param2: 'additional Info.',
-     //          merchant_param3: 'additional Info.',
-     //          merchant_param4: 'additional Info.',
-     //          merchant_param5: 'additional Info.',
-     //          promo_code: '',
-     //          customer_identifier: ''
-     //      };
+    //  scope.submitCCAvenue = function() {
+    //      var data = {
+    //          merchant_id: 'M_151047_9927',
+    //          order_id: 'Ord_91035_7865',
+    //          currency: 'INR',
+    //          amount: '10000',
+    //          redirect_url: 'http://127.0.0.1:3001/ccavResponseHandler',
+    //          cancel_url: 'http://127.0.0.1:3001/ccavResponseHandler',
+    //          language: 'EN',
+    //          billing_name: 'Peter',
+    //          billing_address: 'Santacruz',
+    //          billing_city: 'Mumbai',
+    //          billing_state: 'MH',
+    //          billing_zip: '400054',
+    //          billing_country: 'India',
+    //          billing_tel: '8985201371',
+    //          billing_email: 'kusumavishwaneni@gmail.com',
+    //          delivery_name: 'Sam',
+    //          delivery_address: 'Vile Parle',
+    //          delivery_city: 'Mumbai',
+    //          delivery_state: 'Maharashtra',
+    //          delivery_zip: '400038',
+    //          delivery_country: 'India',
+    //          delivery_tel: '0123456789',
+    //          merchant_param1: 'additional Info.',
+    //          merchant_param2: 'additional Info.',
+    //          merchant_param3: 'additional Info.',
+    //          merchant_param4: 'additional Info.',
+    //          merchant_param5: 'additional Info.',
+    //          promo_code: '',
+    //          customer_identifier: ''
+    //      };
 
 
-     //      http.post('/postCCAvenue', JSON.stringify(data)).then(function(response) {
-     //          console.log(response.data);
-     //          $('#responseDiv').html(response.data);
-     //      });
+    //      http.post('/postCCAvenue', JSON.stringify(data)).then(function(response) {
+    //          console.log(response.data);
+    //          $('#responseDiv').html(response.data);
+    //      });
 
-     //};
- }]);
+    //};
+}]);
 app.controller('ModalDemoCtrl', function($uibModal, $log, $scope) {
     $scope.ddlvals = "aaaa";
     var $ctrl = this;
@@ -7706,40 +7706,40 @@ app.controller('feedbackCtrl', ['$scope', 'reCAPTCHA', 'feedbacksubmit',
         };
     }
 ]);
- app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route', '$location',
-     function(scope, forgetPwdservices, stateParams, alerts, uibModal, route, location) {
-         // scope.custidpassword = stateParams.custid;
-         scope.custidpassword = (location.search()).CustID;
-         scope.statuspassword = null;
-         scope.divngit = function() {
-             alerts.dynamicpopup("forgetpasswordemail.html", scope, uibModal);
-             forgetPwdservices.getstatuscustid(scope.custidpassword).then(function(response) {
-                 _.each(response.data, function(item) {
-                     var passwordarray = JSON.parse(item);
-                     if (passwordarray !== undefined && passwordarray !== null && passwordarray !== "" && passwordarray[0] !== undefined && passwordarray[0] !== null && passwordarray[0] !== "") {
-                         if (passwordarray[0].STATUS === 1) {
-                             scope.statuspassword = passwordarray[0].Password;
-                         } else if (passwordarray[0].STATUS === 2) {
-                             alerts.timeoutoldalerts(scope, 'alert-danger', 'You have already reseted your password', 2500);
-                         }
+app.controller("forgetpasswordemail", ['$scope', 'forgetPwdservices', '$stateParams', 'alert', '$uibModal', 'route', '$location',
+    function(scope, forgetPwdservices, stateParams, alerts, uibModal, route, location) {
+        // scope.custidpassword = stateParams.custid;
+        scope.custidpassword = (location.search()).CustID;
+        scope.statuspassword = null;
+        scope.divngit = function() {
+            alerts.dynamicpopup("forgetpasswordemail.html", scope, uibModal);
+            forgetPwdservices.getstatuscustid(scope.custidpassword).then(function(response) {
+                _.each(response.data, function(item) {
+                    var passwordarray = JSON.parse(item);
+                    if (passwordarray !== undefined && passwordarray !== null && passwordarray !== "" && passwordarray[0] !== undefined && passwordarray[0] !== null && passwordarray[0] !== "") {
+                        if (passwordarray[0].STATUS === 1) {
+                            scope.statuspassword = passwordarray[0].Password;
+                        } else if (passwordarray[0].STATUS === 2) {
+                            alerts.timeoutoldalerts(scope, 'alert-danger', 'You have already reseted your password', 2500);
+                        }
 
-                     }
-                 });
+                    }
+                });
 
-             });
-         };
-         scope.passwordsubmit = function(formloagin) {
-             alerts.dynamicpopupclose();
-             forgetPwdservices.getChangePassword(scope.custidpassword, formloagin.txtPassword).then(function(response) {
-                 if (response.data === 1) {
-                     alerts.timeoutoldalerts(scope, 'alert-success', 'Your password updated successfully', 2500);
-                     route.go('home', {});
-                 }
-             });
-         };
+            });
+        };
+        scope.passwordsubmit = function(formloagin) {
+            alerts.dynamicpopupclose();
+            forgetPwdservices.getChangePassword(scope.custidpassword, formloagin.txtPassword).then(function(response) {
+                if (response.data === 1) {
+                    alerts.timeoutoldalerts(scope, 'alert-success', 'Your password updated successfully', 2500);
+                    route.go('home', {});
+                }
+            });
+        };
 
-     }
- ]);
+    }
+]);
 app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 'reCAPTCHA',
     function(uibModal, scope, helpService, arrayConstants, reCAPTCHA) {
         scope.catgory = 'catgory';
@@ -7843,14 +7843,14 @@ app.controller("help", ['$uibModal', '$scope', 'helpService', 'arrayConstants', 
         vm.init();
     }
 })();
- app.controller("blockerController", ['$scope', 'cerateNewPwd', '$stateParams', function(scope, cerateNewPwd, stateParams) {
-     cerateNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
-         var custData = (res.data).split(';');
-         scope.profileID = custData[1];
-         scope.RelationShipManager = custData[3];
-         scope.mngrMob = custData[4] === 'NoEmpOfficialCCn' ? '' : custData[4];
-     });
- }]);
+app.controller("blockerController", ['$scope', 'cerateNewPwd', '$stateParams', function(scope, cerateNewPwd, stateParams) {
+    cerateNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
+        var custData = (res.data).split(';');
+        scope.profileID = custData[1];
+        scope.RelationShipManager = custData[3];
+        scope.mngrMob = custData[4] === 'NoEmpOfficialCCn' ? '' : custData[4];
+    });
+}]);
 (function() {
     'use strict';
 
@@ -8013,12 +8013,12 @@ app.controller("ourbranches", ["$scope", "ourBranchService", "helperservice", fu
         }
     };
 }]);
-app.controller('privacypolicy', ['$scope', function (scope) {
+app.controller('privacypolicy', ['$scope', function(scope) {
     //hide #back-top first
     $(".back-to-top").hide();
-    scope.initprivacy = function () {
+    scope.initprivacy = function() {
         // fade in #back-top    
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             if ($(this).scrollTop() > 100) {
                 $('.back-to-top').fadeIn();
             } else {
@@ -8026,7 +8026,7 @@ app.controller('privacypolicy', ['$scope', function (scope) {
             }
         });
         // scroll body to 0px on click
-        $('.back-to-top').click(function () {
+        $('.back-to-top').click(function() {
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
@@ -8439,12 +8439,12 @@ app.controller("supporttickets", ['$scope', 'customerProfilesettings', 'authSvc'
         };
     }
 ]);
-app.controller('termsandconditions', ['$scope', function (scope) {
+app.controller('termsandconditions', ['$scope', function(scope) {
     //hide #back-top first
     $(".back-to-top").hide();
-    scope.initconditions = function () {
+    scope.initconditions = function() {
         // fade in #back-top    
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             if ($(this).scrollTop() > 100) {
                 $('.back-to-top').fadeIn();
             } else {
@@ -8452,7 +8452,7 @@ app.controller('termsandconditions', ['$scope', function (scope) {
             }
         });
         // scroll body to 0px on click
-        $('.back-to-top').click(function () {
+        $('.back-to-top').click(function() {
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
@@ -9800,40 +9800,40 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
     ];
 
 })(angular);
- (function() {
+(function() {
 
 
-     function controller(employeeViewfullprofileModel, scope, $location) {
-         var vm = this,
-             model;
-         vm.init = function() {
-             vm.model = model = employeeViewfullprofileModel;
-             vm.model.scope = scope;
-             vm.refForm = {};
-             model.viewprofilearray = [];
-             model.aboutmyself = {};
-             model.personalinfo = {};
-             model.basicinfo = [];
-             model.selfProfileID = '';
-             model.fullprofileshow = true;
-             model.searchObjectquery = $location.search();
-             model.updatepaymentllink = false;
-             var meKey = Object.getOwnPropertyNames(model.searchObjectquery)[0];
-             var meKeyempid = Object.getOwnPropertyNames(model.searchObjectquery)[1];
-             model.selfProfileID = model.searchObjectquery[meKey].replace(' ', '+');
-             model.selfEmp = model.searchObjectquery[meKeyempid];
-             if (model.selfProfileID) {
-                 model.getprofileDataencryptedID(model.selfProfileID);
-             }
-         };
-         vm.init();
-     }
-     angular
-         .module('Kaakateeya')
-         .controller('ViewfullprofileEmailCtrl', controller);
-     controller.$inject = ['employeeViewfullprofilePrintModel', '$scope', '$location'];
+    function controller(employeeViewfullprofileModel, scope, $location) {
+        var vm = this,
+            model;
+        vm.init = function() {
+            vm.model = model = employeeViewfullprofileModel;
+            vm.model.scope = scope;
+            vm.refForm = {};
+            model.viewprofilearray = [];
+            model.aboutmyself = {};
+            model.personalinfo = {};
+            model.basicinfo = [];
+            model.selfProfileID = '';
+            model.fullprofileshow = true;
+            model.searchObjectquery = $location.search();
+            model.updatepaymentllink = false;
+            var meKey = Object.getOwnPropertyNames(model.searchObjectquery)[0];
+            var meKeyempid = Object.getOwnPropertyNames(model.searchObjectquery)[1];
+            model.selfProfileID = model.searchObjectquery[meKey].replace(' ', '+');
+            model.selfEmp = model.searchObjectquery[meKeyempid];
+            if (model.selfProfileID) {
+                model.getprofileDataencryptedID(model.selfProfileID);
+            }
+        };
+        vm.init();
+    }
+    angular
+        .module('Kaakateeya')
+        .controller('ViewfullprofileEmailCtrl', controller);
+    controller.$inject = ['employeeViewfullprofilePrintModel', '$scope', '$location'];
 
- })(angular);
+})(angular);
 (function() {
     'use strict';
 
@@ -9876,24 +9876,24 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         .factory('employeeViewfullprofilePrintservice', factory);
     factory.$inject = ['$http'];
 })(angular);
-//  app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function ($rootScope, $q, $window, authSvc) {
-//     return {
-//       request: function (config) {
-//         config.headers = config.headers || {};
-//         var user = authSvc.user();
-//         if (user.token) {
-//           config.headers.Authorization = 'Bearer ' + user.token;
-//         }
-//         return config;
-//       },
-//       responseError: function (rejection) {
-//         if (rejection.status === 401) {
-//           // handle the case where the user is not authenticated
-//         }
-//         return $q.reject(rejection);
-//       }
-//     };
-//   }]);
+app.factory('authInterceptor', ['$rootScope', '$q', '$window', 'authSvc', function($rootScope, $q, $window, authSvc) {
+    return {
+        request: function(config) {
+            config.headers = config.headers || {};
+            var user = authSvc.user();
+            if (user.token) {
+                config.headers.Authorization = 'Bearer ' + user.token;
+            }
+            return config;
+        },
+        responseError: function(rejection) {
+            if (rejection.status === 401) {
+                // handle the case where the user is not authenticated
+            }
+            return $q.reject(rejection);
+        }
+    };
+}]);
 
 app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
     function setUser(value) {

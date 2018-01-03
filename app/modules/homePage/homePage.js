@@ -18,14 +18,13 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.religion = 1;
             }, 500);
             scope.successstoriesarray = [];
-            // $http.post('/middlewareToken',JSON.stringify({source:'KaakateeyaAPP'}))
-            // .then(function(response){
-            // if(response.data)
-            // {
-            // sessionStorage.setItem('token', response.data.token);
-            // }
+            $http.post('http://localhost:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
+                .then(function(response) {
+                    if (response.data) {
+                        sessionStorage.setItem('token', response.data.token);
+                    }
 
-            // });
+                });
         };
         scope.destroy = function() {
             scope.loginpopup = false;

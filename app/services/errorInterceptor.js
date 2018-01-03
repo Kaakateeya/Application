@@ -7,10 +7,12 @@
                 $rootScope.loading = true;
                 // }
                 config.headers = config.headers || {};
-                // config.headers['Content-Type']= 'application/json';                
-                // config.headers.Authorization = 'Bearer '+sessionStorage.getItem('token');
+                config.headers['Content-Type'] = 'application/json';
+                config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
                 return config;
+
             },
+
             responseError: function(rejection) {
                 $rootScope.loading = false;
                 $rootScope.$broadcast('notify-error', rejection);

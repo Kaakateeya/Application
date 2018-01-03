@@ -9,8 +9,8 @@
 
 
 var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons', 'ngLoadingSpinner',
-    '720kb.tooltips'
+    'ngMessages', 'ngAria', 'KaakateeyaEdit', 'ngPassword', 'KaakateeyaRegistration', 'jcs-autoValidate', 'rzModule', 'angularPromiseButtons', 'ngLoadingSpinner'
+
 ]);
 
 // 'angular-loading-bar'
@@ -18,10 +18,12 @@ var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', '
 // app.apiroot = 'http://52.66.131.254:8010/Api/';
 // app.apiroot183 = 'http://52.66.131.254:8025/Api/';
 
-
 app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 // app.apiroot = 'http://183.82.0.58:8010/Api/';
-app.apiroot = 'http://183.82.0.58:8070/Api/';
+//app.apiroot = 'http://183.82.0.58:8070/Api/';
+
+app.apiroot = 'http://localhost:3000/Api/';
+
 app.global = {
     'alertType': 'toast-top-right'
 };
