@@ -54,5 +54,9 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         // getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
         //     return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         // }
+
+        Viewprofileselef: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getfullprofileself', { params: { ProfileID: toprofileid, EmpID: empid } });
+        }
     };
 }]);

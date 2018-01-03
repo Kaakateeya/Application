@@ -4122,7 +4122,7 @@ app.controller('locationparicular', ['$scope', 'homepageservices', 'authSvc', 's
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
@@ -4795,7 +4795,7 @@ app.controller('locationall', ['$scope', 'homepageservices', 'authSvc', 'success
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
@@ -5246,7 +5246,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
@@ -5319,6 +5319,15 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
                     break;
+
+                case 'Intercaste Matrimony':
+                    url = "caste/intercaste-matrimony";
+                    break;
+
+                case 'Caste No Bar Matrimony':
+                    url = "caste/castenobar-matrimony";
+                    break;
+
                 default:
 
                     route.go('home', {});
@@ -5582,43 +5591,54 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "Second Marriage Bureau - Kaakateeya Matrimonial Services";
                     $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'balija-matrimony':
-                    scope.stateparamsid = 403;
-                    scope.isActiveid = 1;
-                    scope.castenameparam = "Balija Matrimony";
-                    $root.casteTitle = '';
-                    $root.keyWord = '';
-                    $root.description = '';
 
-                    $root.canonicalhref = "";
-                    $root.propertytypecontent = "";
+
+                case 'intercaste-matrimony':
+                    scope.stateparamsid = 417;
+                    scope.isActiveid = 1;
+                    scope.castenameparam = "";
+                    scope.aboutus = "";
+                    scope.firstsuccessstory = "";
+                    scope.secondsuccessstory = "";
+                    $root.casteTitle = '';
+                    $root.keyWord = "";
+                    $root.description = "";
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/intercaste-matrimony";
+                    $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "";
                     $root.propertydescriptioncontent = "";
-                    $root.propertyContenturl = "";
-                    $root.propertysite_name = "";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/intercaste-matrimony";
+                    $root.propertysite_name = " ";
                     $root.twitterdescription = "";
-                    $root.twittertitle = "";
-                    $root.twitterimage = "";
-
+                    $root.twittertitle = " ";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'yadava-matrimony':
-                    scope.stateparamsid = 406;
-                    scope.isActiveid = 1;
-                    scope.castenameparam = "Yadava Matrimony";
-                    $root.casteTitle = '';
-                    $root.keyWord = '';
-                    $root.description = '';
 
-                    $root.canonicalhref = "";
-                    $root.propertytypecontent = "";
+                case 'castenobar-matrimony':
+                    scope.stateparamsid = 488;
+                    scope.isActiveid = 1;
+                    scope.castenameparam = "";
+                    scope.aboutus = "";
+                    scope.firstsuccessstory = "";
+                    scope.secondsuccessstory = "";
+                    $root.casteTitle = '';
+                    $root.keyWord = "";
+                    $root.description = "";
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/castenobar-matrimony";
+                    $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "";
                     $root.propertydescriptioncontent = "";
-                    $root.propertyContenturl = "";
-                    $root.propertysite_name = "";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/castenobar-matrimony";
+                    $root.propertysite_name = " ";
                     $root.twitterdescription = "";
-                    $root.twittertitle = "";
-                    $root.twitterimage = "";
+                    $root.twittertitle = " ";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
+
                 default:
                     route.go('home', {});
                     break;
@@ -6054,7 +6074,7 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
@@ -6120,12 +6140,25 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
                 case 'Christian Matrimony':
                     url = "caste/christian-matrimony";
                     break;
+
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
                     break;
+
+                case 'Intercaste Matrimony':
+                    url = "caste/intercaste-matrimony";
+                    break;
+
+                case 'Caste No Bar Matrimony':
+                    url = "caste/castenobar-matrimony";
+                    break;
+
+
+
                 case 'Gowda Matrimony':
                     url = "caste/gowda-matrimony";
                     break;
+
             }
             return url;
         };
@@ -7375,7 +7408,7 @@ app.controller('searchregistration', ['$scope', 'getArray', 'commonFactory', 'ba
                 intCountryLivingID: obj.ddlcountry,
                 intMobileCode: obj.ddlmobilecountry,
                 intLandCode: obj.ddllandcountry,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.txtMobileNo,
                 ID: 1,
                 strAreaCode: obj.txtArea,
@@ -7963,7 +7996,7 @@ app.controller("ourbranches", ["$scope", "ourBranchService", "helperservice", fu
     scope.region = 'region';
     scope.BranchArr = [];
     scope.BranchDetailsArr = [];
-    scope.telanganaArr = [{ count: 1, "BranchAddress": "103 , 109, Vijayasree Apartments, Behind Chermas ,", "PhoneNumbers": "23747777", "Mobilenumber": "7675818080", "BranchemailID": "kaakateeya.com@gmail.com", "WorkingEndTime": "8:30:00 PM", "Branch_ID": 319, "Address": "Ameerpet , Hyderabad-500073", "WorkingStartTime": "8:30:00 AM", "Landlineareacode": "40", "Landlinenumber": "23747777", "BranchesName": "Hyderabad - Ameerpet" }, { count: 2, "BranchAddress": "2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,", "PhoneNumbers": "24065959", "Mobilenumber": "9966636222", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 320, "Address": "Dilsukhnagar , Hyderabad - 500060", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "24065959", "BranchesName": "Hyderabad-Dilsukhnagar" }, { count: 3, "BranchAddress": "202 , Uday Krishna Complex , Bhagyanagar colony ,", "PhoneNumbers": "23067373", "Mobilenumber": "9392009391", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 321, "Address": "opp KPHB , Hyderabad-500072", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "23067373", "BranchesName": "Hyderabad-Kukatpally" }];
+    scope.telanganaArr = [{ count: 1, "BranchAddress": "101 , 102, Vijayasree Apartments, Behind Chermas ,", "PhoneNumbers": "23747777", "Mobilenumber": "7675818080", "BranchemailID": "kaakateeya.com@gmail.com", "WorkingEndTime": "8:30:00 PM", "Branch_ID": 319, "Address": "Ameerpet , Hyderabad-500073", "WorkingStartTime": "8:30:00 AM", "Landlineareacode": "40", "Landlinenumber": "23747777", "BranchesName": "Hyderabad - Ameerpet" }, { count: 2, "BranchAddress": "2 nd Floor , Pullareddy Sweets Building ,SaiBaba Temple Lane ,", "PhoneNumbers": "24065959", "Mobilenumber": "9966636222", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 320, "Address": "Dilsukhnagar , Hyderabad - 500060", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "24065959", "BranchesName": "Hyderabad-Dilsukhnagar" }, { count: 3, "BranchAddress": "202 , Uday Krishna Complex , Bhagyanagar colony ,", "PhoneNumbers": "23067373", "Mobilenumber": "9392009391", "BranchemailID": "info@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 321, "Address": "opp KPHB , Hyderabad-500072", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "40", "Landlinenumber": "23067373", "BranchesName": "Hyderabad-Kukatpally" }];
     scope.pundicherry = [{ "BranchAddress": "No 10 , 1st Floor , 2 nd Cross , Annanagar East , ", "PhoneNumbers": "43543543", "Mobilenumber": "7668687687", "BranchemailID": "naveena@telugumarriages.com", "WorkingEndTime": "7:0:00 PM", "Branch_ID": 341, "Address": "Behind Housing Board , Puducherry ( Pondicherry ) - 600 005", "WorkingStartTime": "9:0:00 AM", "Landlineareacode": "44", "Landlinenumber": "43543543", "BranchesName": "Pondicheery" }];
     ourBranchService.BranchPageloadSelect().then(function(response) {
         scope.BranchDetailsArr = response.data;
@@ -8196,6 +8229,7 @@ app.controller("profilesettings", ['$scope', '$mdDialog', 'customerProfilesettin
             customerProfilesettings.deleteprofile(ProfileID, Narrtion).then(function(response) {
                 if (response.data == 1) {
                     alerts.open('Delete Profile successfully', 'success');
+                    authSvc.logout();
                     scope.Resetallfields('deleteprofiles');
                 } else {
                     alerts.open('Delete Profile failed', 'warning');
@@ -8738,9 +8772,9 @@ app.controller("upgrademembershipnew", ['$scope', '$interval', 'myAppFactory',
                 if (response.data.length > 0 && parseInt(response.data[0].Status) === 1) {
                     state.go('home');
                 } else {
-                    uploadService.getencrypt(scope.CustID).then(function(response) {
-                        if (response.data !== null && response.data !== undefined && response.data !== "") {
-                            state.go("uploadPhoto", { custid: response.data });
+                    uploadService.getencrypt(scope.CustID).then(function(resp) {
+                        if (resp.data !== null && resp.data !== undefined && resp.data !== "") {
+                            state.go("uploadPhoto", { custid: resp.data });
                         }
                     });
                 }
@@ -9471,10 +9505,12 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
         scope.showmyname = true;
 
         scope.pageload = function() {
+            scope.eduvalue = 0;
             if (scope.custid === localcustid) {
                 scope.showmyname = true;
                 scope.logidliproceed = false;
-                customerDashboardServices.Viewprofile(scope.custid, localcustid, 0).then(function(response) {
+                var loginprofileid = authSvc.getProfileid();
+                customerDashboardServices.Viewprofileselef(loginprofileid, 2).then(function(response) {
                     // scope.slideshowimages();
                     scope.partnerinformation(response);
                 });
@@ -9680,6 +9716,24 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                         }
                     });
                     break;
+            }
+        };
+        scope.Educationvalue = function(value) {
+            if (value === 'Education' && scope.eduvalue === 0) {
+                scope.eduvalue = 1;
+                return "Education";
+
+            } else if (value === 'Education' && scope.eduvalue === 1) {
+                return "";
+            } else {
+                return value;
+            }
+        };
+        scope.valuebinding = function(value) {
+            if (value !== '' && value !== null && value !== undefined) {
+                return ":";
+            } else {
+                return '';
             }
         };
     }
@@ -10076,6 +10130,10 @@ app.factory('customerDashboardServices', ['$http', function(http) {
         // getCustPartnerProfiles: function(custid, typeofaction, frompage, topage, exactflag) {
         //     return http.get(app.apiroot + 'DashboardRequest/getcustDashboardPartnerProfiles', { params: { TypeOfReport: typeofaction, pagefrom: frompage, pageto: topage, id: custid, DashboardType: exactflag } });
         // }
+
+        Viewprofileselef: function(toprofileid, empid) {
+            return http.get(app.apiroot + 'StaticPages/getfullprofileself', { params: { ProfileID: toprofileid, EmpID: empid } });
+        }
     };
 }]);
 (function(app) {

@@ -394,7 +394,7 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 intCountryLivingID: obj.regcountry,
                 intMobileCode: obj.regcontrycodes,
                 intLandCode: null,
-                IsCustomer: 1,
+                IsCustomer: 10,
                 strMobileNo: obj.regmobilenumber,
                 ID: 1,
                 strAreaCode: null,
@@ -467,6 +467,15 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                 case 'Second marriage bureau':
                     url = "caste/second-marriage-bureau";
                     break;
+
+                case 'Intercaste Matrimony':
+                    url = "caste/intercaste-matrimony";
+                    break;
+
+                case 'Caste No Bar Matrimony':
+                    url = "caste/castenobar-matrimony";
+                    break;
+
                 default:
 
                     route.go('home', {});
@@ -730,43 +739,54 @@ app.controller('newhomepcontroller', ['$scope', 'homepageservices', 'authSvc', '
                     $root.twittertitle = "Second Marriage Bureau - Kaakateeya Matrimonial Services";
                     $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'balija-matrimony':
-                    scope.stateparamsid = 403;
-                    scope.isActiveid = 1;
-                    scope.castenameparam = "Balija Matrimony";
-                    $root.casteTitle = '';
-                    $root.keyWord = '';
-                    $root.description = '';
 
-                    $root.canonicalhref = "";
-                    $root.propertytypecontent = "";
+
+                case 'intercaste-matrimony':
+                    scope.stateparamsid = 417;
+                    scope.isActiveid = 1;
+                    scope.castenameparam = "";
+                    scope.aboutus = "";
+                    scope.firstsuccessstory = "";
+                    scope.secondsuccessstory = "";
+                    $root.casteTitle = '';
+                    $root.keyWord = "";
+                    $root.description = "";
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/intercaste-matrimony";
+                    $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "";
                     $root.propertydescriptioncontent = "";
-                    $root.propertyContenturl = "";
-                    $root.propertysite_name = "";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/intercaste-matrimony";
+                    $root.propertysite_name = " ";
                     $root.twitterdescription = "";
-                    $root.twittertitle = "";
-                    $root.twitterimage = "";
-
+                    $root.twittertitle = " ";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
-                case 'yadava-matrimony':
-                    scope.stateparamsid = 406;
-                    scope.isActiveid = 1;
-                    scope.castenameparam = "Yadava Matrimony";
-                    $root.casteTitle = '';
-                    $root.keyWord = '';
-                    $root.description = '';
 
-                    $root.canonicalhref = "";
-                    $root.propertytypecontent = "";
+                case 'castenobar-matrimony':
+                    scope.stateparamsid = 488;
+                    scope.isActiveid = 1;
+                    scope.castenameparam = "";
+                    scope.aboutus = "";
+                    scope.firstsuccessstory = "";
+                    scope.secondsuccessstory = "";
+                    $root.casteTitle = '';
+                    $root.keyWord = "";
+                    $root.description = "";
+
+                    // seo content
+                    $root.canonicalhref = "http://www.kaakateeya.com/caste/castenobar-matrimony";
+                    $root.propertytypecontent = "article";
                     $root.propertytitlecontent = "";
                     $root.propertydescriptioncontent = "";
-                    $root.propertyContenturl = "";
-                    $root.propertysite_name = "";
+                    $root.propertyContenturl = "http://www.kaakateeya.com/caste/castenobar-matrimony";
+                    $root.propertysite_name = " ";
                     $root.twitterdescription = "";
-                    $root.twittertitle = "";
-                    $root.twitterimage = "";
+                    $root.twittertitle = " ";
+                    $root.twitterimage = "http://www.kaakateeya.com/src/images/banner1.jpg";
                     break;
+
                 default:
                     route.go('home', {});
                     break;
