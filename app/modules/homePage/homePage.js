@@ -19,7 +19,6 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 500);
             scope.successstoriesarray = [];
             //http://183.82.0.58:3000/getTempToken
-            debugger;
             $http.post('http://localhost:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
                 .then(function(response) {
                     if (response.data) {
