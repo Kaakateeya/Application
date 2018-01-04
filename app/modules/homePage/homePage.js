@@ -18,7 +18,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.religion = 1;
             }, 500);
             scope.successstoriesarray = [];
-            $http.post('http://localhost:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
+            $http.post('http://183.82.0.58:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
                 .then(function(response) {
                     if (response.data) {
                         sessionStorage.setItem('token', response.data.token);
