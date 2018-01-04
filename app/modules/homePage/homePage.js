@@ -19,7 +19,8 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             }, 500);
             scope.successstoriesarray = [];
             //http://183.82.0.58:3000/getTempToken
-            $http.post('/middlewareToken', JSON.stringify({ source: 'Kaakateeya' }))
+            debugger;
+            $http.post('/MiddlewareToken', JSON.stringify({ source: 'Kaakateeya' }))
                 .then(function(response) {
                     if (response.data) {
                         sessionStorage.setItem('token', response.data.token);
