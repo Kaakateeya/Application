@@ -4,10 +4,21 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
     function(scope, homepageservices, authSvc, successstoriesdata, $mdDialog,
         arrayConstants, service, $rootscope, alerts, timeout, missingFieldService, $state, route, helperservice, uibModal, $window, $http) {
         scope.homeinit = function() {
+
             scope.loginpopup = false;
             scope.emailss = "/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/";
             scope.username = '';
             scope.password = "";
+
+            //http://183.82.0.58:3000/getTempToken
+
+            $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
+                .then(function(response) {
+                    if (response.data) {
+                        sessionStorage.setItem('token', response.data.token);
+                    }
+                });
+
             timeout(function() {
                 // successstoriesdata.suceessdataget(1, 5).then(function(response) {
                 //     scope.successstoriesarray = response.data;
@@ -17,15 +28,9 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.Ageto = 30;
                 scope.religion = 1;
             }, 500);
-            scope.successstoriesarray = [];
-            //http://183.82.0.58:3000/getTempToken
-            $http.post('http://183.82.0.58:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
-                .then(function(response) {
-                    if (response.data) {
-                        sessionStorage.setItem('token', response.data.token);
-                    }
 
-                });
+            scope.successstoriesarray = [];
+
         };
         scope.destroy = function() {
             scope.loginpopup = false;

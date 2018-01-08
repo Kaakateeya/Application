@@ -3245,6 +3245,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
             scope.username = '';
             scope.password = "";
             timeout(function() {
+
                 // successstoriesdata.suceessdataget(1, 5).then(function(response) {
                 //     scope.successstoriesarray = response.data;
                 // });
@@ -3253,18 +3254,20 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 scope.Ageto = 30;
                 scope.religion = 1;
             }, 500);
+
             scope.successstoriesarray = [];
 
             // /middlewareToken
-            $http.post('http://localhost:3000/getTempToken', JSON.stringify({ source: 'KaakateeyaAPP' }))
+
+            $http.post('http://183.82.0.58:3000/getTempToken', JSON.stringify({ source: 'Kaakateeya' }))
                 .then(function(response) {
                     if (response.data) {
+
                         sessionStorage.setItem('token', response.data.token);
                     }
-
                 });
-
         };
+
         scope.destroy = function() {
             scope.loginpopup = false;
             scope.emailss = "";
@@ -10145,8 +10148,8 @@ app.factory('customerDashboardServices', ['$http', function(http) {
                 $rootScope.loading = true;
                 // }
                 config.headers = config.headers || {};
-                // config.headers['Content-Type']= 'application/json';                
-                // config.headers.Authorization = 'Bearer '+sessionStorage.getItem('token');
+                config.headers['Content-Type'] = 'application/json';
+                config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
                 return config;
             },
             responseError: function(rejection) {
