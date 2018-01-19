@@ -86,29 +86,33 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
-                        missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            var missingStatus = null,
-                                custProfileStatus = null;
-                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
-                            if (datav !== null) {
-                                missingStatus = parseInt((datav[0].split(':'))[1]);
-                                custProfileStatus = parseInt((datav[1].split(':'))[1]);
-                            }
-                            if (custProfileStatus === 439) {
-                                sessionStorage.setItem('missingStatus', missingStatus);
-                                if (missingStatus === 0) {
-                                    if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        route.go('dashboard', { type: 'C' });
+                        if (response.response !== null && response.response !== "null") {
+                            missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
+                                var missingStatus = null,
+                                    custProfileStatus = null;
+                                var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                                if (datav !== null) {
+                                    missingStatus = parseInt((datav[0].split(':'))[1]);
+                                    custProfileStatus = parseInt((datav[1].split(':'))[1]);
+                                }
+                                if (custProfileStatus === 439) {
+                                    sessionStorage.setItem('missingStatus', missingStatus);
+                                    if (missingStatus === 0) {
+                                        if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
+                                            route.go('dashboard', { type: 'C' });
+                                        } else {
+                                            route.go('mobileverf', {});
+                                        }
                                     } else {
-                                        route.go('mobileverf', {});
+                                        route.go('missingfields', { id: missingStatus });
                                     }
                                 } else {
-                                    route.go('missingfields', { id: missingStatus });
+                                    route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                                 }
-                            } else {
-                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
-                            }
-                        });
+                            });
+                        } else {
+                            alert("Please enter valid ProfileID/Email");
+                        }
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
