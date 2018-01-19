@@ -401,13 +401,16 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
             }
         };
         scope.regSubmit = function(obj) {
-            var date;
+            //var date;
             var valmm = _.indexOf(monthArr, obj.regmonth);
-            if (parseInt(valmm) < 9) {
-                date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
-            } else {
-                date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
-            }
+            // if (parseInt(valmm) < 9) {
+            //     date = obj.regdate + '-' + (valmm != -1 ? (parseInt(valmm) + 1) : 0) + '-' + obj.regyear;
+            // } else {
+            //     date = obj.regdate + '-' + (valmm != -1 ? parseInt(valmm) + 1 : 0) + '-' + obj.regyear;
+            // }
+            valmm = (valmm != -1 ? parseInt(valmm) + 1 : 0);
+            valmm = valmm >= 10 ? valmm : '0' + valmm;
+            var date = obj.regdate + '-' + valmm + '-' + obj.regyear;
             var inputObj = {
                 strFirstName: obj.regfirstname,
                 strLastName: obj.reglastname,

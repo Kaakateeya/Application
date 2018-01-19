@@ -76,7 +76,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
-                        authSvc.user(response.response !== null ? response.response[0] : null);
+                        authSvc.user(response.response !== null && response.response !== "null" ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
                         missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {

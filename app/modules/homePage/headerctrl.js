@@ -82,7 +82,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                 if (scope.validate()) {
                     authSvc.login(scope.username, scope.password).then(function(response) {
                         sessionStorage.removeItem("homepageobject");
-                        authSvc.user(response.response !== null ? response.response[0] : null);
+                        authSvc.user(response.response !== null && response.response !== "null" ? response.response[0] : null);
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
