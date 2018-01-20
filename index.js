@@ -141,14 +141,14 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             resolve: {
                 user: function($http) {
                     if (item.ishomepage) {
-                        $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
+                        return $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
                             .then(function(response) {
                                 if (response.data) {
                                     sessionStorage.setItem('token', response.data.token);
                                 }
                             });
                     } else {
-                        return false;
+                        return true;
                     }
                 }
             }
