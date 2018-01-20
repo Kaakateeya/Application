@@ -137,6 +137,20 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
             data: {
                 requiresLogin: item.isloginrequired == null ? true : item.isloginrequired,
                 //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
+            },
+            resolve: {
+                user: function($http) {
+                    if (item.ishomepage) {
+                        $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
+                            .then(function(response) {
+                                if (response.data) {
+                                    sessionStorage.setItem('token', response.data.token);
+                                }
+                            });
+                    } else {
+                        return false;
+                    }
+                }
             }
         });
         $locationProvider.html5Mode(true);

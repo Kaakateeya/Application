@@ -12,12 +12,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
             //http://183.82.0.58:3000/getTempToken
 
-            $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
-                .then(function(response) {
-                    if (response.data) {
-                        sessionStorage.setItem('token', response.data.token);
-                    }
-                });
+
 
             timeout(function() {
                 // successstoriesdata.suceessdataget(1, 5).then(function(response) {
