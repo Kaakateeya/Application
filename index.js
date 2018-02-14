@@ -15,15 +15,15 @@ var app = angular.module('Kaakateeya', ['reCAPTCHA', 'ui.router', 'ngAnimate', '
 
 // 'angular-loading-bar'
 
-//app.apiroot = 'http://52.66.131.254:8010/Api/';
-// //app.apiroot183 = 'http://52.66.131.254:8025/Api/';
+// app.apiroot = 'http://52.66.131.254:8010/Api/';
+// app.apiroot183 = 'http://52.66.131.254:8025/Api/';
 
 app.apiroot183 = 'http://183.82.0.58:8025/Api/';
 
-// app.apiroot = 'http://183.82.0.58:8010/Api/';
+app.apiroot = 'http://183.82.0.58:8070/Api/';
 //app.apiroot = 'http://183.82.0.58:8070/Api/';
 
-app.apiroot = 'http://183.82.0.58:3000/Api/';
+// app.apiroot = 'http://183.82.0.58:3000/Api/';
 
 app.global = {
     'alertType': 'toast-top-right'
@@ -85,6 +85,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'uploadPhoto', url: '/uploadPhoto/:custid', templateUrl: 'app/modules/static/uploadPhoto.html', controller: "uploadPhotoCtrl", isloginrequired: false },
         { name: 'uploadPhotoencrypt', url: '/uploadPhotoencrypt/:custid', templateUrl: 'app/modules/static/uploadPhotoencrypt.html', controller: "uploadPhotoencryptCtrl", isloginrequired: false },
         { name: 'horoDisplay', url: '/horoDisplay', templateUrl: 'app/modules/static/horoDisplay.html', controller: "horoDisplaysCtrl", isloginrequired: false },
+        { name: 'nologin', url: '/nologin/:eid', templateUrl: 'app/modules/nologin/nologin.html', controller: "nologinCtrl", isloginrequired: false },
+        { name: 'allmissingfields', url: '/allmissingfields/:eid', templateUrl: 'app/modules/allmissingfilelds/allmissingfields.html', controller: "allmissingfieldsCtrl", isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');
@@ -100,7 +102,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
 
     _.each(states, function(item) {
         var innerView = {};
-        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt" || item.name === "horoDisplay") {
+        if (item.name === "viewFull" || item.name === "commonviewfull" || item.name === "loggedAscustomer" || item.name === "viewMyProfileMail" || item.name === "uploadPhoto" || item.name === "uploadPhotoencrypt" || item.name === "horoDisplay" ||
+            item.name === "allmissingfields") {
             innerView = {
                 "content@": {
                     templateUrl: item.templateUrl,
@@ -139,18 +142,18 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
                 //css: item.ishomepage == true ? 'dist/css/homePage.min.css' : 'dist/css/homePage.min.css'
             },
             resolve: {
-                user: function($http) {
-                    if (item.ishomepage) {
-                        return $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
-                            .then(function(response) {
-                                if (response.data) {
-                                    sessionStorage.setItem('token', response.data.token);
-                                }
-                            });
-                    } else {
-                        return true;
-                    }
-                }
+                // user: function($http) {
+                //     if (item.ishomepage) {
+                //         return $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
+                //             .then(function(response) {
+                //                 if (response.data) {
+                //                     sessionStorage.setItem('token', response.data.token);
+                //                 }
+                //             });
+                //     } else {
+                //         return true;
+                //     }
+                // }
             }
         });
         $locationProvider.html5Mode(true);
@@ -164,6 +167,10 @@ app.config(function(reCAPTCHAProvider) {
         theme: 'clean'
     });
 });
+// app.config(['$httpProvider', function($httpProvider) {
+//     $httpProvider.defaults.useXDomain = true;
+//     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+// }]);
 app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$on('$stateChangeStart', function(e, to) {
         window.prerenderReady = false;

@@ -1,0 +1,179 @@
+<div class="container-fluid p-backcolor">
+    <div class="p-container p-backcolor1">
+        <img src="src/images/logo.png" class="">
+        <a class="p-btn" href="kaakateeya.com">Skip &gt;&gt;</a>
+    </div>
+
+    <div class="p-container p-margin1">
+        <h4 class="p-heading">Thanks for Registering. Now let's build Kumar's Profile.</h4>
+        <div class="col-md-6 p-align">
+            <p class="p-subheading"><span class="p-imp">*</span>Mandatory</p>
+        </div>
+        <form class="form-inline" name="misForm" novalidate role="form" ng-submit="misFieldsSubmit(misObj);">
+            <div class="row p-height" ng-if="!divHeight || !divMaritalstatus || !divComplexion">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 p-text">Candidate Basic Data</div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="col-md-6 p-align p-padding1">
+                <div class="col-md-12  p-margin p-padding" ng-hide="divHeight">
+                    <label class="p-label">Height<span class="p-imp">*</span></label>
+                    <select multiselectdropdown name="ddlheight" ng-model="misObj.ddlFromheight" typeofdata="'height'" ng-required="divHeight==true?false:true">
+                    </select>
+                    <div ng-messages="misForm.ddlheight.$invalid" class="pull-left">
+                        <div style="color: red;font-size: 12px;" ng-if="misForm.ddlheight.$invalid && (misForm.$submitted)">This is required.</div>
+                    </div>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divMaritalstatus">
+                    <label class="p-label">Marital Status<span class="p-imp">*</span></label>
+                    <select multiselectdropdown name="ddlmaritalstatus" ng-model="misObj.lstMaritalstatus" typeofdata="'MaritalStatus'" ng-required="divMaritalstatus==true?false:true">
+                    </select>
+                    <div ng-messages="misForm.ddlmaritalstatus.$invalid" class="pull-left">
+                        <div style="color: red;font-size: 12px;" ng-if="misForm.ddlmaritalstatus.$invalid && (misForm.$submitted)">This is required.</div>
+                    </div>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divComplexion">
+                    <label class="p-label">Complexion<span class="p-imp">*</span></label>
+                    <select name="ddlcomplexion" multiselectdropdown ng-model="misObj.lstComplexion" typeofdata="'Complexion'" ng-required="divComplexion==true?false:true"></select>
+                    <div ng-messages="misForm.ddlcomplexion.$invalid" class="pull-left">
+                        <div style="color: red;font-size: 12px;" ng-if="misForm.ddlcomplexion.$invalid && (misForm.$submitted)">This is required.</div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+
+            </div>
+
+            <div class="row p-height" ng-if="!divProfession || !divSalary">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 p-text">Candidate Location Details</div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="col-md-6 p-align p-padding1">
+                <div class="col-md-12  p-margin p-padding" ng-hide="divProfession">
+                    <label class="p-label">JobLoc Country</label>
+                    <select multiselectdropdown ng-model="misObj.lstJoblocCountry" typeofdata="'Country'" ng-change="changeBind('Country',misObj.lstJoblocCountry);"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divProfession">
+                    <label class="p-label">JobLoc State</label>
+                    <select multiselectdropdown ng-model="misObj.lstjoblocstate" ng-options="item.value as item.label for item in stateArr" ng-change="changeBind('State',misObj.lstjoblocstate,misObj.lstJoblocCountry);"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divProfession">
+                    <label class="p-label">JobLoc District</label>
+                    <select multiselectdropdown ng-model="misObj.lstjoblocdistrict" ng-options="item.value as item.label for item in districtArr" ng-change="changeBind('District',misObj.lstjoblocdistrict);"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divProfession">
+                    <label class="p-label">Job Location</label>
+                    <select multiselectdropdown ng-model="misObj.lstjoblocation" ng-options="item.value as item.label for item in cityeArr"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divSalary">
+                    <label class="p-label">Salary</label>
+                    <div class="salaryy">
+                        <select multiselectdropdown style="float:left;" ng-model="misObj.ddlAnnualincome" typeofdata="'currency'"></select>
+                        <input type="text" onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" class="form-control" style="height:35px !important;width:130px;" ng-model="misObj.txtSalary" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                            MaxLength="7" />
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+
+            </div>
+
+            <div class="row p-height" ng-if="!divProperty || !divIssharedproperty">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 p-text">Property Details</div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="col-md-6 p-align p-padding1">
+                <div class="col-md-12  p-margin p-padding" ng-hide="divIssharedproperty">
+                    <label class="p-label">Shared Property</label>
+
+                    <md-radio-group style="margin-top:10px;" layout="row" ng-model="misObj.rdlSharedProperty" class="radio-inline p-label1 md-block" flex-gt-sm ng-disabled="manageakerts" ng-change="setPhotoPassword(rbtProtectPassword);">
+                        <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                        <md-radio-button value="0"> No </md-radio-button>
+                    </md-radio-group>
+
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divProperty">
+                    <label class="p-label">Property Lakhs</label>
+                    <input type="text" class="form-control p-input" style="height:35px !important;" ng-model="misObj.txtProperty" onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" maxlength="5" />
+                </div>
+
+                <div style="clear: both;"></div>
+
+            </div>
+
+            <div class="row p-height" ng-if="!divStarlanguage || !divStar || !divGothram">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 p-text">Missing Astro Details</div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="col-md-6 p-align p-padding1">
+                <div class="col-md-12  p-margin p-padding" ng-hide="divStarlanguage">
+                    <label class="p-label">Star Language</label>
+                    <select multiselectdropdown ng-model="misObj.ddlstarlanguages" typeofdata="'starLanguage'" ng-change="changeBind('star',misObj.ddlstarlanguages);"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divStar">
+                    <label class="p-label">Star</label>
+                    <select multiselectdropdown ng-model="misObj.lststar" ng-options="item.value as item.label for item in starArr"></select>
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divGothram">
+                    <label class="p-label">Gothram / Gotra</label>
+                    <input type="text" class="form-control p-input" style="height:35px !important;" ng-model="misObj.txtgothram" />
+                </div>
+
+                <div style="clear: both;"></div>
+
+            </div>
+
+            <div class="row p-height" ng-if="!divFatherNative || !divMotherNative">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 p-text">Parents Native Details</div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="col-md-6 p-align p-padding1">
+                <div class="col-md-12  p-margin p-padding" ng-hide="divFatherNative">
+                    <label class="p-label">Father Native<span class="p-imp">*</span></label>
+                    <input type="text" class="form-control p-input" style="height:35px !important;" ng-model="misObj.txtfathernative" />
+                </div>
+
+                <div class="col-md-12  p-margin p-padding" ng-hide="divMotherNative">
+                    <label class="p-label">Mother Native<span class="p-imp">*</span></label>
+                    <input type="text" class="form-control p-input" style="height:35px !important;" ng-model="misObj.txtMothernative" />
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="clearfix"></div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-9">
+                    <input type="submit" value="Submit" class="button_custom  pull-right">
+                </div>
+                <div class="col-lg-3">
+                    <input value="Skip this page" ng-hide="divSkip" ng-click="redirectToMobVerification();" class="button_custom button_custom_reset  pull-left" type="button">
+                </div>
+            </div>
+        </form>
+
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="p-container p-margin1 p-footer">
+        <p class="p-footertext1">Copyright © 2017 Matrimony. All Rights Reserved</p>
+    </div>
+
+</div>

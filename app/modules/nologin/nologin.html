@@ -1,0 +1,117 @@
+<div class="wrapper">
+    <div class="row">
+        <br>
+        <center>
+            <div id="rndcorner" style="width:450px;border-top-left-radius:10px;border-top-right-radius:10px; border:1px solid #d9d9d9; display:block;">
+                <div style="padding:15px 25px;border-top-left-radius:10px;border-top-right-radius:10px;color:rgb(189, 92, 21);font-size:16px;" class="jumbotron title">
+                    <label>Create New Password</label></div>
+                <div style="width:400px;">
+                    <div class="row"><label style="color:#2c2828">you can either use your primary email id or profile id as userid</label></div>
+
+                    <div class="form-horizontal">
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <label class="labelclass" style="color:#323232;" id="">Primary Email</label></div>
+                                <div class="col-lg-4"><label ID="txtlogin" style="color:#323232;font-weight: normal;">{{Email}}</label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <label class="labelclass" style="color:#323232;" id="Label1">Profile Id</label></div>
+                                <div class="col-lg-3"><label ID="lblprofileid" Enabled="false" style="color:#323232;font-weight: normal;">{{profileID}}</label></div>
+                            </div>
+                        </div>
+
+                        <div layout="column" ng-cloak="" class="inputdemoErrors">
+                            <md-content layout-padding="">
+                                <form name="pwdForm" novalidate role="form">
+                                    <md-input-container class="md-block" style="text-align: left;">
+                                        <label>Password</label>
+                                        <input type="password" maxlength="50" required="" md-asterisk="" name="txtPassword" ng-model="pwd.txtPassword">
+                                        <div ng-messages="pwdForm.txtPassword.$error">
+                                            <div ng-message="required">This is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" style="text-align: left;">
+                                        <label>Confirm Password</label>
+                                        <input type="password" maxlength="50" required="" md-asterisk="" name="txtnewPassword" ng-model="pwd.txtnewPassword" match-password="txtPassword">
+                                        <div ng-messages="pwdForm.txtnewPassword.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="passwordMatch" class="message slide-left">Your Password did not match</div>
+                                        </div>
+                                    </md-input-container>
+
+                                </form>
+                            </md-content>
+                        </div>
+                        <div class="row">
+                            <md-button class="md-raised md-warn md-hue-2" ng-click="pwdForm.$valid && CerateNewPwdSubmit(pwd);">login to your account</md-button>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <br />
+        </center>
+    </div>
+</div>
+<style>
+    .btn-group {
+        width: 98%;
+        text-align: left;
+    }
+    
+    .multiselect {
+        border: solid 1px #ADA2A2 !important;
+        color: #000;
+        background: #fff !important;
+        box-shadow: none !important;
+        height: 34px !important;
+        line-height: 33px;
+        margin: 0 !important;
+    }
+    
+    .register_page_main input[type="email"] {
+        box-shadow: none;
+        border-radius: 3px !important;
+        height: 35px;
+        width: 98%;
+        line-height: 28px;
+        padding: 4px 2%;
+        margin: 0;
+    }
+    
+    .input-group {
+        width: 98%;
+        text-align: left;
+    }
+    
+    input[type="email"],
+    input[type="password"] {
+        border: 0 !important;
+        border-bottom: 1px solid red !important;
+        outline: 0 !important;
+        border-style: solid !important;
+        border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+    
+    md-input-container.md-input-invalid .md-input {
+        border-color: rgb(221, 44, 0) !important;
+    }
+    
+    .md-datepicker-input {
+        font-size: 14px;
+        box-sizing: border-box;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        background: transparent;
+        min-width: 299px;
+        max-width: 328px;
+        padding: 0 0 5px;
+    }
+</style>

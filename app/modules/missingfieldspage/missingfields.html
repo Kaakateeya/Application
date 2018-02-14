@@ -319,7 +319,8 @@
                             <label for="lblsal" class="pop_label_left">Monthly salary</label>
                             <div class="pop_controls_right select-box-my select-box-my-double">
                                 <select multiselectdropdown ng-model="profObj.ddlcurreny" typeofdata='currency'></select>
-                                <input onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" ng-model="profObj.txtsalary" style="float:right" class="form-control" onchange="currency();" maxlength="7" tabindex="6" />
+                                <input onkeyup="this.value=this.value.replace(/[^\d\.\-]/g,'');" ng-model="profObj.txtsalary" style="float:right" class="form-control" onchange="currency();" maxlength="7" tabindex="6" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                                />
                             </div>
                         </li>
                         <country-directive countryshow="true" cityshow="true" othercity="true" dcountry="profObj.ddlCountryProf" dstate="profObj.ddlStateProf" ddistrict="profObj.ddlDistrictProf" dcity="profObj.ddlcityworkingprofession" strothercity="profObj.txtcityprofession"></country-directive>

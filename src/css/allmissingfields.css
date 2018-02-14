@@ -1,0 +1,160 @@
+.container-fluid {
+    width: 100%;
+}
+
+.p-backcolor {
+    background: #8385ab24;
+    padding-bottom: 15px;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.p-backcolor1 {
+    position: relative;
+    background: linear-gradient(#8385ab, #4d627d) !important;
+}
+
+.p-container {
+    width: 70%;
+    margin: 0px auto;
+    padding: 15px;
+}
+
+.p-btn {
+    position: absolute;
+    right: 4%;
+    top: 40px;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.p-margin1 {
+    margin-top: 15px;
+}
+
+.p-container {
+    width: 70%;
+    background: #fff;
+    margin: 0px auto;
+    padding: 15px;
+}
+
+.p-heading {
+    text-align: center;
+    color: #777;
+}
+
+.p-align {
+    margin: auto;
+    float: none;
+}
+
+.p-subheading {
+    font-size: 10px;
+    color: #f00;
+    border-bottom: 1px solid #ccc;
+    text-align: right;
+}
+
+.p-imp {
+    color: #f00;
+}
+
+.p-height {
+    background: #8385ab24;
+}
+
+.p-text {
+    padding: 10px 0px;
+    font-size: 15px;
+}
+
+.p-padding1 {
+    padding-bottom: 10px;
+}
+
+.p-footer {
+    background: #333;
+}
+
+.p-margin1 {
+    margin-top: 15px;
+}
+
+.p-input {
+    width: 66%!important;
+    float: left;
+    height: 35px!important;
+}
+
+.p-label {
+    width: 30%;
+    float: left;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 8px 0px;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    /* width: auto; */
+    vertical-align: middle;
+    border-radius: 3px !important;
+}
+
+.form-control {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    border-radius: 3px !important;
+}
+
+.p-footertext1 {
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    margin: 0px;
+}
+
+.p-margin {
+    margin-top: 10px;
+}
+
+.p-input1 {
+    width: 30%!important;
+    float: left;
+}
+
+.p-input2 {
+    width: 40% !important;
+    float: left;
+    height: 35px !important;
+}
+
+label.radio-inline.p-label1 {
+    margin-top: 10px;
+}
+
+.form-inline .btn-group {
+    width: 244px;
+}
+
+.salaryy .btn-group {
+    width: 100px !important;
+}
