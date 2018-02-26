@@ -5,6 +5,7 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
         scope.showhidetestbuttons = function() {
             var datatinfo = authSvc.user();
             if (helperservice.checkstringvalue(datatinfo.custid)) {
+                debugger;
                 scope.loginstatus = false;
                 scope.loginoutstatus = true;
                 scope.usernamepersonal = datatinfo.username;

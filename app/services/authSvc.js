@@ -19,6 +19,7 @@
 
  app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
      function setUser(value) {
+         debugger;
          setSession('cust.id', value.CustID);
          setSession('cust.username', (value.FirstName + ' ' + value.LastName));
          setSession('cust.profileid', (value.ProfileID));
@@ -27,6 +28,17 @@
          setSession('cust.GenderID', (value.GenderID));
          setSession('cust.isemailverified', (value.isemailverified));
          setSession('cust.isnumberverifed', (value.isnumberverifed));
+         ///
+     }
+
+     function setpersonaldata(value) {
+         setSession('Surname', value.Surname);
+         setSession('SelfCaste', value.SelfCaste);
+         setSession('selfmaritalstatusid', value.selfmaritalstatusid);
+         setSession('selfAge', value.selfAge);
+         setSession('selfheightID', value.selfheightID);
+         setSession('Gothramid', value.Gothramid);
+         setSession('GenderID', value.GenderID);
      }
 
      function getSession(key) {
@@ -54,6 +66,15 @@
          clearSession('cust.GenderID');
          clearSession('cust.isemailverified');
          clearSession('cust.isnumberverifed');
+
+         //
+         clearSession('Surname');
+         clearSession('SelfCaste');
+         clearSession('selfmaritalstatusid');
+         clearSession('selfAge');
+         clearSession('selfheightID');
+         clearSession('Gothramid');
+         clearSession('GenderID');
          sessionStorage.removeItem("LoginPhotoIsActive");
          sessionStorage.removeItem("homepageobject");
          sessionStorage.removeItem("httperrorpopupstatus");
@@ -76,12 +97,30 @@
              isnumberverifed: getSession('cust.isnumberverifed')
          };
      }
+
+     function getpersonaldata() {
+         return {
+             Surname: getSession('Surname'),
+             SelfCaste: getSession('SelfCaste'),
+             selfmaritalstatusid: getSession('selfmaritalstatusid'),
+             selfAge: getSession('selfAge'),
+             selfheightID: getSession('selfheightID'),
+             Gothramid: getSession('Gothramid'),
+             GenderID: getSession('GenderID')
+         };
+     }
      return {
          user: function(value) {
              if (value) {
                  setUser(value);
              }
              return getUser();
+         },
+         personaluser: function(value) {
+             if (value) {
+                 setpersonaldata(value);
+             }
+             return getpersonaldata();
          },
          isAuthenticated: function() {
              return !!getSession('cust.id');
@@ -131,7 +170,8 @@
              return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                  .then(function(response) {
                      if (response.status === 200 && response.data !== null && response.data !== undefined) {
-                         if (response.data === "Paid") {
+                         //if (response.data === "Paid") {
+                         if (response.data !== "Paid") {
                              return true;
                          } else {
                              alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);

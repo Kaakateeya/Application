@@ -127,6 +127,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                                 if (scope.counts === 1) {
                                     sessionStorage.removeItem("LoginPhotoIsActive");
                                     scope.PersonalInfo = (responseInfo.data);
+                                    authSvc.personaluser(scope.PersonalInfo);
                                     scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
                                     scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                                     sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -539,6 +540,8 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.bindcounts(response.data.DashBoardCounts);
             scope.bindallcounts = response.data.DashBoardCounts;
             scope.PersonalInfo = (response.data.PersonalInfo);
+            debugger;
+
             scope.photopersonal = scope.PersonalInfo.Photo;
             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -718,6 +721,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     if (scope.counts === 1) {
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         scope.PersonalInfo = (responseInfo.data);
+                        authSvc.personaluser(scope.PersonalInfo);
                         scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
                         scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                         sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);

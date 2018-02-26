@@ -136,6 +136,57 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             }
                         });
                 };
+                scope.shortlistexpressinterest = function(object) {
+                    alerts.dynamicpopupclose();
+                    scope.servicehttp('E', object);
+                };
+                scope.mismatchalerts = function(type, object) {
+                    var datatinfozz = authSvc.personaluser();
+                    scope.divmismatchDataarray = [];
+                    var strmismatch = '';
+                    debugger;
+                    if ((datatinfozz.GenderID === "2" && parseInt(scope.agealert) < parseInt(datatinfozz.selfAge)) || (datatinfozz.GenderID === "2" && parseInt(scope.agealert) > parseInt(datatinfozz.selfAge))) {
+                        strmismatch = "  Age not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if ((datatinfozz.GenderID === "2" && parseInt(scope.heightalert) < parseInt(datatinfozz.selfheightID)) || (datatinfozz.GenderID === "2" && parseInt(scope.heightalert) > parseInt(datatinfozz.selfheightID))) {
+                        strmismatch = "  Height not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (parseInt(scope.maritalstatusalert) != parseInt(datatinfozz.selfmaritalstatusid)) {
+                        strmismatch = "  MaritalStatus not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (parseInt(scope.casteidalert) != parseInt(datatinfozz.SelfCaste)) {
+                        strmismatch = "  Caste not Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (angular.lowercase(scope.LastNamealert) === angular.lowercase(datatinfozz.Surname)) {
+                        strmismatch = "  Surname is Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (angular.lowercase(scope.gothramalert) === angular.lowercase(datatinfozz.Gotram)) {
+                        strmismatch = "  Gothram is Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    ////
+                    if (scope.divmismatchDataarray.length > 0) {
+                        alerts.dynamicpopup("shortlistpopup.html", scope, uibModal);
+                    } else {
+                        scope.servicehttp(type, object);
+                    }
+
+                };
+
+                scope.serviceactionsexpressinterest = function(type, tocustid, typeofactionflag, profileid, data) {
+                    scope.agealert = data.Age;
+                    scope.LastNamealert = data.LastName;
+                    scope.maritalstatusalert = data.maritalstatusid;
+                    scope.gothramalert = data.gothramid;
+                    scope.heightalert = data.heightid;
+                    scope.casteidalert = data.castid;
+                    scope.serviceactions(type, tocustid, typeofactionflag, profileid);
+                };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
@@ -167,11 +218,14 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                                 break;
                             case "E":
+                                debugger;
                                 if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-
-                                        if (responsepaid === true)
-                                            scope.servicehttp(type, object);
+                                        if (responsepaid === true) {
+                                            scope.mismatchalerts(type, object);
+                                            debugger;
+                                            //scope.servicehttp(type, object);
+                                        }
                                     });
                                 } else {
                                     scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
