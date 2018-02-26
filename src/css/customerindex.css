@@ -272,8 +272,13 @@ label {
     width: 140px !important;
 }
 
-md-radio-button.md-default-theme .md-off,
+
+/* md-radio-button.md-default-theme .md-off,
 md-radio-button .md-off {
+    border-color: #fff !important;
+} */
+
+.mdradionborder .md-off {
     border-color: #fff !important;
 }
 
