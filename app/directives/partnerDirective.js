@@ -144,7 +144,6 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                     var datatinfozz = authSvc.personaluser();
                     scope.divmismatchDataarray = [];
                     var strmismatch = '';
-                    debugger;
                     if ((datatinfozz.GenderID === "2" && parseInt(scope.agealert) < parseInt(datatinfozz.selfAge)) || (datatinfozz.GenderID === "2" && parseInt(scope.agealert) > parseInt(datatinfozz.selfAge))) {
                         strmismatch = "  Age not Matched to this profileid" + ",";
                         scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
@@ -218,12 +217,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                                 }
                                 break;
                             case "E":
-                                debugger;
                                 if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
                                         if (responsepaid === true) {
                                             scope.mismatchalerts(type, object);
-                                            debugger;
                                             //scope.servicehttp(type, object);
                                         }
                                     });

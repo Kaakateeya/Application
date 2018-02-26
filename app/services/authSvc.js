@@ -19,7 +19,6 @@
 
  app.factory('authSvc', ['$injector', 'Idle', 'alert', '$http', 'route', function($injector, Idle, alerts, $http, route) {
      function setUser(value) {
-         debugger;
          setSession('cust.id', value.CustID);
          setSession('cust.username', (value.FirstName + ' ' + value.LastName));
          setSession('cust.profileid', (value.ProfileID));

@@ -1397,6 +1397,56 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             }
                         });
                 };
+                scope.shortlistexpressinterest = function(object) {
+                    alerts.dynamicpopupclose();
+                    scope.servicehttp('E', object);
+                };
+                scope.mismatchalerts = function(type, object) {
+                    var datatinfozz = authSvc.personaluser();
+                    scope.divmismatchDataarray = [];
+                    var strmismatch = '';
+                    if ((datatinfozz.GenderID === "2" && parseInt(scope.agealert) < parseInt(datatinfozz.selfAge)) || (datatinfozz.GenderID === "2" && parseInt(scope.agealert) > parseInt(datatinfozz.selfAge))) {
+                        strmismatch = "  Age not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if ((datatinfozz.GenderID === "2" && parseInt(scope.heightalert) < parseInt(datatinfozz.selfheightID)) || (datatinfozz.GenderID === "2" && parseInt(scope.heightalert) > parseInt(datatinfozz.selfheightID))) {
+                        strmismatch = "  Height not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (parseInt(scope.maritalstatusalert) != parseInt(datatinfozz.selfmaritalstatusid)) {
+                        strmismatch = "  MaritalStatus not Matched to this profileid" + ",";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (parseInt(scope.casteidalert) != parseInt(datatinfozz.SelfCaste)) {
+                        strmismatch = "  Caste not Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (angular.lowercase(scope.LastNamealert) === angular.lowercase(datatinfozz.Surname)) {
+                        strmismatch = "  Surname is Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    if (angular.lowercase(scope.gothramalert) === angular.lowercase(datatinfozz.Gotram)) {
+                        strmismatch = "  Gothram is Matched to this profileid";
+                        scope.divmismatchDataarray.push({ profileIDlocal: object, mismath: strmismatch });
+                    }
+                    ////
+                    if (scope.divmismatchDataarray.length > 0) {
+                        alerts.dynamicpopup("shortlistpopup.html", scope, uibModal);
+                    } else {
+                        scope.servicehttp(type, object);
+                    }
+
+                };
+
+                scope.serviceactionsexpressinterest = function(type, tocustid, typeofactionflag, profileid, data) {
+                    scope.agealert = data.Age;
+                    scope.LastNamealert = data.LastName;
+                    scope.maritalstatusalert = data.maritalstatusid;
+                    scope.gothramalert = data.gothramid;
+                    scope.heightalert = data.heightid;
+                    scope.casteidalert = data.castid;
+                    scope.serviceactions(type, tocustid, typeofactionflag, profileid);
+                };
                 scope.serviceactions = function(type, tocustid, typeofactionflag, profileid, form, logid, MessageHistoryId) {
                     if (logincustid !== undefined && logincustid !== null && logincustid !== "") {
                         var indexvalue = scope.indexvalues;
@@ -1430,9 +1480,10 @@ app.directive("partnerData", ["$injector", 'authSvc', 'successstoriesdata',
                             case "E":
                                 if (typeofactionflag !== true) {
                                     authSvc.paymentstaus(logincustid, scope).then(function(responsepaid) {
-
-                                        if (responsepaid === true)
-                                            scope.servicehttp(type, object);
+                                        if (responsepaid === true) {
+                                            scope.mismatchalerts(type, object);
+                                            //scope.servicehttp(type, object);
+                                        }
                                     });
                                 } else {
                                     scope.$emit('successfailer', "You have already ExpressInterest This ProfileID", "warning");
@@ -2257,6 +2308,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                                 if (scope.counts === 1) {
                                     sessionStorage.removeItem("LoginPhotoIsActive");
                                     scope.PersonalInfo = (responseInfo.data);
+                                    authSvc.personaluser(scope.PersonalInfo);
                                     scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
                                     scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                                     sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -2848,6 +2900,7 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
                     if (scope.counts === 1) {
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         scope.PersonalInfo = (responseInfo.data);
+                        authSvc.personaluser(scope.PersonalInfo);
                         scope.photopersonal = helperservice.checkarraylength(scope.PersonalInfo) && helperservice.checkstringvalue(scope.PersonalInfo.Photo) ? scope.PersonalInfo.Photo : "";
                         scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
                         sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
@@ -10127,6 +10180,17 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
          setSession('cust.GenderID', (value.GenderID));
          setSession('cust.isemailverified', (value.isemailverified));
          setSession('cust.isnumberverifed', (value.isnumberverifed));
+         ///
+     }
+
+     function setpersonaldata(value) {
+         setSession('Surname', value.Surname);
+         setSession('SelfCaste', value.SelfCaste);
+         setSession('selfmaritalstatusid', value.selfmaritalstatusid);
+         setSession('selfAge', value.selfAge);
+         setSession('selfheightID', value.selfheightID);
+         setSession('Gothramid', value.Gothramid);
+         setSession('GenderID', value.GenderID);
      }
 
      function getSession(key) {
@@ -10154,6 +10218,15 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
          clearSession('cust.GenderID');
          clearSession('cust.isemailverified');
          clearSession('cust.isnumberverifed');
+
+         //
+         clearSession('Surname');
+         clearSession('SelfCaste');
+         clearSession('selfmaritalstatusid');
+         clearSession('selfAge');
+         clearSession('selfheightID');
+         clearSession('Gothramid');
+         clearSession('GenderID');
          sessionStorage.removeItem("LoginPhotoIsActive");
          sessionStorage.removeItem("homepageobject");
          sessionStorage.removeItem("httperrorpopupstatus");
@@ -10176,12 +10249,30 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
              isnumberverifed: getSession('cust.isnumberverifed')
          };
      }
+
+     function getpersonaldata() {
+         return {
+             Surname: getSession('Surname'),
+             SelfCaste: getSession('SelfCaste'),
+             selfmaritalstatusid: getSession('selfmaritalstatusid'),
+             selfAge: getSession('selfAge'),
+             selfheightID: getSession('selfheightID'),
+             Gothramid: getSession('Gothramid'),
+             GenderID: getSession('GenderID')
+         };
+     }
      return {
          user: function(value) {
              if (value) {
                  setUser(value);
              }
              return getUser();
+         },
+         personaluser: function(value) {
+             if (value) {
+                 setpersonaldata(value);
+             }
+             return getpersonaldata();
          },
          isAuthenticated: function() {
              return !!getSession('cust.id');
@@ -10232,6 +10323,7 @@ app.controller("viewFullProfileCustomer", ['customerDashboardServices', '$scope'
                  .then(function(response) {
                      if (response.status === 200 && response.data !== null && response.data !== undefined) {
                          if (response.data === "Paid") {
+                             // if (response.data !== "Paid") {
                              return true;
                          } else {
                              alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);

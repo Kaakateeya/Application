@@ -540,8 +540,6 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
             scope.bindcounts(response.data.DashBoardCounts);
             scope.bindallcounts = response.data.DashBoardCounts;
             scope.PersonalInfo = (response.data.PersonalInfo);
-            debugger;
-
             scope.photopersonal = scope.PersonalInfo.Photo;
             scope.LoginPhotoIsActive = scope.PersonalInfo.IsActive;
             sessionStorage.setItem("LoginPhotoIsActive", scope.PersonalInfo.IsActive);
