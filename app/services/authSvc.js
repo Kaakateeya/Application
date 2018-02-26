@@ -170,8 +170,8 @@
              return $http.get(app.apiroot + 'Payment/getCustomerPaymentStatus', { params: { CustomerCustID: custid } })
                  .then(function(response) {
                      if (response.status === 200 && response.data !== null && response.data !== undefined) {
-                         //if (response.data === "Paid") {
-                         if (response.data !== "Paid") {
+                         if (response.data === "Paid") {
+                             // if (response.data !== "Paid") {
                              return true;
                          } else {
                              alerts.timeoutoldalerts(scope, 'alert-danger', 'upgrade', 3000);
