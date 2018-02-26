@@ -7,7 +7,6 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "Searchcountry", dependencyValue: "" } });
         },
         stateSelect: function(dependencyVal) {
-            debugger;
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal } });
         },
         districtSelect: function(dependencyVal1) {

@@ -1,0 +1,286 @@
+.select-box-my-trible>input {
+    height: auto !important;
+}
+
+.form-control {
+    height: auto !important;
+}
+
+h5,
+h6 {
+    margin: 0 !important;
+}
+
+.edit_page_item_head>h4 {
+    font-weight: 700;
+}
+
+.edit_page_item_head {
+    padding: 0px 18px;
+    background: #EFEFEF;
+}
+
+#toast-container {
+    position: fixed;
+    z-index: 999999;
+    pointer-events: none;
+    left: 50%;
+    margin-left: -150px;
+    top: 50%;
+}
+
+.input-group {
+    display: block;
+}
+
+.select-box-my-trible3>div {
+    width: 33% !important;
+}
+
+.form-control multiselect-search,
+.input-group .form-control:not(:first-child):not(:last-child) {
+    width: 100% !important;
+}
+
+.input-group-addon,
+.input-group-btn:last-child>.btn {
+    display: none;
+}
+
+.btn {
+    text-align: left;
+}
+
+date-picker>p>button {
+    height: 2%;
+}
+
+label {
+    cursor: initial;
+}
+
+.modal-footer {
+    height: 70px;
+}
+
+.multiselect-container>li>a label {
+    width: 95%;
+}
+
+.radio input {
+    display: none;
+}
+
+.reviewCls {
+    background-image: url(src/images/img_kaaka_Seal_b.png);
+    background-repeat: no-repeat;
+}
+
+.multiselect-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 95% !important;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.multiselect-container .input-group {
+    margin: 5px;
+}
+
+.multiselect-container>li {
+    margin: -4px 0 0 0 !important;
+    padding: 0 !important;
+}
+
+.multiselect-container>li.active,
+.multiselect-container>li:hover {
+    background: #d42e02 !important;
+}
+
+.multiselect-container>li>a {
+    display: block;
+    padding: 0 !important;
+    background: none !important;
+}
+
+.multiselect-container>li>a label {
+    padding: 8px 14px !important;
+    color: #717171 !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-weight: 400 !important;
+}
+
+.multiselect-container>li>a label.checkbox input[type="checkbox"] {
+    margin: 4px 10px 0 0 !important;
+    width: auto !important;
+}
+
+.multiselect-container>li:hover a label,
+.multiselect-container>li.active a label {
+    color: #fff !important;
+}
+
+.lblCastIDsdisplay {
+    display: inline-block;
+    padding: 8px 14px 0 0 !important;
+    color: #717171 !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+}
+
+.multiselect {
+    margin: 4px 0 0 0;
+    border-radius: 3px !important;
+    height: 34px;
+    background: none !important;
+    text-align: left;
+    box-shadow: none !important;
+    display: block;
+    width: 96% !important;
+    border: solid 1px #ccc !important;
+}
+
+.btn-group {
+    display: block;
+}
+
+.caret {
+    position: absolute;
+    right: 8px;
+    top: 44%;
+}
+
+.select-box-my-trible {}
+
+.select-box-my-trible .chzn-container {
+    width: 34% !important;
+    float: left;
+}
+
+.select-box-my-trible input {
+    width: 18%;
+    float: left;
+    box-shadow: none;
+    margin: 3px 0 0 4px;
+    font-size: 14px;
+    padding: 7px 8px;
+    font-weight: 700;
+    border-radius: 3px !important;
+}
+
+.select-box-my-trible input+span {
+    float: left;
+    font-size: 14px;
+    padding: 10px 0 0 4px;
+    font-weight: 700;
+}
+
+.select-box-my-trible input[type="text"] {
+    width: 32% !important;
+    margin: 0 0 0 1% !important;
+    display: inline-block;
+}
+
+.pop_content_my ul .select-box-my-double .btn-group {
+    float: left;
+    width: 48% !important;
+    margin: 0 1% 0 0 !important;
+}
+
+.pop_controls_right>input {
+    width: 96% !important;
+}
+
+.pop_content_my {
+    padding-top: 0%;
+}
+
+.form-group {
+    margin-bottom: 0%;
+}
+
+.maquicls {
+    color: white;
+    padding: 7px 7px 7px 7px;
+    margin-top: 5px;
+    font-family: "Helvetica Neue ", Helvetica, Arial, sans-serif;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    min-height: 60px;
+    height: 100%;
+}
+
+.marquee {
+    height: 115px;
+    overflow: hidden;
+}
+
+.linkdis {
+    pointer-events: none;
+    cursor: default;
+}
+
+.editAlertcls {
+    z-index: 9999999999999 !important;
+}
+
+.castepopupcls {
+    z-index: 9999999999 !important;
+}
+
+.modal {
+    position: fixed!important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999999!important;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+
+#homeage .dropdown-toggle {
+    background-color: white !important;
+    width: 70px !important;
+}
+
+#homeageto .dropdown-toggle {
+    background-color: white !important;
+    width: 70px !important;
+    margin-left: 9px !important;
+}
+
+#homereligion .dropdown-toggle {
+    background-color: white !important;
+    width: 140px !important;
+}
+
+#homecaste .dropdown-toggle {
+    background-color: white !important;
+    width: 140px !important;
+}
+
+#homelocation .dropdown-toggle {
+    background-color: white !important;
+    width: 140px !important;
+}
+
+md-radio-button.md-default-theme .md-off,
+md-radio-button .md-off {
+    border-color: #fff !important;
+}
+
+.btn .caret {
+    margin-top: 3px;
+}
+
+.radio input {
+    display: none;
+}

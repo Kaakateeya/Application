@@ -1,47 +1,6 @@
-<style type="text/css">
-    #homeage .dropdown-toggle {
-        background-color: white !important;
-        width: 70px !important;
-    }
-    
-    #homeageto .dropdown-toggle {
-        background-color: white !important;
-        width: 70px !important;
-        margin-left: 9px !important;
-    }
-    
-    #homereligion .dropdown-toggle {
-        background-color: white !important;
-        width: 140px !important;
-    }
-    
-    #homecaste .dropdown-toggle {
-        background-color: white !important;
-        width: 140px !important;
-    }
-    
-    #homelocation .dropdown-toggle {
-        background-color: white !important;
-        width: 140px !important;
-    }
-    
-    md-radio-button.md-default-theme .md-off,
-    md-radio-button .md-off {
-        border-color: #fff !important;
-    }
-    
-    .btn .caret {
-        margin-top: 3px;
-    }
-    
-    .radio input {
-        display: none;
-    }
-</style>
 <div id="homepageid" class="homepageid" ng-init="homeinit()" scroll>
     <span us-spinner="{radius:30, width:8, length: 16}" spinner-start-active="true"></span>
     <div class="wrapper">
-        <!--/ Header -->
         <div id="header" class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -135,8 +94,6 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <!-- Banner /-->
-        <!--/ Main Block 1 -->
         <div class="row-fluid main_block1">
             <div class="span12">
                 <div class="span6 main_block1_lt">
@@ -156,8 +113,6 @@
                 <div class="color_strip strip-color">&nbsp;</div>
             </div>
         </div>
-        <!-- Main Block 1 /-->
-        <!--/ Main Block 2 -->
         <div class="row-fluid main_block2">
             <div class="main_block2_in clearfix">
                 <div class="span12">
@@ -169,7 +124,6 @@
                             <tr>
                                 <td ng-repeat="s in successstoriesarray">
                                     <div class="success_item_index">
-                                        <!--<img id="dtListsuccess_ctl00_ImageButton1" alt="Kakateeya Matrimony" src="../../access/Images/SuccessStoryImages/19985_31975_SuccessImage/19985_31975_SuccessImage.jpg">-->
                                         <img alt="Kakateeya Matrimony" ng-src="{{s.PhotoPath}}">
                                         <a href="javascript:void(0)" class="overlay">
                                             <small>&nbsp;</small>
@@ -185,8 +139,6 @@
                 </div>
             </div>
         </div>
-        <!-- Main Block 2 /-->
-        <!--/ Main Block 3 -->
         <div class="container-fluid main_block3" style="display: none;">
             <div class="main_block3_in">
                 <h5>marriage is a <b>happy &amp; colorful celebration of life</b></h5>
@@ -195,8 +147,6 @@
                 <div class="color_strip strip-color">&nbsp;</div>
             </div>
         </div>
-        <!-- Main Block 3 /-->
     </div>
 
 </div>
-<script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscript"></script>

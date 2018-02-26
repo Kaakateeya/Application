@@ -2023,6 +2023,111 @@ app.directive('setClassWhenAtTop', function($window) {
     factory.$inject = ['$http', 'SelectBindServiceApp', '$timeout'];
 
 })(angular);
+app.controller('allmissingfieldsCtrl', ['$scope', 'dependencybind', '$mdDialog',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
+    function(scope, commonFactory,
+        $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
+        scope.MFSelectArray = [];
+        scope.misObj = {};
+        scope.custid = parseInt(stateParams.eid);
+        scope.showpopup = function() {
+            missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
+                scope.MFSelectArray = (JSON.parse(response.data)[0]);
+                scope.divSkip = true;
+                if (scope.MFSelectArray.Customerdetailsflag === 1) {
+                    scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
+                    scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
+                    scope.divComplexion = commonFactory.checkvals(scope.MFSelectArray.Complexion) ? true : false;
+                    if (scope.divHeight === true && scope.divMaritalstatus === true && scope.divComplexion === true) {
+                        scope.divSkip = false;
+                    }
+                }
+                if (scope.MFSelectArray.Professionflag === 1) {
+                    scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
+                    scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
+                }
+                if (scope.divProfession === true && scope.divSkip === false) {
+                    scope.divCol = 'none';
+                }
+                if (scope.MFSelectArray.AstroFlag === 1) {
+                    scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
+                    scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
+
+                    scope.starArr = scope.divStar === false ? commonFactory.starBind(1) : [];
+                    scope.divGothram = commonFactory.checkvals(scope.MFSelectArray.MeternalGothram) ? true : false;
+                }
+
+                if (scope.MFSelectArray.ParentsFatherFlag === 1) {
+                    scope.divFatherNative = commonFactory.checkvals(scope.MFSelectArray.FFNative) ? true : false;
+                }
+                if (scope.MFSelectArray.ParentsMotherFlag === 1) {
+                    scope.divMotherNative = commonFactory.checkvals(scope.MFSelectArray.MFNative) ? true : false;
+                }
+                scope.divProperty = commonFactory.checkvals(scope.MFSelectArray.Property) ? true : false;
+                scope.divIssharedproperty = commonFactory.checkvals(scope.MFSelectArray.IsSharedProperty) ? true : false;
+            });
+        };
+
+
+        scope.changeBind = function(type, parentval, countryVal) {
+            switch (type) {
+                case 'Country':
+                    scope.stateArr = commonFactory.StateBind(parentval);
+                    break;
+                case 'State':
+                    if (countryVal === '1' || countryVal === 1) {
+                        scope.districtArr = commonFactory.districtBind(parentval);
+                    } else {
+                        scope.districtArr = [];
+                        scope.cityeArr = commonFactory.districtBind(parentval);
+                    }
+                    break;
+                case 'District':
+                    scope.cityeArr = commonFactory.cityBind(parentval);
+                    break;
+                case 'star':
+                    scope.starArr = commonFactory.starBind(parentval);
+                    break;
+            }
+        };
+        scope.misFieldsSubmit = function(obj) {
+            var misInputobj = {
+                Starlanguage: obj.ddlstarlanguages,
+                i_updateflag: 1,
+                iJoblocationCountry: obj.lstJoblocCountry,
+                iJoblocationDistrict: obj.lstjoblocdistrict,
+                iJoblocationState: obj.lstjoblocstate,
+                iJobLocation: obj.lstjoblocation,
+                IsSharedProperty: obj.rdlSharedProperty,
+                AstroFlag: scope.MFSelectArray.AstroFlag,
+                ParentsFlag: (scope.MFSelectArray.ParentsFatherFlag || scope.MFSelectArray.ParentsMotherFlag) ? 1 : 0,
+                MFCustFamilyID: scope.MFSelectArray.MFCustFamilyID,
+                FFCustFamilyID: scope.MFSelectArray.FFCustFamilyID,
+                Gothram: obj.txtgothram,
+                MotherNative: obj.txtMothernative,
+                Salarycurrency: obj.ddlAnnualincome,
+                Salary: obj.txtSalary,
+                Complexion: obj.lstComplexion,
+                Star: obj.lststar,
+                FatherNative: obj.txtfathernative,
+                Propertylakhs: obj.txtProperty,
+                Maritalstatus: obj.lstMaritalstatus,
+                Height: obj.ddlFromheight,
+                CustID: scope.custid
+            };
+
+            missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
+                scope.redirectToMobVerification();
+
+            });
+        };
+        scope.redirectToMobVerification = function() {
+            route.go('home', {});
+        };
+        scope.showpopup();
+
+    }
+]);
 app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardServices', 'authSvc',
     'alert', '$window', '$location', 'successstoriesdata', '$rootScope', '$timeout', 'route',
     '$stateParams', 'commonFactory', 'helperservice',
@@ -3053,29 +3158,33 @@ app.controller('headctrl', ['$scope', 'authSvc', 'Idle', 'alert', '$uibModal', '
                         var custidlogin = authSvc.getCustId();
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
-                        missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            var missingStatus = null,
-                                custProfileStatus = null;
-                            var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
-                            if (datav !== null) {
-                                missingStatus = parseInt((datav[0].split(':'))[1]);
-                                custProfileStatus = parseInt((datav[1].split(':'))[1]);
-                            }
-                            if (custProfileStatus === 439) {
-                                sessionStorage.setItem('missingStatus', missingStatus);
-                                if (missingStatus === 0) {
-                                    if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        route.go('dashboard', { type: 'C' });
+                        if (response.response !== null && response.response !== "null") {
+                            missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
+                                var missingStatus = null,
+                                    custProfileStatus = null;
+                                var datav = (innerresponse.data !== undefined && innerresponse.data !== null && innerresponse.data !== '') ? (innerresponse.data).split(';') : null;
+                                if (datav !== null) {
+                                    missingStatus = parseInt((datav[0].split(':'))[1]);
+                                    custProfileStatus = parseInt((datav[1].split(':'))[1]);
+                                }
+                                if (custProfileStatus === 439) {
+                                    sessionStorage.setItem('missingStatus', missingStatus);
+                                    if (missingStatus === 0) {
+                                        if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
+                                            route.go('dashboard', { type: 'C' });
+                                        } else {
+                                            route.go('mobileverf', {});
+                                        }
                                     } else {
-                                        route.go('mobileverf', {});
+                                        route.go('missingfields', { id: missingStatus });
                                     }
                                 } else {
-                                    route.go('missingfields', { id: missingStatus });
+                                    route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                                 }
-                            } else {
-                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
-                            }
-                        });
+                            });
+                        } else {
+                            alert("Please enter valid ProfileID/Email");
+                        }
                         scope.loginpopup = false;
                         scope.showhidetestbuttons();
                     });
@@ -3248,12 +3357,7 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
 
             //http://183.82.0.58:3000/getTempToken
 
-            $http.post('/test', JSON.stringify({ source: 'Kaakateeya' }))
-                .then(function(response) {
-                    if (response.data) {
-                        sessionStorage.setItem('token', response.data.token);
-                    }
-                });
+
 
             timeout(function() {
                 // successstoriesdata.suceessdataget(1, 5).then(function(response) {
@@ -3315,31 +3419,34 @@ app.controller('home', ['$scope', 'homepageservices', 'authSvc', 'successstories
                         authSvc.user(response.response !== null && response.response !== "null" ? response.response[0] : null);
                         sessionStorage.removeItem("LoginPhotoIsActive");
                         var responsemiss = response;
-                        missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
-                            var missingStatus = null,
-                                custProfileStatus = null;
-                            var datav = (helperservice.checkstringvalue(innerresponse.data)) ? (innerresponse.data).split(';') : null;
-                            if (datav !== null) {
-                                missingStatus = parseInt((datav[0].split(':'))[1]);
-                                custProfileStatus = parseInt((datav[1].split(':'))[1]);
-                            }
-                            if (custProfileStatus === 439) {
-                                sessionStorage.setItem('missingStatus', missingStatus);
-                                if (missingStatus === 0) {
-                                    if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
-                                        route.go('dashboard', { type: 'C' });
+                        if (response.response !== null && response.response !== "null") {
+                            missingFieldService.GetCustStatus(responsemiss.response[0].CustID).then(function(innerresponse) {
+                                var missingStatus = null,
+                                    custProfileStatus = null;
+                                var datav = (helperservice.checkstringvalue(innerresponse.data)) ? (innerresponse.data).split(';') : null;
+                                if (datav !== null) {
+                                    missingStatus = parseInt((datav[0].split(':'))[1]);
+                                    custProfileStatus = parseInt((datav[1].split(':'))[1]);
+                                }
+                                if (custProfileStatus === 439) {
+                                    sessionStorage.setItem('missingStatus', missingStatus);
+                                    if (missingStatus === 0) {
+                                        if (responsemiss.response[0].isemailverified === true && responsemiss.response[0].isnumberverifed === true) {
+                                            route.go('dashboard', { type: 'C' });
+                                        } else {
+                                            route.go('mobileverf', {});
+                                        }
                                     } else {
-                                        route.go('mobileverf', {});
+                                        route.go('missingfields', { id: missingStatus });
                                     }
                                 } else {
-                                    route.go('missingfields', { id: missingStatus });
+                                    route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
                                 }
-                            } else {
-                                route.go('blockerController', { eid: responsemiss.response[0].VerificationCode });
-                            }
 
-                        });
-
+                            });
+                        } else {
+                            alert("Please enter valid ProfileID/Email");
+                        }
                     });
                 }
             }
@@ -6180,6 +6287,36 @@ app.controller('newhomepagecastecontroller', ['$scope', 'homepageservices', 'aut
         };
     }
 ]);
+app.controller('nologinCtrl', ['$scope', 'nologinPwd', '$stateParams', 'authSvc', 'route', function(scope, nologinNewPwd, stateParams, authSvc, route) {
+    scope.custID = '0';
+    scope.Email = '';
+    scope.profileID = '';
+    nologinNewPwd.getEmailAndProfileID(stateParams.eid).then(function(res) {
+        var custData = (res.data).split(';');
+        console.log(custData);
+        scope.Email = custData[0];
+        scope.profileID = custData[1];
+        scope.custID = custData[2];
+    });
+    scope.CerateNewPwdSubmit = function(obj) {
+        nologinNewPwd.createNewPwdSub(scope.custID, obj.txtPassword).then(function(res) {
+            console.log(res);
+            authSvc.login(scope.profileID, obj.txtPassword).then(function(response) {
+                authSvc.user(response.response !== null ? response.response[0] : null);
+                sessionStorage.removeItem("LoginPhotoIsActive");
+                if (response.response[0].isemailverified === true && response.response[0].isnumberverifed === true) {
+
+                    route.go('dashboard', { type: 'C' });
+
+                } else {
+
+                    route.go('mobileverf', {});
+                }
+
+            });
+        });
+    };
+}]);
   app.controller('myCtrl', function($scope, $http) {
 
       $scope.myFunc = function() {
@@ -10176,8 +10313,9 @@ app.factory('customerDashboardServices', ['$http', function(http) {
                 $rootScope.loading = true;
                 // }
                 config.headers = config.headers || {};
-                config.headers['Content-Type'] = 'application/json';
-                config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
+                ///tokennnnnnnnnnnnn
+                // config.headers['Content-Type'] = 'application/json';
+                // config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
                 return config;
 
             },
@@ -10341,6 +10479,18 @@ app.factory('angularselects', ["SelectBindserviceApp", "arrayConstants", functio
         }
     };
 }]);
+app.factory('nologinPwd', ['$http', function(http) {
+    return {
+        createNewPwdSub: function(custID, newpwd) {
+            return http.get(app.apiroot + 'StaticPages/getCreateNewPassword', { params: { intCusID: custID, strPassword: newpwd } });
+        },
+        getEmailAndProfileID: function(obj) {
+            console.log(JSON.stringify({ VerificationCode: obj, i_EmilMobileVerification: 1, CustContactNumbersID: '' }));
+            return http.get(app.apiroot + 'StaticPages/getEmilVerificationCode', { params: { VerificationCode: obj, i_EmilMobileVerification: 1, CustContactNumbersID: '' } });
+
+        }
+    };
+}]);
 app.factory('ourBranchService', ["$http", function(http) {
     return {
         BranchSelect: function(regionID, BranchId) {
@@ -10428,7 +10578,6 @@ app.factory('SelectBindServiceApp', ["$http", function(http) {
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "Searchcountry", dependencyValue: "" } });
         },
         stateSelect: function(dependencyVal) {
-
             return http.get(app.apiroot + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal } });
         },
         districtSelect: function(dependencyVal1) {

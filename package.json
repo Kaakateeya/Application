@@ -85,11 +85,12 @@
             "node_modules/registration/dist/js/main.min.js",
             "bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js",
             "node_modules/angularjs-slider/dist/rzslider.min.js",
-            "//rawgithub.com/tobia/Pause/master/jquery.pause.js",
+            "src/js/jquerypause",
             "bower_components/angular-promise-buttons/dist/angular-promise-buttons.min.js",
             "src/js/spin.min.js",
             "src/js/angular-loading-spinner.js",
             "src/js/angular-spinner.min.js",
+            "src/js/mustache.min.js",
             "node_modules/angular-tooltips/dist/angular-tooltips.min.js"
         ],
         "css": [

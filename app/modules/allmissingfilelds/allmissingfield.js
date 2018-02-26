@@ -10,7 +10,6 @@ app.controller('allmissingfieldsCtrl', ['$scope', 'dependencybind', '$mdDialog',
                 scope.MFSelectArray = (JSON.parse(response.data)[0]);
                 scope.divSkip = true;
                 if (scope.MFSelectArray.Customerdetailsflag === 1) {
-                    debugger;
                     scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
                     scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
                     scope.divComplexion = commonFactory.checkvals(scope.MFSelectArray.Complexion) ? true : false;
