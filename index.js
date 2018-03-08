@@ -86,7 +86,8 @@ app.config(['$stateProvider', '$urlRouterProvider', 'IdleProvider', 'KeepalivePr
         { name: 'uploadPhotoencrypt', url: '/uploadPhotoencrypt/:custid', templateUrl: 'app/modules/static/uploadPhotoencrypt.html', controller: "uploadPhotoencryptCtrl", isloginrequired: false },
         { name: 'horoDisplay', url: '/horoDisplay', templateUrl: 'app/modules/static/horoDisplay.html', controller: "horoDisplaysCtrl", isloginrequired: false },
         { name: 'nologin', url: '/nologin/:eid', templateUrl: 'app/modules/nologin/nologin.html', controller: "nologinCtrl", isloginrequired: false },
-        { name: 'allmissingfields', url: '/allmissingfields/:eid', templateUrl: 'app/modules/allmissingfilelds/allmissingfields.html', controller: "allmissingfieldsCtrl", isloginrequired: false }
+        { name: 'allmissingfields', url: '/allmissingfields/:eid', templateUrl: 'app/modules/allmissingfilelds/allmissingfields.html', controller: "allmissingfieldsCtrl", isloginrequired: false },
+        { name: 'allmissingfileldencrypt', url: '/allmissingfileldencrypt/:eid', templateUrl: 'app/modules/allmissingfilelds/allmissingfileldencrypt.html', controller: "allmissingfileldencryptCtrl", isloginrequired: false }
     ];
 
     $urlRouterProvider.otherwise('/');

@@ -1,47 +1,55 @@
 app.controller('allmissingfieldsCtrl', ['$scope', 'dependencybind', '$mdDialog',
-    'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route',
+    'missingFieldService', '$timeout', '$stateParams', '$uibModal', 'route', 'uploadService',
     function(scope, commonFactory,
-        $mdDialog, missingFieldService, timeout, stateParams, uibModal, route) {
+        $mdDialog, missingFieldService, timeout, stateParams, uibModal, route, uploadService) {
         scope.MFSelectArray = [];
         scope.misObj = {};
-        scope.custid = parseInt(stateParams.eid);
+        scope.custid = (stateParams.eid);
         scope.showpopup = function() {
-            missingFieldService.missingFieldSelect(scope.custid).then(function(response) {
-                scope.MFSelectArray = (JSON.parse(response.data)[0]);
-                scope.divSkip = true;
-                if (scope.MFSelectArray.Customerdetailsflag === 1) {
-                    scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
-                    scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
-                    scope.divComplexion = commonFactory.checkvals(scope.MFSelectArray.Complexion) ? true : false;
-                    if (scope.divHeight === true && scope.divMaritalstatus === true && scope.divComplexion === true) {
-                        scope.divSkip = false;
+            uploadService.getdecrypt(scope.custid).then(function(res) {
+                scope.missingcustid = res.data;
+                missingFieldService.missingFieldSelect(res.data).then(function(response) {
+                    scope.MFSelectArray = (JSON.parse(response.data)[0]);
+                    scope.divSkip = true;
+                    if (scope.MFSelectArray.Customerdetailsflag === 1) {
+                        scope.divHeight = commonFactory.checkvals(scope.MFSelectArray.Height) ? true : false;
+                        scope.divMaritalstatus = commonFactory.checkvals(scope.MFSelectArray.MaritalStatus) ? true : false;
+                        scope.divComplexion = commonFactory.checkvals(scope.MFSelectArray.Complexion) ? true : false;
+                        if (scope.divHeight === true && scope.divMaritalstatus === true && scope.divComplexion === true) {
+                            scope.divSkip = false;
+                        }
                     }
-                }
-                if (scope.MFSelectArray.Professionflag === 1) {
-                    scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
-                    scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
-                }
-                if (scope.divProfession === true && scope.divSkip === false) {
-                    scope.divCol = 'none';
-                }
-                if (scope.MFSelectArray.AstroFlag === 1) {
-                    scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
-                    scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
+                    if (scope.MFSelectArray.Professionflag === 1) {
+                        scope.divProfession = commonFactory.checkvals(scope.MFSelectArray.JoblocationCountryID) ? true : false;
+                        scope.divSalary = commonFactory.checkvals(scope.MFSelectArray.Salary) ? true : false;
+                    }
+                    if (scope.divProfession === true && scope.divSkip === false) {
+                        scope.divCol = 'none';
+                    }
+                    if (scope.MFSelectArray.AstroFlag === 1) {
+                        scope.divStarlanguage = commonFactory.checkvals(scope.MFSelectArray.TypeofStar) ? true : false;
+                        scope.divStar = commonFactory.checkvals(scope.MFSelectArray.StarName) ? true : false;
 
-                    scope.starArr = scope.divStar === false ? commonFactory.starBind(1) : [];
-                    scope.divGothram = commonFactory.checkvals(scope.MFSelectArray.MeternalGothram) ? true : false;
-                }
+                        scope.starArr = scope.divStar === false ? commonFactory.starBind(1) : [];
+                        scope.divGothram = commonFactory.checkvals(scope.MFSelectArray.MeternalGothram) ? true : false;
+                    }
 
-                if (scope.MFSelectArray.ParentsFatherFlag === 1) {
-                    scope.divFatherNative = commonFactory.checkvals(scope.MFSelectArray.FFNative) ? true : false;
-                }
-                if (scope.MFSelectArray.ParentsMotherFlag === 1) {
-                    scope.divMotherNative = commonFactory.checkvals(scope.MFSelectArray.MFNative) ? true : false;
-                }
-                scope.divProperty = commonFactory.checkvals(scope.MFSelectArray.Property) ? true : false;
-                scope.divIssharedproperty = commonFactory.checkvals(scope.MFSelectArray.IsSharedProperty) ? true : false;
+                    if (scope.MFSelectArray.ParentsFatherFlag === 1) {
+                        scope.divFatherNative = commonFactory.checkvals(scope.MFSelectArray.FFNative) ? true : false;
+                    }
+                    if (scope.MFSelectArray.ParentsMotherFlag === 1) {
+                        scope.divMotherNative = commonFactory.checkvals(scope.MFSelectArray.MFNative) ? true : false;
+                    }
+                    scope.divProperty = commonFactory.checkvals(scope.MFSelectArray.Property) ? true : false;
+                    scope.divIssharedproperty = commonFactory.checkvals(scope.MFSelectArray.IsSharedProperty) ? true : false;
+                });
             });
+
+
+
+
         };
+
 
 
         scope.changeBind = function(type, parentval, countryVal) {
@@ -88,7 +96,7 @@ app.controller('allmissingfieldsCtrl', ['$scope', 'dependencybind', '$mdDialog',
                 Propertylakhs: obj.txtProperty,
                 Maritalstatus: obj.lstMaritalstatus,
                 Height: obj.ddlFromheight,
-                CustID: scope.custid
+                CustID: scope.missingcustid
             };
 
             missingFieldService.missingFieldSubmit(misInputobj).then(function(response) {
