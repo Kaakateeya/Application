@@ -902,7 +902,11 @@ app.controller('Controllerpartner', ['$uibModal', '$scope', 'customerDashboardSe
         scope.notifyViewProfile = function(ToCust_Id, logid, notifyID, type, index, versiontype) {
             if (ToCust_Id !== undefined && ToCust_Id !== null && ToCust_Id !== '') {
                 scope.readNotify(notifyID, type, index);
-                scope.redirectToviewfull(ToCust_Id);
+                sessionStorage.removeItem("localcustid");
+                sessionStorage.removeItem("locallogid");
+                sessionStorage.setItem("localcustid", ToCust_Id);
+                sessionStorage.setItem("locallogid", logid);
+                scope.redirectToviewfull(ToCust_Id, logid);
             }
         };
         scope.leftmenulinks = function(item) {

@@ -463,10 +463,10 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
                                         } else if (scope.fromproceedfromintereststatus === 'V' && scope.toproceedtointereststatus === 'I') {
                                             scope.TicketStatusID = "onsideinterest";
-                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
-                                                " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
-                                                "and please give your opinion in the options provided in the profile.";
-
+                                            // scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') +
+                                            //     " and " + oppositeshe + " is showing interest in your profile Please go through the profile and reply to us on the same.We are resending " + oppositeher + " profile for the ease of viewing " +
+                                            //     "and please give your opinion in the options provided in the profile.";
+                                            scope.txtAllcallDiscusion = "We are Resending the profile of " + oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") now for your Reference which was already sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + ". Please go through the details and contact your relationship manager for further information.";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
                                         } else if (scope.fromproceedfromintereststatus === 'I' && scope.toproceedtointereststatus === 'I') {
@@ -481,8 +481,9 @@ app.controller("commonviewfullprofile", ['customerDashboardServices', '$scope', 
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
                                         } else {
                                             scope.TicketStatusID = "NotViewed";
-                                            scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + " and " + oppositeshe + " is showing interest in your profile.Please go through the profile and reply to us on the same." +
-                                                "We are resending " + oppositeher + " profile for the ease of viewing and please give your opinion in the options provided in the profile";
+                                            // scope.txtAllcallDiscusion = oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") profile was sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + " and " + oppositeshe + " is showing interest in your profile.Please go through the profile and reply to us on the same." +
+                                            //     "We are resending " + oppositeher + " profile for the ease of viewing and please give your opinion in the options provided in the profile";
+                                            scope.txtAllcallDiscusion = "We are Resending the profile of " + oppositegender + scope.personalinfo[0].NAME + " (" + scope.ToProfileID + ") now for your Reference which was already sent to you on " + moment(response.data[0][0].servicedate).format('DD-MM-YYYY') + ". Please go through the details and contact your relationship manager for further information.";
                                             scope.Notes = scope.txtAllcallDiscusion + scope.emailmanagers;
                                             scope.proceedemails(scope.Notes, scope.TicketStatusID, response.data[0][0].FromTicketID);
 
