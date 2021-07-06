@@ -1,5 +1,5 @@
 # Application
-UI module for KaakateeyaApplication
+UI module for lication
 
 # Pre request's To run the Application
  1.install node.js from https://nodejs.org/en/

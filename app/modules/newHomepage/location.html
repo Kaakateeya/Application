@@ -1,0 +1,431 @@
+<div id="mg" ng-init="homeinit()">
+    <div class="row">
+        <div class="head">
+            <div class="col-md-3">
+                <div class="logohome"><img src="src/images/logo3.png">
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="dropdown">
+                    <button class="btn btn-primary" type="button" ng-click="divloginblock()">Login
+                   </button>
+                </div>
+            </div>
+            <div class="login_block_header" ng-style="loginpopup===true?{'display':'block'}:{'display':'none'}" id="divLogin">
+                <form name="myFormss">
+                    <input type="text" id="txtUserName" placeholder="ProfileID/EmailID" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="username" required/>
+                    <input type="password" id="txtPassword" placeholder="Password" ng-keyup="myFormss.$valid && $event.keyCode == 13 && loginsubmit()" style="height: 38px;" ng-model="password" required/>
+                    <span class="clear">&nbsp;</span>
+                    <div class="login_help">
+                        <a id="lnkForgotPassword" href="javascript:void(0);" ng-click="showforgetpasswordpopup()">Forgot Password</a>
+                        <a href="registration">New User Sign Up</a>
+                    </div>
+                    <input type="button" id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myFormss.$invalid" class="button_custom" value="Login" />
+                </form>
+                <span class="clear">&nbsp;</span>
+            </div>
+        </div>
+    </div>
+    <div class="image">
+        <div class="signup_card">
+            <div class="signup_card_top">
+                <span>Register Free</span>
+            </div>
+            <div class="formhome">
+                <form name="registrationform" novalidate role="form" ng-submit="registrationform.$valid  && regSubmit(Regi);">
+                    <ul>
+                        <li>
+                            <input ng-pattern="emailpattaren" ng-blur="valueExists('email',0,Regi.regemail);" required="" type="text" ng-model="Regi.regemail" class="fromtextbox" name="emailvalidation" placeholder="Email">
+                            <div ng-messages="registrationform.emailvalidation.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.emailvalidation.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li><input required="" type="password" ng-model="Regi.regpassword" class="fromtextbox" name="passwordvali" placeholder="Password">
+                            <div ng-messages="registrationform.passwordvali.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.passwordvali.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <select name="regpostedbyddl" required class="profile" style="color: grey;" ng-model="Regi.regpostedby" ng-options="post.value as post.label for post in postedby">   
+                           <option value="" disabled selected>Posted By</option>
+                            </select>
+
+                            <div ng-messages="registrationform.regpostedbyddl.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.regpostedbyddl.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li> <input required type="text" ng-model="Regi.regfirstname" class="fromtextbox" name="txthomefirstname" placeholder="First Name">
+                            <div ng-messages="registrationform.txthomefirstname.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.txthomefirstname.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li> <input required type="text" ng-model="Regi.reglastname" class="fromtextbox" name="txthomelastname" placeholder="Last Name">
+                            <div ng-messages="registrationform.txthomelastname.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.txthomelastname.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li style="color: #fff;">
+                            <input required type="radio" ng-model="Regi.reggender" name="genderregist" value="1" checked> Male
+                            <input required type="radio" ng-model="Regi.reggender" name="genderregist" value="2"> Female
+                            <div ng-messages="registrationform.genderregist.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.genderregist.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li class="triblecontrols">
+                            <select required name="ddldate" class="Date" style="color: grey;" ng-model="Regi.regdate" ng-options="date.value as date.label for date in dateArr" ng-change="dayChange(Regi,'day');">   
+                        </select>
+
+                            <select name="ddlmonth" required class="Month" style="color: grey;" ng-model="Regi.regmonth" ng-options="date.value as date.label for date in monthArr" ng-change="dayChange(Regi,'month');">   
+                            </select>
+
+                            <select name="ddlyear" required class="Year" style="color: grey;" ng-model="Regi.regyear" ng-options="date.value as date.label for date in yearArr">   
+                          </select>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-messages="registrationform.ddldate.$invalid">
+                                    <div style="color: red;font-size: 12px;" ng-if="registrationform.ddldate.$invalid && (registrationform.$submitted)">*Required.</div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-messages="registrationform.ddlmonth.$invalid">
+                                    <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlmonth.$invalid && (registrationform.$submitted)">*Required.</div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-messages="registrationform.ddlyear.$invalid">
+                                    <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlyear.$invalid && (registrationform.$submitted)">*Required.</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <select name="ddlReligion" required class="religion" style="color: grey;" ng-model="Regi.regreligion" ng-options="rel.value as rel.label for rel in Religionarray" ng-change="changeBind(Regi.regreligion,Regi.regmothertongue)">   
+                           <option value="" disabled selected>Religion</option>
+                                             
+                        </select>
+
+                            <div ng-messages="registrationform.ddlReligion.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlReligion.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <select name="ddlmothertongue" required class="Mother_Tongue" style="color: grey;" ng-options="mtongue.value as mtongue.label for mtongue in MotherTonguearray" ng-model="Regi.regmothertongue" ng-change="changeBind(Regi.regreligion,Regi.regmothertongue)">   
+                       
+                           <option value="" disabled selected>Mother Tongue</option>
+                       
+                        </select>
+                            <div ng-messages="registrationform.ddlmothertongue.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlmothertongue.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <select name="ddlCaste" required class="Mother_Tongue" style="color: grey;" ng-options="caste.value as caste.label for caste in castearrayreg" ng-model="Regi.regcaste">   
+                           <option value="" disabled selected>Caste</option>                                                              
+                        </select>
+                            <div ng-messages="registrationform.ddlCaste.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlCaste.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <select name="ddlCountry" required class="Country" style="color: grey;" ng-options="country.value as country.label for country in Countryarray" ng-model="Regi.regcountry">   
+                     
+                           <option value="" disabled selected>Country</option>
+                     
+                        </select>
+                            <div ng-messages="registrationform.ddlCountry.$invalid" class="pull-right">
+                                <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlCountry.$invalid && (registrationform.$submitted)">*Required.</div>
+                            </div>
+                        </li>
+
+                        <li class="doublecontrols">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <select name="ddlcountrycodes" required class="Date" style="color: grey;" ng-model="Regi.regcontrycodes" ng-options="code.value as code.label for code in countryCode">   
+                                 <option value="" disabled selected>Country code</option>
+                              
+                               </select>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input required type="text" ng-pattern="/^[0-9]+$/" ng-model="Regi.regmobilenumber" class="fromtextboxmobile" name="txtmobilenumbereg" placeholder="Mobile" ng-blur="valueExists('number',1,Regi.regmobilenumber);">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-messages="registrationform.ddlcountrycodes.$invalid">
+                                    <div style="color: red;font-size: 12px;" ng-if="registrationform.ddlcountrycodes.$invalid && (registrationform.$submitted)">*Required.</div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-messages="registrationform.txtmobilenumbereg.$invalid">
+                                    <div style="color: red;font-size: 12px;" ng-if="registrationform.txtmobilenumbereg.$invalid && (registrationform.$submitted)">*Required.</div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                    <div class="checkboxform">
+                        <label style="color: #fff; font-size: 12px;"><input name="chkprivacypolicy" type="checkbox" required  ng-model="Regi.Chkprivacy" >I agree to the <a href="privacyPolicy">Privacy Policy</a> and <a href="termsAndConditions">T&C</a></label>
+                    </div>
+                    <div class="row">
+                        <div ng-messages="registrationform.chkprivacypolicy.$invalid" class="pull-left">
+                            <div style="color: red;font-size: 12px;" ng-if="registrationform.chkprivacypolicy.$invalid && (registrationform.$submitted)">This is required.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-left:20px;">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <span class="title"> Just A Click To Find Your <strong>Soulmate</strong></span>
+            </div>
+            <div class="col-md-5">
+                <div class="gender">
+                    <form>
+                        <input type="radio" ng-model="gender" name="gender" value="2" checked> Bride
+                        <input type="radio" ng-model="gender" name="gender" value="1"> Groom
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box_age">
+                    <h5>Age</h5>
+                    <div class="age_wrapper">
+                        <select class="Ageseelct" ng-change="agefromtoagechange(Agefrom,Ageto,1)" ng-model="Agefrom" ng-options="age.value as age.label for age in Age">
+           	           </select>
+                        <span class="drop_to"> To </span>
+                        <select class="Ageseelct" ng-change="agefromtoagechange(Agefrom,Ageto,2)" ng-model="Ageto" ng-options="age.value as age.label for age in Age">
+           	           </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box_age">
+                    <h5>Religion</h5>
+                    <div class="single_wrapper">
+                        <select id="sel1" ng-model="religion" ng-options="rel.value as rel.label for rel in Religionarray">                         
+                           <option value="">--Select--</option>                     
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box_age">
+                    <h5>Caste</h5>
+                    <div class="single_wrapper">
+                        <select id="sel2" ng-options="caste.value as caste.label for caste in Castearray" ng-model="caste">   
+                           <option value="">--Select--</option>                                         
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box_age">
+                    <h5>Current Location</h5>
+                    <div class="single_wrapper">
+                        <select id="sel3" ng-options="country.value as country.label for country in Countryarray" ng-model="country">   
+                           <option value="">--Select--</option>                     
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="contact_wrapper">
+                    <p><strong style="font-size: 22px;">Contact :-</strong>&nbsp;&nbsp;<span style="font-size: 23px;">+91-9390999999</span></p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <a href="javascript:void(0)" ng-click="ValidatequickRegister()">
+                    <div class="partner_btn">
+                        <p style="position: relative;">Find your partner now</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p></p>
+            </div>
+            <div class="col-md-8">
+                <div class=row>
+                    <ol style="background-color:#ededed !important;" class="breadcrumb text-awesome" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="/" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Home</span> </a>
+                            <meta itemprop=position content=1 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem">
+                            <a href="location" itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name>Location</span> </a>
+                            <meta itemprop=position content=2 /> </li>
+                        <li itemprop=itemListElement itemscope itemtype="http://schema.org/ListItem"> <span itemprop=item itemscope itemtype="http://schema.org/Thing"> <span itemprop=name><a ng-href="{{redirecttolocation(castenameparam)}}">{{castenameparam}}</a></span> </span>
+                            <meta itemprop=position content=3 /> </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row br_gr">
+            <div class="col-md-4">
+                <p></p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="javascript:void(0)" ng-click="getalldata('','','',1,4,2,isActiveid)"><span>BRIDES</span></a>
+            </div>
+            <div class="col-md-5">
+                <a href="javascript:void(0)" ng-click="getalldata('','','',1,4,1,isActiveid)">GROOMS</a>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-md-4 sidenav col-xs-12">
+                <div class="s_bar">
+                    <div class="t_bar">
+                        <span> Quick links </span>
+                    </div>
+                    <div class="links">
+                        <span style="font-size: 16px;color: #006dc0;position: relative;left: 94px;top: 12px;"> Caste Matrimonials</span>
+                        <hr>
+                        <ul style="color: #881616;">
+                            <div ng-repeat="matrimony in matrimonyarray">
+                                <a ng-href="{{redirecttocastepage(matrimony)}}">
+                                    <li id="link_1">{{matrimony.CasteName}}</li>
+                                </a>
+                                <hr>
+                            </div>
+                        </ul>
+                        <a href="caste" style="color: #006dc0;margin-left: 125px;font-size: 15px;"> View More</a>
+                        <hr>
+                    </div>
+                    <div class="links">
+                        <span style="font-size: 16px;color: #006dc0;position: relative;left: 94px;top: 12px;"> Location Matrimonials</span>
+                        <hr>
+                        <ul style="color: #881616;">
+                            <div>
+                                <a href="location/matrimony-marriage-bureau-in-hyderabad">
+                                    <li id="link_1">Hyderabad Matrimony</li>
+                                </a>
+                                <hr>
+                                <a href="location/marriage-bureau-in-vijayawada">
+                                    <li id="link_1">Vijayawada Matrimony</li>
+                                </a>
+                                <hr>
+                                <a href="location/marriage-bureau-in-bangalore">
+                                    <li id="link_1">Bangalore Matrimony</li>
+                                </a>
+                                <hr>
+                                <a href="location/chennai-matrimony">
+                                    <li id="link_1">Chennai Matrimony</li>
+                                </a>
+                                <hr>
+                                <a href="location/pondicherry-matrimony">
+                                    <li id="link_1">Pondicherry Matrimony</li>
+                                </a>
+                                <hr>
+                            </div>
+                        </ul>
+                        <a href="location" style="color: #006dc0;margin-left: 125px;font-size: 15px;"> View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6" ng-repeat="latestprofile in latestprofiles">
+                        <div class="card">
+                            <div class="t_bar">
+                                <div class="symbols">
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <i class="glyphicon glyphicon-heart"></i>
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </div>
+                            </div>
+                            <img ng-src="{{latestprofile.ApplicationPhotoPath}}" style="width: 85%;">
+                            <div class="bride_info">
+                                <ul>
+                                    <li>{{latestprofile.Age}} Years</li>
+                                    <li>{{latestprofile.height}}</li>
+                                    <li>{{latestprofile.Profession}}</li>
+                                    <li>{{latestprofile.Place}}</li>
+                                    <li>{{latestprofile.CasteName}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="testimonial" style="padding:10px;">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <h1 id="title_1"> OUR SUCCESS STORIES
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <img ng-src="{{happystoriesarray[0].SuccessPic}}">
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <p ng-bind-html="firstsuccessstory" class="row" style="font-size: 16px;text-align: justify;text-justify: inter-word; line-height: 1.2;width: 250px;"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <img ng-src="{{happystoriesarray[1].SuccessPic}}">
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <p ng-bind-html="secondsuccessstory" class="row" style="font-size: 16px;text-align: justify;text-justify: inter-word; line-height: 1.2;width: 250px;">A cordial greeting to the entire team of Kamma matrimony for their pronounced job. The website is too good and functional with hundreds of verified profiles. All because of Kaakateeya Kamma matrimony I got my perfect match.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about" style="padding: 10px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="title_1">About Us</h1>
+                    <p style="text-align: justify;text-justify: inter-word;" ng-bind-html="aboutus">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+<link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+<style>
+    body.ng-scope.md-dialog-is-showing {
+        position: fixed;
+        width: 100%;
+        bottom: 20%;
+    }
+</style>
+
+
+
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-100212913-1', 'auto');
+
+    ga('send', 'pageview');
+</script>

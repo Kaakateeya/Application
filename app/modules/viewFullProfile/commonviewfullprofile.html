@@ -1,0 +1,255 @@
+<div ng-init="pageload()">
+    <div id="printablediv">
+        <div class="profile_full_main" ng-show="PageDiv">
+            <div ng-show="divacceptreject" style="border: solid 1px #fff;">
+                <div id="upAll">
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="src/images/logo2.png" class="pull-left" style="width: 165px;
+                                height: 83px;">&nbsp;</img>
+                            <!-- <a class="logo2 pull-left">&nbsp;</a> -->
+                        </div>
+                        <div class="col-lg-9 col-lg-offset-1" ng-show="liproceed" style="font-size: 14px;font-weight: bold;">
+                            <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                            <br>
+                            <div class="clearfix">
+                            </div>
+                            <div class="row">
+                                <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                                <a title="{{titledontproceed}}" class="classproceeddontproceed2" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                                <label style="float: left;margin-left:4px;margin-top: 4px;" class="">If not Interested.</label>
+                            </div>
+                        </div>
+                        <div ng-hide="true">
+                            <div class="profile_full_header_in_ui clearfix col-lg-4" ng-show="liproceed">
+                                <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                                <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                            </div>
+                        </div>
+                        <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-4">
+                            <div id="UpdatePanel6">
+                                <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
+                                <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
+                            </div>
+                        </div>
+                        <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-3 col-lg-offset-7">
+                            <a class="aspNetDisabled">{{btnticket}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div id="divProfile" class="profile_full_header clearfix">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div id="UpdateImagesContent">
+                            <div id="divmask" class="profile_full_header_pic">
+                                <img name="iProfilePic" tooltips tooltip-template="Click To Zoom" tooltip-side="bottom" id="iProfilePic" ng-click="photoalbum()" src="{{personalinfo[0].ApplicationPhotoPath}}" style="height:150px;width:150px;cursor:pointer;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="profile_full_header_in">
+                            <h6>
+                                <span id="lblName">{{personalinfo[0].NAME}}</span>
+                                <span>
+                                <span id="lblonlychild" style="font-weight:bold;"></span>
+                                <span id="lblProfileIDs"> (Profile ID:{{personalinfo[0].ProfileID}})</span>
+                                </span>
+                            </h6>
+                            <p>
+                                <span id="lblAboutMyself" class="lblAboutMyself" style="color:Black;font-weight:bold;color: #000">About Myself :</span>
+                            </p>
+                            <p>
+                                <span id="lblDescMy" class="fontsize" style="width: 750px;color:DarkBlue;">{{aboutmyself[0].Aboutyourself}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <img tooltips tooltip-template="Click To Zoom" tooltip-side="bottom" name="iProfilePic" ng-click="viewhoroscopeimage()" ng-hide="!horoscopeimage" src="{{horoimagesrc}}" style="height:160px;width:150px;cursor:pointer;" />
+                    </div>
+                </div>
+            </div>
+            <div id="printdiv">
+                <div class="personal_inform_main">
+                    <div ng-repeat="item in arr" ng-if="item.header=='Headings' || item.header=='About'?'':item.header">
+                        <div id="ctl00_divmain" class="personal_inform_head clearfix" style="background-color: rgb(244, 182, 36); padding: 6px 10px; border-bottom: solid 1px #ccc;">
+                            <h6>
+                                <span id="ctl00_lblHeadings" class="lblHeadings" style="color: black;font-weight: 700;">{{item.header}}</span></h6>
+                        </div>
+                        <div id="ctl00_divsub" class="personal_inform_main_in">
+                            <div id="ctl00_divStyle" ng-class="item.header=='My Basic Details' || item.header=='My Location' ||item.header=='My Location Information'||item.header=='Basic details'|| item.header=='Location' || item.header=='Religious information'?'personal_inform_main_in_list clearfix': ''">
+                                <p ng-repeat="itm in item.value">
+                                    <!-- <label ng-hide="true" ng-bind-html="bindeduction(itm.ColumnName)"></label>-->
+                                    <span id="ctl00_innerRepeater_ctl00_lblContentName" class="lblContentName" style="color:Black;font-weight:bold;" ng-bind-html="bindeduction(itm.columnname || itm.ColumnName)"></span>
+                                    <span style="color:DarkBlue;"> 
+                                  <span ng-if="(itm.columnname!='' && itm.columnname!=null) ||(itm.ColumnName!='' && itm.ColumnName!=null && itm.ColumnName!=='Education') " style="color:DarkBlue;">:</span>
+                                    <span ng-bind-html="itm.value || itm.Value" style="color:DarkBlue;"></span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row" ng-show="liproceed" style="font-size: 14px;font-weight: bold;margin-left: 40px;">
+                    <br>
+                    <label style="float: left;margin-top: 4px;" ng-bind-html="proceedtextforbothsides"></label>
+                    <a title="{{titleproceed}}" href="javascript:void(0)" class="classproceeddontproceed" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If Interested.</label>
+                    <a title="{{titledontproceed}}" class="classproceeddontproceed" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                    <label style="float: left;margin-left:4px;margin-top: 4px;">If not Interested.</label>
+                </div>
+                <div class="row pull-right">
+                    <!--<div class="profile_full_header_in_ui clearfix col-lg-12" ng-show="liproceed">
+                        <a title="{{titleproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnProceed')">Proceed</a>
+                        <a title="{{titledontproceed}}" href="javascript:void(0)" ng-click="btnProceed_Click('btnDontProceed')">Don't Proceed</a>
+                    </div>-->
+                    <div ng-show="liaccept" class="profile_full_header_in_ui clearfix col-lg-12">
+                        <div id="UpdatePanel6">
+                            <a id="btnaccept" href="javascript:void(0)" ng-click="acceptreject('btnaccept')">Accept</a>
+                            <a id="btnreject" href="javascript:void(0)" ng-click="acceptreject('btnreject')">Reject</a>
+                        </div>
+                    </div>
+                    <div ng-show="liticket" class="profile_full_header_in_ui clearfix col-lg-12">
+                        <a class="aspNetDisabled">{{btnticket}}</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <br>
+            </div>
+        </div>
+        <script type="text/ng-template" id="TabClosePopup.html">
+            <div class="modal-message modal-danger">
+                <div class="modal-header" id="divhead1">
+                    <i class="glyphicon glyphicon-fire"></i>
+                </div>
+                <div class="modal-body" id="modalbodyID1">
+                    {{modalbodyID1}}
+                </div>
+                <div class="modal-footer">
+                    <button id="btnclose" class="btn btn-default" ng-click="modalpopupclose1()">Close</button>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="PopupDivToclose.html">
+            <div class="modal-message modal-danger" id="PopupDivToclosedialog" ng-style="PopupDivToclosedialog===true?{'width':'541px'}:''">
+                <div class="modal-header" id="div5">
+                    <i class="glyphicon glyphicon-fire"></i>
+                </div>
+                <div class="modal-body">
+                    {{divmodalbodytoClose}}
+                </div>
+                <div class="modal-footer">
+                    <button id="Button3" class="btn btn-default" ng-click="modalpopupclosetab()">Close</button>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="PageloadAcceptRejectpopup.html">
+            <div class="modal-message modal-danger">
+                <div class="modal-header" id="div6">
+                    <i class="glyphicon glyphicon-fire"></i>
+                </div>
+                <div class="modal-body">
+                    {{modalbodydivContent}}
+                </div>
+                <div class="modal-footer">
+                    <button id="btnOk" class="btn btn-default" ng-click="btnoksubmit()">Ok</button>
+                    <button id="Button2" class="btn btn-default" ng-click="modalpopupclosetab()">Close</button>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="photopopup.html">
+            <button type="button" class="glyphicon glyphicon-remove" style="font-size: 18px; color: white; float: right; background-color: black; right: 286px;"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="modalpopupclose()">×</button>
+                    <h4 class="modal-title">{{scope.headerpopup}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="bs-example">
+                        <div id="slideshow" class="carousel slide" data-interval="3000" data-ride="carousel" ng-hide="popupmodalbody">
+                            <ol class="carousel-indicators">
+                                <li ng-repeat="slide in slides" data-target="#slideshow" ng-class="$index+1==1?'active':''" data-slide-to="$index+1-1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div ng-class="($index+1)==1?'item active':'item'" ng-repeat="slide in slides"><img id="imh" ng-src="{{slide.FullPhotoPath}}"></div>
+                            </div>
+                            <a data-target="#slideshow" id="a1" class="carousel-control left" href="javascript:void(0)" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a data-target="#slideshow" id="a2" class="carousel-control right" href="javascript:void(0)" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                        <div ng-hide="!popupmodalbody">
+                            <img ng-src="{{((personalinfo[0].HoroscopeImage).indexOf('Imagesnew')!==-1)?((personalinfo[0].HoroscopeImage).replace('http://d16o2fcjgzj2wp.cloudfront.net/Imagesnew','https://s3.ap-south-1.amazonaws.com/angularkaknew/Imagesnew')):(personalinfo[0].HoroscopeImage)}}"
+                                style="height: 500px; width: 500px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
+<style type="text/css">
+    .profile_full_header_in_ui a {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .classproceeddontproceed2 {
+        border-radius: 3px;
+        margin: 0 0 0 10px;
+        display: block;
+        float: left;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        color: white;
+        background-color: #d83222;
+        border: solid 1px #ccc;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    a:focus,
+    a:hover {
+        color: white !important;
+    }
+    
+    .modal-backdrop {
+        z-index: 1040 !important;
+    }
+    
+    tooltip tip {
+        width: 125px;
+    }
+    
+    tooltip tip-tip {
+        font-size: 14px !important;
+    }
+</style>

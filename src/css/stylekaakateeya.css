@@ -8,9 +8,9 @@ body {
 }
 
 /* fix for font awesome icon classes */
-[class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover {
+/*[class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover {
     background: none !important;
-}
+}*/
 
 /* hide by default, used to handle elements to show only for ie8*/
 .visible-ie8 {

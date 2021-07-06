@@ -2,78 +2,167 @@
 
 // our wrapper function (required by grunt and its plugins)
 // all configuration goes inside this function
+var fs = require('fs');
+var packageJson = JSON.parse(fs.readFileSync('./package.json'));
+var plugins = packageJson.buildSettings.plugins;
+var css = packageJson.buildSettings.css;
 module.exports = function(grunt) {
+    console.log(plugins);
+    // ===========================================================================
+    // CONFIGURE GRUNT ===========================================================
+    // ===========================================================================
+    grunt.initConfig({
 
-  // ===========================================================================
-  // CONFIGURE GRUNT ===========================================================
-  // ===========================================================================
-  grunt.initConfig({
+        // get the configuration info from package.json ----------------------------
+        // this way we can use things like name and version (pkg.name)
+        pkg: grunt.file.readJSON('package.json'),
 
-    // get the configuration info from package.json ----------------------------
-    // this way we can use things like name and version (pkg.name)
-    pkg: grunt.file.readJSON('package.json'),
+        // all of our configuration will go here
+        jshint: {
+            options: {
+                reporter: require('jshint-stylish') // use jshint-stylish to make our errors look and read good
+            },
 
-    // all of our configuration will go here
-	jshint: {
-      options: {
-        reporter: require('jshint-stylish') // use jshint-stylish to make our errors look and read good
-      },
+            // when this task is run, lint the Gruntfile and all js files in src
+            build: ['Grunfile.js', 'app/**/*.js']
+        },
+        uglify: {
+            options: {
+                banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n',
+                report: 'min',
+                mangle: false
+            },
+            build: {
+                files: {
 
-      // when this task is run, lint the Gruntfile and all js files in src
-      build: ['Grunfile.js', 'src/**/*.js']
-    },
-	uglify: {
-      options: {
-        banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
-      },
-      build: {
-        files: {
-          'dist/js/magic.min.js': 'src/js/*.js'
-        }
-      }
-    },
-	 cssmin: {
-      options: {
-        banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
-      },
-      build: {
-        files: {
-          'dist/css/style.min.css': 'src/css/*.css'
-        }
-      }
-    },
-    dev_prod_switch: {
-        options: {
-            // Can be ran as `grunt --env=dev` or `grunt --env=prod`
-            environment: grunt.option('env') || 'dev',
+                    'dist/js/main.min.js': ['dist/src/main.js']
+                }
+            }
+        },
+        cssmin: {
+            options: {
+                banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+            },
+            build: {
+                files: [{
+                        'dist/css/main.min.css': 'dist/src/main.css'
+                    }
+
+                ]
+
+            }
+        },
+        dev_prod_switch: {
+            options: {
+                // Can be ran as `grunt --env=dev` or `grunt --env=prod`
+                environment: grunt.option('env') || 'dev',
                 env_char: '#',
                 env_block_dev: 'env:dev',
-                env_block_prod: 'env:prod',
+                env_block_dev: 'SCRIPTS DATA',
+                env_block_prod: 'SCRIPTSP DATA',
                 env_block_test: 'env:test'
+            },
+            all: {
+                files: {
+                    'index.html': 'index.html',
+                    'index.js': 'index.js'
+                }
+            }
         },
-        all: {
-            files: {
-                'index.html': 'index.html'
+        scriptlinker: {
+            dev: {
+                options: {
+                    startTag: '<!-- SCRIPTS DATA -->',
+                    endTag: '<!--SCRIPTS END-->',
+                    fileTmpl: '<script src="%s"></script>',
+                    appRoot: ''
+                },
+                files: [{
+                    // Target-specific file lists and/or options go here. 
+                    'index.html': [
+                        plugins, 'index.js', 'app/**/*.js'
+                    ]
+                }],
+            },
+            prod: {
+                options: {
+                    startTag: '<!-- SCRIPTSP DATA -->',
+                    endTag: '<!--SCRIPTSP END-->',
+                    fileTmpl: '<script src="%s"></script>',
+                    appRoot: ''
+                },
+                files: {
+                    // Target-specific file lists and/or options go here. 
+                    'index.html': [plugins, 'index.js', 'dist/js/*.js']
+                },
+            },
+        },
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */',
+                banner: "'use strict';\n",
+                // process: function(src, filepath) {
+                //     return '// Source: ' + filepath + '\n' +
+                //         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                // },
+                // separator: ';'
+            },
+            js: { //target
+                src: ['app/**/*.js'],
+                dest: 'dist/src/main.js'
+            },
+            css: {
+                src: css,
+                dest: 'dist/src/main.css'
+            }
+        },
+        copy: {
+            images: {
+                expand: true,
+                cwd: 'src/images/',
+                src: ['**/*'],
+                dest: 'dist/images/',
+                filter: 'isFile',
+                flatten: true
+            }
+        },
+
+        imagemin: { // Task            
+            dynamic: { // Another target
+                files: [{
+                    expand: true, // Enable dynamic expansion
+                    cwd: 'src/images', // Src matches are relative to this path
+                    src: ['**/*.{png,jpg,gif}'], // Actual patterns to match
+                    dest: 'dist/images' // Destination path prefix
+                }]
             }
         }
-    }
 
-	
-	
-  });
-  grunt.registerTask('default', [
-    'dev_prod_switch'
-  ]);
-  // ===========================================================================
-  // LOAD GRUNT PLUGINS ========================================================
-  // ===========================================================================
-  // we can only load these if they are in our package.json
-  // make sure you have run npm install so our app can find these
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-dev-prod-switch');
+    });
+    grunt.registerTask('default', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    //grunt.registerTask('default', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    // this task will only run the dev configuration 
+    grunt.registerTask('dev', ['jshint', 'cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    //grunt.registerTask('dev', ['cssmin', 'concat', 'scriptlinker:dev', 'imagemin']);
+    // only run production configuration 
+    grunt.registerTask('prod', ['jshint', 'concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
+    //grunt.registerTask('prod', ['concat', 'uglify', 'cssmin', 'scriptlinker:prod', 'imagemin']);
 
+    // ===========================================================================
+    // LOAD GRUNT PLUGINS ========================================================
+    // ===========================================================================
+    // we can only load these if they are in our package.json
+    // make sure you have run npm install so our app can find these
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-dev-prod-switch');
+    grunt.loadNpmTasks('grunt-scriptlinker');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 };

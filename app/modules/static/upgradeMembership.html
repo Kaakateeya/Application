@@ -1,0 +1,136 @@
+<h4 class="row">
+    <label class="col-lg-offset-1">My Payments</label></h4>
+<div class="register_page_main">
+    <div class="register_page_main_in clearfix">
+        <div ng-cloak="" class="virtualRepeatdemoHorizontalUsage">
+            <md-content layout="column">
+                <md-virtual-repeat-container id="horizontal-container" md-orient-horizontal="">
+                    <div md-virtual-repeat="payment in paymentarray" class="repeated-item" flex="">
+                        <table class="package_table_inner my_packages_main clearfix package_table_main">
+                            <tbody>
+                                <tr>
+                                    <td class="pack_heading1">
+                                        <label>{{payment.MembershipName}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pack_heading2">
+                                        <small class="payment-label">
+                                       <label  class="duration_of_pack" ng-hide="payment.MembershipName=='Services & Features'?true:false">{{payment.MemberShipDuration}} Days</label>
+                                       </small>
+                                        <label><span ng-hide="payment.MembershipName=='Services & Features'?true:false">RS :</span>{{payment.MembershipAmount}}</label>
+                                        <button class="button_custom" ng-hide="payment.MembershipName=='Services & Features'?true:false" ng-click="selectpaymantoption(payment.Emp_Membership_ID,payment.MembershipAmount,payment.AllottedServicePoints,'',custid,payment.MembershipName,payment.MemberShipDuration)">Select</button>
+                                        <div ng-show="payment.MembershipName=='Services & Features'?true:false">
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pack_heading1">
+                                        <b>
+                                  <label>{{payment.AllottedServicePoints}}</label></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pack_heading3">
+                                        <b>
+                                         <img src="src/images/icon_tick_mark.png"  ng-hide="payment.MembershipName=='Services & Features'?true:false"/>
+                                          <label   ng-hide="payment.MembershipName=='Services & Features'?false:true">SA Agreed</label>
+                                        </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>{{payment.onlineaccess}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>{{payment.offlineaccess}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <img ng-src="{{payment.Ppath==='../images/icon_tick_mark.png'?'src/images/icon_tick_mark.png':'src/images/icon_x_mark.png'}}" ng-hide="payment.MembershipName=='Services & Features'?true:false" />
+                                        <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Relationship Manager</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <img ng-hide="payment.MembershipName=='Services & Features'?true:false" ng-src="{{payment.Ppluspath==='../images/icon_tick_mark.png'?'src/images/icon_tick_mark.png':'src/images/icon_x_mark.png'}}" />
+                                        <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Senior Relationship Manager</label>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <img src="src/images/icon_tick_mark.png" ng-hide="payment.MembershipName=='Services & Features'?true:false" />
+                                        <label ng-hide="payment.MembershipName=='Services & Features'?false:true">Express Interest</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </md-virtual-repeat-container>
+            </md-content>
+        </div>
+        <div id="ttttt">
+            <div class="my_packages_main_bottom clearfix">
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex=55>
+                        <p>Interested in, exclusive match making services for our super special members, Contact us!</p>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex=20>
+                        <label>Number</label>
+                        <input ng-model="payment.mobilenumber">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex=20>
+                        <md-button class="md-raised md-warn md-hue-2" ng-click="sendsmspayment(payment)">Submit</md-button>
+                    </md-input-container>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .virtualRepeatdemoHorizontalUsage #horizontal-container {
+            height: 494px;
+            width: 100%;
+            /*max-width: 930px; */
+        }
+        
+        .virtualRepeatdemoHorizontalUsage .repeated-item {
+            border-right: 1px solid #ddd;
+            box-sizing: border-box;
+            display: inline-block;
+            height: 484px;
+            padding-top: 35px;
+            text-align: center;
+            width: auto;
+        }
+        
+        .virtualRepeatdemoHorizontalUsage md-content {
+            margin: 16px;
+        }
+        
+        .virtualRepeatdemoHorizontalUsage md-virtual-repeat-container {
+            border: solid 1px grey;
+        }
+        
+        td.pack_heading1 {
+            font-size: 18px !important;
+            line-height: 18px !important;
+            padding: 6px 64px !important;
+            text-transform: uppercase;
+            color: #000 !important;
+            font-weight: 700;
+        }
+        
+        .md-virtual-repeat-container.md-orient-horizontal .md-virtual-repeat-scroller {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>

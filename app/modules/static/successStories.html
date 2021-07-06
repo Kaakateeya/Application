@@ -1,0 +1,46 @@
+<div class="register_page_main success_stories_new" ng-init="init()">
+    <h4>Success Stories</h4>
+    <p>
+        They say marriages are made in heaven and we at <span>kaakateeya.com</span> strive to mix the right-minded people together. We welcome you all to meet the success stories of innumerable married couple who have found their dream partner with us!<small>We wish them the very best for 
+            a happy and success married life.</small>
+    </p>
+    <div class="success_stories_new_list GITheWall">
+        <ul class="clearfix">
+            <li class="inline-test" data-contenttype="inline" style="margin-bottom: 0px;" ng-repeat="s in success">
+                <span class="image">
+                 <img style="height: 200px;width: 266px;"  ng-src="{{s.PhotoPath}}">
+                    </span>
+                <div style="height:95px;" class="col-lg-12">
+                    <p class="clearfix">
+                        <div class="">
+                            <span class="groomname">
+                               <p> {{s.GroomName}} &amp;
+                                {{s.BrideName}}</p>
+                            </span>
+                        </div>
+
+
+                    </p>
+                    <h6 class="clearfix">
+                        <span class="groomid">
+                        <span>{{s.GroomProfileID}}</span>
+                        </span><span class="brideid">
+                        <span>{{s.BrideProfileID}}</span></span>
+                        <span class="weddingdate">
+                        <span>{{s.MarriageDate}}</span></span>
+                    </h6>
+                </div>
+            </li>
+        </ul>
+        <span class="clear">&nbsp;</span>
+    </div>
+    <div class='row col-lg-10'>
+        <div class="col-lg-offset-5" ng-show=loadmore>
+            <a href="javascript:void(0);" ng-click="loadmorefunction();"><span class="fa fa-arrow-down fa-2x">Loadmore</span></a>
+        </div>
+        <div class="col-lg-offset-5" ng-show=loaderspin>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+        </div>
+        <br>
+    </div>
+</div>

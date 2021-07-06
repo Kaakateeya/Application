@@ -1,0 +1,151 @@
+<div ng-controller="ModalDemoCtrl as $ctrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+<select id="sssss" class="selectpicker">
+    <option>--select--</option>
+</select>
+
+            <ul id="uleducation">
+        <li class="clearfix">
+            <label for="lblIsHighestDegree" class="pop_label_left">Is Highest Degree<span style="color: red; margin-left: 3px;">*</span></label>
+
+            <div class="pop_controls_right pop_radios_list">
+
+                <label>
+                    <input name="EmpType" value="1" type="radio"><span>&nbsp;Yes</span>
+                </label>
+                <label class="">
+                    <input name="EmpType" value="0" type="radio"><span>&nbsp;No</span>
+                </label>
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lbleducationGroup" class="pop_label_left">Education category<span style="color: red; margin-left: 3px;">*</span></label>
+
+            <div class="pop_controls_right select-box-my">
+                <select id="lstGEducatgory" ng-class="chosen">
+                     <option>--select--</option>
+                </select>
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lbleducationGroup" class="pop_label_left">Education group<span style="color: red; margin-left: 3px;">*</span></label>
+
+
+            <div class="pop_controls_right select-box-my">
+                <div class="select-box-my">
+                    <select id="lstGEdugroup" class="chosen">
+                         <option>--select--</option>
+                    </select>
+                </div>
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lbleducationGroup" class="pop_label_left">Edu specialization<span style="color: red; margin-left: 3px;">*</span></label>
+
+            <div class="pop_controls_right select-box-my">
+
+                <div class="select-box-my">
+
+                    <select id="ddlEduspecialization" class="chosen">
+                         <option>--select--</option>
+                    </select>
+
+                </div>
+            </div>
+        </li>
+        <li class="clearfix" id="divuniversity">
+            <label for="lbluniversity" class="pop_label_left">University</label>
+
+            <div class="pop_controls_right">
+                <input type="text" id="txtuniversity" maxlength="100" class="form-control" />
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lblcollege" class="pop_label_left">College</label>
+            <div class="pop_controls_right">
+                <input type="text" id="txtcollege" maxlength="150" class="form-control" />
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lblPassOfYear" class="pop_label_left">Pass of year</label>
+
+            <div class="pop_controls_right select-box-my">
+                <select id="ddlpassofyear" class="chosen" style="width: 100%; height: 31px;">
+                     <option>--select--</option>
+                </select>
+            </div>
+        </li>
+
+
+        <li class="clearfix">
+            <label for="lblCountry" class="pop_label_left">Country</label>
+
+            <div class="pop_controls_right select-box-my">
+                <select id="ddlCountry" class="chosen" style="width: 100%; height: 31px;">
+                     <option>--select--</option>
+                </select>
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="State" class="pop_label_left">State</label>
+
+            <div class="pop_controls_right select-box-my">
+                <select id="ddlState" class="chosen" style="width: 100%; height: 31px;">
+                     <option>--select--</option>
+                </select>
+
+            </div>
+        </li>
+        <li class="clearfix">
+
+            <div id="divEduDistric">
+                <label for="lblDistrict" class="pop_label_left">District</label>
+                <div class="pop_controls_right select-box-my">
+                    <select id="ddlDistrict" class="chosen" style="width: 100%; height: 31px;">
+                         <option>--select--</option>
+                        </select>
+                </div>
+            </div>
+
+        </li>
+        <li class="clearfix">
+            <label for="lblCityworking" class="pop_label_left">City Studying in</label>
+
+            <div class="pop_controls_right select-box-my">
+
+                <select id="ddlcityworking" class="chosen" tabindex="11">
+                     <option>--select--</option>
+                </select>
+                <input id="txtcity" style="display: none; width: 100%;" maxlength="100" />
+
+                <a id="lnkCity">Not in List</a>
+
+            </div>
+        </li>
+        <li class="clearfix">
+            <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
+            <div class="">
+
+                <textarea id="txtEdumerits" maxlength="500" rows="4" tabindex="12"
+                    onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
+            </div>
+        </li>
+
+    </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+    <multi-select-directive id="test" ng-model="ddlvals" ng-change="" obj="obj1" selectedvals="selectedvals"></multi-select-directive>
+
+</div>

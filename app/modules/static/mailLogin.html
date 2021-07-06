@@ -1,0 +1,63 @@
+<div class="register_page_main">
+
+    <div class="wrapper">
+
+        <div>
+            <div class="row">
+
+                <center>
+                    <div id="rndcorner" style="width:450px;border-top-left-radius:10px;border-top-right-radius:10px; border:1px solid #d9d9d9; display:block;">
+                        <div style="padding:15px 25px;border-top-left-radius:10px;border-top-right-radius:10px;color:rgb(189, 92, 21);font-size:16px;" class="jumbotron title">
+                            <label>User Credential</label></div>
+                        <div style="width:400px;">
+                            <div class="row"><label style="color:#2c2828">you can either use your primary email id or profile id as userid</label></div>
+
+                            <div class="form-horizontal">
+                                <div layout="column" ng-cloak="" class="inputdemoErrors">
+                                    <md-content layout-padding="">
+                                        <form name="pwdForm" novalidate role="form">
+                                            <md-input-container class="md-block" style="text-align: left;">
+                                                <label>UserID</label>
+                                                <input type="text" maxlength="50" required="" md-asterisk="" name="username" ng-model="username">
+                                                <div ng-messages="pwdForm.username.$error">
+                                                    <div ng-message="required">This is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container class="md-block" style="text-align: left;">
+                                                <label>Password</label>
+                                                <input type="password" maxlength="50" required="" md-asterisk="" name="password" ng-model="password">
+                                                <div ng-messages="pwdForm.password.$error">
+                                                    <div ng-message="required">This is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                        </form>
+                                    </md-content>
+                                </div>
+                                <div class="row">
+                                    <md-button class="md-raised md-warn md-hue-2" ng-click="pwdForm.$valid && loginsubmit();">login to your account</md-button>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                </center>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<style>
+    input[type="password"],
+    input[type="text"] {
+        border: 0 !important;
+        border-bottom: 1px solid red !important;
+        outline: 0 !important;
+        border-style: solid !important;
+        border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+</style>

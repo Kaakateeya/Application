@@ -6,123 +6,297 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js" data-ng-app="Kaakateeya">
+<!--<![endif]-->
+
+
 <head>
-
     <!-- Meta-Information -->
-    <title>Kaakateeya Marriages</title>
+    <title ng:bind-template="{{casteTitle}}" ng-cloak></title>
+    <meta name="fragment" content="!">
+    <meta ng-cloak name="keywords" content="{{keyWord}}">
+    <meta ng-cloak name="description" content="{{description}}">
     <meta charset="utf-8">
+    <!--seo Content-->
+    <meta name="robots" contents="{{robots}}" />
+    <link rel="canonical" ng-href="{{canonicalhref}}" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="{{propertytypecontent}}" />
+    <meta property="og:title" content="{{propertytitlecontent}}" />
+    <meta property="og:description" content="{{propertydescriptioncontent}}" />
+    <meta property="og:url" content="{{propertyContenturl}}" />
+    <meta property="og:site_name" content="{{propertysite_name}}" />
+    <meta property="article:publisher" content="https://www.facebook.com/Kaakateeya/" />
+    <meta property="og:image" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{twitterdescription}}" />
+    <meta name="twitter:title" content="{{twittertitle}}" />
+    <meta name="twitter:site" content="@KaakateeyaMB" />
+    <meta name="twitter:image" ng-if="twitterimage!==''?true:false" content="http://www.kaakateeya.com/src/images/banner1.jpg" />
+    <meta name="twitter:creator" content="@KaakateeyaMB" />
+    <!--end seo content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="ACME Inc.">
+    <meta name="google-site-verification" content="ahloLTv9LQ05CLTkUtqOXiXgBvSCe6Iac5kZABJ7z4k" />
+    <base href="/">
+    <!--<meta name="description" content="ACME Inc.">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
-     <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap-theme.min.css">
-     <link href="src/css/bootstrap-responsive.min.css" rel="stylesheet"></link>
-    <link href="src/css/stylekaakateeya.css" rel="stylesheet"></link>
-  
-      <link href="src/css/style_responsive.css" rel="stylesheet"></link>
-
-      <link href="src/css/uniform.default.css" rel="stylesheet"></link>
-
-      <link href="src/css/chosen.css" rel="stylesheet"></link>
-     <link href="src/css/jquery-css.css" rel="stylesheet"></link>
-     <link href="src/css/bootstrap-fileupload.css" rel="stylesheet"></link>
-    <link href="src/css/custom_styles.css" rel="stylesheet"></link>
-    <link href="src/css/custom_responsive.css" rel="stylesheet"></link>
-    <link href="src/css/GITheWall.css" rel="stylesheet"></link>
-
-    <link href="src/css/CustomerSearchResult_New.css" rel="stylesheet"></link>
-
-    <style>
-       .logo_inner_new 
-       {background: url('src/images/vinod.png') no-repeat -448px -180px;
-width: 162px;
-height: 75px;
-}
-.live_chat_footer_new{
- margin: 0 0 0 30%;
-background: url('src/images/vinod.png') no-repeat -318px -183px;
-display: block;
-width: 90px;
-height: 90px;
-}
-.mobileicon{
-    background: url('src/images/vinod.png') no-repeat -620px -291px !important;
-display: block !important;
-width: 34px !important;
-height: 34px !important;
-}
-        </style>
+    <link href="dist/css/main.min.css" rel="stylesheet"></link>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400" rel="stylesheet"></link>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:500,900,300,700,400" rel="stylesheet"></link>
+    <link href="http://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet"></link>
+    <link href="src/css/glyphicons/materialicons.css" rel="stylesheet"></link>
+    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet"></link>
+    <link href="src/css/allmissingfields.css" rel="stylesheet"></link>
+    <link href="src/css/customerindex.css" rel="stylesheet"></link>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"></link>
 </head>
-<body ng-app="Kaakateeya">
 
-<div ng-include="'templates/header.html'"></div>
-<div ng-view></div>
-<div ng-include="'templates/footer.html'"></div>
+<body ui-router-styles>
+    <div ng-cloak ui-view="topbar"></div>
+    <div ng-cloak ui-view="content"></div>
+    <div ng-cloak ui-view="bottompanel"></div>
+    <!-- SCRIPTS DATA -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="src/js/bootstrap-multiselect.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/underscore/underscore-min.js"></script>
+    <script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
+    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script src="bower_components/ng-idle/angular-idle.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/angular-module-sanitize/angular-sanitize.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script>
+    <script type="text/javascript" src="src/js/mustache.min.js"></script>
+    <script src="index.js"></script>
+    <script src="app/Filters/dateFilter.js"></script>
+    <script src="app/constants/arrayConstants.js"></script>
+    <script src="app/constants/config.js"></script>
+    <script src="app/directives/dynamicAlets.js"></script>
+    <script src="app/directives/multiSelectDirective.js"></script>
+    <script src="app/directives/partnerDirective.js"></script>
+    <script src="app/directives/stickyHeaderDirective.js"></script>
+    <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
+    <script src="app/modules/homePage/headerctrl.js"></script>
+    <script src="app/modules/homePage/homePage.js"></script>
+    <script src="app/modules/mobileverification/mobileVerification.js"></script>
+    <script src="app/modules/payments/controllers/paymentCtrl.js"></script>
+    <script src="app/modules/search/generalSearchView.js"></script>
+    <script src="app/modules/static/aboutUsctrl.js"></script>
+    <script src="app/modules/static/accodian.js"></script>
+    <script src="app/modules/static/dataGetin.js"></script>
+    <script src="app/modules/static/faqs.js"></script>
+    <script src="app/modules/static/feedbackCtrl.js"></script>
+    <script src="app/modules/static/helpPage.js"></script>
+    <script src="app/modules/static/loginBlocker.js"></script>
+    <script src="app/modules/static/myOrdersAndStatistics.js"></script>
+    <script src="app/modules/static/ourBranches.js"></script>
+    <script src="app/modules/static/privacyPolicyCtrl.js"></script>
+    <script src="app/modules/static/profileSettings.js"></script>
+    <script src="app/modules/static/successStories.js"></script>
+    <script src="app/modules/static/supportTickets.js"></script>
+    <script src="app/modules/static/termsAndConditions.js"></script>
+    <script src="app/modules/static/upgradeMemberdhip.js"></script>
+    <script src="app/modules/viewFullProfile/viewFullProfileCustomer.js"></script>
+    <script src="app/services/authSvc.js"></script>
+    <script src="app/services/customerDashboardServices.js"></script>
+    <script src="app/services/errorInterceptor.js"></script>
+    <script src="app/services/feedbackServices.js"></script>
+    <script src="app/services/helpService.js"></script>
+    <script src="app/services/homepageServices.js"></script>
+    <script src="app/services/ourbranchService.js"></script>
+    <script src="app/services/serviceBind.js"></script>
+    <script src="app/services/successstoriesServices.js"></script>
+    <script src="app\animation\animation.js"></script>
+    <script src="app\directives\photoPopupDirective.js"></script>
+    <script src="app\services\profileSettingsServices.js"></script>
+    <script src="bower_components\angular-data-grid\dist\dataGrid.min.js"></script>
+    <script src="bower_components\angular-data-grid\dist\pagination.min.js"></script>
+    <script src="app\services\upgradeServices.js"></script>
+    <script src="node_modules/editandview/dist/src/main.js"></script>
+    <script src="app\directives\angularMaterialmultiselectDirectives.js"></script>
+    <script src="app\directives\dependencyBinding.js"></script>
+    <script src="node_modules\angular-password\angular-password.min.js"></script>
+    <script src="app\modules\payments\controllers\paymentResponseCtrl.js"></script>
+    <script src="app\services\multiselectmaterial.js"></script>
+    <script src="app\services\searchesServices.js"></script>
+    <script src="node_modules\registration\dist\js\main.min.js"></script>
+    <script src="app\directives\forgotPasswordDirective.js"></script>
+    <script src="app\modules\homePage\footerCtrl.js"></script>
+    <script src="app\modules\missingfieldspage\missingfiledsCtrl.js"></script>
+    <script src="app\directives\singleAndStaticBinding.js"></script>
+    <script src="app/services/mobileverificationService.js"></script>
+    <script src="app/directives/oldAlert.js"></script>
+    <script src="app\modules\search\registrationCtrlsearch.js"></script>
+    <script src="app/services/missingFieldService.js"></script>
+    <script src="bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="app/modules/static/ccAvenue.js"></script>
+    <script src="src\js\jquery-ui.js"></script>
+    <script src="app\modules\viewFullProfile\commonviewfullprofilectrl.js"></script>
+    <script src="app\services\viewfullprofileservice.js"></script>
+    <script src="app\services\route.js"></script>
+    <script src="node_modules\angularjs-slider\dist\rzslider.min.js"></script>
+    <srcipt src="src/js/jquerypause.js" type='text/javascript'></srcipt>
+    <script src="app\services\kaakateeyaHelper.js" type='text/javascript'></script>
+    <script src="app\directives\focusDirective.js" type='text/javascript'></script>
+    <script src="app/modules/payments/controllers/paymentResponseHandler.js"></script>
+    <script src="bower_components/angular-promise-buttons/dist/angular-promise-buttons.min.js"></script>
+    <script src="app\services\forgetPwdEmailServices.js"></script>
+    <script src="app\modules\static\forgetPassword.js"></script>
+    <script src="src/js/marqueenotify.js"></script>
+    <script src="app\modules\paymentNew\paymentNewCtrl.js"></script>
+    <script src="app\modules\loggedAsCusomer\loggedAsCustomerCtrl.js"></script>
+    <script src="app\services\loggedAsCustomerService.js"></script>
+    <script src="app/modules/static/emplogToCustomer.js"></script>
+    <script type="text/javascript" src="app\modules\static\upgradeMembership_new.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newHomepage.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomwpageallcaste.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomepageService.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\locationall.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\location.js"></script>
+    <script type="text/javascript" src="app/models/countryArrayModel.js"></script>
+    <script type="text/javascript" src="app/models/eduprofArrayModel.js"></script>
+    <script type="text/javascript" src="app/models/otherArrayModel.js"></script>
+    <script type="text/javascript" src="app/modules/viewMyProfileMail/employeeViewfullprofilePrintctrl.js"></script>
+    <script type="text/javascript" src="app/modules/viewMyProfileMail/employeeViewfullprofilePrintMdl.js"></script>
+    <script type="text/javascript" src="app/modules/viewMyProfileMail/employeeViewfullprofilePrintservice.js"></script>
+    <script type="text/javascript" src="src/js/spin.min.js"></script>
+    <script type="text/javascript" src="src/js/angular-loading-spinner.js"></script>
+    <script type="text/javascript" src="src/js/angular-spinner.min.js"></script>
+    <script type="text/javascript" src="app/modules/static/uploadPhoto.js"></script>
+    <script type="text/javascript" src="app/modules/static/uploadPhotoencry.js"></script>
+    <script type="text/javascript" src="app/services/uploadPhotoService.js"></script>
+    <script type="text/javascript" src="app/modules/static/mailLogin.js"></script>
+    <script type="text/javascript" src="app/modules/static/horoDisplay.js"></script>
+    <script type="text/javascript" src="node_modules/angular-tooltips/dist/angular-tooltips.min.js"></script>
+    <script type="text/javascript" src="app/modules/nologin/nologinCtrl.js"></script>
+    <script type="text/javascript" src="app/services/nologinService.js"></script>
+    <script type="text/javascript" src="app\modules\allmissingfilelds\allmissingfield.js"></script>
+    <script type="text/javascript" src="app\modules\allmissingfilelds\allmissingfileldencrypt.js"></script>
 
-
-<!-- env:dev -->
-<script src="node_modules\jquery\dist\jquery.min.js"></script>
-<script src="bower_components\bootstrap\dist\js\bootstrap.min.js"></script>
-
-<script src="bower_components\angular\angular.min.js"></script>
-<script src="node_modules\angular-route\angular-route.min.js"></script>
-<script src="index.js"></script>
-
-<script src="src/js/bootstrap.min.js"></script>
-
-<script src="src/js/jquery.blockui.js"></script>
-
-
-
-<script src="src/js/chosen.jquery.min.js"></script>
-
-<script src="src/js/bootstrap-multiselect.js"></script>
-<script src="src/js/scriptsKaakateeya.js"></script>
-<script src="src/js/jquery.alert.js"></script>
-<script src="src/js/GI.TheWall.min.js"></script>
-<script src="src/js/KaakateeyaHelper.js"></script>
-<script src="src/js/CustomerCache_prod.js"></script>
- <script src="src/js/scrollgress.js"></script>
- <script src="src/js/jquery-ui.js"></script>
-   <script src="src/js/lhnchatbutton-current.min.cache" type="text/javascript" id="lhnscript"></script>
-   <script src="//commondatastorage.googleapis.com/lhn/chat/scripts/lhnchatbutton-current.min.js" 
-                type="text/javascript" id="Script1"></script>
- <script src="app/directives/customerGridDisplay.js"></script>         
- <script src="app/modules/dashboard/controllers/dashboardController.js"></script>
-<script src="app/modules/Dashboard/patientDashboardCtrl.js"></script>
-<script src="app/services/patientDashboardServices.js"></script>
-<script src="app/directives/partnerDirective.js"></script>
-<!-- env:dev:end -->
-
-<!-- env:prod --#>
-<h1>For everyone</h1>
-<p>This will be visable in 'prod' environment</p>
-<!-- env:prod:end -->
-<script>
-function multidropdown() {
-            $('.multiple').multiselect({
-                includeSelectAllOption: true,
-                disableIfEmpty: true,
-                nonSelectedText: 'Any',
-                allSelectedText: 'All Selected',
-                selectAllText: 'Check all!',
-                // enableFiltering: true,
-                // enableCaseInsensitiveFiltering: true,
-                filterPlaceholder: 'Type To Search',
-                enableClickableOptGroups: true
-
-            });
-
-
+    <script type="text/javascript">
+        var lhnAccountN = "3422-1";
+        var lhnButtonN = -1;
+        var lhnChatPosition = 'default';
+        var lhnInviteEnabled = 1;
+        var lhnWindowN = 0;
+        var lhnDepartmentN = 2666;
+    </script>
+    <script type="text/javascript">
+        function OpenLHNChat() {
+            if (typeof CustomOpenLHNChat == 'function') {
+                CustomOpenLHNChat();
+                return false;
+            }
+            var wleft = (screen.width - 580 - 32) / 2;
+            var wtop = (screen.height - 420 - 96) / 2;
+            //  alert(bLHNOnline);
+            var bLHNOnline = 0;
+            var lhnwindow = 0;
+            var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
+            if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
+                lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            } else {
+                lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            }
+            if (typeof Zstepx != 'undefined') {
+                if (Zstepx == 10) {
+                    Zslide();
+                }
+            }
         }
+    </script>
+    <!--SCRIPTS END-->
 
-        jQuery(function ($) {
-            multidropdown();
-                   });
-        </script>
+
+    <!-- SCRIPTSP DATA --#>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/underscore/underscore-min.js"></script>
+    <script src="bower_components/angular-re-captcha/angular-re-captcha.js"></script>
+    <script src="node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script src="bower_components/ng-idle/angular-idle.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/angular-module-sanitize/angular-sanitize.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/editandview/dist/js/main.min.js"></script>
+    <script src="node_modules/angular-password/angular-password.min.js"></script>
+    <script src="node_modules/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="node_modules/registration/dist/js/main.min.js"></script>
+    <script src="bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="node_modules/angularjs-slider/dist/rzslider.min.js"></script>
+    <script src="bower_components/angular-promise-buttons/dist/angular-promise-buttons.min.js"></script>
+    <script src="src/js/spin.min.js"></script>
+    <script src="src/js/angular-loading-spinner.js"></script>
+    <script src="src/js/angular-spinner.min.js"></script>
+    <script src="src/js/mustache.min.js"></script>
+    <script src="node_modules/angular-tooltips/dist/angular-tooltips.min.js"></script>
+    <script src="index.js"></script>
+    <script src="dist/js/main.min.js"></script>
+    <!--SCRIPTSP END-->
+    <!-- <script src="//www.livehelpnow.net/lhn/widgets/chatbutton/lhnchatbutton-current.min.js" type="text/javascript" id="lhnscript"></script>
+    <script type="text/javascript">
+        var lhnAccountN = "3422-1";
+        var lhnButtonN = -1;
+        var lhnChatPosition = 'default';
+        var lhnInviteEnabled = 1;
+        var lhnWindowN = 0;
+        var lhnDepartmentN = 2666;
+    </script>
+    <script type="text/javascript">
+        function OpenLHNChat() {
+            if (typeof CustomOpenLHNChat == 'function') {
+                CustomOpenLHNChat();
+                return false;
+            }
+            var wleft = (screen.width - 580 - 32) / 2;
+            var wtop = (screen.height - 420 - 96) / 2;
+            //  alert(bLHNOnline);
+
+            var bLHNOnline = 0;
+            var lhnwindow = 0;
+            var sScrollbars = (bLHNOnline == 0) ? "yes" : "no";
+            if (document.location.protocol == 'https:' || (typeof lhnJsHost != 'undefined' && lhnJsHost == "https://")) {
+                lhnWin = window.open('https://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            } else {
+                lhnWin = window.open('http://www.livehelpnow.net/lhn/livechatvisitor.aspx?zzwindow=' + lhnwindow + '&lhnid=' + 3422 + '&d=' + 0, 'lhnchat', 'left=' + wleft + ',top=' + wtop + ',width=580,height=435,toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=' + sScrollbars + ',copyhistory=no,resizable=yes');
+            }
+            if (typeof Zstepx != 'undefined') {
+                if (Zstepx == 10) {
+                    Zslide();
+                }
+            }
+        }
+    </script> -->
+    <!-- <script type="text/javascript" src="app\modules\newHomepage\newHomepage.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomwpageallcaste.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\newhomepageService.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\locationall.js"></script>
+    <script type="text/javascript" src="app\modules\newHomepage\location.js"></script>
+
+    <script type="text/javascript" src="app\modules\allmissingfilelds\allmissingfileldencrypt.js"></script> -->
+
 </body>
+
+</html>
+
 </html>
